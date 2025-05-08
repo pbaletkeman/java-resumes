@@ -1,0 +1,14 @@
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    enabled: true
+
+
+# max request size for a multipart/form-data
+# max file size for each request
+spring:
+    servlet:
+      multipart:
+        max-file-size=500KB
+        max-request-size=500KB
