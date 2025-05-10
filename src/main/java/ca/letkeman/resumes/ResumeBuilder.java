@@ -4,15 +4,23 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.StringJoiner;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Request.Builder;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class ResumeBuilder {
   private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
+  private static final Logger logger = LoggerFactory.getLogger(ResumeBuilder.class);
+
 
   public enum PROMPT_TYPE {
     COVER,
@@ -99,7 +107,8 @@ public final class ResumeBuilder {
     try {
       data = new String(Files.readAllBytes(Paths.get(fileName)));
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      logger.error(e.toString());
+//      throw new RuntimeException(e);
     }
     return data;
   }
@@ -114,8 +123,10 @@ public final class ResumeBuilder {
     try (Response response = client.newCall(request).execute()) {
       return response.body() != null ? response.body().string() : "";
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      logger.error(e.toString());
+//      throw new RuntimeException(e);
     }
+    return null;
   }
 
   String getResponse(){
@@ -148,6 +159,41 @@ public final class ResumeBuilder {
     return retval.replace("{resume_string}", resume).replace("{jd_string}",jobDescription);
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    ResumeBuilder that = (ResumeBuilder) o;
+
+    return new EqualsBuilder().append(getModel(), that.getModel())
+        .append(getTemperature(), that.getTemperature()).append(getPromptType(), that.getPromptType())
+        .append(getJobDescription(), that.getJobDescription()).append(getResume(), that.getResume())
+        .append(getServerURL(), that.getServerURL()).isEquals();
+  }
+
+  @Override
+  public int hashCode() {
+    return new HashCodeBuilder(17, 37).append(getModel()).append(getTemperature()).append(getPromptType())
+        .append(getJobDescription()).append(getResume()).append(getServerURL()).toHashCode();
+  }
+
+  @Override
+  public String toString() {
+    return new StringJoiner(", ", ResumeBuilder.class.getSimpleName() + "[", "]")
+        .add("model='" + model + "'")
+        .add("temperature=" + temperature)
+        .add("promptType=" + promptType)
+        .add("jobDescription='" + jobDescription + "'")
+        .add("resume='" + resume + "'")
+        .add("serverURL='" + serverURL + "'")
+        .toString();
+  }
 
   public static void main(String[] args) throws IOException {
     ResumeBuilder rb = new ResumeBuilder();
