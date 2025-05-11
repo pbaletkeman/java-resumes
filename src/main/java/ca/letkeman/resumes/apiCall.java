@@ -7,75 +7,143 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class apiCall {
-  public static void main(String[] args)
-      throws URISyntaxException
-  {
 
-    // API URL
-    String url = "http://localhost:1234/v1/chat/completions";
+  private static final Logger logger = LoggerFactory.getLogger(apiCall.class);
 
-    // JSON String which will be sent to the API.
-//    String data_to_send = "{\"data\": \"Sample Data\"}";
-    String data_to_send = "{\"model\": \"gemma-3-4b-it\", \n\"messages\": [ \n{ \"role\": \"system\", \"content\": \"Always answer in rhymes. Today is Thursday\" }, \n{ \"role\": \"user\", \"content\": \"What day is it today?\" } \n], \n\"temperature\": 0.7, \n\"max_tokens\": -1, \n\"stream\": false \n}";
-    /*
+  // API URL
+  private String url; // = "http://localhost:1234/v1/chat/completions";
 
-*/
-    try {
-      URL obj = new URI(url).toURL(); // Making an object to point to the API URL
+  // JSON String which will be sent to the API.
+  private String dataToSend;
 
-      // attempts to establish a connection to the URL represented by the obj.
-      HttpURLConnection connection = (HttpURLConnection)obj.openConnection();
+  public apiCall(String url, String dataToSend) {
+    this.url = url;
+    this.dataToSend = dataToSend;
+  }
 
-      // Set request method and enable writing to the connection
-      connection.setRequestMethod("POST");
-      connection.setDoOutput(true);
+  public apiCall() {
+    dataToSend = "{\"model\": \"gemma-3-4b-it\", \n\"messages\": [ \n{ \"role\": \"system\", \"content\": \"Always answer in rhymes. Today is Thursday\" }, \n{ \"role\": \"user\", \"content\": \"What day is it today?\" } \n], \n\"temperature\": 0.7, \n\"max_tokens\": -1, \n\"stream\": false \n}";
+    url = "http://localhost:1234/v1/chat/completions";
+  }
 
-      // Set content type header,
-      // input (Content-Type) is in JSON (application/json) format.
-      connection.setRequestProperty("Content-Type", "application/json");
+  public String getUrl() {
+    return url;
+  }
 
-      // Calling the API and send request data
-      // connection.getOutputStream() purpose is to obtain an output stream for sending data to the server.
-      try (DataOutputStream os = new DataOutputStream(connection.getOutputStream())) {
-        os.writeBytes(data_to_send);
-        os.flush();
+  public void setUrl(String url) {
+    this.url = url;
+  }
+
+  public String getDataToSend() {
+    return dataToSend;
+  }
+
+  public void setDataToSend(String dataToSend) {
+    this.dataToSend = dataToSend;
+  }
+
+  public String processResponse(HttpURLConnection connection) throws IOException {
+    StringBuilder response = new StringBuilder();
+
+    try (
+        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))
+    ) {
+      String line;
+      while ((line = reader.readLine()) != null) {
+        response.append(line);
       }
+    } catch (IOException e) {
+      // Handle the IOException appropriately - logging, re-throwing, etc.
+      logger.error("Error reading response:{}" , e.getMessage());
+    }
+
+    // Now you can use the 'response' StringBuilder containing the entire response
+    return response.toString();
+  }
+
+
+  public LLMResponse execute() {
+
+    try {
+      HttpURLConnection connection = getConnection();
 
       // Get response code and handle response
-      int responseCode = connection.getResponseCode();
+      int responseCode = connection != null ? connection.getResponseCode() : 500;
 
       if (responseCode == HttpURLConnection.HTTP_OK) {
-        // HTTP_OK or 200 response code generally means that the server ran successfully without any errors
-        StringBuilder response = new StringBuilder();
+        String response = processResponse(connection);
 
-        // Read response content
-        // connection.getInputStream() purpose is to obtain an input stream for reading the server's response.
-        try (
-            BufferedReader reader = new BufferedReader( new InputStreamReader( connection.getInputStream()))) {
-          String line;
-          while ((line = reader.readLine()) != null) {
-            response.append(line); // Adds every line to response till the end of file.
-          }
-        }
-        LLMResponse llmResponse = new LLMResponse();
+        LLMResponse llmResponse;
         Gson gson = new Gson();
-        llmResponse = gson.fromJson(response.toString(),LLMResponse.class );
-        System.out.println("Response: " + response.toString());
+        llmResponse = gson.fromJson(response, LLMResponse.class);
+        connection.disconnect();
+        return llmResponse;
+      } else {
+        logger.error("Error: HTTP Response code - {}", responseCode);
       }
-      else {
-        System.out.println("Error: HTTP Response code - " + responseCode);
-      }
-      connection.disconnect();
-    }
-    catch (IOException e) {
+    } catch (IOException e) {
       // If any error occurs during api call it will go into catch block
-      System.out.println(e.toString());
-      e.printStackTrace();
+      logger.error(e.getMessage());
     }
+    return null;
+  }
+
+  private HttpURLConnection getConnection() {
+    URL obj = null; // Making an object to point to the API URL
+    try {
+      obj = new URI(url).toURL();
+    } catch (MalformedURLException | URISyntaxException e) {
+      logger.error(e.getMessage());
+    }
+
+    // attempts to establish a connection to the URL represented by the obj.
+    HttpURLConnection connection = null;
+    try {
+      if (obj != null) {
+        connection = (HttpURLConnection) obj.openConnection();
+      }
+    } catch (IOException e) {
+      logger.error(e.getMessage());
+    }
+
+    // Set request method and enable writing to the connection
+    try {
+      if (connection != null) {
+        connection.setRequestMethod("POST");
+      }
+    } catch (ProtocolException e) {
+      logger.error(e.getMessage());
+    }
+    if (connection != null) {
+      connection.setDoOutput(true);
+    }
+
+    // Set content type header,
+    // input (Content-Type) is in JSON (application/json) format.
+    if (connection != null) {
+      connection.setRequestProperty("Content-Type", "application/json");
+    }
+
+    // Calling the API and send request data
+    // connection.getOutputStream() purpose is to obtain an output stream for sending data to the server.
+    if (connection != null) {
+      try (DataOutputStream os = new DataOutputStream(connection.getOutputStream())) {
+        os.writeBytes(dataToSend);
+        os.flush();
+      } catch (IOException e) {
+        logger.error(e.getMessage());
+      }
+    }
+    return connection;
   }
 }
+
