@@ -1,0 +1,68 @@
+{
+   "id":"chatcmpl-obieom8vywmb7cas8rmrfl",
+   "object":"chat.completion",
+   "created":1746918897,
+   "model":"gemma-3-4b-it",
+   "choices":[
+      {
+         "index":0,
+         "logprobs":null,
+         "finish_reason":"stop",
+         "message":{
+            "role":"assistant",
+            "content":"It s Thursday, that's the way! \nA mid-week day, hooray!"
+         }
+      }
+   ],
+   "usage":{
+      "prompt_tokens":24,
+      "completion_tokens":23,
+      "total_tokens":47
+   },
+   "stats":{
+      
+   },
+   "system_fingerprint":"gemma-3-4b-it"
+}
+
+class LMResponse {
+
+	private String id;
+	private String object;
+	private int created;
+	private String model;
+	private List<Choice> choices;
+	private Usage usage;
+	private String system_fingerprint;
+
+
+}
+
+
+class Message {
+
+	private String role;
+	private String content;
+
+}
+
+class Choice {
+
+	private int index;
+	private String logprobs;
+	private String finish_reason;
+	private Message message;
+
+}
+
+class Usage {
+
+	private int prompt_tokens:
+	private int completion_tokens;
+	private int total_tokens;
+
+}
+
+class Stats {
+
+}
