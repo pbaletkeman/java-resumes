@@ -1,5 +1,7 @@
 package ca.letkeman.resumes;
 
+import ca.letkeman.resumes.responses.LLMResponse;
+import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -60,6 +62,9 @@ public class apiCall {
             response.append(line); // Adds every line to response till the end of file.
           }
         }
+        LLMResponse llmResponse = new LLMResponse();
+        Gson gson = new Gson();
+        llmResponse = gson.fromJson(response.toString(),LLMResponse.class );
         System.out.println("Response: " + response.toString());
       }
       else {
