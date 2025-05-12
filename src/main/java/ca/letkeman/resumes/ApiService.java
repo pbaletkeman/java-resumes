@@ -16,9 +16,11 @@ import java.net.URL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 public class ApiService {
 
   private static final Logger logger = LoggerFactory.getLogger(ApiService.class);
+
 
   public enum PROMPT_TYPE {
     COVER,
@@ -62,7 +64,7 @@ public class ApiService {
     try {
       data = new String(Files.readAllBytes(Paths.get(fileName)));
     } catch (IOException e) {
-      logger.error(e.toString());
+      logger.error("Error reading file: {}\n{}", fileName, e.toString());
     }
     return data;
   }
@@ -81,28 +83,36 @@ public class ApiService {
         conn.setRequestProperty("Content-Type", "application/json");
         conn.setRequestProperty("Accept", "application/json");
         conn.setDoOutput(true);
-        try(OutputStream os = conn.getOutputStream()) {
-          byte[] input = jsonBody.getBytes(StandardCharsets.UTF_8);
-          try {
-            os.write(input, 0, input.length);
-          } catch (IOException e) {
-            throw new RuntimeException(e);
-          }
-        }
-        try(BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8))) {
+
+        attachJSONBody(jsonBody, conn);
+        try (BufferedReader br = new BufferedReader(
+            new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8))) {
           StringBuilder response = new StringBuilder();
           String responseLine = null;
           while ((responseLine = br.readLine()) != null) {
             response.append(responseLine.trim());
           }
-          System.out.println(response.toString());
+          logger.info("API Response:\n{}", response);
         }
 
         return String.valueOf(conn.getResponseCode());
       } catch (Exception e) {
-        throw new RuntimeException(e);
+        logger.error(e.toString());
       }
+      return null;
     });
+  }
+  private static void attachJSONBody(String jsonBody, HttpURLConnection conn) {
+    byte[] input = jsonBody.getBytes(StandardCharsets.UTF_8);
+    try (OutputStream os = conn.getOutputStream()) {
+      try {
+        os.write(input, 0, input.length);
+      } catch (IOException e) {
+        logger.error("Problem attaching JSON body:\n{}", e.toString());
+      }
+    } catch (IOException e) {
+      logger.error("Problem getting output steam:\n{}", e.toString());
+    }
   }
 
   public static void main(String[] args) {
@@ -131,9 +141,6 @@ public class ApiService {
     CompletableFuture<String> apiFuture = service.invokeApi(chatBody);
 
     // Block and wait for the API request to complete
-    apiFuture.thenAccept(response -> {
-      System.out.println("API Response Code: " + response);
-    }).join(); // This will wait for the API response
+    apiFuture.thenAccept(response -> logger.info("API Response Code: {}", response)).join(); // This will wait for the API response
   }
 }
-
