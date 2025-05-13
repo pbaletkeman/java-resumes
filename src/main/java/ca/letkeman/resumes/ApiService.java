@@ -6,13 +6,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.net.HttpURLConnection;
-import java.net.URL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -77,8 +77,8 @@ public class ApiService {
     String jsonBody = new Gson().toJson(chatBody);
     return CompletableFuture.supplyAsync(() -> {
       try {
-        URL url = new URL(getServerURL());
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        URI uri = new URI(getServerURL());
+        HttpURLConnection conn = (HttpURLConnection) uri.toURL().openConnection();
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-Type", "application/json");
         conn.setRequestProperty("Accept", "application/json");
@@ -105,13 +105,17 @@ public class ApiService {
   private static void attachJSONBody(String jsonBody, HttpURLConnection conn) {
     byte[] input = jsonBody.getBytes(StandardCharsets.UTF_8);
     try (OutputStream os = conn.getOutputStream()) {
-      try {
-        os.write(input, 0, input.length);
-      } catch (IOException e) {
-        logger.error("Problem attaching JSON body:\n{}", e.toString());
-      }
+      encodeBody(os, input);
     } catch (IOException e) {
       logger.error("Problem getting output steam:\n{}", e.toString());
+    }
+  }
+
+  private static void encodeBody(OutputStream os, byte[] input) {
+    try {
+      os.write(input, 0, input.length);
+    } catch (IOException e) {
+      logger.error("Problem attaching JSON body:\n{}", e.toString());
     }
   }
 
