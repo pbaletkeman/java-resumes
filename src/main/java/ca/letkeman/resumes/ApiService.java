@@ -1,5 +1,8 @@
 package ca.letkeman.resumes;
 
+import static java.net.HttpURLConnection.HTTP_OK;
+
+import ca.letkeman.resumes.responses.LLMResponse;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.File;
@@ -73,7 +76,7 @@ public class ApiService {
     this.serverURL = "http://localhost:1234/v1/chat/completions";
   }
 
-  public CompletableFuture<String> invokeApi(ChatBody chatBody) {
+  public CompletableFuture<LLMResponse> invokeApi(ChatBody chatBody) {
     String jsonBody = new Gson().toJson(chatBody);
     return CompletableFuture.supplyAsync(() -> {
       try {
@@ -85,17 +88,21 @@ public class ApiService {
         conn.setDoOutput(true);
 
         attachJSONBody(jsonBody, conn);
+        StringBuilder response = new StringBuilder();
         try (BufferedReader br = new BufferedReader(
             new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8))) {
-          StringBuilder response = new StringBuilder();
+
           String responseLine = null;
           while ((responseLine = br.readLine()) != null) {
             response.append(responseLine.trim());
           }
           logger.info("API Response:\n{}", response);
         }
-
-        return String.valueOf(conn.getResponseCode());
+        if (conn.getResponseCode() != HTTP_OK) {
+          logger.error(String.valueOf(conn.getErrorStream()));
+        } else {
+          return new Gson().fromJson(response.toString(), LLMResponse.class);
+        }
       } catch (Exception e) {
         logger.error(e.toString());
       }
@@ -119,8 +126,7 @@ public class ApiService {
     }
   }
 
-  public static void main(String[] args) {
-    ApiService service = new ApiService();
+  public static void main(String[] args) throws Exception {
 
     String promptData = readFileAsString("prompts" + File.separator + PROMPT_TYPE.RESUME.name() + ".md");
 
@@ -140,12 +146,17 @@ public class ApiService {
     Message userMessage = new Message();
     userMessage.setRole("user");
     userMessage.setContent(promptData);
+
     chatBody.setMessages(List.of(systemMessage, userMessage));
 
-    CompletableFuture<String> apiFuture = service.invokeApi(chatBody);
+    ApiService service = new ApiService();
+    CompletableFuture<LLMResponse> apiFuture = service.invokeApi(chatBody);
 
-    // Block and wait for the API request to complete
-    apiFuture.thenAccept(response -> logger.info("API Response Code: {}", response)).join(); // This will wait for the API response
+    LLMResponse x = new LLMResponse();
+    x = apiFuture.get(); // this is a blocking operation
+
+    System.out.println(x.getChoices());
+    System.out.println("pete");
   }
 }
 

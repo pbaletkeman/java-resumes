@@ -107,10 +107,12 @@ public class HtmlToPdf {
     return true;
   }
 
-  public static void main(String[] args) {
-
+/*
+    sample usage:
     HtmlToPdf htmlToPdf = new HtmlToPdf("sample/resume.md","output.pdf", "");
     htmlToPdf.convertFile();
-
-  }
+    --------------------
+    HtmlToPdf htmlToPdf = new HtmlToPdf("","output.pdf", "**markdown content**");
+    htmlToPdf.convertFile();
+*/
 }

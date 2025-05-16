@@ -1,5 +1,6 @@
 package ca.letkeman.resumes.responses;
 
+import com.google.gson.Gson;
 import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -105,4 +106,8 @@ public class LLMResponse {
   }
 
   public LLMResponse(){}
+
+  public String getJSON(){
+    return new Gson().toJson(this);
+  }
 }
