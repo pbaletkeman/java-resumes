@@ -4,7 +4,7 @@ import java.util.StringJoiner;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-class Message {
+public class Message {
 
   private String role;
   private String content;
