@@ -168,15 +168,13 @@ public class ApiService {
           String[] content = message.split("Additional Suggestions");
           if (content != null) { // Check length for exactly two elements
             body = content[0].trim();
-            suggestion = content.length == 2 ? content[1].trim() : "";
-
             body = trimString(body);
-
-            suggestion = removeTrailingChar(suggestion,"#");
-
             if (body.trim().isEmpty()) {
               body = "";
             }
+
+            suggestion = content.length == 2 ? content[1].trim() : "";
+            suggestion = removeTrailingChar(suggestion,"#");
           }
         }
       }
@@ -187,25 +185,24 @@ public class ApiService {
     } catch (Exception e) {
       logger.error("Unable to create output directory.\n{}", e.toString());
     }
-
     String fileName = company + "-" + jobTitle + ".md";
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter(OUTPUT_DIR + File.separator + fileName, false))) {
-      writer.write(body);
-      writer.flush();  // Data is written to OS page cache, not necessarily to the disk immediately
-    } catch (Exception e) {
-      logger.error("Error writing file: {}\n{}:", fileName, e.toString());
-    }
+    createResultFile(fileName, body);
+
     fileName = company + "-" + jobTitle + "-suggestions.md";
-    if (suggestion != null && !suggestion.isBlank()) {
+    createResultFile(fileName, suggestion);
+
+    return  llmResponse;
+  }
+
+  private static void createResultFile(String fileName, String s ) {
+    if (s != null && !s.isBlank()) {
       try (BufferedWriter writer = new BufferedWriter(new FileWriter(OUTPUT_DIR + File.separator + fileName, false))) {
-        writer.write(suggestion);
+        writer.write(s);
         writer.flush();  // Data is written to OS page cache, not necessarily to the disk immediately
       } catch (Exception e) {
         logger.error("Error writing file: {}\n{}:", fileName, e.toString());
       }
     }
-
-    return  llmResponse;
   }
 
   private String trimString(String body) {
