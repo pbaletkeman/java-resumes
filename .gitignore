@@ -81,3 +81,4 @@ fabric.properties
 /.gradle/
 /.idea/
 /gradle/
+/output/

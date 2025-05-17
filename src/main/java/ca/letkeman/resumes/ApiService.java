@@ -3,8 +3,8 @@ package ca.letkeman.resumes;
 import static java.net.HttpURLConnection.HTTP_OK;
 
 import ca.letkeman.resumes.responses.LLMResponse;
+import ca.letkeman.resumes.responses.Choice;
 import com.google.gson.Gson;
-import java.awt.Choice;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -157,7 +157,7 @@ public class ApiService {
     String suggestion = "";
 
     if (llmResponse != null) {
-      ArrayList<ca.letkeman.resumes.responses.Choice> choices = (ArrayList<ca.letkeman.resumes.responses.Choice>) llmResponse.getChoices();
+      ArrayList<Choice> choices = (ArrayList<Choice>) llmResponse.getChoices();
       if (choices != null && !choices.isEmpty() && choices.get(0).getMessage() != null && choices.get(0).getMessage().getContent() != null){
         String message = choices.get(0).getMessage().getContent();
         int chopStart = message.indexOf("```");
@@ -166,13 +166,12 @@ public class ApiService {
           chopStart = message.indexOf("\n");
           message = message.substring(chopStart);
           String[] content = message.split("Additional Suggestions");
-          if (content != null) { // Check length for exactly two elements
+          if (content != null) {
             body = content[0].trim();
             body = trimString(body);
             if (body.trim().isEmpty()) {
               body = "";
             }
-
             suggestion = content.length == 2 ? content[1].trim() : "";
             suggestion = removeTrailingChar(suggestion,"#");
           }
@@ -187,6 +186,10 @@ public class ApiService {
     }
     String fileName = company + "-" + jobTitle + ".md";
     createResultFile(fileName, body);
+    HtmlToPdf html = new HtmlToPdf(OUTPUT_DIR + File.separator + fileName, OUTPUT_DIR + File.separator + company + "-" + jobTitle +".pdf" ,"");
+    if (html.convertFile()) {
+      logger.error("Unable to save PDF file");
+    }
 
     fileName = company + "-" + jobTitle + "-suggestions.md";
     createResultFile(fileName, suggestion);
