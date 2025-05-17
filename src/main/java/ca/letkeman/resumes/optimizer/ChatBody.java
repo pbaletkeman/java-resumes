@@ -1,4 +1,4 @@
-package ca.letkeman.resumes;
+package ca.letkeman.resumes.optimizer;
 
 
 import java.util.List;

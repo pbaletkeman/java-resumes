@@ -1,4 +1,4 @@
-package ca.letkeman.resumes.responses;
+package ca.letkeman.resumes.optimizer.responses;
 
 import com.google.gson.Gson;
 import java.util.List;

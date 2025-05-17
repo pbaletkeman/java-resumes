@@ -1,9 +1,9 @@
-package ca.letkeman.resumes;
+package ca.letkeman.resumes.optimizer;
 
 import static java.net.HttpURLConnection.HTTP_OK;
 
-import ca.letkeman.resumes.responses.LLMResponse;
-import ca.letkeman.resumes.responses.Choice;
+import ca.letkeman.resumes.optimizer.responses.LLMResponse;
+import ca.letkeman.resumes.optimizer.responses.Choice;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -66,7 +66,7 @@ public class ApiService {
     setServerURL(serverURL);
   }
 
-  private static String readFileAsString(String fileName) {
+  public static String readFileAsString(String fileName) {
     String data = "";
     try {
       data = Files.readString(Paths.get(fileName), StandardCharsets.ISO_8859_1);
@@ -88,6 +88,7 @@ public class ApiService {
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setRequestProperty("Accept", "application/json");
+      logger.info("Send JSON to LLM Engine");
       conn.setDoOutput(true);
 
       attachJSONBody(jsonBody, conn);
@@ -96,13 +97,16 @@ public class ApiService {
           new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8))) {
 
         String responseLine = null;
+        logger.info("Get API Response");
         while ((responseLine = br.readLine()) != null) {
           response.append(responseLine.trim());
         }
       }
       if (conn.getResponseCode() != HTTP_OK) {
+        logger.error("Invalid API response");
         logger.error(String.valueOf(conn.getErrorStream()));
       } else {
+        logger.info("Response saved to object.");
         return new Gson().fromJson(response.toString(), LLMResponse.class);
       }
     } catch (Exception e) {
@@ -128,11 +132,11 @@ public class ApiService {
     }
   }
 
-  public LLMResponse getLLMResponse(String promptType, String resume, String jobDescription, String jobTitle, String company) {
-    return getLLMResponse(promptType, 0.7, "gemma-3-4b-it", resume, jobDescription, jobTitle, company);
+  public void produceFiles(String promptType, String resume, String jobDescription, String jobTitle, String company) {
+    produceFiles(promptType, 0.7, "gemma-3-4b-it", resume, jobDescription, jobTitle, company);
   }
 
-  public LLMResponse getLLMResponse(String promptType, double temperature, String model, String resume, String jobDescription, String jobTitle, String company) {
+  public void produceFiles(String promptType, double temperature, String model, String resume, String jobDescription, String jobTitle, String company) {
     String promptData = readFileAsString("prompts" + File.separator + promptType + ".md");
     promptData = promptData.replace("{resume_string}", resume).replace("{jd_string}", jobDescription);
 
@@ -187,14 +191,15 @@ public class ApiService {
     String fileName = company + "-" + jobTitle + ".md";
     createResultFile(fileName, body);
     HtmlToPdf html = new HtmlToPdf(OUTPUT_DIR + File.separator + fileName, OUTPUT_DIR + File.separator + company + "-" + jobTitle +".pdf" ,"");
-    if (html.convertFile()) {
+    if (!html.convertFile()) {
       logger.error("Unable to save PDF file");
     }
 
     fileName = company + "-" + jobTitle + "-suggestions.md";
     createResultFile(fileName, suggestion);
 
-    return  llmResponse;
+//    return  llmResponse;
+
   }
 
   private static void createResultFile(String fileName, String s ) {
@@ -233,10 +238,8 @@ public class ApiService {
     String jobDescription = readFileAsString("sample" + File.separator + "PointClickCare-Software Engineer.txt");
 
     ApiService apiService = new ApiService();
-    LLMResponse x = apiService.getLLMResponse(PROMPT_TYPE.RESUME.name(), resume, jobDescription, "developer", "point click care");
+    apiService.produceFiles(PROMPT_TYPE.RESUME.name(), resume, jobDescription, "developer", "point click care");
 
-//    System.out.println(x.getChoices());
-    System.out.println("pete");
   }
 }
 

@@ -1,4 +1,4 @@
-package ca.letkeman.resumes;
+package ca.letkeman.resumes.optimizer;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -100,7 +100,8 @@ public class HtmlToPdf {
 
     try {
       xhtmlToPdf(htmlToXhtml(renderer.render(document)), getPdfFilePath());
-    } catch (IOException e) {
+      logger.info("PDF saved to: {}", getPdfFilePath());
+    } catch (Exception e) {
       logger.error("Error unable to save PDF file:\n{}", e.toString());
       return false;
     }

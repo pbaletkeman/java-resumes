@@ -1,4 +1,4 @@
-package ca.letkeman.resumes.responses;
+package ca.letkeman.resumes.optimizer.responses;
 
 import java.util.StringJoiner;
 import org.apache.commons.lang3.builder.EqualsBuilder;

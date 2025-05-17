@@ -1,4 +1,4 @@
-package ca.letkeman.resumes.responses;
+package ca.letkeman.resumes.optimizer.responses;
 
 class Usage {
 
