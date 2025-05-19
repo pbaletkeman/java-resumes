@@ -1,6 +1,8 @@
 package ca.letkeman.resumes.model;
 
 import ca.letkeman.resumes.optimizer.ApiService.PROMPT_TYPE;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class Optimize {
   PROMPT_TYPE promptType = PROMPT_TYPE.RESUME;
@@ -79,5 +81,41 @@ public class Optimize {
 
   public void setCompany(String company) {
     this.company = company;
+  }
+
+  @Override
+  public String toString() {
+    return "Optimize{" + "promptType=" + promptType
+        + ", temperature=" + temperature
+        + ", model='" + model + '\''
+        + ", resume='" + resume + '\''
+        + ", jobDescription='" + jobDescription + '\''
+        + ", jobTitle='" + jobTitle + '\''
+        + ", company='" + company + '\''
+        + '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    Optimize optimize = (Optimize) o;
+
+    return new EqualsBuilder().append(getTemperature(), optimize.getTemperature())
+        .append(getPromptType(), optimize.getPromptType()).append(getModel(), optimize.getModel())
+        .append(getResume(), optimize.getResume()).append(getJobDescription(), optimize.getJobDescription())
+        .append(getJobTitle(), optimize.getJobTitle()).append(getCompany(), optimize.getCompany()).isEquals();
+  }
+
+  @Override
+  public int hashCode() {
+    return new HashCodeBuilder(17, 37).append(getPromptType()).append(getTemperature()).append(getModel())
+        .append(getResume()).append(getJobDescription()).append(getJobTitle()).append(getCompany()).toHashCode();
   }
 }

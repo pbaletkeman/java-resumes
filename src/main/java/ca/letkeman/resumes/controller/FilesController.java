@@ -1,6 +1,7 @@
 package ca.letkeman.resumes.controller;
 
 import ca.letkeman.resumes.model.Optimize;
+import com.google.gson.Gson;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,7 +36,8 @@ public class FilesController {
   @PostMapping(path = "/upload")
   public ResponseEntity<ResponseMessage> uploadFile(
       @RequestParam(name = "resume", required = false) MultipartFile resume,
-      @RequestParam(name = "job", required = false) MultipartFile job) {
+      @RequestParam(name = "job", required = false) MultipartFile job,
+      @RequestParam(name="optimize", required = false) String opt) {
     String resumeMessage = "";
     String jobMessage = "";
     boolean uploadGood = true;
@@ -58,6 +61,8 @@ public class FilesController {
         }
       }
     }
+    Optimize optimize = new Gson().fromJson(opt, Optimize.class);
+    System.out.println("optimize: " + optimize);
     if (uploadGood){
       return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(resumeMessage + "\n" + jobMessage));
     } else {
