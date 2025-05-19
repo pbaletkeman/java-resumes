@@ -1,4 +1,4 @@
-package ca.letkeman.resumes;
+package ca.letkeman.resumes.model;
 
 import ca.letkeman.resumes.optimizer.ApiService.PROMPT_TYPE;
 

@@ -1,5 +1,6 @@
-package ca.letkeman.resumes;
+package ca.letkeman.resumes.controller;
 
+import ca.letkeman.resumes.model.Greeting;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.web.bind.annotation.GetMapping;

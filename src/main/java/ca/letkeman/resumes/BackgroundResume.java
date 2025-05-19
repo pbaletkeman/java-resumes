@@ -1,5 +1,6 @@
 package ca.letkeman.resumes;
 
+import ca.letkeman.resumes.model.Optimize;
 import ca.letkeman.resumes.optimizer.ApiService;
 
 public class BackgroundResume implements Runnable {
@@ -24,7 +25,7 @@ public class BackgroundResume implements Runnable {
   public void run() {
 
     ApiService apiService = new ApiService();
-    apiService.produceFiles(optimize.promptType.name(), optimize.resume, optimize.jobDescription, optimize.jobTitle, optimize.company);
+    apiService.produceFiles(optimize.getPromptType().name(), optimize.getResume(), optimize.getJobDescription(), optimize.getJobTitle(), optimize.getCompany());
 
   }
 }

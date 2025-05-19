@@ -1,5 +1,7 @@
-package ca.letkeman.resumes;
+package ca.letkeman.resumes.controller;
 
+import ca.letkeman.resumes.BackgroundResume;
+import ca.letkeman.resumes.model.Optimize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,8 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ResumeController {
 
-  @PostMapping(
-      value = "/optimizer", consumes = "application/json", produces = "application/json")
+  @PostMapping(value = "/optimizer", consumes = "application/json", produces = "application/json")
   public String optimize(@RequestBody Optimize optimize) {
 
 //    String resume = readFileAsString("sample" + File.separator + "resume.md");
