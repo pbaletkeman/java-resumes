@@ -4,7 +4,10 @@ import ca.letkeman.resumes.model.Optimize;
 import com.google.gson.Gson;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,7 +16,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,7 +28,12 @@ import ca.letkeman.resumes.service.FilesStorageService;
 @RestController
 public class FilesController {
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(FilesController.class);
+
   private final FilesStorageService storageService;
+
+  @Value("${upload.path:uploads}")
+  private String root;
 
   @Autowired
   public FilesController( FilesStorageService storageService){
@@ -40,33 +47,35 @@ public class FilesController {
       @RequestParam(name="optimize", required = false) String opt) {
     String resumeMessage = "";
     String jobMessage = "";
-    boolean uploadGood = true;
-    if (resume != null) {
+    Optimize optimize = new Gson().fromJson(opt, Optimize.class);
+    LOGGER.info("optimize: {}",optimize);
+    if ((optimize.getResume() == null || optimize.getResume().isBlank() || optimize.getResume().isEmpty())
+        && resume != null) {
       try {
         storageService.save(resume);
         resumeMessage = "Uploaded the resume successfully: " + resume.getOriginalFilename();
+        optimize.setResume(resume.getOriginalFilename());
       } catch (Exception e) {
+        LOGGER.error("Could not upload the resume: {}. Error:\n{}", resume.getOriginalFilename(), e.getMessage());
         resumeMessage = "Could not upload the resume: " + resume.getOriginalFilename() + ". Error: " + e.getMessage();
-        uploadGood = false;
       }
     }
-    if (job != null) {
-      if (uploadGood) {
-        try {
+
+    if (optimize.getJobDescription() == null || optimize.getJobDescription().isBlank() || optimize.getJobDescription().isEmpty() && job != null) {
+      try {
           storageService.save(job);
           jobMessage = "Uploaded the job successfully: " + job.getOriginalFilename();
+          optimize.setJobDescription(job.getOriginalFilename());
         } catch (Exception e) {
+          LOGGER.error("Could not upload the job: {}. Error:\n{}", job.getOriginalFilename(),e.getMessage());
           jobMessage = "Could not upload the job: " + job.getOriginalFilename() + ". Error: " + e.getMessage();
-          uploadGood = false;
         }
-      }
     }
-    Optimize optimize = new Gson().fromJson(opt, Optimize.class);
-    System.out.println("optimize: " + optimize);
-    if (uploadGood){
+
+    if (optimize.isValid()){
       return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(resumeMessage + "\n" + jobMessage));
     } else {
-      return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(resumeMessage + "\n" + jobMessage));
+      return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage("Required property missing or invalid."));
     }
   }
 
@@ -77,7 +86,8 @@ public class FilesController {
       String url = MvcUriComponentsBuilder
           .fromMethodName(FilesController.class, "getFile", path.getFileName().toString()).build().toString();
 
-      return new FileInfo(filename, url);
+
+      return new FileInfo(filename, url, root);
     }).toList();
 
     return ResponseEntity.status(HttpStatus.OK).body(fileInfos);

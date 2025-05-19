@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,15 @@ public class FilesStorageServiceImpl implements FilesStorageService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(FilesStorageServiceImpl.class);
 
-  private final Path root = Paths.get("uploads");
+  @Value("${upload.path:uploads}")
+  private String configRoot;
+
+  private Path root;
 
   @Override
   public void init() {
     try {
+      root = Paths.get(configRoot);
       Files.createDirectories(root);
     } catch (IOException e) {
       LOGGER.error("Could not initialize folder for upload!");

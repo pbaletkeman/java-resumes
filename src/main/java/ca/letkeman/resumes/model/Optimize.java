@@ -118,4 +118,17 @@ public class Optimize {
     return new HashCodeBuilder(17, 37).append(getPromptType()).append(getTemperature()).append(getModel())
         .append(getResume()).append(getJobDescription()).append(getJobTitle()).append(getCompany()).toHashCode();
   }
+
+  /*
+  check to see if properties are somewhat present and somewhat correct
+   */
+  public boolean isValid(){
+    return getResume() != null && !getResume().isBlank() && !getResume().isEmpty() &&
+        getJobDescription() != null && !getJobDescription().isBlank() && !getJobDescription().isEmpty() &&
+        getTemperature() > 0 && getTemperature() < 2 &&
+        getPromptType() != null &&
+        getCompany() != null && !getCompany().isBlank() && !getCompany().isEmpty() &&
+        getJobTitle() != null && !getJobTitle().isBlank() && !getJobTitle().isEmpty() &&
+        getModel() != null && !getModel().isBlank() && !getModel().isEmpty();
+  }
 }
