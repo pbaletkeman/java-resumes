@@ -1,5 +1,6 @@
 package ca.letkeman.resumes.controller;
 
+import ca.letkeman.resumes.model.Optimize;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,20 +29,39 @@ public class FilesController {
   @Autowired
   public FilesController( FilesStorageService storageService){
     this.storageService = storageService;
-
   }
 
-  @PostMapping("/upload")
-  public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
-    String message = "";
-    try {
-      storageService.save(file);
-
-      message = "Uploaded the file successfully: " + file.getOriginalFilename();
-      return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
-    } catch (Exception e) {
-      message = "Could not upload the file: " + file.getOriginalFilename() + ". Error: " + e.getMessage();
-      return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+  @PostMapping(path = "/upload")
+  public ResponseEntity<ResponseMessage> uploadFile(
+      @RequestParam(name = "resume", required = false) MultipartFile resume,
+      @RequestParam(name = "job", required = false) MultipartFile job) {
+    String resumeMessage = "";
+    String jobMessage = "";
+    boolean uploadGood = true;
+    if (resume != null) {
+      try {
+        storageService.save(resume);
+        resumeMessage = "Uploaded the resume successfully: " + resume.getOriginalFilename();
+      } catch (Exception e) {
+        resumeMessage = "Could not upload the resume: " + resume.getOriginalFilename() + ". Error: " + e.getMessage();
+        uploadGood = false;
+      }
+    }
+    if (job != null) {
+      if (uploadGood) {
+        try {
+          storageService.save(job);
+          jobMessage = "Uploaded the job successfully: " + job.getOriginalFilename();
+        } catch (Exception e) {
+          jobMessage = "Could not upload the job: " + job.getOriginalFilename() + ". Error: " + e.getMessage();
+          uploadGood = false;
+        }
+      }
+    }
+    if (uploadGood){
+      return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(resumeMessage + "\n" + jobMessage));
+    } else {
+      return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(resumeMessage + "\n" + jobMessage));
     }
   }
 

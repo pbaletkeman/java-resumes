@@ -2,10 +2,10 @@ package ca.letkeman.resumes.service;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -36,11 +36,8 @@ public class FilesStorageServiceImpl implements FilesStorageService {
   @Override
   public void save(MultipartFile file) {
     try {
-      Files.copy(file.getInputStream(), this.root.resolve(Objects.requireNonNull(file.getOriginalFilename())));
+      Files.copy(file.getInputStream(), this.root.resolve(Objects.requireNonNull(file.getOriginalFilename())), StandardCopyOption.REPLACE_EXISTING);
     } catch (Exception e) {
-      if (e instanceof FileAlreadyExistsException) {
-        LOGGER.error("A file of that name already exists.");
-      }
       LOGGER.error(e.getMessage());
     }
   }
