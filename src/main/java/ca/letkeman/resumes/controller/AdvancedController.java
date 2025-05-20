@@ -1,7 +1,12 @@
 package ca.letkeman.resumes.controller;
 
+import ca.letkeman.resumes.BackgroundResume;
+import ca.letkeman.resumes.Utility;
 import ca.letkeman.resumes.model.Optimize;
+
 import com.google.gson.Gson;
+
+import java.io.File;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -26,9 +31,9 @@ import ca.letkeman.resumes.model.FileInfo;
 import ca.letkeman.resumes.service.FilesStorageService;
 
 @RestController
-public class FilesController {
+public class AdvancedController {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(FilesController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(AdvancedController.class);
 
   private final FilesStorageService storageService;
 
@@ -36,55 +41,53 @@ public class FilesController {
   private String root;
 
   @Autowired
-  public FilesController( FilesStorageService storageService){
+  public AdvancedController( FilesStorageService storageService){
     this.storageService = storageService;
   }
 
   @PostMapping(path = "/upload")
-  public ResponseEntity<ResponseMessage> uploadFile(
+  public ResponseEntity<ResponseMessage> optimizeResume(
       @RequestParam(name = "resume", required = false) MultipartFile resume,
       @RequestParam(name = "job", required = false) MultipartFile job,
       @RequestParam(name="optimize", required = false) String opt) {
-    String resumeMessage = "";
-    String jobMessage = "";
     Optimize optimize = new Gson().fromJson(opt, Optimize.class);
     LOGGER.info("optimize: {}",optimize);
     if ((optimize.getResume() == null || optimize.getResume().isBlank() || optimize.getResume().isEmpty())
         && resume != null) {
       try {
         storageService.save(resume);
-        resumeMessage = "Uploaded the resume successfully: " + resume.getOriginalFilename();
-        optimize.setResume(resume.getOriginalFilename());
+        optimize.setResume(Utility.readFileAsString(root + File.separator + resume.getOriginalFilename()));
       } catch (Exception e) {
         LOGGER.error("Could not upload the resume: {}. Error:\n{}", resume.getOriginalFilename(), e.getMessage());
-        resumeMessage = "Could not upload the resume: " + resume.getOriginalFilename() + ". Error: " + e.getMessage();
       }
     }
 
     if (optimize.getJobDescription() == null || optimize.getJobDescription().isBlank() || optimize.getJobDescription().isEmpty() && job != null) {
       try {
           storageService.save(job);
-          jobMessage = "Uploaded the job successfully: " + job.getOriginalFilename();
-          optimize.setJobDescription(job.getOriginalFilename());
+          optimize.setJobDescription(Utility.readFileAsString(root + File.separator + job.getOriginalFilename()));
         } catch (Exception e) {
           LOGGER.error("Could not upload the job: {}. Error:\n{}", job.getOriginalFilename(),e.getMessage());
-          jobMessage = "Could not upload the job: " + job.getOriginalFilename() + ". Error: " + e.getMessage();
         }
     }
 
     if (optimize.isValid()){
-      return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(resumeMessage + "\n" + jobMessage));
+      // start background task here
+      Thread thread = new Thread(new BackgroundResume(optimize));
+      thread.start();
+      return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("generating"));
     } else {
       return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage("Required property missing or invalid."));
     }
+//    return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("done"));
   }
 
-  @GetMapping("/files")
+  @GetMapping("/get-files")
   public ResponseEntity<List<FileInfo>> getListFiles() {
     List<FileInfo> fileInfos = storageService.loadAll().map(path -> {
       String filename = path.getFileName().toString();
       String url = MvcUriComponentsBuilder
-          .fromMethodName(FilesController.class, "getFile", path.getFileName().toString()).build().toString();
+          .fromMethodName(AdvancedController.class, "getFile", path.getFileName().toString()).build().toString();
 
 
       return new FileInfo(filename, url, root);

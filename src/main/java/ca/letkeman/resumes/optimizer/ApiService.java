@@ -2,6 +2,7 @@ package ca.letkeman.resumes.optimizer;
 
 import static java.net.HttpURLConnection.HTTP_OK;
 
+import ca.letkeman.resumes.Utility;
 import ca.letkeman.resumes.optimizer.responses.LLMResponse;
 import ca.letkeman.resumes.optimizer.responses.Choice;
 import com.google.gson.Gson;
@@ -16,7 +17,10 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.net.HttpURLConnection;
 import org.slf4j.Logger;
@@ -25,7 +29,7 @@ import org.slf4j.LoggerFactory;
 
 public class ApiService {
 
-  private static final Logger logger = LoggerFactory.getLogger(ApiService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ApiService.class);
   private static final String OUTPUT_DIR = "output";
 
 
@@ -66,16 +70,6 @@ public class ApiService {
     setServerURL(serverURL);
   }
 
-  public static String readFileAsString(String fileName) {
-    String data = "";
-    try {
-      data = Files.readString(Paths.get(fileName), StandardCharsets.ISO_8859_1);
-    } catch (IOException e) {
-      logger.error("Error reading file: {}\n{}", fileName, e.toString());
-    }
-    return data;
-  }
-
   public ApiService() {
     this.serverURL = "http://localhost:1234/v1/chat/completions";
   }
@@ -88,7 +82,7 @@ public class ApiService {
       conn.setRequestMethod("POST");
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setRequestProperty("Accept", "application/json");
-      logger.info("Send JSON to LLM Engine");
+      LOGGER.info("Send JSON to LLM Engine");
       conn.setDoOutput(true);
 
       attachJSONBody(jsonBody, conn);
@@ -97,20 +91,20 @@ public class ApiService {
           new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8))) {
 
         String responseLine = null;
-        logger.info("Get API Response");
+        LOGGER.info("Get API Response");
         while ((responseLine = br.readLine()) != null) {
           response.append(responseLine.trim());
         }
       }
       if (conn.getResponseCode() != HTTP_OK) {
-        logger.error("Invalid API response");
-        logger.error(String.valueOf(conn.getErrorStream()));
+        LOGGER.error("Invalid API response");
+        LOGGER.error(String.valueOf(conn.getErrorStream()));
       } else {
-        logger.info("Response saved to object.");
+        LOGGER.info("Response saved to object.");
         return new Gson().fromJson(response.toString(), LLMResponse.class);
       }
     } catch (Exception e) {
-      logger.error(e.toString());
+      LOGGER.error(e.toString());
     }
     return null;
   }
@@ -120,7 +114,7 @@ public class ApiService {
     try (OutputStream os = conn.getOutputStream()) {
       encodeBody(os, input);
     } catch (IOException e) {
-      logger.error("Problem getting output steam:\n{}", e.toString());
+      LOGGER.error("Problem getting output steam:\n{}", e.toString());
     }
   }
 
@@ -128,7 +122,7 @@ public class ApiService {
     try {
       os.write(input, 0, input.length);
     } catch (IOException e) {
-      logger.error("Problem attaching JSON body:\n{}", e.toString());
+      LOGGER.error("Problem attaching JSON body:\n{}", e.toString());
     }
   }
 
@@ -137,8 +131,12 @@ public class ApiService {
   }
 
   public void produceFiles(String promptType, double temperature, String model, String resume, String jobDescription, String jobTitle, String company) {
-    String promptData = readFileAsString("prompts" + File.separator + promptType + ".md");
+    String promptData = Utility.readFileAsString("prompts" + File.separator + promptType + ".md");
     promptData = promptData.replace("{resume_string}", resume).replace("{jd_string}", jobDescription);
+
+    LocalDate myDateObj = LocalDate.now();
+    String today = myDateObj.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
+    promptData = promptData.replace("{today}", today);
 
     ChatBody chatBody = new ChatBody();
     chatBody.setTemperature(temperature);
@@ -162,6 +160,11 @@ public class ApiService {
 
     if (llmResponse != null) {
       ArrayList<Choice> choices = (ArrayList<Choice>) llmResponse.getChoices();
+      try {
+        Files.createDirectories(Paths.get(OUTPUT_DIR));
+      } catch (Exception e) {
+        LOGGER.error("Unable to create output directory.\n{}", e.toString());
+      }
       if (choices != null && !choices.isEmpty() && choices.get(0).getMessage() != null && choices.get(0).getMessage().getContent() != null){
         String message = choices.get(0).getMessage().getContent();
         int chopStart = message.indexOf("```");
@@ -170,45 +173,43 @@ public class ApiService {
           chopStart = message.indexOf("\n");
           message = message.substring(chopStart);
           String[] content = message.split("Additional Suggestions");
-          if (content != null) {
+          if (content.length > 0) {
             body = content[0].trim();
             body = trimString(body);
-            if (body.trim().isEmpty()) {
-              body = "";
-            }
+            body = !body.isEmpty() ? body : "";
             suggestion = content.length == 2 ? content[1].trim() : "";
             suggestion = removeTrailingChar(suggestion,"#");
+          } else {
+            body = trimString(message.replace("Additional Suggestions", ""));
           }
+        } else {
+          body = message;
         }
       }
     }
 
-    try {
-      Files.createDirectories(Paths.get(OUTPUT_DIR));
-    } catch (Exception e) {
-      logger.error("Unable to create output directory.\n{}", e.toString());
-    }
-    String fileName = company + "-" + jobTitle + ".md";
+    String fileName = promptType + "-" + company + "-" + jobTitle + ".md";
     createResultFile(fileName, body);
-    HtmlToPdf html = new HtmlToPdf(OUTPUT_DIR + File.separator + fileName, OUTPUT_DIR + File.separator + company + "-" + jobTitle +".pdf" ,"");
+    HtmlToPdf html = new HtmlToPdf(OUTPUT_DIR + File.separator + fileName, OUTPUT_DIR + File.separator + promptType + "-" + company + "-" + jobTitle +".pdf" ,"");
     if (!html.convertFile()) {
-      logger.error("Unable to save PDF file");
+      LOGGER.error("Unable to save PDF file");
     }
 
-    fileName = company + "-" + jobTitle + "-suggestions.md";
-    createResultFile(fileName, suggestion);
-
-//    return  llmResponse;
+    if (suggestion != null && !suggestion.isBlank()) {
+      fileName = company + "-" + jobTitle + "-suggestions.md";
+      createResultFile(fileName, suggestion);
+    }
 
   }
 
   private static void createResultFile(String fileName, String s ) {
+
     if (s != null && !s.isBlank()) {
       try (BufferedWriter writer = new BufferedWriter(new FileWriter(OUTPUT_DIR + File.separator + fileName, false))) {
         writer.write(s);
         writer.flush();  // Data is written to OS page cache, not necessarily to the disk immediately
       } catch (Exception e) {
-        logger.error("Error writing file: {}\n{}:", fileName, e.toString());
+        LOGGER.error("Error writing file: {}\n{}:", fileName, e.toString());
       }
     }
   }
@@ -220,22 +221,23 @@ public class ApiService {
         body = removeTrailingChar(body, "`");
         body = removeTrailingChar(body, "-");
       }
+      body = body.trim();
     }
-    return body;
+    return body == null ? "" : body;
   }
 
   private String removeTrailingChar(String str, String badChar) {
     if (str == null) return str; //Handle null input gracefully
-    while (str != null && str.endsWith(badChar)) {
+    while (str.endsWith(badChar)) {
       str = str.substring(0, str.length() - 1);
     }
-    return str == null ? "" : str.trim();
+    return str.trim();
   }
 
   public static void main(String[] args) {
 
-    String resume = readFileAsString("sample" + File.separator + "resume.md");
-    String jobDescription = readFileAsString("sample" + File.separator + "PointClickCare-Software Engineer.txt");
+    String resume = Utility.readFileAsString("sample" + File.separator + "resume.md");
+    String jobDescription = Utility.readFileAsString("sample" + File.separator + "PointClickCare-Software Engineer.txt");
 
     ApiService apiService = new ApiService();
     apiService.produceFiles(PROMPT_TYPE.RESUME.name(), resume, jobDescription, "developer", "point click care");

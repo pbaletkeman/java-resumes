@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ResumeController {
+public class BasicResumeController {
 
   @PostMapping(value = "/optimizer", consumes = "application/json", produces = "application/json")
   public String optimize(@RequestBody Optimize optimize) {
