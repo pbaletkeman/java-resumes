@@ -20,7 +20,6 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.net.HttpURLConnection;
 import org.slf4j.Logger;
@@ -155,52 +154,73 @@ public class ApiService {
 
     LLMResponse llmResponse = new ApiService().invokeApi(chatBody);
 
-    String body = "";
-    String suggestion = "";
+    if (llmResponse == null){
+      LOGGER.error("Invalid LLM Response. Please try again.");
+      return;
+    }
 
-    if (llmResponse != null) {
-      ArrayList<Choice> choices = (ArrayList<Choice>) llmResponse.getChoices();
-      try {
-        Files.createDirectories(Paths.get(OUTPUT_DIR));
-      } catch (Exception e) {
-        LOGGER.error("Unable to create output directory.\n{}", e.toString());
-      }
-      if (choices != null && !choices.isEmpty() && choices.get(0).getMessage() != null && choices.get(0).getMessage().getContent() != null){
-        String message = choices.get(0).getMessage().getContent();
-        int chopStart = message.indexOf("```");
-        if (chopStart > -1){
-          message = message.substring(chopStart);
-          chopStart = message.indexOf("\n");
-          message = message.substring(chopStart);
-          String[] content = message.split("Additional Suggestions");
-          if (content.length > 0) {
-            body = content[0].trim();
-            body = trimString(body);
-            body = !body.isEmpty() ? body : "";
-            suggestion = content.length == 2 ? content[1].trim() : "";
-            suggestion = removeTrailingChar(suggestion,"#");
-          } else {
-            body = trimString(message.replace("Additional Suggestions", ""));
-          }
-        } else {
-          body = message;
-        }
-      }
+    Result result = null;
+    ArrayList<Choice> choices = (ArrayList<Choice>) llmResponse.getChoices();
+    try {
+      Files.createDirectories(Paths.get(OUTPUT_DIR));
+    } catch (Exception e) {
+      LOGGER.error("Unable to create output directory.\n{}", e.toString());
+    }
+    if (choices != null && !choices.isEmpty() && choices.get(0).getMessage() != null
+        && choices.get(0).getMessage().getContent() != null) {
+      String message = choices.get(0).getMessage().getContent();
+      result = getResult(message);
+    }
+
+    if (result == null || result.body() == null){
+      LOGGER.error("Invalid LLM result from response. Please try again.");
+      return;
     }
 
     String fileName = promptType + "-" + company + "-" + jobTitle + ".md";
-    createResultFile(fileName, body);
-    HtmlToPdf html = new HtmlToPdf(OUTPUT_DIR + File.separator + fileName, OUTPUT_DIR + File.separator + promptType + "-" + company + "-" + jobTitle +".pdf" ,"");
+    createResultFile(fileName, result.body());
+    HtmlToPdf html = new HtmlToPdf(OUTPUT_DIR + File.separator + fileName,
+        OUTPUT_DIR + File.separator + promptType + "-" + company + "-" + jobTitle + ".pdf", "");
     if (!html.convertFile()) {
       LOGGER.error("Unable to save PDF file");
     }
 
-    if (suggestion != null && !suggestion.isBlank()) {
+    if (result.suggestion() != null && !result.suggestion().isBlank()) {
       fileName = company + "-" + jobTitle + "-suggestions.md";
-      createResultFile(fileName, suggestion);
+      createResultFile(fileName, result.suggestion());
     }
 
+    LOGGER.info("Operation Complete.");
   }
+
+  private Result getResult(String message) {
+    String body;
+    String suggestion = null;
+    int chopStart = message.indexOf("```");
+    if (chopStart > -1) {
+      message = message.substring(chopStart);
+      chopStart = message.indexOf("\n");
+      message = message.substring(chopStart);
+      String[] content = message.split("Additional Suggestions");
+      if (content.length > 0) {
+        body = content[0].trim();
+        body = trimString(body);
+        body = !body.isEmpty() ? body : "";
+        suggestion = content.length == 2 ? content[1].trim() : "";
+        suggestion = removeTrailingChar(suggestion, "#");
+      } else {
+        body = trimString(message.replace("Additional Suggestions", ""));
+      }
+    } else {
+      body = message;
+    }
+    return new Result(body, (suggestion == null ? "" : suggestion));
+  }
+
+  private record Result(String body, String suggestion) {
+
+  }
+
 
   private static void createResultFile(String fileName, String s ) {
 
