@@ -120,7 +120,7 @@ public class Optimize {
   }
 
   /*
-  check to see if properties are somewhat present and somewhat correct
+  check to see if properties are present and somewhat correct
    */
   public boolean isValid(){
     return getResume() != null && !getResume().isBlank() && !getResume().isEmpty() &&

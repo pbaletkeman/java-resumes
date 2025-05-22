@@ -4,6 +4,7 @@ import ca.letkeman.resumes.BackgroundResume;
 import ca.letkeman.resumes.Utility;
 import ca.letkeman.resumes.model.Optimize;
 
+import ca.letkeman.resumes.optimizer.HtmlToPdf;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -45,6 +46,23 @@ public class AdvancedController {
     this.storageService = storageService;
   }
 
+  @PostMapping(path = "/markdownFile2PDF")
+  public ResponseEntity<ResponseMessage> file2PDF(@RequestParam(name = "file", required = false) MultipartFile file){
+    try {
+      storageService.save(file);
+      String outputFile = "output" + File.separator + Utility.removeFileExtension( file.getOriginalFilename() , true) + ".pdf";
+      HtmlToPdf htmlToPdf = new HtmlToPdf(root + File.separator + file.getOriginalFilename(),outputFile, "");
+      if (htmlToPdf.convertFile()){
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("file successfully converted"));
+      } else {
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("unable to convert file"));
+      }
+    } catch (Exception e) {
+      LOGGER.error("Could not upload the resume: {}. Error:\n{}", file.getOriginalFilename(), e.getMessage());
+    }
+    return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("problem with conversion"));
+  }
+
   @PostMapping(path = "/upload")
   public ResponseEntity<ResponseMessage> optimizeResume(
       @RequestParam(name = "resume", required = false) MultipartFile resume,
@@ -79,7 +97,6 @@ public class AdvancedController {
     } else {
       return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage("Required property missing or invalid."));
     }
-//    return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("done"));
   }
 
   @GetMapping("/get-files")
