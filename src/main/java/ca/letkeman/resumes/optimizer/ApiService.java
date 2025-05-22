@@ -146,11 +146,11 @@ public class ApiService {
 
   /***
    *
-   * @param promptType - Cover or Resume prompt request type
-   * @param resume - resume content for the request
-   * @param jobDescription - job description to send to the endpoint
-   * @param jobTitle - job title of the posting
-   * @param company - company who posted the job
+   * @param promptType Cover or Resume prompt request type
+   * @param resume resume content for the request
+   * @param jobDescription job description to send to the endpoint
+   * @param jobTitle job title of the posting
+   * @param company company who posted the job
    */
   public void produceFiles(String promptType, String resume, String jobDescription, String jobTitle, String company) {
     produceFiles(promptType, 0.7, "gemma-3-4b-it", resume, jobDescription, jobTitle, company);
@@ -158,13 +158,13 @@ public class ApiService {
 
   /***
    *
-   * @param promptType - Cover or Resume prompt request type
-   * @param temperature - values from 0.0 to 2.0, the higher the value the more creative the response
-   * @param model - llm model to use
-   * @param resume - resume content for the request
-   * @param jobDescription - job description to send to the endpoint
-   * @param jobTitle - job title of the posting
-   * @param company - company who posted the job
+   * @param promptType Cover or Resume prompt request type
+   * @param temperature values from 0.0 to 2.0, the higher the value the more creative the response
+   * @param model llm model to use
+   * @param resume resume content for the request
+   * @param jobDescription job description to send to the endpoint
+   * @param jobTitle job title of the posting
+   * @param company company who posted the job
    */
   public void produceFiles(String promptType, double temperature, String model, String resume, String jobDescription, String jobTitle, String company) {
     String promptData = Utility.readFileAsString("prompts" + File.separator + promptType + ".md");
@@ -232,8 +232,8 @@ public class ApiService {
 
   /***
    *
-   * @param message - the message response, considered the source
-   * @return - formatted response from the source
+   * @param message the message response, considered the source
+   * @return formatted response from the source
    */
   private Result getResult(String message) {
     String body;
@@ -266,8 +266,8 @@ public class ApiService {
 
   /***
    *
-   * @param fileName - name of the file to create
-   * @param s - content to save in the file
+   * @param fileName name of the file to create
+   * @param s content to save in the file
    */
   private static void createResultFile(String fileName, String s ) {
 
@@ -283,8 +283,8 @@ public class ApiService {
 
   /***
    *
-   * @param body - text with extra characters that should be removed
-   * @return - cleaned up response
+   * @param body text with extra characters that should be removed
+   * @return cleaned up response
    */
   private String trimString(String body) {
     if (body != null) {
@@ -300,9 +300,9 @@ public class ApiService {
 
   /***
    *
-   * @param str - string with bad characters
-   * @param badChar - bad character to remove
-   * @return - cleaned up str
+   * @param str string with bad characters
+   * @param badChar bad character to remove
+   * @return cleaned up str
    */
   private String removeTrailingChar(String str, String badChar) {
     if (str == null) return str; //Handle null input gracefully
