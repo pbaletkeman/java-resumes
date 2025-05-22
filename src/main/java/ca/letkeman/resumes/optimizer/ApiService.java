@@ -65,6 +65,10 @@ public class ApiService {
     this.serverURL = serverURL;
   }
 
+  /***
+   *
+   * @param serverURL - completion endpoint url
+   */
   public ApiService(String serverURL) {
     setServerURL(serverURL);
   }
@@ -73,6 +77,11 @@ public class ApiService {
     this.serverURL = "http://localhost:1234/v1/chat/completions";
   }
 
+  /***
+   *
+   * @param chatBody - the object to send to the LLM endpoint
+   * @return - the result from the LLM request
+   */
   public LLMResponse invokeApi(ChatBody chatBody) {
     String jsonBody = new Gson().toJson(chatBody);
     try {
@@ -108,6 +117,11 @@ public class ApiService {
     return null;
   }
 
+  /***
+   *
+   * @param jsonBody - content to add to the http request
+   * @param conn - http connection to use
+   */
   private void attachJSONBody(String jsonBody, HttpURLConnection conn) {
     byte[] input = jsonBody.getBytes(StandardCharsets.UTF_8);
     try (OutputStream os = conn.getOutputStream()) {
@@ -117,6 +131,11 @@ public class ApiService {
     }
   }
 
+  /***
+   *
+   * @param os - the output stream containing the data to encode
+   * @param input - the data to be encoded into the output stream
+   */
   private void encodeBody(OutputStream os, byte[] input) {
     try {
       os.write(input, 0, input.length);
@@ -125,10 +144,28 @@ public class ApiService {
     }
   }
 
+  /***
+   *
+   * @param promptType - Cover or Resume prompt request type
+   * @param resume - resume content for the request
+   * @param jobDescription - job description to send to the endpoint
+   * @param jobTitle - job title of the posting
+   * @param company - company who posted the job
+   */
   public void produceFiles(String promptType, String resume, String jobDescription, String jobTitle, String company) {
     produceFiles(promptType, 0.7, "gemma-3-4b-it", resume, jobDescription, jobTitle, company);
   }
 
+  /***
+   *
+   * @param promptType - Cover or Resume prompt request type
+   * @param temperature - values from 0.0 to 2.0, the higher the value the more creative the response
+   * @param model - llm model to use
+   * @param resume - resume content for the request
+   * @param jobDescription - job description to send to the endpoint
+   * @param jobTitle - job title of the posting
+   * @param company - company who posted the job
+   */
   public void produceFiles(String promptType, double temperature, String model, String resume, String jobDescription, String jobTitle, String company) {
     String promptData = Utility.readFileAsString("prompts" + File.separator + promptType + ".md");
     promptData = promptData.replace("{resume_string}", resume).replace("{jd_string}", jobDescription);
@@ -193,6 +230,11 @@ public class ApiService {
     LOGGER.info("Operation Complete.");
   }
 
+  /***
+   *
+   * @param message - the message response, considered the source
+   * @return - formatted response from the source
+   */
   private Result getResult(String message) {
     String body;
     String suggestion = null;
@@ -222,6 +264,11 @@ public class ApiService {
   }
 
 
+  /***
+   *
+   * @param fileName - name of the file to create
+   * @param s - content to save in the file
+   */
   private static void createResultFile(String fileName, String s ) {
 
     if (s != null && !s.isBlank()) {
@@ -234,6 +281,11 @@ public class ApiService {
     }
   }
 
+  /***
+   *
+   * @param body - text with extra characters that should be removed
+   * @return - cleaned up response
+   */
   private String trimString(String body) {
     if (body != null) {
       while ((body.endsWith("#")) || (body.endsWith("`")) || (body.endsWith("-"))) {
@@ -246,6 +298,12 @@ public class ApiService {
     return body == null ? "" : body;
   }
 
+  /***
+   *
+   * @param str - string with bad characters
+   * @param badChar - bad character to remove
+   * @return - cleaned up str
+   */
   private String removeTrailingChar(String str, String badChar) {
     if (str == null) return str; //Handle null input gracefully
     while (str.endsWith(badChar)) {
