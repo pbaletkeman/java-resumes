@@ -15,3 +15,7 @@ spring:
 
 upload:
   path: uploads
+
+llm:
+  endpoint: http://localhost:1234/v1/chat/completions
+  apikey: 1234567890

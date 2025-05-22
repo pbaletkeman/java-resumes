@@ -22,8 +22,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.net.HttpURLConnection;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 
 public class ApiService {
@@ -31,13 +34,18 @@ public class ApiService {
   private static final Logger LOGGER = LoggerFactory.getLogger(ApiService.class);
   private static final String OUTPUT_DIR = "output";
 
+  @Value("${llm:endpoint}")
+  private String endPointURL;
+
+  @Value("${llm:apikey}")
+  private String apikey;
+
 
   public enum PROMPT_TYPE {
     COVER,
     RESUME
   }
 
-  private String serverURL;
   private String jobDescription;
   private String resume;
 
@@ -57,24 +65,7 @@ public class ApiService {
     this.resume = resume;
   }
 
-  public String getServerURL() {
-    return serverURL;
-  }
-
-  public void setServerURL(String serverURL) {
-    this.serverURL = serverURL;
-  }
-
-  /***
-   *
-   * @param serverURL - completion endpoint url
-   */
-  public ApiService(String serverURL) {
-    setServerURL(serverURL);
-  }
-
   public ApiService() {
-    this.serverURL = "http://localhost:1234/v1/chat/completions";
   }
 
   /***
@@ -85,9 +76,11 @@ public class ApiService {
   public LLMResponse invokeApi(ChatBody chatBody) {
     String jsonBody = new Gson().toJson(chatBody);
     try {
-      URI uri = new URI(getServerURL());
+      URI uri = new URI(endPointURL);
       HttpURLConnection conn = (HttpURLConnection) uri.toURL().openConnection();
+
       conn.setRequestMethod("POST");
+      conn.setRequestProperty("Authorization", "Basic " + apikey);
       conn.setRequestProperty("Content-Type", "application/json");
       conn.setRequestProperty("Accept", "application/json");
       LOGGER.info("Send JSON to LLM Engine");
@@ -189,7 +182,8 @@ public class ApiService {
 
     chatBody.setMessages(List.of(systemMessage, userMessage));
 
-    LLMResponse llmResponse = new ApiService().invokeApi(chatBody);
+    ApiService apiService = new ApiService();
+    LLMResponse llmResponse = apiService.invokeApi(chatBody);
 
     if (llmResponse == null){
       LOGGER.error("Invalid LLM Response. Please try again.");
@@ -312,15 +306,6 @@ public class ApiService {
     return str.trim();
   }
 
-  public static void main(String[] args) {
-
-    String resume = Utility.readFileAsString("sample" + File.separator + "resume.md");
-    String jobDescription = Utility.readFileAsString("sample" + File.separator + "PointClickCare-Software Engineer.txt");
-
-    ApiService apiService = new ApiService();
-    apiService.produceFiles(PROMPT_TYPE.RESUME.name(), resume, jobDescription, "developer", "point click care");
-
-  }
 }
 
 
