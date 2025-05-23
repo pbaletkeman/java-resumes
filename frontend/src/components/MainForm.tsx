@@ -11,7 +11,6 @@ import {
 import { Checkbox, type CheckboxChangeEvent } from "primereact/checkbox";
 import { Button } from "primereact/button";
 import { Accordion, AccordionTab } from "primereact/accordion";
-import { Tooltip } from "primereact/tooltip";
 
 import MDEditor from "@uiw/react-md-editor";
 
@@ -107,7 +106,7 @@ export default function MainForm() {
             max={2.0}
             min={0.01}
             showButtons
-            size={25}
+            size={24}
             step={0.01}
             className="p-inputtext-sm"
             tooltip="Higher Values Produce More Creative Responses"
@@ -118,7 +117,7 @@ export default function MainForm() {
         </div>
         <div className="col-6 mt-1">
           <div className="flex flex-wrap">
-            <div className="ml-6 mr-6">
+            <div className="ml-4 mr-6">
               <Checkbox
                 inputId="promptResume"
                 name="promptType"
@@ -185,7 +184,7 @@ export default function MainForm() {
         </div>
         <div className="col-12">
           <label htmlFor="jobDescriptionFile">Job Description</label>
-          <Accordion>
+          <Accordion activeIndex={0}>
             <AccordionTab header="File Upload">
               <Toast ref={toast}></Toast>
               <FileUpload
