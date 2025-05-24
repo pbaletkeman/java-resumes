@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { Toast } from "primereact/toast";
-import { FileUpload, type FileUploadFile } from "primereact/fileupload";
+import { FileUpload } from "primereact/fileupload";
 import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
@@ -45,9 +45,8 @@ export default function MainForm() {
   const [temperature, setTemperature] = useState<number>(0);
   const [resumeMD, setResumeMD] = useState<string>("");
   const [jobText, setJobText] = useState<string>("");
-  const [resumeFile, setResumeFile] = useState<FileUploadFile>();
-  const [jobFile, setJobFile] = useState<FileUploadFile>();
-  const [tempValue, setTempValue] = useState<string>();
+  const [resumeFile, setResumeFile] = useState<string>();
+  const [jobFile, setJobFile] = useState<string>();
 
   const uploadResumeRef = useRef(null);
   const uploadCoverRef = useRef(null);
@@ -88,30 +87,27 @@ export default function MainForm() {
     }
   };
 
-  const uploadHandler = ({ files }: { files: File[] }) => {
+  const resumeUploadHandler = ({ files }: { files: File[] }) => {
     const [file] = files;
     const fileReader = new FileReader();
     fileReader.onload = (e) => {
       if (typeof e.target?.result === "string") {
-        console.log(base64ToPlainText(e.target?.result));
+        setResumeFile(base64ToPlainText(e.target?.result));
       }
     };
     fileReader.readAsDataURL(file);
   };
 
-  /*
-  const uploadInvoice = async (invoiceFile) => {
-    let formData = new FormData();
-    formData.append('invoiceFile', invoiceFile);
-
-    const response = await fetch(`orders/${orderId}/uploadInvoiceFile`,
-        {
-            method: 'POST',
-            body: formData
-        },
-    );
-};
-  */
+  const jobUploadHandler = ({ files }: { files: File[] }) => {
+    const [file] = files;
+    const fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      if (typeof e.target?.result === "string") {
+        setJobFile(base64ToPlainText(e.target?.result));
+      }
+    };
+    fileReader.readAsDataURL(file);
+  };
 
   return (
     <Card
@@ -249,10 +245,11 @@ export default function MainForm() {
                 name="resume"
                 maxFileSize={1000000}
                 customUpload={true}
-                uploadHandler={uploadHandler}
+                uploadHandler={resumeUploadHandler}
                 chooseLabel="Resume File"
                 cancelLabel="Cancel"
                 uploadLabel="Upload"
+                auto={true}
               />
             </AccordionTab>
             <AccordionTab header="Manual Input">
@@ -283,10 +280,11 @@ export default function MainForm() {
                 name="jobDescription"
                 maxFileSize={1000000}
                 customUpload={true}
-                // uploadHandler={coverUploadHandler}
+                uploadHandler={jobUploadHandler}
                 chooseLabel="Job Description"
                 cancelLabel="Cancel"
                 uploadLabel="Upload"
+                auto={true}
               />
             </AccordionTab>
             <AccordionTab header="Manual Input">
