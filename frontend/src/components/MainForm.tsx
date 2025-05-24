@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { Toast } from "primereact/toast";
-import { FileUpload } from "primereact/fileupload";
+import { FileUpload, type FileUploadFile } from "primereact/fileupload";
 import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
@@ -21,6 +21,20 @@ interface OptimizeType {
   temperature: number;
   resumeMD?: string;
   jobText?: string;
+  promptType?: string[];
+}
+
+function base64ToPlainText(base64: string) {
+  const encodedString = base64.replace(
+    /^data:[A-Za-z]+\/[A-Za-z]+;base64,/,
+    ""
+  ) as string;
+  const decodedData = atob(encodedString);
+  const buffer = new Uint8Array(decodedData.length);
+  for (let i = 0; i < decodedData.length; i++) {
+    buffer[i] = decodedData.charCodeAt(i);
+  }
+  return new TextDecoder("utf-8").decode(buffer);
 }
 
 export default function MainForm() {
@@ -31,21 +45,12 @@ export default function MainForm() {
   const [temperature, setTemperature] = useState<number>(0);
   const [resumeMD, setResumeMD] = useState<string>("");
   const [jobText, setJobText] = useState<string>("");
-  const [resumeFile, setResumeFile] = useState<FileUpload>;
-  const [jobFile, setJobFile] = useState<FileUpload>;
+  const [resumeFile, setResumeFile] = useState<FileUploadFile>();
+  const [jobFile, setJobFile] = useState<FileUploadFile>();
+  const [tempValue, setTempValue] = useState<string>();
 
-  const onUpload = (whichFile: string, file: FileUpload) => {
-    if (whichFile === "job") {
-      setJobFile(file);
-    } else {
-      setResumeFile(file);
-    }
-    toast?.current?.show({
-      severity: "info",
-      summary: "Success",
-      detail: "File Uploaded",
-    });
-  };
+  const uploadResumeRef = useRef(null);
+  const uploadCoverRef = useRef(null);
 
   const [prompt, setPrompt] = useState<string[]>([]);
 
@@ -65,6 +70,7 @@ export default function MainForm() {
       title: title,
       model: model,
       temperature: temperature,
+      promptType: prompt,
     };
     if (!jobFile) {
       optimize["jobText"] = jobText;
@@ -77,130 +83,176 @@ export default function MainForm() {
       data.append("resumeFile", resumeFile);
     }
     data.append("optimze", JSON.stringify(optimize));
+    for (const pair of data.entries()) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
   };
 
+  const uploadHandler = ({ files }: { files: File[] }) => {
+    const [file] = files;
+    const fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      if (typeof e.target?.result === "string") {
+        console.log(base64ToPlainText(e.target?.result));
+      }
+    };
+    fileReader.readAsDataURL(file);
+  };
+
+  /*
+  const uploadInvoice = async (invoiceFile) => {
+    let formData = new FormData();
+    formData.append('invoiceFile', invoiceFile);
+
+    const response = await fetch(`orders/${orderId}/uploadInvoiceFile`,
+        {
+            method: 'POST',
+            body: formData
+        },
+    );
+};
+  */
+
   return (
-    <Card title="Resume Optimizer">
+    <Card
+      title="Resume Optimizer"
+      className="border-round-3xl	"
+    >
       <div className="grid">
-        <div className="col-6 pt-3 mt-1 mb-1">
-          <label htmlFor="Company">Company</label>
+        <div className="col-12 grid">
+          <div className="col-6 pt-3 mt-1 mb-1">
+            <label htmlFor="company">Company</label>
+          </div>
+          <div className="col-6">
+            <InputText
+              id="company"
+              value={company}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setCompany(e.target.value)
+              }
+              className="p-inputtext-sm"
+              size={30}
+              variant="filled"
+              tooltip="Company That Posted Job"
+            />
+          </div>
         </div>
-        <div className="col-6">
-          <InputText
-            id="company"
-            value={company}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setCompany(e.target.value)
-            }
-            className="p-inputtext-sm"
-            size={30}
-            variant="filled"
-            tooltip="Company That Posted Job"
-          />
+        <div className="border-top-1 col-12 grid">
+          <div className="col-6 pt-3 mt-1 mb-1">
+            <label htmlFor="title">Job Title</label>
+          </div>
+          <div className="col-6">
+            <InputText
+              id="title"
+              value={title}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setTitle(e.target.value)
+              }
+              className="p-inputtext-sm"
+              size={30}
+              tooltip="Position Title"
+            />
+          </div>
         </div>
-        <div className="col-6 pt-3 mt-1 mb-1">
-          <label htmlFor="title">Job Title</label>
+        <div className="border-top-1 col-12 grid">
+          <div className="col-6 pt-3 mt-1 mb-1">
+            <label htmlFor="model">Model</label>
+          </div>
+          <div className="col-6">
+            <InputText
+              id="model"
+              value={model}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setModel(e.target.value)
+              }
+              className="p-inputtext-sm"
+              size={30}
+              variant="filled"
+              tooltip="LLM Identifer"
+            />
+          </div>
         </div>
-        <div className="col-6">
-          <InputText
-            id="title"
-            value={title}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setTitle(e.target.value)
-            }
-            className="p-inputtext-sm"
-            size={30}
-            tooltip="Position Title"
-          />
+        <div className="border-top-1 col-12 grid">
+          <div className="col-6 pt-3 mt-1 mb-1">
+            <label htmlFor="temperature">Temperature</label>
+          </div>
+          <div className="col-6">
+            <InputNumber
+              inputId="temperature"
+              value={temperature}
+              onValueChange={(e: InputNumberValueChangeEvent) =>
+                setTemperature(e.value ? e.value : 0)
+              }
+              minFractionDigits={2}
+              max={2.0}
+              min={0.01}
+              showButtons
+              size={24}
+              step={0.01}
+              className="p-inputtext-sm"
+              tooltip="Higher Values Produce More Creative Responses"
+            />
+          </div>
         </div>
-        <div className="col-6 pt-3 mt-1 mb-1">
-          <label htmlFor="model">Model</label>
-        </div>
-        <div className="col-6">
-          <InputText
-            id="model"
-            value={model}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setModel(e.target.value)
-            }
-            className="p-inputtext-sm"
-            size={30}
-            variant="filled"
-            tooltip="LLM Identifer"
-          />
-        </div>
-        <div className="col-6 pt-3 mt-1 mb-1">
-          <label htmlFor="temperature">Temperature</label>
-        </div>
-        <div className="col-6">
-          <InputNumber
-            inputId="temperature"
-            value={temperature}
-            onValueChange={(e: InputNumberValueChangeEvent) =>
-              setTemperature(e.value ? e.value : 0)
-            }
-            minFractionDigits={2}
-            max={2.0}
-            min={0.01}
-            showButtons
-            size={24}
-            step={0.01}
-            className="p-inputtext-sm"
-            tooltip="Higher Values Produce More Creative Responses"
-          />
-        </div>
-        <div className="col-6 mt-1 mb-1 pb-2">
-          <label>Prompt Type</label>
-        </div>
-        <div className="col-6 mt-1">
-          <div className="flex flex-wrap">
-            <div className="ml-4 mr-6">
-              <Checkbox
-                inputId="promptResume"
-                name="promptType"
-                value="Resume"
-                onChange={onPromptChange}
-                checked={prompt.includes("Resume")}
-                variant="filled"
-                tooltip="Create Resume Response"
-              />
-              <label
-                htmlFor="promptResume"
-                className="ml-2"
-              >
-                Resume
-              </label>
-            </div>
-            <div>
-              <Checkbox
-                inputId="promptCover"
-                name="promptType"
-                value="Cover"
-                onChange={onPromptChange}
-                checked={prompt.includes("Cover")}
-                variant="filled"
-                tooltip="Create Cover Letter Response"
-              />
-              <label
-                htmlFor="promptCover"
-                className="ml-2"
-              >
-                Cover Letter
-              </label>
+        <div className="border-top-1 col-12 grid">
+          <div className="col-6 mt-1 mb-1 pb-2">
+            <label>Prompt Type</label>
+          </div>
+          <div className="col-6 mt-1">
+            <div className="flex flex-wrap">
+              <div className="ml-4 mr-6">
+                <Checkbox
+                  inputId="promptResume"
+                  name="promptType"
+                  value="Resume"
+                  onChange={onPromptChange}
+                  checked={prompt.includes("Resume")}
+                  variant="filled"
+                  tooltip="Create Resume Response"
+                />
+                <label
+                  htmlFor="promptResume"
+                  className="ml-2"
+                >
+                  Resume
+                </label>
+              </div>
+              <div>
+                <Checkbox
+                  inputId="promptCover"
+                  name="promptType"
+                  value="Cover"
+                  onChange={onPromptChange}
+                  checked={prompt.includes("Cover")}
+                  variant="filled"
+                  tooltip="Create Cover Letter Response"
+                />
+                <label
+                  htmlFor="promptCover"
+                  className="ml-2"
+                >
+                  Cover Letter
+                </label>
+              </div>
             </div>
           </div>
         </div>
-        <div className="col-12">
+        <div className="col-12 border-top-1">
           <label htmlFor="resumeFile">Resume</label>
           <Toast ref={toast}></Toast>
           <Accordion activeIndex={0}>
             <AccordionTab header="File Upload">
               <FileUpload
+                ref={uploadResumeRef}
                 id="resumeFile"
-                mode="basic"
+                mode="advanced"
                 name="resume"
                 maxFileSize={1000000}
-                onUpload={onUpload}
+                customUpload={true}
+                uploadHandler={uploadHandler}
+                chooseLabel="Resume File"
+                cancelLabel="Cancel"
+                uploadLabel="Upload"
               />
             </AccordionTab>
             <AccordionTab header="Manual Input">
@@ -219,17 +271,22 @@ export default function MainForm() {
             </AccordionTab>
           </Accordion>
         </div>
-        <div className="col-12">
+        <div className="col-12 border-top-1">
           <label htmlFor="jobDescriptionFile">Job Description</label>
           <Accordion activeIndex={0}>
             <AccordionTab header="File Upload">
               <Toast ref={toast}></Toast>
               <FileUpload
+                ref={uploadCoverRef}
                 id="jobDescriptionFile"
-                mode="basic"
+                mode="advanced"
                 name="jobDescription"
                 maxFileSize={1000000}
-                onUpload={onUpload}
+                customUpload={true}
+                // uploadHandler={coverUploadHandler}
+                chooseLabel="Job Description"
+                cancelLabel="Cancel"
+                uploadLabel="Upload"
               />
             </AccordionTab>
             <AccordionTab header="Manual Input">
@@ -252,12 +309,12 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula 
             </AccordionTab>
           </Accordion>
         </div>
-      </div>
-      <div className="card flex justify-content-center">
-        <Button
-          label="Generate Files"
-          onClick={() => onFormSubmit()}
-        />
+        <div className="card flex justify-content-center border-top-1 pt-2 col-12">
+          <Button
+            label="Generate Files"
+            onClick={() => onFormSubmit()}
+          />
+        </div>
       </div>
     </Card>
   );
