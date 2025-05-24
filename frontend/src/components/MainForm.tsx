@@ -14,6 +14,15 @@ import { Accordion, AccordionTab } from "primereact/accordion";
 
 import MDEditor from "@uiw/react-md-editor";
 
+interface OptimizeType {
+  model: string;
+  title: string;
+  company: string;
+  temperature: number;
+  resumeMD?: string;
+  jobText?: string;
+}
+
 export default function MainForm() {
   const toast = useRef<Toast>(null);
   const [model, setModel] = useState<string>("");
@@ -22,8 +31,15 @@ export default function MainForm() {
   const [temperature, setTemperature] = useState<number>(0);
   const [resumeMD, setResumeMD] = useState<string>("");
   const [jobText, setJobText] = useState<string>("");
+  const [resumeFile, setResumeFile] = useState<FileUpload>;
+  const [jobFile, setJobFile] = useState<FileUpload>;
 
-  const onUpload = () => {
+  const onUpload = (whichFile: string, file: FileUpload) => {
+    if (whichFile === "job") {
+      setJobFile(file);
+    } else {
+      setResumeFile(file);
+    }
     toast?.current?.show({
       severity: "info",
       summary: "Success",
@@ -40,6 +56,27 @@ export default function MainForm() {
     else _prompt.splice(_prompt.indexOf(e.value), 1);
 
     setPrompt(_prompt);
+  };
+
+  const onFormSubmit = () => {
+    const data = new FormData();
+    const optimize: OptimizeType = {
+      company: company,
+      title: title,
+      model: model,
+      temperature: temperature,
+    };
+    if (!jobFile) {
+      optimize["jobText"] = jobText;
+    } else {
+      data.append("jobFile", jobFile);
+    }
+    if (!resumeFile) {
+      optimize["resumeMD"] = resumeMD;
+    } else {
+      data.append("resumeFile", resumeFile);
+    }
+    data.append("optimze", JSON.stringify(optimize));
   };
 
   return (
@@ -217,7 +254,10 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula 
         </div>
       </div>
       <div className="card flex justify-content-center">
-        <Button label="Generate Files" />
+        <Button
+          label="Generate Files"
+          onClick={() => onFormSubmit()}
+        />
       </div>
     </Card>
   );
