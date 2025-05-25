@@ -22,10 +22,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.net.HttpURLConnection;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 
@@ -145,8 +143,10 @@ public class ApiService {
    * @param jobTitle job title of the posting
    * @param company company who posted the job
    */
-  public void produceFiles(String promptType, String resume, String jobDescription, String jobTitle, String company) {
-    produceFiles(promptType, 0.7, "gemma-3-4b-it", resume, jobDescription, jobTitle, company);
+  public void produceFiles(PROMPT_TYPE[] promptType, double temperature, String model, String resume, String jobDescription, String jobTitle, String company) {
+    for (PROMPT_TYPE p: promptType) {
+      produceFiles(p.name(), temperature, model, resume, jobDescription, jobTitle, company);
+    }
   }
 
   /***

@@ -19,8 +19,8 @@ interface OptimizeType {
   title: string;
   company: string;
   temperature: number;
-  resumeMD?: string;
-  jobText?: string;
+  resume?: string;
+  jobDescription?: string;
   promptType?: string[];
 }
 
@@ -62,8 +62,7 @@ export default function MainForm() {
     setPrompt(_prompt);
   };
 
-  const onFormSubmit = () => {
-    const data = new FormData();
+  const handleFormSubmit = async () => {
     const optimize: OptimizeType = {
       company: company,
       title: title,
@@ -71,26 +70,47 @@ export default function MainForm() {
       temperature: temperature,
       promptType: prompt,
     };
-    if (!jobFile) {
-      optimize["jobText"] = jobText;
+    // if (!jobFile) {
+    //   optimize["jobDescription"] = jobText;
+    // } else {
+    optimize["jobDescription"] = jobFile;
+    // }
+    // if (!resumeFile) {
+    //   optimize["resume"] = resumeMD;
+    // } else {
+    optimize["resume"] = resumeFile;
+    // }
+
+    const formData = new FormData();
+    formData.append("optimize", JSON.stringify(optimize));
+    console.log("optimize");
+    console.log(optimize);
+
+    const response = await fetch("http://localhost:8080/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (response.ok) {
+      console.log("Form submitted successfully!");
+      alert("Form submitted successfully!"); // Optional feedback to the user
+      // setFormData({ name: '', email: '', message: '' }); // Clear the form after successful submission
     } else {
-      data.append("jobFile", jobFile);
-    }
-    if (!resumeFile) {
-      optimize["resumeMD"] = resumeMD;
-    } else {
-      data.append("resumeFile", resumeFile);
-    }
-    data.append("optimze", JSON.stringify(optimize));
-    for (const pair of data.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
+      console.error(
+        "Error submitting form:",
+        response.status,
+        response.statusText
+      );
+      alert(`Error submitting form: ${response.statusText}`); // Provide more informative error feedback
     }
   };
 
   const resumeUploadHandler = ({ files }: { files: File[] }) => {
+    console.log("resumeUploadHandler");
     const [file] = files;
     const fileReader = new FileReader();
     fileReader.onload = (e) => {
+      console.log(base64ToPlainText(e.target?.result));
       if (typeof e.target?.result === "string") {
         setResumeFile(base64ToPlainText(e.target?.result));
       }
@@ -310,7 +330,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula 
         <div className="card flex justify-content-center border-top-1 pt-2 col-12">
           <Button
             label="Generate Files"
-            onClick={() => onFormSubmit()}
+            onClick={() => handleFormSubmit()}
           />
         </div>
       </div>

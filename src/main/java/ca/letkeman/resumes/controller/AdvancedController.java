@@ -18,6 +18,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +32,7 @@ import ca.letkeman.resumes.message.ResponseMessage;
 import ca.letkeman.resumes.model.FileInfo;
 import ca.letkeman.resumes.service.FilesStorageService;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class AdvancedController {
 
@@ -80,7 +82,7 @@ public class AdvancedController {
       }
     }
 
-    if (optimize.getJobDescription() == null || optimize.getJobDescription().isBlank() || optimize.getJobDescription().isEmpty() && job != null) {
+    if ((optimize.getJobDescription() == null || optimize.getJobDescription().isBlank() || optimize.getJobDescription().isEmpty()) && job != null) {
       try {
           storageService.save(job);
           optimize.setJobDescription(Utility.readFileAsString(root + File.separator + job.getOriginalFilename()));

@@ -30,7 +30,7 @@ public class BackgroundResume implements Runnable {
   public void run() {
 
     ApiService apiService = new ApiService();
-    apiService.produceFiles(optimize.getPromptType().name(), optimize.getResume(), optimize.getJobDescription(), optimize.getJobTitle(), optimize.getCompany());
+    apiService.produceFiles(optimize.getPromptType(), optimize.getTemperature(), optimize.getModel(), optimize.getResume(), optimize.getJobDescription(), optimize.getJobTitle(), optimize.getCompany());
     LOGGER.info("all done");
   }
 }
