@@ -1,6 +1,4 @@
-import { useRef, useState } from "react";
-import { Toast } from "primereact/toast";
-import { FileUpload } from "primereact/fileupload";
+import { useState } from "react";
 import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
@@ -11,6 +9,8 @@ import {
 import { Checkbox, type CheckboxChangeEvent } from "primereact/checkbox";
 import { Button } from "primereact/button";
 import { Accordion, AccordionTab } from "primereact/accordion";
+
+import FileUpload from "./FileUpload";
 
 import MDEditor from "@uiw/react-md-editor";
 
@@ -24,32 +24,15 @@ interface OptimizeType {
   promptType?: string[];
 }
 
-function base64ToPlainText(base64: string) {
-  const encodedString = base64.replace(
-    /^data:[A-Za-z]+\/[A-Za-z]+;base64,/,
-    ""
-  ) as string;
-  const decodedData = atob(encodedString);
-  const buffer = new Uint8Array(decodedData.length);
-  for (let i = 0; i < decodedData.length; i++) {
-    buffer[i] = decodedData.charCodeAt(i);
-  }
-  return new TextDecoder("utf-8").decode(buffer);
-}
-
 export default function MainForm() {
-  const toast = useRef<Toast>(null);
   const [model, setModel] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [company, setCompany] = useState<string>("");
   const [temperature, setTemperature] = useState<number>(0);
   const [resumeMD, setResumeMD] = useState<string>("");
   const [jobText, setJobText] = useState<string>("");
-  const [resumeFile, setResumeFile] = useState<string>();
-  const [jobFile, setJobFile] = useState<string>();
-
-  const uploadResumeRef = useRef(null);
-  const uploadCoverRef = useRef(null);
+  const [resumeFile, setResumeFile] = useState<File | null>();
+  const [jobFile, setJobFile] = useState<File | null>();
 
   const [prompt, setPrompt] = useState<string[]>([]);
 
@@ -62,6 +45,22 @@ export default function MainForm() {
     setPrompt(_prompt);
   };
 
+  const handleFilesSelected = (files: File[], source: string) => {
+    if (source === "job") {
+      if (files?.length > 0) {
+        setJobFile(files[0]);
+      } else {
+        setJobFile(null);
+      }
+    } else {
+      if (files?.length > 0) {
+        setResumeFile(files[0]);
+      } else {
+        setResumeFile(null);
+      }
+    }
+  };
+
   const handleFormSubmit = async () => {
     const optimize: OptimizeType = {
       company: company,
@@ -70,21 +69,19 @@ export default function MainForm() {
       temperature: temperature,
       promptType: prompt,
     };
-    // if (!jobFile) {
-    //   optimize["jobDescription"] = jobText;
-    // } else {
-    optimize["jobDescription"] = jobFile;
-    // }
-    // if (!resumeFile) {
-    //   optimize["resume"] = resumeMD;
-    // } else {
-    optimize["resume"] = resumeFile;
-    // }
-
     const formData = new FormData();
+    if (!jobFile) {
+      optimize["jobDescription"] = jobText;
+    } else {
+      formData.append("job", jobFile, jobFile.name);
+    }
+    if (!resumeFile) {
+      optimize["resume"] = resumeMD;
+    } else {
+      formData.append("resume", resumeFile, resumeFile.name);
+    }
+
     formData.append("optimize", JSON.stringify(optimize));
-    console.log("optimize");
-    console.log(optimize);
 
     const response = await fetch("http://localhost:8080/upload", {
       method: "POST",
@@ -103,30 +100,6 @@ export default function MainForm() {
       );
       alert(`Error submitting form: ${response.statusText}`); // Provide more informative error feedback
     }
-  };
-
-  const resumeUploadHandler = ({ files }: { files: File[] }) => {
-    console.log("resumeUploadHandler");
-    const [file] = files;
-    const fileReader = new FileReader();
-    fileReader.onload = (e) => {
-      console.log(base64ToPlainText(e.target?.result));
-      if (typeof e.target?.result === "string") {
-        setResumeFile(base64ToPlainText(e.target?.result));
-      }
-    };
-    fileReader.readAsDataURL(file);
-  };
-
-  const jobUploadHandler = ({ files }: { files: File[] }) => {
-    const [file] = files;
-    const fileReader = new FileReader();
-    fileReader.onload = (e) => {
-      if (typeof e.target?.result === "string") {
-        setJobFile(base64ToPlainText(e.target?.result));
-      }
-    };
-    fileReader.readAsDataURL(file);
   };
 
   return (
@@ -150,6 +123,7 @@ export default function MainForm() {
               size={30}
               variant="filled"
               tooltip="Company That Posted Job"
+              placeholder="Microsoft Game Studios"
             />
           </div>
         </div>
@@ -167,6 +141,7 @@ export default function MainForm() {
               className="p-inputtext-sm"
               size={30}
               tooltip="Position Title"
+              placeholder="Primary Game Developer"
             />
           </div>
         </div>
@@ -185,6 +160,7 @@ export default function MainForm() {
               size={30}
               variant="filled"
               tooltip="LLM Identifer"
+              placeholder="gemma-3-4b-it"
             />
           </div>
         </div>
@@ -207,6 +183,7 @@ export default function MainForm() {
               step={0.01}
               className="p-inputtext-sm"
               tooltip="Higher Values Produce More Creative Responses"
+              placeholder="0.01"
             />
           </div>
         </div>
@@ -255,21 +232,11 @@ export default function MainForm() {
         </div>
         <div className="col-12 border-top-1">
           <label htmlFor="resumeFile">Resume</label>
-          <Toast ref={toast}></Toast>
           <Accordion activeIndex={0}>
             <AccordionTab header="File Upload">
               <FileUpload
-                ref={uploadResumeRef}
-                id="resumeFile"
-                mode="advanced"
-                name="resume"
-                maxFileSize={1000000}
-                customUpload={true}
-                uploadHandler={resumeUploadHandler}
-                chooseLabel="Resume File"
-                cancelLabel="Cancel"
-                uploadLabel="Upload"
-                auto={true}
+                accept="text/markdown, text/plain" // Optional: Filter file types
+                onChange={(files) => handleFilesSelected(files, "resume")} // Callback function
               />
             </AccordionTab>
             <AccordionTab header="Manual Input">
@@ -292,19 +259,9 @@ export default function MainForm() {
           <label htmlFor="jobDescriptionFile">Job Description</label>
           <Accordion activeIndex={0}>
             <AccordionTab header="File Upload">
-              <Toast ref={toast}></Toast>
               <FileUpload
-                ref={uploadCoverRef}
-                id="jobDescriptionFile"
-                mode="advanced"
-                name="jobDescription"
-                maxFileSize={1000000}
-                customUpload={true}
-                uploadHandler={jobUploadHandler}
-                chooseLabel="Job Description"
-                cancelLabel="Cancel"
-                uploadLabel="Upload"
-                auto={true}
+                accept="text/markdown, text/plain" // Optional: Filter file types
+                onChange={(files) => handleFilesSelected(files, "job")} // Callback function
               />
             </AccordionTab>
             <AccordionTab header="Manual Input">
