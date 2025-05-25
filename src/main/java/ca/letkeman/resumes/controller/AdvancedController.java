@@ -71,7 +71,7 @@ public class AdvancedController {
       @RequestParam(name = "job", required = false) MultipartFile job,
       @RequestParam(name="optimize", required = false) String opt) {
     Optimize optimize = new Gson().fromJson(opt, Optimize.class);
-    LOGGER.info("optimize: {}",optimize);
+
     if ((optimize.getResume() == null || optimize.getResume().isBlank() || optimize.getResume().isEmpty())
         && resume != null) {
       try {
@@ -90,7 +90,9 @@ public class AdvancedController {
           LOGGER.error("Could not upload the job: {}. Error:\n{}", job.getOriginalFilename(),e.getMessage());
         }
     }
-
+    optimize.setJobDescription(Utility.convertLineEndings(optimize.getJobDescription()));
+    optimize.setResume(Utility.convertLineEndings(optimize.getResume()));
+    LOGGER.info("optimize: {}",optimize);
     if (optimize.isValid()){
       // start background task here
       Thread thread = new Thread(new BackgroundResume(optimize));

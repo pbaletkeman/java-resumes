@@ -16,7 +16,7 @@ import MDEditor from "@uiw/react-md-editor";
 
 interface OptimizeType {
   model: string;
-  title: string;
+  jobTitle: string;
   company: string;
   temperature: number;
   resume?: string;
@@ -26,7 +26,7 @@ interface OptimizeType {
 
 export default function MainForm() {
   const [model, setModel] = useState<string>("");
-  const [title, setTitle] = useState<string>("");
+  const [jobTitle, setJobTitle] = useState<string>("");
   const [company, setCompany] = useState<string>("");
   const [temperature, setTemperature] = useState<number>(0);
   const [resumeMD, setResumeMD] = useState<string>("");
@@ -62,9 +62,24 @@ export default function MainForm() {
   };
 
   const handleFormSubmit = async () => {
+    if (
+      !company ||
+      company.length == 0 ||
+      !jobTitle ||
+      jobTitle.length == 0 ||
+      !model ||
+      model.length == 0 ||
+      !prompt ||
+      prompt.length == 0 ||
+      !temperature ||
+      temperature.valueOf() < 0 ||
+      temperature.valueOf() > 2
+    ) {
+      return;
+    }
     const optimize: OptimizeType = {
       company: company,
-      title: title,
+      jobTitle: jobTitle,
       model: model,
       temperature: temperature,
       promptType: prompt,
@@ -73,12 +88,12 @@ export default function MainForm() {
     if (!jobFile) {
       optimize["jobDescription"] = jobText;
     } else {
-      formData.append("job", jobFile, jobFile.name);
+      // formData.append("job", jobFile, jobFile.name);
     }
     if (!resumeFile) {
       optimize["resume"] = resumeMD;
     } else {
-      formData.append("resume", resumeFile, resumeFile.name);
+      // formData.append("resume", resumeFile, resumeFile.name);
     }
 
     formData.append("optimize", JSON.stringify(optimize));
@@ -86,6 +101,9 @@ export default function MainForm() {
     const response = await fetch("http://localhost:8080/upload", {
       method: "POST",
       body: formData,
+      // headers: {
+      //   "Content-Type": "application/x-www-form-urlencoded",
+      // },
     });
 
     if (response.ok) {
@@ -134,9 +152,9 @@ export default function MainForm() {
           <div className="col-6">
             <InputText
               id="title"
-              value={title}
+              value={jobTitle}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setTitle(e.target.value)
+                setJobTitle(e.target.value)
               }
               className="p-inputtext-sm"
               size={30}

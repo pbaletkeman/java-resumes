@@ -1,6 +1,9 @@
 package ca.letkeman.resumes.model;
 
+import static ca.letkeman.resumes.Utility.convertLineEndings;
+
 import ca.letkeman.resumes.optimizer.ApiService.PROMPT_TYPE;
+import java.util.Arrays;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -18,8 +21,8 @@ public class Optimize {
     this.promptType = promptType;
     this.temperature = temperature;
     this.model = model;
-    this.resume = resume;
-    this.jobDescription = jobDescription;
+    this.resume = convertLineEndings(resume);
+    this.jobDescription = convertLineEndings(jobDescription);
     this.jobTitle = jobTitle;
     this.company = company;
   }
@@ -56,7 +59,7 @@ public class Optimize {
   }
 
   public void setResume(String resume) {
-    this.resume = resume;
+    this.resume = convertLineEndings(resume);
   }
 
   public String getJobDescription() {
@@ -64,7 +67,7 @@ public class Optimize {
   }
 
   public void setJobDescription(String jobDescription) {
-    this.jobDescription = jobDescription;
+    this.jobDescription = convertLineEndings(jobDescription);
   }
 
   public String getJobTitle() {
@@ -85,14 +88,16 @@ public class Optimize {
 
   @Override
   public String toString() {
-    return "Optimize{" + "promptType=" + promptType
-        + ", temperature=" + temperature
-        + ", model='" + model + '\''
-        + ", resume='" + resume + '\''
-        + ", jobDescription='" + jobDescription + '\''
-        + ", jobTitle='" + jobTitle + '\''
-        + ", company='" + company + '\''
-        + '}';
+    final StringBuilder sb = new StringBuilder("Optimize{");
+    sb.append("promptType=").append(Arrays.toString(promptType));
+    sb.append(", temperature=").append(temperature);
+    sb.append(", model='").append(model).append('\'');
+    sb.append(", resume='").append(resume).append('\'');
+    sb.append(", jobDescription='").append(jobDescription).append('\'');
+    sb.append(", jobTitle='").append(jobTitle).append('\'');
+    sb.append(", company='").append(company).append('\'');
+    sb.append('}');
+    return sb.toString();
   }
 
   @Override

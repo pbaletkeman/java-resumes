@@ -31,4 +31,22 @@ public class Utility {
     String extPattern = "(?<!^)[.]" + (removeAllExtensions ? ".*" : "[^.]*$");
     return filename.replaceAll(extPattern, "");
   }
+
+  /**
+   * Replaces all line ending characters (CR, LF, CR+LF) within a string
+   * with the '\n' character.
+   *
+   * @param inputString The string to process.  Can be null or empty.
+   * @return A new string with all line endings replaced by '\n', or the original
+   *         string if it was null or empty.
+   */
+  public static String convertLineEndings(String inputString) {
+    if (inputString == null || inputString.isEmpty()) {
+      return inputString; // Handle null and empty strings gracefully
+    }
+
+    // Use a regular expression to replace all line ending characters.
+    // The pattern matches CR, LF, or CRLF.  The 'replaceAll' method is efficient.
+    return inputString.replaceAll("[\r\n]+", "\\\\n ").trim();
+  }
 }
