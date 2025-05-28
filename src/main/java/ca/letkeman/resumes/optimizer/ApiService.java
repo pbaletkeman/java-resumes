@@ -3,6 +3,7 @@ package ca.letkeman.resumes.optimizer;
 import static java.net.HttpURLConnection.HTTP_OK;
 
 import ca.letkeman.resumes.Utility;
+import ca.letkeman.resumes.model.Optimize;
 import ca.letkeman.resumes.optimizer.responses.LLMResponse;
 import ca.letkeman.resumes.optimizer.responses.Choice;
 import com.google.gson.Gson;
@@ -24,25 +25,13 @@ import java.util.List;
 import java.net.HttpURLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class ApiService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ApiService.class);
   private static final String OUTPUT_DIR = "output";
-
-  @Value("${llm:endpoint}")
-  private String endPointURL;
-
-  @Value("${llm:apikey}")
-  private String apikey;
-
-
-  public enum PROMPT_TYPE {
-    COVER,
-    RESUME
-  }
 
   private String jobDescription;
   private String resume;
@@ -71,11 +60,11 @@ public class ApiService {
    * @param chatBody - the object to send to the LLM endpoint
    * @return - the result from the LLM request
    */
-  public LLMResponse invokeApi(ChatBody chatBody) {
+  public LLMResponse invokeApi(ChatBody chatBody, String endpoint, String apikey) {
     String jsonBody = new Gson().toJson(chatBody);
     try {
-//      URI uri = new URI(endPointURL);
-      URI uri = new URI("http://localhost:1234/v1/chat/completions");
+      URI uri = new URI(endpoint);
+//      URI uri = new URI("http://localhost:1234/v1/chat/completions");
       HttpURLConnection conn = (HttpURLConnection) uri.toURL().openConnection();
 
       conn.setRequestMethod("POST");
@@ -136,17 +125,14 @@ public class ApiService {
     }
   }
 
-  /***
+  /**
    *
-   * @param promptType Cover or Resume prompt request type
-   * @param resume resume content for the request
-   * @param jobDescription job description to send to the endpoint
-   * @param jobTitle job title of the posting
-   * @param company company who posted the job
+   * @param optimize api input parameters
    */
-  public void produceFiles(String[] promptType, double temperature, String model, String resume, String jobDescription, String jobTitle, String company) {
-    for (String p: promptType) {
-      produceFiles(p, temperature, model, resume, jobDescription, jobTitle, company);
+  public void produceFiles(Optimize optimize, String endpoint, String apikey){
+
+    for (String p: optimize.getPromptType()) {
+      produceFiles(p, optimize.getTemperature(), optimize.getModel(), optimize.getResume(), optimize.getJobDescription(), optimize.getJobTitle(), optimize.getCompany(), endpoint, apikey);
     }
   }
 
@@ -160,7 +146,7 @@ public class ApiService {
    * @param jobTitle job title of the posting
    * @param company company who posted the job
    */
-  public void produceFiles(String promptType, double temperature, String model, String resume, String jobDescription, String jobTitle, String company) {
+  public void produceFiles(String promptType, double temperature, String model, String resume, String jobDescription, String jobTitle, String company, String endpoint, String apikey) {
     String promptData = Utility.readFileAsString("prompts" + File.separator + promptType + ".md");
     promptData = promptData.replace("{resume_string}", resume).replace("{jd_string}", jobDescription);
 
@@ -184,7 +170,7 @@ public class ApiService {
     chatBody.setMessages(List.of(systemMessage, userMessage));
 
     ApiService apiService = new ApiService();
-    LLMResponse llmResponse = apiService.invokeApi(chatBody);
+    LLMResponse llmResponse = apiService.invokeApi(chatBody, endpoint, apikey);
 
     if (llmResponse == null){
       LOGGER.error("Invalid LLM Response. Please try again.");
@@ -309,7 +295,6 @@ public class ApiService {
     }
     return str.trim();
   }
-
 }
 
 

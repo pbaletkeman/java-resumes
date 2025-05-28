@@ -43,6 +43,12 @@ public class AdvancedController {
   @Value("${upload.path:uploads}")
   private String root;
 
+  @Value("${llm.endpoint}")
+  private String endpoint;
+
+  @Value("${llm.apikey}")
+  private String apikey;
+
   @Autowired
   public AdvancedController( FilesStorageService storageService){
     this.storageService = storageService;
@@ -95,7 +101,7 @@ public class AdvancedController {
     LOGGER.info("optimize: {}",optimize);
     if (optimize.isValid()){
       // start background task here
-      Thread thread = new Thread(new BackgroundResume(optimize));
+      Thread thread = new Thread(new BackgroundResume(optimize, endpoint, apikey));
       thread.start();
       return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("generating"));
     } else {
