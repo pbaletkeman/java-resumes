@@ -74,7 +74,8 @@ public class ApiService {
   public LLMResponse invokeApi(ChatBody chatBody) {
     String jsonBody = new Gson().toJson(chatBody);
     try {
-      URI uri = new URI(endPointURL);
+//      URI uri = new URI(endPointURL);
+      URI uri = new URI("http://localhost:1234/v1/chat/completions");
       HttpURLConnection conn = (HttpURLConnection) uri.toURL().openConnection();
 
       conn.setRequestMethod("POST");
@@ -99,7 +100,7 @@ public class ApiService {
         LOGGER.error("Invalid API response");
         LOGGER.error(String.valueOf(conn.getErrorStream()));
       } else {
-        LOGGER.info("Response saved to object.");
+        LOGGER.info("Saving response to object.");
         return new Gson().fromJson(response.toString(), LLMResponse.class);
       }
     } catch (Exception e) {
@@ -143,9 +144,9 @@ public class ApiService {
    * @param jobTitle job title of the posting
    * @param company company who posted the job
    */
-  public void produceFiles(PROMPT_TYPE[] promptType, double temperature, String model, String resume, String jobDescription, String jobTitle, String company) {
-    for (PROMPT_TYPE p: promptType) {
-      produceFiles(p.name(), temperature, model, resume, jobDescription, jobTitle, company);
+  public void produceFiles(String[] promptType, double temperature, String model, String resume, String jobDescription, String jobTitle, String company) {
+    for (String p: promptType) {
+      produceFiles(p, temperature, model, resume, jobDescription, jobTitle, company);
     }
   }
 
@@ -200,7 +201,7 @@ public class ApiService {
     if (choices != null && !choices.isEmpty() && choices.get(0).getMessage() != null
         && choices.get(0).getMessage().getContent() != null) {
       String message = choices.get(0).getMessage().getContent();
-      result = getResult(message);
+      result = getResult(message, company);
     }
 
     if (result == null || result.body() == null){
@@ -229,26 +230,29 @@ public class ApiService {
    * @param message the message response, considered the source
    * @return formatted response from the source
    */
-  private Result getResult(String message) {
+  private Result getResult(String message, String company) {
     String body;
     String suggestion = null;
-    int chopStart = message.indexOf("```");
-    if (chopStart > -1) {
-      message = message.substring(chopStart);
-      chopStart = message.indexOf("\n");
-      message = message.substring(chopStart);
-      String[] content = message.split("Additional Suggestions");
-      if (content.length > 0) {
-        body = content[0].trim();
-        body = trimString(body);
-        body = !body.isEmpty() ? body : "";
-        suggestion = content.length == 2 ? content[1].trim() : "";
-        suggestion = removeTrailingChar(suggestion, "#");
+    String[] content = message.split("Additional Suggestions");
+    if (content.length > 0) {
+      body = content[0].trim();
+      body = trimString(body);
+      if (!body.isEmpty()){
+        body = body.replace("\\n ","\n").replace("\n**","\n\n**");
+        int companyLoc = body.indexOf(company);
+        if (companyLoc > 0){
+          LOGGER.info("company");
+          companyLoc = body.indexOf("\n");
+          body = body.substring(companyLoc).trim();
+        }
       } else {
-        body = trimString(message.replace("Additional Suggestions", ""));
+        body = "";
       }
+
+      suggestion = content.length == 2 ? content[1].trim() : "";
+      suggestion = removeTrailingChar(suggestion, "#");
     } else {
-      body = message;
+      body = trimString(message.replace("Additional Suggestions", ""));
     }
     return new Result(body, (suggestion == null ? "" : suggestion));
   }

@@ -38,6 +38,7 @@ export default function MainForm() {
 
   const onPromptChange = (e: CheckboxChangeEvent) => {
     const _prompt = [...prompt];
+    console.log(prompt);
 
     if (e.checked) _prompt.push(e.value);
     else _prompt.splice(_prompt.indexOf(e.value), 1);
@@ -62,7 +63,7 @@ export default function MainForm() {
   };
 
   const handleFormSubmit = async () => {
-    if (
+    /* if (
       !company ||
       company.length == 0 ||
       !jobTitle ||
@@ -75,8 +76,9 @@ export default function MainForm() {
       temperature.valueOf() < 0 ||
       temperature.valueOf() > 2
     ) {
+      console.log("geee");
       return;
-    }
+    } */
     const optimize: OptimizeType = {
       company: company,
       jobTitle: jobTitle,
@@ -85,16 +87,16 @@ export default function MainForm() {
       promptType: prompt,
     };
     const formData = new FormData();
-    if (!jobFile) {
-      optimize["jobDescription"] = jobText;
-    } else {
-      // formData.append("job", jobFile, jobFile.name);
-    }
-    if (!resumeFile) {
-      optimize["resume"] = resumeMD;
-    } else {
-      // formData.append("resume", resumeFile, resumeFile.name);
-    }
+    // if (!jobFile) {
+    optimize["jobDescription"] = jobText;
+    // } else {
+    // formData.append("job", jobFile, jobFile.name);
+    // }
+    // if (!resumeFile) {
+    optimize["resume"] = resumeMD;
+    // } else {
+    // formData.append("resume", resumeFile, resumeFile.name);
+    // }
 
     formData.append("optimize", JSON.stringify(optimize));
 

@@ -2,13 +2,12 @@ package ca.letkeman.resumes.model;
 
 import static ca.letkeman.resumes.Utility.convertLineEndings;
 
-import ca.letkeman.resumes.optimizer.ApiService.PROMPT_TYPE;
 import java.util.Arrays;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class Optimize {
-  PROMPT_TYPE[] promptType = {PROMPT_TYPE.RESUME};
+  String[] promptType = {"Resume"};
   double temperature = 0.15;
   String model = "gemma-3-4b-it";
   String resume;
@@ -16,7 +15,7 @@ public class Optimize {
   String jobTitle;
   String company;
 
-  public Optimize(PROMPT_TYPE[] promptType, double temperature, String model, String resume, String jobDescription,
+  public Optimize(String[] promptType, double temperature, String model, String resume, String jobDescription,
       String jobTitle, String company) {
     this.promptType = promptType;
     this.temperature = temperature;
@@ -30,11 +29,11 @@ public class Optimize {
   public Optimize() {
   }
 
-  public PROMPT_TYPE[] getPromptType() {
+  public String[] getPromptType() {
     return promptType;
   }
 
-  public void setPromptType(PROMPT_TYPE[] promptType) {
+  public void setPromptType(String[] promptType) {
     this.promptType = promptType;
   }
 
