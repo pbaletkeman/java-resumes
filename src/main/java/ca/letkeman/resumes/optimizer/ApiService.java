@@ -19,6 +19,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -195,16 +196,17 @@ public class ApiService {
       return;
     }
 
-    String fileName = promptType + "-" + company + "-" + jobTitle + ".md";
+    String suffixString = DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm").format(LocalDateTime.now());
+    String fileName = promptType + "-" + company + "-" + jobTitle + "-" + suffixString + ".md";
     createResultFile(fileName, result.body());
     HtmlToPdf html = new HtmlToPdf(OUTPUT_DIR + File.separator + fileName,
-        OUTPUT_DIR + File.separator + promptType + "-" + company + "-" + jobTitle + ".pdf", "");
+        OUTPUT_DIR + File.separator + promptType + "-" + company + "-" + jobTitle + "-" + suffixString + ".pdf", "");
     if (!html.convertFile()) {
       LOGGER.error("Unable to save PDF file");
     }
 
     if (result.suggestion() != null && !result.suggestion().isBlank()) {
-      fileName = company + "-" + jobTitle + "-suggestions.md";
+      fileName = company + "-" + jobTitle + "-" +  suffixString + "-suggestions.md";
       createResultFile(fileName, result.suggestion());
     }
 

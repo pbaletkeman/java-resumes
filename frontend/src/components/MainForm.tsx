@@ -49,6 +49,8 @@ export default function MainForm() {
   const handleFilesSelected = (files: File[], source: string) => {
     if (source === "job") {
       if (files?.length > 0) {
+        console.log("files");
+        console.log(files);
         setJobFile(files[0]);
       } else {
         setJobFile(null);
@@ -63,22 +65,21 @@ export default function MainForm() {
   };
 
   const handleFormSubmit = async () => {
-    /* if (
-      !company ||
-      company.length == 0 ||
-      !jobTitle ||
-      jobTitle.length == 0 ||
-      !model ||
-      model.length == 0 ||
+    if (
       !prompt ||
-      prompt.length == 0 ||
+      prompt.length === 0 ||
       !temperature ||
-      temperature.valueOf() < 0 ||
-      temperature.valueOf() > 2
+      temperature < 0 ||
+      temperature > 2 ||
+      !company ||
+      company.length === 0 ||
+      !jobTitle ||
+      jobTitle.length === 0 ||
+      !model ||
+      model.length === 0
     ) {
-      console.log("geee");
       return;
-    } */
+    }
     const optimize: OptimizeType = {
       company: company,
       jobTitle: jobTitle,
@@ -87,25 +88,22 @@ export default function MainForm() {
       promptType: prompt,
     };
     const formData = new FormData();
-    // if (!jobFile) {
-    optimize["jobDescription"] = jobText;
-    // } else {
-    // formData.append("job", jobFile, jobFile.name);
-    // }
-    // if (!resumeFile) {
-    optimize["resume"] = resumeMD;
-    // } else {
-    // formData.append("resume", resumeFile, resumeFile.name);
-    // }
+    if (jobFile) {
+      formData.append("job", jobFile, jobFile.name);
+    } else {
+      optimize["jobDescription"] = jobText;
+    }
+    if (resumeFile) {
+      formData.append("resume", resumeFile, resumeFile.name);
+    } else {
+      optimize["resume"] = resumeMD;
+    }
 
     formData.append("optimize", JSON.stringify(optimize));
 
     const response = await fetch("http://localhost:8080/upload", {
       method: "POST",
       body: formData,
-      // headers: {
-      //   "Content-Type": "application/x-www-form-urlencoded",
-      // },
     });
 
     if (response.ok) {
