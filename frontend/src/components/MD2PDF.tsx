@@ -5,8 +5,9 @@ import { Button } from "primereact/button";
 import FileUpload from "./FileUpload";
 import { useState } from "react";
 import { API_HOST } from "./MainForm";
+import type { ResultsTableType } from "./ResultsTable";
 
-export default function MD2PDF() {
+export default function MD2PDF({ setUpdateFiles }: ResultsTableType) {
   const [resetMDFile, setResetMDFile] = useState<boolean>(false);
   const [mdFile, setMDFile] = useState<File | null>();
 
@@ -32,6 +33,7 @@ export default function MD2PDF() {
         console.log("Form submitted successfully!");
         alert("Form submitted successfully!"); // Optional feedback to the user
         setResetMDFile(true);
+        setUpdateFiles(true);
       } else {
         console.error(
           "Error submitting form:",

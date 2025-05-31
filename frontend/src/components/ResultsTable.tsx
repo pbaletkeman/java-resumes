@@ -13,13 +13,29 @@ interface FileType {
   date: string;
 }
 
-export default function ResultsTable() {
+export interface ResultsTableType {
+  updateFiles?: boolean;
+  setUpdateFiles: (b: boolean) => void;
+}
+
+export default function ResultsTable({
+  updateFiles,
+  setUpdateFiles,
+}: ResultsTableType) {
   const [files, setFiles] = useState<FileType[] | null>(null);
   const [busyCursor, setBusyCursor] = useState<string>("cursor-wait");
 
   useEffect(() => {
-    getFiles();
+    getFiles(); // initial page load
   }, []);
+
+  useEffect(() => {
+    if (updateFiles) {
+      // Markdown File to PDF File called
+      getFiles();
+      setUpdateFiles(false);
+    }
+  }, [updateFiles, setUpdateFiles]);
 
   function getFiles() {
     setBusyCursor("cursor-wait");
@@ -67,24 +83,26 @@ export default function ResultsTable() {
     <Card className={"border-round-3xl " + busyCursor}>
       {header}
       <ScrollPanel style={{ width: "100%", height: "41vh" }}>
-        <div className="grid pl-2 pt-2">
+        <div className="grid mt-2 ml-2">
           {files?.flatMap((x) => (
-            <>
-              <div className="col-1 border-right-1 border-y-1">
+            <div
+              className="grid mb-2 border-top-1"
+              style={{ width: "100%" }}
+            >
+              <div className="col-1 ">
                 <Button
                   icon="pi pi-times"
                   tooltip={"Delete " + x.name}
-                  className="border-circle border-2"
+                  className="border-circle"
                   onClick={() => handleDelete(x.name)}
                 />
               </div>
-              <div className="col-10 border-1 border-x-none">
+              <div className="col-11 border-left-1 border-y-none">
                 <a href={x.url}>{x.name}</a> ({x.date + ") - " + x.size}
                 <br />
                 <a href={x.url}>{x.url}</a>
               </div>
-              <div className="col-1 border-1 border-x-none"></div>
-            </>
+            </div>
           ))}
         </div>
       </ScrollPanel>
