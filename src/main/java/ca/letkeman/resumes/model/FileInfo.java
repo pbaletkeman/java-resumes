@@ -12,11 +12,13 @@ public class FileInfo {
   private String name;
   private String url;
   private String size;
+  private String date;
 
-  public FileInfo(String name, String url, String root) {
+  public FileInfo(String name, String url, String root, String date) {
     this.name = name;
     this.url = url;
     this.size = calcFileSize(name,root);
+    this.date = date;
   }
 
   public FileInfo(String name, String url) {
@@ -47,6 +49,14 @@ public class FileInfo {
 
   public void setSize(String size) {
     this.size = size;
+  }
+
+  public String getDate() {
+    return date;
+  }
+
+  public void setDate(String date) {
+    this.date = date;
   }
 
   private String calcFileSize(String root, String fileName) {

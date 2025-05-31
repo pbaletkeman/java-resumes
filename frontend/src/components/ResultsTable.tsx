@@ -1,21 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "primeicons/primeicons.css";
 
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
-import { Filedata } from "./FileData";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
-import { Fieldset } from "primereact/fieldset";
+import { ScrollPanel } from "primereact/scrollpanel";
 
 interface FileType {
   url: string;
   name: string;
   size: string;
+  date: string;
 }
 
 export default function ResultsTable() {
-  const [files, setFiles] = useState<FileType[]>(Filedata);
+  const [files, setFiles] = useState<FileType[] | null>(null);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/get-files")
+      .then((response) => response.json())
+      .then((json) => setFiles(json))
+      .catch((error) => console.error(error));
+  }, []);
 
   const header = (
     <table width="100%">
@@ -38,24 +43,20 @@ export default function ResultsTable() {
 
   return (
     <Card className="border-round-3xl">
-      <DataTable
-        value={files}
-        size="small"
-        header={header}
-      >
-        <Column
-          field="name"
-          header="name"
-        ></Column>
-        <Column
-          field="size"
-          header="size"
-        ></Column>
-        <Column
-          field="url"
-          header="url"
-        ></Column>
-      </DataTable>
+      {header}
+      <ScrollPanel style={{ width: "100%", height: "41vh" }}>
+        <ul>
+          {files?.flatMap((x) => (
+            <li className="m-2">
+              <p>
+                <a href={x.url}>{x.name}</a> ({x.date + ") - " + x.size}
+                <br />
+                <a href={x.url}>{x.url}</a>
+              </p>
+            </li>
+          ))}
+        </ul>
+      </ScrollPanel>
     </Card>
   );
 }

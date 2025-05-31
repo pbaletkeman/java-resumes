@@ -1,5 +1,7 @@
 package ca.letkeman.resumes.controller;
 
+import static java.nio.file.Files.getLastModifiedTime;
+
 import ca.letkeman.resumes.BackgroundResume;
 import ca.letkeman.resumes.Utility;
 import ca.letkeman.resumes.model.Optimize;
@@ -8,8 +10,19 @@ import ca.letkeman.resumes.optimizer.HtmlToPdf;
 import com.google.gson.Gson;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.FileTime;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import java.util.Locale;
+import javax.swing.text.DateFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,14 +130,26 @@ public class AdvancedController {
   public ResponseEntity<List<FileInfo>> getListFiles() {
     storageService.setConfigRoot(root);
     List<FileInfo> fileInfos = storageService.loadAll().map(path -> {
+      String date = getFileDate(path);
       String filename = path.getFileName().toString();
         String url = MvcUriComponentsBuilder
             .fromMethodName(AdvancedController.class, "getFile", path.getFileName().toString()).build().toString();
 
-        return new FileInfo(filename, url, root);
+        return new FileInfo(filename, url, root, date);
     }).toList();
 
     return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
+  }
+
+  private String getFileDate(Path path) {
+    try {
+      String p =  root + File.separator + path.toString();
+      LocalDateTime x = LocalDateTime.ofInstant (getLastModifiedTime(Path.of(p)).toInstant(), ZoneId.systemDefault());
+      return x.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+    } catch (Exception e) {
+      LOGGER.error(e.toString());
+    }
+    return "";
   }
 
   @GetMapping("/files/{filename:.+}")

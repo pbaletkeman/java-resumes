@@ -41,8 +41,6 @@ const FileUpload: React.FC<FileUploadProps> = ({
     fontSize: "14px",
     boxShadow: "0px 0px 10px 0px grey",
   };
-  console.log("input");
-  console.log(input);
 
   // Ref object to reference the input element
   const inputFile = useRef<HTMLInputElement | null>(null);
