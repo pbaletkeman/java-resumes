@@ -4,6 +4,7 @@ import "primeicons/primeicons.css";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 import { ScrollPanel } from "primereact/scrollpanel";
+import { API_HOST } from "./MainForm";
 
 interface FileType {
   url: string;
@@ -14,18 +15,38 @@ interface FileType {
 
 export default function ResultsTable() {
   const [files, setFiles] = useState<FileType[] | null>(null);
+  const [busyCursor, setBusyCursor] = useState<string>("cursor-wait");
 
   useEffect(() => {
-    fetch("http://localhost:8080/get-files")
+    getFiles();
+  }, []);
+
+  function getFiles() {
+    setBusyCursor("cursor-wait");
+    fetch(API_HOST + "/get-files")
       .then((response) => response.json())
       .then((json) => setFiles(json))
       .catch((error) => console.error(error));
-  }, []);
+    setBusyCursor("cursor-auto");
+  }
+
+  function handleDelete(fileName: string) {
+    setBusyCursor("cursor-wait");
+    fetch(API_HOST + "/files/" + fileName, { method: "DELETE" });
+    setTimeout(getFiles, 2000);
+  }
+
+  setInterval(() => {
+    getFiles();
+  }, 30000);
 
   const header = (
-    <table width="100%">
+    <table
+      width="100%"
+      className={busyCursor}
+    >
       <tr>
-        <td className="text-3xl">Files</td>
+        <td className="text-3xl">Files: {files?.length}</td>
         <td
           colSpan={11}
           align="right"
@@ -35,6 +56,7 @@ export default function ResultsTable() {
             icon="pi pi-refresh"
             iconPos="right"
             className="border-round-xl"
+            onClick={getFiles}
           />
         </td>
       </tr>
@@ -42,20 +64,29 @@ export default function ResultsTable() {
   );
 
   return (
-    <Card className="border-round-3xl">
+    <Card className={"border-round-3xl " + busyCursor}>
       {header}
       <ScrollPanel style={{ width: "100%", height: "41vh" }}>
-        <ul>
+        <div className="grid pl-2 pt-2">
           {files?.flatMap((x) => (
-            <li className="m-2">
-              <p>
+            <>
+              <div className="col-1 border-right-1 border-y-1">
+                <Button
+                  icon="pi pi-times"
+                  tooltip={"Delete " + x.name}
+                  className="border-circle border-2"
+                  onClick={() => handleDelete(x.name)}
+                />
+              </div>
+              <div className="col-10 border-1 border-x-none">
                 <a href={x.url}>{x.name}</a> ({x.date + ") - " + x.size}
                 <br />
                 <a href={x.url}>{x.url}</a>
-              </p>
-            </li>
+              </div>
+              <div className="col-1 border-1 border-x-none"></div>
+            </>
           ))}
-        </ul>
+        </div>
       </ScrollPanel>
     </Card>
   );
