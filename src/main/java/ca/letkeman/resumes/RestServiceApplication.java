@@ -4,6 +4,7 @@ package ca.letkeman.resumes;
 import ca.letkeman.resumes.service.FilesStorageService;
 import jakarta.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +14,9 @@ public class RestServiceApplication  implements CommandLineRunner {
 	@Resource
 	FilesStorageService storageService;
 
+	@Value("${upload.path}")
+	private String root;
+
 	public static void main(String[] args) {
 		SpringApplication.run(RestServiceApplication.class, args);
 	}
@@ -20,6 +24,6 @@ public class RestServiceApplication  implements CommandLineRunner {
 	@Override
 	public void run(String... arg) throws Exception {
 
-		storageService.init();
+		storageService.init(root);
 	}
 }

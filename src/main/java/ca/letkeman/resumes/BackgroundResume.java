@@ -17,15 +17,17 @@ public class BackgroundResume implements Runnable {
 
   private String endpoint;
   private String apikey;
+  private String root;
 
   public void setOptimize(Optimize optimize) {
     this.optimize = optimize;
   }
 
-  public BackgroundResume(Optimize optimize, String endpoint, String apikey) {
+  public BackgroundResume(Optimize optimize, String endpoint, String apikey, String root) {
     this.optimize = optimize;
     this.endpoint = endpoint;
     this.apikey = apikey;
+    this.root = root;
   }
 
   public BackgroundResume() {
@@ -34,7 +36,7 @@ public class BackgroundResume implements Runnable {
   @Override
   public void run() {
     ApiService apiService = new ApiService();
-    apiService.produceFiles(optimize, endpoint, apikey);
+    apiService.produceFiles(optimize, endpoint, apikey, root);
     LOGGER.info("all done");
   }
 }

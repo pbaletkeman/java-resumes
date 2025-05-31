@@ -32,7 +32,6 @@ import org.springframework.stereotype.Component;
 public class ApiService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ApiService.class);
-  private static final String OUTPUT_DIR = "output";
 
   private String jobDescription;
   private String resume;
@@ -65,7 +64,6 @@ public class ApiService {
     String jsonBody = new Gson().toJson(chatBody);
     try {
       URI uri = new URI(endpoint);
-//      URI uri = new URI("http://localhost:1234/v1/chat/completions");
       HttpURLConnection conn = (HttpURLConnection) uri.toURL().openConnection();
 
       conn.setRequestMethod("POST");
@@ -130,10 +128,10 @@ public class ApiService {
    *
    * @param optimize api input parameters
    */
-  public void produceFiles(Optimize optimize, String endpoint, String apikey){
+  public void produceFiles(Optimize optimize, String endpoint, String apikey, String root){
 
     for (String p: optimize.getPromptType()) {
-      produceFiles(p, optimize.getTemperature(), optimize.getModel(), optimize.getResume(), optimize.getJobDescription(), optimize.getJobTitle(), optimize.getCompany(), endpoint, apikey);
+      produceFiles(p, optimize.getTemperature(), optimize.getModel(), optimize.getResume(), optimize.getJobDescription(), optimize.getJobTitle(), optimize.getCompany(), endpoint, apikey, root);
     }
   }
 
@@ -147,7 +145,7 @@ public class ApiService {
    * @param jobTitle job title of the posting
    * @param company company who posted the job
    */
-  public void produceFiles(String promptType, double temperature, String model, String resume, String jobDescription, String jobTitle, String company, String endpoint, String apikey) {
+  public void produceFiles(String promptType, double temperature, String model, String resume, String jobDescription, String jobTitle, String company, String endpoint, String apikey, String root) {
     String promptData = Utility.readFileAsString("prompts" + File.separator + promptType + ".md");
     promptData = promptData.replace("{resume_string}", resume).replace("{jd_string}", jobDescription);
 
@@ -181,7 +179,7 @@ public class ApiService {
     Result result = null;
     ArrayList<Choice> choices = (ArrayList<Choice>) llmResponse.getChoices();
     try {
-      Files.createDirectories(Paths.get(OUTPUT_DIR));
+      Files.createDirectories(Paths.get(root));
     } catch (Exception e) {
       LOGGER.error("Unable to create output directory.\n{}", e.toString());
     }
@@ -198,16 +196,16 @@ public class ApiService {
 
     String suffixString = DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm").format(LocalDateTime.now());
     String fileName = promptType + "-" + company + "-" + jobTitle + "-" + suffixString + ".md";
-    createResultFile(fileName, result.body());
-    HtmlToPdf html = new HtmlToPdf(OUTPUT_DIR + File.separator + fileName,
-        OUTPUT_DIR + File.separator + promptType + "-" + company + "-" + jobTitle + "-" + suffixString + ".pdf", "");
+    createResultFile(fileName, result.body(), root);
+    HtmlToPdf html = new HtmlToPdf( root + File.separator + fileName,
+        root + File.separator + promptType + "-" + company + "-" + jobTitle + "-" + suffixString + ".pdf", "");
     if (!html.convertFile()) {
       LOGGER.error("Unable to save PDF file");
     }
 
     if (result.suggestion() != null && !result.suggestion().isBlank()) {
       fileName = company + "-" + jobTitle + "-" +  suffixString + "-suggestions.md";
-      createResultFile(fileName, result.suggestion());
+      createResultFile(fileName, result.suggestion(),root);
     }
 
     LOGGER.info("Operation Complete.");
@@ -255,10 +253,10 @@ public class ApiService {
    * @param fileName name of the file to create
    * @param s content to save in the file
    */
-  private static void createResultFile(String fileName, String s ) {
+  private static void createResultFile(String fileName, String s, String root ) {
 
     if (s != null && !s.isBlank()) {
-      try (BufferedWriter writer = new BufferedWriter(new FileWriter(OUTPUT_DIR + File.separator + fileName, false))) {
+      try (BufferedWriter writer = new BufferedWriter(new FileWriter(root + File.separator + fileName, false))) {
         writer.write(s);
         writer.flush();  // Data is written to OS page cache, not necessarily to the disk immediately
       } catch (Exception e) {

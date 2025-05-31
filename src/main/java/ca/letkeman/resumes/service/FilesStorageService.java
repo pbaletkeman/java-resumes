@@ -7,7 +7,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface FilesStorageService {
-  void init();
+  void init(String configRoot);
 
   void save(MultipartFile file);
 
@@ -18,4 +18,8 @@ public interface FilesStorageService {
   void deleteAll();
 
   Stream<Path> loadAll();
+
+  String getConfigRoot();
+
+  void setConfigRoot(String root);
 }

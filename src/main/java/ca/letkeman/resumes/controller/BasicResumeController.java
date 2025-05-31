@@ -10,15 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class BasicResumeController {
 
   @PostMapping(value = "/optimizer", consumes = "application/json", produces = "application/json")
-  public String optimize(@RequestBody Optimize optimize, String somekey, String apikey) {
+  public String optimize(@RequestBody Optimize optimize, String somekey, String apikey, String root) {
 
-//    String resume = readFileAsString("sample" + File.separator + "resume.md");
-//    String jobDescription = readFileAsString("sample" + File.separator + "PointClickCare-Software Engineer.txt");
-
-//    ApiService apiService = new ApiService();
-//    apiService.produceFiles(optimize.promptType.name(), optimize.resume, optimize.jobDescription, optimize.jobTitle, optimize.company);
-
-    Thread thread = new Thread(new BackgroundResume(optimize, somekey, apikey));
+    Thread thread = new Thread(new BackgroundResume(optimize, somekey, apikey, root));
     thread.start();
 
     return "Pete";

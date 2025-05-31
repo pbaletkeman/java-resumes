@@ -4,7 +4,7 @@ import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 import FileUpload from "./FileUpload";
 import { useState } from "react";
-import { Fieldset } from "primereact/fieldset";
+import { API_HOST } from "./MainForm";
 
 export default function MD2PDF() {
   const [resetMDFile, setResetMDFile] = useState<boolean>(false);
@@ -16,6 +16,32 @@ export default function MD2PDF() {
     } else {
       setMDFile(null);
     }
+  };
+
+  const handleFormSubmit = async () => {
+    if (mdFile && mdFile.name) {
+      const formData = new FormData();
+      formData.append("file", mdFile, mdFile.name);
+
+      const response = await fetch(API_HOST + "/markdownFile2PDF", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        console.log("Form submitted successfully!");
+        alert("Form submitted successfully!"); // Optional feedback to the user
+        setResetMDFile(true);
+      } else {
+        console.error(
+          "Error submitting form:",
+          response.status,
+          response.statusText
+        );
+        alert(`Error submitting form: ${response.statusText}`); // Provide more informative error feedback
+      }
+    }
+    console.log("form submit");
   };
   return (
     <Card className="border-round-3xl">
@@ -45,6 +71,7 @@ export default function MD2PDF() {
               iconPos="right"
               label="Convert"
               className="mb-0 border-round-xl"
+              onClick={handleFormSubmit}
             />
           </td>
         </tr>

@@ -49,7 +49,7 @@ public class FileInfo {
     this.size = size;
   }
 
-  private String calcFileSize(String root, String fileName){
+  private String calcFileSize(String root, String fileName) {
     long ONE_MB = 1048576;
     long ONE_KB = 1024;
     File file = new File(Paths.get(fileName, root).toAbsolutePath().toUri());
@@ -58,10 +58,10 @@ public class FileInfo {
       return "0 bytes";
     } else {
       long fileSize = file.length();
-      if (fileSize > ONE_MB){
-        return fileSize/ONE_MB + " mb";
-      } else if (fileSize > ONE_KB){
-        return fileSize/ONE_KB + " kb";
+      if (fileSize > ONE_MB) {
+        return fileSize / ONE_MB + " mb";
+      } else if (fileSize > ONE_KB) {
+        return fileSize / ONE_KB + " kb";
       } else {
         return fileSize + " bytes";
       }

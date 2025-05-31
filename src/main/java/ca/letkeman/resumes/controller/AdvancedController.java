@@ -40,7 +40,7 @@ public class AdvancedController {
 
   private final FilesStorageService storageService;
 
-  @Value("${upload.path:uploads}")
+  @Value("${upload.path}")
   private String root;
 
   @Value("${llm.endpoint}")
@@ -52,13 +52,15 @@ public class AdvancedController {
   @Autowired
   public AdvancedController( FilesStorageService storageService){
     this.storageService = storageService;
+
   }
 
   @PostMapping(path = "/markdownFile2PDF")
   public ResponseEntity<ResponseMessage> file2PDF(@RequestParam(name = "file", required = false) MultipartFile file){
     try {
+      storageService.setConfigRoot(root);
       storageService.save(file);
-      String outputFile = "output" + File.separator + Utility.removeFileExtension( file.getOriginalFilename() , true) + ".pdf";
+      String outputFile = root + File.separator + Utility.removeFileExtension( file.getOriginalFilename() , true) + ".pdf";
       HtmlToPdf htmlToPdf = new HtmlToPdf(root + File.separator + file.getOriginalFilename(),outputFile, "");
       if (htmlToPdf.convertFile()){
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("file successfully converted"));
@@ -81,6 +83,7 @@ public class AdvancedController {
     if ((optimize.getResume() == null || optimize.getResume().isBlank() || optimize.getResume().isEmpty())
         && resume != null) {
       try {
+        storageService.setConfigRoot(root);
         storageService.save(resume);
         optimize.setResume(Utility.readFileAsString(root + File.separator + resume.getOriginalFilename()));
       } catch (Exception e) {
@@ -90,6 +93,7 @@ public class AdvancedController {
 
     if ((optimize.getJobDescription() == null || optimize.getJobDescription().isBlank() || optimize.getJobDescription().isEmpty()) && job != null) {
       try {
+          storageService.setConfigRoot(root);
           storageService.save(job);
           optimize.setJobDescription(Utility.readFileAsString(root + File.separator + job.getOriginalFilename()));
         } catch (Exception e) {
@@ -101,7 +105,7 @@ public class AdvancedController {
     LOGGER.info("optimize: {}",optimize);
     if (optimize.isValid()){
       // start background task here
-      Thread thread = new Thread(new BackgroundResume(optimize, endpoint, apikey));
+      Thread thread = new Thread(new BackgroundResume(optimize, endpoint, apikey, root));
       thread.start();
       return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("generating"));
     } else {
@@ -111,13 +115,13 @@ public class AdvancedController {
 
   @GetMapping("/get-files")
   public ResponseEntity<List<FileInfo>> getListFiles() {
+    storageService.setConfigRoot(root);
     List<FileInfo> fileInfos = storageService.loadAll().map(path -> {
       String filename = path.getFileName().toString();
-      String url = MvcUriComponentsBuilder
-          .fromMethodName(AdvancedController.class, "getFile", path.getFileName().toString()).build().toString();
+        String url = MvcUriComponentsBuilder
+            .fromMethodName(AdvancedController.class, "getFile", path.getFileName().toString()).build().toString();
 
-
-      return new FileInfo(filename, url, root);
+        return new FileInfo(filename, url, root);
     }).toList();
 
     return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
@@ -125,6 +129,7 @@ public class AdvancedController {
 
   @GetMapping("/files/{filename:.+}")
   public ResponseEntity<Resource> getFile(@PathVariable String filename) {
+    storageService.setConfigRoot(root);
     Resource file = storageService.load(filename);
     return ResponseEntity.ok()
         .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
@@ -135,6 +140,7 @@ public class AdvancedController {
     String message = "";
 
     try {
+      storageService.setConfigRoot(root);
       boolean existed = storageService.delete(filename);
 
       if (existed) {

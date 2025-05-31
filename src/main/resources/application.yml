@@ -14,7 +14,7 @@ spring:
         max-request-size=500KB
 
 upload:
-  path: uploads
+  path: files
 
 llm:
   endpoint: http://localhost:1234/v1/chat/completions

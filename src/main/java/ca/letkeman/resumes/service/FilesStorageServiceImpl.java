@@ -1,7 +1,6 @@
 package ca.letkeman.resumes.service;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,7 +10,6 @@ import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -23,13 +21,23 @@ public class FilesStorageServiceImpl implements FilesStorageService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(FilesStorageServiceImpl.class);
 
-  @Value("${upload.path:uploads}")
   private String configRoot;
 
   private Path root;
 
   @Override
-  public void init() {
+  public void setConfigRoot(String root) {
+    this.configRoot = configRoot;
+  }
+
+  @Override
+  public String getConfigRoot() {
+    return configRoot;
+  }
+
+
+  @Override
+  public void init(String configRoot) {
     try {
       root = Paths.get(configRoot);
       Files.createDirectories(root);
@@ -51,6 +59,7 @@ public class FilesStorageServiceImpl implements FilesStorageService {
   public Resource load(String filename) {
     try {
       Path file = root.resolve(filename);
+
       Resource resource = new UrlResource(file.toUri());
 
       if (resource.exists() || resource.isReadable()) {
@@ -58,8 +67,8 @@ public class FilesStorageServiceImpl implements FilesStorageService {
       } else {
         LOGGER.error("Could not read the file!");
       }
-    } catch (MalformedURLException e) {
-      LOGGER.error("Error:\n{}",e.getMessage());
+    } catch (Exception e) {
+      LOGGER.error("Error:\n{}", e.getMessage());
     }
     return null;
   }
@@ -83,7 +92,7 @@ public class FilesStorageServiceImpl implements FilesStorageService {
   @Override
   public Stream<Path> loadAll() {
     try {
-      return Files.walk(this.root, 1).filter(path -> !path.equals(this.root)).map(this.root::relativize);
+      return Files.walk(this.root, 1).filter(path -> !path.equals(this.root) && !Files.isDirectory(path)).map(this.root::relativize);
     } catch (IOException e) {
       LOGGER.error("Could not load the files!");
     }
