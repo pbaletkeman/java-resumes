@@ -13,6 +13,7 @@
     "@mdxeditor/editor": "^3.32.3",
     "@uiw/react-md-editor": "^4.0.7",
     "primeflex": "^4.0.0",
+    "primeicons": "^7.0.0",
     "primereact": "^10.9.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"

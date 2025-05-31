@@ -89,9 +89,9 @@ export default function MainForm() {
       jobTitle.length === 0 ||
       !model ||
       model.length === 0 ||
-      ((!jobFile || jobFile.name == null) &&
+      ((jobFile?.name == null) &&
         (jobText == null || jobText.length === 0)) ||
-      ((!resumeFile || resumeFile.name == null) &&
+      ((resumeFile?.name == null) &&
         (resumeMD == null || resumeMD.length === 0))
     );
   };
@@ -101,8 +101,6 @@ export default function MainForm() {
       console.log("bad form values");
       return;
     }
-    console.log("else");
-    return;
 
     const optimize: OptimizeType = {
       company: company,
@@ -215,7 +213,7 @@ export default function MainForm() {
               inputId="temperature"
               value={temperature}
               onValueChange={(e: InputNumberValueChangeEvent) =>
-                setTemperature(e.value ? e.value : 0)
+                setTemperature(e.value ?? 0)
               }
               minFractionDigits={2}
               max={1.99}
@@ -288,7 +286,7 @@ export default function MainForm() {
                 <MDEditor
                   id="resumeMD"
                   value={resumeMD}
-                  onChange={(e) => setResumeMD(e ? e : "")}
+                  onChange={(e) => setResumeMD(e ?? "")}
                   style={{ whiteSpace: "pre-wrap", width: "140vh" }}
                   height={600}
                   textareaProps={{
