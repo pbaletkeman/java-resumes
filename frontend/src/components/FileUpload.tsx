@@ -7,6 +7,7 @@ interface FileUploadProps {
   multiple?: boolean;
   resetValue: boolean;
   setResetValue: (b: boolean) => void;
+  width: string;
 }
 
 const FileUpload: React.FC<FileUploadProps> = ({
@@ -16,6 +17,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
   multiple,
   resetValue,
   setResetValue,
+  width,
 }) => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
@@ -32,13 +34,15 @@ const FileUpload: React.FC<FileUploadProps> = ({
   };
 
   const input = {
-    width: "400px",
+    width: width,
     padding: "8px",
     border: "1px solid #ccc",
     borderRadius: "4px",
     fontSize: "14px",
     boxShadow: "0px 0px 10px 0px grey",
   };
+  console.log("input");
+  console.log(input);
 
   // Ref object to reference the input element
   const inputFile = useRef<HTMLInputElement | null>(null);
@@ -73,6 +77,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
         multiple={multiple ? multiple : false} // Allows multiple file selection
         style={input}
         ref={inputFile}
+        size={10}
       />
 
       {selectedFiles.length > 0 && (

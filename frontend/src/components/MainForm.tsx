@@ -89,10 +89,8 @@ export default function MainForm() {
       jobTitle.length === 0 ||
       !model ||
       model.length === 0 ||
-      ((jobFile?.name == null) &&
-        (jobText == null || jobText.length === 0)) ||
-      ((resumeFile?.name == null) &&
-        (resumeMD == null || resumeMD.length === 0))
+      (jobFile?.name == null && (jobText == null || jobText.length === 0)) ||
+      (resumeFile?.name == null && (resumeMD == null || resumeMD.length === 0))
     );
   };
 
@@ -279,6 +277,7 @@ export default function MainForm() {
                 setResetValue={setResetResume}
                 accept="text/markdown, text/plain" // Optional: Filter file types
                 onChange={(files) => handleFilesSelected(files, "resume")} // Callback function
+                width="60vh"
               />
             </AccordionTab>
             <AccordionTab header="Manual Input">
@@ -306,6 +305,7 @@ export default function MainForm() {
                 setResetValue={setResetJob}
                 accept="text/markdown, text/plain" // Optional: Filter file types
                 onChange={(files) => handleFilesSelected(files, "job")} // Callback function
+                width="60vh"
               />
             </AccordionTab>
             <AccordionTab header="Manual Input">
@@ -332,6 +332,9 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula 
           <Button
             label="Generate Files"
             onClick={() => handleFormSubmit()}
+            className="border-round-xl"
+            icon="pi pi-copy"
+            iconPos="right"
           />
         </div>
       </div>

@@ -6,6 +6,7 @@ import { Column } from "primereact/column";
 import { Filedata } from "./FileData";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
+import { Fieldset } from "primereact/fieldset";
 
 interface FileType {
   url: string;
@@ -17,24 +18,30 @@ export default function ResultsTable() {
   const [files, setFiles] = useState<FileType[]>(Filedata);
 
   const header = (
-    <div className="grid">
-      <div className="col-5 text-3xl">Files</div>
-      <div className="col-7 absolute right-0 bg-primary flex align-items-right justify-content-end">
-        <Button
-          label="Refresh"
-          icon="pi pi-refresh"
-        />
-      </div>
-    </div>
+    <table width="100%">
+      <tr>
+        <td className="text-3xl">Files</td>
+        <td
+          colSpan={11}
+          align="right"
+        >
+          <Button
+            label="Refresh"
+            icon="pi pi-refresh"
+            iconPos="right"
+            className="border-round-xl"
+          />
+        </td>
+      </tr>
+    </table>
   );
 
   return (
     <Card className="border-round-3xl">
       <DataTable
         value={files}
-        tableStyle={{ minWidth: "50rem" }}
-        header={header}
         size="small"
+        header={header}
       >
         <Column
           field="name"

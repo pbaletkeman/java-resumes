@@ -6,10 +6,10 @@ import MD2PDF from "./components/MD2PDF";
 function App() {
   return (
     <div className="grid">
-      <div className="col-8">
+      <div className="col-7">
         <MainForm />
       </div>
-      <div className="col-4">
+      <div className="col-5">
         <ResultsTable />
         <br />
         <MD2PDF />
