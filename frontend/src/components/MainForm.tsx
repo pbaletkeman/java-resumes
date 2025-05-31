@@ -24,6 +24,8 @@ interface OptimizeType {
   promptType?: string[];
 }
 
+const API_HOST = "http://localhost:8080";
+
 export default function MainForm() {
   const [model, setModel] = useState<string>("");
   const [jobTitle, setJobTitle] = useState<string>("");
@@ -33,12 +35,12 @@ export default function MainForm() {
   const [jobText, setJobText] = useState<string>("");
   const [resumeFile, setResumeFile] = useState<File | null>();
   const [jobFile, setJobFile] = useState<File | null>();
-
   const [prompt, setPrompt] = useState<string[]>([]);
+  const [resetResume, setResetResume] = useState<boolean>(false);
+  const [resetJob, setResetJob] = useState<boolean>(false);
 
   const onPromptChange = (e: CheckboxChangeEvent) => {
     const _prompt = [...prompt];
-    console.log(prompt);
 
     if (e.checked) _prompt.push(e.value);
     else _prompt.splice(_prompt.indexOf(e.value), 1);
@@ -49,8 +51,6 @@ export default function MainForm() {
   const handleFilesSelected = (files: File[], source: string) => {
     if (source === "job") {
       if (files?.length > 0) {
-        console.log("files");
-        console.log(files);
         setJobFile(files[0]);
       } else {
         setJobFile(null);
@@ -64,22 +64,46 @@ export default function MainForm() {
     }
   };
 
-  const handleFormSubmit = async () => {
-    if (
+  const clearForm = async () => {
+    setResetResume(true);
+    setResetJob(true);
+    setCompany("");
+    setJobTitle("");
+    setModel("");
+    setTemperature(0.01);
+    setPrompt([]);
+    setJobText("");
+    setResumeMD("");
+  };
+
+  const isValidForm = () => {
+    return !(
       !prompt ||
       prompt.length === 0 ||
       !temperature ||
-      temperature < 0 ||
-      temperature > 2 ||
+      temperature < 0.01 ||
+      temperature > 1.99 ||
       !company ||
       company.length === 0 ||
       !jobTitle ||
       jobTitle.length === 0 ||
       !model ||
-      model.length === 0
-    ) {
+      model.length === 0 ||
+      ((!jobFile || jobFile.name == null) &&
+        (jobText == null || jobText.length === 0)) ||
+      ((!resumeFile || resumeFile.name == null) &&
+        (resumeMD == null || resumeMD.length === 0))
+    );
+  };
+
+  const handleFormSubmit = async () => {
+    if (!isValidForm()) {
+      console.log("bad form values");
       return;
     }
+    console.log("else");
+    return;
+
     const optimize: OptimizeType = {
       company: company,
       jobTitle: jobTitle,
@@ -101,7 +125,7 @@ export default function MainForm() {
 
     formData.append("optimize", JSON.stringify(optimize));
 
-    const response = await fetch("http://localhost:8080/upload", {
+    const response = await fetch(API_HOST + "/upload", {
       method: "POST",
       body: formData,
     });
@@ -109,7 +133,7 @@ export default function MainForm() {
     if (response.ok) {
       console.log("Form submitted successfully!");
       alert("Form submitted successfully!"); // Optional feedback to the user
-      // setFormData({ name: '', email: '', message: '' }); // Clear the form after successful submission
+      clearForm();
     } else {
       console.error(
         "Error submitting form:",
@@ -194,7 +218,7 @@ export default function MainForm() {
                 setTemperature(e.value ? e.value : 0)
               }
               minFractionDigits={2}
-              max={2.0}
+              max={1.99}
               min={0.01}
               showButtons
               size={24}
@@ -253,6 +277,8 @@ export default function MainForm() {
           <Accordion activeIndex={0}>
             <AccordionTab header="File Upload">
               <FileUpload
+                resetValue={resetResume}
+                setResetValue={setResetResume}
                 accept="text/markdown, text/plain" // Optional: Filter file types
                 onChange={(files) => handleFilesSelected(files, "resume")} // Callback function
               />
@@ -278,6 +304,8 @@ export default function MainForm() {
           <Accordion activeIndex={0}>
             <AccordionTab header="File Upload">
               <FileUpload
+                resetValue={resetJob}
+                setResetValue={setResetJob}
                 accept="text/markdown, text/plain" // Optional: Filter file types
                 onChange={(files) => handleFilesSelected(files, "job")} // Callback function
               />

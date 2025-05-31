@@ -1,10 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 interface FileUploadProps {
   accept?: string; // e.g., "image/*", "application/pdf" - Optional file type filter
   onChange?: (files: File[]) => void; // Callback function when files are selected
   onCancel?: () => void; // Callback for cancel button
   multiple?: boolean;
+  resetValue: boolean;
+  setResetValue: (b: boolean) => void;
 }
 
 const FileUpload: React.FC<FileUploadProps> = ({
@@ -12,6 +14,8 @@ const FileUpload: React.FC<FileUploadProps> = ({
   onChange,
   onCancel,
   multiple,
+  resetValue,
+  setResetValue,
 }) => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
@@ -27,11 +31,6 @@ const FileUpload: React.FC<FileUploadProps> = ({
     }
   };
 
-  const handleClearFile = () => {
-    setSelectedFiles([]);
-    handleReset();
-  };
-
   const input = {
     width: "400px",
     padding: "8px",
@@ -42,7 +41,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
   };
 
   // Ref object to reference the input element
-  const inputFile = useRef(null);
+  const inputFile = useRef<HTMLInputElement | null>(null);
 
   // Function to reset the input element
   const handleReset = () => {
@@ -52,6 +51,18 @@ const FileUpload: React.FC<FileUploadProps> = ({
       inputFile.current.type = "file";
     }
   };
+
+  const handleClearFile = useCallback(() => {
+    setSelectedFiles([]);
+    handleReset();
+  });
+
+  useEffect(() => {
+    if (resetValue) {
+      handleClearFile();
+      setResetValue(false);
+    }
+  }, [handleClearFile, resetValue, setResetValue]);
 
   return (
     <div>
