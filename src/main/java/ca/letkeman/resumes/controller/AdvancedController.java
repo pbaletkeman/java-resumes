@@ -139,7 +139,9 @@ public class AdvancedController {
 
       return new FileInfo(filename, url, root, date);
     }).toList());
-    fileInfos.sort(Comparator.comparing(o -> LocalDateTime.parse(o.getDate(), formatter)));
+    if (!fileInfos.isEmpty()) {
+      fileInfos.sort(Comparator.comparing(o -> LocalDateTime.parse(o.getDate(), formatter)));
+    }
     return ResponseEntity.status(HttpStatus.OK).body(fileInfos.reversed());
   }
 
