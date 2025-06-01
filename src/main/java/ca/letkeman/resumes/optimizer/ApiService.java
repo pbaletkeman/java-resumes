@@ -225,11 +225,21 @@ public class ApiService {
       body = trimString(body);
       if (!body.isEmpty()){
         body = body.replace("\\n ","\n").replace("\n**","\n\n**");
-        int companyLoc = body.indexOf(company);
-        if (companyLoc > 0){
-          LOGGER.info("company");
-          companyLoc = body.indexOf("\n");
-          body = body.substring(companyLoc).trim();
+        int tempLoc = body.indexOf(company);
+        if (tempLoc > 0){
+          // remove the first line from the output
+          tempLoc = body.indexOf("\n");
+          body = body.substring(tempLoc).trim();
+        }
+        tempLoc = body.toLowerCase().indexOf("markdown");
+        if (tempLoc > 0){
+          // remove the word markdown from the output
+          // markdown is not a skill
+          body = body.substring(tempLoc).trim();
+        }
+        while (body.startsWith("`")){
+          // remove markdown notation from start of the output
+          body = body.substring(1).trim();
         }
       } else {
         body = "";
