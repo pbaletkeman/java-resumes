@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "primeicons/primeicons.css";
-
+import { Toast } from "primereact/toast";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 import { ScrollPanel } from "primereact/scrollpanel";
 import { API_HOST } from "./MainForm";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 
 interface FileType {
   url: string;
@@ -22,23 +23,33 @@ export default function ResultsTable({
   updateFiles,
   setUpdateFiles,
 }: ResultsTableType) {
+  const toast = useRef<Toast>(null);
   const [files, setFiles] = useState<FileType[] | null>(null);
   const [busyCursor, setBusyCursor] = useState<string>("cursor-wait");
+  let deleteFile = "";
 
   useEffect(() => {
-    getFiles(); // initial page load
+    getFiles(false); // initial page load
   }, []);
 
   useEffect(() => {
     if (updateFiles) {
       // Markdown File to PDF File called
-      getFiles();
+      getFiles(true);
       setUpdateFiles(false);
     }
   }, [updateFiles, setUpdateFiles]);
 
-  function getFiles() {
+  function getFiles(showToast: boolean) {
     setBusyCursor("cursor-wait");
+    if (showToast) {
+      toast?.current?.show({
+        severity: "info",
+        summary: "Refreshing",
+        detail: "Refreshing File Listing...",
+        life: 3000,
+      });
+    }
     fetch(API_HOST + "/get-files")
       .then((response) => response.json())
       .then((json) => setFiles(json))
@@ -47,14 +58,56 @@ export default function ResultsTable({
   }
 
   function handleDelete(fileName: string) {
+    // setBusyCursor("cursor-wait");
     setBusyCursor("cursor-wait");
     fetch(API_HOST + "/files/" + fileName, { method: "DELETE" });
-    setTimeout(getFiles, 2000);
+    setInterval(() => {
+      // wait 1.5 seconds and refresh file listing
+      getFiles(false);
+    }, 1500);
+    setBusyCursor("cursor-auto");
   }
 
   setInterval(() => {
-    getFiles();
+    // refresh file listing every 30 seconds
+    getFiles(false);
   }, 30000);
+
+  const accept = () => {
+    handleDelete(deleteFile);
+    toast?.current?.show({
+      severity: "info",
+      summary: "Confirmed",
+      detail: "Deleting File",
+      life: 3000,
+    });
+    setUpdateFiles(false);
+  };
+
+  const reject = () => {
+    /* toast?.current?.show({
+      severity: "warn",
+      summary: "Rejected",
+      detail: "You have rejected",
+      life: 3000,
+    });*/
+  };
+
+  const deleteFileConfirm = (
+    event: React.MouseEvent<HTMLButtonElement, EventTarget | null>,
+    fileName: string
+  ) => {
+    deleteFile = fileName;
+    confirmDialog({
+      message: "Delete file '" + fileName + "'?",
+      header: "Delete Confirmation",
+      icon: "pi pi-info-circle",
+      defaultFocus: "reject",
+      acceptClassName: "p-button-danger",
+      accept,
+      reject,
+    });
+  };
 
   const header = (
     <table
@@ -72,7 +125,7 @@ export default function ResultsTable({
             icon="pi pi-refresh"
             iconPos="right"
             className="border-round-xl"
-            onClick={getFiles}
+            onClick={() => setUpdateFiles(true)}
           />
         </td>
       </tr>
@@ -80,32 +133,39 @@ export default function ResultsTable({
   );
 
   return (
-    <Card className={"border-round-3xl " + busyCursor}>
-      {header}
-      <ScrollPanel style={{ width: "100%", height: "41vh" }}>
-        <div className="grid mt-2 ml-2">
-          {files?.flatMap((x) => (
-            <div
-              className="grid mb-2 border-top-1"
-              style={{ width: "100%" }}
-            >
-              <div className="col-1 ">
-                <Button
-                  icon="pi pi-times"
-                  tooltip={"Delete " + x.name}
-                  className="border-circle"
-                  onClick={() => handleDelete(x.name)}
-                />
-              </div>
-              <div className="col-11 border-left-1 border-y-none">
-                <a href={x.url}>{x.name}</a> ({x.date + ") - " + x.size}
-                <br />
-                <a href={x.url}>{x.url}</a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </ScrollPanel>
-    </Card>
+    <>
+      <Toast ref={toast} />
+      <ConfirmDialog />
+      <Card className={"border-round-3xl " + busyCursor}>
+        {header}
+        <ScrollPanel style={{ width: "100%", height: "41vh" }}>
+          <div className="grid mt-2 ml-2">
+            {files &&
+              files.flatMap((x) => (
+                <div
+                  className="grid mb-2 border-top-1"
+                  style={{ width: "100%" }}
+                >
+                  <div className="col-1 ">
+                    <Button
+                      icon="pi pi-times"
+                      tooltip={"Delete " + x.name}
+                      className="border-circle"
+                      // onClick={() => handleDelete(x.name)}
+                      onClick={(e) => deleteFileConfirm(e, x.name)}
+                      // deleteFileConfirm
+                    />
+                  </div>
+                  <div className="col-11 border-left-1 border-y-none">
+                    <a href={x.url}>{x.name}</a> ({x.date + ") - " + x.size}
+                    <br />
+                    <a href={x.url}>{x.url}</a>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </ScrollPanel>
+      </Card>
+    </>
   );
 }
