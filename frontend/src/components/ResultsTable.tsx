@@ -102,6 +102,7 @@ export default function ResultsTable({
   };
 
   const reject = () => {
+    console.log("cancel pressed, do nothing");
     /* toast?.current?.show({
       severity: "warn",
       summary: "Rejected",
@@ -180,29 +181,28 @@ export default function ResultsTable({
         {header}
         <ScrollPanel style={{ width: "100%", height: "41vh" }}>
           <div className="grid mt-2 ml-2">
-            {files &&
-              files.flatMap((x) => (
-                <div
-                  className="grid mb-2 border-top-1"
-                  style={{ width: "100%" }}
-                >
-                  <div className="col-1 ">
-                    <Button
-                      icon="pi pi-times"
-                      tooltip={"Delete " + x.name}
-                      className="border-circle"
-                      // onClick={() => handleDelete(x.name)}
-                      onClick={(e) => deleteFileConfirm(e, x.name)}
-                      // deleteFileConfirm
-                    />
-                  </div>
-                  <div className="col-11 border-left-1 border-y-none">
-                    <a href={x.url}>{x.name}</a> ({x.date + ") - " + x.size}
-                    <br />
-                    <a href={x.url}>{x.url}</a>
-                  </div>
+            {files?.flatMap((x) => (
+              <div
+                className="grid mb-2 border-top-1"
+                style={{ width: "100%" }}
+              >
+                <div className="col-1 ">
+                  <Button
+                    icon="pi pi-times"
+                    tooltip={"Delete " + x.name}
+                    className="border-circle"
+                    // onClick={() => handleDelete(x.name)}
+                    onClick={(e) => deleteFileConfirm(e, x.name)}
+                    // deleteFileConfirm
+                  />
                 </div>
-              ))}
+                <div className="col-11 border-left-1 border-y-none">
+                  <a href={x.url}>{x.name}</a> ({x.date + ") - " + x.size}
+                  <br />
+                  <a href={x.url}>{x.url}</a>
+                </div>
+              </div>
+            ))}
           </div>
         </ScrollPanel>
       </Card>
