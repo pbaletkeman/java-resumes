@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 
 import java.util.Locale;
@@ -129,16 +130,17 @@ public class AdvancedController {
   @GetMapping("/get-files")
   public ResponseEntity<List<FileInfo>> getListFiles() {
     storageService.setConfigRoot(root);
-    List<FileInfo> fileInfos = storageService.loadAll().map(path -> {
+    final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    List<FileInfo> fileInfos = new java.util.ArrayList<>(storageService.loadAll().map(path -> {
       String date = getFileDate(path);
       String filename = path.getFileName().toString();
-        String url = MvcUriComponentsBuilder
-            .fromMethodName(AdvancedController.class, "getFile", path.getFileName().toString()).build().toString();
+      String url = MvcUriComponentsBuilder
+          .fromMethodName(AdvancedController.class, "getFile", path.getFileName().toString()).build().toString();
 
-        return new FileInfo(filename, url, root, date);
-    }).toList();
-
-    return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
+      return new FileInfo(filename, url, root, date);
+    }).toList());
+    fileInfos.sort(Comparator.comparing(o -> LocalDateTime.parse(o.getDate(), formatter)));
+    return ResponseEntity.status(HttpStatus.OK).body(fileInfos.reversed());
   }
 
   private String getFileDate(Path path) {

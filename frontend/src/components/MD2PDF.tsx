@@ -35,7 +35,7 @@ export default function MD2PDF({ setUpdateFiles }: ResultsTableType) {
 
       if (response.ok) {
         console.log("Form submitted successfully!");
-        alert("Form submitted successfully!"); // Optional feedback to the user
+        // alert("Form submitted successfully!"); // Optional feedback to the user
         setResetMDFile(true);
         setUpdateFiles(true);
       } else {
