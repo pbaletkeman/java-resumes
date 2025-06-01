@@ -6,6 +6,7 @@ import { Button } from "primereact/button";
 import { ScrollPanel } from "primereact/scrollpanel";
 import { API_HOST } from "./MainForm";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { Dialog } from "primereact/dialog";
 
 interface FileType {
   url: string;
@@ -26,6 +27,7 @@ export default function ResultsTable({
   const toast = useRef<Toast>(null);
   const [files, setFiles] = useState<FileType[] | null>(null);
   const [busyCursor, setBusyCursor] = useState<string>("cursor-wait");
+  const [errorCount, setErrorCount] = useState<number>(1);
   let deleteFile = "";
 
   useEffect(() => {
@@ -41,8 +43,8 @@ export default function ResultsTable({
   }, [updateFiles, setUpdateFiles]);
 
   function getFiles(showToast: boolean) {
-    setBusyCursor("cursor-wait");
     if (showToast) {
+      setBusyCursor("cursor-wait");
       toast?.current?.show({
         severity: "info",
         summary: "Refreshing",
@@ -50,15 +52,25 @@ export default function ResultsTable({
         life: 3000,
       });
     }
+    if (errorCount > 3) {
+      setShowError(true);
+      setErrorCount(1);
+    }
     fetch(API_HOST + "/get-files")
       .then((response) => response.json())
-      .then((json) => setFiles(json))
-      .catch((error) => console.error(error));
+      .then((json) => {
+        setFiles(json);
+        setErrorCount(1);
+      })
+      .catch((error) => {
+        console.error(error);
+        const counter = errorCount + 1;
+        setErrorCount(counter);
+      });
     setBusyCursor("cursor-auto");
   }
 
   function handleDelete(fileName: string) {
-    // setBusyCursor("cursor-wait");
     setBusyCursor("cursor-wait");
     fetch(API_HOST + "/files/" + fileName, { method: "DELETE" });
     setInterval(() => {
@@ -70,8 +82,13 @@ export default function ResultsTable({
 
   setInterval(() => {
     // refresh file listing every 30 seconds
-    getFiles(false);
-  }, 30000);
+    if (errorCount > 3) {
+      setShowError(true);
+      setErrorCount(1);
+    } else {
+      getFiles(false);
+    }
+  }, 30000 * errorCount);
 
   const accept = () => {
     handleDelete(deleteFile);
@@ -115,7 +132,9 @@ export default function ResultsTable({
       className={busyCursor}
     >
       <tr>
-        <td className="text-3xl">Files: {files?.length}</td>
+        <td className="text-3xl">
+          Files: {files && files.length ? files.length : 0}
+        </td>
         <td
           colSpan={11}
           align="right"
@@ -132,8 +151,29 @@ export default function ResultsTable({
     </table>
   );
 
+  const [showError, setShowError] = useState<boolean>(false);
+
   return (
     <>
+      <Dialog
+        header="Connection Error"
+        visible={showError}
+        style={{ width: "50vw" }}
+        onHide={() => {
+          if (!showError) return;
+          setShowError(false);
+        }}
+      >
+        <p className="m-0">
+          Problems getting result files.
+          <br />
+          Please verify that the server is functioning.
+        </p>
+        <Button
+          label="Close"
+          onClick={() => setShowError(false)}
+        />
+      </Dialog>
       <Toast ref={toast} />
       <ConfirmDialog />
       <Card className={"border-round-3xl " + busyCursor}>

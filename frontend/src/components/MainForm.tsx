@@ -13,6 +13,8 @@ import { Accordion, AccordionTab } from "primereact/accordion";
 import FileUpload from "./FileUpload";
 
 import MDEditor from "@uiw/react-md-editor";
+import { Dialog } from "primereact/dialog";
+import { useInterval } from "primereact/hooks";
 
 interface OptimizeType {
   model: string;
@@ -38,6 +40,25 @@ export default function MainForm() {
   const [prompt, setPrompt] = useState<string[]>([]);
   const [resetResume, setResetResume] = useState<boolean>(false);
   const [resetJob, setResetJob] = useState<boolean>(false);
+
+  const [showDialog, setShowDialog] = useState<boolean>(false);
+  const [dialogHeader, setDialogHeader] = useState<string>("");
+  const [dialogBody, setDialogBody] = useState<string>("");
+  const [countDown, setCountDown] = useState<number>(5);
+  const [active, setActive] = useState<boolean>(false);
+
+  useInterval(
+    () => {
+      setCountDown((countDown) => countDown - 1);
+      if (countDown <= 0) {
+        setActive(false);
+        setShowDialog(false);
+        setCountDown(5);
+      }
+    },
+    1000,
+    active
+  );
 
   const onPromptChange = (e: CheckboxChangeEvent) => {
     const _prompt = [...prompt];
@@ -96,7 +117,11 @@ export default function MainForm() {
 
   const handleFormSubmit = async () => {
     if (!isValidForm()) {
-      console.log("bad form values");
+      // console.log("bad form values");
+      setActive(true);
+      setShowDialog(true);
+      setDialogHeader("Invalid Form Values");
+      setDialogBody("One Or More Inputs Are Invalid");
       return;
     }
 
@@ -128,15 +153,26 @@ export default function MainForm() {
 
     if (response.ok) {
       console.log("Form submitted successfully!");
-      alert("Form submitted successfully!"); // Optional feedback to the user
-      clearForm();
+      setShowDialog(true);
+      setDialogHeader("Form submitted successfully!");
+      setActive(true);
+      if (countDown == 0) {
+        setActive(false);
+        clearForm();
+      }
     } else {
       console.error(
         "Error submitting form:",
         response.status,
         response.statusText
       );
-      alert(`Error submitting form: ${response.statusText}`); // Provide more informative error feedback
+      setShowDialog(true);
+      setDialogHeader("Form Submission Error");
+      setDialogBody(response.status + "\n" + response.statusText);
+      setActive(true);
+      if (countDown == 0) {
+        setActive(false);
+      }
     }
   };
 
@@ -145,6 +181,25 @@ export default function MainForm() {
       title="Resume Optimizer"
       className="border-round-3xl	"
     >
+      <div className="card flex justify-content-center">
+        <Dialog
+          header={dialogHeader}
+          visible={showDialog}
+          style={{ width: "25vw" }}
+          onHide={() => {
+            if (!showDialog) return;
+            setCountDown(5);
+            setShowDialog(false);
+            setDialogHeader("");
+            setDialogBody("");
+          }}
+        >
+          {dialogBody}
+          <br />
+          Closing in {countDown} seconds.
+        </Dialog>
+      </div>
+
       <div className="grid">
         <div className="col-12 grid">
           <div className="col-6 pt-3 mt-1 mb-1">
@@ -211,7 +266,7 @@ export default function MainForm() {
               inputId="temperature"
               value={temperature}
               onValueChange={(e: InputNumberValueChangeEvent) =>
-                setTemperature(e.value ?? 0)
+                setTemperature(e.value ?? 0.01)
               }
               minFractionDigits={2}
               max={1.99}
