@@ -1,6 +1,5 @@
 package ca.letkeman.resumes;
 
-// import javax.annotation.Resource; // for Spring Boot 2
 import ca.letkeman.resumes.service.FilesStorageService;
 import jakarta.annotation.Resource;
 

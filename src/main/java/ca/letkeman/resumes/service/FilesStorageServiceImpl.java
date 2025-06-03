@@ -27,7 +27,7 @@ public class FilesStorageServiceImpl implements FilesStorageService {
 
   @Override
   public void setConfigRoot(String root) {
-    this.configRoot = configRoot;
+    this.configRoot = root;
   }
 
   @Override

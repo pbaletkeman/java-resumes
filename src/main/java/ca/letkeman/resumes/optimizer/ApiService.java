@@ -6,7 +6,9 @@ import ca.letkeman.resumes.Utility;
 import ca.letkeman.resumes.model.Optimize;
 import ca.letkeman.resumes.optimizer.responses.LLMResponse;
 import ca.letkeman.resumes.optimizer.responses.Choice;
+
 import com.google.gson.Gson;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -53,6 +55,7 @@ public class ApiService {
   }
 
   public ApiService() {
+    // default constructor
   }
 
   /***
@@ -74,27 +77,42 @@ public class ApiService {
       conn.setDoOutput(true);
 
       attachJSONBody(jsonBody, conn);
-      StringBuilder response = new StringBuilder();
-      try (BufferedReader br = new BufferedReader(
-          new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8))) {
-
-        String responseLine = null;
-        LOGGER.info("Get API Response");
-        while ((responseLine = br.readLine()) != null) {
-          response.append(responseLine.trim());
-        }
-      }
       if (conn.getResponseCode() != HTTP_OK) {
         LOGGER.error("Invalid API response");
-        LOGGER.error(String.valueOf(conn.getErrorStream()));
+        if (LOGGER.isErrorEnabled()) {
+          LOGGER.error(String.valueOf(conn.getErrorStream()));
+        }
       } else {
+        String response = getAPIResponse(conn);
         LOGGER.info("Saving response to object.");
-        return new Gson().fromJson(response.toString(), LLMResponse.class);
+        return new Gson().fromJson(response, LLMResponse.class);
       }
     } catch (Exception e) {
       LOGGER.error(e.toString());
     }
     return null;
+  }
+
+  /***
+   *
+   * @param conn - http connection to use
+   * @return - api response
+   */
+  private String getAPIResponse(HttpURLConnection conn) {
+    StringBuilder response = new StringBuilder();
+    try (BufferedReader br = new BufferedReader(
+        new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8))) {
+
+      String responseLine;
+      LOGGER.info("Get API Response");
+      while ((responseLine = br.readLine()) != null) {
+        response.append(responseLine.trim());
+      }
+    } catch (Exception e) {
+      LOGGER.error("Problem with api response.");
+      LOGGER.error(e.toString());
+    }
+    return response.toString();
   }
 
   /***
@@ -106,7 +124,7 @@ public class ApiService {
     byte[] input = jsonBody.getBytes(StandardCharsets.UTF_8);
     try (OutputStream os = conn.getOutputStream()) {
       encodeBody(os, input);
-    } catch (IOException e) {
+    } catch (Exception e) {
       LOGGER.error("Problem getting output steam:\n{}", e.toString());
     }
   }
@@ -127,46 +145,35 @@ public class ApiService {
   /**
    *
    * @param optimize api input parameters
+   * @param endpoint - url to post the prompt to
+   * @param apikey - openai key
+   * @param root - location to upload & save file tp
    */
   public void produceFiles(Optimize optimize, String endpoint, String apikey, String root){
 
     for (String p: optimize.getPromptType()) {
-      produceFiles(p, optimize.getTemperature(), optimize.getModel(), optimize.getResume(), optimize.getJobDescription(), optimize.getJobTitle(), optimize.getCompany(), endpoint, apikey, root);
+      produceFiles(p, optimize, endpoint, apikey, root);
     }
   }
 
   /***
    *
-   * @param promptType Cover or Resume prompt request type
-   * @param temperature values from 0.0 to 2.0, the higher the value the more creative the response
-   * @param model llm model to use
-   * @param resume resume content for the request
-   * @param jobDescription job description to send to the endpoint
-   * @param jobTitle job title of the posting
-   * @param company company who posted the job
+   *
+   * @param promptType - cover letter or resume to generate
+   * @param optimize - the data to sent to the endpoint
+   * @param endpoint - url to post the prompt to
+   * @param apikey - openai key
+   * @param root - location to upload & save file tp
    */
-  public void produceFiles(String promptType, double temperature, String model, String resume, String jobDescription, String jobTitle, String company, String endpoint, String apikey, String root) {
-    String promptData = Utility.readFileAsString("prompts" + File.separator + promptType + ".md");
-    promptData = promptData.replace("{resume_string}", resume).replace("{jd_string}", jobDescription);
-
+  public void produceFiles(String promptType, Optimize optimize, String endpoint, String apikey, String root) {
     LocalDate myDateObj = LocalDate.now();
     String today = myDateObj.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
+
+    String promptData = Utility.readFileAsString("prompts" + File.separator + promptType + ".md");
+    promptData = promptData.replace("{resume_string}", optimize.getResume()).replace("{jd_string}", optimize.getJobDescription());
     promptData = promptData.replace("{today}", today);
 
-    ChatBody chatBody = new ChatBody();
-    chatBody.setTemperature(temperature);
-    chatBody.setModel(model);
-    chatBody.setMaxTokens(-1);
-    chatBody.setStream(false);
-
-    Message systemMessage = new Message();
-    systemMessage.setRole("system");
-    systemMessage.setContent("Expert resume writer");
-    Message userMessage = new Message();
-    userMessage.setRole("user");
-    userMessage.setContent(promptData);
-
-    chatBody.setMessages(List.of(systemMessage, userMessage));
+    ChatBody chatBody = getChatBody(optimize, promptData);
 
     ApiService apiService = new ApiService();
     LLMResponse llmResponse = apiService.invokeApi(chatBody, endpoint, apikey);
@@ -186,7 +193,7 @@ public class ApiService {
     if (choices != null && !choices.isEmpty() && choices.get(0).getMessage() != null
         && choices.get(0).getMessage().getContent() != null) {
       String message = choices.get(0).getMessage().getContent();
-      result = getResult(message, company);
+      result = getResult(message, optimize.getCompany());
     }
 
     if (result == null || result.body() == null){
@@ -195,20 +202,38 @@ public class ApiService {
     }
 
     String suffixString = DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm").format(LocalDateTime.now());
-    String fileName = promptType + "-" + company + "-" + jobTitle + "-" + suffixString + ".md";
+    String fileName = promptType + "-" + optimize.getCompany() + "-" + optimize.getJobTitle() + "-" + suffixString + ".md";
     createResultFile(fileName, result.body(), root);
     HtmlToPdf html = new HtmlToPdf( root + File.separator + fileName,
-        root + File.separator + promptType + "-" + company + "-" + jobTitle + "-" + suffixString + ".pdf", "");
+        root + File.separator + promptType + "-" + optimize.getCompany() + "-" + optimize.getJobTitle() + "-" + suffixString + ".pdf", "");
     if (!html.convertFile()) {
       LOGGER.error("Unable to save PDF file");
     }
 
     if (result.suggestion() != null && !result.suggestion().isBlank()) {
-      fileName = company + "-" + jobTitle + "-" +  suffixString + "-suggestions.md";
+      fileName = optimize.getCompany() + "-" + optimize.getJobTitle() + "-" +  suffixString + "-suggestions.md";
       createResultFile(fileName, result.suggestion(),root);
     }
 
     LOGGER.info("Operation Complete.");
+  }
+
+  private ChatBody getChatBody(Optimize optimize, String promptData) {
+    ChatBody chatBody = new ChatBody();
+    chatBody.setTemperature(optimize.getTemperature());
+    chatBody.setModel(optimize.getModel());
+    chatBody.setMaxTokens(-1);
+    chatBody.setStream(false);
+
+    Message systemMessage = new Message();
+    systemMessage.setRole("system");
+    systemMessage.setContent("Expert resume writer");
+    Message userMessage = new Message();
+    userMessage.setRole("user");
+    userMessage.setContent(promptData);
+
+    chatBody.setMessages(List.of(systemMessage, userMessage));
+    return chatBody;
   }
 
   /***
@@ -221,30 +246,7 @@ public class ApiService {
     String suggestion = null;
     String[] content = message.split("Additional Suggestions");
     if (content.length > 0) {
-      body = content[0].trim();
-      body = trimString(body);
-      if (!body.isEmpty()){
-        body = body.replace("\\n ","\n").replace("\n**","\n\n**");
-        int tempLoc = body.indexOf(company);
-        if (tempLoc > 0){
-          // remove the first line from the output
-          tempLoc = body.indexOf("\n");
-          body = body.substring(tempLoc).trim();
-        }
-        tempLoc = body.toLowerCase().indexOf("markdown");
-        if (tempLoc > 0){
-          // remove the word markdown from the output
-          // markdown is not a skill
-          body = body.substring(tempLoc).trim();
-        }
-        while (body.startsWith("`")){
-          // remove markdown notation from start of the output
-          body = body.substring(1).trim();
-        }
-      } else {
-        body = "";
-      }
-
+      body = calcBody(company, content[0].trim());
       suggestion = content.length == 2 ? content[1].trim() : "";
       suggestion = removeTrailingChar(suggestion, "#");
     } else {
@@ -253,17 +255,42 @@ public class ApiService {
     return new Result(body, (suggestion == null ? "" : suggestion));
   }
 
+  private String calcBody(String company, String content) {
+    String body = trimString(content);
+    if (!body.isEmpty()){
+      body = body.replace("\\n ","\n").replace("\n**","\n\n**");
+      int tempLoc = body.indexOf(company);
+      if (tempLoc > 0){
+        // remove the first line from the output
+        tempLoc = body.indexOf("\n");
+        body = body.substring(tempLoc).trim();
+      }
+      tempLoc = body.toLowerCase().indexOf("markdown");
+      if (tempLoc > 0){
+        // remove the word markdown from the output
+        // markdown is not a skill
+        body = body.substring(tempLoc).trim();
+      }
+      while (body.startsWith("`")){
+        // remove markdown notation from start of the output
+        body = body.substring(1).trim();
+      }
+    } else {
+      body = "";
+    }
+    return body;
+  }
+
   private record Result(String body, String suggestion) {
 
   }
-
 
   /***
    *
    * @param fileName name of the file to create
    * @param s content to save in the file
    */
-  private static void createResultFile(String fileName, String s, String root ) {
+  private void createResultFile(String fileName, String s, String root ) {
 
     if (s != null && !s.isBlank()) {
       try (BufferedWriter writer = new BufferedWriter(new FileWriter(root + File.separator + fileName, false))) {
@@ -299,12 +326,10 @@ public class ApiService {
    * @return cleaned up str
    */
   private String removeTrailingChar(String str, String badChar) {
-    if (str == null) return str; //Handle null input gracefully
+    if (str == null) return ""; //Handle null input gracefully
     while (str.endsWith(badChar)) {
       str = str.substring(0, str.length() - 1);
     }
     return str.trim();
   }
 }
-
-

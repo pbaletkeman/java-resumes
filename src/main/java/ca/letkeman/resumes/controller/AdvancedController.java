@@ -4,28 +4,25 @@ import static java.nio.file.Files.getLastModifiedTime;
 
 import ca.letkeman.resumes.BackgroundResume;
 import ca.letkeman.resumes.Utility;
+import ca.letkeman.resumes.message.ResponseMessage;
+import ca.letkeman.resumes.model.FileInfo;
 import ca.letkeman.resumes.model.Optimize;
-
+import ca.letkeman.resumes.service.FilesStorageService;
 import ca.letkeman.resumes.optimizer.HtmlToPdf;
+
 import com.google.gson.Gson;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.attribute.FileTime;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 
-import java.util.Locale;
-import javax.swing.text.DateFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -42,9 +39,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
-import ca.letkeman.resumes.message.ResponseMessage;
-import ca.letkeman.resumes.model.FileInfo;
-import ca.letkeman.resumes.service.FilesStorageService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -66,7 +60,6 @@ public class AdvancedController {
   @Autowired
   public AdvancedController( FilesStorageService storageService){
     this.storageService = storageService;
-
   }
 
   @PostMapping(path = "/markdownFile2PDF")
