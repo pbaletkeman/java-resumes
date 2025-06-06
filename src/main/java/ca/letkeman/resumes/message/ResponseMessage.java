@@ -1,6 +1,6 @@
 package ca.letkeman.resumes.message;
 
-public class ResponseMessage {
+public final class ResponseMessage {
   private String message;
 
   public ResponseMessage(String message) {

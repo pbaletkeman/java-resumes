@@ -3,7 +3,7 @@ package ca.letkeman.resumes.optimizer;
 
 import java.util.List;
 
-public class ChatBody {
+public final class ChatBody {
 
   String model;
   List<Message> messages;

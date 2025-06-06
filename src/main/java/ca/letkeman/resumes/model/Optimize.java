@@ -6,7 +6,7 @@ import java.util.Arrays;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class Optimize {
+public final class Optimize {
   String[] promptType = {"Resume"};
   double temperature = 0.15;
   String model = "gemma-3-4b-it";
@@ -15,7 +15,7 @@ public class Optimize {
   String jobTitle;
   String company;
 
-  public Optimize(String[] promptType, double temperature, String model, String resume, String jobDescription,
+  public  Optimize(String[] promptType, double temperature, String model, String resume, String jobDescription,
       String jobTitle, String company) {
     this.promptType = promptType;
     this.temperature = temperature;
@@ -127,12 +127,21 @@ public class Optimize {
   check to see if properties are present and somewhat correct
    */
   public boolean isValid(){
-    return getResume() != null && !getResume().isBlank() && !getResume().isEmpty() &&
+    return getResume() != null && !getResume().isBlank() && !getResume().isEmpty() && !getResume().equals("null") &&
         getJobDescription() != null && !getJobDescription().isBlank() && !getJobDescription().isEmpty() &&
-        getTemperature() > 0 && getTemperature() < 2 &&
-        getPromptType() != null &&
-        getCompany() != null && !getCompany().isBlank() && !getCompany().isEmpty() &&
-        getJobTitle() != null && !getJobTitle().isBlank() && !getJobTitle().isEmpty() &&
-        getModel() != null && !getModel().isBlank() && !getModel().isEmpty();
+        !getJobDescription().equals("null") && getTemperature() > 0 && getTemperature() < 2 &&
+        getPromptType() != null && getPromptType().length > 0 && getPromptType().length < 3 && hasResumeOrCoverPrompt() &&
+                getCompany() != null && !getCompany().isBlank() && !getCompany().isEmpty() &&
+        getJobTitle() != null && !getJobTitle().isBlank() && !getJobTitle().isEmpty() && !getJobTitle().equals("null") &&
+        getModel() != null && !getModel().isBlank() && !getModel().isEmpty() && !getModel().equals("null");
+  }
+
+  public boolean hasResumeOrCoverPrompt() {
+    return Arrays.stream(getPromptType())
+        .anyMatch(x -> x.equalsIgnoreCase("resume")) ||
+        Arrays.stream(getPromptType())
+            .anyMatch(x -> x.equalsIgnoreCase("cover"));
   }
 }
+
+

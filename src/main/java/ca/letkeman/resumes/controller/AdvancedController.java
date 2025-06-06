@@ -42,7 +42,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 
 @CrossOrigin(origins = "*")
 @RestController
-public class AdvancedController {
+public final class AdvancedController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AdvancedController.class);
 
@@ -88,7 +88,7 @@ public class AdvancedController {
     Optimize optimize = new Gson().fromJson(opt, Optimize.class);
 
     if ((optimize.getResume() == null || optimize.getResume().isBlank() || optimize.getResume().isEmpty())
-        && resume != null) {
+        && resume != null  ) {
       try {
         storageService.setConfigRoot(root);
         storageService.save(resume);

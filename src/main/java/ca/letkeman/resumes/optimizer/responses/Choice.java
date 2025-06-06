@@ -4,7 +4,7 @@ import java.util.StringJoiner;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class Choice {
+public final class Choice {
 
   private int index;
   private String logprobs;

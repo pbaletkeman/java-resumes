@@ -1,6 +1,6 @@
 package ca.letkeman.resumes.optimizer.responses;
 
-public class Usage {
+public final class Usage {
 
   private int prompt_tokens;
   private int completion_tokens;

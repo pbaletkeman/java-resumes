@@ -17,7 +17,7 @@ import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class FilesStorageServiceImpl implements FilesStorageService {
+public final class FilesStorageServiceImpl implements FilesStorageService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(FilesStorageServiceImpl.class);
 

@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
-public class HtmlToPdf {
+public final class HtmlToPdf {
 
   private static Logger logger = LoggerFactory.getLogger(HtmlToPdf.class);
 

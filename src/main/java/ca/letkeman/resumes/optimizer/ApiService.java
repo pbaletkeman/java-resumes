@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ApiService {
+public final class ApiService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ApiService.class);
 

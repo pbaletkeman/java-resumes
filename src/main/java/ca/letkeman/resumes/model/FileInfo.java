@@ -5,7 +5,7 @@ import java.nio.file.Paths;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class FileInfo {
+public final class FileInfo {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(FileInfo.class);
 

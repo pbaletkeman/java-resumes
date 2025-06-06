@@ -1,7 +1,7 @@
 package ca.letkeman.resumes.optimizer;
 
 
-public class Message {
+public final class Message {
 
   String role;
   String content;

@@ -9,7 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RestServiceApplication  implements CommandLineRunner {
+public final class RestServiceApplication  implements CommandLineRunner {
 	@Resource
 	FilesStorageService storageService;
 
