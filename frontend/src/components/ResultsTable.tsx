@@ -144,7 +144,7 @@ export default function ResultsTable({
             label="Refresh"
             icon="pi pi-refresh"
             iconPos="right"
-            className="border-round-xl"
+            className="border-round-xl mb-2"
             onClick={() => setUpdateFiles(true)}
           />
         </td>
@@ -186,7 +186,7 @@ export default function ResultsTable({
                 className="grid mb-2 border-top-1"
                 style={{ width: "100%" }}
               >
-                <div className="col-1 ">
+                <div className="col-1">
                   <Button
                     icon="pi pi-times"
                     tooltip={"Delete " + x.name}
@@ -196,10 +196,23 @@ export default function ResultsTable({
                     // deleteFileConfirm
                   />
                 </div>
-                <div className="col-11 border-left-1 border-y-none">
-                  <a href={x.url}>{x.name}</a> ({x.date + ") - " + x.size}
-                  <br />
-                  <a href={x.url}>{x.url}</a>
+                <div className="col-11 border-left-1 border-y-none p-1">
+                  <div className="flex m-0 p-0">
+                    <div className="flex">
+                      <a
+                        href={x.url}
+                        className="text-sm"
+                      >
+                        {x.name}
+                      </a>
+                    </div>
+                    <div className="flex text-xs font-bold ml-1">
+                      ({x.date + ") - " + x.size}
+                    </div>
+                  </div>
+                  <div className="text-xs">
+                    <a href={x.url}>{x.url}</a>
+                  </div>
                 </div>
               </div>
             ))}
