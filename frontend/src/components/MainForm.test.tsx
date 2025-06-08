@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { Button } from "primereact/button";
@@ -7,6 +6,7 @@ import { InputNumber } from "primereact/inputnumber";
 import { Checkbox } from "primereact/checkbox";
 import { Accordion, AccordionTab } from "primereact/accordion";
 import { FileUpload } from "primereact/fileupload";
+import { vi } from "vitest";
 
 // Mock PrimeReact components
 vi.mock("primereact/button", () => ({
@@ -75,6 +75,7 @@ vi.mock("primereact/fileupload", () => ({
   ),
 }));
 
+/*
 // Define types for props
 type ButtonProps = {
   label: string;
@@ -96,25 +97,27 @@ type InputNumberProps = {
   minFractionDigits?: number;
 };
 
+
 type CheckboxProps = {
   checked: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
+*/
 
 // Test individual components
 describe("MainForm Components", () => {
   const mockModel = "gemma-3-4b-it";
-  const mockJobTitle = "Software Developer";
-  const mockCompany = "Tech Corp";
+  // const mockJobTitle = "Software Developer";
+  // const mockCompany = "Tech Corp";
   const temperature = 0.2;
 
   // Mock file uploads
-  const mockResumeFile = new File(["mock resume content"], "resume.pdf", {
-    type: "application/pdf",
-  });
-  const mockJobFile = new File(["mock job description"], "job.txt", {
-    type: "text/plain",
-  });
+  // const mockResumeFile = new File(["mock resume content"], "resume.pdf", {
+  //   type: "application/pdf",
+  // });
+  // const mockJobFile = new File(["mock job description"], "job.txt", {
+  //   type: "text/plain",
+  // });
 
   // Test InputText component
   it("should render InputText with correct value", () => {

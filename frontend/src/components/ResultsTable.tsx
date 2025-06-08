@@ -111,10 +111,7 @@ export default function ResultsTable({
     });*/
   };
 
-  const deleteFileConfirm = (
-    event: React.MouseEvent<HTMLButtonElement, EventTarget | null>,
-    fileName: string
-  ) => {
+  const deleteFileConfirm = (fileName: string) => {
     deleteFile = fileName;
     confirmDialog({
       message: "Delete file '" + fileName + "'?",
@@ -192,7 +189,7 @@ export default function ResultsTable({
                     tooltip={"Delete " + x.name}
                     className="border-circle"
                     // onClick={() => handleDelete(x.name)}
-                    onClick={(e) => deleteFileConfirm(e, x.name)}
+                    onClick={() => deleteFileConfirm(x.name)}
                     // deleteFileConfirm
                   />
                 </div>

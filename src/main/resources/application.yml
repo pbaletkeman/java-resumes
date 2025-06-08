@@ -17,5 +17,6 @@ upload:
   path: files
 
 llm:
-  endpoint: http://localhost:1234/v1/chat/completions
+#  endpoint: http://localhost:1234/v1/chat/completions # lmstudio
+  endpoint: http://127.0.0.1:11434/v1/chat/completions # ollama
   apikey: 1234567890

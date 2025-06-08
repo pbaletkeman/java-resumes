@@ -1,5 +1,7 @@
 import { render, fireEvent, screen } from "@testing-library/react";
 import MD2PDF from "./MD2PDF";
+import { vi } from "vitest";
+import type { ResultsTableType } from "./ResultsTable";
 
 // Mock necessary functions and objects
 vi.mock("primeicons/primeicons.css");
@@ -56,6 +58,11 @@ it("handles file selection correctly", () => {
     0: mockFile,
     length: 1,
     item: (index: number) => (index === 0 ? mockFile : null),
+    [Symbol.iterator]: function* () {
+      for (let i = 0; i < this.length; i++) {
+        yield this[i];
+      }
+    },
   } as FileList;
 
   // Mock the files property and trigger change event

@@ -76,8 +76,6 @@ export default function MD2PDF({ setUpdateFiles }: ResultsTableType) {
             <td width="75%">
               <div className="mb-2 ml-0 mr-0">Markdown File</div>
               <FileUpload
-                resetValue={resetMDFile}
-                setResetValue={setResetMDFile}
                 accept="text/markdown, text/plain" // Optional: Filter file types
                 onChange={(files) => handleFilesSelected(files)} // Callback function
                 width="55vh"

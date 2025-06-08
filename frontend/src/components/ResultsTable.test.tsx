@@ -1,5 +1,6 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import ResultsTable from "./ResultsTable";
+import { vi } from "vitest";
 
 // Mock dependencies
 vi.mock("./MainForm", () => ({
@@ -97,7 +98,7 @@ describe("ResultsTable Component", () => {
     try {
       await fetch("/api/files/error-file.pdf", { method: "DELETE" });
     } catch (error) {
-      expect(error.message).toBe("Network error");
+      expect((error as Error).message).toBe("Network error");
     }
 
     // Verify the failed delete attempt was made
