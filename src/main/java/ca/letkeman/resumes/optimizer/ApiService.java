@@ -150,9 +150,12 @@ public final class ApiService {
    * @param root - location to upload & save file tp
    */
   public void produceFiles(Optimize optimize, String endpoint, String apikey, String root){
-
-    for (String p: optimize.getPromptType()) {
-      produceFiles(p, optimize, endpoint, apikey, root);
+    if (optimize != null) {
+      for (String p : optimize.getPromptType()) {
+        produceFiles(p, optimize, endpoint, apikey, root);
+      }
+    } else {
+      LOGGER.error("invalid optimize");
     }
   }
 
