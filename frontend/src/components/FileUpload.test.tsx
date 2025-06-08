@@ -44,24 +44,6 @@ describe("FileUpload", () => {
 
     expect(fileInput).toBeInTheDocument();
 
-    // Create a proper FileList-like object
-    // const mockFileList = {
-    //   0: validFile,
-    //   1: invalidFile,
-    //   length: 2,
-    //   item: (index: number) => (index === 0 ? validFile : invalidFile),
-    // } as FileList;
-
-    // const mockFileList = {
-    //   0: validFile,
-    //   1: invalidFile,
-    //   length: 2,
-    //   item: (index: number) => (index === 0 ? validFile : invalidFile),
-    //   [Symbol.iterator]: function () {
-    //     return [validFile, invalidFile];
-    //   },
-    // } as FileList;
-
     const mockFileList = {
       [Symbol.iterator]: function* () {
         yield validFile;
