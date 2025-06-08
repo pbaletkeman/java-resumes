@@ -9,7 +9,7 @@ import type { ResultsTableType } from "./ResultsTable";
 import { Toast } from "primereact/toast";
 
 export default function MD2PDF({ setUpdateFiles }: ResultsTableType) {
-  const [resetMDFile, setResetMDFile] = useState<boolean>(false);
+  const [_, setResetMDFile] = useState<boolean>(false);
   const [mdFile, setMDFile] = useState<File | null>();
   const toast = useRef<Toast>(null);
   const [showToast, setShowToast] = useState<boolean>(false);

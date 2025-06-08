@@ -10,6 +10,8 @@ interface FileUploadProps {
   onCancel?: () => void; // Callback for cancel button
   multiple?: boolean;
   width: string;
+  resetValue?: boolean;
+  setResetValue?: (b: boolean) => void;
 }
 
 interface FileUploadRef {
