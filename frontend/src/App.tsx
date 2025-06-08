@@ -3,7 +3,6 @@ import MainForm from "./components/MainForm";
 import ResultsTable from "./components/ResultsTable";
 import MD2PDF from "./components/MD2PDF";
 import { useState } from "react";
-import BasicDemo from "./components/BasicDemo";
 
 function App() {
   const [updateFiles, setUpdateFiles] = useState<boolean>(false);
