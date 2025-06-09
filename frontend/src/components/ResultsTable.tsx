@@ -7,6 +7,7 @@ import { ScrollPanel } from "primereact/scrollpanel";
 import { API_HOST } from "./MainForm";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { Dialog } from "primereact/dialog";
+import { Checkbox } from "primereact/checkbox";
 
 interface FileType {
   url: string;
@@ -28,6 +29,8 @@ export default function ResultsTable({
   const [files, setFiles] = useState<FileType[] | null>(null);
   const [busyCursor, setBusyCursor] = useState<string>("cursor-wait");
   const [errorCount, setErrorCount] = useState<number>(1);
+  const [refreshRetry, setRefreshRetry] = useState<boolean>(false);
+
   let deleteFile = "";
 
   useEffect(() => {
@@ -80,15 +83,17 @@ export default function ResultsTable({
     setBusyCursor("cursor-auto");
   }
 
-  setInterval(() => {
-    // refresh file listing every 30 seconds
-    if (errorCount > 3) {
-      setShowError(true);
-      setErrorCount(1);
-    } else {
-      getFiles(false);
-    }
-  }, 30000 * errorCount);
+  if (refreshRetry) {
+    setInterval(() => {
+      // refresh file listing every 30 seconds
+      if (errorCount > 3) {
+        setShowError(true);
+        setErrorCount(1);
+      } else {
+        getFiles(false);
+      }
+    }, 30000 * errorCount);
+  }
 
   const accept = () => {
     handleDelete(deleteFile);
@@ -133,15 +138,23 @@ export default function ResultsTable({
         <td className="text-3xl">
           Files: {files && files.length ? files.length : 0}
         </td>
-        <td
-          colSpan={11}
-          align="right"
-        >
+        <td className="card flex justify-content-center"></td>
+        <td align="right">
+          <label htmlFor="continueRefresh">
+            <Checkbox
+              onChange={(e) => setRefreshRetry(e?.checked ? true : false)}
+              checked={refreshRetry}
+              inputId="continueRefresh"
+              className="border-2"
+            ></Checkbox>{" "}
+            Continually Refresh
+          </label>
+          <br />
           <Button
             label="Refresh"
             icon="pi pi-refresh"
             iconPos="right"
-            className="border-round-xl mb-2"
+            className="border-round-xl mb-2 mt-2"
             onClick={() => setUpdateFiles(true)}
           />
         </td>
