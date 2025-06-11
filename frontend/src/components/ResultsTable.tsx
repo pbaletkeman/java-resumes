@@ -6,8 +6,6 @@ import { Button } from "primereact/button";
 import { ScrollPanel } from "primereact/scrollpanel";
 import { API_HOST } from "./MainForm";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
-import { Dialog } from "primereact/dialog";
-import { Checkbox } from "primereact/checkbox";
 
 interface FileType {
   url: string;
@@ -28,8 +26,6 @@ export default function ResultsTable({
   const toast = useRef<Toast>(null);
   const [files, setFiles] = useState<FileType[] | null>(null);
   const [busyCursor, setBusyCursor] = useState<string>("cursor-wait");
-  const [errorCount, setErrorCount] = useState<number>(1);
-  const [refreshRetry, setRefreshRetry] = useState<boolean>(false);
 
   let deleteFile = "";
 
@@ -39,10 +35,13 @@ export default function ResultsTable({
 
   useEffect(() => {
     if (updateFiles) {
-      // Markdown File to PDF File called
       getFiles(true);
       setUpdateFiles(false);
     }
+    setInterval(() => {
+      // refresh file listing every 30 seconds
+      getFiles(false);
+    }, 30000);
   }, [updateFiles, setUpdateFiles]);
 
   function getFiles(showToast: boolean) {
@@ -55,20 +54,14 @@ export default function ResultsTable({
         life: 3000,
       });
     }
-    if (errorCount > 3) {
-      setShowError(true);
-      setErrorCount(1);
-    }
+
     fetch(API_HOST + "/get-files")
       .then((response) => response.json())
       .then((json) => {
         setFiles(json);
-        setErrorCount(1);
       })
       .catch((error) => {
         console.error(error);
-        const counter = errorCount + 1;
-        setErrorCount(counter);
       });
     setBusyCursor("cursor-auto");
   }
@@ -81,18 +74,6 @@ export default function ResultsTable({
       getFiles(false);
     }, 1500);
     setBusyCursor("cursor-auto");
-  }
-
-  if (refreshRetry) {
-    setInterval(() => {
-      // refresh file listing every 30 seconds
-      if (errorCount > 3) {
-        setShowError(true);
-        setErrorCount(1);
-      } else {
-        getFiles(false);
-      }
-    }, 30000 * errorCount);
   }
 
   const accept = () => {
@@ -108,12 +89,6 @@ export default function ResultsTable({
 
   const reject = () => {
     console.log("cancel pressed, do nothing");
-    /* toast?.current?.show({
-      severity: "warn",
-      summary: "Rejected",
-      detail: "You have rejected",
-      life: 3000,
-    });*/
   };
 
   const deleteFileConfirm = (fileName: string) => {
@@ -140,51 +115,22 @@ export default function ResultsTable({
         </td>
         <td className="card flex justify-content-center"></td>
         <td align="right">
-          <label htmlFor="continueRefresh">
-            <Checkbox
-              onChange={(e) => setRefreshRetry(e?.checked ? true : false)}
-              checked={refreshRetry}
-              inputId="continueRefresh"
-              className="border-2"
-            ></Checkbox>{" "}
-            Continually Refresh
-          </label>
-          <br />
           <Button
             label="Refresh"
             icon="pi pi-refresh"
             iconPos="right"
             className="border-round-xl mb-2 mt-2"
-            onClick={() => setUpdateFiles(true)}
+            onClick={() => {
+              setUpdateFiles(true);
+            }}
           />
         </td>
       </tr>
     </table>
   );
 
-  const [showError, setShowError] = useState<boolean>(false);
-
   return (
     <>
-      <Dialog
-        header="Connection Error"
-        visible={showError}
-        style={{ width: "50vw" }}
-        onHide={() => {
-          if (!showError) return;
-          setShowError(false);
-        }}
-      >
-        <p className="m-0">
-          Problems getting result files.
-          <br />
-          Please verify that the server is functioning.
-        </p>
-        <Button
-          label="Close"
-          onClick={() => setShowError(false)}
-        />
-      </Dialog>
       <Toast ref={toast} />
       <ConfirmDialog />
       <Card className={"border-round-3xl " + busyCursor}>
@@ -201,9 +147,7 @@ export default function ResultsTable({
                     icon="pi pi-times"
                     tooltip={"Delete " + x.name}
                     className="border-circle"
-                    // onClick={() => handleDelete(x.name)}
                     onClick={() => deleteFileConfirm(x.name)}
-                    // deleteFileConfirm
                   />
                 </div>
                 <div className="col-11 border-left-1 border-y-none p-1">

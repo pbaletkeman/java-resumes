@@ -26,7 +26,11 @@ interface OptimizeType {
   promptType?: string[];
 }
 
-export const API_HOST = "http://localhost:8080";
+export const API_HOST = (
+  window as Window & typeof globalThis & { Config: { host: string } }
+).Config.host;
+
+// export const API_HOST = window["Config"].host; // "http://localhost:8080";
 
 export default function MainForm() {
   const [model, setModel] = useState<string>("");
