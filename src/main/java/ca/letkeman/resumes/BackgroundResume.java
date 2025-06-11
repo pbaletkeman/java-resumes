@@ -2,6 +2,7 @@ package ca.letkeman.resumes;
 
 import ca.letkeman.resumes.model.Optimize;
 import ca.letkeman.resumes.optimizer.ApiService;
+import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,10 +24,12 @@ public final class BackgroundResume implements Runnable {
     this.optimize = optimize;
   }
 
-  public BackgroundResume(Optimize optimize, String endpoint, String apikey, String root) {
+  public BackgroundResume(Optimize optimize, String root) {
+    String configStr = Utility.readFileAsString("config.json");
+    Config c = new Gson().fromJson(configStr, Config.class);
     this.optimize = optimize;
-    this.endpoint = endpoint;
-    this.apikey = apikey;
+    this.endpoint = c.getEndpoint();
+    this.apikey = c.getApikey();
     this.root = root;
   }
 
