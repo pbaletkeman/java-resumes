@@ -1,0 +1,20 @@
+meta {
+  name: Optimize Resume
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/upload
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  optimize: '''
+    {"resume": "", "jobDescription": ""}
+    }
+  '''
+  resume: @file()
+  job: @file()
+}

@@ -1,0 +1,15 @@
+meta {
+  name: Convert Markdown to PDF
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/markdownFile2PDF
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  file: @file()
+}

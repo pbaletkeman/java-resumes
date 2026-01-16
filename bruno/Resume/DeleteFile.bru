@@ -1,0 +1,11 @@
+meta {
+  name: DeleteFile
+  type: http
+  seq: 1
+}
+
+delete {
+  url: http://localhost:8080/files/{filename}
+  body: none
+  auth: none
+}
