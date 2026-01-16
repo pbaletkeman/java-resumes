@@ -1,0 +1,2 @@
+# JVM options for Gradle
+-Dorg.gradle.java.home=C:\\Users\\Pete\\java\\corretto25

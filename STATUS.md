@@ -34,7 +34,7 @@
 
 ### 2️⃣ Java Toolchain
 
-- [x] Java 21 Corretto configured
+- [x] Java 25 Corretto configured (C:\Users\Pete\java\corretto25)
 - [x] Gradle 8.7 wrapper verified
 - [x] Build system validated
 
@@ -159,7 +159,7 @@ java -jar build/libs/java-resumes-*.jar
 ### Framework Stack
 
 - Spring Boot 3.5.1 (latest stable)
-- Java 21 (Corretto)
+- Java 25 (Corretto 25.0.1 LTS)
 - Gradle 8.7
 - Checkstyle 10.14.2
 
@@ -191,10 +191,11 @@ java -jar build/libs/java-resumes-*.jar
 
 ### Key Decisions Made
 
-1. **Java 21**: Selected from available options (Corretto not in requested path)
-2. **JSON fields**: Preserved snake_case for API compatibility
-3. **Checkstyle**: Focused on non-JSON violations (100% success)
-4. **Documentation**: Comprehensive guides for future maintenance
+1. **Java 25**: Successfully configured with Corretto 25.0.1 at C:\Users\Pete\java\corretto25
+2. **Build script**: Created build25.bat for convenient builds with Java 25
+3. **JSON fields**: Preserved snake_case for API compatibility
+4. **Checkstyle**: Focused on non-JSON violations (100% success)
+5. **Documentation**: Comprehensive guides for future maintenance
 
 ### What NOT Changed
 

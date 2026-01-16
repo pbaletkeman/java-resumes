@@ -5,6 +5,7 @@
 Successfully completed comprehensive modernization and code quality improvements for the java-resumes Spring Boot application:
 
 - ✅ **Spring Boot 3.4.5 → 3.5.1** upgrade (latest compatible version)
+- ✅ **Java 21 → Java 25** upgrade (Corretto 25.0.1 LTS)
 - ✅ **All dependencies updated** to latest compatible versions
 - ✅ **Checkstyle violations reduced 98 → 28** (71% reduction, non-JSON violations eliminated)
 - ✅ **Build and tests**: All passing ✅
@@ -43,15 +44,16 @@ Successfully completed comprehensive modernization and code quality improvements
 
 ### Java Version Setup
 
-- **Requested**: Java 25 (not available)
-- **Configured**: Java 21 (Amazon Corretto 21.0.9)
+- **Requested**: Java 25 (at C:\Users\Pete\java\corretto25)
+- **Configured**: Java 25 Corretto 25.0.1 LTS
 - **Status**: ✅ Gradle toolchain properly configured
-- **Location**: C:\Users\Pete\.jdks\corretto-21.0.9
+- **Location**: C:\Users\Pete\java\corretto25
+- **Build Script**: `build25.bat` for convenient builds with Java 25
 
 ### Build Tool
 
 - **Gradle**: 8.7 with wrapper
-- **Verification**: All builds successful
+- **Verification**: All builds successful ✅
 
 ## Phase 3: Checkstyle Compliance ✅
 
