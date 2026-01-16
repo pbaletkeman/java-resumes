@@ -58,7 +58,7 @@ public final class HtmlToPdf {
     this.pdfFilePath = pdfFilePath;
   }
 
-  public HtmlToPdf(){}
+  public HtmlToPdf() {}
 
   public HtmlToPdf(String markdownFilePath, String pdfFilePath, String markdownContent) {
     if (markdownContent.isBlank()) {
@@ -77,15 +77,15 @@ public final class HtmlToPdf {
 
   private static void xhtmlToPdf(String xhtml, String outFileName) throws IOException {
     File output = new File(outFileName);
-    ITextRenderer iTextRenderer = new ITextRenderer();
-    iTextRenderer.setDocumentFromString(xhtml);
-    iTextRenderer.layout();
+    ITextRenderer textRenderer = new ITextRenderer();
+    textRenderer.setDocumentFromString(xhtml);
+    textRenderer.layout();
     OutputStream os = new FileOutputStream(output);
-    iTextRenderer.createPDF(os);
+    textRenderer.createPDF(os);
     os.close();
   }
 
-  public boolean convertFile (){
+  public boolean convertFile() {
     String content = "";
     if (getMarkdownContent() == null || getMarkdownContent().isBlank()) {
       try {
@@ -111,12 +111,12 @@ public final class HtmlToPdf {
     return true;
   }
 
-/*
-    sample usage:
-    HtmlToPdf htmlToPdf = new HtmlToPdf("sample/resume.md","output.pdf", "");
-    htmlToPdf.convertFile();
-    --------------------
-    HtmlToPdf htmlToPdf = new HtmlToPdf("","output.pdf", "**markdown content**");
-    htmlToPdf.convertFile();
+  /*
+   * sample usage:
+   * HtmlToPdf htmlToPdf = new HtmlToPdf("sample/resume.md","output.pdf", "");
+  htmlToPdf.convertFile();
+  --------------------
+  HtmlToPdf htmlToPdf = new HtmlToPdf("","output.pdf", "**markdown content**");
+  htmlToPdf.convertFile();
 */
 }

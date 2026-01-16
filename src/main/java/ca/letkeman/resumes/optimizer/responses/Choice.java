@@ -11,7 +11,7 @@ public final class Choice {
   private String finish_reason;
   private Message message;
 
-  public Choice(){}
+  public Choice() {}
 
   public Choice(int index, String logprobs, String finish_reason, Message message) {
     this.index = index;

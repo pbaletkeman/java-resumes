@@ -9,16 +9,16 @@ import org.slf4j.LoggerFactory;
 
 public final class Utility {
 
-  private Utility(){}
+  private Utility() {}
 
-  private static Logger LOGGER = LoggerFactory.getLogger(Utility.class);
+  private static Logger logger = LoggerFactory.getLogger(Utility.class);
 
   public static String readFileAsString(String fileName) {
     String data = "";
     try {
       data = Files.readString(Paths.get(fileName), StandardCharsets.ISO_8859_1);
     } catch (IOException e) {
-      LOGGER.error("Error reading file: {}\n{}", fileName, e.toString());
+      logger.error("Error reading file: {}", e.toString());
     }
     return data;
   }

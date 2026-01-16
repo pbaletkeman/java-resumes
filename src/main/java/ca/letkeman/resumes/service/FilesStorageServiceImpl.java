@@ -49,7 +49,10 @@ public final class FilesStorageServiceImpl implements FilesStorageService {
   @Override
   public void save(MultipartFile file) {
     try {
-      Files.copy(file.getInputStream(), this.root.resolve(Objects.requireNonNull(file.getOriginalFilename())), StandardCopyOption.REPLACE_EXISTING);
+      Files.copy(
+          file.getInputStream(),
+          this.root.resolve(Objects.requireNonNull(file.getOriginalFilename())),
+          StandardCopyOption.REPLACE_EXISTING);
     } catch (Exception e) {
       LOGGER.error(e.getMessage());
     }
@@ -92,7 +95,9 @@ public final class FilesStorageServiceImpl implements FilesStorageService {
   @Override
   public Stream<Path> loadAll() {
     try {
-      return Files.walk(this.root, 1).filter(path -> !path.equals(this.root) && !Files.isDirectory(path)).map(this.root::relativize);
+      return Files.walk(this.root, 1)
+          .filter(path -> !path.equals(this.root) && !Files.isDirectory(path))
+          .map(this.root::relativize);
     } catch (IOException e) {
       LOGGER.error("Could not load the files!");
     }

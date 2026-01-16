@@ -53,7 +53,8 @@ public final class Message {
         .add("content='" + content + "'")
         .toString();
   }
-  public Message(){}
+
+  public Message() {}
 
   public Message(String role, String content) {
     this.role = role;

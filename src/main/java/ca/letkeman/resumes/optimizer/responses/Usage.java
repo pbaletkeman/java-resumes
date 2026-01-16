@@ -30,7 +30,7 @@ public final class Usage {
     this.total_tokens = total_tokens;
   }
 
-  public Usage(){}
+  public Usage() {}
 
   public Usage(int prompt_tokens, int completion_tokens, int total_tokens) {
     this.prompt_tokens = prompt_tokens;

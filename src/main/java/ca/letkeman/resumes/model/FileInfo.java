@@ -17,7 +17,7 @@ public final class FileInfo {
   public FileInfo(String name, String url, String root, String date) {
     this.name = name;
     this.url = url;
-    this.size = calcFileSize(name,root);
+    this.size = calcFileSize(root, name);
     this.date = date;
   }
 
@@ -60,18 +60,18 @@ public final class FileInfo {
   }
 
   private String calcFileSize(String root, String fileName) {
-    long ONE_MB = 1048576;
-    long ONE_KB = 1024;
+    long oneMb = 1048576;
+    long oneKb = 1024;
     File file = new File(Paths.get(fileName, root).toAbsolutePath().toUri());
     if (!file.exists() || !file.isFile()) {
       LOGGER.error("Invalid file path");
       return "0 bytes";
     } else {
       long fileSize = file.length();
-      if (fileSize > ONE_MB) {
-        return fileSize / ONE_MB + " mb";
-      } else if (fileSize > ONE_KB) {
-        return fileSize / ONE_KB + " kb";
+      if (fileSize > oneMb) {
+        return fileSize / oneMb + " mb";
+      } else if (fileSize > oneKb) {
+        return fileSize / oneKb + " kb";
       } else {
         return fileSize + " bytes";
       }

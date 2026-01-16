@@ -147,7 +147,7 @@ public final class ApiService {
    * @param apikey - openai key
    * @param root - location to upload & save file tp
    */
-  public void produceFiles(Optimize optimize, String endpoint, String apikey, String root){
+  public void produceFiles(Optimize optimize, String endpoint, String apikey, String root) {
     if (optimize != null) {
       for (String p : optimize.getPromptType()) {
         produceFiles(p, optimize, endpoint, apikey, root);
@@ -170,8 +170,11 @@ public final class ApiService {
     LocalDate myDateObj = LocalDate.now();
     String today = myDateObj.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
 
-    String promptData = Utility.readFileAsString("prompts" + File.separator + promptType + ".md");
-    promptData = promptData.replace("{resume_string}", optimize.getResume()).replace("{jd_string}", optimize.getJobDescription());
+    String promptData = Utility.readFileAsString(
+        "prompts" + File.separator + promptType + ".md");
+    promptData = promptData
+        .replace("{resume_string}", optimize.getResume())
+        .replace("{jd_string}", optimize.getJobDescription());
     promptData = promptData.replace("{today}", today);
 
     ChatBody chatBody = getChatBody(optimize, promptData);
@@ -179,7 +182,7 @@ public final class ApiService {
     ApiService apiService = new ApiService();
     LLMResponse llmResponse = apiService.invokeApi(chatBody, endpoint, apikey);
 
-    if (llmResponse == null){
+    if (llmResponse == null) {
       LOGGER.error("Invalid LLM Response. Please try again.");
       return;
     }
@@ -202,18 +205,23 @@ public final class ApiService {
       return;
     }
 
-    String suffixString = DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm").format(LocalDateTime.now());
-    String fileName = promptType + "-" + optimize.getCompany() + "-" + optimize.getJobTitle() + "-" + suffixString + ".md";
+    String suffixString =
+        DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm").format(LocalDateTime.now());
+    String fileName = promptType + "-" + optimize.getCompany() + "-"
+        + optimize.getJobTitle() + "-" + suffixString + ".md";
     createResultFile(fileName, result.body(), root);
-    HtmlToPdf html = new HtmlToPdf( root + File.separator + fileName,
-        root + File.separator + promptType + "-" + optimize.getCompany() + "-" + optimize.getJobTitle() + "-" + suffixString + ".pdf", "");
+    HtmlToPdf html = new HtmlToPdf(
+        root + File.separator + fileName,
+        root + File.separator + promptType + "-" + optimize.getCompany()
+            + "-" + optimize.getJobTitle() + "-" + suffixString + ".pdf", "");
     if (!html.convertFile()) {
       LOGGER.error("Unable to save PDF file");
     }
 
     if (result.suggestion() != null && !result.suggestion().isBlank()) {
-      fileName = optimize.getCompany() + "-" + optimize.getJobTitle() + "-" +  suffixString + "-suggestions.md";
-      createResultFile(fileName, result.suggestion(),root);
+      fileName = optimize.getCompany() + "-" + optimize.getJobTitle()
+          + "-" + suffixString + "-suggestions.md";
+      createResultFile(fileName, result.suggestion(), root);
     }
 
     LOGGER.info("Operation Complete.");
@@ -258,21 +266,21 @@ public final class ApiService {
 
   private String calcBody(String company, String content) {
     String body = trimString(content);
-    if (!body.isEmpty()){
-      body = body.replace("\\n ","\n").replace("\n**","\n\n**");
+    if (!body.isEmpty()) {
+      body = body.replace("\\n ", "\n").replace("\n**", "\n\n**");
       int tempLoc = body.indexOf(company);
-      if (tempLoc > 0){
+      if (tempLoc > 0) {
         // remove the first line from the output
         tempLoc = body.indexOf("\n");
         body = body.substring(tempLoc).trim();
       }
       tempLoc = body.toLowerCase().indexOf("markdown");
-      if (tempLoc > 0){
+      if (tempLoc > 0) {
         // remove the word markdown from the output
         // markdown is not a skill
         body = body.substring(tempLoc).trim();
       }
-      while (body.startsWith("`")){
+      while (body.startsWith("`")) {
         // remove markdown notation from start of the output
         body = body.substring(1).trim();
       }
@@ -291,7 +299,7 @@ public final class ApiService {
    * @param fileName name of the file to create
    * @param s content to save in the file
    */
-  private void createResultFile(String fileName, String s, String root ) {
+  private void createResultFile(String fileName, String s, String root) {
 
     if (s != null && !s.isBlank()) {
       try (BufferedWriter writer = new BufferedWriter(new FileWriter(root + File.separator + fileName, false))) {
@@ -327,7 +335,9 @@ public final class ApiService {
    * @return cleaned up str
    */
   private String removeTrailingChar(String str, String badChar) {
-    if (str == null) return ""; //Handle null input gracefully
+    if (str == null) {
+      return ""; //Handle null input gracefully
+    }
     while (str.endsWith(badChar)) {
       str = str.substring(0, str.length() - 1);
     }

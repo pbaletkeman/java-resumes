@@ -105,7 +105,7 @@ public final class LLMResponse {
     this.system_fingerprint = system_fingerprint;
   }
 
-  public LLMResponse(){}
+  public LLMResponse() {}
 
   public String getJSON(){
     return new Gson().toJson(this);

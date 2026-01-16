@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 public final class BackgroundResume implements Runnable {
 
-  private static Logger LOGGER = LoggerFactory.getLogger(BackgroundResume.class);
+  private static Logger logger = LoggerFactory.getLogger(BackgroundResume.class);
 
   private Optimize optimize;
 
@@ -40,6 +40,6 @@ public final class BackgroundResume implements Runnable {
   public void run() {
     ApiService apiService = new ApiService();
     apiService.produceFiles(optimize, endpoint, apikey, root);
-    LOGGER.info("all done");
+    logger.info("all done");
   }
 }

@@ -63,16 +63,23 @@ public final class AdvancedController {
     try {
       storageService.setConfigRoot(root);
       storageService.save(file);
-      String outputFile = root + File.separator + Utility.removeFileExtension(file.getOriginalFilename(), true) + ".pdf";
-      HtmlToPdf htmlToPdf = new HtmlToPdf(root + File.separator + file.getOriginalFilename(), outputFile, "");
+      String outputFile = root + File.separator
+          + Utility.removeFileExtension(file.getOriginalFilename(), true) + ".pdf";
+      HtmlToPdf htmlToPdf = new HtmlToPdf(
+          root + File.separator + file.getOriginalFilename(),
+          outputFile, "");
       if (htmlToPdf.convertFile()) {
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("file successfully converted"));
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(new ResponseMessage("file successfully converted"));
       } else {
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("unable to convert file"));
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(new ResponseMessage("unable to convert file"));
       }
     } catch (Exception e) {
-      LOGGER.error("Could not upload the resume: {}. Error:\n{}", file.getOriginalFilename(), e.getMessage());
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseMessage("problem with conversion"));
+      LOGGER.error("Could not upload the resume: {}. Error:\n{}",
+          file.getOriginalFilename(), e.getMessage());
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .body(new ResponseMessage("problem with conversion"));
     }
   }
 
@@ -107,15 +114,18 @@ public final class AdvancedController {
       try {
         storageService.setConfigRoot(root);
         storageService.save(job);
-        optimize.setJobDescription(Utility.readFileAsString(root + File.separator + job.getOriginalFilename()));
+        optimize.setJobDescription(
+            Utility.readFileAsString(root + File.separator + job.getOriginalFilename()));
       } catch (Exception e) {
         LOGGER.error("Could not upload the job: {}. Error:\n{}", job.getOriginalFilename(), e.getMessage());
       }
     }
-    if (optimize.getJobDescription() != null)
+    if (optimize.getJobDescription() != null) {
       optimize.setJobDescription(Utility.convertLineEndings(optimize.getJobDescription()));
-    if (optimize.getResume() != null)
+    }
+    if (optimize.getResume() != null) {
       optimize.setResume(Utility.convertLineEndings(optimize.getResume()));
+    }
     LOGGER.info("optimize: {}", optimize);
     if (optimize.isValid()) {
       // start background task here
@@ -123,7 +133,8 @@ public final class AdvancedController {
       thread.start();
       return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("generating"));
     } else {
-      return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage("Required property missing or invalid."));
+      return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
+          .body(new ResponseMessage("Required property missing or invalid."));
     }
   }
 
@@ -148,7 +159,9 @@ public final class AdvancedController {
   private String getFileDate(Path path) {
     try {
       String p = root + File.separator + path.toString();
-      LocalDateTime x = LocalDateTime.ofInstant(Files.getLastModifiedTime(Path.of(p)).toInstant(), ZoneId.systemDefault());
+      LocalDateTime x = LocalDateTime.ofInstant(
+          Files.getLastModifiedTime(Path.of(p)).toInstant(),
+          ZoneId.systemDefault());
       return x.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     } catch (Exception e) {
       LOGGER.error(e.toString());
