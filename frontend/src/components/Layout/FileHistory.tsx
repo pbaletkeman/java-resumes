@@ -3,6 +3,7 @@ import { Card } from 'primereact/card';
 import { DataView } from 'primereact/dataview';
 import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';
+import type { FileMetadata } from '../../services/fileService';
 import { useFileManagement } from '../../hooks/useFileManagement';
 import { ConfirmDialog } from '../Common/ConfirmDialog';
 import { formatFileSize, formatDate } from '../../utils/helpers';
