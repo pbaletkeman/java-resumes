@@ -10,19 +10,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public final class RestServiceApplication  implements CommandLineRunner {
-	@Resource
-	FilesStorageService storageService;
+    @Resource
+    FilesStorageService storageService;
 
-	@Value("${upload.path}")
-	private String root;
+    @Value("${upload.path}")
+    private String root;
 
-	public static void main(String[] args) {
-		SpringApplication.run(RestServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(RestServiceApplication.class, args);
+    }
 
-	@Override
-	public void run(String... arg) throws Exception {
-
-		storageService.init(root);
-	}
+    @Override
+    public void run(String... arg) throws Exception {
+        storageService.init(root);
+    }
 }

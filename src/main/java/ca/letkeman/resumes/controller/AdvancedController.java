@@ -1,7 +1,5 @@
 package ca.letkeman.resumes.controller;
 
-import static java.nio.file.Files.getLastModifiedTime;
-
 import ca.letkeman.resumes.BackgroundResume;
 import ca.letkeman.resumes.Utility;
 import ca.letkeman.resumes.message.ResponseMessage;
@@ -14,18 +12,18 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Collections;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -150,7 +148,7 @@ public final class AdvancedController {
   private String getFileDate(Path path) {
     try {
       String p = root + File.separator + path.toString();
-      LocalDateTime x = LocalDateTime.ofInstant(getLastModifiedTime(Path.of(p)).toInstant(), ZoneId.systemDefault());
+      LocalDateTime x = LocalDateTime.ofInstant(Files.getLastModifiedTime(Path.of(p)).toInstant(), ZoneId.systemDefault());
       return x.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     } catch (Exception e) {
       LOGGER.error(e.toString());

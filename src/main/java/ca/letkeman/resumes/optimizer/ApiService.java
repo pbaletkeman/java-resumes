@@ -1,7 +1,5 @@
 package ca.letkeman.resumes.optimizer;
 
-import static java.net.HttpURLConnection.HTTP_OK;
-
 import ca.letkeman.resumes.Utility;
 import ca.letkeman.resumes.model.Optimize;
 import ca.letkeman.resumes.optimizer.responses.LLMResponse;
@@ -77,7 +75,7 @@ public final class ApiService {
       conn.setDoOutput(true);
 
       attachJSONBody(jsonBody, conn);
-      if (conn.getResponseCode() != HTTP_OK) {
+      if (conn.getResponseCode() != java.net.HttpURLConnection.HTTP_OK) {
         LOGGER.error("Invalid API response");
         if (LOGGER.isErrorEnabled()) {
           LOGGER.error(String.valueOf(conn.getErrorStream()));

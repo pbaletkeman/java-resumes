@@ -1,10 +1,10 @@
 package ca.letkeman.resumes.model;
 
-import static ca.letkeman.resumes.Utility.convertLineEndings;
-
 import java.util.Arrays;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import ca.letkeman.resumes.Utility;
 
 public final class Optimize {
   String[] promptType = {"Resume"};
@@ -20,8 +20,8 @@ public final class Optimize {
     this.promptType = promptType;
     this.temperature = temperature;
     this.model = model;
-    this.resume = convertLineEndings(resume);
-    this.jobDescription = convertLineEndings(jobDescription);
+    this.resume = Utility.convertLineEndings(resume);
+    this.jobDescription = Utility.convertLineEndings(jobDescription);
     this.jobTitle = jobTitle;
     this.company = company;
   }
@@ -58,7 +58,7 @@ public final class Optimize {
   }
 
   public void setResume(String resume) {
-    this.resume = convertLineEndings(resume);
+    this.resume = Utility.convertLineEndings(resume);
   }
 
   public String getJobDescription() {
@@ -66,7 +66,7 @@ public final class Optimize {
   }
 
   public void setJobDescription(String jobDescription) {
-    this.jobDescription = convertLineEndings(jobDescription);
+    this.jobDescription = Utility.convertLineEndings(jobDescription);
   }
 
   public String getJobTitle() {
@@ -143,5 +143,3 @@ public final class Optimize {
             .anyMatch(x -> x.equalsIgnoreCase("cover"));
   }
 }
-
-
