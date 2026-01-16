@@ -110,7 +110,7 @@ See [docs/README.md](docs/README.md#api-endpoints) for full API reference.
 
 ## 📂 Project Structure
 
-```
+```shell
 java-resumes/
 ├── src/main/java/ca/letkeman/resumes/
 │   ├── controller/              # REST endpoints

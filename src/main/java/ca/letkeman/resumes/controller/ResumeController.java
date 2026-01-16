@@ -41,9 +41,9 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 
 @CrossOrigin(origins = "*")
 @RestController
-public final class AdvancedController {
+public final class ResumeController {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(AdvancedController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ResumeController.class);
 
   private final FilesStorageService storageService;
 
@@ -51,7 +51,7 @@ public final class AdvancedController {
   private String root;
 
 
-  public AdvancedController(FilesStorageService storageService) {
+  public ResumeController(FilesStorageService storageService) {
     this.storageService = storageService;
   }
 
@@ -146,7 +146,7 @@ public final class AdvancedController {
       String date = getFileDate(path);
       String filename = path.getFileName().toString();
       String url = MvcUriComponentsBuilder
-          .fromMethodName(AdvancedController.class, "getFile", path.getFileName().toString()).build().toString();
+          .fromMethodName(ResumeController.class, "getFile", path.getFileName().toString()).build().toString();
       return new FileInfo(filename, url, root, date);
     }).toList());
     if (!fileInfos.isEmpty()) {

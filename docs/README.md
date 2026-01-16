@@ -139,7 +139,7 @@ See [Architecture.md](./Architecture.md) for detailed architecture diagrams incl
 
 ## Project Structure
 
-```
+```shell
 java-resumes/
 ├── src/
 │   ├── main/java/ca/letkeman/resumes/
