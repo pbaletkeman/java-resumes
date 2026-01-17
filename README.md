@@ -850,47 +850,189 @@ For complete API documentation, visit: http://localhost:8080/swagger-ui/index.ht
 
 ## 🖼️ Screenshots
 
-### Main Content Tab - Upload & Process
+The java-resumes project includes comprehensive visual documentation and screenshots. See [**Screenshot Documentation**](docs/screenshots/) for complete details, including:
 
-![Main Content Tab - Upload Interface](https://via.placeholder.com/800x500/4A90E2/ffffff?text=Main+Content+Tab+-+Upload+%26+Process)
+- **Capture Guidelines**: Standards for all UI screenshots
+- **Architecture Diagrams**: System design and data flow
+- **Setup Instructions**: Visual guides for installation
+- **Maintenance Guide**: Keeping screenshots current
 
-_Upload job descriptions and resumes via text paste or file upload. Create optimized resumes and cover letters with AI._
+### Frontend Interface
 
-### File History Panel
+#### Main Content Tab - Upload & Process
 
-![File History Panel](https://via.placeholder.com/300x500/50C878/ffffff?text=File+History+Panel)
+<center>
+
+![Main Content Tab - Upload Interface - Shows job description input, resume upload, optimization type selection, and process button](docs/screenshots/frontend/main-tab.png)
+
+_Upload job descriptions and resumes via text paste or file upload. Select optimization type (Resume, Cover Letter, or both). Adjust LLM parameters (temperature, model). Click Process to start optimization._
+
+</center>
+
+**Features Shown:**
+
+- Job description text area or file upload
+- Resume/CV text area or file upload
+- Optimization type selector (Resume/Cover Letter)
+- Model selection dropdown (mistral, neural-chat, etc.)
+- Temperature slider for response creativity
+- Process button to start optimization
+- Output preview area showing generated content
+
+#### File History Panel
+
+<center>
+
+![File History Panel - Shows list of uploaded and generated files with timestamps, sizes, and action buttons](docs/screenshots/frontend/file-history.png)
 
 _Always-visible panel showing all uploaded and generated files with download and delete options._
 
-### Additional Tools Tab - Markdown to PDF
+</center>
 
-![Additional Tools - Markdown to PDF](https://via.placeholder.com/800x500/FF6B6B/ffffff?text=Markdown+to+PDF+Converter)
+**Features Shown:**
 
-_Convert markdown documents to professionally formatted PDFs._
+- Chronological file list
+- File names and types (PDF, Markdown)
+- File sizes and upload dates
+- Download buttons for each file
+- Delete buttons for cleanup
+- Clear all button for bulk operations
 
-### Light Theme
+#### Additional Tools Tab - Markdown to PDF
 
-![Light Theme](https://via.placeholder.com/800x500/F0F0F0/333333?text=Light+Theme)
+<center>
 
-_Clean and professional light theme for comfortable daytime use._
+![Additional Tools Tab - Shows markdown input area, convert button, and PDF preview of output](docs/screenshots/frontend/tools-tab.png)
 
-### Dark Theme
+_Convert markdown documents to professionally formatted PDFs with custom styling._
 
-![Dark Theme](https://via.placeholder.com/800x500/1E1E1E/FFFFFF?text=Dark+Theme)
+</center>
 
-_Modern dark theme for reduced eye strain in low-light environments._
+**Features Shown:**
 
-### API Documentation (Swagger UI)
+- Markdown editor with syntax highlighting
+- File upload for markdown documents
+- Convert to PDF button
+- PDF preview window
+- Download converted PDF option
 
-![Swagger UI](https://github.com/user-attachments/assets/930b18cd-d0e8-4088-8f54-dafb1792e523)
+#### Theme Variations
 
-_Interactive API documentation with try-it-out functionality._
+##### Light Theme
 
-### Web Interface (Spotlight)
+<center>
 
-![Spotlight UI](https://github.com/user-attachments/assets/d6fb204f-8ac4-446e-b853-8a5d8e75d02e)
+![Light Theme Interface - Shows full application with light background, dark text, and high contrast](docs/screenshots/frontend/light-theme.png)
 
-_Original Spotlight web interface showing resume optimization features._
+_Clean and professional light theme for comfortable daytime use with excellent readability._
+
+</center>
+
+##### Dark Theme
+
+<center>
+
+![Dark Theme Interface - Shows full application with dark background, light text, and accent colors](docs/screenshots/frontend/dark-theme.png)
+
+_Modern dark theme for reduced eye strain in low-light environments with vibrant accent colors._
+
+</center>
+
+#### Responsive Mobile View
+
+<center>
+
+![Mobile Responsive Design - Shows interface on iPhone-sized screen with optimized layout](docs/screenshots/frontend/responsive-mobile.png)
+
+_Fully responsive design works seamlessly on mobile devices, tablets, and desktops._
+
+</center>
+
+### Backend API
+
+#### Swagger UI Documentation
+
+<center>
+
+![Swagger UI - Shows OpenAPI documentation with all endpoints, request/response examples, and try-it-out interface](docs/screenshots/backend/swagger-ui.png)
+
+_Interactive API documentation accessible at `http://localhost:8080/swagger-ui/index.html`_
+
+</center>
+
+**Features Shown:**
+
+- Complete API endpoint listing
+- Request and response schemas
+- Try-it-out functionality for testing
+- Authentication configuration
+- Response code documentation
+
+#### API Endpoints Reference
+
+<center>
+
+![API Endpoints - Shows POST /upload, GET /files, DELETE /files/{id}, and other endpoints with examples](docs/screenshots/backend/api-endpoints.png)
+
+_All available REST API endpoints with parameters and response formats._
+
+</center>
+
+**Endpoints Shown:**
+
+- `POST /upload` - Submit documents for optimization
+- `GET /files` - List all files
+- `GET /files/{filename}` - Download specific file
+- `DELETE /files/{filename}` - Remove file
+- `POST /markdownFile2PDF` - Convert markdown to PDF
+
+### Architecture & System Design
+
+#### System Architecture Diagram
+
+<center>
+
+![System Architecture - Shows frontend, backend, LLM service, and file storage components with connections](docs/screenshots/architecture/system-architecture.png)
+
+_High-level view of all system components and how they interact._
+
+</center>
+
+See [**Architecture Diagrams**](docs/screenshots/architecture/DIAGRAMS.md) for detailed ASCII diagrams including:
+
+- Component architecture
+- Data flow diagrams
+- Deployment structure
+- Request/response flows
+
+---
+
+## 📸 Taking Your Own Screenshots
+
+To capture screenshots of the application:
+
+### Prerequisites
+
+- Application running locally (`npm run dev` for frontend, `./gradlew bootRun` for backend)
+- Screenshot tool installed (Windows Snip & Sketch, ShareX, or similar)
+
+### Capture Process
+
+1. Start both frontend and backend services
+2. Navigate to the feature you want to capture
+3. Use screenshot tool (Win+Shift+S on Windows)
+4. Save to `docs/screenshots/{category}/`
+5. Follow naming convention: `{category}-{component}-{description}.png`
+
+### Quality Guidelines
+
+- Ensure text is readable
+- Capture at 800px+ width
+- Optimize file size (< 500KB)
+- Include meaningful context
+- Add descriptive alt text in documentation
+
+See [**Screenshot Guide**](docs/screenshots/SCREENSHOTS_GUIDE.md#-screenshot-requirements) for complete requirements.
 
 ---
 
