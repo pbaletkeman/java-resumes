@@ -65,35 +65,35 @@ Get the frontend running in just 5 minutes! Follow these quick steps to start de
 
 ### Steps
 
-**Step 1: Clone and navigate to frontend**
+#### Step 1: Clone and navigate to frontend
 
 ```bash
 git clone https://github.com/pbaletkeman/java-resumes.git
 cd java-resumes/frontend
 ```
 
-**Step 2: Install dependencies**
+#### Step 2: Install dependencies
 
 ```bash
 npm install
 ```
 
-**Step 3: Configure API endpoint** (optional, if backend not on localhost:8080)
+#### Step 3: Configure API endpoint (optional, if backend not on localhost:8080)
 
 ```bash
 cp .env.example .env
 # Edit .env if needed to match your backend URL
 ```
 
-**Step 4: Start development server**
+#### Step 4: Start development server
 
 ```bash
 npm run dev
 ```
 
-**Step 5: Open in browser**
+#### Step 5: Open in browser
 
-```
+```plaintext
 http://localhost:5173
 ```
 
@@ -107,7 +107,7 @@ That's it! You now have a hot-reloading development environment. Any code change
 
 ---
 
-## �🛠️ Technology Stack
+## ���️ Technology Stack
 
 ### Core Technologies
 
@@ -225,17 +225,23 @@ If you prefer to run the frontend without Docker, follow these native setup inst
 ### Prerequisites
 
 - **Node.js 24 LTS** installed
+
   ```bash
   node --version  # Verify you see Node 24.x
   ```
+
 - **npm 10.x+** (comes with Node.js)
+
   ```bash
   npm --version
   ```
+
 - **Java backend** running (see BACKEND_README.md)
+
   ```bash
   curl http://localhost:8080/api/health
   ```
+
 - **Git** for version control
 - **IDE or Editor** (VS Code, WebStorm, etc.)
 
@@ -311,7 +317,7 @@ npm run dev
 
 You should see:
 
-```
+```shell
   VITE v7.2.4  dev server running at:
   ➜  Local:   http://localhost:5173/
   ➜  press h to show help
@@ -355,6 +361,7 @@ Navigate to one of the URLs shown in the terminal:
    - "Thunder Client" (for API testing)
 
 2. Create `.vscode/settings.json`:
+
    ```json
    {
      "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -450,7 +457,7 @@ npm run lint:fix
 
 ### Project Structure
 
-```
+```plaintext
 frontend/
 ├── src/
 │   ├── components/          # Reusable React components
@@ -626,6 +633,7 @@ The development server will start with:
 4. **Test Changes**: See updates instantly in browser
 
 5. **Run Tests**:
+
    ```bash
    npm run test
    ```
@@ -717,7 +725,7 @@ This command:
 
 ### Build Output
 
-```
+```shell
 dist/
 ├── assets/
 │   ├── index-[hash].js       # Main JavaScript bundle
@@ -787,7 +795,7 @@ Report location: `coverage/index.html`
 
 ### Test Structure
 
-```
+```shell
 tests/
 ├── components/              # Component tests
 │   ├── Layout/
@@ -964,88 +972,88 @@ VITE_ENABLE_DEBUG=false
 
 ## 📁 Project Structure
 
-```
+```shell
 frontend/
-├── public/                         # Static assets
+├── public/                             # Static assets
 │   ├── favicon.ico
 │   └── logo.png
 │
-├── src/                            # Source code
-│   ├── components/                # React components
-│   │   ├── Layout/               # Layout components
-│   │   │   ├── Navbar.tsx        # Top navigation bar
-│   │   │   ├── Sidebar.tsx       # File history sidebar
-│   │   │   ├── FileHistory.tsx   # File list component
-│   │   │   └── MainLayout.tsx    # Main layout wrapper
-│   │   ├── Tabs/                 # Tab components
+├── src/                                # Source code
+│   ├── components/                     # React components
+│   │   ├── Layout/                     # Layout components
+│   │   │   ├── Navbar.tsx              # Top navigation bar
+│   │   │   ├── Sidebar.tsx             # File history sidebar
+│   │   │   ├── FileHistory.tsx         # File list component
+│   │   │   └── MainLayout.tsx          # Main layout wrapper
+│   │   ├── Tabs/                       # Tab components
 │   │   │   ├── MainContentTab.tsx      # Upload & process tab
 │   │   │   └── AdditionalToolsTab.tsx  # Utilities tab
-│   │   ├── Forms/                # Form components
+│   │   ├── Forms/                      # Form components
 │   │   │   ├── DocumentUploadForm.tsx  # File upload form
 │   │   │   ├── MarkdownToPdfForm.tsx   # MD to PDF form
 │   │   │   └── FormInputs.tsx          # Reusable inputs
-│   │   └── Common/               # Shared components
+│   │   └── Common/                     # Shared components
 │   │       ├── ErrorBoundary.tsx       # Error handling
 │   │       ├── LoadingSpinner.tsx      # Loading indicator
 │   │       ├── ConfirmDialog.tsx       # Confirmation modal
 │   │       └── ThemeToggle.tsx         # Theme switcher
 │   │
-│   ├── pages/                    # Page components
-│   │   ├── HomePage.tsx          # Main application page
-│   │   └── NotFound.tsx          # 404 page
+│   ├── pages/                          # Page components
+│   │   ├── HomePage.tsx                # Main application page
+│   │   └── NotFound.tsx                # 404 page
 │   │
-│   ├── hooks/                    # Custom React hooks
-│   │   ├── useTheme.ts           # Theme management hook
-│   │   ├── useApi.ts             # API calls hook
-│   │   ├── useFileManagement.ts  # File operations hook
-│   │   └── useToast.ts           # Toast notifications hook
+│   ├── hooks/                          # Custom React hooks
+│   │   ├── useTheme.ts                 # Theme management hook
+│   │   ├── useApi.ts                   # API calls hook
+│   │   ├── useFileManagement.ts        # File operations hook
+│   │   └── useToast.ts                 # Toast notifications hook
 │   │
-│   ├── services/                 # Service layer
-│   │   ├── api.ts                # Axios configuration
-│   │   ├── fileService.ts        # File operations API
-│   │   └── documentService.ts    # Document processing API
+│   ├── services/                       # Service layer
+│   │   ├── api.ts                      # Axios configuration
+│   │   ├── fileService.ts              # File operations API
+│   │   └── documentService.ts          # Document processing API
 │   │
-│   ├── context/                  # React Context providers
-│   │   ├── ThemeContext.tsx      # Theme state management
-│   │   └── AppContext.tsx        # Global app state
+│   ├── context/                        # React Context providers
+│   │   ├── ThemeContext.tsx            # Theme state management
+│   │   └── AppContext.tsx              # Global app state
 │   │
-│   ├── utils/                    # Utility functions
-│   │   ├── constants.ts          # App constants
-│   │   ├── validators.ts         # Form validators
-│   │   ├── helpers.ts            # Helper functions
-│   │   └── types.ts              # TypeScript types
+│   ├── utils/                          # Utility functions
+│   │   ├── constants.ts                # App constants
+│   │   ├── validators.ts               # Form validators
+│   │   ├── helpers.ts                  # Helper functions
+│   │   └── types.ts                    # TypeScript types
 │   │
-│   ├── assets/                   # Images, fonts, etc.
+│   ├── assets/                         # Images, fonts, etc.
 │   │
-│   ├── App.tsx                   # Root component
-│   ├── main.tsx                  # Entry point
-│   ├── index.css                 # Global styles
-│   └── vite-env.d.ts             # Vite type definitions
+│   ├── App.tsx                         # Root component
+│   ├── main.tsx                        # Entry point
+│   ├── index.css                       # Global styles
+│   └── vite-env.d.ts                   # Vite type definitions
 │
-├── tests/                        # Test files
-│   ├── components/               # Component tests
-│   ├── hooks/                    # Hook tests
-│   ├── services/                 # Service tests
-│   ├── utils/                    # Utility tests
-│   └── setup.ts                  # Test configuration
+├── tests/                              # Test files
+│   ├── components/                     # Component tests
+│   ├── hooks/                          # Hook tests
+│   ├── services/                       # Service tests
+│   ├── utils/                          # Utility tests
+│   └── setup.ts                        # Test configuration
 │
-├── .env.example                  # Environment template
-├── .gitignore                    # Git ignore rules
-├── .prettierrc                   # Prettier configuration
-├── .dockerignore                 # Docker ignore rules
-├── Dockerfile                    # Docker build configuration
-├── nginx.conf                    # Nginx server configuration
-├── package.json                  # Dependencies and scripts
-├── package-lock.json             # Locked dependency versions
-├── tsconfig.json                 # TypeScript configuration
-├── tsconfig.app.json             # App-specific TS config
-├── tsconfig.node.json            # Node-specific TS config
-├── vite.config.ts                # Vite configuration
-├── vitest.config.ts              # Vitest configuration
-├── tailwind.config.js            # Tailwind CSS configuration
-├── postcss.config.js             # PostCSS configuration
-├── eslint.config.js              # ESLint configuration
-└── README.md                     # This file
+├── .env.example                        # Environment template
+├── .gitignore                          # Git ignore rules
+├── .prettierrc                         # Prettier configuration
+├── .dockerignore                       # Docker ignore rules
+├── Dockerfile                          # Docker build configuration
+├── nginx.conf                          # Nginx server configuration
+├── package.json                        # Dependencies and scripts
+├── package-lock.json                   # Locked dependency versions
+├── tsconfig.json                       # TypeScript configuration
+├── tsconfig.app.json                   # App-specific TS config
+├── tsconfig.node.json                  # Node-specific TS config
+├── vite.config.ts                      # Vite configuration
+├── vitest.config.ts                    # Vitest configuration
+├── tailwind.config.js                  # Tailwind CSS configuration
+├── postcss.config.js                   # PostCSS configuration
+├── eslint.config.js                    # ESLint configuration
+└── README.md                           # This file
 ```
 
 ### Directory Descriptions
@@ -1338,7 +1346,7 @@ try {
 
 ### Component Hierarchy
 
-```
+```shell
 App
 ├── ThemeProvider
 │   ├── MainLayout
@@ -1756,7 +1764,7 @@ We welcome contributions! Please follow these guidelines:
 
 ### Commit Message Format
 
-```
+```plaintext
 type(scope): subject
 
 body (optional)
@@ -1776,7 +1784,7 @@ footer (optional)
 
 **Examples:**
 
-```
+```plaintext
 feat(upload): add drag and drop support
 fix(theme): persist theme selection
 docs(readme): update installation instructions

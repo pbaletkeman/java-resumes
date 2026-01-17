@@ -2,6 +2,23 @@
 
 This directory contains the carefully crafted prompt templates that drive the artificial intelligence engine behind the Resume Optimization System. These prompts are strategic instructions that guide the LLM (Large Language Model) to produce high-quality, contextually relevant resume and cover letter optimizations.
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Available Prompt Templates](#available-prompt-templates)
+- [Prompt Design Philosophy](#prompt-design-philosophy)
+- [How Prompts Are Used](#how-prompts-are-used)
+- [Prompt Customization](#prompt-customization)
+- [Quality Metrics](#quality-metrics)
+- [Technical Details](#technical-details)
+- [Best Practices for Prompt Engineering](#best-practices-for-prompt-engineering)
+- [Maintenance & Updates](#maintenance--updates)
+- [Examples](#examples)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+
+---
+
 ## Overview
 
 Prompts are the communication bridge between the application and the AI model. Each prompt is designed to:
@@ -99,6 +116,8 @@ Each prompt emphasizes:
 - Relevance scoring
 - Competitive positioning
 
+---
+
 ## How Prompts Are Used
 
 ### Processing Flow
@@ -135,6 +154,8 @@ Input:
 Output: Optimized Resume with enhanced relevance
 ```
 
+---
+
 ## Prompt Customization
 
 ### Extending Prompts
@@ -156,6 +177,8 @@ When improving prompts:
 3. Compare output quality before/after
 4. Update supporting documentation
 5. Version control all changes
+
+---
 
 ## Quality Metrics
 

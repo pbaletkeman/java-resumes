@@ -125,6 +125,8 @@ For file operations, responses may include:
 - File list with multiple entries
 - Generated file paths
 
+---
+
 ## Error Handling
 
 Common HTTP status codes:

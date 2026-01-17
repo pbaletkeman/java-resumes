@@ -323,7 +323,7 @@ Edit `config.json` in the root directory:
 {
   "endpoint": "http://host.docker.internal:11434/v1/chat/completions",
   "apikey": "not-needed-for-local",
-  "model": "gemma-3-4b-it"
+  "model": "gemma3:4b"
 }
 ```
 
@@ -331,7 +331,7 @@ Edit `config.json` in the root directory:
 
 ```bash
 ollama serve
-ollama pull gemma-3-4b-it
+ollama pull gemma3:4b
 ```
 
 **For LM Studio:**
@@ -399,7 +399,7 @@ docker compose exec frontend sh
 
 ## 📂 Directory Structure
 
-```
+```shell
 java-resumes/
 ├── frontend/                          # React frontend application
 │   ├── src/

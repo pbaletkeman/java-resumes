@@ -98,11 +98,15 @@ DELETE /api/files/{filename}
    - Archive important documents externally
    - Maintain performance and storage efficiency
 
+---
+
 ## Storage Limits
 
 - **Individual File Size**: Limited by system configuration
 - **Total Storage**: Depends on available disk space
 - **Retention Policy**: Files persist until manually deleted
+
+---
 
 ## API Integration
 
@@ -117,12 +121,16 @@ The file management system integrates seamlessly with the Resume Optimization AP
 }
 ```
 
+---
+
 ## Security Considerations
 
 - Files are stored in a dedicated directory separate from application code
 - Access is controlled through the API endpoints
 - No direct file system access required for normal operations
 - Sensitive information should be removed before file deletion
+
+---
 
 ## Troubleshooting
 
@@ -142,6 +150,8 @@ The file management system integrates seamlessly with the Resume Optimization AP
 - Use Delete File endpoint to remove unnecessary documents
 - Archive important files to external storage
 - Monitor available disk space
+
+---
 
 ## Integration with Processing Pipeline
 
