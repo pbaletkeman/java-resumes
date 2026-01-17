@@ -107,20 +107,21 @@ Configuration Files:
 **Key Methods**:
 
 - `file2PDF()`: Markdown/HTML to PDF conversion
-- `uploadFiles()`: Process resume/job description and trigger optimization
+- `optimizeResume()`: Process resume/job description and trigger optimization
 - `getListFiles()`: List uploaded files
-- `downloadFile()`: Download specific file
+- `getFile()`: Download specific file
 - `deleteFile()`: Remove file
+- `healthCheck()`: API health status check
 
 **HTTP Endpoints**:
 
 ```
-POST   /upload                    - Optimize resume/cover letter
-POST   /markdownFile2PDF          - Convert markdown to PDF
-GET    /files                     - List all files
-GET    /files/{filename}          - Download file
-DELETE /files/{filename}          - Delete file
-POST   /delete-all                - Clear all uploads
+POST   /api/upload                - Optimize resume/cover letter
+POST   /api/markdownFile2PDF      - Convert markdown to PDF
+GET    /api/files                 - List all files
+GET    /api/files/{filename}      - Download file
+DELETE /api/files/{filename}      - Delete file
+GET    /api/health                - Health check
 ```
 
 **Guidelines**:
