@@ -79,7 +79,7 @@ Java Resumes leverages Large Language Models (LLMs) to streamline the entire pro
 
 ### Workflow
 
-```
+```plaintext
 User Input (Job Description + Resume)
          ↓
   Frontend (React + PrimeReact)
@@ -101,7 +101,7 @@ Generated Documents (MD + PDF)
 
 ### High-Level Architecture (ASCII)
 
-```
+```plaintext
 ┌─────────────────────────────────────────────────────────────────────┐
 │                         USER BROWSER                                │
 │                    (Chrome, Firefox, Safari)                        │
@@ -110,49 +110,49 @@ Generated Documents (MD + PDF)
                                  ↓
 ┌─────────────────────────────────────────────────────────────────────┐
 │                      FRONTEND (Port 80/3000)                        │
-│  ┌───────────────────────────────────────────────────────────┐     │
-│  │  React 19 + TypeScript + PrimeReact + Tailwind CSS       │     │
-│  │  - Main Content Tab (Upload & Process)                   │     │
-│  │  - Additional Tools Tab (Markdown to PDF)                │     │
-│  │  - File History Panel (List, Download, Delete)           │     │
-│  │  - Theme Toggle (Light/Dark)                             │     │
-│  └───────────────────────────────────────────────────────────┘     │
+│  ┌───────────────────────────────────────────────────────────┐      │
+│  │  React 19 + TypeScript + PrimeReact + Tailwind CSS        │      │
+│  │  - Main Content Tab (Upload & Process)                    │      │
+│  │  - Additional Tools Tab (Markdown to PDF)                 │      │
+│  │  - File History Panel (List, Download, Delete)            │      │
+│  │  - Theme Toggle (Light/Dark)                              │      │
+│  └───────────────────────────────────────────────────────────┘      │
 │                      Nginx (Reverse Proxy)                          │
 └────────────────────────────────┬────────────────────────────────────┘
                                  │ REST API (JSON)
                                  ↓
 ┌─────────────────────────────────────────────────────────────────────┐
 │                       BACKEND (Port 8080)                           │
-│  ┌───────────────────────────────────────────────────────────┐     │
-│  │  Spring Boot 3.5.1 + Java 17 + Gradle                    │     │
-│  │  ┌─────────────────────────────────────────────────┐     │     │
-│  │  │  Controller Layer (REST Endpoints)              │     │     │
-│  │  │  - ResumeController                             │     │     │
-│  │  │  - /upload, /files/*, /markdownFile2PDF        │     │     │
-│  │  └─────────────────────────────────────────────────┘     │     │
-│  │  ┌─────────────────────────────────────────────────┐     │     │
-│  │  │  Service Layer (Business Logic)                 │     │     │
-│  │  │  - FilesStorageService                          │     │     │
-│  │  │  - ApiService (LLM Integration)                 │     │     │
-│  │  └─────────────────────────────────────────────────┘     │     │
-│  │  ┌─────────────────────────────────────────────────┐     │     │
-│  │  │  Utilities                                      │     │     │
-│  │  │  - HtmlToPdf (Document Conversion)              │     │     │
-│  │  │  - File Management (Upload/Download/Delete)     │     │     │
-│  │  └─────────────────────────────────────────────────┘     │     │
-│  └───────────────────────────────────────────────────────────┘     │
+│  ┌───────────────────────────────────────────────────────────┐      │
+│  │  Spring Boot 3.5.1 + Java 17 + Gradle                     │      │
+│  │  ┌─────────────────────────────────────────────────┐      │      │
+│  │  │  Controller Layer (REST Endpoints)              │      │      │
+│  │  │  - ResumeController                             │      │      │
+│  │  │  - /upload, /files/*, /markdownFile2PDF         │      │      │
+│  │  └─────────────────────────────────────────────────┘      │      │
+│  │  ┌─────────────────────────────────────────────────┐      │      │
+│  │  │  Service Layer (Business Logic)                 │      │      │
+│  │  │  - FilesStorageService                          │      │      │
+│  │  │  - ApiService (LLM Integration)                 │      │      │
+│  │  └─────────────────────────────────────────────────┘      │      │
+│  │  ┌─────────────────────────────────────────────────┐      │      │
+│  │  │  Utilities                                      │      │      │
+│  │  │  - HtmlToPdf (Document Conversion)              │      │      │
+│  │  │  - File Management (Upload/Download/Delete)     │      │      │
+│  │  └─────────────────────────────────────────────────┘      │      │
+│  └───────────────────────────────────────────────────────────┘      │
 └────────────────────────────────┬────────────────────────────────────┘
                                  │ HTTP REST API
                                  ↓
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    LLM SERVICE (Port 11434/1234)                    │
-│  ┌───────────────────────────────────────────────────────────┐     │
-│  │  Ollama / LM Studio / OpenAI                              │     │
-│  │  - Model: gemma-3-4b-it / llama3 / gpt-4                 │     │
-│  │  - Resume Optimization                                    │     │
-│  │  - Cover Letter Generation                                │     │
-│  │  - Skills Gap Analysis                                    │     │
-│  └───────────────────────────────────────────────────────────┘     │
+│  ┌───────────────────────────────────────────────────────────┐      │
+│  │  Ollama / LM Studio / OpenAI                              │      │
+│  │  - Model: gemma-3-4b-it / llama3 / gpt-4                  │      │
+│  │  - Resume Optimization                                    │      │
+│  │  - Cover Letter Generation                                │      │
+│  │  - Skills Gap Analysis                                    │      │
+│  └───────────────────────────────────────────────────────────┘      │
 └─────────────────────────────────────────────────────────────────────┘
                                  ↓
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -403,81 +403,81 @@ docker compose exec frontend sh
 java-resumes/
 ├── frontend/                          # React frontend application
 │   ├── src/
-│   │   ├── components/               # React components
-│   │   │   ├── Layout/              # Layout components (Navbar, Sidebar)
-│   │   │   ├── Tabs/                # Tab components (MainContent, Tools)
-│   │   │   ├── Forms/               # Form components
-│   │   │   └── Common/              # Reusable components
-│   │   ├── pages/                   # Page components
-│   │   ├── hooks/                   # Custom React hooks
-│   │   ├── services/                # API service layer
-│   │   ├── context/                 # React Context providers
-│   │   ├── utils/                   # Utility functions
-│   │   ├── assets/                  # Static assets
-│   │   ├── App.tsx                  # Root component
-│   │   ├── main.tsx                 # Application entry point
-│   │   └── index.css                # Global styles
-│   ├── public/                      # Public assets
-│   ├── tests/                       # Frontend tests
-│   ├── Dockerfile                   # Frontend Docker configuration
-│   ├── nginx.conf                   # Nginx configuration
-│   ├── package.json                 # Node dependencies
-│   ├── vite.config.ts               # Vite configuration
-│   ├── tsconfig.json                # TypeScript configuration
-│   ├── tailwind.config.js           # Tailwind CSS configuration
-│   ├── .env.example                 # Environment variables template
-│   └── README.md                    # Frontend documentation
+│   │   ├── components/                # React components
+│   │   │   ├── Layout/                # Layout components (Navbar, Sidebar)
+│   │   │   ├── Tabs/                  # Tab components (MainContent, Tools)
+│   │   │   ├── Forms/                 # Form components
+│   │   │   └── Common/                # Reusable components
+│   │   ├── pages/                     # Page components
+│   │   ├── hooks/                     # Custom React hooks
+│   │   ├── services/                  # API service layer
+│   │   ├── context/                   # React Context providers
+│   │   ├── utils/                     # Utility functions
+│   │   ├── assets/                    # Static assets
+│   │   ├── App.tsx                    # Root component
+│   │   ├── main.tsx                   # Application entry point
+│   │   └── index.css                  # Global styles
+│   ├── public/                        # Public assets
+│   ├── tests/                         # Frontend tests
+│   ├── Dockerfile                     # Frontend Docker configuration
+│   ├── nginx.conf                     # Nginx configuration
+│   ├── package.json                   # Node dependencies
+│   ├── vite.config.ts                 # Vite configuration
+│   ├── tsconfig.json                  # TypeScript configuration
+│   ├── tailwind.config.js             # Tailwind CSS configuration
+│   ├── .env.example                   # Environment variables template
+│   └── README.md                      # Frontend documentation
 │
-├── src/                             # Backend source code
+├── src/                               # Backend source code
 │   ├── main/
 │   │   ├── java/ca/letkeman/resumes/
-│   │   │   ├── controller/         # REST API controllers
+│   │   │   ├── controller/            # REST API controllers
 │   │   │   │   └── ResumeController.java
-│   │   │   ├── service/            # Business logic services
+│   │   │   ├── service/               # Business logic services
 │   │   │   │   ├── FilesStorageService.java
 │   │   │   │   └── FilesStorageServiceImpl.java
-│   │   │   ├── model/              # Data models
+│   │   │   ├── model/                 # Data models
 │   │   │   │   ├── Optimize.java
 │   │   │   │   └── FileInfo.java
-│   │   │   ├── optimizer/          # LLM integration
+│   │   │   ├── optimizer/             # LLM integration
 │   │   │   │   ├── ApiService.java
 │   │   │   │   ├── HtmlToPdf.java
 │   │   │   │   ├── ChatBody.java
 │   │   │   │   └── responses/
-│   │   │   ├── message/            # Response messages
-│   │   │   ├── Config.java         # Configuration
-│   │   │   ├── Utility.java        # Utility methods
+│   │   │   ├── message/               # Response messages
+│   │   │   ├── Config.java            # Configuration
+│   │   │   ├── Utility.java           # Utility methods
 │   │   │   └── RestServiceApplication.java
 │   │   └── resources/
-│   │       ├── application.yml     # Spring Boot configuration
-│   │       └── static/            # Static resources
-│   └── test/                       # Backend tests
+│   │       ├── application.yml        # Spring Boot configuration
+│   │       └── static/                # Static resources
+│   └── test/                          # Backend tests
 │       └── java/ca/letkeman/resumes/
 │
-├── config/                          # Configuration files
+├── config/                            # Configuration files
 │   └── checkstyle/
-│       └── checkstyle.xml          # Checkstyle rules
+│       └── checkstyle.xml             # Checkstyle rules
 │
-├── docs/                           # Documentation
-│   ├── README.md                   # Detailed documentation
-│   └── Architecture.md             # Architecture documentation
+├── docs/                              # Documentation
+│   ├── README.md                      # Detailed documentation
+│   └── Architecture.md                # Architecture documentation
 │
-├── gradle/                         # Gradle wrapper
-├── files/                          # File storage (generated)
-├── build.gradle                    # Gradle build configuration
-├── settings.gradle                 # Gradle settings
-├── gradle.properties               # Gradle properties
-├── gradlew                         # Gradle wrapper script (Unix)
-├── gradlew.bat                     # Gradle wrapper script (Windows)
-├── Dockerfile                      # Backend Docker configuration
-├── docker-compose.yml              # Docker Compose orchestration
-├── config.json                     # LLM configuration
-├── .env.example                    # Environment variables template
-├── .gitignore                      # Git ignore rules
-├── README.md                       # This file
-├── BACKEND_README.md               # Backend-specific documentation
-├── copilot-instructions.md         # Developer guidelines
-└── PRD-PRIMEREACT-DOCKER-v2.md    # Product requirements document
+├── gradle/                            # Gradle wrapper
+├── files/                             # File storage (generated)
+├── build.gradle                       # Gradle build configuration
+├── settings.gradle                    # Gradle settings
+├── gradle.properties                  # Gradle properties
+├── gradlew                            # Gradle wrapper script (Unix)
+├── gradlew.bat                        # Gradle wrapper script (Windows)
+├── Dockerfile                         # Backend Docker configuration
+├── docker-compose.yml                 # Docker Compose orchestration
+├── config.json                        # LLM configuration
+├── .env.example                       # Environment variables template
+├── .gitignore                         # Git ignore rules
+├── README.md                          # This file
+├── BACKEND_README.md                  # Backend-specific documentation
+├── copilot-instructions.md            # Developer guidelines
+└── PRD-PRIMEREACT-DOCKER-v2.md        # Product requirements document
 ```
 
 ---
@@ -658,6 +658,7 @@ See [frontend/README.md](frontend/README.md) for detailed frontend documentation
    ```
 
 4. **View logs**:
+
    ```bash
    docker compose logs -f
    ```
@@ -725,18 +726,18 @@ LLM_APIKEY=sk-your-production-key
 
 ### File Management
 
-| Method     | Endpoint            | Description            | Request Body | Response      |
-| ---------- | ------------------- | ---------------------- | ------------ | ------------- |
-| **GET**    | `/files`            | List all files         | -            | `FileInfo[]`  |
-| **GET**    | `/files/{filename}` | Download specific file | -            | `Binary`      |
-| **DELETE** | `/files/{filename}` | Delete specific file   | -            | `ResponseMsg` |
+| Method     | Endpoint                | Description            | Request Body | Response      |
+| ---------- | ----------------------- | ---------------------- | ------------ | ------------- |
+| **GET**    | `/api/files`            | List all files         | -            | `FileInfo[]`  |
+| **GET**    | `/api/files/{filename}` | Download specific file | -            | `Binary`      |
+| **DELETE** | `/api/files/{filename}` | Delete specific file   | -            | `ResponseMsg` |
 
 ### Document Processing
 
-| Method   | Endpoint            | Description            | Request Body    | Response       |
-| -------- | ------------------- | ---------------------- | --------------- | -------------- |
-| **POST** | `/upload`           | Upload & optimize docs | `Optimize`      | `ResponseMsg`  |
-| **POST** | `/markdownFile2PDF` | Convert MD to PDF      | `MultipartFile` | `Binary (PDF)` |
+| Method   | Endpoint                | Description            | Request Body    | Response       |
+| -------- | ----------------------- | ---------------------- | --------------- | -------------- |
+| **POST** | `/api/upload`           | Upload & optimize docs | `Optimize`      | `ResponseMsg`  |
+| **POST** | `/api/markdownFile2PDF` | Convert MD to PDF      | `MultipartFile` | `Binary (PDF)` |
 
 ### System
 
@@ -749,7 +750,7 @@ LLM_APIKEY=sk-your-production-key
 **Upload and Optimize Resume:**
 
 ```bash
-curl -X POST http://localhost:8080/upload \
+curl -X POST http://localhost:8080/api/upload \
   -H "Content-Type: application/json" \
   -d '{
     "jobDescription": "We are looking for a Senior Java Developer...",
@@ -762,25 +763,25 @@ curl -X POST http://localhost:8080/upload \
 **List Files:**
 
 ```bash
-curl http://localhost:8080/files
+curl http://localhost:8080/api/files
 ```
 
 **Download File:**
 
 ```bash
-curl http://localhost:8080/files/resume-optimized.md -o resume.md
+curl http://localhost:8080/api/files/resume-optimized.md -o resume.md
 ```
 
 **Delete File:**
 
 ```bash
-curl -X DELETE http://localhost:8080/files/old-resume.pdf
+curl -X DELETE http://localhost:8080/api/files/old-resume.pdf
 ```
 
 **Convert Markdown to PDF:**
 
 ```bash
-curl -X POST http://localhost:8080/markdownFile2PDF \
+curl -X POST http://localhost:8080/api/markdownFile2PDF \
   -F "file=@resume.md" \
   --output resume.pdf
 ```
@@ -1527,10 +1528,10 @@ We welcome contributions! Please follow these guidelines:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-```
+```plaintext
 MIT License
 
-Copyright (c) 2025 Pete Letkeman
+Copyright (c) 2026 Pete Letkeman
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1630,7 +1631,7 @@ Complete documentation is available in the [docs/](docs/) directory and [.github
 
 ## 👥 Authors
 
-**Pete Letkeman**
+### Pete Letkeman
 
 - GitHub: [@pbaletkeman](https://github.com/pbaletkeman)
 - Project: [java-resumes](https://github.com/pbaletkeman/java-resumes)
@@ -1658,4 +1659,4 @@ For support, please:
 
 ---
 
-**Made with ❤️ using Java, Spring Boot, React, and AI**
+### Made with ❤️ using Java, Spring Boot, React, and AI

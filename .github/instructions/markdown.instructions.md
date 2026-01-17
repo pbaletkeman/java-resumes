@@ -787,7 +787,7 @@ The project copilot-instructions.md demonstrates:
 - [ ] No broken internal or external links
 
 **Code and Examples:**
-- [ ] All code blocks have language specification
+- [ ] All code blocks have language specification, fall back to `plaintext` if unknown
 - [ ] Code examples are complete and functional
 - [ ] Examples match current code patterns
 - [ ] Comments explain complex logic
