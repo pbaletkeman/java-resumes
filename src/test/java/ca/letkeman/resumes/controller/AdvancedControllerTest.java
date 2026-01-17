@@ -22,7 +22,7 @@ class AdvancedControllerTest {
     void test_successful_markdown_to_pdf_conversion() throws Exception {
         MockMultipartFile file = new MockMultipartFile(
                 "file", "test.md", "text/markdown", "# Test Markdown".getBytes());
-        mockMvc.perform(multipart("/markdownFile2PDF").file(file))
+        mockMvc.perform(multipart("/api/markdownFile2PDF").file(file))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("file successfully converted"));
     }
@@ -32,14 +32,14 @@ class AdvancedControllerTest {
         // Simulate a file that will fail conversion (e.g., empty or invalid content)
         MockMultipartFile file = new MockMultipartFile(
                 "file", "bad.md", "text/markdown", new byte[0]);
-        mockMvc.perform(multipart("/markdownFile2PDF").file(file))
+        mockMvc.perform(multipart("/api/markdownFile2PDF").file(file))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.message").value("No file/invalid file provided"));
     }
 
     @Test
     void test_handles_null_file_parameter() throws Exception {
-        mockMvc.perform(multipart("/markdownFile2PDF"))
+        mockMvc.perform(multipart("/api/markdownFile2PDF"))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.message").value("No file/invalid file provided"));
     }
@@ -51,7 +51,7 @@ class AdvancedControllerTest {
         MockMultipartFile job = new MockMultipartFile(
             "job", "jd.pdf", "application/pdf", "dummy job".getBytes());
         String optimizeJson = "{\"resume\":\"\",\"jobDescription\":\"\"}";
-        mockMvc.perform(multipart("/upload")
+        mockMvc.perform(multipart("/api/upload")
                 .file(resume)
                 .file(job)
                 .param("optimize", optimizeJson))
@@ -68,7 +68,7 @@ class AdvancedControllerTest {
         String optimizeJson = "{\"company\":\"company\",\"jobTitle\":\"title\",\"model\":\"model\",\"temperature\":0.01,\"promptType\":[\"Resume\"],\"jobDescription\":\"\",\"resume\":\"\"}";
 
 
-        mockMvc.perform(multipart("/upload")
+        mockMvc.perform(multipart("/api/upload")
                 .file(resume)
                 .file(job)
                 .param("optimize", optimizeJson))
@@ -78,7 +78,7 @@ class AdvancedControllerTest {
 
     @Test
     void test_getListFiles_with_files() throws Exception {
-        mockMvc.perform(get("/get-files"))
+        mockMvc.perform(get("/api/files"))
             .andExpect(status().isOk())
             .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
     }
@@ -90,7 +90,7 @@ class AdvancedControllerTest {
         MockMultipartFile job = new MockMultipartFile(
                 "job", "jd.pdf", "application/pdf", "dummy job".getBytes());
         String invalidOptimize = "{invalid}";
-        mockMvc.perform(multipart("/upload")
+        mockMvc.perform(multipart("/api/upload")
                 .file(resume)
                 .file(job)
                 .param("optimize", invalidOptimize))
@@ -101,7 +101,7 @@ class AdvancedControllerTest {
     @Test
     void test_getListFiles_empty() throws Exception {
         // This test assumes the storage is empty; may need to clear storage before running
-        mockMvc.perform(get("/get-files"))
+        mockMvc.perform(get("/api/files"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
     }
@@ -109,21 +109,21 @@ class AdvancedControllerTest {
     @Test
     void test_getFile() throws Exception {
         // This test assumes a file named "test.md" exists in storage
-        mockMvc.perform(get("/files/test.md"))
+        mockMvc.perform(get("/api/files/test.md"))
                 .andExpect(status().isOk());
     }
 
     @Test
     void test_deleteFile_success() throws Exception {
         // This test assumes a file named "resume.pdf" exists in storage
-        mockMvc.perform(delete("/files/resume.pdf"))
+        mockMvc.perform(delete("/api/files/resume.pdf"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value(org.hamcrest.Matchers.containsString("Delete the file successfully")));
     }
 
     @Test
     void test_deleteFile_not_found() throws Exception {
-        mockMvc.perform(delete("/files/nonexistent.pdf"))
+        mockMvc.perform(delete("/api/files/nonexistent.pdf"))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.message").value("The file does not exist!"));
     }

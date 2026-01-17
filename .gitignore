@@ -84,3 +84,23 @@ fabric.properties
 /output/
 /uploads/
 /frontend/.qodo/
+
+# Docker volumes and temp files
+.docker/
+docker-compose.override.yml
+
+# Environment files (keep .example)
+.env
+!.env.example
+
+# Frontend build artifacts
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env
+!frontend/.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+

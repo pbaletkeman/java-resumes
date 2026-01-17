@@ -20,6 +20,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,13 +36,15 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5173", "http://localhost:80"})
 @RestController
+@RequestMapping("/api")
 public final class ResumeController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ResumeController.class);
@@ -138,7 +142,7 @@ public final class ResumeController {
     }
   }
 
-  @GetMapping("/get-files")
+  @GetMapping("/files")
   public ResponseEntity<List<FileInfo>> getListFiles() {
     storageService.setConfigRoot(root);
     final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -193,5 +197,14 @@ public final class ResumeController {
       message = "Could not delete the file: " + filename + ". Error: " + e.getMessage();
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseMessage(message));
     }
+  }
+
+  @GetMapping("/health")
+  public ResponseEntity<Map<String, Object>> healthCheck() {
+    Map<String, Object> health = new HashMap<>();
+    health.put("status", "UP");
+    health.put("timestamp", LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
+    health.put("service", "Resume Optimization API");
+    return ResponseEntity.ok(health);
   }
 }

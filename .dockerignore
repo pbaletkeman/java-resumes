@@ -1,0 +1,45 @@
+# Build artifacts
+build/
+.gradle/
+out/
+target/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Gradle wrapper (we'll use the image's gradle)
+gradle/
+gradlew
+gradlew.bat
+
+# Testing
+.nyc_output/
+
+# Git
+.git/
+.gitignore
+.github/
+
+# Documentation
+README.md
+*.md
+docs/
+prompts/
+sample/
+bruno/
+
+# Frontend
+frontend/
+
+# Checkstyle reports
+checkstyle-output.txt
+build/reports/
