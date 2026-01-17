@@ -168,11 +168,12 @@ export const DocumentUploadForm: React.FC = () => {
             {inputMode === INPUT_MODES.PASTE ? (
               <div
                 className="w-full"
-                style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+                style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}
               >
                 <div
-                  className="field w-full"
+                  className="field"
                   style={{
+                    flex: 1,
                     display: 'block',
                     backgroundColor: '#f9fafb',
                     padding: '1rem',
@@ -200,8 +201,9 @@ export const DocumentUploadForm: React.FC = () => {
                 </div>
 
                 <div
-                  className="field w-full"
+                  className="field"
                   style={{
+                    flex: 1,
                     display: 'block',
                     backgroundColor: '#ffffff',
                     padding: '1rem',
