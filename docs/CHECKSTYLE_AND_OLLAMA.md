@@ -39,28 +39,24 @@ The project currently has **98 checkstyle warnings** that need to be fixed. Thes
 ### Key Rules Enforced
 
 1. **Naming Conventions**
-
    - Constants: `UPPER_CASE`
    - Variables/Methods: `camelCase`
    - Classes: `PascalCase`
    - Packages: `lowercase.with.dots`
 
 2. **Code Structure**
-
    - Line max length: 120 characters
    - Method max length: 150 lines
    - Max parameters: 7
    - All if/else statements must use braces
 
 3. **Formatting**
-
    - 4-space indentation
    - No tabs allowed
    - Newline at end of file
    - Whitespace around operators
 
 4. **Imports**
-
    - No star imports
    - No static imports
    - No redundant imports
@@ -89,20 +85,17 @@ llm:
 ### Key Components
 
 1. **ApiService** (`src/main/java/ca/letkeman/resumes/optimizer/ApiService.java`)
-
    - Handles API communication with Ollama
    - Uses HTTP POST with JSON payloads
    - Supports chat completions endpoint
    - Proper error handling and logging
 
 2. **Request Models**
-
    - `ChatBody.java`: Request payload structure
    - `Message.java`: Individual messages in conversation
    - Proper serialization/deserialization with Gson
 
 3. **Response Models**
-
    - `LLMResponse.java`: Full API response
    - `Choice.java`: Individual response choice
    - `Message.java`: Response message content
@@ -111,7 +104,7 @@ llm:
 
 4. **Integration Points**
    - `Optimize.java`: Main optimization request model
-   - `AdvancedController.java`: REST API endpoint
+   - `ResumeController.java`: REST API endpoint
    - Prompt templates in `prompts/` directory
 
 ### How to Use with Ollama

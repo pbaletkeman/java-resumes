@@ -175,7 +175,7 @@ graph TB
         PrimeReact[PrimeReact Components]
         Axios[Axios HTTP Client]
         Nginx[Nginx Web Server]
-        
+
         React --> PrimeReact
         React --> Axios
         Nginx --> React
@@ -188,7 +188,7 @@ graph TB
         Storage[File Storage Service]
         ApiService[LLM API Service]
         Utils[Utilities]
-        
+
         SpringBoot --> Controller
         Controller --> Service
         Service --> Storage
@@ -199,7 +199,7 @@ graph TB
     subgraph "LLM Service - Port 11434"
         LLM[Ollama/LM Studio/OpenAI]
         Model[AI Models]
-        
+
         LLM --> Model
     end
 
@@ -227,14 +227,14 @@ graph LR
         Frontend[Frontend Container<br/>nginx:alpine<br/>Port 80]
         Backend[Backend Container<br/>eclipse-temurin:17-jre<br/>Port 8080]
         Volume[(Volume:<br/>backend-files)]
-        
+
         Frontend -->|HTTP API Calls| Backend
         Backend -->|Store/Retrieve| Volume
     end
-    
+
     User[User Browser] -->|Port 80| Frontend
     Backend -->|External API| LLM[LLM Service<br/>localhost:11434]
-    
+
     style Frontend fill:#61dafb
     style Backend fill:#6db33f
     style Volume fill:#ffd93d
@@ -247,53 +247,53 @@ graph LR
 
 ### Frontend Technologies
 
-| Component            | Technology         | Version | Purpose                           |
-| -------------------- | ------------------ | ------- | --------------------------------- |
-| **Framework**        | React              | 19.2.0  | UI component library              |
-| **Language**         | TypeScript         | 5.9.3   | Type-safe JavaScript              |
-| **Build Tool**       | Vite               | 7.2.4   | Fast build and dev server         |
-| **UI Library**       | PrimeReact         | 10.9.7  | Professional UI components        |
-| **Icons**            | PrimeIcons         | 7.0.0   | Icon library                      |
-| **Styling**          | Tailwind CSS       | 4.1.18  | Utility-first CSS                 |
-| **HTTP Client**      | Axios              | 1.13.2  | API communication                 |
-| **Testing**          | Vitest             | 4.0.17  | Unit testing framework            |
-| **Testing Library**  | React Testing Lib  | 16.3.1  | Component testing                 |
-| **Package Manager**  | npm                | 10+     | Dependency management             |
-| **Web Server**       | Nginx              | alpine  | Production web server             |
+| Component           | Technology        | Version | Purpose                    |
+| ------------------- | ----------------- | ------- | -------------------------- |
+| **Framework**       | React             | 19.2.0  | UI component library       |
+| **Language**        | TypeScript        | 5.9.3   | Type-safe JavaScript       |
+| **Build Tool**      | Vite              | 7.2.4   | Fast build and dev server  |
+| **UI Library**      | PrimeReact        | 10.9.7  | Professional UI components |
+| **Icons**           | PrimeIcons        | 7.0.0   | Icon library               |
+| **Styling**         | Tailwind CSS      | 4.1.18  | Utility-first CSS          |
+| **HTTP Client**     | Axios             | 1.13.2  | API communication          |
+| **Testing**         | Vitest            | 4.0.17  | Unit testing framework     |
+| **Testing Library** | React Testing Lib | 16.3.1  | Component testing          |
+| **Package Manager** | npm               | 10+     | Dependency management      |
+| **Web Server**      | Nginx             | alpine  | Production web server      |
 
 ### Backend Technologies
 
-| Component            | Technology         | Version | Purpose                           |
-| -------------------- | ------------------ | ------- | --------------------------------- |
-| **Language**         | Java               | 17 LTS  | Backend programming language      |
-| **Framework**        | Spring Boot        | 3.5.1   | Application framework             |
-| **Build Tool**       | Gradle             | 8.7     | Build automation                  |
-| **API Docs**         | SpringDoc OpenAPI  | 2.8.7   | Swagger/OpenAPI documentation     |
-| **PDF Generation**   | Flying Saucer      | 9.1.22  | HTML to PDF conversion            |
-| **Markdown Parser**  | CommonMark         | 0.24.0  | Markdown processing               |
-| **HTML Parser**      | Jsoup              | 1.15.4  | HTML parsing                      |
-| **JSON**             | Gson               | 2.13.1  | JSON serialization                |
-| **Testing**          | JUnit 5            | 5.x     | Unit testing framework            |
-| **Code Quality**     | Checkstyle         | 10.14.2 | Code style enforcement            |
+| Component           | Technology        | Version | Purpose                       |
+| ------------------- | ----------------- | ------- | ----------------------------- |
+| **Language**        | Java              | 17 LTS  | Backend programming language  |
+| **Framework**       | Spring Boot       | 3.5.1   | Application framework         |
+| **Build Tool**      | Gradle            | 8.7     | Build automation              |
+| **API Docs**        | SpringDoc OpenAPI | 2.8.7   | Swagger/OpenAPI documentation |
+| **PDF Generation**  | Flying Saucer     | 9.1.22  | HTML to PDF conversion        |
+| **Markdown Parser** | CommonMark        | 0.24.0  | Markdown processing           |
+| **HTML Parser**     | Jsoup             | 1.15.4  | HTML parsing                  |
+| **JSON**            | Gson              | 2.13.1  | JSON serialization            |
+| **Testing**         | JUnit 5           | 5.x     | Unit testing framework        |
+| **Code Quality**    | Checkstyle        | 10.14.2 | Code style enforcement        |
 
 ### DevOps & Infrastructure
 
-| Component            | Technology         | Version | Purpose                           |
-| -------------------- | ------------------ | ------- | --------------------------------- |
-| **Containerization** | Docker             | 20.10+  | Application containerization      |
-| **Orchestration**    | Docker Compose     | 2.0+    | Multi-container management        |
-| **Frontend Image**   | node:20-alpine     | latest  | Build stage                       |
-| **Frontend Runtime** | nginx:alpine       | latest  | Production runtime                |
-| **Backend Build**    | gradle:8.7-jdk17   | 8.7     | Build stage                       |
-| **Backend Runtime**  | eclipse-temurin:17 | 17-jre  | Production runtime                |
+| Component            | Technology         | Version | Purpose                      |
+| -------------------- | ------------------ | ------- | ---------------------------- |
+| **Containerization** | Docker             | 20.10+  | Application containerization |
+| **Orchestration**    | Docker Compose     | 2.0+    | Multi-container management   |
+| **Frontend Image**   | node:20-alpine     | latest  | Build stage                  |
+| **Frontend Runtime** | nginx:alpine       | latest  | Production runtime           |
+| **Backend Build**    | gradle:8.7-jdk17   | 8.7     | Build stage                  |
+| **Backend Runtime**  | eclipse-temurin:17 | 17-jre  | Production runtime           |
 
 ### AI/LLM Integration
 
-| Service          | Purpose                  | Default Port |
-| ---------------- | ------------------------ | ------------ |
-| **Ollama**       | Local LLM inference      | 11434        |
-| **LM Studio**    | Local LLM inference      | 1234         |
-| **OpenAI API**   | Cloud LLM service        | 443 (HTTPS)  |
+| Service        | Purpose             | Default Port |
+| -------------- | ------------------- | ------------ |
+| **Ollama**     | Local LLM inference | 11434        |
+| **LM Studio**  | Local LLM inference | 1234         |
+| **OpenAI API** | Cloud LLM service   | 443 (HTTPS)  |
 
 ---
 
@@ -327,12 +327,14 @@ Edit `config.json` in the root directory:
 ```
 
 **For Ollama (recommended):**
+
 ```bash
 ollama serve
 ollama pull gemma-3-4b-it
 ```
 
 **For LM Studio:**
+
 - Download and run LM Studio
 - Load a model (e.g., llama-3-8b)
 - Start the server (default port: 1234)
@@ -345,6 +347,7 @@ docker compose up --build
 ```
 
 This command will:
+
 1. Build the frontend Docker image (~5 minutes)
 2. Build the backend Docker image (~8 minutes)
 3. Start both containers
@@ -491,11 +494,13 @@ java-resumes/
 #### Setup Steps
 
 1. **Navigate to project root**:
+
    ```bash
    cd java-resumes
    ```
 
 2. **Configure LLM service** (edit `config.json`):
+
    ```json
    {
      "endpoint": "http://localhost:11434/v1/chat/completions",
@@ -505,16 +510,19 @@ java-resumes/
    ```
 
 3. **Build the application**:
+
    ```bash
    ./gradlew build
    ```
 
 4. **Run tests**:
+
    ```bash
    ./gradlew test
    ```
 
 5. **Start the backend**:
+
    ```bash
    ./gradlew bootRun
    ```
@@ -533,7 +541,7 @@ java-resumes/
 ./gradlew bootRun --continuous
 
 # Run specific test
-./gradlew test --tests AdvancedControllerTest
+./gradlew test --tests ResumeControllerTest
 
 # Check code style
 ./gradlew checkstyleMain checkstyleTest
@@ -557,26 +565,31 @@ See [BACKEND_README.md](BACKEND_README.md) for detailed backend documentation.
 #### Setup Steps
 
 1. **Navigate to frontend directory**:
+
    ```bash
    cd frontend
    ```
 
 2. **Install dependencies**:
+
    ```bash
    npm install
    ```
 
 3. **Configure environment** (copy and edit `.env`):
+
    ```bash
    cp .env.example .env
    ```
 
    Edit `.env`:
+
    ```env
    VITE_API_BASE_URL=http://localhost:8080
    ```
 
 4. **Start development server**:
+
    ```bash
    npm run dev
    ```
@@ -624,17 +637,20 @@ See [frontend/README.md](frontend/README.md) for detailed frontend documentation
 ### Using Docker Compose (Recommended)
 
 1. **Prepare configuration**:
+
    ```bash
    # Edit config.json with production LLM endpoint
    # Set environment variables in .env file
    ```
 
 2. **Build and start**:
+
    ```bash
    docker compose up --build -d
    ```
 
 3. **Verify health**:
+
    ```bash
    curl http://localhost:8080/api/health
    curl http://localhost/
@@ -677,11 +693,13 @@ rsync -avz dist/ user@server:/var/www/java-resumes/
 ### Environment-Specific Configuration
 
 **Development** (`application.yml`):
+
 - Max file size: 500KB
 - CORS: http://localhost:3000
 - Logging: DEBUG level
 
 **Production** (environment variables):
+
 ```bash
 SPRING_PROFILES_ACTIVE=prod
 UPLOAD_PATH=/data/files
@@ -706,28 +724,29 @@ LLM_APIKEY=sk-your-production-key
 
 ### File Management
 
-| Method     | Endpoint            | Description              | Request Body | Response        |
-| ---------- | ------------------- | ------------------------ | ------------ | --------------- |
-| **GET**    | `/files`            | List all files           | -            | `FileInfo[]`    |
-| **GET**    | `/files/{filename}` | Download specific file   | -            | `Binary`        |
-| **DELETE** | `/files/{filename}` | Delete specific file     | -            | `ResponseMsg`   |
+| Method     | Endpoint            | Description            | Request Body | Response      |
+| ---------- | ------------------- | ---------------------- | ------------ | ------------- |
+| **GET**    | `/files`            | List all files         | -            | `FileInfo[]`  |
+| **GET**    | `/files/{filename}` | Download specific file | -            | `Binary`      |
+| **DELETE** | `/files/{filename}` | Delete specific file   | -            | `ResponseMsg` |
 
 ### Document Processing
 
-| Method   | Endpoint                | Description              | Request Body     | Response          |
-| -------- | ----------------------- | ------------------------ | ---------------- | ----------------- |
-| **POST** | `/upload`               | Upload & optimize docs   | `Optimize`       | `ResponseMsg`     |
-| **POST** | `/markdownFile2PDF`     | Convert MD to PDF        | `MultipartFile`  | `Binary (PDF)`    |
+| Method   | Endpoint            | Description            | Request Body    | Response       |
+| -------- | ------------------- | ---------------------- | --------------- | -------------- |
+| **POST** | `/upload`           | Upload & optimize docs | `Optimize`      | `ResponseMsg`  |
+| **POST** | `/markdownFile2PDF` | Convert MD to PDF      | `MultipartFile` | `Binary (PDF)` |
 
 ### System
 
-| Method   | Endpoint     | Description       | Request Body | Response          |
-| -------- | ------------ | ----------------- | ------------ | ----------------- |
-| **GET**  | `/api/health`| Health check      | -            | `{"status":"UP"}` |
+| Method  | Endpoint      | Description  | Request Body | Response          |
+| ------- | ------------- | ------------ | ------------ | ----------------- |
+| **GET** | `/api/health` | Health check | -            | `{"status":"UP"}` |
 
 ### Request Examples
 
 **Upload and Optimize Resume:**
+
 ```bash
 curl -X POST http://localhost:8080/upload \
   -H "Content-Type: application/json" \
@@ -740,21 +759,25 @@ curl -X POST http://localhost:8080/upload \
 ```
 
 **List Files:**
+
 ```bash
 curl http://localhost:8080/files
 ```
 
 **Download File:**
+
 ```bash
 curl http://localhost:8080/files/resume-optimized.md -o resume.md
 ```
 
 **Delete File:**
+
 ```bash
 curl -X DELETE http://localhost:8080/files/old-resume.pdf
 ```
 
 **Convert Markdown to PDF:**
+
 ```bash
 curl -X POST http://localhost:8080/markdownFile2PDF \
   -F "file=@resume.md" \
@@ -762,6 +785,7 @@ curl -X POST http://localhost:8080/markdownFile2PDF \
 ```
 
 **Health Check:**
+
 ```bash
 curl http://localhost:8080/api/health
 ```
@@ -773,18 +797,21 @@ For complete API documentation, visit: http://localhost:8080/swagger-ui/index.ht
 ## ✨ Features
 
 ### Resume Optimization
+
 - ✅ AI-powered resume tailoring based on job descriptions
 - ✅ Keyword optimization for ATS (Applicant Tracking Systems)
 - ✅ Content restructuring and enhancement
 - ✅ Skills highlighting and matching
 
 ### Cover Letter Generation
+
 - ✅ Automated cover letter creation from resume and job description
 - ✅ Personalized and professional tone
 - ✅ Company-specific customization
 - ✅ Markdown and PDF export
 
 ### Document Management
+
 - ✅ File upload (drag & drop or browse)
 - ✅ Text paste input support
 - ✅ File listing with metadata
@@ -793,6 +820,7 @@ For complete API documentation, visit: http://localhost:8080/swagger-ui/index.ht
 - ✅ Persistent file storage
 
 ### User Interface
+
 - ✅ Modern, responsive design (320px - 1920px)
 - ✅ Tab-based navigation (Main Content, Additional Tools)
 - ✅ Always-visible file history panel
@@ -803,12 +831,14 @@ For complete API documentation, visit: http://localhost:8080/swagger-ui/index.ht
 - ✅ Error boundaries
 
 ### Additional Tools
+
 - ✅ Markdown to PDF conversion
 - ✅ Skills gap analysis
 - ✅ Certification recommendations
 - ✅ Experience highlighting
 
 ### Developer Features
+
 - ✅ Comprehensive REST API
 - ✅ OpenAPI/Swagger documentation
 - ✅ Full test coverage (80%+)
@@ -824,43 +854,43 @@ For complete API documentation, visit: http://localhost:8080/swagger-ui/index.ht
 
 ![Main Content Tab - Upload Interface](https://via.placeholder.com/800x500/4A90E2/ffffff?text=Main+Content+Tab+-+Upload+%26+Process)
 
-*Upload job descriptions and resumes via text paste or file upload. Create optimized resumes and cover letters with AI.*
+_Upload job descriptions and resumes via text paste or file upload. Create optimized resumes and cover letters with AI._
 
 ### File History Panel
 
 ![File History Panel](https://via.placeholder.com/300x500/50C878/ffffff?text=File+History+Panel)
 
-*Always-visible panel showing all uploaded and generated files with download and delete options.*
+_Always-visible panel showing all uploaded and generated files with download and delete options._
 
 ### Additional Tools Tab - Markdown to PDF
 
 ![Additional Tools - Markdown to PDF](https://via.placeholder.com/800x500/FF6B6B/ffffff?text=Markdown+to+PDF+Converter)
 
-*Convert markdown documents to professionally formatted PDFs.*
+_Convert markdown documents to professionally formatted PDFs._
 
 ### Light Theme
 
 ![Light Theme](https://via.placeholder.com/800x500/F0F0F0/333333?text=Light+Theme)
 
-*Clean and professional light theme for comfortable daytime use.*
+_Clean and professional light theme for comfortable daytime use._
 
 ### Dark Theme
 
 ![Dark Theme](https://via.placeholder.com/800x500/1E1E1E/FFFFFF?text=Dark+Theme)
 
-*Modern dark theme for reduced eye strain in low-light environments.*
+_Modern dark theme for reduced eye strain in low-light environments._
 
 ### API Documentation (Swagger UI)
 
 ![Swagger UI](https://github.com/user-attachments/assets/930b18cd-d0e8-4088-8f54-dafb1792e523)
 
-*Interactive API documentation with try-it-out functionality.*
+_Interactive API documentation with try-it-out functionality._
 
 ### Web Interface (Spotlight)
 
 ![Spotlight UI](https://github.com/user-attachments/assets/d6fb204f-8ac4-446e-b853-8a5d8e75d02e)
 
-*Original Spotlight web interface showing resume optimization features.*
+_Original Spotlight web interface showing resume optimization features._
 
 ---
 
@@ -869,24 +899,28 @@ For complete API documentation, visit: http://localhost:8080/swagger-ui/index.ht
 ### Backend Testing
 
 **Run all tests:**
+
 ```bash
 ./gradlew test
 ```
 
 **Run specific test class:**
+
 ```bash
-./gradlew test --tests AdvancedControllerTest
+./gradlew test --tests ResumeControllerTest
 ./gradlew test --tests OptimizeTest
 ./gradlew test --tests ApiServiceTest
 ```
 
 **Generate coverage report:**
+
 ```bash
 ./gradlew test jacocoTestReport
 # Report location: build/reports/jacoco/test/html/index.html
 ```
 
 **Test coverage targets:**
+
 - Minimum coverage: 80%
 - Controller tests: REST endpoint validation
 - Service tests: Business logic validation
@@ -895,23 +929,27 @@ For complete API documentation, visit: http://localhost:8080/swagger-ui/index.ht
 ### Frontend Testing
 
 **Run all tests:**
+
 ```bash
 cd frontend
 npm run test
 ```
 
 **Run tests with UI:**
+
 ```bash
 npm run test:ui
 ```
 
 **Generate coverage report:**
+
 ```bash
 npm run test:coverage
 # Report location: frontend/coverage/index.html
 ```
 
 **Test coverage targets:**
+
 - Minimum coverage: 80%
 - Component tests: UI component behavior
 - Hook tests: Custom React hooks
@@ -921,11 +959,13 @@ npm run test:coverage
 ### Manual Testing
 
 **Backend health check:**
+
 ```bash
 curl http://localhost:8080/api/health
 ```
 
 **Frontend accessibility:**
+
 ```bash
 # Open in browser
 http://localhost:3000
@@ -954,6 +994,7 @@ http://localhost:3000
 ```
 
 **Standards:**
+
 - Google Java Style Guide
 - Maximum line length: 100 characters
 - Proper Javadoc comments
@@ -976,6 +1017,7 @@ npm run format
 ```
 
 **Standards:**
+
 - React best practices
 - TypeScript strict mode
 - Functional components
@@ -985,6 +1027,7 @@ npm run format
 ### Continuous Integration
 
 Both frontend and backend must pass:
+
 - ✅ All unit tests
 - ✅ Linting checks
 - ✅ Code formatting
@@ -1056,13 +1099,13 @@ environment:
 
 ### Environment Variables Reference
 
-| Variable                | Description                    | Default Value                  | Required |
-| ----------------------- | ------------------------------ | ------------------------------ | -------- |
-| `VITE_API_BASE_URL`     | Frontend API endpoint          | `http://localhost:8080`        | Yes      |
-| `SPRING_PROFILES_ACTIVE`| Spring Boot profile            | `dev`                          | No       |
-| `UPLOAD_PATH`           | File storage directory         | `files`                        | No       |
-| `LLM_ENDPOINT`          | LLM service endpoint           | `http://localhost:11434/...`   | Yes      |
-| `LLM_APIKEY`            | LLM API key                    | `not-needed-for-local`         | Yes      |
+| Variable                 | Description            | Default Value                | Required |
+| ------------------------ | ---------------------- | ---------------------------- | -------- |
+| `VITE_API_BASE_URL`      | Frontend API endpoint  | `http://localhost:8080`      | Yes      |
+| `SPRING_PROFILES_ACTIVE` | Spring Boot profile    | `dev`                        | No       |
+| `UPLOAD_PATH`            | File storage directory | `files`                      | No       |
+| `LLM_ENDPOINT`           | LLM service endpoint   | `http://localhost:11434/...` | Yes      |
+| `LLM_APIKEY`             | LLM API key            | `not-needed-for-local`       | Yes      |
 
 ---
 
@@ -1073,6 +1116,7 @@ environment:
 #### Docker Issues
 
 **Issue:** Containers fail to start
+
 ```bash
 # Check logs
 docker compose logs -f
@@ -1083,6 +1127,7 @@ docker compose up --build --force-recreate
 ```
 
 **Issue:** Port already in use
+
 ```bash
 # Check what's using port 8080
 lsof -i :8080
@@ -1092,6 +1137,7 @@ netstat -ano | findstr :8080  # Windows
 ```
 
 **Issue:** Cannot connect to backend from frontend
+
 ```bash
 # Check network
 docker network ls
@@ -1104,6 +1150,7 @@ docker compose exec backend wget -O- http://localhost:8080/api/health
 #### Backend Issues
 
 **Issue:** LLM connection failed
+
 ```bash
 # Check LLM service is running
 curl http://localhost:11434/api/version  # Ollama
@@ -1118,6 +1165,7 @@ cat config.json
 ```
 
 **Issue:** File upload fails
+
 ```bash
 # Check file size limits in application.yml
 # Ensure files/ directory exists and is writable
@@ -1129,17 +1177,19 @@ df -h
 ```
 
 **Issue:** Tests fail
+
 ```bash
 # Clean and rebuild
 ./gradlew clean test
 
 # Run specific test with stack trace
-./gradlew test --tests AdvancedControllerTest --stacktrace
+./gradlew test --tests ResumeControllerTest --stacktrace
 ```
 
 #### Frontend Issues
 
 **Issue:** Cannot connect to backend
+
 ```bash
 # Check .env configuration
 cat frontend/.env
@@ -1152,6 +1202,7 @@ curl http://localhost:8080/api/health
 ```
 
 **Issue:** Build fails
+
 ```bash
 # Clear node_modules and reinstall
 cd frontend
@@ -1163,6 +1214,7 @@ rm -rf node_modules/.vite
 ```
 
 **Issue:** Theme not persisting
+
 ```bash
 # Check browser localStorage
 # Open DevTools → Application → Local Storage
@@ -1175,6 +1227,7 @@ localStorage.clear()
 #### LLM Issues
 
 **Issue:** Ollama not responding
+
 ```bash
 # Start Ollama
 ollama serve
@@ -1190,6 +1243,7 @@ journalctl -u ollama -f  # Linux
 ```
 
 **Issue:** LM Studio not responding
+
 ```bash
 # Ensure LM Studio server is started
 # Load a model in LM Studio
@@ -1200,6 +1254,7 @@ journalctl -u ollama -f  # Linux
 ### Debug Mode
 
 **Enable backend debug logging:**
+
 ```yaml
 # application.yml
 logging:
@@ -1208,10 +1263,11 @@ logging:
 ```
 
 **Enable frontend debug mode:**
+
 ```typescript
 // In service/api.ts
-axios.interceptors.request.use(request => {
-  console.log('Request:', request);
+axios.interceptors.request.use((request) => {
+  console.log("Request:", request);
   return request;
 });
 ```
@@ -1232,12 +1288,14 @@ We welcome contributions! Please follow these guidelines:
 ### Code Contribution Process
 
 1. **Fork the repository**
+
    ```bash
    git clone https://github.com/YOUR_USERNAME/java-resumes.git
    cd java-resumes
    ```
 
 2. **Create a feature branch**
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -1248,6 +1306,7 @@ We welcome contributions! Please follow these guidelines:
    - Update documentation
 
 4. **Run tests and quality checks**
+
    ```bash
    # Backend
    ./gradlew clean build test checkstyleMain
@@ -1259,6 +1318,7 @@ We welcome contributions! Please follow these guidelines:
    ```
 
 5. **Commit your changes**
+
    ```bash
    git add .
    git commit -m "feat: add new feature description"
@@ -1274,6 +1334,7 @@ We welcome contributions! Please follow these guidelines:
    - `chore:` Maintenance tasks
 
 6. **Push to your fork**
+
    ```bash
    git push origin feature/your-feature-name
    ```
@@ -1286,6 +1347,7 @@ We welcome contributions! Please follow these guidelines:
 ### Code Standards
 
 **Backend (Java):**
+
 - Follow Google Java Style Guide
 - Use Checkstyle validation
 - Minimum 80% test coverage
@@ -1294,6 +1356,7 @@ We welcome contributions! Please follow these guidelines:
 - Keep methods focused and small
 
 **Frontend (React/TypeScript):**
+
 - Use functional components
 - Follow React best practices
 - Use TypeScript strict mode
@@ -1349,24 +1412,54 @@ SOFTWARE.
 
 ## 📚 Documentation
 
-### Additional Documentation
+### Quick Links
 
-| Document                                                | Purpose                                      |
-| ------------------------------------------------------- | -------------------------------------------- |
-| **[BACKEND_README.md](BACKEND_README.md)**              | Backend-specific setup and API reference     |
-| **[frontend/README.md](frontend/README.md)**            | Frontend-specific setup and components       |
-| **[docs/README.md](docs/README.md)**                    | Comprehensive project documentation          |
-| **[docs/Architecture.md](docs/Architecture.md)**        | System architecture and design patterns      |
-| **[copilot-instructions.md](copilot-instructions.md)**  | Developer guide and coding standards         |
-| **[PRD-PRIMEREACT-DOCKER-v2.md](PRD-PRIMEREACT-DOCKER-v2.md)** | Product requirements document       |
+Complete documentation is available in the [docs/](docs/) directory and [.github/](.github/) folder:
+
+| Document                                                                   | Purpose                                             |
+| -------------------------------------------------------------------------- | --------------------------------------------------- |
+| **[docs/INDEX.md](docs/INDEX.md)**                                         | Complete documentation index and navigation guide   |
+| **[docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)** | System architecture, design patterns, and data flow |
+| **[docs/BACKEND_README.md](docs/BACKEND_README.md)**                       | Backend setup, build commands, and API reference    |
+| **[docs/README.md](docs/README.md)**                                       | Frontend setup, components, and development guide   |
+| **[copilot-instructions.md](copilot-instructions.md)**                     | Repository-wide developer guidance                  |
+| **.github/instructions/backend.instructions.md**                           | Path-specific backend Copilot guidance              |
+| **.github/instructions/frontend.instructions.md**                          | Path-specific frontend Copilot guidance             |
+| **.github/agents.md**                                                      | AI agent task completion guidelines                 |
+
+### Key Documentation Files
+
+#### For Getting Started
+
+1. Start with this [README.md](README.md)
+2. Review [docs/Architecture.md](docs/architecture/ARCHITECTURE.md) for system design
+3. Choose your track:
+   - **Backend**: [docs/BACKEND_README.md](docs/BACKEND_README.md)
+   - **Frontend**: [docs/README.md](docs/README.md)
+   - **Both**: Follow Docker setup above
+
+#### For Development
+
+- **Backend Coding**: See `.github/instructions/backend.instructions.md`
+- **Frontend Coding**: See `.github/instructions/frontend.instructions.md`
+- **AI Agents**: See `.github/agents.md`
+- **General Guidance**: See [copilot-instructions.md](copilot-instructions.md)
+
+#### Additional Resources
+
+- **Product Requirements**: [docs/PRD-PRIMEREACT-DOCKER-v2.md](docs/PRD-PRIMEREACT-DOCKER-v2.md)
+- **Code Quality**: [docs/CHECKSTYLE_AND_OLLAMA.md](docs/CHECKSTYLE_AND_OLLAMA.md)
+- **Work in Progress**: [docs/wip/](docs/wip/)
 
 ### External Resources
 
 - [Spring Boot Documentation](https://spring.io/projects/spring-boot)
 - [React Documentation](https://react.dev/)
 - [PrimeReact Documentation](https://primereact.org/)
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
 - [Docker Documentation](https://docs.docker.com/)
 - [Ollama Documentation](https://ollama.ai/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 
 ---
 
@@ -1395,6 +1488,7 @@ SOFTWARE.
 ## 👥 Authors
 
 **Pete Letkeman**
+
 - GitHub: [@pbaletkeman](https://github.com/pbaletkeman)
 - Project: [java-resumes](https://github.com/pbaletkeman/java-resumes)
 
@@ -1414,6 +1508,7 @@ SOFTWARE.
 ## 📞 Support
 
 For support, please:
+
 1. Check the [Troubleshooting](#-troubleshooting) section
 2. Review [documentation](docs/README.md)
 3. Open an issue on [GitHub](https://github.com/pbaletkeman/java-resumes/issues)

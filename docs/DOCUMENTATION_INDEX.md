@@ -7,21 +7,18 @@ Complete guide to all documentation files for this project.
 ### 🌟 Start Here
 
 1. **[README.md](README.md)** - 5-minute overview
-
    - Problem and solution
    - Quick setup (5 steps)
    - Key features
    - Technology stack
 
 2. **[copilot-instructions.md](copilot-instructions.md)** - Developer reference
-
    - Coding standards
    - Project structure
    - Development workflow
    - Common patterns
 
 3. **[docs/Architecture.md](docs/Architecture.md)** - System design
-
    - 9 Mermaid diagrams
    - Component interactions
    - Data flow visualization
@@ -69,23 +66,19 @@ Complete guide to all documentation files for this project.
 ### I'm a New Developer
 
 1. Read [README.md](README.md) (5 min)
-
    - Understand what the project does
    - Get an overview of technologies
 
 2. Follow [README.md - Quick Start](README.md#-quick-start) (15 min)
-
    - Set up development environment
    - Get the app running
 
 3. Read [copilot-instructions.md](copilot-instructions.md) (30 min)
-
    - Learn coding standards
    - Understand project structure
    - Review common patterns
 
 4. Study [docs/Architecture.md](docs/Architecture.md) (20 min)
-
    - Visualize system components
    - Understand data flow
 
@@ -112,7 +105,6 @@ Complete guide to all documentation files for this project.
 ### I'm a System Architect
 
 1. Read [docs/Architecture.md](docs/Architecture.md) (30 min)
-
    - Review all 9 diagrams
    - Understand component relationships
    - Study data models
@@ -122,7 +114,7 @@ Complete guide to all documentation files for this project.
 3. Examine [copilot-instructions.md - Project Structure](copilot-instructions.md#project-structure) (10 min)
 
 4. Look at key source files (15 min)
-   - AdvancedController.java
+   - ResumeController.java
    - ApiService.java
    - BackgroundResume.java
 
@@ -292,19 +284,16 @@ All files have:
 ### Best Practices
 
 1. **Bookmark Key Files**
-
    - [README.md](README.md) - Quick reference
    - [copilot-instructions.md](copilot-instructions.md) - Development guide
    - [docs/Architecture.md](docs/Architecture.md) - System design
 
 2. **Use Table of Contents**
-
    - Every document starts with a TOC
    - Use Ctrl+F to search within document
    - Click anchor links to jump to sections
 
 3. **Follow Cross-References**
-
    - Links in blue text connect related topics
    - Relative paths work within the repository
    - Use them to understand relationships

@@ -35,7 +35,7 @@
 #### 3. **Unused Imports** ✅
 
 - **Count Fixed**: 1
-- **File**: AdvancedController.java
+- **File**: ResumeController.java
 - **Details**: @Autowired import removed (unused)
 - **Verification**: ✅ Confirmed
 
@@ -72,7 +72,7 @@
 
 - **Count Fixed**: 8+
 - **Files Affected**:
-  - AdvancedController.java (2 lines fixed)
+  - ResumeController.java (2 lines fixed)
   - ApiService.java (3+ lines wrapped)
   - FilesStorageServiceImpl.java (2 lines wrapped)
 - **Examples**:
@@ -86,7 +86,7 @@
 
 - **Count Fixed**: 3+
 - **Details**:
-  - AdvancedController.java: Added braces to if statements (lines 115-117)
+  - ResumeController.java: Added braces to if statements (lines 115-117)
   - ApiService.java: Added braces to multiple if/while statements
   - Multiple classes: Ensured all control structures have braces
 - **Verification**: ✅ Confirmed
@@ -111,7 +111,7 @@
 - **Examples**:
   - Optimize.java: Rewrote isValid() with all && operators on new lines (16 lines)
   - Optimize.java: Fixed hasResumeOrCoverPrompt() with || on new line
-  - AdvancedController.java: Fixed string concatenation operators
+  - ResumeController.java: Fixed string concatenation operators
   - ApiService.java: Fixed multiple operator placements
 - **Verification**: ✅ Confirmed
 
@@ -140,7 +140,7 @@
 
 ## Files Modified and Verification
 
-### AdvancedController.java ✅
+### ResumeController.java ✅
 
 ```
 Violations Fixed:
@@ -384,12 +384,10 @@ Usage.java (19 violations):
 ### Challenges & Solutions
 
 1. **JSON field naming conflict**:
-
    - Problem: Checkstyle wants camelCase, API requires snake_case
    - Solution: Preserve intentionally, document decision clearly
 
 2. **Complex line wrapping**:
-
    - Problem: Some lines had multiple issues (length + operators)
    - Solution: Fix one issue at a time, re-run checkstyle, iterate
 

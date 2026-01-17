@@ -84,12 +84,10 @@ See [Architecture.md](./Architecture.md) for detailed architecture diagrams incl
 ### User Interfaces
 
 1. **Swagger UI**: Interactive API documentation
-
    - Endpoint: `http://localhost:8080/swagger-ui/index.html`
    - Full API exploration and testing
 
 2. **Web UI (Spotlight)**: User-friendly React frontend
-
    - Endpoint: `http://localhost:8080/spotlight/index.html`
    - File uploads and optimization workflows
    - Built with React, TypeScript, and PrimeReact
@@ -107,7 +105,7 @@ See [Architecture.md](./Architecture.md) for detailed architecture diagrams incl
 | Component               | Technology        | Version  |
 | ----------------------- | ----------------- | -------- |
 | **Framework**           | Spring Boot       | 3.5+     |
-| **Language**            | Java              | 25 (LTS) |
+| **Language**            | Java              | 17 (LTS) |
 | **Build Tool**          | Gradle            | Latest   |
 | **API Documentation**   | SpringDoc OpenAPI | 2.8.7    |
 | **JSON Processing**     | Gson              | 2.13.1   |
@@ -148,7 +146,7 @@ java-resumes/
 │   │   ├── Config.java                          # Configuration management
 │   │   ├── Utility.java                         # Utility functions
 │   │   ├── controller/
-│   │   │   └── AdvancedController.java          # REST endpoints
+│   │   │   └── ResumeController.java            # REST endpoints
 │   │   ├── service/
 │   │   │   ├── FilesStorageService.java         # File service interface
 │   │   │   └── FilesStorageServiceImpl.java      # File service implementation
@@ -169,7 +167,7 @@ java-resumes/
 │   │           ├── Stats.java                   # Generation statistics
 │   │           └── Usage.java                   # Token usage info
 │   └── test/java/ca/letkeman/resumes/
-│       ├── controller/AdvancedControllerTest.java
+│       ├── controller/ResumeControllerTest.java
 │       ├── model/OptimizeTest.java
 │       └── optimizer/ApiServiceTest.java
 ├── config/
@@ -190,7 +188,7 @@ java-resumes/
 
 ### Prerequisites
 
-- **Java 25 LTS** (or compatible JDK)
+- **Java 17 LTS** (or compatible JDK)
 - **Gradle** build tool
 - **LLM Service** running locally:
   - Ollama: https://ollama.ai
@@ -217,7 +215,6 @@ java-resumes/
    ```
 
    **Option B: LM Studio**
-
    - Download LM Studio
    - Load model: gemma-3-4b-it or Hermes-3-Llama-3.1-8B
    - Start local server on default port
@@ -302,7 +299,7 @@ java-resumes/
 
 ## Core Components
 
-### Controller Layer (`AdvancedController`)
+### Controller Layer (`ResumeController`)
 
 **Responsibilities**:
 
@@ -391,10 +388,10 @@ java-resumes/
 
 The project includes comprehensive unit tests for:
 
-#### AdvancedControllerTest
+#### ResumeControllerTest
 
 ```java
-// File: src/test/java/ca/letkeman/resumes/controller/AdvancedControllerTest.java
+// File: src/test/java/ca/letkeman/resumes/controller/ResumeControllerTest.java
 - test_successful_markdown_to_pdf_conversion()
 - test_unsuccessful_markdown_to_pdf_conversion()
 - test_handles_null_file_parameter()
@@ -444,7 +441,7 @@ The project includes comprehensive unit tests for:
 **Run specific test class**:
 
 ```bash
-./gradlew test --tests AdvancedControllerTest
+./gradlew test --tests ResumeControllerTest
 ```
 
 **Run with coverage**:

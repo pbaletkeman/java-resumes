@@ -61,7 +61,7 @@
 ## 📁 Modified Files (13 total)
 
 ```
-✅ AdvancedController.java       - 3 violations fixed
+✅ ResumeController.java       - 3 violations fixed
 ✅ ApiService.java               - 8 violations fixed
 ✅ Optimize.java                 - 7 violations fixed
 ✅ HtmlToPdf.java                - 5 violations fixed
@@ -129,13 +129,11 @@ java -jar build/libs/java-resumes-*.jar
 ## 📚 Documentation Generated
 
 1. **MIGRATION_SUMMARY.md** (700+ lines)
-
    - Executive summary
    - Phase-by-phase breakdown
    - Detailed metrics and status
 
 2. **CHECKSTYLE_COMPLIANCE_REPORT.md** (400+ lines)
-
    - Violation resolution details
    - File-by-file verification
    - Best practices & lessons learned

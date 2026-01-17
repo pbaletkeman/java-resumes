@@ -89,7 +89,7 @@ Breakdown of remaining 28 violations:
 #### 3. **Static Imports** (3 fixed)
 
 - **Details**:
-  - Files.getLastModifiedTime (AdvancedController.java)
+  - Files.getLastModifiedTime (ResumeController.java)
   - HttpURLConnection.HTTP_OK
   - Utility.convertLineEndings
 - **Change**: Converted to qualified names
@@ -114,11 +114,11 @@ Breakdown of remaining 28 violations:
 
 #### 6. **Line Length** (8+ fixed)
 
-- **Files**: AdvancedController.java, ApiService.java, FilesStorageServiceImpl.java
+- **Files**: ResumeController.java, ApiService.java, FilesStorageServiceImpl.java
 - **Changes**: Wrapped lines exceeding 120 characters across multiple lines
 - **Examples**:
-  - AdvancedController.java line 66: Wrapped operator across lines
-  - AdvancedController.java line 136: Wrapped method chain
+  - ResumeController.java line 66: Wrapped operator across lines
+  - ResumeController.java line 136: Wrapped method chain
   - ApiService.java: Wrapped prompt handling and method chains
   - FilesStorageServiceImpl.java: Wrapped Files.copy() and Files.walk() chains
 - **Status**: ✅ COMPLETE
@@ -126,7 +126,7 @@ Breakdown of remaining 28 violations:
 #### 7. **Braces & Whitespace** (20+ fixed)
 
 - **Missing braces on if statements** (3 fixed)
-  - AdvancedController.java: Lines 115-117
+  - ResumeController.java: Lines 115-117
   - ApiService.java: Multiple locations
 - **Whitespace before braces** (10+ fixed)
   - ApiService.java: calcBody(), multiple if statements
@@ -136,7 +136,7 @@ Breakdown of remaining 28 violations:
 - **Operator placement** (7+ fixed)
   - Optimize.java: Rewrote isValid() with all && on new lines
   - Optimize.java: hasResumeOrCoverPrompt() with || on new line
-  - AdvancedController.java: String concatenation operators
+  - ResumeController.java: String concatenation operators
 - **Status**: ✅ COMPLETE
 
 #### 8. **Comment Indentation** (1 fixed)
@@ -158,11 +158,9 @@ These violations are **INTENTIONALLY PRESERVED** because they must match Ollama 
 **Files & Fields:**
 
 - **Choice.java**:
-
   - `finish_reason` field, getter, setter, parameter
 
 - **LLMResponse.java**:
-
   - `system_fingerprint` field, getter, setter, parameter (3 methods)
 
 - **Usage.java**:
@@ -206,7 +204,7 @@ Build result: SUCCESSFUL
 
 ### Controllers
 
-- **AdvancedController.java**:
+- **ResumeController.java**:
   - Fixed operator wrapping (line 66)
   - Fixed line length (line 136)
   - Added braces to if statements (lines 115-117)
@@ -214,7 +212,6 @@ Build result: SUCCESSFUL
 ### Services
 
 - **ApiService.java**:
-
   - Fixed 8 whitespace/brace violations
   - Fixed line length in file handling
   - Wrapped long method chains
@@ -227,29 +224,24 @@ Build result: SUCCESSFUL
 ### Models & Data Objects
 
 - **Optimize.java**:
-
   - Rewrote isValid() method with proper operator wrapping
   - Fixed hasResumeOrCoverPrompt() operator placement
 
 - **HtmlToPdf.java**:
-
   - Expanded star imports
   - Renamed iTextRenderer → textRenderer
   - Fixed method spacing and comment indentation
 
 - **FileInfo.java**:
-
   - Fixed constructor parameter order
   - Renamed ONE_MB → oneMb, ONE_KB → oneKb
   - Updated all usages
 
 - **Message.java**:
-
   - Added blank line before constructor
   - Fixed whitespace around constructor brace
 
 - **Utility.java**:
-
   - Renamed LOGGER → logger
   - Fixed constructor spacing
 

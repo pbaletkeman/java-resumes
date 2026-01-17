@@ -18,7 +18,7 @@
    - Usage.java
    - HtmlToPdf.java
    - Choice.java
-3. **Unused imports** - Removed `@Autowired` import from AdvancedController.java
+3. **Unused imports** - Removed `@Autowired` import from ResumeController.java
 4. **Static imports** - Converted to qualified names:
    - Changed `getLastModifiedTime()` to `Files.getLastModifiedTime()`
    - Changed `HTTP_OK` to `java.net.HttpURLConnection.HTTP_OK`
@@ -43,7 +43,7 @@ These violations involve fields that MUST maintain underscores to match the Olla
 
 ### 2. Line Length Violations (8)
 
-- AdvancedController.java: Lines 66, 75, 126, 151 (121-133 chars)
+- ResumeController.java: Lines 66, 75, 126, 151 (121-133 chars)
 - FilesStorageServiceImpl.java: Lines 52, 95 (133-148 chars)
 - ApiService.java: Lines 174, 206, 209 (123-139 chars)
 - Optimize.java: Lines 133, 135 (121-122 chars)
@@ -73,7 +73,7 @@ These violations involve fields that MUST maintain underscores to match the Olla
 
 ## Files Affected by Remaining Violations
 
-1. AdvancedController.java: 4 violations
+1. ResumeController.java: 4 violations
 2. ApiService.java: 8 violations
 3. Optimize.java: 9 violations
 4. Choice.java: 5 violations

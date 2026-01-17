@@ -103,51 +103,43 @@ Successfully created comprehensive documentation for the Java Resumes project.
 **Contains**:
 
 1. **1000ft Process View Diagram**
-
    - High-level component overview
    - User → UI → API → LLM Service flow
    - File storage interactions
 
 2. **Sequence Diagram**
-
    - Detailed interaction flow during resume optimization
    - Upload phase through file retrieval
    - 25+ step process flow
 
 3. **Detailed Process View Diagram**
-
    - Seven architectural layers
    - Component dependencies
    - Data flow between layers
 
 4. **Class Dependency Diagram**
-
    - All Java classes and relationships
    - Interface implementations
    - Data model dependencies
    - Request/response model structure
 
 5. **Component Interactions Section**
-
    - File upload & processing flow
    - Async thread handling
    - LLM API communication
 
 6. **Data Models Section**
-
    - Optimize request model schema
    - FileInfo response model
    - LLMResponse model structure
    - Message and Usage models
 
 7. **API Contract Section**
-
    - All REST endpoints
    - Request/response specifications
    - HTTP status codes
 
 8. **Technology Mapping Diagram**
-
    - Frontend technologies (React, TypeScript, PrimeReact)
    - Backend technologies (Spring Boot, Gradle)
    - Processing libraries (Gson, jsoup, CommonMark)
@@ -321,7 +313,7 @@ All markdown files contain:
 
 ### Source Code References
 
-- **AdvancedController** - REST endpoints, file operations
+- **ResumeController** - REST endpoints, file operations
 - **BackgroundResume** - Async processing, threading
 - **ApiService** - LLM integration, HTTP communication
 - **FilesStorageService** - File persistence interface
@@ -330,7 +322,7 @@ All markdown files contain:
 
 ### Test File References
 
-- **AdvancedControllerTest** - REST endpoint testing patterns
+- **ResumeControllerTest** - REST endpoint testing patterns
 - **OptimizeTest** - Model validation testing
 - **ApiServiceTest** - LLM integration testing
 
@@ -362,26 +354,22 @@ All documentation created with:
 ## 🚀 Next Steps
 
 1. **Review Documentation**
-
    - Read [README.md](../README.md) for quick overview
    - Review [copilot-instructions.md](../copilot-instructions.md) for development standards
    - Study [docs/Architecture.md](../docs/Architecture.md) for system design
    - Reference [docs/README.md](../docs/README.md) for detailed features
 
 2. **Set Up Local Environment**
-
    - Follow [Quick Start](../README.md#-quick-start) section
    - Review [docs/README.md](../docs/README.md#getting-started) for detailed setup
    - Check [copilot-instructions.md](../copilot-instructions.md#local-development-setup) for development setup
 
 3. **Run Tests**
-
    - Review test patterns in [copilot-instructions.md](../copilot-instructions.md#common-patterns)
    - Check [docs/README.md](../docs/README.md#testing) for test coverage details
    - Run: `./gradlew test`
 
 4. **Check Code Quality**
-
    - Review standards in [copilot-instructions.md](../copilot-instructions.md#code-quality-standards)
    - Run: `./gradlew checkstyleMain`
 

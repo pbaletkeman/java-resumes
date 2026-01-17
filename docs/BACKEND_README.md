@@ -55,48 +55,48 @@ The Resume Optimizer Backend is a production-ready Spring Boot application that 
 
 ### Core Technologies
 
-| Component           | Technology              | Version | Purpose                          |
-| ------------------- | ----------------------- | ------- | -------------------------------- |
-| **Language**        | Java                    | 17 LTS  | Backend programming language     |
-| **Framework**       | Spring Boot             | 3.5.1   | Application framework            |
-| **Build Tool**      | Gradle                  | 8.7     | Build automation and dependencies|
-| **Dependency Mgmt** | Spring Dependency Mgmt  | 1.1.7   | Consistent dependency versions   |
+| Component           | Technology             | Version | Purpose                           |
+| ------------------- | ---------------------- | ------- | --------------------------------- |
+| **Language**        | Java                   | 17 LTS  | Backend programming language      |
+| **Framework**       | Spring Boot            | 3.5.1   | Application framework             |
+| **Build Tool**      | Gradle                 | 8.7     | Build automation and dependencies |
+| **Dependency Mgmt** | Spring Dependency Mgmt | 1.1.7   | Consistent dependency versions    |
 
 ### Spring Boot Starters
 
-| Component                 | Purpose                              |
-| ------------------------- | ------------------------------------ |
-| `spring-boot-starter-web` | RESTful web services and embedded Tomcat |
-| `spring-boot-starter-test`| Testing framework with JUnit 5       |
+| Component                  | Purpose                                  |
+| -------------------------- | ---------------------------------------- |
+| `spring-boot-starter-web`  | RESTful web services and embedded Tomcat |
+| `spring-boot-starter-test` | Testing framework with JUnit 5           |
 
 ### Libraries and Tools
 
-| Library                   | Version | Purpose                          |
-| ------------------------- | ------- | -------------------------------- |
-| **SpringDoc OpenAPI**     | 2.8.7   | Swagger/OpenAPI documentation    |
-| **Gson**                  | 2.13.1  | JSON serialization/deserialization|
-| **Jsoup**                 | 1.15.4  | HTML parsing and cleaning        |
-| **Flying Saucer Core**    | 9.1.22  | XHTML rendering                  |
-| **Flying Saucer PDF**     | 9.1.22  | PDF generation from XHTML        |
-| **CommonMark**            | 0.24.0  | Markdown parsing and processing  |
-| **Checkstyle**            | 10.14.2 | Code quality enforcement         |
+| Library                | Version | Purpose                            |
+| ---------------------- | ------- | ---------------------------------- |
+| **SpringDoc OpenAPI**  | 2.8.7   | Swagger/OpenAPI documentation      |
+| **Gson**               | 2.13.1  | JSON serialization/deserialization |
+| **Jsoup**              | 1.15.4  | HTML parsing and cleaning          |
+| **Flying Saucer Core** | 9.1.22  | XHTML rendering                    |
+| **Flying Saucer PDF**  | 9.1.22  | PDF generation from XHTML          |
+| **CommonMark**         | 0.24.0  | Markdown parsing and processing    |
+| **Checkstyle**         | 10.14.2 | Code quality enforcement           |
 
 ### Testing Framework
 
-| Component                 | Version | Purpose                          |
-| ------------------------- | ------- | -------------------------------- |
-| **JUnit 5**               | 5.x     | Unit testing framework           |
-| **Mockito**               | 5.x     | Mocking framework                |
-| **Spring Test**           | 6.x     | Spring integration testing       |
-| **AssertJ**               | 3.x     | Fluent assertions                |
+| Component       | Version | Purpose                    |
+| --------------- | ------- | -------------------------- |
+| **JUnit 5**     | 5.x     | Unit testing framework     |
+| **Mockito**     | 5.x     | Mocking framework          |
+| **Spring Test** | 6.x     | Spring integration testing |
+| **AssertJ**     | 3.x     | Fluent assertions          |
 
 ### Development Tools
 
-| Tool                      | Version | Purpose                          |
-| ------------------------- | ------- | -------------------------------- |
-| **Gradle Wrapper**        | 8.7     | Consistent Gradle version        |
-| **Spring Boot DevTools**  | 3.5.1   | Hot reload and live reload       |
-| **Checkstyle**            | 10.14.2 | Code style validation            |
+| Tool                     | Version | Purpose                    |
+| ------------------------ | ------- | -------------------------- |
+| **Gradle Wrapper**       | 8.7     | Consistent Gradle version  |
+| **Spring Boot DevTools** | 3.5.1   | Hot reload and live reload |
+| **Checkstyle**           | 10.14.2 | Code style validation      |
 
 ---
 
@@ -145,6 +145,7 @@ gradle build
 ```
 
 This command will:
+
 - Download all dependencies
 - Compile Java source code
 - Run all tests
@@ -176,26 +177,28 @@ ls -lh build/libs/
 
 **Configuration Options:**
 
-| Field      | Description                       | Example Values                                |
-| ---------- | --------------------------------- | --------------------------------------------- |
-| `endpoint` | LLM API endpoint URL              | `http://localhost:11434/v1/chat/completions`  |
-| `apikey`   | API key (if required)             | `not-needed-for-local` or actual API key      |
-| `model`    | Model name to use                 | `gemma-3-4b-it`, `llama-3-8b`, `gpt-4`       |
+| Field      | Description           | Example Values                               |
+| ---------- | --------------------- | -------------------------------------------- |
+| `endpoint` | LLM API endpoint URL  | `http://localhost:11434/v1/chat/completions` |
+| `apikey`   | API key (if required) | `not-needed-for-local` or actual API key     |
+| `model`    | Model name to use     | `gemma-3-4b-it`, `llama-3-8b`, `gpt-4`       |
 
 **LLM Service Options:**
 
 1. **Ollama** (Local, Free):
+
    ```bash
    ollama serve
    ollama pull gemma-3-4b-it
    ```
+
    Endpoint: `http://localhost:11434/v1/chat/completions`
 
 2. **LM Studio** (Local, Free):
    - Download and install LM Studio
    - Load a model (e.g., llama-3-8b)
    - Start server (default port: 1234)
-   
+
    Endpoint: `http://localhost:1234/v1/chat/completions`
 
 3. **OpenAI API** (Cloud, Paid):
@@ -234,12 +237,12 @@ llm:
 
 **Configuration Properties:**
 
-| Property                           | Description                  | Default Value     |
-| ---------------------------------- | ---------------------------- | ----------------- |
-| `spring.servlet.multipart.max-file-size` | Max file upload size   | `500KB`           |
-| `upload.path`                      | File storage directory       | `files`           |
-| `llm.endpoint`                     | LLM service endpoint         | See config.json   |
-| `llm.apikey`                       | LLM API key                  | See config.json   |
+| Property                                 | Description            | Default Value   |
+| ---------------------------------------- | ---------------------- | --------------- |
+| `spring.servlet.multipart.max-file-size` | Max file upload size   | `500KB`         |
+| `upload.path`                            | File storage directory | `files`         |
+| `llm.endpoint`                           | LLM service endpoint   | See config.json |
+| `llm.apikey`                             | LLM API key            | See config.json |
 
 ---
 
@@ -260,6 +263,7 @@ llm:
 ```
 
 **Access the application:**
+
 - **API Base URL**: http://localhost:8080
 - **Swagger UI**: http://localhost:8080/swagger-ui/index.html
 - **API Docs**: http://localhost:8080/api-docs
@@ -326,7 +330,7 @@ This watches for file changes and automatically recompiles.
 **Run specific test class:**
 
 ```bash
-./gradlew test --tests AdvancedControllerTest
+./gradlew test --tests ResumeControllerTest
 ./gradlew test --tests OptimizeTest
 ./gradlew test --tests ApiServiceTest
 ```
@@ -360,6 +364,7 @@ start build/reports/jacoco/test/html/index.html  # Windows
 ```
 
 **Coverage targets:**
+
 - **Minimum**: 80% overall coverage
 - **Statements**: 80%+
 - **Branches**: 75%+
@@ -369,7 +374,7 @@ start build/reports/jacoco/test/html/index.html  # Windows
 
 ```
 src/test/java/ca/letkeman/resumes/
-├── AdvancedControllerTest.java   # REST endpoint tests
+├── ResumeControllerTest.java   # REST endpoint tests
 ├── OptimizeTest.java             # Model validation tests
 ├── ApiServiceTest.java           # LLM integration tests
 └── [additional test files]
@@ -377,7 +382,8 @@ src/test/java/ca/letkeman/resumes/
 
 ### Test Categories
 
-**1. Controller Tests** (`AdvancedControllerTest.java`):
+**1. Controller Tests** (`ResumeControllerTest.java`):
+
 - REST endpoint validation
 - Request/response handling
 - File upload/download
@@ -385,12 +391,14 @@ src/test/java/ca/letkeman/resumes/
 - Status codes
 
 **2. Model Tests** (`OptimizeTest.java`):
+
 - Data validation
 - Getter/setter tests
 - Serialization/deserialization
 - Business logic validation
 
 **3. Integration Tests** (`ApiServiceTest.java`):
+
 - LLM API integration
 - External service mocking
 - End-to-end workflows
@@ -402,19 +410,19 @@ src/test/java/ca/letkeman/resumes/
 ```java
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ControllerTest {
-    
+
     @Autowired
     private TestRestTemplate restTemplate;
-    
+
     @Test
     public void testUploadEndpoint() {
         Optimize optimize = new Optimize();
         optimize.setJobDescription("Test job");
         optimize.setResume("Test resume");
-        
+
         ResponseEntity<ResponseMessage> response = restTemplate
             .postForEntity("/upload", optimize, ResponseMessage.class);
-        
+
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 }
@@ -425,19 +433,19 @@ public class ControllerTest {
 ```java
 @ExtendWith(MockitoExtension.class)
 public class ServiceTest {
-    
+
     @Mock
     private FilesStorageService storageService;
-    
+
     @InjectMocks
     private ResumeController controller;
-    
+
     @Test
     public void testFileList() {
         when(storageService.loadAll()).thenReturn(Stream.empty());
-        
+
         ResponseEntity<List<FileInfo>> response = controller.getListFiles();
-        
+
         assertEquals(HttpStatus.OK, response.getStatusCode());
         verify(storageService).loadAll();
     }
@@ -503,6 +511,7 @@ docker compose down
    - Health check configuration
 
 **Image sizes:**
+
 - Build stage: ~700MB
 - Final image: ~200MB
 
@@ -559,11 +568,13 @@ GET /files/{filename}
 **Description**: Downloads specific file
 
 **Parameters**:
+
 - `filename` (path): Name of file to download
 
 **Response**: `200 OK` with file binary data
 
 **Headers**:
+
 - `Content-Type`: File MIME type
 - `Content-Disposition`: `attachment; filename="..."`
 
@@ -576,6 +587,7 @@ DELETE /files/{filename}
 **Description**: Deletes specific file
 
 **Parameters**:
+
 - `filename` (path): Name of file to delete
 
 **Response**: `200 OK`
@@ -611,16 +623,16 @@ POST /upload
 
 **Request Parameters**:
 
-| Field                        | Type    | Required | Description                      |
-| ---------------------------- | ------- | -------- | -------------------------------- |
-| `jobDescription`             | String  | Yes*     | Job description text             |
-| `resume`                     | String  | Yes*     | Resume text                      |
-| `jobDescriptionFile`         | String  | Yes*     | Job description filename         |
-| `resumeFile`                 | String  | Yes*     | Resume filename                  |
-| `createOptimizedResume`      | Boolean | No       | Generate optimized resume        |
-| `createOptimizedCoverLetter` | Boolean | No       | Generate cover letter            |
+| Field                        | Type    | Required | Description               |
+| ---------------------------- | ------- | -------- | ------------------------- |
+| `jobDescription`             | String  | Yes\*    | Job description text      |
+| `resume`                     | String  | Yes\*    | Resume text               |
+| `jobDescriptionFile`         | String  | Yes\*    | Job description filename  |
+| `resumeFile`                 | String  | Yes\*    | Resume filename           |
+| `createOptimizedResume`      | Boolean | No       | Generate optimized resume |
+| `createOptimizedCoverLetter` | Boolean | No       | Generate cover letter     |
 
-*Either text fields or file fields must be provided
+\*Either text fields or file fields must be provided
 
 **Response**: `200 OK`
 
@@ -631,6 +643,7 @@ POST /upload
 ```
 
 **Generated Files**:
+
 - `resume-optimized.md` - Optimized resume (Markdown)
 - `resume-optimized.pdf` - Optimized resume (PDF)
 - `cover-letter.md` - Cover letter (Markdown)
@@ -647,11 +660,13 @@ POST /markdownFile2PDF
 **Request**: `multipart/form-data`
 
 **Parameters**:
+
 - `file` (file): Markdown file to convert
 
 **Response**: `200 OK` with PDF binary data
 
 **Headers**:
+
 - `Content-Type`: `application/pdf`
 - `Content-Disposition`: `attachment; filename="document.pdf"`
 
@@ -679,6 +694,7 @@ GET /api/health
 All endpoints return consistent error responses:
 
 **400 Bad Request**:
+
 ```json
 {
   "error": "VALIDATION_ERROR",
@@ -688,6 +704,7 @@ All endpoints return consistent error responses:
 ```
 
 **404 Not Found**:
+
 ```json
 {
   "error": "FILE_NOT_FOUND",
@@ -697,6 +714,7 @@ All endpoints return consistent error responses:
 ```
 
 **500 Internal Server Error**:
+
 ```json
 {
   "error": "INTERNAL_SERVER_ERROR",
@@ -721,22 +739,22 @@ JSON specification for API tools and clients.
 
 ### Application Configuration
 
-| Variable                  | Description                | Default                      | Required |
-| ------------------------- | -------------------------- | ---------------------------- | -------- |
-| `SPRING_PROFILES_ACTIVE`  | Active Spring profile      | `default`                    | No       |
-| `SERVER_PORT`             | Server port                | `8080`                       | No       |
-| `UPLOAD_PATH`             | File storage directory     | `files`                      | No       |
-| `LLM_ENDPOINT`            | LLM service endpoint       | From `config.json`           | Yes      |
-| `LLM_APIKEY`              | LLM API key                | From `config.json`           | Yes      |
+| Variable                 | Description            | Default            | Required |
+| ------------------------ | ---------------------- | ------------------ | -------- |
+| `SPRING_PROFILES_ACTIVE` | Active Spring profile  | `default`          | No       |
+| `SERVER_PORT`            | Server port            | `8080`             | No       |
+| `UPLOAD_PATH`            | File storage directory | `files`            | No       |
+| `LLM_ENDPOINT`           | LLM service endpoint   | From `config.json` | Yes      |
+| `LLM_APIKEY`             | LLM API key            | From `config.json` | Yes      |
 
 ### JVM Options
 
-| Option                    | Description                | Recommended Value            |
-| ------------------------- | -------------------------- | ---------------------------- |
-| `-Xms`                    | Initial heap size          | `256m`                       |
-| `-Xmx`                    | Maximum heap size          | `512m`                       |
-| `-XX:MaxRAMPercentage`    | Max RAM for container      | `75.0`                       |
-| `-XX:+UseContainerSupport`| Enable container awareness | `true`                       |
+| Option                     | Description                | Recommended Value |
+| -------------------------- | -------------------------- | ----------------- |
+| `-Xms`                     | Initial heap size          | `256m`            |
+| `-Xmx`                     | Maximum heap size          | `512m`            |
+| `-XX:MaxRAMPercentage`     | Max RAM for container      | `75.0`            |
+| `-XX:+UseContainerSupport` | Enable container awareness | `true`            |
 
 **Example:**
 
@@ -837,6 +855,7 @@ Defines code style rules based on Google Java Style Guide.
 ### Logging Configuration
 
 **Default Logging**:
+
 - Level: INFO
 - Output: Console
 - Format: Spring Boot default
@@ -864,6 +883,7 @@ logging:
 ### Logging Best Practices
 
 **1. Log Levels:**
+
 - `ERROR`: System errors, exceptions
 - `WARN`: Warnings, deprecated usage
 - `INFO`: Important events, startup info
@@ -878,11 +898,13 @@ log.error("Failed to process document", exception);
 ```
 
 **3. Sensitive Data:**
+
 - Never log passwords or API keys
 - Mask sensitive information
 - Use appropriate log levels
 
 **4. Performance:**
+
 - Use parameterized logging
 - Avoid expensive operations in logs
 - Use appropriate log levels
@@ -890,16 +912,19 @@ log.error("Failed to process document", exception);
 ### Viewing Logs
 
 **Console output:**
+
 ```bash
 ./gradlew bootRun
 ```
 
 **Docker logs:**
+
 ```bash
 docker compose logs -f backend
 ```
 
 **Log file:**
+
 ```bash
 tail -f logs/application.log
 ```
@@ -972,7 +997,7 @@ java-resumes/
 │   │
 │   └── test/                            # Test Files
 │       └── java/ca/letkeman/resumes/
-│           ├── AdvancedControllerTest.java
+│           ├── ResumeControllerTest.java
 │           ├── OptimizeTest.java
 │           └── ApiServiceTest.java
 │
@@ -1004,27 +1029,32 @@ java-resumes/
 ### Package Organization
 
 **Controller Layer** (`controller/`):
+
 - REST API endpoints
 - Request validation
 - Response formatting
 - Exception handling
 
 **Service Layer** (`service/`):
+
 - Business logic
 - File operations
 - Transaction management
 
 **Model Layer** (`model/`):
+
 - Data transfer objects (DTOs)
 - Request/response models
 - Validation annotations
 
 **Optimizer Layer** (`optimizer/`):
+
 - LLM integration
 - Document processing
 - PDF generation
 
 **Configuration** (`Config.java`):
+
 - Application configuration
 - External service config
 - Bean definitions
@@ -1061,18 +1091,21 @@ start build/reports/checkstyle/main.html  # Windows
 Based on Google Java Style Guide:
 
 **Naming Conventions:**
+
 - Classes: PascalCase (`ResumeController`)
 - Methods: camelCase (`uploadDocument`)
 - Constants: UPPER_SNAKE_CASE (`MAX_FILE_SIZE`)
 - Variables: camelCase (`fileName`)
 
 **Formatting:**
+
 - Indentation: 2 spaces (not tabs)
 - Line length: Maximum 100 characters
 - Braces: K&R style (opening brace on same line)
 - Imports: No wildcard imports
 
 **Documentation:**
+
 - Public APIs: Javadoc required
 - Complex logic: Inline comments
 - Package: package-info.java with description
@@ -1086,11 +1119,11 @@ Based on Google Java Style Guide:
  */
 @RestController
 public class ResumeController {
-  
+
   private static final int MAX_FILE_SIZE = 500_000; // 500KB
-  
+
   private final FilesStorageService storageService;
-  
+
   /**
    * Uploads and processes resume and job description.
    *
@@ -1114,6 +1147,7 @@ public class ResumeController {
 ```
 
 This runs:
+
 - Compilation
 - Checkstyle
 - Tests
@@ -1157,7 +1191,7 @@ Generate Documents
 
 ```java
 public class ApiService {
-  
+
   /**
    * Sends prompt to LLM and returns response.
    *
@@ -1171,7 +1205,7 @@ public class ApiService {
     // Parse response
     // Return content
   }
-  
+
   /**
    * Optimizes resume based on job description.
    *
@@ -1220,9 +1254,9 @@ try {
 public void testOptimizeResume() {
   String mockResponse = "Optimized resume content...";
   when(apiService.callApi(any())).thenReturn(mockResponse);
-  
+
   String result = controller.optimizeResume(jobDesc, resume);
-  
+
   assertNotNull(result);
   assertTrue(result.contains("optimized"));
 }
@@ -1250,7 +1284,7 @@ RuntimeException
 ```java
 @ControllerAdvice
 public class GlobalExceptionHandler {
-  
+
   @ExceptionHandler(StorageFileNotFoundException.class)
   public ResponseEntity<ErrorResponse> handleFileNotFound(
       StorageFileNotFoundException ex) {
@@ -1261,7 +1295,7 @@ public class GlobalExceptionHandler {
     );
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
   }
-  
+
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ErrorResponse> handleGenericError(
       Exception ex) {
@@ -1296,6 +1330,7 @@ public class GlobalExceptionHandler {
 ### Security Best Practices
 
 **1. Input Validation:**
+
 - Validate all user inputs
 - Sanitize file names
 - Check file sizes and types
@@ -1308,18 +1343,21 @@ if (!isValidFilename(filename)) {
 ```
 
 **2. File Upload Security:**
+
 - Whitelist allowed file types
 - Enforce size limits (500KB default)
 - Store files outside web root
 - Generate unique filenames
 
 **3. API Security:**
+
 - CORS configuration
 - Rate limiting (future)
 - Authentication/authorization (future)
 - HTTPS in production
 
 **4. Dependency Security:**
+
 ```bash
 # Check for vulnerabilities
 ./gradlew dependencyCheckAnalyze
@@ -1329,6 +1367,7 @@ if (!isValidFilename(filename)) {
 ```
 
 **5. Secrets Management:**
+
 - No secrets in code
 - Use environment variables
 - Use external configuration
@@ -1339,7 +1378,7 @@ if (!isValidFilename(filename)) {
 ```java
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
-  
+
   @Override
   public void addCorsMappings(CorsRegistry registry) {
     registry.addMapping("/**")
@@ -1358,21 +1397,25 @@ public class CorsConfig implements WebMvcConfigurer {
 ### Performance Optimization
 
 **1. File I/O:**
+
 - Buffered streams for large files
 - Async processing for long operations
 - Efficient file storage structure
 
 **2. LLM API Calls:**
+
 - Connection pooling
 - Timeout configuration (30s)
 - Retry logic with backoff
 
 **3. Memory Management:**
+
 - Stream processing for large files
 - Proper resource cleanup
 - JVM tuning for containers
 
 **4. Caching** (future enhancement):
+
 - Cache common LLM responses
 - File metadata caching
 - Spring Cache abstraction
@@ -1380,6 +1423,7 @@ public class CorsConfig implements WebMvcConfigurer {
 ### Performance Monitoring
 
 **JVM Metrics:**
+
 ```bash
 # Enable JMX
 java -Dcom.sun.management.jmxremote -jar app.jar
@@ -1388,11 +1432,13 @@ java -Dcom.sun.management.jmxremote -jar app.jar
 ```
 
 **Spring Boot Actuator** (optional):
+
 ```gradle
 implementation 'org.springframework.boot:spring-boot-starter-actuator'
 ```
 
 **Endpoints:**
+
 - `/actuator/health` - Health check
 - `/actuator/metrics` - Application metrics
 - `/actuator/info` - Application info
@@ -1473,7 +1519,7 @@ df -h
 ./gradlew test --info
 
 # Run specific test with stacktrace
-./gradlew test --tests AdvancedControllerTest --stacktrace
+./gradlew test --tests ResumeControllerTest --stacktrace
 
 # Skip flaky tests (temporary)
 ./gradlew build -x test
@@ -1543,6 +1589,7 @@ footer (optional)
 ```
 
 **Types:**
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation
@@ -1552,6 +1599,7 @@ footer (optional)
 - `chore`: Maintenance tasks
 
 **Example:**
+
 ```
 feat(api): add resume optimization endpoint
 

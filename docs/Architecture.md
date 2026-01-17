@@ -62,7 +62,7 @@ Detailed sequence of interactions during a resume optimization request:
 sequenceDiagram
     participant User as User<br/>(Browser)
     participant UI as Web UI<br/>(React)
-    participant API as AdvancedController<br/>(REST)
+    participant API as ResumeController<br/>(REST)
     participant Service as FilesStorageService<br/>(File Mgmt)
     participant BG as BackgroundResume<br/>(Async Thread)
     participant LLM as ApiService<br/>(LLM Integration)
@@ -165,7 +165,7 @@ graph TB
     end
 
     subgraph REST["🔌 REST Layer<br/>Spring Boot"]
-        Controller["AdvancedController<br/>@RestController"]
+        Controller["ResumeController<br/>@RestController"]
     end
 
     subgraph Service["📁 Service Layer"]
@@ -234,7 +234,7 @@ graph TB
 | Layer         | Components                   | Purpose                          |
 | ------------- | ---------------------------- | -------------------------------- |
 | **Client**    | Web Browser                  | User interface                   |
-| **REST**      | AdvancedController           | HTTP endpoints & request routing |
+| **REST**      | ResumeController             | HTTP endpoints & request routing |
 | **Service**   | FilesStorageService          | File operations abstraction      |
 | **Model**     | POJO classes                 | Data transfer & validation       |
 | **Optimizer** | ApiService, BackgroundResume | LLM integration & processing     |
@@ -250,7 +250,7 @@ Detailed class relationships and dependencies:
 ```mermaid
 graph TB
     subgraph Controllers["Controllers"]
-        AC["AdvancedController<br/>─────────<br/>+ file2PDF()<br/>+ uploadFiles()<br/>+ getListFiles()<br/>+ downloadFile()<br/>+ deleteFile()"]
+        AC["ResumeController<br/>─────────<br/>+ file2PDF()<br/>+ uploadFiles()<br/>+ getListFiles()<br/>+ downloadFile()<br/>+ deleteFile()"]
     end
 
     subgraph Services["Services"]
@@ -328,7 +328,7 @@ graph TB
 
 **Key Relationships**:
 
-- **AdvancedController** → FilesStorageService: Dependency injection
+- **ResumeController** → FilesStorageService: Dependency injection
 - **FilesStorageServiceImpl** → FilesStorageService: Interface implementation
 - **BackgroundResume** → ApiService: Delegates LLM operations
 - **ApiService** → LLMResponse: Parses API responses
@@ -345,7 +345,7 @@ sequenceDiagram
     autonumber
 
     actor User
-    participant Controller as AdvancedController
+    participant Controller as ResumeController
     participant Validator as Request Validator
     participant Spawner as Thread Spawner
     participant Background as BackgroundResume

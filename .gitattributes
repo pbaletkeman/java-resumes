@@ -1,0 +1,103 @@
+# Git Configuration for Consistent Character Encoding and Formatting
+# Applies to: java-resumes repository
+# Purpose: Ensure consistent encoding, line endings, and formatting across all files
+
+# Auto detect text files and normalize line endings to LF
+* text=auto
+
+# Source Code Files - UTF-8 encoding, LF line endings, 4-space tabs, newline at EOF
+*.java text eol=lf charset=utf-8 working-tree-encoding=UTF-8 tab-size=4
+*.ts text eol=lf charset=utf-8 working-tree-encoding=UTF-8 tab-size=2
+*.tsx text eol=lf charset=utf-8 working-tree-encoding=UTF-8 tab-size=2
+*.js text eol=lf charset=utf-8 working-tree-encoding=UTF-8 tab-size=2
+*.jsx text eol=lf charset=utf-8 working-tree-encoding=UTF-8 tab-size=2
+*.kt text eol=lf charset=utf-8 working-tree-encoding=UTF-8 tab-size=4
+*.gradle text eol=lf charset=utf-8 working-tree-encoding=UTF-8 tab-size=4
+
+# Documentation Files - UTF-8 encoding, LF line endings
+*.md text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+*.markdown text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+*.txt text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+
+# Configuration Files - UTF-8 encoding, LF line endings
+*.json text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+*.yml text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+*.yaml text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+*.xml text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+*.properties text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+.gitattributes text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+.gitignore text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+
+# CSS and Styling - UTF-8 encoding, LF line endings
+*.css text eol=lf charset=utf-8 working-tree-encoding=UTF-8 tab-size=2
+*.scss text eol=lf charset=utf-8 working-tree-encoding=UTF-8 tab-size=2
+*.less text eol=lf charset=utf-8 working-tree-encoding=UTF-8 tab-size=2
+
+# HTML Templates - UTF-8 encoding, LF line endings
+*.html text eol=lf charset=utf-8 working-tree-encoding=UTF-8 tab-size=2
+*.htm text eol=lf charset=utf-8 working-tree-encoding=UTF-8 tab-size=2
+
+# Shell Scripts - UTF-8 encoding, LF line endings
+*.sh text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+*.bash text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+*.bat text eol=crlf charset=utf-8 working-tree-encoding=UTF-8
+
+# Docker - UTF-8 encoding, LF line endings
+Dockerfile text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+docker-compose.yml text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+docker-compose.yaml text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+
+# Nginx Configuration - UTF-8 encoding, LF line endings
+*.conf text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+
+# Binary Files - No normalization
+*.jar binary
+*.class binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.tar binary
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary
+
+# Node Modules - Don't normalize
+node_modules/** -text
+.gradle/** -text
+build/** -text
+target/** -text
+dist/** -text
+coverage/** -text
+
+# IDE and Editor Files - UTF-8, LF
+.vscode/** text eol=lf
+.idea/** -text
+*.iml text eol=lf
+.eclipse -text
+.project text eol=lf
+.classpath text eol=lf
+
+# Environment and Build Files - UTF-8, LF, CRLF for Windows
+.env* text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+.editorconfig text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+Makefile text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+gradle.properties text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+pom.xml text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+package.json text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+package-lock.json text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+tsconfig.json text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+
+# Documentation and License
+LICENSE text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+CHANGELOG* text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+AUTHORS* text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+CONTRIBUTORS* text eol=lf charset=utf-8 working-tree-encoding=UTF-8
+
+# Ensure all text files end with newline
+text eol=lf
