@@ -78,6 +78,8 @@ Prompts are the communication bridge between the application and the AI model. E
 - Professional tone matching industry standards
 - Ready-to-send formatted document
 
+---
+
 ## Prompt Design Philosophy
 
 ### 1. **Clarity & Specificity**
@@ -228,7 +230,7 @@ Prompts connect to:
 ❌ Omit important context or constraints
 ❌ Ignore edge cases and error handling
 
-## Maintenance & Updates
+---
 
 ### Regular Review
 
