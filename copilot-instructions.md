@@ -506,7 +506,7 @@ class ComponentTest {
 
 ### Local Development Setup
 
-**1. Install Java 17 LTS**
+**1. Install Java 25 LTS**
 
 ```bash
 # Verify installation
@@ -572,7 +572,7 @@ logging.level.ca.letkeman=DEBUG
 ### Core Dependencies
 
 - **Spring Boot**: 3.5.1+
-- **Java**: 17 (LTS)
+- **Java**: 25 (LTS)
 - **Gradle**: Latest
 - **Gson**: 2.13.1
 - **jsoup**: 1.15.4
@@ -896,7 +896,7 @@ java-resumes/
 
 ### Backend
 
-- **Language**: Java 17 LTS (Corretto)
+- **Language**: Java 25 LTS (Eclipse Temurin)
 - **Framework**: Spring Boot 3.5.1
 - **Build Tool**: Gradle 8.7
 - **Testing**: JUnit 5, Mockito (80%+ coverage required)
