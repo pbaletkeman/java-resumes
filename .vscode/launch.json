@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-RestServiceApplication<java-resumes>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "ca.letkeman.resumes.RestServiceApplication",
+      "projectName": "java-resumes",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
