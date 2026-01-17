@@ -1,7 +1,7 @@
 # Multi-stage build for Java Spring Boot Backend
 
 # Stage 1: Build the application
-FROM gradle:8.7-jdk17 AS builder
+FROM gradle:8.7-jdk25 AS builder
 
 WORKDIR /app
 
@@ -19,7 +19,7 @@ COPY config.json ./
 RUN gradle build -x test --no-daemon
 
 # Stage 2: Runtime
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:25-jre-alpine
 
 WORKDIR /app
 

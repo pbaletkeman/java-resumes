@@ -6,7 +6,7 @@ Repository-wide custom instructions for GitHub Copilot agents working on the jav
 
 **java-resumes** is a full-stack application for AI-powered resume and cover letter optimization.
 
-- **Backend**: Spring Boot 3.5.1, Java 17 LTS, Gradle 8.7 - REST API for document processing
+- **Backend**: Spring Boot 3.5.1, Java 25 LTS, Gradle 8.7 - REST API for document processing
 - **Frontend**: React 19, TypeScript 5.9.3, Vite 7.2.4 - Tab-based UI for document management
 - **AI Integration**: Ollama/LM Studio LLM endpoints for intelligent optimization
 - **Code Quality**: Checkstyle 10.14.2 (100% compliance), 80%+ test coverage required

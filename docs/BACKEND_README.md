@@ -1,6 +1,6 @@
 # Resume Optimizer Backend
 
-[![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://openjdk.java.net/)
+[![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://openjdk.java.net/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.1-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![Gradle](https://img.shields.io/badge/Gradle-8.7-02303A.svg)](https://gradle.org/)
 [![Checkstyle](https://img.shields.io/badge/Checkstyle-10.14.2-blue.svg)](https://checkstyle.org/)
@@ -12,9 +12,11 @@ A robust Java Spring Boot backend service for AI-powered resume and cover letter
 ## 📋 Table of Contents
 
 - [Overview](#-overview)
+- [🚀 Quick Start in 5 Steps](#-quick-start-in-5-steps)
 - [Technology Stack](#%EF%B8%8F-technology-stack)
 - [Prerequisites](#-prerequisites)
 - [Installation](#-installation)
+- [Getting Started Without Docker](#-getting-started-without-docker)
 - [Configuration](#-configuration)
 - [Running Locally](#-running-locally)
 - [Testing](#-testing)
@@ -51,13 +53,74 @@ The Resume Optimizer Backend is a production-ready Spring Boot application that 
 
 ---
 
-## 🛠️ Technology Stack
+## � Quick Start in 5 Steps
+
+Get the backend running in just 5 minutes! Follow these quick steps to start developing:
+
+### Prerequisites
+
+- Java 25 JDK installed
+- Gradle 8.7+ (or use included wrapper)
+- LLM service running (Ollama recommended)
+
+### Steps
+
+**Step 1: Clone and navigate**
+
+```bash
+git clone https://github.com/pbaletkeman/java-resumes.git
+cd java-resumes
+```
+
+**Step 2: Start an LLM service** (open separate terminal)
+
+```bash
+ollama serve
+# In another terminal: ollama pull gemma-3-4b-it
+```
+
+**Step 3: Configure LLM endpoint**
+
+```bash
+# Edit config.json (or leave as default for local Ollama)
+cat > config.json << 'EOF'
+{
+  "endpoint": "http://localhost:11434/v1/chat/completions",
+  "apikey": "not-needed-for-local",
+  "model": "gemma-3-4b-it"
+}
+EOF
+```
+
+**Step 4: Build the application**
+
+```bash
+./gradlew build
+```
+
+**Step 5: Run the backend**
+
+```bash
+./gradlew bootRun
+```
+
+### Access the Application
+
+- **REST API**: http://localhost:8080
+- **Swagger UI**: http://localhost:8080/swagger-ui/index.html
+- **Health Check**: http://localhost:8080/api/health
+
+That's it! Your backend is now running. Start uploading resumes and generating optimized versions.
+
+---
+
+## �🛠️ Technology Stack
 
 ### Core Technologies
 
 | Component           | Technology             | Version | Purpose                           |
 | ------------------- | ---------------------- | ------- | --------------------------------- |
-| **Language**        | Java                   | 17 LTS  | Backend programming language      |
+| **Language**        | Java                   | 25 LTS  | Backend programming language      |
 | **Framework**       | Spring Boot            | 3.5.1   | Application framework             |
 | **Build Tool**      | Gradle                 | 8.7     | Build automation and dependencies |
 | **Dependency Mgmt** | Spring Dependency Mgmt | 1.1.7   | Consistent dependency versions    |
@@ -104,7 +167,7 @@ The Resume Optimizer Backend is a production-ready Spring Boot application that 
 
 Before you begin, ensure you have the following installed:
 
-- **Java Development Kit (JDK)**: Version 17 or higher ([Download OpenJDK](https://adoptium.net/))
+- **Java Development Kit (JDK)**: Version 25 LTS ([Download Eclipse Temurin](https://adoptium.net/))
 - **Gradle**: Version 8.7+ (or use included Gradle wrapper)
 - **LLM Service**: Ollama, LM Studio, or OpenAI API access
 - **IDE** (optional): IntelliJ IDEA, Eclipse, or VS Code with Java extensions
@@ -114,7 +177,7 @@ Before you begin, ensure you have the following installed:
 ```bash
 # Check Java version
 java -version
-# Output should show version 17 or higher
+# Output should show version 25 or higher
 
 # Check Gradle version (if installed globally)
 gradle --version
@@ -243,6 +306,341 @@ llm:
 | `upload.path`                            | File storage directory | `files`         |
 | `llm.endpoint`                           | LLM service endpoint   | See config.json |
 | `llm.apikey`                             | LLM API key            | See config.json |
+
+---
+
+## 🚀 Getting Started Without Docker
+
+If you prefer to run the backend without Docker, follow these native setup instructions.
+
+### Prerequisites
+
+- **Java 25 LTS JDK** installed
+  ```bash
+  java -version  # Verify you see Java 25
+  ```
+- **Gradle 8.7+** (or use included wrapper)
+  ```bash
+  ./gradlew --version  # Verify Gradle is installed
+  ```
+- **LLM Service**: Ollama, LM Studio, or OpenAI API
+- **Git** for version control
+- **IDE** (optional): IntelliJ IDEA, Eclipse, or VS Code
+
+### Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/pbaletkeman/java-resumes.git
+cd java-resumes
+```
+
+### Step 2: Set Up LLM Service
+
+Choose one of the following options:
+
+#### Option A: Ollama (Recommended - Free, Local)
+
+**Install Ollama**:
+
+- Download from https://ollama.ai
+- Follow installation instructions for your OS
+
+**Start Ollama Service**:
+
+```bash
+# Start Ollama in background
+ollama serve
+
+# In another terminal, pull a model
+ollama pull gemma-3-4b-it
+
+# Or use a different model
+ollama pull llama2
+ollama pull mistral
+```
+
+**Verify Ollama**:
+
+```bash
+curl http://localhost:11434/api/version
+```
+
+#### Option B: LM Studio (Free, Local)
+
+**Install LM Studio**:
+
+- Download from https://lmstudio.ai
+- Install and launch application
+
+**Load a Model**:
+
+1. Open LM Studio
+2. Click "Browse Models"
+3. Select and download a model (e.g., `Mistral 7B`)
+4. Click the download icon
+5. Wait for download to complete
+
+**Start Local Server**:
+
+1. Go to "Local Server" tab
+2. Click "Start Server"
+3. Default endpoint: `http://localhost:1234/v1/chat/completions`
+
+#### Option C: OpenAI API (Paid, Cloud)
+
+**Get API Key**:
+
+1. Sign up at https://openai.com
+2. Get your API key from settings
+3. Set environment variable:
+   ```bash
+   export OPENAI_API_KEY="sk-your-key-here"  # Unix/Mac
+   set OPENAI_API_KEY=sk-your-key-here       # Windows
+   ```
+
+### Step 3: Configure LLM Endpoint
+
+Create or edit `config.json` in the project root:
+
+```json
+{
+  "endpoint": "http://localhost:11434/v1/chat/completions",
+  "apikey": "not-needed-for-local",
+  "model": "gemma-3-4b-it"
+}
+```
+
+**For different LLM services**:
+
+- **Ollama**: `http://localhost:11434/v1/chat/completions`
+- **LM Studio**: `http://localhost:1234/v1/chat/completions`
+- **OpenAI**: `https://api.openai.com/v1/chat/completions`
+
+### Step 4: Build the Project
+
+```bash
+./gradlew clean build
+```
+
+This command:
+
+- Downloads all dependencies
+- Compiles Java source code
+- Runs all tests
+- Generates JAR file
+
+**Troubleshooting build issues**:
+
+```bash
+# If build fails, try:
+./gradlew clean build --refresh-dependencies
+
+# For verbose output:
+./gradlew build --info
+
+# Skip tests (faster):
+./gradlew build -x test
+```
+
+### Step 5: Run the Application
+
+**Using Gradle (with hot reload)**:
+
+```bash
+./gradlew bootRun
+```
+
+**Using JAR file**:
+
+```bash
+java -jar build/libs/resumes-0.0.1-SNAPSHOT.jar
+```
+
+**With custom JVM options**:
+
+```bash
+java -Xms512m -Xmx1024m \
+  -Dlogging.level.ca.letkeman=DEBUG \
+  -jar build/libs/resumes-0.0.1-SNAPSHOT.jar
+```
+
+### Step 6: Verify Installation
+
+Open your browser and test the following:
+
+1. **Health Check**: http://localhost:8080/api/health
+   - Should return: `{"status":"UP"}`
+
+2. **Swagger UI**: http://localhost:8080/swagger-ui/index.html
+   - Should show interactive API documentation
+
+3. **API Docs**: http://localhost:8080/api-docs
+   - Should return JSON OpenAPI specification
+
+### Development Setup
+
+#### Configure IDE
+
+**IntelliJ IDEA**:
+
+1. Open project root
+2. Select "gradle" as build tool
+3. Set JDK to Java 25
+4. Enable annotations processing (Settings > Build > Compiler > Annotation Processors)
+
+**VS Code**:
+
+1. Install "Extension Pack for Java"
+2. Install "Gradle for Java"
+3. Open project root folder
+
+#### Enable Hot Reload
+
+```bash
+./gradlew bootRun --continuous
+```
+
+This watches for changes and automatically recompiles code.
+
+#### Run Tests During Development
+
+```bash
+# Run all tests
+./gradlew test
+
+# Run specific test class
+./gradlew test --tests ResumeControllerTest
+
+# Run tests in watch mode
+./gradlew test --continuous
+
+# Run with coverage report
+./gradlew test jacocoTestReport
+```
+
+#### Check Code Quality
+
+```bash
+# Run Checkstyle
+./gradlew checkstyleMain checkstyleTest
+
+# View detailed report
+./gradlew checkstyleMain
+# Report: build/reports/checkstyle/main.html
+```
+
+### Directory Structure
+
+After setup, you should have:
+
+```
+java-resumes/
+├── src/main/          # Source code
+├── src/test/          # Test code
+├── build/             # Compiled output
+├── files/             # File storage (created at runtime)
+├── config/            # Configuration files
+├── build.gradle       # Build configuration
+├── config.json        # LLM configuration
+├── Dockerfile         # Docker config (optional)
+├── docker-compose.yml # Compose config (optional)
+└── README.md          # This file
+```
+
+### Environment Variables
+
+Set these for custom configuration:
+
+```bash
+# LLM Configuration
+export LLM_ENDPOINT="http://localhost:11434/v1/chat/completions"
+export LLM_APIKEY="your-api-key"
+
+# Server Configuration
+export SERVER_PORT=9090
+
+# Upload Configuration
+export UPLOAD_PATH="./uploads"
+
+# Logging
+export LOGGING_LEVEL_CA_LETKEMAN="DEBUG"
+```
+
+### Common Development Tasks
+
+```bash
+# Full clean build
+./gradlew clean build
+
+# Build without running tests
+./gradlew build -x test
+
+# Run application with debug logging
+./gradlew bootRun --debug
+
+# Run on different port
+./gradlew bootRun --args='--server.port=9090'
+
+# Stop the running application
+Ctrl+C
+
+# Clean build artifacts
+./gradlew clean
+
+# Check dependencies for updates
+./gradlew dependencyUpdates
+
+# Generate test coverage report
+./gradlew test jacocoTestReport
+# Open: build/reports/jacoco/test/html/index.html
+```
+
+### Troubleshooting Native Setup
+
+**Java Version Mismatch**:
+
+```bash
+# Check Java version
+java -version
+
+# If wrong version, set JAVA_HOME
+export JAVA_HOME=/path/to/jdk-25  # Unix/Mac
+set JAVA_HOME=C:\path\to\jdk-25   # Windows
+```
+
+**LLM Connection Error**:
+
+```bash
+# Check if Ollama is running
+curl http://localhost:11434/api/version
+
+# Check if LM Studio is running
+curl http://localhost:1234/v1/models
+
+# Verify config.json endpoint
+cat config.json
+```
+
+**Build Failures**:
+
+```bash
+# Clear Gradle cache
+rm -rf ~/.gradle/caches
+
+# Retry build
+./gradlew clean build --refresh-dependencies
+```
+
+**Port Already in Use**:
+
+```bash
+# Find what's using port 8080
+lsof -i :8080              # Unix/Mac
+netstat -ano | findstr 8080  # Windows
+
+# Use different port
+./gradlew bootRun --args='--server.port=9090'
+```
 
 ---
 
@@ -499,12 +897,12 @@ docker compose down
 
 **Multi-stage build:**
 
-1. **Build Stage** (`gradle:8.7-jdk17`):
+1. **Build Stage** (`gradle:8.7-jdk25`):
    - Copies source code
    - Builds application
    - Creates JAR file
 
-2. **Runtime Stage** (`eclipse-temurin:17-jre-alpine`):
+2. **Runtime Stage** (`eclipse-temurin:25-jre-alpine`):
    - Minimal JRE image
    - Copies JAR from build stage
    - Non-root user for security

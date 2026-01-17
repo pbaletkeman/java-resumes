@@ -13,9 +13,11 @@ A modern, responsive React application built with PrimeReact components for AI-p
 ## 📋 Table of Contents
 
 - [Overview](#-overview)
+- [🚀 Quick Start in 5 Steps](#-quick-start-in-5-steps)
 - [Technology Stack](#%EF%B8%8F-technology-stack)
 - [Prerequisites](#-prerequisites)
 - [Installation](#-installation)
+- [Getting Started Without Docker](#-getting-started-without-docker)
 - [Development](#-development)
 - [Available Scripts](#-available-scripts)
 - [Building for Production](#-building-for-production)
@@ -51,56 +53,110 @@ The Resume Optimizer Frontend is a production-ready React application that provi
 
 ---
 
-## 🛠️ Technology Stack
+## � Quick Start in 5 Steps
+
+Get the frontend running in just 5 minutes! Follow these quick steps to start developing:
+
+### Prerequisites
+
+- Node.js 24 LTS installed
+- npm 10+ installed
+- Backend running (http://localhost:8080)
+
+### Steps
+
+**Step 1: Clone and navigate to frontend**
+
+```bash
+git clone https://github.com/pbaletkeman/java-resumes.git
+cd java-resumes/frontend
+```
+
+**Step 2: Install dependencies**
+
+```bash
+npm install
+```
+
+**Step 3: Configure API endpoint** (optional, if backend not on localhost:8080)
+
+```bash
+cp .env.example .env
+# Edit .env if needed to match your backend URL
+```
+
+**Step 4: Start development server**
+
+```bash
+npm run dev
+```
+
+**Step 5: Open in browser**
+
+```
+http://localhost:5173
+```
+
+### Access the Application
+
+- **Frontend**: http://localhost:5173 (or port shown in terminal)
+- **Backend API**: http://localhost:8080
+- **Swagger UI**: http://localhost:8080/swagger-ui/index.html
+
+That's it! You now have a hot-reloading development environment. Any code changes will automatically refresh in your browser.
+
+---
+
+## �🛠️ Technology Stack
 
 ### Core Technologies
 
-| Technology           | Version | Purpose                              |
-| -------------------- | ------- | ------------------------------------ |
-| **React**            | 19.2.0  | UI library and component framework   |
-| **TypeScript**       | 5.9.3   | Type-safe JavaScript superset        |
-| **Vite**             | 7.2.4   | Fast build tool and dev server       |
+| Technology     | Version | Purpose                            |
+| -------------- | ------- | ---------------------------------- |
+| **React**      | 19.2.0  | UI library and component framework |
+| **TypeScript** | 5.9.3   | Type-safe JavaScript superset      |
+| **Vite**       | 7.2.4   | Fast build tool and dev server     |
 
 ### UI and Styling
 
-| Technology           | Version | Purpose                              |
-| -------------------- | ------- | ------------------------------------ |
-| **PrimeReact**       | 10.9.7  | Professional UI component library    |
-| **PrimeIcons**       | 7.0.0   | Icon library                         |
-| **Tailwind CSS**     | 4.1.18  | Utility-first CSS framework          |
-| **PostCSS**          | 8.5.6   | CSS processing                       |
-| **Autoprefixer**     | 10.4.23 | CSS vendor prefixing                 |
+| Technology       | Version | Purpose                           |
+| ---------------- | ------- | --------------------------------- |
+| **PrimeReact**   | 10.9.7  | Professional UI component library |
+| **PrimeIcons**   | 7.0.0   | Icon library                      |
+| **Tailwind CSS** | 4.1.18  | Utility-first CSS framework       |
+| **PostCSS**      | 8.5.6   | CSS processing                    |
+| **Autoprefixer** | 10.4.23 | CSS vendor prefixing              |
 
 ### HTTP and State Management
 
-| Technology           | Version | Purpose                              |
-| -------------------- | ------- | ------------------------------------ |
-| **Axios**            | 1.13.2  | Promise-based HTTP client            |
-| **React Context**    | 19.2.0  | Global state management              |
+| Technology        | Version | Purpose                   |
+| ----------------- | ------- | ------------------------- |
+| **Axios**         | 1.13.2  | Promise-based HTTP client |
+| **React Context** | 19.2.0  | Global state management   |
 
 ### Testing
 
-| Technology                  | Version | Purpose                       |
-| --------------------------- | ------- | ----------------------------- |
-| **Vitest**                  | 4.0.17  | Unit testing framework        |
-| **React Testing Library**   | 16.3.1  | React component testing       |
-| **@testing-library/jest-dom**| 6.9.1  | Custom DOM matchers           |
-| **@testing-library/user-event**| 14.6.1 | User interaction simulation |
-| **jsdom**                   | 27.4.0  | DOM implementation            |
+| Technology                      | Version | Purpose                     |
+| ------------------------------- | ------- | --------------------------- |
+| **Vitest**                      | 4.0.17  | Unit testing framework      |
+| **React Testing Library**       | 16.3.1  | React component testing     |
+| **@testing-library/jest-dom**   | 6.9.1   | Custom DOM matchers         |
+| **@testing-library/user-event** | 14.6.1  | User interaction simulation |
+| **jsdom**                       | 27.4.0  | DOM implementation          |
 
 ### Development Tools
 
-| Technology           | Version | Purpose                              |
-| -------------------- | ------- | ------------------------------------ |
-| **ESLint**           | 9.39.1  | JavaScript/TypeScript linting        |
-| **Prettier**         | latest  | Code formatting                      |
-| **TypeScript ESLint**| 8.46.4  | TypeScript-specific linting rules    |
+| Technology            | Version | Purpose                           |
+| --------------------- | ------- | --------------------------------- |
+| **ESLint**            | 9.39.1  | JavaScript/TypeScript linting     |
+| **Prettier**          | latest  | Code formatting                   |
+| **TypeScript ESLint** | 8.46.4  | TypeScript-specific linting rules |
 
 ### Production Server
 
-| Technology           | Version | Purpose                              |
-| -------------------- | ------- | ------------------------------------ |
-| **Nginx**            | alpine  | Production web server                |
+| Technology | Version | Purpose               |
+| ---------- | ------- | --------------------- |
+| **Nginx**  | alpine  | Production web server |
 
 ---
 
@@ -108,7 +164,7 @@ The Resume Optimizer Frontend is a production-ready React application that provi
 
 Before you begin, ensure you have the following installed:
 
-- **Node.js**: Version 20.x or higher ([Download Node.js](https://nodejs.org/))
+- **Node.js**: Version 24 LTS or higher ([Download Node.js](https://nodejs.org/))
 - **npm**: Version 10.x or higher (comes with Node.js)
 - **Backend Service**: Java backend must be running on port 8080
 - **Docker** (optional): For containerized deployment
@@ -116,7 +172,7 @@ Before you begin, ensure you have the following installed:
 ### Verify Installation
 
 ```bash
-node --version  # Should be v20.x or higher
+node --version  # Should be v24.x or higher
 npm --version   # Should be 10.x or higher
 ```
 
@@ -162,6 +218,371 @@ Open http://localhost:3000 in your browser. You should see the application runni
 
 ---
 
+## 🚀 Getting Started Without Docker
+
+If you prefer to run the frontend without Docker, follow these native setup instructions.
+
+### Prerequisites
+
+- **Node.js 24 LTS** installed
+  ```bash
+  node --version  # Verify you see Node 24.x
+  ```
+- **npm 10.x+** (comes with Node.js)
+  ```bash
+  npm --version
+  ```
+- **Java backend** running (see BACKEND_README.md)
+  ```bash
+  curl http://localhost:8080/api/health
+  ```
+- **Git** for version control
+- **IDE or Editor** (VS Code, WebStorm, etc.)
+
+### Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/pbaletkeman/java-resumes.git
+cd java-resumes/frontend
+```
+
+### Step 2: Install Node Dependencies
+
+```bash
+# Install all dependencies
+npm install
+
+# Verify installation
+npm list react  # Should show React 19.2.0
+```
+
+**Troubleshooting installation issues**:
+
+```bash
+# Clear npm cache
+npm cache clean --force
+
+# Remove node_modules and reinstall
+rm -rf node_modules package-lock.json
+npm install
+
+# Use npm ci for exact versions (CI environments)
+npm ci
+```
+
+### Step 3: Configure Environment Variables
+
+Copy the example environment file:
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` to match your setup:
+
+```env
+# Backend API endpoint (adjust if backend is on different host/port)
+VITE_API_BASE_URL=http://localhost:8080
+
+# Optional: Custom configuration
+# VITE_APP_TITLE=Resume Optimizer
+# VITE_MAX_FILE_SIZE=500000
+```
+
+**Common configurations**:
+
+```env
+# Local development (backend on same machine)
+VITE_API_BASE_URL=http://localhost:8080
+
+# Remote backend development
+VITE_API_BASE_URL=http://192.168.1.100:8080
+
+# Production deployment
+VITE_API_BASE_URL=https://api.example.com
+```
+
+### Step 4: Start Development Server
+
+```bash
+# Start the dev server with hot reload
+npm run dev
+```
+
+You should see:
+
+```
+  VITE v7.2.4  dev server running at:
+  ➜  Local:   http://localhost:5173/
+  ➜  press h to show help
+```
+
+### Step 5: Open in Browser
+
+Navigate to one of the URLs shown in the terminal:
+
+- Local: http://localhost:5173 (or http://127.0.0.1:5173)
+- Accessible from network: http://your-ip:5173
+
+### Verify Setup
+
+1. **Check Frontend Loads**:
+   - Page should display without errors
+   - See the main content area and file history panel
+   - Light theme should be active by default
+
+2. **Test Backend Connection**:
+   - Try uploading a test document
+   - Should see "loading" indicator
+   - Should either process successfully or show error
+
+3. **Test Theme Toggle**:
+   - Click theme toggle button (top right)
+   - Should switch between light and dark themes
+   - Theme should persist across page reloads
+
+### Development Setup
+
+#### Configure IDE/Editor
+
+**VS Code** (recommended):
+
+1. Install extensions:
+   - "ES7+ React/Redux/React-Native snippets"
+   - "ESLint"
+   - "Prettier - Code formatter"
+   - "Tailwind CSS IntelliSense"
+   - "Thunder Client" (for API testing)
+
+2. Create `.vscode/settings.json`:
+   ```json
+   {
+     "editor.defaultFormatter": "esbenp.prettier-vscode",
+     "editor.formatOnSave": true,
+     "editor.codeActionsOnSave": {
+       "source.fixAll.eslint": true
+     }
+   }
+   ```
+
+**WebStorm/IntelliJ**:
+
+1. Open project root
+2. Enable ESLint and Prettier
+3. Set Node.js interpreter to 24 LTS
+4. Configure Vite as build tool
+
+#### Enable Hot Reload Features
+
+The development server includes:
+
+- **Hot Module Replacement (HMR)**: Instant component updates
+- **Preserve Component State**: State survives hot reloads
+- **Fast Refresh**: Automatically handles React component updates
+- **CSS Hot Reload**: Styling updates without refresh
+
+Just save your files and see changes instantly in the browser!
+
+#### Development Workflow
+
+1. **Start Backend** (in separate terminal):
+
+   ```bash
+   cd ../
+   ./gradlew bootRun
+   ```
+
+2. **Start Frontend**:
+
+   ```bash
+   npm run dev
+   ```
+
+3. **Make Code Changes**:
+   - Edit files in `src/` directory
+   - Changes appear instantly in browser
+   - Fix any displayed errors and save again
+
+4. **Test Your Changes**:
+   - Use the application UI to test features
+   - Open browser DevTools (F12) to check console
+   - Use Thunder Client or Postman to test API directly
+
+5. **Stop the Server**:
+   - Press `Ctrl+C` in the terminal
+
+### Available Development Commands
+
+```bash
+# Start development server with hot reload
+npm run dev
+
+# Check for TypeScript errors
+npm run type-check
+
+# Run linting checks
+npm run lint
+
+# Build for production
+npm run build
+
+# Preview production build locally
+npm run preview
+
+# Run unit tests
+npm run test
+
+# Run tests in watch mode (continuous)
+npm run test -- --watch
+
+# Run tests with UI
+npm run test:ui
+
+# Generate coverage report
+npm run test:coverage
+
+# Format code with Prettier
+npm run format
+
+# Format and lint code
+npm run lint:fix
+```
+
+### Project Structure
+
+```
+frontend/
+├── src/
+│   ├── components/          # Reusable React components
+│   │   ├── Layout/
+│   │   ├── Tabs/
+│   │   ├── Forms/
+│   │   └── Common/
+│   ├── hooks/               # Custom React hooks
+│   │   ├── useApi.ts
+│   │   ├── useTheme.ts
+│   │   └── [other hooks]
+│   ├── services/            # API service layer
+│   │   └── api.ts           # Axios instance and requests
+│   ├── context/             # Context providers
+│   │   └── ThemeContext.tsx
+│   ├── utils/               # Utility functions
+│   ├── assets/              # Static files (images, fonts)
+│   ├── App.tsx              # Root component
+│   ├── main.tsx             # Application entry point
+│   └── index.css            # Global styles
+├── public/                  # Static files served as-is
+├── .env.example             # Environment variables template
+├── vite.config.ts           # Vite configuration
+├── tsconfig.json            # TypeScript configuration
+├── tailwind.config.js       # Tailwind CSS configuration
+├── eslint.config.js         # ESLint configuration
+├── vitest.config.ts         # Vitest configuration
+├── package.json             # Dependencies and scripts
+├── Dockerfile               # Docker configuration
+├── nginx.conf               # Nginx configuration
+└── README.md                # This file
+```
+
+### Environment-Specific Settings
+
+```env
+# Development
+VITE_API_BASE_URL=http://localhost:8080
+VITE_ENV=development
+
+# Staging
+VITE_API_BASE_URL=https://staging-api.example.com
+VITE_ENV=staging
+
+# Production
+VITE_API_BASE_URL=https://api.example.com
+VITE_ENV=production
+```
+
+### Common Development Issues
+
+**Port 5173 Already in Use**:
+
+```bash
+# Use different port
+npm run dev -- --port 3000
+
+# Or kill process using port 5173
+lsof -i :5173         # Unix/Mac
+netstat -ano | findstr :5173  # Windows
+```
+
+**Backend Connection Error**:
+
+```bash
+# Check backend is running
+curl http://localhost:8080/api/health
+
+# Check VITE_API_BASE_URL in .env
+cat .env
+
+# Check browser console for CORS errors
+# Backend might need CORS configuration
+```
+
+**Node Version Mismatch**:
+
+```bash
+# Check Node version
+node --version
+
+# Use Node Version Manager (nvm) to switch versions
+nvm list          # See installed versions
+nvm use 24        # Switch to Node 24
+nvm install 24    # Install Node 24
+```
+
+**Module Not Found Errors**:
+
+```bash
+# Reinstall dependencies
+rm -rf node_modules package-lock.json
+npm install
+
+# Clear Vite cache
+rm -rf node_modules/.vite
+```
+
+**Hot Reload Not Working**:
+
+```bash
+# Restart dev server
+npm run dev
+
+# Check firewall/antivirus isn't blocking connections
+# Clear browser cache (Ctrl+Shift+Delete)
+# Restart browser
+```
+
+### Performance Tips
+
+1. **Use Development Build**:
+   - `npm run dev` - fast, unoptimized
+   - `npm run build` - slower, production-optimized
+
+2. **Monitor Bundle Size**:
+
+   ```bash
+   npm run build
+   # Check size of dist/index.js
+   ```
+
+3. **Enable Source Maps**:
+   - Vite enables by default in dev mode
+   - See original source in browser DevTools
+
+4. **Code Splitting**:
+   - Vite automatically splits code
+   - Monitor Network tab to see bundle requests
+
+---
+
 ## 🚀 Development
 
 ### Start Development Server
@@ -171,6 +592,7 @@ npm run dev
 ```
 
 The development server will start with:
+
 - **URL**: http://localhost:3000
 - **Hot Module Replacement (HMR)**: Enabled
 - **Source Maps**: Enabled for debugging
@@ -187,12 +609,14 @@ The development server will start with:
 ### Development Workflow
 
 1. **Start Backend** (in separate terminal):
+
    ```bash
    cd ../
    ./gradlew bootRun
    ```
 
 2. **Start Frontend**:
+
    ```bash
    npm run dev
    ```
@@ -201,7 +625,7 @@ The development server will start with:
 
 4. **Test Changes**: See updates instantly in browser
 
-5. **Run Tests**: 
+5. **Run Tests**:
    ```bash
    npm run test
    ```
@@ -283,6 +707,7 @@ npm run build
 ```
 
 This command:
+
 1. ✅ Compiles TypeScript to JavaScript
 2. ✅ Optimizes and minifies code
 3. ✅ Generates source maps
@@ -313,11 +738,13 @@ Opens the production build at http://localhost:4173
 ### Build Optimization
 
 **Bundle Size Targets:**
+
 - Main bundle: < 200KB gzipped
 - CSS bundle: < 50KB gzipped
 - Total bundle: < 300KB gzipped
 
 **Optimization Techniques:**
+
 - Code splitting for routes
 - Tree shaking for unused code
 - Minification and compression
@@ -331,25 +758,31 @@ Opens the production build at http://localhost:4173
 ### Running Tests
 
 **Watch Mode** (recommended for development):
+
 ```bash
 npm run test
 ```
 
 **Single Run**:
+
 ```bash
 npm run test -- --run
 ```
 
 **With UI Interface**:
+
 ```bash
 npm run test:ui
 ```
+
 Opens an interactive UI at http://localhost:51204
 
 **Coverage Report**:
+
 ```bash
 npm run test:coverage
 ```
+
 Report location: `coverage/index.html`
 
 ### Test Structure
@@ -385,7 +818,7 @@ describe('Button Component', () => {
   it('calls onClick when clicked', () => {
     const handleClick = vi.fn();
     render(<Button label="Click Me" onClick={handleClick} />);
-    
+
     fireEvent.click(screen.getByText('Click Me'));
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
@@ -433,11 +866,13 @@ docker run -d \
 The `Dockerfile` uses a multi-stage build for optimization:
 
 **Stage 1: Build** (node:20-alpine)
+
 - Installs dependencies
 - Compiles TypeScript
 - Builds production bundle
 
 **Stage 2: Runtime** (nginx:alpine)
+
 - Copies built assets
 - Serves with Nginx
 - Minimal image size (~20MB)
@@ -481,12 +916,12 @@ VITE_ENABLE_DEBUG=false
 
 ### Environment Variables Reference
 
-| Variable                | Description                  | Default                    | Required |
-| ----------------------- | ---------------------------- | -------------------------- | -------- |
-| `VITE_API_BASE_URL`     | Backend API endpoint         | `http://localhost:8080`    | Yes      |
-| `VITE_APP_TITLE`        | Application title            | `Resume Optimizer`         | No       |
-| `VITE_MAX_FILE_SIZE`    | Max file upload size (bytes) | `524288` (500KB)           | No       |
-| `VITE_ENABLE_DEBUG`     | Enable debug logging         | `false`                    | No       |
+| Variable             | Description                  | Default                 | Required |
+| -------------------- | ---------------------------- | ----------------------- | -------- |
+| `VITE_API_BASE_URL`  | Backend API endpoint         | `http://localhost:8080` | Yes      |
+| `VITE_APP_TITLE`     | Application title            | `Resume Optimizer`      | No       |
+| `VITE_MAX_FILE_SIZE` | Max file upload size (bytes) | `524288` (500KB)        | No       |
+| `VITE_ENABLE_DEBUG`  | Enable debug logging         | `false`                 | No       |
 
 ### Accessing Environment Variables
 
@@ -505,12 +940,14 @@ if (!apiBaseUrl) {
 ### Environment-Specific Configuration
 
 **Development** (`.env.development`):
+
 ```env
 VITE_API_BASE_URL=http://localhost:8080
 VITE_ENABLE_DEBUG=true
 ```
 
 **Production** (`.env.production`):
+
 ```env
 VITE_API_BASE_URL=https://api.example.com
 VITE_ENABLE_DEBUG=false
@@ -770,7 +1207,7 @@ const api = axios.create({
 
 // Request interceptor
 api.interceptors.request.use(
-  (config) => {
+  config => {
     // Add auth token if available
     const token = localStorage.getItem('token');
     if (token) {
@@ -778,13 +1215,13 @@ api.interceptors.request.use(
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  error => Promise.reject(error)
 );
 
 // Response interceptor
 api.interceptors.response.use(
-  (response) => response,
-  (error) => {
+  response => response,
+  error => {
     // Handle errors globally
     console.error('API Error:', error);
     return Promise.reject(error);
@@ -837,12 +1274,12 @@ export const uploadAndOptimize = async (data: OptimizeRequest) => {
 export const markdownToPdf = async (file: File) => {
   const formData = new FormData();
   formData.append('file', file);
-  
+
   const response = await api.post('/markdownFile2PDF', formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
     responseType: 'blob',
   });
-  
+
   return response.data;
 };
 ```
@@ -931,9 +1368,9 @@ App
 // Container (Logic)
 export const FileHistoryContainer = () => {
   const { files, loading, deleteFile } = useFileManagement();
-  
+
   return (
-    <FileHistoryPresentation 
+    <FileHistoryPresentation
       files={files}
       loading={loading}
       onDelete={deleteFile}
@@ -944,7 +1381,7 @@ export const FileHistoryContainer = () => {
 // Presentational (UI)
 export const FileHistoryPresentation = ({ files, loading, onDelete }) => {
   if (loading) return <LoadingSpinner />;
-  
+
   return (
     <div>
       {files.map(file => (
@@ -1156,7 +1593,7 @@ npm run build
 
 ```typescript
 // In .env
-VITE_ENABLE_DEBUG=true
+VITE_ENABLE_DEBUG = true;
 
 // In code
 if (import.meta.env.VITE_ENABLE_DEBUG) {
@@ -1175,6 +1612,7 @@ api.interceptors.request.use(request => {
 ```
 
 **React DevTools:**
+
 - Install React DevTools browser extension
 - Inspect component tree and props
 - Profile performance issues
@@ -1223,6 +1661,7 @@ export default [
 ### Coding Standards
 
 **Naming Conventions:**
+
 - Components: PascalCase (`MainContentTab`)
 - Files: PascalCase for components (`MainContentTab.tsx`)
 - Hooks: camelCase with `use` prefix (`useFileManagement`)
@@ -1230,6 +1669,7 @@ export default [
 - Functions: camelCase (`fetchFiles`)
 
 **Import Order:**
+
 1. React imports
 2. Third-party libraries
 3. Internal components
@@ -1252,6 +1692,7 @@ import './styles.css';
 ```
 
 **Component Structure:**
+
 ```typescript
 // 1. Imports
 import { ... } from '...';
@@ -1266,17 +1707,17 @@ interface ComponentProps {
 export const Component = ({ prop1, prop2 }: ComponentProps) => {
   // 4. Hooks
   const [state, setState] = useState();
-  
+
   // 5. Effects
   useEffect(() => {
     // ...
   }, []);
-  
+
   // 6. Handlers
   const handleClick = () => {
     // ...
   };
-  
+
   // 7. Render
   return (
     <div>{/* ... */}</div>
@@ -1324,6 +1765,7 @@ footer (optional)
 ```
 
 **Types:**
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation changes
@@ -1333,6 +1775,7 @@ footer (optional)
 - `chore`: Maintenance tasks
 
 **Examples:**
+
 ```
 feat(upload): add drag and drop support
 fix(theme): persist theme selection
