@@ -168,7 +168,7 @@ export const DocumentUploadForm: React.FC = () => {
             {inputMode === INPUT_MODES.PASTE ? (
               <div
                 className="w-full"
-                style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}
+                style={{ display: 'flex', flexDirection: 'row', gap: '0.5rem' }}
               >
                 <div
                   className="field"

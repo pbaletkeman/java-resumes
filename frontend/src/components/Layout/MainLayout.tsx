@@ -17,7 +17,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         </div>
         <div
           style={{
-            width: '500px',
+            width: '350px',
             padding: '1rem',
             borderLeft: '1px solid var(--surface-border)',
             overflowY: 'auto',
