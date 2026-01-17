@@ -26,10 +26,14 @@ export const FileHistory: React.FC = () => {
     setFileToDelete(null);
   };
 
-  const itemTemplate = (file: FileMetadata) => {
+  const itemTemplate = (file: FileMetadata, index: number) => {
+    const backgroundColor = index % 2 === 0 ? '#f9fafb' : '#ffffff';
     return (
       <div className="col-12">
-        <div className="flex flex-column xl:flex-row xl:align-items-start p-3 gap-3 border-bottom-1 surface-border">
+        <div
+          className="flex flex-column xl:flex-row xl:align-items-start p-3 gap-3 border-bottom-1 surface-border"
+          style={{ backgroundColor }}
+        >
           <i className="pi pi-file text-2xl" />
           <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-3">
             <div className="flex flex-column align-items-center sm:align-items-start gap-2">
@@ -69,7 +73,11 @@ export const FileHistory: React.FC = () => {
 
   const listTemplate = (items: FileMetadata[]) => {
     if (!items || items.length === 0) return null;
-    return <div className="grid grid-nogutter">{items.map(item => itemTemplate(item))}</div>;
+    return (
+      <div className="grid grid-nogutter">
+        {items.map((item, index) => itemTemplate(item, index))}
+      </div>
+    );
   };
 
   return (

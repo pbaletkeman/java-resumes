@@ -9,11 +9,20 @@ interface MainLayoutProps {
 
 export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
-    <div className="min-h-screen flex flex-column">
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', width: '100%' }}>
       <Navbar />
-      <div className="flex-1 flex">
-        <div className="flex-1 p-3">{children}</div>
-        <div className="w-full md:w-4 lg:w-3 p-3 border-left-1 surface-border overflow-y-auto">
+      <div style={{ display: 'flex', flex: 1, minHeight: 0, overflow: 'hidden' }}>
+        <div style={{ flex: 1, padding: '1rem', overflowY: 'auto', overflowX: 'hidden' }}>
+          {children}
+        </div>
+        <div
+          style={{
+            width: '500px',
+            padding: '1rem',
+            borderLeft: '1px solid var(--surface-border)',
+            overflowY: 'auto',
+          }}
+        >
           <FileHistory />
         </div>
       </div>

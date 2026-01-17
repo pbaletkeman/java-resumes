@@ -631,6 +631,121 @@ npm run format
 
 See [frontend/README.md](frontend/README.md) for detailed frontend documentation.
 
+### Windows Batch File Automation
+
+For Windows 11 users, three batch files are provided to streamline development workflow. These files automate npm module management, frontend dev server startup, and backend gradle build/run operations.
+
+#### Batch Files Overview
+
+| File           | Purpose                                     | Location     |
+| -------------- | ------------------------------------------- | ------------ |
+| `run.bat`      | Master file - orchestrates frontend/backend | Project root |
+| `frontend.bat` | Frontend npm and dev server automation      | Project root |
+| `backend.bat`  | Backend gradle build and Java app startup   | Project root |
+
+#### run.bat (Master File)
+
+Controls both frontend and backend operations with command-line switches.
+
+**Usage:**
+
+```batch
+run.bat --frontend          # Run only frontend
+run.bat --backend           # Run only backend
+run.bat --all               # Run both frontend and backend
+run.bat --help              # Show help message
+```
+
+#### frontend.bat
+
+Automates npm module management and development server startup.
+
+**Options:**
+
+- `--clean` - Remove node_modules directory
+- `--install` - Run npm install
+- `--start` - Start the frontend dev server (npm run dev)
+- `--all` - Run clean → install → start (in sequence)
+- `--help` - Show help message
+
+**Usage Examples:**
+
+```batch
+frontend.bat --clean                # Clear node_modules
+frontend.bat --install              # Install npm modules
+frontend.bat --start                # Start dev server
+frontend.bat --all                  # Full frontend setup and run
+```
+
+#### backend.bat
+
+Automates Gradle build and Java application startup.
+
+**Options:**
+
+- `--clean` - Run gradle clean
+- `--build` - Run gradle clean build
+- `--run` - Start the Java application (gradlew bootRun)
+- `--all` - Run clean → build → run (in sequence)
+- `--help` - Show help message
+
+**Usage Examples:**
+
+```batch
+backend.bat --clean                 # Clean gradle build
+backend.bat --build                 # Build the backend
+backend.bat --run                   # Start Java app
+backend.bat --all                   # Full backend build and run
+```
+
+#### Quick Start Examples
+
+**Start only frontend development:**
+
+```batch
+frontend.bat --all
+```
+
+**Start only backend development:**
+
+```batch
+backend.bat --all
+```
+
+**Start both frontend and backend in one command:**
+
+```batch
+run.bat --all
+```
+
+**Custom workflows:**
+
+```batch
+# Just build backend, don't run it
+backend.bat --build
+
+# Clean everything and restart
+run.bat --all
+
+# Fresh npm install and dev server
+frontend.bat --clean --install --start
+```
+
+#### Features
+
+✅ Command-line switches for flexible execution
+✅ Error checking between steps (stops on failure)
+✅ Run individual operations or complete workflows
+✅ Visual status messages with ✓/✗ indicators
+✅ Help messages for each batch file
+✅ Proper directory handling for nested projects
+
+#### Windows Requirements
+
+- Windows 11 (or Windows 10 with batch support)
+- Command Prompt or PowerShell
+- All prerequisites installed (Node.js, Java, Gradle)
+
 ---
 
 ## 🌐 Production Deployment
