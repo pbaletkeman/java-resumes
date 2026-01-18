@@ -7,7 +7,7 @@ import { Message } from 'primereact/message';
 import type { FileMetadata } from '../../services/fileService';
 import { useFileManagement } from '../../hooks/useFileManagement';
 import { ConfirmDialog } from '../Common/ConfirmDialog';
-import { formatFileSize, formatDate } from '../../utils/helpers';
+import { formatDate } from '../../utils/helpers';
 
 export const FileHistory: React.FC = () => {
   const { files, loading, downloadFile, deleteFile, fetchFiles, fileCount, newFilesAlert } =
@@ -29,44 +29,51 @@ export const FileHistory: React.FC = () => {
   };
 
   const itemTemplate = (file: FileMetadata, index: number) => {
-    const backgroundColor = index % 2 === 0 ? '#f9fafb' : '#ffffff';
+    const backgroundColor = index % 2 === 0 ? '#f3f4f6' : '#ffffff';
     return (
       <div className="col-12">
         <div
-          className="flex flex-column xl:flex-row xl:align-items-start p-3 gap-3 border-bottom-1 surface-border"
-          style={{ backgroundColor }}
+          className="p-3 border-bottom-1 surface-border"
+          style={{
+            backgroundColor,
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            gap: '1rem',
+          }}
         >
-          <i className="pi pi-file text-2xl" />
-          <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-3">
-            <div className="flex flex-column align-items-center sm:align-items-start gap-2">
-              <div className="text-lg font-bold">{file.name}</div>
-              <div className="text-sm text-gray-500">
-                {file.uploadedDate && formatDate(file.uploadedDate)}
-                {file.size && ` • ${formatFileSize(file.size)}`}
-              </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flex: 1 }}>
+            {/* Line 1: File icon + name */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <i className="pi pi-file text-xl" />
+              <span style={{ fontWeight: 600, fontSize: '1rem' }}>{file.name}</span>
             </div>
-            <div className="flex gap-2">
-              <Button
-                icon="pi pi-download"
-                rounded
-                outlined
-                severity="success"
-                onClick={() => downloadFile(file.name)}
-                aria-label={`Download ${file.name}`}
-                tooltip="Download"
-                tooltipOptions={{ position: 'top' }}
-              />
-              <Button
-                icon="pi pi-trash"
-                rounded
-                outlined
-                severity="danger"
-                onClick={() => handleDeleteClick(file.name)}
-                aria-label={`Delete ${file.name}`}
-                tooltip="Delete"
-                tooltipOptions={{ position: 'top' }}
-              />
+            {/* Line 2: Date */}
+            <div style={{ fontSize: '0.875rem', color: '#6b7280', marginLeft: '1.75rem' }}>
+              {file.uploadedDate && formatDate(file.uploadedDate)}
             </div>
+          </div>
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <Button
+              icon="pi pi-download"
+              rounded
+              outlined
+              severity="success"
+              onClick={() => downloadFile(file.name)}
+              aria-label={`Download ${file.name}`}
+              tooltip="Download"
+              tooltipOptions={{ position: 'top' }}
+            />
+            <Button
+              icon="pi pi-trash"
+              rounded
+              outlined
+              severity="danger"
+              onClick={() => handleDeleteClick(file.name)}
+              aria-label={`Delete ${file.name}`}
+              tooltip="Delete"
+              tooltipOptions={{ position: 'top' }}
+            />
           </div>
         </div>
       </div>

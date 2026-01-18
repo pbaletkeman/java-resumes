@@ -107,10 +107,10 @@ class ResumeControllerTest {
     }
 
     @Test
-    void test_getFile() throws Exception {
-        // This test assumes a file named "test.md" exists in storage
-        mockMvc.perform(get("/api/files/test.md"))
-                .andExpect(status().isOk());
+    void testGetFile() throws Exception {
+        // Test requesting a non-existent file; should return 404
+        mockMvc.perform(get("/api/files/nonexistent.md"))
+                .andExpect(status().isNotFound());
     }
 
     @Test

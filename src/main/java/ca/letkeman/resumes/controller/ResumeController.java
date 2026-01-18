@@ -165,6 +165,7 @@ public final class ResumeController {
           .body(new ResponseMessage("Required property missing or invalid."));
     }
   }
+
   @GetMapping("/files")
   public ResponseEntity<List<FileInfo>> getListFiles() {
     storageService.setConfigRoot(root);
@@ -198,20 +199,32 @@ public final class ResumeController {
 
   @GetMapping("/files/{filename:.+}")
   public ResponseEntity<Resource> getFile(@PathVariable String filename) {
-    storageService.setConfigRoot(root);
-    Resource file = storageService.load(filename);
-    return ResponseEntity.ok()
-        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+    try {
+      // URL decode the filename to handle encoded special characters and spaces
+      String decodedFilename = java.net.URLDecoder.decode(filename, "UTF-8");
+      storageService.setConfigRoot(root);
+      Resource file = storageService.load(decodedFilename);
+      if (file == null || !file.exists()) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+      }
+      return ResponseEntity.ok()
+          .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+    } catch (Exception e) {
+      LOGGER.error("Error retrieving file: {}", e.getMessage());
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
   }
 
   @DeleteMapping("/files/{filename:.+}")
   public ResponseEntity<ResponseMessage> deleteFile(@PathVariable String filename) {
     String message = "";
     try {
+      // URL decode the filename to handle encoded special characters and spaces
+      String decodedFilename = java.net.URLDecoder.decode(filename, "UTF-8");
       storageService.setConfigRoot(root);
-      boolean existed = storageService.delete(filename);
+      boolean existed = storageService.delete(decodedFilename);
       if (existed) {
-        message = "Delete the file successfully: " + filename;
+        message = "Delete the file successfully: " + decodedFilename;
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
       }
       message = "The file does not exist!";

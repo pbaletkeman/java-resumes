@@ -3,11 +3,12 @@ import { API_ENDPOINTS } from '../utils/constants';
 import { downloadFile } from '../utils/helpers';
 
 export interface FileMetadata {
-  id?: string;
   name: string;
-  type?: string;
   uploadedDate?: string;
   size?: number;
+  filename?: string;
+  url?: string;
+  date?: string;
 }
 
 export interface ProcessingResult {
@@ -19,12 +20,26 @@ export interface ProcessingResult {
 
 export const fileService = {
   async getFiles(): Promise<FileMetadata[]> {
-    const response = await apiClient.get<{ files: FileMetadata[] }>(API_ENDPOINTS.FILES);
-    return response.data.files || [];
+    const response = await apiClient.get<
+      Array<{ name: string; url: string; date: string; size?: string }>
+    >(API_ENDPOINTS.FILES);
+    if (Array.isArray(response.data)) {
+      return response.data.map(file => ({
+        name: file.name,
+        uploadedDate: file.date,
+        filename: file.name,
+        url: file.url,
+        date: file.date,
+        size: file.size ? parseInt(file.size) : undefined,
+      }));
+    }
+    return [];
   },
 
   async downloadFile(filename: string): Promise<void> {
-    const response = await apiClient.get(`${API_ENDPOINTS.FILES}/${filename}`, {
+    // URL encode the filename to handle special characters and spaces
+    const encodedFilename = encodeURIComponent(filename);
+    const response = await apiClient.get(`${API_ENDPOINTS.FILES}/${encodedFilename}`, {
       responseType: 'blob',
     });
     const contentDisposition = response.headers['content-disposition'];
@@ -35,7 +50,9 @@ export const fileService = {
   },
 
   async deleteFile(filename: string): Promise<{ success: boolean; message: string }> {
-    const response = await apiClient.delete(`${API_ENDPOINTS.FILES}/${filename}`);
+    // URL encode the filename to handle special characters and spaces
+    const encodedFilename = encodeURIComponent(filename);
+    const response = await apiClient.delete(`${API_ENDPOINTS.FILES}/${encodedFilename}`);
     return response.data;
   },
 

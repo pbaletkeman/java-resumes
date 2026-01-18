@@ -66,9 +66,9 @@ export const MarkdownToPdfForm: React.FC = () => {
 
   return (
     <Card title="Markdown to PDF Converter" className="h-full">
-      <div className="flex flex-column gap-4">
+      <div className="flex flex-column gap-6 p-4">
         <div className="field">
-          <label className="font-bold block mb-2">Select Markdown File</label>
+          <label className="font-bold block mb-3">Select Markdown File</label>
           <FileUpload
             mode="basic"
             name="markdownFile"
@@ -79,51 +79,55 @@ export const MarkdownToPdfForm: React.FC = () => {
             chooseLabel="Choose Markdown File"
             className="w-full"
           />
-          {error && (
-            <Message severity="error" text={error} className="mt-2 w-full" />
-          )}
+          {error && <Message severity="error" text={error} className="mt-3 w-full" />}
           {markdownFile && (
             <Message
               severity="info"
               text={`Selected: ${markdownFile.name}`}
-              className="mt-2 w-full"
+              className="mt-3 w-full"
+            />
+          )}
+
+          {/* Action buttons below file chooser */}
+          <div className="flex flex-wrap gap-4 mt-5" style={{ padding: '0.75rem' }}>
+            <Button
+              label="Convert"
+              icon="pi pi-refresh"
+              onClick={handleConvert}
+              disabled={!markdownFile || convertApi.loading}
+              style={{ padding: '0.75rem 1.5rem', marginRight: '1.5rem' }}
+            />
+            <Button
+              label="Download"
+              icon="pi pi-download"
+              onClick={handleDownload}
+              disabled={!convertedPdf}
+              severity="success"
+              style={{ padding: '0.75rem 1.5rem', marginRight: '1.5rem' }}
+            />
+            {markdownFile && (
+              <Button
+                label="Clear"
+                icon="pi pi-times"
+                onClick={handleClear}
+                disabled={convertApi.loading}
+                severity="secondary"
+                outlined
+                style={{ padding: '0.75rem 1.5rem' }}
+              />
+            )}
+          </div>
+
+          {convertedPdf && (
+            <Message
+              severity="success"
+              text="Conversion successful! Click Download to save the PDF."
+              className="mt-4 w-full"
             />
           )}
         </div>
 
         {convertApi.loading && <LoadingSpinner message="Converting..." />}
-
-        {convertedPdf && (
-          <Message
-            severity="success"
-            text="Conversion successful! Click Download to save the PDF."
-            className="w-full"
-          />
-        )}
-
-        <div className="flex flex-wrap gap-2">
-          <Button
-            label="Convert"
-            icon="pi pi-refresh"
-            onClick={handleConvert}
-            disabled={!markdownFile || convertApi.loading}
-          />
-          <Button
-            label="Download"
-            icon="pi pi-download"
-            onClick={handleDownload}
-            disabled={!convertedPdf}
-            severity="success"
-          />
-          <Button
-            label="Clear"
-            icon="pi pi-times"
-            onClick={handleClear}
-            disabled={convertApi.loading}
-            severity="secondary"
-            outlined
-          />
-        </div>
       </div>
     </Card>
   );

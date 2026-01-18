@@ -59,16 +59,6 @@ Analyze the provided resume and job description, then create an optimized versio
 - Use industry-specific terminology appropriate for the target role
 - Output ONLY the optimized resume text—no explanations, suggestions, or preamble
 
-## Best Practices
-
-- **Action Verbs**: Use power verbs like "Architected", "Orchestrated", "Accelerated", "Drove", "Transformed", "Optimized", "Pioneered"
-- **Quantification**: Always include numbers—percentages, dollar amounts, time saved, scale of impact
-- **Context**: Start with the challenge or opportunity, then explain your action and result
-- **Keywords**: Natural integration of job description terminology throughout
-- **Relevance First**: If candidate has limited experience in the required area, emphasize transferable skills and rapid learning ability
-- **Recency**: Emphasize more recent accomplishments while showing progression
-- **Problem-Solution-Result**: Frame each accomplishment as a business problem you solved
-
 ## Guidance for Specific Scenarios
 
 - **Career Changers**: Highlight transferable skills and domain-relevant achievements from previous roles
@@ -76,12 +66,3 @@ Analyze the provided resume and job description, then create an optimized versio
 - **Gaps or Transitions**: Frame these positively or omit if not relevant to the target role
 - **Multiple Skill Sets**: Prioritize skills most relevant to the target job, organizing them by importance
 - **Overqualification Concerns**: Emphasize current relevance and genuine interest in the specific role
-
-## Critical Success Factors
-
-✓ Every bullet point addresses a job requirement or demonstrates relevant capability
-✓ Quantifiable results are included wherever possible
-✓ Language mirrors the job description while maintaining authenticity
-✓ The resume reads as a compelling narrative of relevant expertise
-✓ ATS keywords are naturally integrated, not forced
-✓ The candidate appears as the ideal fit for THIS specific role

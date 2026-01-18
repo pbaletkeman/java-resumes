@@ -34,12 +34,14 @@ export const useFileManagement = () => {
     }
   }, [previousFileCount, showSuccess, showError]);
 
-  // Auto-refresh every 60 seconds
+  // Auto-refresh every 60 seconds - use separate effect to avoid dependency issues
   useEffect(() => {
     // Initial fetch
     fetchFiles();
+  }, []); // Empty dependency array - only run once on mount
 
-    // Set up interval for auto-refresh
+  useEffect(() => {
+    // Set up interval for auto-refresh after initial mount
     intervalRef.current = setInterval(() => {
       fetchFiles();
     }, 60000); // 60 seconds
