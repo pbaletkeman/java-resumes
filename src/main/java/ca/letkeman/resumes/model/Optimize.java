@@ -127,19 +127,20 @@ public final class Optimize {
   check to see if properties are present and somewhat correct
    */
   public boolean isValid() {
-    return getResume() != null && !getResume().isBlank() && !getResume().isEmpty()
-        && !getResume().equals("null")
-        && getJobDescription() != null && !getJobDescription().isBlank()
+    return getJobDescription() != null && !getJobDescription().isBlank()
         && !getJobDescription().isEmpty()
         && !getJobDescription().equals("null") && getTemperature() > 0
         && getTemperature() < 2
         && getPromptType() != null && getPromptType().length > 0
-        && getPromptType().length < 3 && hasResumeOrCoverPrompt()
+        && getPromptType().length < 3 && isValidPromptType()
         && getCompany() != null && !getCompany().isBlank() && !getCompany().isEmpty()
         && getJobTitle() != null && !getJobTitle().isBlank()
         && !getJobTitle().isEmpty() && !getJobTitle().equals("null")
         && getModel() != null && !getModel().isBlank() && !getModel().isEmpty()
-        && !getModel().equals("null");
+        && !getModel().equals("null")
+        && (isSkillsPrompt()
+            || (getResume() != null && !getResume().isBlank() && !getResume().isEmpty()
+                && !getResume().equals("null")));
   }
 
   public boolean hasResumeOrCoverPrompt() {
@@ -147,5 +148,14 @@ public final class Optimize {
             .anyMatch(x -> x.equalsIgnoreCase("resume"))
         || Arrays.stream(getPromptType())
             .anyMatch(x -> x.equalsIgnoreCase("cover"));
+  }
+
+  public boolean isSkillsPrompt() {
+    return Arrays.stream(getPromptType())
+        .anyMatch(x -> x.equalsIgnoreCase("skills"));
+  }
+
+  public boolean isValidPromptType() {
+    return hasResumeOrCoverPrompt() || isSkillsPrompt();
   }
 }

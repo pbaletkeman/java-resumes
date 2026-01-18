@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { InputTextarea } from 'primereact/inputtextarea';
@@ -13,6 +13,15 @@ import { validateTextInput, validateFile } from '../../utils/validators';
 import { INPUT_MODES, ALLOWED_FILE_TYPES } from '../../utils/constants';
 import { LoadingSpinner } from '../Common/LoadingSpinner';
 
+// Default models (fallback if not in storage)
+const DEFAULT_MODELS = [
+  { label: 'Gemma 3.4B (Default)', value: 'gemma-3-4b-it' },
+  { label: 'GPT-4 Turbo', value: 'gpt-4-turbo' },
+  { label: 'Claude 3 Opus', value: 'claude-3-opus' },
+  { label: 'Llama 2 Chat', value: 'llama-2-chat' },
+  { label: 'Mistral', value: 'mistral' },
+];
+
 export const DocumentUploadForm: React.FC = () => {
   const [inputMode, setInputMode] = useState(INPUT_MODES.PASTE);
   const [jobDescription, setJobDescription] = useState('');
@@ -22,6 +31,8 @@ export const DocumentUploadForm: React.FC = () => {
   const [jobTitle, setJobTitle] = useState('');
   const [company, setCompany] = useState('');
   const [model, setModel] = useState('gemma-3-4b-it');
+  const [promptTypes, setPromptTypes] = useState<string[]>(['resume']);
+  const [modelOptions, setModelOptions] = useState(DEFAULT_MODELS);
   const [errors, setErrors] = useState<{
     job?: string;
     resume?: string;
@@ -33,6 +44,18 @@ export const DocumentUploadForm: React.FC = () => {
   const uploadApi = useApi();
   const resumeApi = useApi();
   const coverLetterApi = useApi();
+
+  // Load models from storage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('java-resumes-models');
+    if (saved) {
+      try {
+        setModelOptions(JSON.parse(saved));
+      } catch (err) {
+        console.error('Failed to load saved models:', err);
+      }
+    }
+  }, []);
 
   // Memoized change handlers to prevent re-renders
   const handleJobDescriptionChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -51,12 +74,10 @@ export const DocumentUploadForm: React.FC = () => {
     setCompany(e.target.value);
   }, []);
 
-  const modelOptions = [
-    { label: 'Gemma 3.4B (Default)', value: 'gemma-3-4b-it' },
-    { label: 'GPT-4 Turbo', value: 'gpt-4-turbo' },
-    { label: 'Claude 3 Opus', value: 'claude-3-opus' },
-    { label: 'Llama 2 Chat', value: 'llama-2-chat' },
-    { label: 'Mistral', value: 'mistral' },
+  const promptTypeOptions = [
+    { label: 'Resume Optimization', value: 'resume' },
+    { label: 'Cover Letter', value: 'cover' },
+    { label: 'Skills & Certifications', value: 'skills' },
   ];
 
   const modes = [
@@ -69,12 +90,15 @@ export const DocumentUploadForm: React.FC = () => {
 
     if (inputMode === INPUT_MODES.PASTE) {
       const jobError = validateTextInput(jobDescription, 'Job Description');
-      const resumeError = validateTextInput(resume, 'Resume');
+      // Resume is only required if not generating Skills only
+      const isSkillsOnly = promptTypes.length === 1 && promptTypes.includes('skills');
+      const resumeError = !isSkillsOnly ? validateTextInput(resume, 'Resume') : null;
       if (jobError) newErrors.job = jobError;
       if (resumeError) newErrors.resume = resumeError;
     } else {
       if (!jobFile) newErrors.job = 'Job description file is required';
-      if (!resumeFile) newErrors.resume = 'Resume file is required';
+      const isSkillsOnly = promptTypes.length === 1 && promptTypes.includes('skills');
+      if (!resumeFile && !isSkillsOnly) newErrors.resume = 'Resume file is required';
 
       if (jobFile) {
         const jobValidation = validateFile(jobFile, ALLOWED_FILE_TYPES.DOCUMENTS);
@@ -172,6 +196,34 @@ export const DocumentUploadForm: React.FC = () => {
     }
   };
 
+  const handleProcessSkills = async () => {
+    if (!validateForm()) return;
+
+    try {
+      const optimize = {
+        promptType: ['skills'],
+        temperature: 0.15,
+        model: model,
+        resume: inputMode === INPUT_MODES.PASTE ? resume : resumeFile?.name || '',
+        jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
+        jobTitle: jobTitle,
+        company: company,
+      };
+
+      const data = {
+        jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
+        resume: inputMode === INPUT_MODES.PASTE ? resume : resumeFile?.name || '',
+        optimize: JSON.stringify(optimize),
+      };
+
+      const result = await resumeApi.execute(() => fileService.processSkills(data));
+      showSuccess('Skills and certifications suggestions generated successfully');
+      console.log('Skills Suggestions:', result);
+    } catch (err: unknown) {
+      showError((err as Error)?.message || 'Failed to generate skills suggestions');
+    }
+  };
+
   const clearForm = () => {
     setJobDescription('');
     setResume('');
@@ -180,6 +232,7 @@ export const DocumentUploadForm: React.FC = () => {
     setJobTitle('');
     setCompany('');
     setModel('gemma-3-4b-it');
+    setPromptTypes(['resume']);
     setErrors({});
   };
 
@@ -220,7 +273,7 @@ export const DocumentUploadForm: React.FC = () => {
           {/* User Input Parameters Section */}
           <div className="w-full bg-blue-50 border-round border-1 border-blue-300 p-4 mb-4">
             <div className="font-bold mb-3">Job Information & Model Selection</div>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-4 gap-3">
               <div className="field">
                 <label htmlFor="jobTitle" className="block mb-2">
                   Job Title *
@@ -274,6 +327,30 @@ export const DocumentUploadForm: React.FC = () => {
                   className="w-full"
                 />
               </div>
+
+              <div className="field">
+                <label htmlFor="promptTypes" className="block mb-2">
+                  Output Types
+                </label>
+                <Dropdown
+                  id="promptTypes"
+                  value={promptTypes}
+                  onChange={e => {
+                    console.log('Dropdown change event:', e, 'e.value:', e.value);
+                    setPromptTypes(e.value || []);
+                    // Clear previous results when changing output types to prevent stale data
+                    uploadApi.reset();
+                    resumeApi.reset();
+                    coverLetterApi.reset();
+                  }}
+                  options={promptTypeOptions}
+                  optionLabel="label"
+                  optionValue="value"
+                  placeholder="Select output types..."
+                  className="w-full"
+                  multiple
+                />
+              </div>
             </div>
           </div>
           <div className="w-full">
@@ -323,7 +400,8 @@ export const DocumentUploadForm: React.FC = () => {
                   }}
                 >
                   <label htmlFor="resume" className="font-bold block mb-2">
-                    Source Resume *
+                    Source Resume{' '}
+                    {promptTypes.length === 1 && promptTypes.includes('skills') ? '' : '*'}
                   </label>
                   <InputTextarea
                     id="resume"
@@ -384,7 +462,10 @@ export const DocumentUploadForm: React.FC = () => {
                     borderRadius: '6px',
                   }}
                 >
-                  <label className="font-bold block mb-2">Resume File *</label>
+                  <label className="font-bold block mb-2">
+                    Resume File{' '}
+                    {promptTypes.length === 1 && promptTypes.includes('skills') ? '' : '*'}
+                  </label>
                   <FileUpload
                     mode="basic"
                     name="resumeFile"
@@ -433,22 +514,47 @@ export const DocumentUploadForm: React.FC = () => {
                 </div>
 
                 <div className="flex flex-wrap gap-2">
-                  <Button
-                    label="Create Optimized Resume"
-                    icon="pi pi-file-edit"
-                    onClick={handleProcessResume}
-                    disabled={loading}
-                    severity="info"
-                    className="flex-1"
-                  />
-                  <Button
-                    label="Create Cover Letter"
-                    icon="pi pi-file"
-                    onClick={handleProcessCoverLetter}
-                    disabled={loading}
-                    severity="success"
-                    className="flex-1"
-                  />
+                  {promptTypes.includes('resume') && (
+                    <Button
+                      key="btn-resume"
+                      label="Optimize Resume"
+                      icon="pi pi-file-edit"
+                      onClick={handleProcessResume}
+                      disabled={loading}
+                      severity="info"
+                      className="flex-1"
+                    />
+                  )}
+                  {promptTypes.includes('cover') && (
+                    <Button
+                      key="btn-cover"
+                      label="Generate Cover Letter"
+                      icon="pi pi-file"
+                      onClick={handleProcessCoverLetter}
+                      disabled={loading}
+                      severity="success"
+                      className="flex-1"
+                    />
+                  )}
+                  {promptTypes.includes('skills') && (
+                    <Button
+                      key="btn-skills"
+                      label="Generate Skills & Certs"
+                      icon="pi pi-star"
+                      onClick={handleProcessSkills}
+                      disabled={loading}
+                      severity="warning"
+                      className="flex-1"
+                    />
+                  )}
+                </div>
+
+                <div className="bg-blue-50 border-1 border-blue-300 rounded p-3 mb-3">
+                  <p className="text-sm text-blue-900 m-0">
+                    <i className="pi pi-info-circle mr-2" />
+                    <strong>Note:</strong> File generation can take a few minutes depending on the
+                    model and content size. Please be patient while processing.
+                  </p>
                 </div>
 
                 <div className="flex flex-wrap gap-2">

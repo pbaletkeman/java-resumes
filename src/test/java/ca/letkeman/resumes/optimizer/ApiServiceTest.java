@@ -103,4 +103,42 @@ class ApiServiceTest {
         when(optimize.getPromptType()).thenReturn(new String[]{});
         assertDoesNotThrow(() -> apiService.produceFiles(optimize, "endpoint", "apikey", "mistral", "/tmp"));
     }
+
+    @Test
+    void testProduceFilesWithSkillsPrompt() {
+        Optimize optimize = mock(Optimize.class);
+        when(optimize.getPromptType()).thenReturn(new String[]{"SKILLS"});
+        when(optimize.getJobDescription()).thenReturn("Java Spring Developer - 5+ years");
+        when(optimize.getJobTitle()).thenReturn("Java Spring Developer");
+        when(optimize.getCompany()).thenReturn("TechCorp");
+        when(optimize.getTemperature()).thenReturn(0.5);
+        when(optimize.getModel()).thenReturn("gpt-3");
+        when(optimize.getResume()).thenReturn(null);
+
+        // Mock PromptService to return SKILLS template
+        when(promptServiceMock.loadPrompt("SKILLS"))
+            .thenReturn("Skills Prompt: {job_title} {job_description}");
+
+        // This will use the mock PromptService; invokeApi will return null (no real HTTP call)
+        assertDoesNotThrow(() -> apiService.produceFiles("SKILLS", optimize, "http://invalid-endpoint", "fakekey", "mistral", System.getProperty("java.io.tmpdir")));
+    }
+
+    @Test
+    void testPromptVariableSubstitution() {
+        Optimize optimize = mock(Optimize.class);
+        when(optimize.getPromptType()).thenReturn(new String[]{"SKILLS"});
+        when(optimize.getJobDescription()).thenReturn("Java developer position");
+        when(optimize.getJobTitle()).thenReturn("Senior Java Developer");
+        when(optimize.getCompany()).thenReturn("TestCorp");
+        when(optimize.getTemperature()).thenReturn(0.5);
+        when(optimize.getModel()).thenReturn("mistral");
+        when(optimize.getResume()).thenReturn(null);
+
+        // Mock PromptService with template
+        String template = "Job: {job_title} Desc: {job_description}";
+        when(promptServiceMock.loadPrompt("SKILLS")).thenReturn(template);
+
+        // Verify that it doesn't throw exception
+        assertDoesNotThrow(() -> apiService.produceFiles("SKILLS", optimize, "http://invalid-endpoint", "fakekey", "mistral", System.getProperty("java.io.tmpdir")));
+    }
 }

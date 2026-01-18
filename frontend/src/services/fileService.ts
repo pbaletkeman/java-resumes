@@ -154,6 +154,49 @@ export const fileService = {
     return response.data;
   },
 
+  async processSkills(data: {
+    jobDescription: string;
+    resume: string;
+    optimize?: string;
+  }): Promise<ProcessingResult> {
+    const formData = new FormData();
+
+    // Create files from strings
+    if (data.resume) {
+      formData.append('resume', new File([data.resume], 'resume.txt', { type: 'text/plain' }));
+    }
+
+    if (data.jobDescription) {
+      formData.append('job', new File([data.jobDescription], 'job.txt', { type: 'text/plain' }));
+    }
+
+    // Use provided optimize or create default
+    const optimizeData =
+      data.optimize ||
+      JSON.stringify({
+        resume: data.resume ? 'resume.txt' : '',
+        jobDescription: data.jobDescription ? 'job.txt' : '',
+        company: 'Company',
+        jobTitle: 'Job Title',
+        model: 'mistral:latest',
+        temperature: 0.15,
+        promptType: ['skills'],
+      });
+
+    formData.append('optimize', optimizeData);
+
+    const response = await apiClient.post<ProcessingResult>(
+      API_ENDPOINTS.PROCESS_RESUME,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+    return response.data;
+  },
+
   async convertMarkdownToPdf(file: File): Promise<Blob> {
     const formData = new FormData();
     formData.append('file', file);

@@ -48,9 +48,9 @@ Create a compelling, personalized cover letter that captures the hiring manager'
 
 ### Input Information
 
-**Job Title:** {jobTitle}
+**Job Title:** {job_title}
 **Company:** {company}
-**Job Description:** {jd_string}
+**Job Description:** {job_description}
 **Candidate Resume:** {resume_string}
 **Today's Date:** {today}
 

@@ -84,7 +84,9 @@ export const FileHistory: React.FC = () => {
     if (!items || items.length === 0) return null;
     return (
       <div className="grid grid-nogutter">
-        {items.map((item, index) => itemTemplate(item, index))}
+        {items.map(item => (
+          <React.Fragment key={item.name}>{itemTemplate(item, 0)}</React.Fragment>
+        ))}
       </div>
     );
   };

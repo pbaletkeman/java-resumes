@@ -166,6 +166,48 @@ public final class ResumeController {
     }
   }
 
+  @PostMapping(path = "/process/skills")
+  public ResponseEntity<ResponseMessage> processSkills(
+      @RequestParam(name = "job", required = false) MultipartFile job,
+      @RequestParam(name = "optimize", required = false) String opt) {
+    Optimize optimize = null;
+    if (opt != null && !opt.isBlank()) {
+      try {
+        optimize = new Gson().fromJson(opt, Optimize.class);
+      } catch (JsonSyntaxException e) {
+        LOGGER.error("Invalid optimize JSON: {}", opt);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("invalid optimize parameter"));
+      }
+    } else {
+      optimize = new Optimize();
+    }
+
+    if ((optimize.getJobDescription() == null || optimize.getJobDescription().isBlank()) && job != null) {
+      try {
+        storageService.setConfigRoot(root);
+        storageService.save(job);
+        optimize.setJobDescription(
+            Utility.readFileAsString(root + File.separator + job.getOriginalFilename()));
+      } catch (Exception e) {
+        LOGGER.error("Could not upload the job: {}. Error:\n{}", job.getOriginalFilename(), e.getMessage());
+      }
+    }
+
+    if (optimize.getJobDescription() != null && !optimize.getJobDescription().isBlank()) {
+      try {
+        BackgroundResume bg = new BackgroundResume(optimize, root);
+        Thread t = new Thread(bg);
+        t.start();
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("Skills suggestion generation started"));
+      } catch (Exception e) {
+        LOGGER.error("Error processing skills: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseMessage("Error processing skills"));
+      }
+    } else {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("job description is required"));
+    }
+  }
+
   @GetMapping("/files")
   public ResponseEntity<List<FileInfo>> getListFiles() {
     storageService.setConfigRoot(root);
@@ -198,7 +240,7 @@ public final class ResumeController {
   }
 
   @GetMapping("/files/{filename:.+}")
-  public ResponseEntity<Resource> getFile(@PathVariable String filename) {
+  public ResponseEntity<Resource> getFile(@PathVariable(name = "filename") String filename) {
     try {
       // URL decode the filename to handle encoded special characters and spaces
       String decodedFilename = java.net.URLDecoder.decode(filename, "UTF-8");
@@ -216,7 +258,7 @@ public final class ResumeController {
   }
 
   @DeleteMapping("/files/{filename:.+}")
-  public ResponseEntity<ResponseMessage> deleteFile(@PathVariable String filename) {
+  public ResponseEntity<ResponseMessage> deleteFile(@PathVariable(name = "filename") String filename) {
     String message = "";
     try {
       // URL decode the filename to handle encoded special characters and spaces

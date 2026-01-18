@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { MainContentTab } from '../components/Tabs/MainContentTab';
 import { AdditionalToolsTab } from '../components/Tabs/AdditionalToolsTab';
+import { SettingsTab } from '../components/Tabs/SettingsTab';
 
 export const HomePage: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -14,6 +15,9 @@ export const HomePage: React.FC = () => {
         </TabPanel>
         <TabPanel header="Additional Tools" leftIcon="pi pi-wrench mr-2">
           <AdditionalToolsTab />
+        </TabPanel>
+        <TabPanel header="Settings" leftIcon="pi pi-cog mr-2">
+          <SettingsTab />
         </TabPanel>
       </TabView>
     </div>

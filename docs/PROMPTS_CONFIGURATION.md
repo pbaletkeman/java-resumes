@@ -16,6 +16,7 @@ By default, the application uses prompts bundled in the JAR:
 
 - `src/main/resources/prompts/RESUME.md` - Resume optimization prompt
 - `src/main/resources/prompts/COVER.md` - Cover letter generation prompt
+- `src/main/resources/prompts/SKILLS.md` - Skills, certifications, and experience suggestions
 
 **These prompts are NOT recompiled into the JAR.** They are read at runtime as resources, so you can:
 
@@ -107,9 +108,9 @@ Both `RESUME.md` and `COVER.md` use template variables:
 
 ## Input Information
 
-**Job Title:** {jobTitle}
+**Job Title:** {job_title}
 **Company:** {company}
-**Job Description:** {jd_string}
+**Job Description:** {job_description}
 
 **Current Resume:** {resume_string}
 **Today's Date:** {today}
@@ -117,12 +118,29 @@ Both `RESUME.md` and `COVER.md` use template variables:
 ...
 ```
 
+**Example: SKILLS Prompt (doesn't require resume)**
+
+```markdown
+# Skills Recommendations
+
+You are an expert career advisor.
+
+## Input Information
+
+**Job Title:** {job_title}
+**Job Description:** {job_description}
+
+## Output
+
+Provide certifications, skills, and experiences needed.
+```
+
 These placeholders are replaced at runtime with actual values:
 
-- `{jobTitle}` - The job title from user input
+- `{job_title}` - The job title from user input
 - `{company}` - The company name from user input
-- `{jd_string}` - The job description content
-- `{resume_string}` - The candidate's resume content
+- `{job_description}` - The job description content
+- `{resume_string}` - The candidate's resume content (Resume and Cover Letter only)
 - `{today}` - Current date (Cover Letter only)
 
 ## File Structure
@@ -130,10 +148,11 @@ These placeholders are replaced at runtime with actual values:
 ```
 prompts/
 ├── RESUME.md          # Resume optimization prompt
-└── COVER.md           # Cover letter generation prompt
+├── COVER.md           # Cover letter generation prompt
+└── SKILLS.md          # Skills, certifications, and experiences
 ```
 
-Both files should be in the same directory (either bundled or external).
+All prompt files should be in the same directory (either bundled or external).
 
 ## Troubleshooting
 
@@ -199,6 +218,7 @@ This architecture ensures:
 # Edit prompts
 nano src/main/resources/prompts/RESUME.md
 nano src/main/resources/prompts/COVER.md
+nano src/main/resources/prompts/SKILLS.md
 
 # Build JAR
 gradlew clean build
@@ -221,9 +241,23 @@ PROMPTS_DIR=/opt/java-resumes/prompts java -jar java-resumes.jar
 
 # Update prompts anytime (no recompilation!)
 nano /opt/java-resumes/prompts/RESUME.md
+nano /opt/java-resumes/prompts/SKILLS.md
 
 # Restart application for changes to take effect
 ```
+
+## Adding New Prompts
+
+To add a new prompt (e.g., LINKEDIN for LinkedIn summaries):
+
+1. Create `src/main/resources/prompts/LINKEDIN.md`
+2. Add template variables using `{variable_name}` format
+3. Update backend model and service to support the new prompt
+4. Add controller endpoint for processing
+5. Add frontend UI component
+6. Write comprehensive unit tests (80%+ coverage)
+
+**See [ADD_NEW_PROMPT.md](./ADD_NEW_PROMPT.md)** for detailed step-by-step instructions.
 
 ## See Also
 

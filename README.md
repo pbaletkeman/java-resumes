@@ -1701,13 +1701,20 @@ Complete documentation is available in the [docs/](docs/) directory and [.github
 
 - **Backend Coding**: See `.github/instructions/backend.instructions.md`
 - **Frontend Coding**: See `.github/instructions/frontend.instructions.md`
-- **AI Agents**: See `.github/agents.md`
+- **AI Agents**: See `AGENTS.md`
 - **General Guidance**: See [copilot-instructions.md](copilot-instructions.md)
+
+#### Prompt System
+
+- **Available Prompts**: [src/main/resources/prompts/README.md](src/main/resources/prompts/README.md)
+- **Prompt Configuration**: [docs/PROMPTS_CONFIGURATION.md](docs/PROMPTS_CONFIGURATION.md)
+- **Adding New Prompts**: [docs/ADD_NEW_PROMPT.md](docs/ADD_NEW_PROMPT.md)
 
 #### Additional Resources
 
 - **Product Requirements**: [docs/PRD-PRIMEREACT-DOCKER-v2.md](docs/PRD-PRIMEREACT-DOCKER-v2.md)
 - **Code Quality**: [docs/CHECKSTYLE_AND_OLLAMA.md](docs/CHECKSTYLE_AND_OLLAMA.md)
+- **Architecture**: [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)
 - **Work in Progress**: [docs/wip/](docs/wip/)
 
 ### External Resources

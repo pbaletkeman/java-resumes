@@ -127,4 +127,40 @@ class ResumeControllerTest {
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.message").value("The file does not exist!"));
     }
+
+    @Test
+    void test_processSkills_with_valid_job() throws Exception {
+        MockMultipartFile job = new MockMultipartFile(
+                "job", "jd.txt", "text/plain", "Java Spring Developer position".getBytes());
+        String optimizeJson = "{\"company\":\"TechCorp\",\"jobTitle\":\"Java Developer\",\"model\":\"mistral\",\"temperature\":0.15,\"promptType\":[\"SKILLS\"],\"jobDescription\":\"\",\"resume\":\"\"}";
+
+        mockMvc.perform(multipart("/api/process/skills")
+                .file(job)
+                .param("optimize", optimizeJson))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message").value("Skills suggestion generation started"));
+    }
+
+    @Test
+    void test_processSkills_with_invalid_optimize() throws Exception {
+        MockMultipartFile job = new MockMultipartFile(
+                "job", "jd.txt", "text/plain", "Java Developer position".getBytes());
+        String invalidOptimize = "{invalid json}";
+
+        mockMvc.perform(multipart("/api/process/skills")
+                .file(job)
+                .param("optimize", invalidOptimize))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("invalid optimize parameter"));
+    }
+
+    @Test
+    void test_processSkills_without_job_description() throws Exception {
+        String optimizeJson = "{\"company\":\"TechCorp\",\"jobTitle\":\"Java Developer\",\"model\":\"mistral\",\"temperature\":0.15,\"promptType\":[\"SKILLS\"],\"jobDescription\":\"\",\"resume\":\"\"}";
+
+        mockMvc.perform(multipart("/api/process/skills")
+                .param("optimize", optimizeJson))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("job description is required"));
+    }
 }

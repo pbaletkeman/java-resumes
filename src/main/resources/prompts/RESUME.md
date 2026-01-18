@@ -44,9 +44,9 @@ Analyze the provided resume and job description, then create an optimized versio
 
 ## Input Information
 
-**Job Title:** {jobTitle}
+**Job Title:** {job_title}
 **Company:** {company}
-**Job Description:** {jd_string}
+**Job Description:** {job_description}
 
 **Current Resume:** {resume_string}
 

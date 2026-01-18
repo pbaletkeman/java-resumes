@@ -39,6 +39,10 @@ test {
 	useJUnitPlatform()
 }
 
+tasks.withType(JavaCompile).configureEach {
+	options.compilerArgs << '-parameters'
+}
+
 checkstyle {
 	toolVersion '10.14.2'
 	configFile = file('config/checkstyle/checkstyle.xml')

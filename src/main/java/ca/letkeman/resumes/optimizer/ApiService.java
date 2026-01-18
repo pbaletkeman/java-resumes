@@ -207,15 +207,16 @@ public final class ApiService {
     }
 
     promptData = promptData
-        .replace("{resume_string}", optimize.getResume())
-        .replace("{jd_string}", optimize.getJobDescription());
-    promptData = promptData.replace("{today}", today);
+        .replace("{resume_string}", optimize.getResume() != null ? optimize.getResume() : "")
+        .replace("{job_description}", optimize.getJobDescription() != null ? optimize.getJobDescription() : "");
+    promptData = promptData.replace("{job_title}", optimize.getJobTitle() != null ? optimize.getJobTitle() : "");
+    promptData = promptData.replace("{today}", today != null ? today : "");
+    promptData = promptData.replace("{company}", optimize.getCompany() != null ? optimize.getCompany() : "");
 
     ChatBody chatBody = getChatBody(optimize, promptData);
     chatBody.setModel(model);
 
-    ApiService apiService = new ApiService();
-    LLMResponse llmResponse = apiService.invokeApi(chatBody, endpoint, apikey);
+    LLMResponse llmResponse = this.invokeApi(chatBody, endpoint, apikey);
 
     if (llmResponse == null) {
       LOGGER.error("Invalid LLM Response. Please try again.");
