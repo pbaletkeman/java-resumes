@@ -1,21 +1,39 @@
 # Copilot Instructions - java-resumes Repository
 
-> **📍 Location:** `docs/copilot-instructions.md`
-> **👥 Audience:** GitHub Copilot, AI Agents
-> **🔗 Related:** [AI Agent Guidelines](AGENTS.md) | [Quick Reference](QUICK_REFERENCE.md) | [Index](INDEX.md)
-
----
-
 Repository-wide custom instructions for GitHub Copilot agents working on the java-resumes project.
 
 ## Project Overview
 
-**java-resumes** is a full-stack application for AI-powered resume and cover letter optimization.
+**java-resumes** is a full-stack AI-powered resume and cover letter optimization application.
 
-- **Backend**: Spring Boot 3.5.1, Java 25 LTS, Gradle 8.7 - REST API for document processing
-- **Frontend**: React 19, TypeScript 5.9.3, Vite 7.2.4 - Tab-based UI for document management
-- **AI Integration**: Ollama/LM Studio LLM endpoints for intelligent optimization
-- **Code Quality**: Checkstyle 10.14.2 (100% compliance), 80%+ test coverage required
+- **Backend**: Spring Boot 3.5.1, Java 25 LTS, Gradle 8.7
+- **Frontend**: React 19, TypeScript 5.9.3, Vite 7.2.4
+- **LLM Integration**: Ollama/LM Studio with OpenAI-compatible API
+- **Code Quality**: Checkstyle 10.14.2 (100% compliance), 80%+ test coverage
+- **Architecture**: Async processing with background threads for long-running optimizations
+
+---
+
+## 🎯 Essential Architecture Pattern
+
+**THE Core Flow** - This is the ONE critical pattern that ties everything together:
+
+1. **User submits** via React UI (`frontend/src/components/MainContentTab.tsx`)
+2. **Controller validates** (`ResumeController.optimizeResume()`) - checks file/config, returns 202 Accepted immediately
+3. **Background thread spawned** (`new BackgroundResume(optimize, root)`) - runs async in separate thread
+4. **LLM integration** (`ApiService.produceFiles()`) - sends to Ollama/LM Studio via OpenAI API format
+5. **Files saved** (`FilesStorageService.save()`) - markdown + PDF written to filesystem
+6. **UI polls** (`GET /api/files`) - frontend retrieves list and downloads results
+
+**Why this matters**: NEVER block the HTTP response waiting for LLM completion. ALWAYS spawn BackgroundResume asynchronously. The controller returns 202 immediately; the UI polls for results.
+
+**Config loading pattern** (`BackgroundResume` constructor):
+
+```java
+String configStr = Utility.readFileAsString("config.json");
+Config c = new Gson().fromJson(configStr, Config.class);
+// config.json: { "endpoint", "apikey", "model" } for LLM service
+```
 
 ---
 
@@ -50,6 +68,72 @@ When working with this codebase:
 3. **Test Thoroughly**: Write unit tests for all new functionality (target: 80%+ coverage)
 4. **Document Well**: Update markdown files when architecture changes
 5. **Design Simply**: Prefer straightforward solutions over complex patterns
+
+---
+
+## Key Integration Points & Workflows
+
+### Critical Backend Workflows
+
+**REST Request → Background Processing → File Download Flow**:
+
+- Controller receives multipart upload, validates, returns 202 immediately
+- `new BackgroundResume(optimize, root)` spawned in separate thread (NEVER in controller thread)
+- BackgroundResume loads config.json, calls ApiService.produceFiles()
+- Files written to disk, UI polls GET /api/files until results appear
+
+**Example from ResumeController**:
+
+```java
+// Returns 202 immediately - spawns thread for LLM work
+Thread thread = new Thread(new BackgroundResume(optimize, root));
+thread.start();
+return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ResponseMessage("generating"));
+```
+
+### Critical Frontend Workflows
+
+**File Upload → Poll Results → Download Flow**:
+
+- MainContentTab.tsx handles upload form submission
+- useApi hook manages loading/error states during async operations
+- Frontend polls GET /api/files every 2-3 seconds until new files appear
+- User clicks download link to retrieve PDF/Markdown
+
+**Example Pattern**:
+
+```typescript
+const { execute, loading, error } = useApi();
+const onSubmit = async () => {
+  try {
+    await execute(async () => fileService.upload(formData));
+    // Start polling for results
+    pollForResults();
+  } catch (err) {
+    /* handle */
+  }
+};
+```
+
+### LLM Integration Points
+
+**ApiService.produceFiles() is the gateway**:
+
+- Reads resume + job description
+- Sends OpenAI-compatible request to Ollama/LM Studio endpoint
+- Parses response and extracts optimized content
+- Converts to markdown, then PDF
+- Saves to filesystem
+
+**CRITICAL**: Config comes from config.json (not Spring properties). Endpoint format:
+
+```json
+{
+  "endpoint": "http://localhost:11434/v1/chat/completions",
+  "apikey": "ollama",
+  "model": "mistral"
+}
+```
 
 ---
 
@@ -997,11 +1081,67 @@ Important configuration files (see path-specific instructions for details):
 - `.gitattributes` - Encoding and line ending consistency (UTF-8, LF)
 - `.gitignore` - Files to ignore
 
+**Git Configuration:**
+
+- `.gitattributes` - Encoding and line ending consistency (UTF-8, LF)
+- `.gitignore` - Files to ignore
+
+---
+
+## Quick Command Reference
+
+### Backend (Java/Spring Boot)
+
+```bash
+./gradlew clean build              # Full build with tests
+./gradlew clean build -x test      # Build without tests (faster)
+./gradlew test                     # Run all tests
+./gradlew test --tests ClassName   # Run specific test
+./gradlew checkstyleMain           # Check code quality
+./gradlew bootRun                  # Run application (port 8080)
+```
+
+### Frontend (React/TypeScript)
+
+```bash
+npm install                        # Install dependencies
+npm run dev                        # Start dev server (port 5173)
+npm test                           # Run tests
+npm run build                      # Build for production
+npm run lint                       # Check code quality
+npm run type-check                 # TypeScript type checking
+```
+
+### Local Setup
+
+```bash
+# 1. Start LLM Service (Ollama)
+ollama serve
+ollama pull mistral:latest
+
+# 2. In another terminal, build backend
+./gradlew clean build
+
+# 3. In another terminal, build frontend
+cd frontend && npm run dev
+
+# 4. Access UI at http://localhost:5173
+```
+
+---
+
+## Project Size & Scope
+
+- **Backend**: ~14 main source files + 13+ test files
+- **Frontend**: ~41+ component files + comprehensive test coverage
+- **Configuration**: Checkstyle (100% required), ESLint, TypeScript strict mode
+- **Testing**: 80%+ coverage target for both backend and frontend
+
 ---
 
 ## Last Updated
 
-Documentation reorganization and Copilot instructions consolidation: 2024
+Documentation reorganization and Copilot instructions consolidation: 2026
 
 For the latest updates and detailed guidance on specific technologies, see the path-specific instructions or documentation files.
 
