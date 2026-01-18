@@ -59,7 +59,7 @@ Get the frontend running in just 5 minutes! Follow these quick steps to start de
 
 ### Prerequisites
 
-- Node.js 24 LTS installed
+- Node.js 22 LTS installed
 - npm 10+ installed
 - Backend running (http://localhost:8080)
 
@@ -873,7 +873,7 @@ docker run -d \
 
 The `Dockerfile` uses a multi-stage build for optimization:
 
-**Stage 1: Build** (node:20-alpine)
+**Stage 1: Build** (node:22-alpine)
 
 - Installs dependencies
 - Compiles TypeScript

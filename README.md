@@ -1,9 +1,9 @@
 # Java Resumes - Full-Stack Resume Optimization Application
 
-[![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://openjdk.java.net/)
+[![Java](https://img.shields.io/badge/Java-25%20LTS-orange.svg)](https://openjdk.java.net/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.1-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![React](https://img.shields.io/badge/React-19.2.0-blue.svg)](https://reactjs.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-24%20LTS-339933.svg)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-22%20LTS-339933.svg)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue.svg)](https://www.typescriptlang.org/)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -124,7 +124,7 @@ Generated Documents (MD + PDF)
 ┌─────────────────────────────────────────────────────────────────────┐
 │                       BACKEND (Port 8080)                           │
 │  ┌───────────────────────────────────────────────────────────┐      │
-│  │  Spring Boot 3.5.1 + Java 17 + Gradle                     │      │
+│  │  Spring Boot 3.5.1 + Java 25 + Gradle                     │      │
 │  │  ┌─────────────────────────────────────────────────┐      │      │
 │  │  │  Controller Layer (REST Endpoints)              │      │      │
 │  │  │  - ResumeController                             │      │      │
@@ -183,7 +183,7 @@ graph TB
     end
 
     subgraph "Backend Container - Port 8080"
-        SpringBoot[Spring Boot 3.5.1]
+        SpringBoot[Spring Boot 3.5.1 + Java 25]
         Controller[REST Controllers]
         Service[Service Layer]
         Storage[File Storage Service]
@@ -226,7 +226,7 @@ graph TB
 graph LR
     subgraph "Docker Network: resume-app-network"
         Frontend[Frontend Container<br/>nginx:alpine<br/>Port 80]
-        Backend[Backend Container<br/>eclipse-temurin:17-jre<br/>Port 8080]
+        Backend[Backend Container<br/>eclipse-temurin:21-jre<br/>Port 8080]
         Volume[(Volume:<br/>backend-files)]
 
         Frontend -->|HTTP API Calls| Backend
@@ -260,13 +260,14 @@ graph LR
 | **Testing**         | Vitest            | 4.0.17  | Unit testing framework     |
 | **Testing Library** | React Testing Lib | 16.3.1  | Component testing          |
 | **Package Manager** | npm               | 10+     | Dependency management      |
+| **Node.js**         | Node.js           | 22 LTS  | JavaScript runtime         |
 | **Web Server**      | Nginx             | alpine  | Production web server      |
 
 ### Backend Technologies
 
 | Component           | Technology        | Version | Purpose                       |
 | ------------------- | ----------------- | ------- | ----------------------------- |
-| **Language**        | Java              | 17 LTS  | Backend programming language  |
+| **Language**        | Java              | 25 LTS  | Backend programming language  |
 | **Framework**       | Spring Boot       | 3.5.1   | Application framework         |
 | **Build Tool**      | Gradle            | 8.7     | Build automation              |
 | **API Docs**        | SpringDoc OpenAPI | 2.8.7   | Swagger/OpenAPI documentation |
@@ -283,10 +284,10 @@ graph LR
 | -------------------- | ------------------ | ------- | ---------------------------- |
 | **Containerization** | Docker             | 20.10+  | Application containerization |
 | **Orchestration**    | Docker Compose     | 2.0+    | Multi-container management   |
-| **Frontend Image**   | node:20-alpine     | latest  | Build stage                  |
+| **Frontend Image**   | node:22-alpine     | latest  | Build stage                  |
 | **Frontend Runtime** | nginx:alpine       | latest  | Production runtime           |
-| **Backend Build**    | gradle:8.7-jdk17   | 8.7     | Build stage                  |
-| **Backend Runtime**  | eclipse-temurin:17 | 17-jre  | Production runtime           |
+| **Backend Build**    | gradle:8.7-jdk21   | 8.7     | Build stage                  |
+| **Backend Runtime**  | eclipse-temurin:21 | 21-jre  | Production runtime           |
 
 ### AI/LLM Integration
 
@@ -488,7 +489,7 @@ java-resumes/
 
 #### Prerequisites
 
-- Java 17 JDK installed
+- Java 25 LTS JDK installed
 - Gradle 8.7+ (or use included wrapper)
 - IDE (IntelliJ IDEA, Eclipse, VS Code)
 
@@ -560,7 +561,7 @@ See [BACKEND_README.md](BACKEND_README.md) for detailed backend documentation.
 
 #### Prerequisites
 
-- Node.js 20+ installed
+- Node.js 22 LTS installed
 - npm 10+ installed
 
 #### Setup Steps
@@ -1761,7 +1762,7 @@ All documentation files are located in [docs/](docs/):
 
 ## 🎯 Project Status
 
-- ✅ **Backend**: Complete with Spring Boot 3.5.1 and Java 17
+- ✅ **Backend**: Complete with Spring Boot 3.5.1 and Java 25
 - ✅ **Frontend**: Complete with React 19, TypeScript, and PrimeReact
 - ✅ **Docker**: Multi-container setup with Docker Compose
 - ✅ **Testing**: 80%+ coverage on both frontend and backend

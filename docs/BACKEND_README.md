@@ -1,6 +1,6 @@
 # Resume Optimizer Backend
 
-[![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://openjdk.java.net/)
+[![Java](https://img.shields.io/badge/Java-25%20LTS-orange.svg)](https://openjdk.java.net/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.1-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![Gradle](https://img.shields.io/badge/Gradle-8.7-02303A.svg)](https://gradle.org/)
 [![Checkstyle](https://img.shields.io/badge/Checkstyle-10.14.2-blue.svg)](https://checkstyle.org/)
@@ -59,7 +59,7 @@ Get the backend running in just 5 minutes! Follow these quick steps to start dev
 
 ### Prerequisites
 
-- Java 25 JDK installed
+- Java 25 LTS JDK installed
 - Gradle 8.7+ (or use included wrapper)
 - LLM service running (Ollama recommended)
 
@@ -120,7 +120,7 @@ That's it! Your backend is now running. Start uploading resumes and generating o
 
 | Component           | Technology             | Version | Purpose                           |
 | ------------------- | ---------------------- | ------- | --------------------------------- |
-| **Language**        | Java                   | 25 LTS  | Backend programming language      |
+| **Language**        | Java                   | 21 LTS  | Backend programming language      |
 | **Framework**       | Spring Boot            | 3.5.1   | Application framework             |
 | **Build Tool**      | Gradle                 | 8.7     | Build automation and dependencies |
 | **Dependency Mgmt** | Spring Dependency Mgmt | 1.1.7   | Consistent dependency versions    |
@@ -167,7 +167,7 @@ That's it! Your backend is now running. Start uploading resumes and generating o
 
 Before you begin, ensure you have the following installed:
 
-- **Java Development Kit (JDK)**: Version 25 LTS ([Download Eclipse Temurin](https://adoptium.net/))
+- **Java Development Kit (JDK)**: Version 21 LTS ([Download Eclipse Temurin](https://adoptium.net/))
 - **Gradle**: Version 8.7+ (or use included Gradle wrapper)
 - **LLM Service**: Ollama, LM Studio, or OpenAI API access
 - **IDE** (optional): IntelliJ IDEA, Eclipse, or VS Code with Java extensions
@@ -177,7 +177,7 @@ Before you begin, ensure you have the following installed:
 ```bash
 # Check Java version
 java -version
-# Output should show version 25 or higher
+# Output should show version 21 or higher
 
 # Check Gradle version (if installed globally)
 gradle --version
@@ -902,7 +902,7 @@ docker compose down
    - Builds application
    - Creates JAR file
 
-2. **Runtime Stage** (`eclipse-temurin:25-jre-alpine`):
+2. **Runtime Stage** (`eclipse-temurin:21-jre-alpine`):
    - Minimal JRE image
    - Copies JAR from build stage
    - Non-root user for security
