@@ -1671,51 +1671,81 @@ SOFTWARE.
 
 ## 📚 Documentation
 
-### Quick Links
+### Quick Start Navigation
 
-Complete documentation is available in the [docs/](docs/) directory and [.github/](.github/) folder:
+All documentation has been reorganized and moved to the [docs/](docs/) directory for better organization and maintainability. Start with these key documents:
 
-| Document                                                                   | Purpose                                             |
-| -------------------------------------------------------------------------- | --------------------------------------------------- |
-| **[docs/INDEX.md](docs/INDEX.md)**                                         | Complete documentation index and navigation guide   |
-| **[docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)** | System architecture, design patterns, and data flow |
-| **[docs/BACKEND_README.md](docs/BACKEND_README.md)**                       | Backend setup, build commands, and API reference    |
-| **[docs/README.md](docs/README.md)**                                       | Frontend setup, components, and development guide   |
-| **[copilot-instructions.md](copilot-instructions.md)**                     | Repository-wide developer guidance                  |
-| **.github/instructions/backend.instructions.md**                           | Path-specific backend Copilot guidance              |
-| **.github/instructions/frontend.instructions.md**                          | Path-specific frontend Copilot guidance             |
-| **.github/agents.md**                                                      | AI agent task completion guidelines                 |
+- **[docs/INDEX.md](docs/INDEX.md)** ⭐ - **Complete documentation index with role-based navigation**
+- **[docs/QUICK_START_ADVANCED.md](docs/QUICK_START_ADVANCED.md)** - Setup and configuration guide
+- **[docs/QUICK_REFERENCE.md](docs/QUICK_REFERENCE.md)** - Common tasks and commands reference
 
-### Key Documentation Files
+### Navigation by Role
 
-#### For Getting Started
+| Role                | Start Here                                           | Then                                                     | Reference                                          |
+| ------------------- | ---------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------- |
+| **Project Manager** | [Project Status](docs/PROJECT_STATUS.md)             | [Job Completion Summary](docs/JOB_COMPLETION_SUMMARY.md) | [Outstanding Issues](docs/OUTSTANDING_ISSUES.md)   |
+| **Developer**       | [Quick Start](docs/QUICK_START_ADVANCED.md)          | [Quick Reference](docs/QUICK_REFERENCE.md)               | [Technical Checklist](docs/TECHNICAL_CHECKLIST.md) |
+| **QA/Tester**       | [Testing Guide](docs/OUTPUT_TYPE_TESTING_GUIDE.md)   | [UI Changes Guide](docs/UI_CHANGES_VISUAL_GUIDE.md)      | [Technical Checklist](docs/TECHNICAL_CHECKLIST.md) |
+| **AI Agent**        | [Copilot Instructions](docs/copilot-instructions.md) | [Agent Guidelines](docs/AGENTS.md)                       | [Quick Reference](docs/QUICK_REFERENCE.md)         |
 
-1. Start with this [README.md](README.md)
-2. Review [docs/Architecture.md](docs/architecture/ARCHITECTURE.md) for system design
-3. Choose your track:
-   - **Backend**: [docs/BACKEND_README.md](docs/BACKEND_README.md)
-   - **Frontend**: [docs/README.md](docs/README.md)
-   - **Both**: Follow Docker setup above
+### Complete Documentation Files
 
-#### For Development
+All documentation files are located in [docs/](docs/):
 
-- **Backend Coding**: See `.github/instructions/backend.instructions.md`
-- **Frontend Coding**: See `.github/instructions/frontend.instructions.md`
-- **AI Agents**: See `AGENTS.md`
-- **General Guidance**: See [copilot-instructions.md](copilot-instructions.md)
+**Getting Started & Configuration:**
 
-#### Prompt System
+- [Quick Start Advanced](docs/QUICK_START_ADVANCED.md) - Setup, configuration, and development environment
+- [Quick Reference](docs/QUICK_REFERENCE.md) - Common commands and task reference
 
-- **Available Prompts**: [src/main/resources/prompts/README.md](src/main/resources/prompts/README.md)
-- **Prompt Configuration**: [docs/PROMPTS_CONFIGURATION.md](docs/PROMPTS_CONFIGURATION.md)
-- **Adding New Prompts**: [docs/ADD_NEW_PROMPT.md](docs/ADD_NEW_PROMPT.md)
+**Project Overview:**
 
-#### Additional Resources
+- [Project Status](docs/PROJECT_STATUS.md) - Current status, completed features, and metrics
+- [Implementation Summary](docs/IMPLEMENTATION_SUMMARY.md) - Overview of implementations
+- [Implementation Complete](docs/IMPLEMENTATION_COMPLETE.md) - Final completion details
+- [Job Completion Summary](docs/JOB_COMPLETION_SUMMARY.md) - Deliverables and summary
 
-- **Product Requirements**: [docs/PRD-PRIMEREACT-DOCKER-v2.md](docs/PRD-PRIMEREACT-DOCKER-v2.md)
-- **Code Quality**: [docs/CHECKSTYLE_AND_OLLAMA.md](docs/CHECKSTYLE_AND_OLLAMA.md)
-- **Architecture**: [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)
-- **Work in Progress**: [docs/wip/](docs/wip/)
+**Development Guides:**
+
+- [Frontend Enhancements](docs/FRONTEND_ENHANCEMENTS.md) - Frontend improvements and features
+- [UI Changes Visual Guide](docs/UI_CHANGES_VISUAL_GUIDE.md) - Visual documentation of UI changes
+- [Copilot Instructions](docs/copilot-instructions.md) - Repository-wide development guidance
+
+**Technical Reference:**
+
+- [Technical Checklist](docs/TECHNICAL_CHECKLIST.md) - Requirements and verification checklist
+- [Testing Guide](docs/OUTPUT_TYPE_TESTING_GUIDE.md) - Testing procedures and validation
+
+**Issue Tracking & Fixes:**
+
+- [Outstanding Issues](docs/OUTSTANDING_ISSUES.md) - Current issues and blockers
+- [Bug Fix: Output Type](docs/BUG_FIX_OUTPUT_TYPE.md) - Output type dropdown fix documentation
+- [Output Type Bug Fix Summary](docs/OUTPUT_TYPE_BUG_FIX_SUMMARY.md) - Comprehensive fix summary
+- [Output Type Fix Quick Reference](docs/OUTPUT_TYPE_FIX_QUICK_REFERENCE.md) - Quick reference for fixes
+
+**Additional Resources:**
+
+- [AI Agent Guidelines](docs/AGENTS.md) - Guidelines for AI agents and assistants
+- [Non-Technical Model Guide](docs/NONTECHNICAL_MODEL_GUIDE.md) - Guide for non-technical users
+- [Session Log](docs/SESSION_LOG.md) - Development session log
+- [Screenshot Capture Summary](docs/SCREENSHOT_CAPTURE_SUMMARY.md) - Documentation screenshot results
+
+### Backend & Frontend Documentation
+
+| Document                                         | Purpose                                           |
+| ------------------------------------------------ | ------------------------------------------------- |
+| [docs/BACKEND_README.md](docs/BACKEND_README.md) | Backend setup, build commands, and API reference  |
+| [docs/README.md](docs/README.md)                 | Frontend setup, components, and development guide |
+| [docs/Architecture.md](docs/Architecture.md)     | System architecture and design patterns           |
+
+### Backend-Specific Guidance
+
+- **Custom Instructions**: [.github/instructions/backend.instructions.md](.github/instructions/backend.instructions.md)
+- **Prompt System**: [src/main/resources/prompts/README.md](src/main/resources/prompts/README.md)
+
+### Frontend-Specific Guidance
+
+- **Custom Instructions**: [.github/instructions/frontend.instructions.md](.github/instructions/frontend.instructions.md)
+- **Screenshots**: [docs/screenshots/](docs/screenshots/)
 
 ### External Resources
 

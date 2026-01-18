@@ -2,46 +2,127 @@
 
 Complete documentation and reference guide for the java-resumes project.
 
-## Quick Links
+**Last Updated:** January 18, 2026
+**Status:** Reorganized with cross-linked navigation
 
-### Getting Started
+## Table of Contents
 
-- [Root README](../README.md) - Project overview and quick start
-- [Architecture](./Architecture.md) - System architecture and design
+1. [Quick Navigation](#quick-navigation)
+2. [Getting Started](#getting-started)
+3. [Project Overview](#project-overview)
+4. [Development Guides](#development-guides)
+5. [Technical Reference](#technical-reference)
+6. [Session & Testing](#session--testing)
+7. [Issue Tracking & Fixes](#issue-tracking--fixes)
+8. [Related Documentation](#related-documentation)
 
-### Backend Development
+---
 
-- [Backend README](./BACKEND_README.md) - Backend development guide
-- [Backend Custom Instructions](../.github/instructions/backend.instructions.md) - Copilot backend guidance
+## Quick Navigation
 
-### Frontend Development
+### By Role
 
-- [Frontend README](./README.md) - Frontend development guide
-- [Frontend Custom Instructions](../.github/instructions/frontend.instructions.md) - Copilot frontend guidance
+**👤 Project Managers**
 
-### Product & Requirements
+- Start → [Project Status](PROJECT_STATUS.md)
+- Then → [Job Completion Summary](JOB_COMPLETION_SUMMARY.md)
+- Check → [Outstanding Issues](OUTSTANDING_ISSUES.md)
 
-- [PRD v2 (Latest)](./PRD-PRIMEREACT-DOCKER-v2.md) - Product requirements document (latest version)
-- [PRD v1](./PRD-PRIMEREACT-DOCKER.md) - Product requirements document (previous version)
+**👨‍💻 Developers**
 
-### Configuration & Infrastructure
+- Start → [Quick Start Advanced](QUICK_START_ADVANCED.md)
+- Reference → [Quick Reference](QUICK_REFERENCE.md)
+- Study → [AI Agent Guidelines](AGENTS.md)
+- Check → [Technical Checklist](TECHNICAL_CHECKLIST.md)
 
-- [Checkstyle Configuration](./CHECKSTYLE_AND_OLLAMA.md) - Code quality and Ollama integration
-- [Checkstyle Compliance Report](./CHECKSTYLE_COMPLIANCE_REPORT.md) - Code quality compliance status
+**🤖 AI Agents (Copilot, Claude)**
 
-### Work in Progress
+- Study → [Copilot Instructions](copilot-instructions.md)
+- Reference → [AI Agent Guidelines](AGENTS.md)
+- Use → [Quick Reference](QUICK_REFERENCE.md)
 
-- [STATUS](./wip/STATUS.md) - Current project status
-- [Implementation Summary](./wip/IMPLEMENTATION_SUMMARY.md) - Frontend/backend implementation overview
-- [Frontend Implementation](./wip/FRONTEND_IMPLEMENTATION_SUMMARY.md) - Frontend implementation details
-- [Java 17 Setup](./wip/JAVA17_SETUP.md) - Java 17 LTS setup and configuration
-- [Checkstyle Progress](./wip/CHECKSTYLE_PROGRESS.md) - Code quality progress tracking
-- [Migration Summary](./MIGRATION_SUMMARY.md) - Migration and refactoring summary
+**🧪 QA/Testers**
 
-### Reference
+- Review → [Testing Guide](OUTPUT_TYPE_TESTING_GUIDE.md)
+- Study → [UI Changes Visual Guide](UI_CHANGES_VISUAL_GUIDE.md)
+- Reference → [Screenshot Capture Summary](SCREENSHOT_CAPTURE_SUMMARY.md)
 
-- [Documentation Summary](./DOCUMENTATION_SUMMARY.md) - Summary of all documentation
-- [Documentation Index](./DOCUMENTATION_INDEX.md) - Alternative documentation index
+---
+
+## Getting Started
+
+Start here if you're new to the project:
+
+- **[Quick Start Advanced](QUICK_START_ADVANCED.md)** - Setup and configuration guide for development environment
+- **[Quick Reference](QUICK_REFERENCE.md)** - Quick lookup for common tasks, commands, and workflows
+- **[Root README](../README.md)** - Main project README (in repository root)
+
+---
+
+## Project Overview
+
+Understand the project structure, status, and architecture:
+
+- **[Project Status](PROJECT_STATUS.md)** - Current project status, milestones, and progress tracking
+- **[Implementation Summary](IMPLEMENTATION_SUMMARY.md)** - Overview of completed implementations and features
+- **[Implementation Complete](IMPLEMENTATION_COMPLETE.md)** - Final implementation details and completion status
+- **[Job Completion Summary](JOB_COMPLETION_SUMMARY.md)** - Summary of all completed work and deliverables
+- **[AI Agent Guidelines](AGENTS.md)** - Guidelines and best practices for AI agents and assistants
+- **[Non-Technical Model Guide](NONTECHNICAL_MODEL_GUIDE.md)** - Guide for non-technical stakeholders and AI models
+
+---
+
+## Development Guides
+
+Detailed guides for development and feature implementation:
+
+- **[Frontend Enhancements](FRONTEND_ENHANCEMENTS.md)** - Frontend improvements, new features, and component documentation
+- **[UI Changes Visual Guide](UI_CHANGES_VISUAL_GUIDE.md)** - Visual documentation of all UI changes and modifications
+- **[Copilot Instructions](copilot-instructions.md)** - Repository-wide instructions and guidelines for GitHub Copilot
+
+---
+
+## Technical Reference
+
+Technical documentation and reference materials:
+
+- **[Technical Checklist](TECHNICAL_CHECKLIST.md)** - Technical requirements, acceptance criteria, and verification checklist
+- **[Screenshot Capture Summary](SCREENSHOT_CAPTURE_SUMMARY.md)** - Documentation screenshot capture results and metadata
+
+---
+
+## Session & Testing
+
+Session logs, testing guides, and quality assurance documentation:
+
+- **[Testing Guide](OUTPUT_TYPE_TESTING_GUIDE.md)** - Comprehensive testing procedures and validation guidelines
+- **[Session Log](SESSION_LOG.md)** - Development session log, activities, and timeline
+
+---
+
+## Issue Tracking & Fixes
+
+Documentation related to bug fixes, issues, and resolutions:
+
+- **[Outstanding Issues](OUTSTANDING_ISSUES.md)** - Current unresolved issues, blockers, and next action items
+- **[Bug Fix: Output Type](BUG_FIX_OUTPUT_TYPE.md)** - Detailed documentation of output type dropdown bug fix
+- **[Output Type Bug Fix Summary](OUTPUT_TYPE_BUG_FIX_SUMMARY.md)** - Comprehensive summary of all output type bug fixes and changes
+- **[Output Type Fix Quick Reference](OUTPUT_TYPE_FIX_QUICK_REFERENCE.md)** - Quick reference guide for output type fixes and implementations
+
+---
+
+## Related Documentation
+
+Additional resources and directories:
+
+- **[Repository Root](../README.md)** - Main project README and overview
+- **[Screenshots Directory](screenshots/)** - Captured screenshots for visual documentation
+- **[Backend README](./BACKEND_README.md)** - Backend setup and API documentation (if available)
+- **[Frontend README](../frontend/README.md)** - Frontend setup and component documentation (if available)
+- **[Backend Custom Instructions](../.github/instructions/backend.instructions.md)** - Copilot backend guidance
+- **[Frontend Custom Instructions](../.github/instructions/frontend.instructions.md)** - Copilot frontend guidance
+
+---
 
 ## Project Structure
 
