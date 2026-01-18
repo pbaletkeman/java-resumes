@@ -37,7 +37,7 @@ Multiple hypotheses have been tested but the core issue remains undiagnosed.
   id="promptTypes"
   value={promptTypes}
   onChange={(e) => {
-    console.log("Dropdown change event:", e, "e.value:", e.value);
+    //  console.log("Dropdown change event:", e, "e.value:", e.value);
     setPromptTypes(e.value || []);
     uploadApi.reset();
     resumeApi.reset();

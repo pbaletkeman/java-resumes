@@ -336,7 +336,7 @@ export const DocumentUploadForm: React.FC = () => {
                   id="promptTypes"
                   value={promptTypes}
                   onChange={e => {
-                    console.log('Dropdown change event:', e, 'e.value:', e.value);
+                    // console.log('Dropdown change event:', e, 'e.value:', e.value);
                     setPromptTypes(e.value || []);
                     // Clear previous results when changing output types to prevent stale data
                     uploadApi.reset();
