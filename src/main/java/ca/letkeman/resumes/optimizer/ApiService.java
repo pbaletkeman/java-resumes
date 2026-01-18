@@ -1,11 +1,12 @@
 package ca.letkeman.resumes.optimizer;
 
-import ca.letkeman.resumes.Utility;
 import ca.letkeman.resumes.model.Optimize;
 import ca.letkeman.resumes.optimizer.responses.LLMResponse;
 import ca.letkeman.resumes.optimizer.responses.Choice;
+import ca.letkeman.resumes.service.PromptService;
 
 import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -33,6 +34,9 @@ public final class ApiService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ApiService.class);
 
+  @Autowired(required = false)
+  private PromptService promptService;
+
   private String jobDescription;
   private String resume;
 
@@ -50,6 +54,20 @@ public final class ApiService {
 
   public void setResume(String resume) {
     this.resume = resume;
+  }
+
+  /**
+   * Lazily load or create PromptService if not injected by Spring.
+   * This ensures the service works whether ApiService is instantiated
+   * via Spring dependency injection or manually with 'new ApiService()'.
+   *
+   * @return the PromptService instance
+   */
+  private PromptService getPromptService() {
+    if (promptService == null) {
+      promptService = new PromptService();
+    }
+    return promptService;
   }
 
   public ApiService() {
@@ -76,9 +94,17 @@ public final class ApiService {
 
       attachJSONBody(jsonBody, conn);
       if (conn.getResponseCode() != java.net.HttpURLConnection.HTTP_OK) {
-        LOGGER.error("Invalid API response");
-        if (LOGGER.isErrorEnabled()) {
-          LOGGER.error(String.valueOf(conn.getErrorStream()));
+        LOGGER.error("Invalid API response. Status code: {}", conn.getResponseCode());
+        try (BufferedReader br = new BufferedReader(
+            new InputStreamReader(conn.getErrorStream(), StandardCharsets.UTF_8))) {
+          StringBuilder errorResponse = new StringBuilder();
+          String line;
+          while ((line = br.readLine()) != null) {
+            errorResponse.append(line);
+          }
+          LOGGER.error("Error response from API: {}", errorResponse.toString());
+        } catch (Exception e) {
+          LOGGER.error("Could not read error response: {}", e.toString());
         }
       } else {
         String response = getAPIResponse(conn);
@@ -145,12 +171,13 @@ public final class ApiService {
    * @param optimize api input parameters
    * @param endpoint - url to post the prompt to
    * @param apikey - openai key
+   * @param model - model to use for generation
    * @param root - location to upload & save file tp
    */
-  public void produceFiles(Optimize optimize, String endpoint, String apikey, String root) {
+  public void produceFiles(Optimize optimize, String endpoint, String apikey, String model, String root) {
     if (optimize != null) {
       for (String p : optimize.getPromptType()) {
-        produceFiles(p, optimize, endpoint, apikey, root);
+        produceFiles(p, optimize, endpoint, apikey, model, root);
       }
     } else {
       LOGGER.error("invalid optimize");
@@ -164,20 +191,28 @@ public final class ApiService {
    * @param optimize - the data to sent to the endpoint
    * @param endpoint - url to post the prompt to
    * @param apikey - openai key
+   * @param model - model to use for generation
    * @param root - location to upload & save file tp
    */
-  public void produceFiles(String promptType, Optimize optimize, String endpoint, String apikey, String root) {
+  public void produceFiles(String promptType, Optimize optimize, String endpoint, String apikey, String model, String root) {
     LocalDate myDateObj = LocalDate.now();
     String today = myDateObj.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
 
-    String promptData = Utility.readFileAsString(
-        "prompts" + File.separator + promptType + ".md");
+    // Load prompt using PromptService (hybrid: external override + bundled fallback)
+    String promptData = getPromptService().loadPrompt(promptType);
+
+    if (promptData == null || promptData.isEmpty()) {
+      LOGGER.error("Could not load prompt: {}", promptType);
+      return;
+    }
+
     promptData = promptData
         .replace("{resume_string}", optimize.getResume())
         .replace("{jd_string}", optimize.getJobDescription());
     promptData = promptData.replace("{today}", today);
 
     ChatBody chatBody = getChatBody(optimize, promptData);
+    chatBody.setModel(model);
 
     ApiService apiService = new ApiService();
     LLMResponse llmResponse = apiService.invokeApi(chatBody, endpoint, apikey);
@@ -200,7 +235,7 @@ public final class ApiService {
       result = getResult(message, optimize.getCompany());
     }
 
-    if (result == null || result.body() == null){
+    if (result == null || result.body() == null) {
       LOGGER.error("Invalid LLM result from response. Please try again.");
       return;
     }

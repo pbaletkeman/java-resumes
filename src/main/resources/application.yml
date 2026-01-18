@@ -4,19 +4,23 @@ springdoc:
   swagger-ui:
     enabled: true
 
-
 # max request size for a multipart/form-data
 # max file size for each request
 spring:
-    servlet:
-      multipart:
-        max-file-size=500KB
-        max-request-size=500KB
+  servlet:
+    multipart: max-file-size=500KB
+      max-request-size=500KB
 
 upload:
   path: files
 
 llm:
-#  endpoint: http://localhost:1234/v1/chat/completions # lmstudio
+  #  endpoint: http://localhost:1234/v1/chat/completions # lmstudio
   endpoint: http://127.0.0.1:11434/v1/chat/completions # ollama
   apikey: 1234567890
+# Prompts configuration
+# external-dir: Leave empty to use bundled prompts
+# Set to a directory path (e.g., ./prompts or /etc/java-resumes/prompts) to override with external files
+# External prompts will be loaded if they exist; otherwise bundled versions are used
+prompts:
+  external-dir: ${PROMPTS_DIR:}

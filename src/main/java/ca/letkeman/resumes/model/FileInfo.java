@@ -62,7 +62,7 @@ public final class FileInfo {
   private String calcFileSize(String root, String fileName) {
     long oneMb = 1048576;
     long oneKb = 1024;
-    File file = new File(Paths.get(fileName, root).toAbsolutePath().toUri());
+    File file = new File(Paths.get(root, fileName).toAbsolutePath().toUri());
     if (!file.exists() || !file.isFile()) {
       LOGGER.error("Invalid file path");
       return "0 bytes";

@@ -5,7 +5,24 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Resume Optimizer - React + PrimeReact</title>
-    <link id="theme-link" rel="stylesheet" href="/themes/lara-light-blue/theme.css" />
+    <link
+      id="theme-link"
+      rel="stylesheet"
+      href="/themes/lara-light-blue/theme.css"
+      onerror="this.remove()"
+    />
+    <script>
+      // Suppress OTS font parsing errors in console
+      window.addEventListener(
+        'error',
+        function (e) {
+          if (e.message && e.message.indexOf('OTS parsing error') > -1) {
+            e.preventDefault();
+          }
+        },
+        true
+      );
+    </script>
   </head>
   <body>
     <div id="root"></div>

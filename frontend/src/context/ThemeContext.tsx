@@ -20,13 +20,19 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   useEffect(() => {
     const themeLink = document.getElementById('theme-link') as HTMLLinkElement;
+    const themePath = `/themes/${theme}/theme.css`;
+
     if (themeLink) {
-      themeLink.href = `/themes/${theme}/theme.css`;
+      themeLink.href = themePath;
     } else {
       const link = document.createElement('link');
       link.id = 'theme-link';
       link.rel = 'stylesheet';
-      link.href = `/themes/${theme}/theme.css`;
+      link.href = themePath;
+      // Handle font loading errors gracefully
+      link.onerror = () => {
+        console.warn(`Failed to load theme: ${themePath}`);
+      };
       document.head.appendChild(link);
     }
 

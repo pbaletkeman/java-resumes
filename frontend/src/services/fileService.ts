@@ -51,18 +51,88 @@ export const fileService = {
   async processResume(data: {
     jobDescription: string;
     resume: string;
+    optimize?: string;
   }): Promise<ProcessingResult> {
-    const response = await apiClient.post<ProcessingResult>(API_ENDPOINTS.PROCESS_RESUME, data);
+    const formData = new FormData();
+
+    // Create files from strings
+    if (data.resume) {
+      formData.append('resume', new File([data.resume], 'resume.txt', { type: 'text/plain' }));
+    }
+
+    if (data.jobDescription) {
+      formData.append('job', new File([data.jobDescription], 'job.txt', { type: 'text/plain' }));
+    }
+
+    // Use provided optimize or create default
+    const optimizeData =
+      data.optimize ||
+      JSON.stringify({
+        resume: data.resume ? 'resume.txt' : '',
+        jobDescription: data.jobDescription ? 'job.txt' : '',
+        company: 'Company',
+        jobTitle: 'Job Title',
+        model: 'mistral:latest',
+        temperature: 0.15,
+        promptType: ['resume'],
+      });
+
+    formData.append('optimize', optimizeData);
+
+    const response = await apiClient.post<ProcessingResult>(
+      API_ENDPOINTS.PROCESS_RESUME,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
     return response.data;
   },
 
   async processCoverLetter(data: {
     jobDescription: string;
     resume: string;
+    optimize?: string;
   }): Promise<ProcessingResult> {
+    const formData = new FormData();
+
+    // Create files from strings
+    if (data.resume) {
+      formData.append(
+        'coverLetter',
+        new File([data.resume], 'coverletter.txt', { type: 'text/plain' })
+      );
+    }
+
+    if (data.jobDescription) {
+      formData.append('job', new File([data.jobDescription], 'job.txt', { type: 'text/plain' }));
+    }
+
+    // Use provided optimize or create default
+    const optimizeData =
+      data.optimize ||
+      JSON.stringify({
+        resume: data.resume ? 'coverletter.txt' : '',
+        jobDescription: data.jobDescription ? 'job.txt' : '',
+        company: 'Company',
+        jobTitle: 'Job Title',
+        model: 'mistral:latest',
+        temperature: 0.15,
+        promptType: ['cover'],
+      });
+
+    formData.append('optimize', optimizeData);
+
     const response = await apiClient.post<ProcessingResult>(
       API_ENDPOINTS.PROCESS_COVER_LETTER,
-      data
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
     );
     return response.data;
   },

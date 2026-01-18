@@ -3,13 +3,15 @@ import { Card } from 'primereact/card';
 import { DataView } from 'primereact/dataview';
 import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';
+import { Message } from 'primereact/message';
 import type { FileMetadata } from '../../services/fileService';
 import { useFileManagement } from '../../hooks/useFileManagement';
 import { ConfirmDialog } from '../Common/ConfirmDialog';
 import { formatFileSize, formatDate } from '../../utils/helpers';
 
 export const FileHistory: React.FC = () => {
-  const { files, loading, downloadFile, deleteFile } = useFileManagement();
+  const { files, loading, downloadFile, deleteFile, fetchFiles, fileCount, newFilesAlert } =
+    useFileManagement();
   const [deleteDialogVisible, setDeleteDialogVisible] = useState(false);
   const [fileToDelete, setFileToDelete] = useState<string | null>(null);
 
@@ -82,7 +84,27 @@ export const FileHistory: React.FC = () => {
 
   return (
     <>
-      <Card title="File History" className="h-full">
+      <Card title={`File History (${fileCount} files)`} className="h-full">
+        {newFilesAlert && (
+          <Message
+            severity="success"
+            text="New files detected! List has been updated."
+            className="mb-3 w-full"
+          />
+        )}
+        <div className="flex gap-2 mb-4">
+          <Button
+            label="Refresh Now"
+            icon="pi pi-refresh"
+            onClick={fetchFiles}
+            disabled={loading}
+            severity="info"
+            outlined
+          />
+          <div className="text-sm text-gray-500 flex align-items-center ml-2">
+            Auto-refreshes every 60 seconds
+          </div>
+        </div>
         {loading ? (
           <div className="flex flex-column gap-3">
             {[1, 2, 3].map(i => (

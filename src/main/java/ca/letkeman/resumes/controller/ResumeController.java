@@ -42,7 +42,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5173", "http://localhost:80"})
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5173", "http://localhost:80",
+    "http://127.0.0.1:3000", "http://127.0.0.1:5173", "http://127.0.0.1:80"},
+    allowCredentials = "true",
+    maxAge = 3600,
+    methods = {org.springframework.web.bind.annotation.RequestMethod.GET,
+        org.springframework.web.bind.annotation.RequestMethod.POST,
+        org.springframework.web.bind.annotation.RequestMethod.DELETE,
+        org.springframework.web.bind.annotation.RequestMethod.OPTIONS})
 @RestController
 @RequestMapping("/api")
 public final class ResumeController {
@@ -85,6 +92,22 @@ public final class ResumeController {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
           .body(new ResponseMessage("problem with conversion"));
     }
+  }
+
+  @PostMapping(path = "/process/cover-letter")
+  public ResponseEntity<ResponseMessage> processCoverLetter(
+      @RequestParam(name = "coverLetter", required = false) MultipartFile coverLetter,
+      @RequestParam(name = "job", required = false) MultipartFile job,
+      @RequestParam(name = "optimize", required = false) String opt) {
+    return optimizeResume(coverLetter, job, opt);
+  }
+
+  @PostMapping(path = "/process/resume")
+  public ResponseEntity<ResponseMessage> processResume(
+      @RequestParam(name = "resume", required = false) MultipartFile resume,
+      @RequestParam(name = "job", required = false) MultipartFile job,
+      @RequestParam(name = "optimize", required = false) String opt) {
+    return optimizeResume(resume, job, opt);
   }
 
   @PostMapping(path = "/upload")
@@ -137,11 +160,11 @@ public final class ResumeController {
       thread.start();
       return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("generating"));
     } else {
+      LOGGER.warn("Validation failed");
       return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
           .body(new ResponseMessage("Required property missing or invalid."));
     }
   }
-
   @GetMapping("/files")
   public ResponseEntity<List<FileInfo>> getListFiles() {
     storageService.setConfigRoot(root);

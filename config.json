@@ -1,11 +1,5 @@
 {
-  "config": {
-    "endpoint": "http://localhost:1234/v1/chat/completions",
-    "apikey": "1234567890",
-    "comments": [
-      {"url":"http://localhost:1234/v1/chat/completions","comment":"lmstudio"},
-      {"url":"http://127.0.0.1:11434/v1/chat/completions","comment":"ollama"}
-    ]
-  }
+  "endpoint": "http://localhost:11434/v1/chat/completions",
+  "apikey": "ollama",
+  "model": "mistral:latest"
 }
-

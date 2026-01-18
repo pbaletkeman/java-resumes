@@ -2,6 +2,8 @@ import React, { useState, useCallback } from 'react';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { InputTextarea } from 'primereact/inputtextarea';
+import { InputText } from 'primereact/inputtext';
+import { Dropdown } from 'primereact/dropdown';
 import { FileUpload } from 'primereact/fileupload';
 import { SelectButton } from 'primereact/selectbutton';
 import { useApi } from '../../hooks/useApi';
@@ -17,7 +19,15 @@ export const DocumentUploadForm: React.FC = () => {
   const [resume, setResume] = useState('');
   const [jobFile, setJobFile] = useState<File | null>(null);
   const [resumeFile, setResumeFile] = useState<File | null>(null);
-  const [errors, setErrors] = useState<{ job?: string; resume?: string }>({});
+  const [jobTitle, setJobTitle] = useState('');
+  const [company, setCompany] = useState('');
+  const [model, setModel] = useState('gemma-3-4b-it');
+  const [errors, setErrors] = useState<{
+    job?: string;
+    resume?: string;
+    jobTitle?: string;
+    company?: string;
+  }>({});
 
   const { showSuccess, showError } = useAppContext();
   const uploadApi = useApi();
@@ -25,13 +35,29 @@ export const DocumentUploadForm: React.FC = () => {
   const coverLetterApi = useApi();
 
   // Memoized change handlers to prevent re-renders
-  const handleJobDescriptionChange = useCallback((e: any) => {
+  const handleJobDescriptionChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setJobDescription(e.target.value);
   }, []);
 
-  const handleResumeChange = useCallback((e: any) => {
+  const handleResumeChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setResume(e.target.value);
   }, []);
+
+  const handleJobTitleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setJobTitle(e.target.value);
+  }, []);
+
+  const handleCompanyChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setCompany(e.target.value);
+  }, []);
+
+  const modelOptions = [
+    { label: 'Gemma 3.4B (Default)', value: 'gemma-3-4b-it' },
+    { label: 'GPT-4 Turbo', value: 'gpt-4-turbo' },
+    { label: 'Claude 3 Opus', value: 'claude-3-opus' },
+    { label: 'Llama 2 Chat', value: 'llama-2-chat' },
+    { label: 'Mistral', value: 'mistral' },
+  ];
 
   const modes = [
     { label: 'Paste Text', value: INPUT_MODES.PASTE },
@@ -39,7 +65,7 @@ export const DocumentUploadForm: React.FC = () => {
   ];
 
   const validateForm = (): boolean => {
-    const newErrors: { job?: string; resume?: string } = {};
+    const newErrors: { job?: string; resume?: string; jobTitle?: string; company?: string } = {};
 
     if (inputMode === INPUT_MODES.PASTE) {
       const jobError = validateTextInput(jobDescription, 'Job Description');
@@ -60,6 +86,9 @@ export const DocumentUploadForm: React.FC = () => {
         if (!resumeValidation.valid) newErrors.resume = resumeValidation.error;
       }
     }
+
+    if (!jobTitle.trim()) newErrors.jobTitle = 'Job Title is required';
+    if (!company.trim()) newErrors.company = 'Company is required';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -91,9 +120,20 @@ export const DocumentUploadForm: React.FC = () => {
     if (!validateForm()) return;
 
     try {
+      const optimize = {
+        promptType: ['resume'],
+        temperature: 0.15,
+        model: model,
+        resume: inputMode === INPUT_MODES.PASTE ? resume : resumeFile?.name || '',
+        jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
+        jobTitle: jobTitle,
+        company: company,
+      };
+
       const data = {
         jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
         resume: inputMode === INPUT_MODES.PASTE ? resume : resumeFile?.name || '',
+        optimize: JSON.stringify(optimize),
       };
 
       const result = await resumeApi.execute(() => fileService.processResume(data));
@@ -108,9 +148,20 @@ export const DocumentUploadForm: React.FC = () => {
     if (!validateForm()) return;
 
     try {
+      const optimize = {
+        promptType: ['cover'],
+        temperature: 0.15,
+        model: model,
+        resume: inputMode === INPUT_MODES.PASTE ? resume : resumeFile?.name || '',
+        jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
+        jobTitle: jobTitle,
+        company: company,
+      };
+
       const data = {
         jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
         resume: inputMode === INPUT_MODES.PASTE ? resume : resumeFile?.name || '',
+        optimize: JSON.stringify(optimize),
       };
 
       const result = await coverLetterApi.execute(() => fileService.processCoverLetter(data));
@@ -126,6 +177,9 @@ export const DocumentUploadForm: React.FC = () => {
     setResume('');
     setJobFile(null);
     setResumeFile(null);
+    setJobTitle('');
+    setCompany('');
+    setModel('gemma-3-4b-it');
     setErrors({});
   };
 
@@ -163,7 +217,65 @@ export const DocumentUploadForm: React.FC = () => {
             Document Upload & Processing
           </div>
 
-          {/* 3. Form Content */}
+          {/* User Input Parameters Section */}
+          <div className="w-full bg-blue-50 border-round border-1 border-blue-300 p-4 mb-4">
+            <div className="font-bold mb-3">Job Information & Model Selection</div>
+            <div className="grid grid-cols-3 gap-3">
+              <div className="field">
+                <label htmlFor="jobTitle" className="block mb-2">
+                  Job Title *
+                </label>
+                <InputText
+                  id="jobTitle"
+                  value={jobTitle}
+                  onChange={handleJobTitleChange}
+                  placeholder="e.g., Senior Software Engineer"
+                  className={`w-full ${errors.jobTitle ? 'p-invalid' : ''}`}
+                  aria-describedby="jobtitle-error"
+                />
+                {errors.jobTitle && (
+                  <small id="jobtitle-error" className="p-error block mt-1">
+                    {errors.jobTitle}
+                  </small>
+                )}
+              </div>
+
+              <div className="field">
+                <label htmlFor="company" className="block mb-2">
+                  Company *
+                </label>
+                <InputText
+                  id="company"
+                  value={company}
+                  onChange={handleCompanyChange}
+                  placeholder="e.g., Tech Corporation"
+                  className={`w-full ${errors.company ? 'p-invalid' : ''}`}
+                  aria-describedby="company-error"
+                />
+                {errors.company && (
+                  <small id="company-error" className="p-error block mt-1">
+                    {errors.company}
+                  </small>
+                )}
+              </div>
+
+              <div className="field">
+                <label htmlFor="model" className="block mb-2">
+                  AI Model
+                </label>
+                <Dropdown
+                  id="model"
+                  value={model}
+                  onChange={e => setModel(e.value)}
+                  options={modelOptions}
+                  optionLabel="label"
+                  optionValue="value"
+                  placeholder="Select model..."
+                  className="w-full"
+                />
+              </div>
+            </div>
+          </div>
           <div className="w-full">
             {inputMode === INPUT_MODES.PASTE ? (
               <div

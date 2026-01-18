@@ -2,6 +2,7 @@ package ca.letkeman.resumes.optimizer;
 
 import ca.letkeman.resumes.model.Optimize;
 import ca.letkeman.resumes.optimizer.responses.LLMResponse;
+import ca.letkeman.resumes.service.PromptService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -12,10 +13,20 @@ import static org.mockito.Mockito.*;
 
 class ApiServiceTest {
     private ApiService apiService;
+    private PromptService promptServiceMock;
 
     @BeforeEach
     void setUp() {
         apiService = new ApiService();
+        promptServiceMock = mock(PromptService.class);
+        // Inject the mock PromptService
+        try {
+            var field = ApiService.class.getDeclaredField("promptService");
+            field.setAccessible(true);
+            field.set(apiService, promptServiceMock);
+        } catch (Exception e) {
+            fail("Failed to inject mock PromptService: " + e.getMessage());
+        }
     }
 
     @Test
@@ -40,7 +51,7 @@ class ApiServiceTest {
     @Test
     void testProduceFilesHandlesNullLLMResponse() {
         Optimize optimize = mock(Optimize.class);
-        when(optimize.getPromptType()).thenReturn(new String[]{"resume"});
+        when(optimize.getPromptType()).thenReturn(new String[]{"RESUME"});
         when(optimize.getResume()).thenReturn("resume");
         when(optimize.getJobDescription()).thenReturn("desc");
         when(optimize.getCompany()).thenReturn("company");
@@ -48,12 +59,12 @@ class ApiServiceTest {
         when(optimize.getTemperature()).thenReturn(0.5);
         when(optimize.getModel()).thenReturn("gpt-3");
 
-        // Mock Utility.readFileAsString to return a template
-        try (MockedStatic<ca.letkeman.resumes.Utility> utilMock = Mockito.mockStatic(ca.letkeman.resumes.Utility.class)) {
-            utilMock.when(() -> ca.letkeman.resumes.Utility.readFileAsString(anyString())).thenReturn("Prompt: {resume_string} {jd_string} {today}");
-            // This will use the real ApiService, but invokeApi will return null (no real HTTP call)
-            apiService.produceFiles("resume", optimize, "http://invalid-endpoint", "fakekey", System.getProperty("java.io.tmpdir"));
-        }
+        // Mock PromptService to return a template
+        when(promptServiceMock.loadPrompt("RESUME"))
+            .thenReturn("Prompt: {resume_string} {jd_string} {today}");
+
+        // This will use the mock PromptService; invokeApi will return null (no real HTTP call)
+        apiService.produceFiles("RESUME", optimize, "http://invalid-endpoint", "fakekey", "mistral", System.getProperty("java.io.tmpdir"));
     }
 
     // More tests can be added for edge cases, file creation, and response parsing
@@ -83,13 +94,13 @@ class ApiServiceTest {
     @Test
     void testProduceFilesWithNullOptimize() {
         // Should not throw exception
-        assertDoesNotThrow(() -> apiService.produceFiles(null, "endpoint", "apikey", "/tmp"));
+        assertDoesNotThrow(() -> apiService.produceFiles(null, "endpoint", "apikey", "mistral", "/tmp"));
     }
 
     @Test
     void testProduceFilesWithEmptyPromptType() {
         Optimize optimize = mock(Optimize.class);
         when(optimize.getPromptType()).thenReturn(new String[]{});
-        assertDoesNotThrow(() -> apiService.produceFiles(optimize, "endpoint", "apikey", "/tmp"));
+        assertDoesNotThrow(() -> apiService.produceFiles(optimize, "endpoint", "apikey", "mistral", "/tmp"));
     }
 }

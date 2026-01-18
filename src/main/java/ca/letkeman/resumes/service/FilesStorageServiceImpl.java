@@ -28,6 +28,12 @@ public final class FilesStorageServiceImpl implements FilesStorageService {
   @Override
   public void setConfigRoot(String root) {
     this.configRoot = root;
+    try {
+      this.root = Paths.get(root);
+      Files.createDirectories(this.root);
+    } catch (IOException e) {
+      LOGGER.error("Could not initialize folder for upload!");
+    }
   }
 
   @Override
