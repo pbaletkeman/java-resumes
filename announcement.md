@@ -68,7 +68,7 @@ It’s a practical example of how LLMs can enhance everyday workflows without re
 | Backend   | **Java 25**          | API, data processing, LLM orchestration           |
 | Frontend  | **ReactJS**          | User interface for editing and generating resumes |
 | AI        | **Ollama or OpenAI** | Natural‑language generation                       |
-| Build/Run | Maven / Node         | Standard tooling for Java + React                 |
+| Build/Run | Gradle / Node        | Standard tooling for Java + React                 |
 
 ---
 
