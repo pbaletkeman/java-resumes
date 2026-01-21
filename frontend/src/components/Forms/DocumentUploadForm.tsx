@@ -12,6 +12,7 @@ import { fileService } from '../../services/fileService';
 import { validateTextInput, validateFile } from '../../utils/validators';
 import { INPUT_MODES, ALLOWED_FILE_TYPES } from '../../utils/constants';
 import { LoadingSpinner } from '../Common/LoadingSpinner';
+import { SubmissionDialog } from '../Common/SubmissionDialog';
 
 // Default models (fallback if not in storage)
 const DEFAULT_MODELS = [
@@ -39,6 +40,7 @@ export const DocumentUploadForm: React.FC = () => {
     jobTitle?: string;
     company?: string;
   }>({});
+  const [showSubmissionDialog, setShowSubmissionDialog] = useState(false);
 
   const { showSuccess, showError } = useAppContext();
   const uploadApi = useApi();
@@ -141,6 +143,7 @@ export const DocumentUploadForm: React.FC = () => {
   };
 
   const handleProcessResume = async () => {
+    setShowSubmissionDialog(true);
     if (!validateForm()) return;
 
     try {
@@ -169,6 +172,7 @@ export const DocumentUploadForm: React.FC = () => {
   };
 
   const handleProcessCoverLetter = async () => {
+    setShowSubmissionDialog(true);
     if (!validateForm()) return;
 
     try {
@@ -580,6 +584,10 @@ export const DocumentUploadForm: React.FC = () => {
           </div>
         </div>
       </div>
+      <SubmissionDialog
+        visible={showSubmissionDialog}
+        onHide={() => setShowSubmissionDialog(false)}
+      />
     </Card>
   );
 };

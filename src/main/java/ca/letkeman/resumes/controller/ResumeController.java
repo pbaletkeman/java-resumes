@@ -7,6 +7,7 @@ import ca.letkeman.resumes.model.FileInfo;
 import ca.letkeman.resumes.model.Optimize;
 import ca.letkeman.resumes.service.FilesStorageService;
 import ca.letkeman.resumes.optimizer.HtmlToPdf;
+import ca.letkeman.resumes.optimizer.MarkdownToDocx;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -88,6 +89,34 @@ public final class ResumeController {
       }
     } catch (Exception e) {
       LOGGER.error("Could not upload the resume: {}. Error:\n{}",
+          file.getOriginalFilename(), e.getMessage());
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .body(new ResponseMessage("problem with conversion"));
+    }
+  }
+
+  @PostMapping(path = "/markdownFile2DOCX")
+  public ResponseEntity<ResponseMessage> file2DOCX(@RequestParam(name = "file", required = false) MultipartFile file) {
+    if (file == null || file.isEmpty()) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("No file/invalid file provided"));
+    }
+    try {
+      storageService.setConfigRoot(root);
+      storageService.save(file);
+      String outputFile = root + File.separator
+          + Utility.removeFileExtension(file.getOriginalFilename(), true) + ".docx";
+      MarkdownToDocx mdToDocx = new MarkdownToDocx(
+          root + File.separator + file.getOriginalFilename(),
+          outputFile, "");
+      if (mdToDocx.convertFile()) {
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(new ResponseMessage("file successfully converted"));
+      } else {
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(new ResponseMessage("unable to convert file"));
+      }
+    } catch (Exception e) {
+      LOGGER.error("Could not upload the file: {}. Error:\n{}",
           file.getOriginalFilename(), e.getMessage());
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
           .body(new ResponseMessage("problem with conversion"));

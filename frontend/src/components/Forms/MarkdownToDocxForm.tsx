@@ -11,9 +11,9 @@ import { ALLOWED_FILE_TYPES } from '../../utils/constants';
 import { downloadFile } from '../../utils/helpers';
 import { LoadingSpinner } from '../Common/LoadingSpinner';
 
-export const MarkdownToPdfForm: React.FC = () => {
+export const MarkdownToDocxForm: React.FC = () => {
   const [markdownFile, setMarkdownFile] = useState<File | null>(null);
-  const [convertedPdf, setConvertedPdf] = useState<Blob | null>(null);
+  const [convertedDocx, setConvertedDocx] = useState<Blob | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const { showSuccess, showError } = useAppContext();
@@ -32,7 +32,7 @@ export const MarkdownToPdfForm: React.FC = () => {
 
     setMarkdownFile(file);
     setError(null);
-    setConvertedPdf(null);
+    setConvertedDocx(null);
   };
 
   const handleConvert = async () => {
@@ -42,30 +42,30 @@ export const MarkdownToPdfForm: React.FC = () => {
     }
 
     try {
-      const pdf = await convertApi.execute(() => fileService.convertMarkdownToPdf(markdownFile));
-      setConvertedPdf(pdf);
-      showSuccess('Markdown converted to PDF successfully');
+      const docx = await convertApi.execute(() => fileService.convertMarkdownToDocx(markdownFile));
+      setConvertedDocx(docx);
+      showSuccess('Markdown converted to DOCX successfully');
     } catch (err: unknown) {
-      showError((err as Error)?.message || 'Failed to convert markdown to PDF');
+      showError((err as Error)?.message || 'Failed to convert markdown to DOCX');
     }
   };
 
   const handleDownload = () => {
-    if (convertedPdf && markdownFile) {
-      const pdfFilename = markdownFile.name.replace(/\.md$/i, '.pdf');
-      downloadFile(convertedPdf, pdfFilename);
-      showSuccess('PDF downloaded successfully');
+    if (convertedDocx && markdownFile) {
+      const docxFilename = markdownFile.name.replace(/\.md$/i, '.docx');
+      downloadFile(convertedDocx, docxFilename);
+      showSuccess('DOCX downloaded successfully');
     }
   };
 
   const handleClear = () => {
     setMarkdownFile(null);
-    setConvertedPdf(null);
+    setConvertedDocx(null);
     setError(null);
   };
 
   return (
-    <Card title="Markdown to PDF Converter" className="h-full">
+    <Card title="Markdown to DOCX Converter" className="h-full">
       <div className="flex flex-column gap-6 p-4">
         <div className="field">
           <label className="font-bold block mb-3">Select Markdown File</label>
@@ -110,7 +110,7 @@ export const MarkdownToPdfForm: React.FC = () => {
               label="Download"
               icon="pi pi-download"
               onClick={handleDownload}
-              disabled={!convertedPdf}
+              disabled={!convertedDocx}
               severity="success"
               style={{ padding: '0.75rem 1.5rem', marginRight: '1.5rem' }}
             />
@@ -127,10 +127,10 @@ export const MarkdownToPdfForm: React.FC = () => {
             )}
           </div>
 
-          {convertedPdf && (
+          {convertedDocx && (
             <Message
               severity="success"
-              text="Conversion successful! Click Download to save the PDF."
+              text="Conversion successful! Click Download to save the DOCX file."
               className="mt-4 w-full"
             />
           )}

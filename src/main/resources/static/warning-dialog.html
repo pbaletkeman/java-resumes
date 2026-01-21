@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Processing Information</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+          "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .dialog-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 0.3s ease-out;
+      }
+
+      .dialog-overlay.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .dialog-container {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        max-width: 500px;
+        width: 90%;
+        max-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        animation: slideIn 0.3s ease-out;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .dialog-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 20px;
+        border-bottom: 1px solid #e0e0e0;
+        background-color: #f5f5f5;
+      }
+
+      .dialog-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .dialog-close {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #666;
+        padding: 0;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        transition: all 0.2s;
+      }
+
+      .dialog-close:hover {
+        background-color: #e0e0e0;
+        color: #333;
+      }
+
+      .dialog-content {
+        padding: 20px;
+        overflow-y: auto;
+        flex: 1;
+      }
+
+      .content-section {
+        margin-bottom: 12px;
+      }
+
+      .content-section:last-child {
+        margin-bottom: 0;
+      }
+
+      .section-title {
+        font-weight: 600;
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 6px;
+      }
+
+      .section-content {
+        font-size: 13px;
+        color: #666;
+        line-height: 1.5;
+      }
+
+      .section-content ul {
+        margin-left: 16px;
+        margin-top: 4px;
+      }
+
+      .section-content li {
+        margin-bottom: 4px;
+      }
+
+      .dialog-footer {
+        padding: 12px 20px;
+        border-top: 1px solid #e0e0e0;
+        background-color: #f5f5f5;
+        text-align: center;
+      }
+
+      .timer-text {
+        font-size: 12px;
+        color: #999;
+        font-style: italic;
+      }
+
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 3px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #999;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="dialog-overlay"
+      id="warningDialog"
+    >
+      <div class="dialog-container">
+        <div class="dialog-header">
+          <span class="dialog-title">⚠️ Important: Before Submission</span>
+          <button
+            class="dialog-close"
+            onclick="closeWarningDialog()"
+          >
+            ×
+          </button>
+        </div>
+
+        <div class="dialog-content">
+          <div class="content-section">
+            <div class="section-title">LLM Response Cleanup Required</div>
+            <div class="section-content">
+              AI models may generate extra formatting, markdown sections, or
+              incomplete content. Review your document before downloading to
+              ensure quality.
+            </div>
+          </div>
+
+          <div class="content-section">
+            <div class="section-title">Processing Time</div>
+            <div class="section-content">
+              File generation may take a few minutes depending on document size
+              and system load. Check the Files tab once processing is complete.
+            </div>
+          </div>
+        </div>
+
+        <div class="dialog-footer">
+          <div
+            class="timer-text"
+            id="timerText"
+          >
+            Auto-closes in <span id="timer">15</span> seconds
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let timerInterval = null;
+      let timeRemaining = 15;
+
+      function initializeDialog() {
+        const dialog = document.getElementById("warningDialog");
+        if (!dialog) return;
+
+        // Show dialog if not already visible
+        dialog.classList.remove("hidden");
+
+        // Reset timer
+        timeRemaining = 15;
+        updateTimer();
+
+        // Clear any existing timer
+        if (timerInterval) clearInterval(timerInterval);
+
+        // Start countdown
+        timerInterval = setInterval(() => {
+          timeRemaining--;
+          updateTimer();
+
+          if (timeRemaining <= 0) {
+            closeWarningDialog();
+          }
+        }, 1000);
+      }
+
+      function updateTimer() {
+        const timerElement = document.getElementById("timer");
+        if (timerElement) {
+          timerElement.textContent = timeRemaining;
+        }
+      }
+
+      function closeWarningDialog() {
+        const dialog = document.getElementById("warningDialog");
+        if (dialog) {
+          dialog.classList.add("hidden");
+        }
+        if (timerInterval) {
+          clearInterval(timerInterval);
+        }
+      }
+
+      // Initialize on page load
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initializeDialog);
+      } else {
+        initializeDialog();
+      }
+
+      // Allow closing on Escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeWarningDialog();
+        }
+      });
+    </script>
+  </body>
+</html>
