@@ -209,6 +209,18 @@ export const fileService = {
     return response.data;
   },
 
+  async convertMarkdownToDocx(file: File): Promise<Blob> {
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await apiClient.post(API_ENDPOINTS.MARKDOWN_TO_DOCX, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      responseType: 'blob',
+    });
+    return response.data;
+  },
+
   async checkHealth(): Promise<{ status: string; timestamp: string }> {
     const response = await apiClient.get(API_ENDPOINTS.HEALTH);
     return response.data;

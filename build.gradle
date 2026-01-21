@@ -32,6 +32,9 @@ dependencies {
 
 	implementation 'org.commonmark:commonmark:0.24.0'
 
+	// Apache POI for DOCX generation
+	implementation 'org.apache.poi:poi-ooxml:5.0.0'
+
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 

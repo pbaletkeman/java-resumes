@@ -215,7 +215,9 @@ graph TB
     ApiService -->|Parse| LLMResponse
 
     ApiService -->|Markdown Output| HtmlToPdf
+    ApiService -->|Markdown Output| MarkdownToDocx
     HtmlToPdf -->|Convert| FileSystem
+    MarkdownToDocx -->|Convert| FileSystem
 
     Controller -->|Build Response| ResponseMsg
     ResponseMsg -->|JSON| Browser
@@ -231,15 +233,15 @@ graph TB
 
 **Layer Responsibilities**:
 
-| Layer         | Components                   | Purpose                          |
-| ------------- | ---------------------------- | -------------------------------- |
-| **Client**    | Web Browser                  | User interface                   |
-| **REST**      | ResumeController             | HTTP endpoints & request routing |
-| **Service**   | FilesStorageService          | File operations abstraction      |
-| **Model**     | POJO classes                 | Data transfer & validation       |
-| **Optimizer** | ApiService, BackgroundResume | LLM integration & processing     |
-| **External**  | LLM Service                  | AI model execution               |
-| **Storage**   | File System                  | Persistent data storage          |
+| Layer         | Components                                              | Purpose                          |
+| ------------- | ------------------------------------------------------- | -------------------------------- |
+| **Client**    | Web Browser                                             | User interface                   |
+| **REST**      | ResumeController                                        | HTTP endpoints & request routing |
+| **Service**   | FilesStorageService                                     | File operations abstraction      |
+| **Model**     | POJO classes                                            | Data transfer & validation       |
+| **Optimizer** | ApiService, BackgroundResume, HtmlToPdf, MarkdownToDocx | LLM integration & processing     |
+| **External**  | LLM Service                                             | AI model execution               |
+| **Storage**   | File System                                             | Persistent data storage          |
 
 ---
 
@@ -499,6 +501,7 @@ graph LR
         DELETE["DELETE /files/{filename}<br/>Delete file"]
         DELALL["POST /delete-all<br/>Delete all"]
         MD2PDF["POST /markdownFile2PDF<br/>Convert MD to PDF"]
+        MD2DOCX["POST /markdownFile2DOCX<br/>Convert MD to DOCX"]
     end
 
     style API fill:#fff3e0
@@ -506,14 +509,15 @@ graph LR
 
 ### Key Endpoints
 
-| HTTP       | Endpoint            | Payload                                     | Response                    |
-| ---------- | ------------------- | ------------------------------------------- | --------------------------- |
-| **POST**   | `/upload`           | Multi-part form: resume, job, optimize JSON | `{"message": "generating"}` |
-| **GET**    | `/files`            | None                                        | `List<FileInfo>`            |
-| **GET**    | `/files/{filename}` | Path parameter: filename                    | File content (binary)       |
-| **DELETE** | `/files/{filename}` | Path parameter: filename                    | `{"message": "deleted"}`    |
-| **POST**   | `/delete-all`       | None                                        | `{"message": "deleted"}`    |
-| **POST**   | `/markdownFile2PDF` | Multi-part form: file                       | `{"message": "converted"}`  |
+| HTTP       | Endpoint             | Payload                                     | Response                    |
+| ---------- | -------------------- | ------------------------------------------- | --------------------------- |
+| **POST**   | `/upload`            | Multi-part form: resume, job, optimize JSON | `{"message": "generating"}` |
+| **GET**    | `/files`             | None                                        | `List<FileInfo>`            |
+| **GET**    | `/files/{filename}`  | Path parameter: filename                    | File content (binary)       |
+| **DELETE** | `/files/{filename}`  | Path parameter: filename                    | `{"message": "deleted"}`    |
+| **POST**   | `/delete-all`        | None                                        | `{"message": "deleted"}`    |
+| **POST**   | `/markdownFile2PDF`  | Multi-part form: file                       | `{"message": "converted"}`  |
+| **POST**   | `/markdownFile2DOCX` | Multi-part form: file                       | `{"message": "converted"}`  |
 
 ---
 

@@ -28,18 +28,26 @@ class ResumeControllerTest {
     }
 
     @Test
-    void test_unsuccessful_markdown_to_pdf_conversion() throws Exception {
-        // Simulate a file that will fail conversion (e.g., empty or invalid content)
+    void test_successful_markdown_to_docx_conversion() throws Exception {
+        MockMultipartFile file = new MockMultipartFile(
+                "file", "test.md", "text/markdown", "# Test Markdown\n\n## Section\n\nContent here".getBytes());
+        mockMvc.perform(multipart("/api/markdownFile2DOCX").file(file))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message").value("file successfully converted"));
+    }
+
+    @Test
+    void test_unsuccessful_markdown_to_docx_conversion() throws Exception {
         MockMultipartFile file = new MockMultipartFile(
                 "file", "bad.md", "text/markdown", new byte[0]);
-        mockMvc.perform(multipart("/api/markdownFile2PDF").file(file))
+        mockMvc.perform(multipart("/api/markdownFile2DOCX").file(file))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.message").value("No file/invalid file provided"));
     }
 
     @Test
-    void test_handles_null_file_parameter() throws Exception {
-        mockMvc.perform(multipart("/api/markdownFile2PDF"))
+    void test_handles_null_file_parameter_for_docx() throws Exception {
+        mockMvc.perform(multipart("/api/markdownFile2DOCX"))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.message").value("No file/invalid file provided"));
     }

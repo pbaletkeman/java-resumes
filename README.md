@@ -47,7 +47,8 @@ AI-powered full-stack application for resume and cover letter optimization using
 - 📊 **ATS Optimization**: Ensure resumes pass Applicant Tracking Systems
 - 🔍 **Skills Gap Analysis**: Identify missing skills and certifications
 - 📝 **Markdown to PDF**: Convert markdown documents to professional PDFs
-- 💾 **File Management**: Upload, download, and manage documents
+- � **Markdown to DOCX**: Convert markdown to Word documents for easy editing
+- �💾 **File Management**: Upload, download, and manage documents
 - 🎨 **Theme Support**: Light and dark themes with persistent preferences
 - 🚀 **Containerized**: Docker Compose for one-command deployment
 
@@ -1782,7 +1783,128 @@ All documentation files are located in [docs/](docs/):
 
 ---
 
-## 👥 Authors
+## � Documentation
+
+Comprehensive documentation for development, deployment, and operations:
+
+### Getting Started
+
+- **[Quick Build Reference](QUICK_BUILD_REFERENCE.md)** - Fast commands for common tasks
+- **[Build and Deployment Guide](docs/BUILD_AND_DEPLOYMENT.md)** - Complete workflow guide
+- **[Architecture Documentation](docs/Architecture.md)** - System design and component diagrams
+- **[Frontend Guide](frontend/README.md)** - React development setup and configuration
+- **[Backend Guide](docs/BACKEND_README.md)** - Spring Boot development setup and configuration
+
+### Build Workflows
+
+#### Quick Builds (5 minutes)
+
+```bash
+# Frontend: npm run build → dist/
+# Backend:  gradle build -x test → build/libs/*.jar
+```
+
+#### Production Builds (15 minutes)
+
+```bash
+# Frontend: scripts/build-frontend.sh (or .bat on Windows)
+# Backend:  scripts/build-backend.sh (or .bat on Windows)
+```
+
+#### Automated CI/CD
+
+- **.github/workflows/frontend-build.yml** - Triggered on frontend changes
+- **.github/workflows/backend-build.yml** - Triggered on backend changes
+- **.github/workflows/release.yml** - Manual release coordination
+
+### Release Management
+
+**Manual Release:**
+
+```bash
+scripts/release.sh        # macOS/Linux
+scripts/release.bat       # Windows
+```
+
+**Version Tags:**
+
+- Frontend: `frontend/v1.2.3`
+- Backend: `backend/v2.0.1`
+- Combined: `v1.2.3-2.0.1`
+
+### Deployment Options
+
+| Platform            | Guide                                                                    | Effort      | Time   |
+| ------------------- | ------------------------------------------------------------------------ | ----------- | ------ |
+| **Docker Compose**  | [BUILD_AND_DEPLOYMENT.md](docs/BUILD_AND_DEPLOYMENT.md#docker-compose)   | ⭐ Low      | 5 min  |
+| **Docker Solo**     | [BUILD_AND_DEPLOYMENT.md](docs/BUILD_AND_DEPLOYMENT.md#docker)           | ⭐⭐ Medium | 10 min |
+| **Kubernetes**      | [BUILD_AND_DEPLOYMENT.md](docs/BUILD_AND_DEPLOYMENT.md#kubernetes)       | ⭐⭐⭐ High | 30 min |
+| **Cloud Platforms** | [BUILD_AND_DEPLOYMENT.md](docs/BUILD_AND_DEPLOYMENT.md#cloud-deployment) | ⭐⭐ Medium | 15 min |
+| **Bare Metal**      | [BUILD_AND_DEPLOYMENT.md](docs/BUILD_AND_DEPLOYMENT.md#bare-metal)       | ⭐⭐ Medium | 20 min |
+
+### Scripts Reference
+
+Located in `scripts/` directory:
+
+| Script               | Purpose                          | Platform    |
+| -------------------- | -------------------------------- | ----------- |
+| `build-frontend.sh`  | Frontend production build        | macOS/Linux |
+| `build-frontend.bat` | Frontend production build        | Windows     |
+| `build-backend.sh`   | Backend fat JAR build            | macOS/Linux |
+| `build-backend.bat`  | Backend fat JAR build            | Windows     |
+| `release.sh`         | Version management & GitHub push | macOS/Linux |
+| `release.bat`        | Version management & GitHub push | Windows     |
+
+### Test Coverage
+
+**Frontend (React/TypeScript):**
+
+- Target: 80%+ code coverage
+- Command: `npm test -- --coverage --run`
+- Report: `frontend/coverage/`
+
+**Backend (Java/Spring Boot):**
+
+- Target: 80%+ code coverage
+- Command: `gradle test`
+- Report: `build/reports/tests/test/index.html`
+
+### Environment Configuration
+
+**Frontend (.env):**
+
+```env
+VITE_API_BASE_URL=https://api.yourdomain.com
+VITE_APP_TITLE=Resume Optimizer
+VITE_ENABLE_ANALYTICS=true
+```
+
+**Backend (application-prod.yml):**
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://host:3306/database
+  jpa:
+    hibernate:
+      ddl-auto: validate
+server:
+  port: 8080
+upload:
+  path: /data/uploads
+```
+
+### Troubleshooting Guide
+
+**Build Issues?** → [BUILD_AND_DEPLOYMENT.md#troubleshooting](docs/BUILD_AND_DEPLOYMENT.md#troubleshooting)
+
+**Deployment Issues?** → [BUILD_AND_DEPLOYMENT.md#troubleshooting](docs/BUILD_AND_DEPLOYMENT.md#troubleshooting)
+
+**Development Issues?** → Check relevant README in `docs/` or `frontend/`
+
+---
+
+## �👥 Authors
 
 ### Pete Letkeman
 
