@@ -164,7 +164,7 @@ files in the repository.
 
 ### Heading Rules
 
-**✅ DO:**
+**DO:**
 
 - Start document with single `# Title`
 - Use `##` (H2) for major sections
@@ -173,7 +173,7 @@ files in the repository.
 - Use heading hierarchy to reflect content organization
 - Include blank lines before and after headings
 
-**❌ DON'T:**
+**DON'T:**
 
 - Use multiple `#` titles in one document
 - Skip heading levels (e.g., H2 directly to H4)
@@ -233,7 +233,7 @@ markdown, plaintext, text
 
 ### Code Block Best Practices
 
-**✅ DO:**
+**DO:**
 
 - Specify the programming language (bash, java, typescript, etc.)
 - Include complete, working code examples
@@ -242,7 +242,7 @@ markdown, plaintext, text
 - Ensure examples are accurate and up-to-date
 - Add context before complex code blocks
 
-**❌ DON'T:**
+**DON'T:**
 
 - Use generic ```code blocks without language specification
 - Include incomplete or non-working code
@@ -477,7 +477,7 @@ Link to sections in other files:
 
 ### Table Rules
 
-**✅ DO:**
+**DO:**
 
 - Use pipes `|` to separate columns
 - Include header row (with separator row using hyphens)
@@ -486,7 +486,7 @@ Link to sections in other files:
 - Right-align numbers with `:---:` or `---:`
 - Center important headers with `:---:`
 
-**❌ DON'T:**
+**DON'T:**
 
 - Create tables with inconsistent column counts
 - Use single hyphens in separator row
@@ -686,7 +686,7 @@ The project README.md demonstrates:
 
 [![Badge](url)](link) - Status badges at top
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Section](#section-name)
 
@@ -809,6 +809,8 @@ The project copilot-instructions.md demonstrates:
 - [ ] Maintenance schedule documented
 - [ ] No personal notes or TODO comments
 - [ ] Ready for public/team consumption
+- [ ] All invalid unicode, emoji, and icon characters have been removed or fixed
+- [ ] All markdown linting rules have been followed
 
 ---
 
