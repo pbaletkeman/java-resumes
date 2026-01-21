@@ -254,6 +254,15 @@ public final class ApiService {
       LOGGER.error("Unable to save PDF file");
     }
 
+    // Convert markdown to DOCX
+    MarkdownToDocx mdToDocx = new MarkdownToDocx(
+        root + File.separator + fileName,
+        root + File.separator + promptType + "-" + optimize.getCompany()
+            + "-" + optimize.getJobTitle() + "-" + suffixString + ".docx", "");
+    if (!mdToDocx.convertFile()) {
+      LOGGER.error("Unable to save DOCX file");
+    }
+
     if (result.suggestion() != null && !result.suggestion().isBlank()) {
       fileName = optimize.getCompany() + "-" + optimize.getJobTitle()
           + "-" + suffixString + "-suggestions.md";

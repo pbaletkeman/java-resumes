@@ -1,0 +1,92 @@
+name: Frontend Build and Deploy
+
+on:
+  push:
+    branches: [master, develop]
+    paths:
+      - "frontend/**"
+      - ".github/workflows/frontend-build.yml"
+  pull_request:
+    branches: [master, develop]
+    paths:
+      - "frontend/**"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: "frontend/package-lock.json"
+
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm ci
+
+      - name: Run linting
+        working-directory: ./frontend
+        run: npm run lint
+        continue-on-error: true
+
+      - name: Run type checking
+        working-directory: ./frontend
+        run: npm run type-check
+
+      - name: Run tests
+        working-directory: ./frontend
+        run: npm test -- --run
+
+      - name: Build production bundle
+        working-directory: ./frontend
+        run: npm run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-build
+          path: frontend/dist/
+          retention-days: 5
+
+      - name: Archive build for deployment
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: |
+          cd frontend/dist
+          tar czf ../../frontend-dist.tar.gz .
+
+      - name: Upload to release artifacts
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-production-bundle
+          path: frontend-dist.tar.gz
+          retention-days: 30
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-build
+
+      - name: Deploy to hosting (example - customize for your platform)
+        run: |
+          echo "Frontend build ready for deployment"
+          echo "Artifact location: $(pwd)"
+          ls -la
+        continue-on-error: true

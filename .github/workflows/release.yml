@@ -1,0 +1,167 @@
+name: Full Release Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Release type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+      components:
+        description: 'Components to release'
+        required: true
+        default: 'both'
+        type: choice
+        options:
+          - frontend
+          - backend
+          - both
+
+jobs:
+  frontend-build:
+    if: ${{ github.event.inputs.components == 'frontend' || github.event.inputs.components == 'both' }}
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.frontend_version }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        cache-dependency-path: 'frontend/package-lock.json'
+
+    - name: Extract current version
+      id: version
+      working-directory: ./frontend
+      run: |
+        VERSION=$(grep '"version"' package.json | head -1 | sed 's/.*"version": "\([^"]*\)".*/\1/')
+        echo "frontend_version=$VERSION" >> $GITHUB_OUTPUT
+
+    - name: Install and build
+      working-directory: ./frontend
+      run: |
+        npm ci
+        npm run lint
+        npm run type-check
+        npm test -- --run
+        npm run build
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: frontend-${{ steps.version.outputs.frontend_version }}
+        path: frontend/dist/
+        retention-days: 30
+
+  backend-build:
+    if: ${{ github.event.inputs.components == 'backend' || github.event.inputs.components == 'both' }}
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.backend_version }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Java 25
+      uses: actions/setup-java@v4
+      with:
+        java-version: '25'
+        distribution: 'corretto'
+        cache: gradle
+
+    - name: Extract current version
+      id: version
+      run: |
+        VERSION=$(grep 'version = ' build.gradle | head -1 | sed "s/version = '\\([^']*\\)'.*/\\1/")
+        echo "backend_version=$VERSION" >> $GITHUB_OUTPUT
+
+    - name: Make gradlew executable
+      run: chmod +x gradlew
+
+    - name: Build backend
+      run: |
+        ./gradlew test -x checkstyleMain -x checkstyleTest --no-daemon
+        ./gradlew checkstyleMain checkstyleTest --no-daemon || true
+        ./gradlew build -x test -x checkstyleMain -x checkstyleTest --no-daemon
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: backend-${{ steps.version.outputs.backend_version }}
+        path: build/libs/*.jar
+        retention-days: 30
+
+  create-release:
+    needs: [frontend-build, backend-build]
+    if: always() && (needs.frontend-build.result == 'success' || needs.backend-build.result == 'success')
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Generate release notes
+      id: release
+      run: |
+        FRONTEND_VERSION=${{ needs.frontend-build.outputs.version }}
+        BACKEND_VERSION=${{ needs.backend-build.outputs.version }}
+        TIMESTAMP=$(date +'%Y-%m-%d %H:%M:%S')
+
+        echo "release_title=Release - Frontend: $FRONTEND_VERSION | Backend: $BACKEND_VERSION" >> $GITHUB_OUTPUT
+        echo "release_body=**Release Date:** $TIMESTAMP
+
+**Frontend Version:** v$FRONTEND_VERSION
+**Backend Version:** v$BACKEND_VERSION
+**Release Type:** ${{ github.event.inputs.release_type }}
+
+### Changes
+- Frontend: Production-ready build
+- Backend: Production-ready fat JAR
+
+**Build Artifacts:**
+- Frontend: Available in Actions artifacts
+- Backend: Available in Actions artifacts
+
+### Deployment
+Follow the deployment documentation in docs/ for production deployment steps." >> $GITHUB_OUTPUT
+
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ needs.frontend-build.outputs.version }}-${{ needs.backend-build.outputs.version }}
+        release_name: ${{ steps.release.outputs.release_title }}
+        body: ${{ steps.release.outputs.release_body }}
+        draft: false
+        prerelease: false
+      continue-on-error: true
+
+  notify:
+    needs: [frontend-build, backend-build, create-release]
+    if: always()
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Prepare summary
+      run: |
+        echo "## Release Pipeline Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Frontend Build:** ${{ needs.frontend-build.result }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Version: ${{ needs.frontend-build.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Backend Build:** ${{ needs.backend-build.result }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Version: ${{ needs.backend-build.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Release Creation:** ${{ needs.create-release.result }}" >> $GITHUB_STEP_SUMMARY

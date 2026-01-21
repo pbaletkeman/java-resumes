@@ -6,6 +6,7 @@ export const API_ENDPOINTS = {
   PROCESS_RESUME: '/api/process/resume',
   PROCESS_COVER_LETTER: '/api/process/cover-letter',
   MARKDOWN_TO_PDF: '/api/markdownFile2PDF',
+  MARKDOWN_TO_DOCX: '/api/markdownFile2DOCX',
   HEALTH: '/api/health',
 } as const;
 
