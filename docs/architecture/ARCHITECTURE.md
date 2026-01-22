@@ -38,41 +38,27 @@ Complete architecture documentation for the java-resumes project, covering both 
 
 ### High-Level Structure
 
-```plaintext
-┌─────────────────────────────────────────┐
-│         HTTP Client (React Frontend)    │
-└─────────────────┬───────────────────────┘
-                  │
-┌─────────────────▼───────────────────────┐
-│        Spring Boot Application          │
-├─────────────────────────────────────────┤
-│  REST Layer (Controllers)               │
-│  ├── ResumeController                   │
-│  │   ├── /upload (POST)                 │
-│  │   ├── /markdownFile2PDF (POST)      │
-│  │   ├── /files (GET)                   │
-│  │   ├── /files/{id} (GET/DELETE)      │
-│  │   └── /health (GET)                  │
-├─────────────────────────────────────────┤
-│  Business Logic Layer (Services)        │
-│  ├── FilesStorageService               │
-│  ├── ApiService (LLM Integration)      │
-│  └── Utility Functions                  │
-├─────────────────────────────────────────┤
-│  Processing Layer                       │
-│  ├── BackgroundResume (Async Thread)   │
-│  ├── HtmlToPdf (Conversion)            │
-│  └── Config (LLM Configuration)        │
-├─────────────────────────────────────────┤
-│  Data Models (DTOs)                     │
-│  ├── Optimize (Request)                │
-│  ├── FileInfo (Metadata)               │
-│  └── ResponseMessage (Wrapper)         │
-├─────────────────────────────────────────┤
-│  External Services                      │
-│  ├── LLM API (Ollama/LM Studio)        │
-│  └── Filesystem Operations              │
-└─────────────────────────────────────────┘
+```mermaid
+graph TB
+    Frontend["HTTP Client<br/>React Frontend"]
+
+    subgraph SpringApp["Spring Boot Application"]
+        REST["REST Layer - Controllers<br/>- ResumeController<br/>- /upload POST<br/>- /markdownFile2PDF POST<br/>- /files GET<br/>- /files/{id} GET/DELETE<br/>- /health GET"]
+
+        Business["Business Logic Layer<br/>- FilesStorageService<br/>- ApiService LLM Integration<br/>- Utility Functions"]
+
+        Processing["Processing Layer<br/>- BackgroundResume Async Thread<br/>- HtmlToPdf Conversion<br/>- Config LLM Configuration"]
+
+        Models["Data Models DTOs<br/>- Optimize Request<br/>- FileInfo Metadata<br/>- ResponseMessage Wrapper"]
+
+        External["External Services<br/>- LLM API Ollama/LM Studio<br/>- Filesystem Operations"]
+    end
+
+    Frontend -->|HTTP Requests| REST
+    REST --> Business
+    Business --> Processing
+    Processing --> Models
+    Models --> External
 ```
 
 ### Core Components
@@ -200,60 +186,51 @@ class FileInfo {
 
 ### Layers
 
-```
-┌─────────────────────────────────────┐
-│  Presentation Layer                 │
-│  - REST Controllers                 │
-│  - Request/Response Mapping         │
-└─────────────────────────────────────┘
-              ↓
-┌─────────────────────────────────────┐
-│  Business Logic Layer               │
-│  - Services (ApiService,            │
-│    FilesStorageService)             │
-│  - Domain Objects                   │
-│  - Business Rules                   │
-└─────────────────────────────────────┘
-              ↓
-┌─────────────────────────────────────┐
-│  Data Access Layer                  │
-│  - File System Access               │
-│  - LLM API Access                   │
-│  - External Service Integration     │
-└─────────────────────────────────────┘
+```mermaid
+graph TD
+    subgraph Presentation["Presentation Layer"]
+        Controllers["REST Controllers<br/>Request/Response Mapping"]
+    end
+
+    subgraph Business["Business Logic Layer"]
+        Services["Services<br/>ApiService<br/>FilesStorageService<br/>Domain Objects<br/>Business Rules"]
+    end
+
+    subgraph DataAccess["Data Access Layer"]
+        FileSystem["File System Access<br/>LLM API Access<br/>External Service Integration"]
+    end
+
+    Presentation -->|Delegates| Business
+    Business -->|Accesses| DataAccess
 ```
 
 ### Asynchronous Processing
 
-```
-HTTP Request
-     │
-     ▼
-ResumeController.upload()
-     │
-     ├─ Validate request
-     │
-     ├─ Save files
-     │
-     ├─ Spawn BackgroundResume thread
-     │
-     └─ Return 200 OK (immediately)
+```mermaid
+sequenceDiagram
+    participant Client as HTTP Client
+    participant Controller as ResumeController
+    participant BG as BackgroundResume
+    participant API as ApiService
+    participant LLM as LLM Service
+    participant Files as FilesStorage
 
-     ↓ (asynchronous)
+    Client->>Controller: HTTP Request
+    Controller->>Controller: Validate request
+    Controller->>Files: Save files
+    Controller->>BG: Spawn thread
+    Controller->>Client: Return 200 OK immediately
 
-BackgroundResume.run()
-     │
-     ├─ Read files
-     │
-     ├─ Call ApiService for LLM optimization
-     │
-     ├─ Process results
-     │
-     ├─ Convert to PDF if needed
-     │
-     ├─ Save output files
-     │
-     └─ Log completion/errors
+    par Background Processing
+        BG->>BG: Read files
+        BG->>API: Call LLM optimization
+        API->>LLM: Send request
+        LLM->>API: Return optimized content
+        API->>API: Process results
+        API->>Files: Convert to PDF if needed
+        Files->>BG: Save output files
+        BG->>BG: Log completion/errors
+    end
 ```
 
 ---
@@ -262,73 +239,60 @@ BackgroundResume.run()
 
 ### High-Level Structure
 
-```
-┌──────────────────────────────────┐
-│      React Application           │
-├──────────────────────────────────┤
-│  Layout Components               │
-│  ├── Navbar                      │
-│  └── Main Container              │
-├──────────────────────────────────┤
-│  Tab Management                  │
-│  ├── MainContentTab              │
-│  └── AdditionalToolsTab          │
-├──────────────────────────────────┤
-│  UI Components                   │
-│  ├── DocumentUploadForm          │
-│  ├── MarkdownToPdfForm           │
-│  ├── FileHistory                 │
-│  └── PrimeReact Components       │
-├──────────────────────────────────┤
-│  Custom Hooks                    │
-│  ├── useApi (HTTP)               │
-│  ├── useTheme (Styling)          │
-│  └── useFileManagement           │
-├──────────────────────────────────┤
-│  State Management                │
-│  ├── AppContext                  │
-│  ├── ThemeContext                │
-│  └── Local Component State       │
-├──────────────────────────────────┤
-│  Services                        │
-│  ├── API Service (Axios)         │
-│  └── Storage Service             │
-├──────────────────────────────────┤
-│  Styling                         │
-│  ├── Tailwind CSS Classes        │
-│  ├── CSS Modules                 │
-│  └── Theme Variables             │
-└──────────────────────────────────┘
-     │
-     ▼
-┌──────────────────────────────────┐
-│   Backend API (Spring Boot)      │
-└──────────────────────────────────┘
+```mermaid
+graph TB
+    subgraph React["React Application"]
+        Layout["Layout Components<br/>- Navbar<br/>- Main Container"]
+
+        Tabs["Tab Management<br/>- MainContentTab<br/>- AdditionalToolsTab"]
+
+        UI["UI Components<br/>- DocumentUploadForm<br/>- MarkdownToPdfForm<br/>- FileHistory<br/>- PrimeReact Components"]
+
+        Hooks["Custom Hooks<br/>- useApi HTTP<br/>- useTheme Styling<br/>- useFileManagement"]
+
+        State["State Management<br/>- AppContext<br/>- ThemeContext<br/>- Local Component State"]
+
+        Services["Services<br/>- API Service Axios<br/>- Storage Service"]
+
+        Styling["Styling<br/>- Tailwind CSS Classes<br/>- CSS Modules<br/>- Theme Variables"]
+    end
+
+    API["Backend API<br/>Spring Boot"]
+
+    Layout --> Tabs
+    Tabs --> UI
+    UI --> Hooks
+    Hooks --> State
+    State --> Services
+    Services --> Styling
+    Styling --> API
 ```
 
 ### Component Structure
 
-```
-App.tsx
-├── Navbar
-│   ├── Logo
-│   ├── Theme Toggle
-│   └── Navigation Links
-├── MainLayout
-│   ├── MainContentTab
-│   │   ├── DocumentUploadForm
-│   │   │   ├── Resume Upload
-│   │   │   ├── Job Description Input
-│   │   │   └── Submit Button
-│   │   └── Results Display
-│   ├── AdditionalToolsTab
-│   │   ├── MarkdownToPdfForm
-│   │   └── Other Tools
-│   └── FileHistory (Sidebar)
-│       ├── File List
-│       ├── Download Buttons
-│       └── Delete Buttons
-└── Toast Notifications
+```mermaid
+graph TD
+    App["App.tsx"]
+
+    App --> Navbar["Navbar<br/>- Logo<br/>- Theme Toggle<br/>- Navigation Links"]
+
+    App --> MainLayout["MainLayout"]
+
+    MainLayout --> MainContent["MainContentTab"]
+    MainLayout --> AdditionalTools["AdditionalToolsTab"]
+    MainLayout --> FileHistorySidebar["FileHistory<br/>Sidebar"]
+
+    MainContent --> DocForm["DocumentUploadForm<br/>- Resume Upload<br/>- Job Description<br/>- Submit Button"]
+    MainContent --> ResultsDisplay["Results Display"]
+
+    AdditionalTools --> M2PDF["MarkdownToPdfForm"]
+    AdditionalTools --> OtherTools["Other Tools"]
+
+    FileHistorySidebar --> FileList["File List"]
+    FileHistorySidebar --> DownloadBtns["Download Buttons"]
+    FileHistorySidebar --> DeleteBtns["Delete Buttons"]
+
+    App --> Toasts["Toast Notifications"]
 ```
 
 ### Custom Hooks
@@ -403,43 +367,29 @@ const useTheme = () => {
 
 ### Data Flow
 
-```
-User Action (form submission)
-     │
-     ▼
-Component Event Handler
-     │
-     ├─ Validate input
-     │
-     ├─ Call useApi hook or service
-     │
-     ├─ Set loading state
-     │
-     └─ Send HTTP request
+```mermaid
+sequenceDiagram
+    participant User as User
+    participant UI as React Component
+    participant Hook as Custom Hook/Service
+    participant API as Backend API
+    participant State as State Management
 
-     ▼ (async)
+    User->>UI: Form Submission
+    UI->>Hook: Call useApi or Service
 
-Backend API
-     │
-     ├─ Process request
-     │
-     ├─ Trigger async processing if needed
-     │
-     └─ Return response
+    par Frontend Validation
+        Hook->>Hook: Validate Input
+    end
 
-     ▼
-Response Handler
-     │
-     ├─ Check for errors
-     │
-     ├─ Update state with response
-     │
-     ├─ Clear loading state
-     │
-     └─ Display results or error message
+    par API Call
+        Hook->>API: HTTP Request
+        API->>Hook: Response
+    end
 
-     ▼
-Component Re-render with new state
+    Hook->>State: Update State
+    State->>UI: Trigger Re-render
+    UI->>User: Display Results
 ```
 
 ### Component Types
@@ -469,54 +419,40 @@ Component Re-render with new state
 
 ### Document Processing Flow
 
-```
-┌─────────────────────────────────────────┐
-│  Frontend User Interface                │
-│  - DocumentUploadForm                   │
-│  - File selection                       │
-│  - Job description input                │
-│  - Submit button                        │
-└────────────────┬────────────────────────┘
-                 │
-                 │ POST /upload
-                 │ (resume, job_description, etc.)
-                 ▼
-┌─────────────────────────────────────────┐
-│  Backend - ResumeController             │
-│  1. Validate request                    │
-│  2. Save files                          │
-│  3. Spawn BackgroundResume              │
-│  4. Return 200 OK with job ID           │
-└────────────────┬────────────────────────┘
-                 │
-                 │ (immediate response)
-                 ▼
-┌─────────────────────────────────────────┐
-│  Frontend                               │
-│  - Show processing status               │
-│  - Poll for results or wait for message │
-└─────────────────────────────────────────┘
+```mermaid
+sequenceDiagram
+    participant FE as Frontend UI
+    participant Controller as ResumeController
+    participant BG as BackgroundResume
+    participant LLM as LLM Service
+    participant Storage as File Storage
+    participant FEPoll as Frontend Polling
 
-                 ▼ (Background Process)
+    FE->>Controller: POST /upload<br/>resume, job_description
 
-┌─────────────────────────────────────────┐
-│  Backend - BackgroundResume             │
-│  1. Read uploaded files                 │
-│  2. Call ApiService for LLM             │
-│  3. LLM optimizes resume                │
-│  4. Convert to PDF if needed            │
-│  5. Save results                        │
-│  6. Notify frontend (WebSocket/polling) │
-└─────────────────────────────────────────┘
-                 │
-                 │ Results available
-                 ▼
-┌─────────────────────────────────────────┐
-│  Frontend                               │
-│  - Display optimized content            │
-│  - Show download links                  │
-│  - Add to file history                  │
-└─────────────────────────────────────────┘
+    par Backend Processing
+        Controller->>Controller: Validate request
+        Controller->>Storage: Save uploaded files
+        Controller->>BG: Spawn async thread
+        Controller->>FE: 200 OK (immediate)
+    end
+
+    FE->>FE: Show processing status
+    FEPoll->>Storage: Poll GET /files
+
+    par Background Processing
+        BG->>BG: Read files
+        BG->>LLM: Call LLM API
+        LLM->>BG: Return optimization
+        BG->>Storage: Convert to PDF
+        Storage->>BG: Save results
+    end
+
+    FEPoll->>Storage: Detect new files
+    Storage->>FEPoll: Return file list
+    FEPoll->>FE: Display results
+    FE->>FE: Show download links
+    FE->>FE: Add to file history
 ```
 
 ### API Contracts
@@ -567,34 +503,27 @@ Component Re-render with new state
 
 ### Development Environment
 
-```
-Local Machine
-├── Backend: ./gradlew bootRun (port 8080)
-├── Frontend: npm run dev (port 5173)
-└── LLM: Ollama/LM Studio (local or remote)
+```mermaid
+graph TD
+    Dev["Local Machine"]
+
+    Dev --> Backend["Backend<br/>./gradlew bootRun<br/>Port 8080"]
+    Dev --> Frontend["Frontend<br/>npm run dev<br/>Port 5173"]
+    Dev --> LLM["LLM Service<br/>Ollama / LM Studio<br/>Local or Remote"]
 ```
 
 ### Production Environment
 
-```plaintext
-┌───────────────────────────────────────┐
-│  Load Balancer / Reverse Proxy        │
-│  (Nginx/HAProxy)                      │
-└─────────────────┬─────────────────────┘
-                  │
-        ┌─────────┴─────────┐
-        │                   │
-┌───────▼─────────┐  ┌──────▼─────────┐
-│  Backend        │  │  Frontend      │
-│  Instance 1     │  │  (Static)      │
-│  (Spring Boot)  │  │                │
-└─────────────────┘  └────────────────┘
-         │
-   ┌─────▴────┬──────────────┐
-   │          │              │
-   ▼          ▼              ▼
-Filesystem  LLM API    Database (optional)
-Storage     (Ollama)
+```mermaid
+graph TB
+    LB["Load Balancer / Reverse Proxy<br/>Nginx / HAProxy"]
+
+    LB -->|Route| BackendInstance["Backend Instance<br/>Spring Boot<br/>Port 8080"]
+    LB -->|Route| FrontendStatic["Frontend<br/>Static Files<br/>Port 80"]
+
+    BackendInstance --> FileStorage["Filesystem Storage<br/>Uploaded Documents<br/>Generated Files"]
+    BackendInstance --> LLMService["LLM API<br/>Ollama / LM Studio<br/>OpenAI Compatible"]
+    BackendInstance --> Database["Database<br/>Optional<br/>Metadata Storage"]
 ```
 
 ### Container Deployment
@@ -628,7 +557,7 @@ EXPOSE 80
 
 ### Backend
 
-- **JDK**: Java 15 LTS (Corretto)
+- **JDK**: Java 25 LTS (Corretto)
 - **Framework**: Spring Boot 3.5.1
 - **Build**: Gradle 8.7
 - **Testing**: JUnit 5, Mockito

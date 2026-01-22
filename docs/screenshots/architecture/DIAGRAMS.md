@@ -2,235 +2,235 @@
 
 This directory contains architecture diagrams and visual representations of the java-resumes system.
 
-## 📊 Diagrams Included
+## � Table of Contents
+
+1. [System Architecture](#system-architecture)
+2. [Component Architecture](#component-architecture)
+3. [Data Flow Diagram](#data-flow-diagram)
+4. [Deployment Architecture](#deployment-architecture)
+5. [Docker Compose Structure](#docker-compose-structure)
+6. [Request/Response Flow](#request-response-flow)
+7. [Backend Component Dependencies (UML)](#backend-component-dependencies-uml)
+8. [Frontend Component Dependencies (UML)](#frontend-component-dependencies-uml)
+9. [Authentication & Security](#authentication--security)
+10. [Scalability Patterns](#scalability-patterns)
+
+---
+
+## �📊 Diagrams Included
 
 ### System Architecture
 
-```plaintext
-┌─────────────────────────────────────────────────────────────┐
-│                    Java Resumes System                      │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+graph TB
+    subgraph Frontend["Frontend Layer"]
+        React["React 19.2.0<br/>TypeScript 5.9.3<br/>PrimeReact 10.9.7<br/>Vite 7.2.4<br/>Port: 5173/3173"]
+        Components["Components<br/>- MainContentTab<br/>- AdditionalTools<br/>- FileHistory<br/>- Settings"]
+    end
 
-┌──────────────────────┐        ┌──────────────────────┐
-│  Frontend Layer      │        │  Backend Layer       │
-│  ────────────────    │        │  ──────────────      │
-│                      │        │                      │
-│  React 19.2.0        │◄──────►│  Spring Boot 3.5.1   │
-│  TypeScript 5.9.3    │        │  Java 17 LTS         │
-│  PrimeReact 10.9.7   │        │  Gradle 8.7          │
-│  Vite 7.2.4          │        │                      │
-│  Port: 5173          │        │  Port: 8080          │
-│  (Development)       │        │  ────────────────    │
-│  3173 (Production)   │        │                      │
-│                      │        │  Controllers         │
-│  ────────────────    │        │  Services            │
-│  Main Components:    │        │  Models              │
-│  - MainContentTab    │        │  ────────────────    │
-│  - AdditionalTools   │        │  API Endpoints:      │
-│  - FileHistory       │        │  - POST /upload      │
-│  - Settings/Theme    │        │  - GET /files        │
-│  - ApiClient (Hooks) │        │  - DELETE /files     │
-└──────────────────────┘        └──────────────────────┘
-          │                               │
-          │                               │
-          └───────────────────┬───────────┘
-                              │
-                    REST API (JSON)
-                    HTTP/HTTPS
-                              │
-          ┌───────────────────┴───────────────────┐
-          │                                       │
-    ┌─────▼──────┐                         ┌──────▼──────┐
-    │  LLM Service│                         │ File Storage │
-    │  ─────────  │                         │ ────────────│
-    │             │                         │             │
-    │ Ollama      │                         │ Local FS    │
-    │ LM Studio   │                         │ Upload Dir  │
-    │ OpenAI API  │                         │ /uploads    │
-    │             │                         │             │
-    │ Port: 11434 │                         │ Management: │
-    │ (local)     │                         │ - Save      │
-    │             │                         │ - Delete    │
-    │ Returns:    │                         │ - List      │
-    │ - Resume    │                         │             │
-    │ - Cover     │                         └─────────────┘
-    │ - Analysis  │
-    └─────────────┘
+    subgraph Backend["Backend Layer"]
+        SpringBoot["Spring Boot 3.5.1<br/>Java 17 LTS<br/>Gradle 8.7<br/>Port: 8080"]
+        Controllers["Controllers<br/>Services<br/>Models<br/>API Endpoints"]
+    end
+
+    subgraph External["External Services"]
+        LLM["LLM Service<br/>Ollama/LM Studio<br/>OpenAI API<br/>Port: 11434"]
+        FileStorage["File Storage<br/>Local FS<br/>Upload Dir<br/>Save/Delete/List"]
+    end
+
+    Frontend <-->|REST API JSON<br/>HTTP/HTTPS| Backend
+    Backend <-->|LLM Requests| LLM
+    Backend <-->|File Operations| FileStorage
 ```
 
 ### Component Architecture
 
 **Frontend Components**:
 
-```shell
-App (Root)
-├── AppHeader
-│   └── ThemeToggle
-├── MainContentArea
-│   ├── MainContentTab
-│   │   ├── JobDescriptionInput
-│   │   ├── ResumeInput
-│   │   ├── PromptTypeSelector
-│   │   ├── TemperatureSlider
-│   │   ├── ModelSelector
-│   │   ├── ProcessButton
-│   │   └── OutputPreview
-│   └── AdditionalToolsTab
-│       ├── MarkdownInput
-│       ├── ConvertButton
-│       └── PdfPreview
-└── FileHistory
-    ├── FileList
-    │   └── FileItem
-    │       ├── DownloadBtn
-    │       └── DeleteBtn
-    └── ClearAllBtn
+```mermaid
+graph TD
+    App["App Root"]
+    Header["AppHeader"]
+    Theme["ThemeToggle"]
+    Content["MainContentArea"]
+
+    Tab1["MainContentTab"]
+    JobDesc["JobDescriptionInput"]
+    Resume["ResumeInput"]
+    PromptType["PromptTypeSelector"]
+    Temp["TemperatureSlider"]
+    Model["ModelSelector"]
+    Process["ProcessButton"]
+    Output["OutputPreview"]
+
+    Tab2["AdditionalToolsTab"]
+    MarkdownIn["MarkdownInput"]
+    Convert["ConvertButton"]
+    PdfPreview["PdfPreview"]
+
+    History["FileHistory"]
+    List["FileList"]
+    Item["FileItem"]
+    Download["DownloadBtn"]
+    Delete["DeleteBtn"]
+    ClearAll["ClearAllBtn"]
+
+    App --> Header
+    App --> Content
+    App --> History
+    Header --> Theme
+    Content --> Tab1
+    Content --> Tab2
+    Tab1 --> JobDesc
+    Tab1 --> Resume
+    Tab1 --> PromptType
+    Tab1 --> Temp
+    Tab1 --> Model
+    Tab1 --> Process
+    Tab1 --> Output
+    Tab2 --> MarkdownIn
+    Tab2 --> Convert
+    Tab2 --> PdfPreview
+    History --> List
+    List --> Item
+    Item --> Download
+    Item --> Delete
+    History --> ClearAll
 ```
 
 **Backend Components**:
 
-```shell
-RestServiceApplication (Spring Boot)
-├── ResumeController (REST Endpoints)
-│   ├── /upload (POST)
-│   ├── /files (GET)
-│   ├── /files/{id} (GET, DELETE)
-│   └── /markdownFile2PDF (POST)
-├── ResumeService (Business Logic)
-│   ├── Optimization Logic
-│   ├── File Processing
-│   └── Response Formatting
-├── ApiService (LLM Integration)
-│   ├── HTTP Client
-│   ├── Request Building
-│   ├── Response Parsing
-│   └── Error Handling
-└── FilesStorageService (File Operations)
-    ├── Save Files
-    ├── Load Files
-    ├── Delete Files
-    └── List Files
+```mermaid
+graph TD
+    App["RestServiceApplication<br/>Spring Boot"]
+
+    Controller["ResumeController<br/>REST Endpoints"]
+    Upload["/upload POST"]
+    Files["/files GET"]
+    FilesId["/files/{id}<br/>GET/DELETE"]
+    Markdown["/markdownFile2PDF POST"]
+
+    Service["ResumeService<br/>Business Logic"]
+    OptLogic["Optimization Logic"]
+    FileProc["File Processing"]
+    Response["Response Formatting"]
+
+    Api["ApiService<br/>LLM Integration"]
+    HttpClient["HTTP Client"]
+    BuildReq["Request Building"]
+    ParseResp["Response Parsing"]
+    ErrorHandle["Error Handling"]
+
+    Storage["FilesStorageService<br/>File Operations"]
+    Save["Save Files"]
+    Load["Load Files"]
+    Delete["Delete Files"]
+    List["List Files"]
+
+    App --> Controller
+    App --> Service
+    App --> Api
+    App --> Storage
+
+    Controller --> Upload
+    Controller --> Files
+    Controller --> FilesId
+    Controller --> Markdown
+
+    Service --> OptLogic
+    Service --> FileProc
+    Service --> Response
+
+    Api --> HttpClient
+    Api --> BuildReq
+    Api --> ParseResp
+    Api --> ErrorHandle
+
+    Storage --> Save
+    Storage --> Load
+    Storage --> Delete
+    Storage --> List
 ```
 
 ### Data Flow Diagram
 
-```plaintext
-User Interaction:
-1. User enters job description (text or upload)
-2. User enters resume (text or upload)
-3. User selects optimization type (Resume/CoverLetter)
-4. User adjusts parameters (temperature, model)
-5. User clicks "Process" button
-   │
-   ▼
-Frontend Validation & Submission:
-1. Validate inputs (non-empty, valid format)
-2. Build FormData with files
-3. Send POST /upload request to backend
-   │
-   ▼
-Backend Processing:
-1. Receive request at ResumeController
-2. Validate files and parameters
-3. Save uploaded files to storage
-4. Create optimization request
-5. Pass to BackgroundResume thread
-   │
-   ▼
-Async Background Processing:
-1. Read optimization parameters
-2. Call ApiService.produceFiles()
-3. Build LLM request:
-   - Select model from config
-   - Build system prompt
-   - Add job description context
-   - Add resume content
-   - Set temperature parameter
-   │
-   ▼
-LLM Service Communication:
-1. Send HTTP request to LLM endpoint
-2. Format: OpenAI-compatible API
-3. Wait for LLM response
-4. Parse response JSON
-5. Extract generated content
-   │
-   ▼
-Output Generation:
-1. Format response data
-2. Generate PDF from content
-3. Save generated files to storage
-4. Update status/metadata
-   │
-   ▼
-Response & Storage:
-1. Store generated resume/cover letter
-2. Return file location
-3. Frontend polls for completion
-4. Display results to user
-   │
-   ▼
-User Download:
-1. View generated documents
-2. Download as PDF
-3. Download as Markdown
-4. Manage files (delete, etc.)
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    participant BackgroundThread
+    participant ApiService
+    participant LLMService
+    participant FileStorage
+
+    User->>Frontend: 1. Enter job description & resume
+    User->>Frontend: 2. Select optimization type
+    User->>Frontend: 3. Adjust parameters
+    User->>Frontend: 4. Click Process
+
+    Frontend->>Frontend: Validate inputs
+    Frontend->>Frontend: Build FormData
+    Frontend->>Backend: POST /upload
+
+    Backend->>Backend: Validate files & parameters
+    Backend->>FileStorage: Save uploaded files
+    Backend->>BackgroundThread: Spawn async thread
+    Backend->>Frontend: Return 200/202
+
+    BackgroundThread->>ApiService: Call produceFiles()
+    ApiService->>ApiService: Build LLM request
+    ApiService->>LLMService: Send OpenAI-compatible request
+    LLMService->>ApiService: Return optimized content
+
+    ApiService->>ApiService: Generate PDF
+    ApiService->>FileStorage: Save generated files
+
+    Frontend->>Backend: Poll GET /files
+    Backend->>Frontend: Return file list with results
+
+    Frontend->>User: Display optimized documents
+    User->>Frontend: Download PDF/Markdown
+    User->>Frontend: Manage files (delete, etc.)
 ```
 
 ### Deployment Architecture
 
-```plaintext
-┌──────────────────────────────────────────────────────────┐
-│              Docker Compose Environment                  │
-└──────────────────────────────────────────────────────────┘
+```mermaid
+graph TB
+    Host["Host Machine"]
 
-┌─────────────────────┐         ┌─────────────────────┐
-│  Backend Container  │         │ Frontend Container  │
-│  ─────────────────  │         │ ─────────────────   │
-│                     │         │                     │
-│ Base Image:         │         │ Base Image:         │
-│ gradle:8.7-jdk17    │         │ node:18-alpine      │
-│ (build stage)       │         │                     │
-│                     │         │ Build: npm run build│
-│ Runtime:            │         │                     │
-│ eclipse-temurin:    │         │ Server: nginx       │
-│ 17-jre-alpine       │         │                     │
-│                     │         │ Exposes:            │
-│ Port: 8080          │◄────────│ Port: 80 (nginx)    │
-│ Java App:           │ REST API│ Maps to: 5173 (dev) │
-│ app.jar             │         │ Maps to: 3173 (prod)│
-│                     │         │                     │
-│ Environment:        │         │ Environment:        │
-│ JAVA_OPTS           │         │ REACT_APP_API_URL   │
-│ Spring Profile      │         │                     │
-│                     │         │                     │
-│ Volumes:            │         │ Volumes:            │
-│ /app/uploads/       │         │ (build output)      │
-│ (file storage)      │         │                     │
-└─────────────────────┘         └─────────────────────┘
-         │                              │
-         ▼                              ▼
-    ┌────────────────────────────────────┐
-    │    Docker Network: java-resumes    │
-    │    (containers communicate)        │
-    └────────────────────────────────────┘
-         │
-         ▼
-    ┌─────────────────┐
-    │  Host Machine   │
-    │  ─────────────  │
-    │                 │
-    │  Ports:         │
-    │  8080→8080      │
-    │  (backend)      │
-    │                 │
-    │  80→80          │
-    │  (frontend)     │
-    │                 │
-    │  Volumes:       │
-    │  ./uploads/     │
-    │  (file sync)    │
-    └─────────────────┘
+    subgraph DockerNetwork["Docker Network: java-resumes"]
+        subgraph Backend["Backend Container"]
+            BuildStage["Build Stage<br/>gradle:8.7-jdk17"]
+            BackendRuntime["Runtime<br/>eclipse-temurin:17-jre-alpine<br/>Port: 8080<br/>Java App: app.jar"]
+            BackendEnv["Environment<br/>JAVA_OPTS<br/>Spring Profile"]
+            BackendVolume["Volumes<br/>/app/uploads/"]
+        end
+
+        subgraph Frontend["Frontend Container"]
+            FrontendBuild["Build<br/>node:18-alpine<br/>npm run build"]
+            FrontendServer["Server<br/>nginx<br/>Port: 80"]
+            FrontendPorts["Port Mapping<br/>80→5173 dev<br/>80→3173 prod"]
+            FrontendEnv["Environment<br/>REACT_APP_API_URL"]
+        end
+    end
+
+    BuildStage --> BackendRuntime
+    BackendRuntime --> BackendEnv
+    BackendRuntime --> BackendVolume
+
+    FrontendBuild --> FrontendServer
+    FrontendServer --> FrontendPorts
+    FrontendServer --> FrontendEnv
+
+    BackendRuntime <-->|REST API| FrontendServer
+
+    Host --> DockerNetwork
+    Host --> BackendVolume
+
+    Host -.->|Port 8080| BackendRuntime
+    Host -.->|Port 80| FrontendServer
 ```
 
 ### Docker Compose Structure
@@ -274,86 +274,306 @@ networks:
 
 ## 📈 Request/Response Flow
 
-```plaintext
-┌─────────────────────────────────────────────────────────┐
-│           Resume Optimization Request Flow              │
-└─────────────────────────────────────────────────────────┘
+```mermaid
+sequenceDiagram
+    participant Frontend as Frontend<br/>Client
+    participant HTTP as HTTP POST<br/>/upload
+    participant Backend as Backend<br/>Processing
+    participant BG as Background<br/>Thread
+    participant LLM as LLM Service<br/>Ollama/OpenAI
+    participant Storage as File<br/>Storage
+    participant Poll as HTTP GET<br/>/files
 
-CLIENT REQUEST (Frontend):
-{
-  "jobDescription": "We are seeking...",
-  "resume": "John Doe, Senior Developer...",
-  "promptType": ["Resume", "CoverLetter"],
-  "temperature": 0.7,
-  "model": "mistral"
-}
+    Frontend->>Frontend: Build Request:<br/>{jobDescription, resume,<br/>promptType, temperature,<br/>model}
 
-   │
-   ▼ HTTP POST /upload
+    Frontend->>HTTP: Send FormData
+    HTTP->>Backend: Receive Request
 
-BACKEND PROCESSING:
-1. Validate and extract files
-2. Save to /uploads/
-3. Queue background job
-4. Return immediate response
+    Backend->>Backend: 1. Validate files<br/>2. Extract parameters
+    Backend->>Storage: 3. Save uploaded files
+    Backend->>BG: 4. Spawn async thread
+    Backend->>Frontend: Return 200/202:<br/>{message: "Processing started",<br/>jobId: "abc123"}
 
-IMMEDIATE RESPONSE:
-{
-  "message": "Processing started",
-  "jobId": "abc123def456"
-}
+    par Background Processing
+        BG->>BG: 1. Read parameters
+        BG->>BG: 2. Build LLM prompt
+        BG->>LLM: 3. Send request
+        LLM->>BG: Return: {choices,<br/>usage: {prompt_tokens,<br/>completion_tokens}}
+        BG->>BG: 4. Parse response
+        BG->>Storage: 5. Generate & save PDF
+    end
 
-   │
-   ▼ Poll GET /files
+    Frontend->>Poll: Poll GET /files
+    Storage->>Frontend: Return file list:<br/>{files: [{filename,<br/>url, size, type}]}
 
-BACKGROUND PROCESSING:
-1. Read job parameters
-2. Build LLM prompt
-3. Send to LLM service
-4. Parse response
-5. Generate PDF
-6. Save results
+    Frontend->>Frontend: Display:<br/>- resume_optimized.pdf<br/>- coverletter_generated.pdf
+    Frontend->>User: Ready for download
+```
 
-   │
-   ▼ When complete
+---
 
-LLM RESPONSE (from Ollama/OpenAI):
-{
-  "choices": [{
-    "message": {
-      "content": "Optimized resume content..."
+## Backend Component Dependencies (UML)
+
+```mermaid
+classDiagram
+    class RestServiceApplication {
+        +main(String[] args) void
+        +init() void
     }
-  }],
-  "usage": {
-    "prompt_tokens": 245,
-    "completion_tokens": 156
-  }
-}
 
-   │
-   ▼ Generate outputs
+    class ResumeController {
+        -FilesStorageService filesStorageService
+        -ApiService apiService
+        +optimizeResume(MultipartFile, String) ResponseEntity
+        +file2PDF(String) ResponseEntity
+        +getListFiles() ResponseEntity
+        +getFile(String) ResponseEntity
+        +deleteFile(String) ResponseEntity
+        +healthCheck() ResponseEntity
+        -validate(Optimize) boolean
+        -spawn(BackgroundResume) void
+    }
 
-GENERATED FILES:
-├── resume_optimized.md
-├── resume_optimized.pdf
-├── coverletter_generated.md
-└── coverletter_generated.pdf
+    class BackgroundResume {
+        -Optimize optimize
+        -String root
+        +run() void
+        -processOptimization() void
+        -logResults() void
+    }
 
-   │
-   ▼ File response
+    class ApiService {
+        -String endpoint
+        -String apiKey
+        -String model
+        +produceFiles(String, String, Optimize) String
+        -createChatBody(String, String) ChatBody
+        -sendHttpRequest(ChatBody) LLMResponse
+        -parseResponse(LLMResponse) String
+        -handleError(Exception) void
+    }
 
-FILE LIST RESPONSE:
-{
-  "files": [
-    {
-      "filename": "resume_optimized.pdf",
-      "url": "/files/resume_optimized.pdf",
-      "size": 245120,
-      "type": "pdf"
-    },
-    ...
-  ]
-}
+    class FilesStorageService {
+        -Path rootLocation
+        +save(MultipartFile) void
+        +load(String) Resource
+        +delete(String) void
+        +loadAll() Stream<Path>
+        +init() void
+    }
+
+    class HtmlToPdf {
+        +convertMarkdownToPdf(String) byte[]
+        +convertHtmlToPdf(String) byte[]
+        -renderDocument(Document) byte[]
+    }
+
+    class Config {
+        -String endpoint
+        -String apikey
+        -String model
+        +loadFromJson(String) Config
+    }
+
+    class Optimize {
+        -String resume
+        -String jobDescription
+        -String coverLetter
+        -String outputType
+        -double temperature
+        -String model
+        +getResume() String
+        +getJobDescription() String
+    }
+
+    class FileInfo {
+        -String filename
+        -String url
+        -long size
+        -String type
+        +getFilename() String
+        +getUrl() String
+    }
+
+    class ResponseMessage {
+        -String message
+        +getMessage() String
+        +setMessage(String) void
+    }
+
+    class Utility {
+        +readFileAsString(String) String
+        +validateFile(MultipartFile) boolean
+        +sanitizeFilename(String) String
+    }
+
+    RestServiceApplication --> ResumeController
+    RestServiceApplication --> FilesStorageService
+    RestServiceApplication --> ApiService
+
+    ResumeController --> BackgroundResume
+    ResumeController --> FilesStorageService
+    ResumeController --> ApiService
+    ResumeController --> Optimize
+    ResumeController --> FileInfo
+    ResumeController --> ResponseMessage
+
+    BackgroundResume --> ApiService
+    BackgroundResume --> FilesStorageService
+    BackgroundResume --> Optimize
+    BackgroundResume --> HtmlToPdf
+
+    ApiService --> Config
+    ApiService --> HtmlToPdf
+
+    FilesStorageService --> FileInfo
+
+    HtmlToPdf --> Utility
+```
+
+---
+
+## Frontend Component Dependencies (UML)
+
+```mermaid
+classDiagram
+    class App {
+        -useTheme()
+        -useApi()
+        +render() JSX
+    }
+
+    class Navbar {
+        -theme: string
+        -toggleTheme() void
+        +render() JSX
+    }
+
+    class MainLayout {
+        -activeTab: string
+        -loading: boolean
+        +setActiveTab(string) void
+        +render() JSX
+    }
+
+    class MainContentTab {
+        -resume: string
+        -jobDescription: string
+        -outputType: string
+        -temperature: number
+        -useApi()
+        +handleSubmit() void
+        +render() JSX
+    }
+
+    class DocumentUploadForm {
+        -formData: FormData
+        -loading: boolean
+        -error: string
+        +handleUpload() void
+        +handleChange() void
+        +render() JSX
+    }
+
+    class FileHistory {
+        -files: FileInfo[]
+        -loading: boolean
+        -useApi(endpoint)
+        +loadFiles() void
+        +handleDelete(id) void
+        +handleDownload(id) void
+        +render() JSX
+    }
+
+    class AdditionalToolsTab {
+        -markdown: string
+        -pdfPreview: Blob
+        -useApi()
+        +handleConvert() void
+        +render() JSX
+    }
+
+    class MarkdownToPdfForm {
+        -markdown: string
+        -converted: boolean
+        +handleConvert() void
+        +render() JSX
+    }
+
+    class ThemeToggle {
+        -theme: string
+        +toggleTheme() void
+        +render() JSX
+    }
+
+    class useApi {
+        -data: any
+        -loading: boolean
+        -error: string
+        +execute(payload) Promise
+        +reset() void
+    }
+
+    class useTheme {
+        -theme: string
+        +toggleTheme() void
+        +setTheme(string) void
+    }
+
+    class ApiService {
+        -baseURL: string
+        +uploadResume(formData) Promise
+        +convertToPdf(markdown) Promise
+        +getFiles() Promise
+        +deleteFile(id) Promise
+        +downloadFile(filename) void
+    }
+
+    class AppContext {
+        -files: FileInfo[]
+        -loading: boolean
+        +setFiles(FileInfo[]) void
+        +setLoading(boolean) void
+    }
+
+    class ThemeContext {
+        -theme: string
+        -colors: object
+        +toggleTheme() void
+        +getColors() object
+    }
+
+    App --> Navbar
+    App --> MainLayout
+    App --> ThemeToggle
+    App --> AppContext
+    App --> ThemeContext
+
+    Navbar --> ThemeToggle
+    Navbar --> useTheme
+
+    MainLayout --> MainContentTab
+    MainLayout --> AdditionalToolsTab
+    MainLayout --> FileHistory
+
+    MainContentTab --> DocumentUploadForm
+    MainContentTab --> useApi
+    MainContentTab --> ApiService
+
+    DocumentUploadForm --> useApi
+
+    FileHistory --> useApi
+    FileHistory --> ApiService
+    FileHistory --> AppContext
+
+    AdditionalToolsTab --> MarkdownToPdfForm
+    AdditionalToolsTab --> useApi
+    AdditionalToolsTab --> ApiService
+
+    MarkdownToPdfForm --> useApi
+
+    useApi --> ApiService
+    useTheme --> ThemeContext
 ```
 
 ---
@@ -382,30 +602,66 @@ Production Considerations:
 
 ### Horizontal Scaling
 
-```plaintext
-Load Balancer
-     │
-     ├─► Backend Instance 1
-     ├─► Backend Instance 2
-     └─► Backend Instance 3
+```mermaid
+graph LR
+    LB["Load Balancer"]
 
-Shared:
-├─► File Storage (NFS/S3)
-├─► Database (if added)
-└─► Cache (if added)
+    subgraph Backend["Backend Instances"]
+        B1["Backend 1<br/>Port 8080"]
+        B2["Backend 2<br/>Port 8080"]
+        B3["Backend 3<br/>Port 8080"]
+    end
+
+    subgraph Shared["Shared Resources"]
+        FS["File Storage<br/>NFS/S3"]
+        DB["Database<br/>Optional"]
+        Cache["Cache<br/>Redis/Optional"]
+    end
+
+    LB --> B1
+    LB --> B2
+    LB --> B3
+
+    B1 --> FS
+    B2 --> FS
+    B3 --> FS
+
+    B1 --> DB
+    B2 --> DB
+    B3 --> DB
+
+    B1 --> Cache
+    B2 --> Cache
+    B3 --> Cache
 ```
 
 ### Message Queue Pattern
 
-```plaintext
-Frontend ──► REST API ──► Message Queue
-                          │
-                          ├─► Worker 1
-                          ├─► Worker 2
-                          └─► Worker 3
+```mermaid
+graph LR
+    Frontend["Frontend"]
+    API["REST API"]
+    Queue["Message Queue<br/>Job Queue"]
 
-Each worker processes optimization jobs
-independently and updates shared storage.
+    subgraph Workers["Worker Pool"]
+        W1["Worker 1<br/>Process Jobs"]
+        W2["Worker 2<br/>Process Jobs"]
+        W3["Worker 3<br/>Process Jobs"]
+    end
+
+    Storage["Shared Storage<br/>Results"]
+
+    Frontend -->|Submit| API
+    API -->|Enqueue| Queue
+    Queue -->|Dequeue| W1
+    Queue -->|Dequeue| W2
+    Queue -->|Dequeue| W3
+
+    W1 -->|Update| Storage
+    W2 -->|Update| Storage
+    W3 -->|Update| Storage
+
+    Storage -->|Poll| Frontend
 ```
 
 ---
