@@ -127,7 +127,7 @@ export const ModelSettings: React.FC = () => {
 
   return (
     <Card className="h-full">
-      <div className="flex flex-column gap-4 w-full">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
         <div>
           <h2 className="text-2xl font-bold mb-2">AI Model Management</h2>
           <p className="text-gray-600">
@@ -137,7 +137,7 @@ export const ModelSettings: React.FC = () => {
         </div>
 
         {/* Models Table */}
-        <div>
+        <div style={{ width: '100%' }}>
           <h3 className="font-bold mb-3">Available Models ({models.length})</h3>
           <DataTable value={models} stripedRows responsiveLayout="scroll">
             <Column field="label" header="Display Name" />
@@ -152,10 +152,18 @@ export const ModelSettings: React.FC = () => {
           onHide={() => setShowDialog(false)}
           header="Add New Model"
           modal
-          style={{ width: '50vw' }}
+          style={{ width: '40vw', height: '5vw' }}
         >
-          <div className="flex flex-column gap-4">
-            <div>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '1rem',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <div style={{ padding: '10px', flex: 1 }}>
               <label className="block mb-2 font-bold">Display Name *</label>
               <InputText
                 value={newLabel}
@@ -164,7 +172,7 @@ export const ModelSettings: React.FC = () => {
                 className="w-full"
               />
             </div>
-            <div>
+            <div style={{ padding: '10px', flex: 1 }}>
               <label className="block mb-2 font-bold">Model ID/Value *</label>
               <InputText
                 value={newValue}
@@ -173,7 +181,14 @@ export const ModelSettings: React.FC = () => {
                 className="w-full"
               />
             </div>
-            <div className="flex gap-2">
+            <div
+              style={{
+                display: 'flex',
+                gap: '1rem',
+                padding: '10px',
+                flex: 1,
+              }}
+            >
               <Button label="Add Model" onClick={addModel} className="flex-1" />
               <Button
                 label="Cancel"
@@ -186,35 +201,43 @@ export const ModelSettings: React.FC = () => {
         </Dialog>
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap gap-2">
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '0.5rem',
+            width: '100%',
+            flexWrap: 'wrap',
+          }}
+        >
           <Button
             label="Add Model"
             icon="pi pi-plus"
             onClick={() => setShowDialog(true)}
-            className="flex-1"
+            style={{ flex: 1 }}
           />
-          <Button
+          {/* <Button
             label="Export Models"
             icon="pi pi-download"
             onClick={exportModels}
             severity="info"
-            className="flex-1"
+            style={{ flex: 1 }}
           />
-          <label className="flex-1">
+          <label style={{ flex: 1 }}>
             <Button
               label="Import Models"
               icon="pi pi-upload"
               severity="warning"
-              className="w-full"
+              style={{ width: '100%' }}
             />
             <input type="file" accept=".json" onChange={importModels} style={{ display: 'none' }} />
-          </label>
+          </label> */}
           <Button
             label="Reset to Defaults"
             icon="pi pi-refresh"
             onClick={resetToDefaults}
             severity="secondary"
-            className="flex-1"
+            style={{ flex: 1 }}
           />
         </div>
 
@@ -222,13 +245,17 @@ export const ModelSettings: React.FC = () => {
         <div className="bg-blue-50 border-1 border-blue-300 border-round p-4">
           <p className="text-sm text-gray-700">
             <strong>How it works:</strong>
+            <div>&nbsp;</div>
           </p>
-          <ul className="list-disc pl-5 text-sm text-gray-700 mt-2">
-            <li>Models are saved to your browser&apos;s local storage</li>
-            <li>Export models to share configurations with others</li>
-            <li>Import a JSON file to quickly load a set of models</li>
-            <li>Reset to defaults to restore the original model list</li>
-          </ul>
+          <div
+            className="text-sm text-gray-700"
+            style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}
+          >
+            <div>- Models are saved to your browser&apos;s local storage</div>
+            <div>- Export models to share configurations with others</div>
+            <div>- Import a JSON file to quickly load a set of models</div>
+            <div>- Reset to defaults to restore the original model list</div>
+          </div>
         </div>
       </div>
     </Card>

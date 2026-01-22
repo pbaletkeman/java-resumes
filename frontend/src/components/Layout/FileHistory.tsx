@@ -29,7 +29,7 @@ export const FileHistory: React.FC = () => {
   };
 
   const itemTemplate = (file: FileMetadata, index: number) => {
-    const backgroundColor = index % 2 === 0 ? '#f3f4f6' : '#ffffff';
+    const backgroundColor = index % 2 === 0 ? 'var(--highlight-bg)' : 'var(--surface-ground)';
     return (
       <div className="col-12">
         <div
@@ -46,7 +46,9 @@ export const FileHistory: React.FC = () => {
             {/* Line 1: File icon + name */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <i className="pi pi-file text-xl" />
-              <span style={{ fontWeight: 600, fontSize: '1rem' }}>{file.name}</span>
+              <span style={{ fontWeight: 600, fontSize: '1rem', color: 'var(--text-color)' }}>
+                {file.name}
+              </span>
             </div>
             {/* Line 2: Date */}
             <div style={{ fontSize: '0.875rem', color: '#6b7280', marginLeft: '1.75rem' }}>
@@ -84,8 +86,8 @@ export const FileHistory: React.FC = () => {
     if (!items || items.length === 0) return null;
     return (
       <div className="grid grid-nogutter">
-        {items.map(item => (
-          <React.Fragment key={item.name}>{itemTemplate(item, 0)}</React.Fragment>
+        {items.map((item, index) => (
+          <React.Fragment key={item.name}>{itemTemplate(item, index)}</React.Fragment>
         ))}
       </div>
     );

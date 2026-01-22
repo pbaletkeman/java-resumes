@@ -134,21 +134,6 @@ docs/screenshots/
   2. Capture full application window
   3. Ensure all details are visible
 
-#### Responsive Mobile View (`responsive-mobile.png`)
-
-- **Location**: Mobile device or responsive browser view
-- **Size**: 375x812px (iPhone 12)
-- **Shows**:
-  - Mobile-optimized interface
-  - Responsive layout
-  - Touch-friendly buttons
-  - Readable on small screen
-- **How to capture**:
-  1. Open DevTools (F12)
-  2. Toggle Device Toolbar
-  3. Select iPhone 12 device
-  4. Capture screenshot
-
 ---
 
 ### Backend API Screenshots

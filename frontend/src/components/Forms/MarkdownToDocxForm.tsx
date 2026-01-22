@@ -89,13 +89,41 @@ export const MarkdownToDocxForm: React.FC = () => {
           )}
 
           {/* Information message about extra markdown */}
-          <Message
-            severity="info"
-            icon="pi pi-info-circle"
-            text="Note: LLM responses often include formatting markdown or extra content. You may need to clean up your markdown file (remove headers like ### Suggestions, extra markdown formatting, etc.) before converting to ensure professional-looking output. Review the markdown file before converting."
-            className="mt-4 w-full"
-            style={{ textAlign: 'left' }}
-          />
+          <div
+            className="mt-4 w-full p-4"
+            style={{
+              backgroundColor: 'var(--surface-section)',
+              border: '1px solid var(--surface-border)',
+              borderRadius: '6px',
+            }}
+          >
+            <div style={{ display: 'flex', gap: '0.75rem' }}>
+              <i
+                className="pi pi-info-circle"
+                style={{ color: 'var(--primary-color)', marginTop: '0.25rem', flexShrink: 0 }}
+              />
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.5rem',
+                  textAlign: 'left',
+                }}
+              >
+                <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--text-color)' }}>
+                  Note: LLM responses often include formatting markdown or extra content.
+                </p>
+                <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--text-color)' }}>
+                  You may need to clean up your markdown file (remove headers like ### Suggestions,
+                  extra markdown formatting, etc.) before converting to ensure professional-looking
+                  output.
+                </p>
+                <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--text-color)' }}>
+                  Review the markdown file before converting.
+                </p>
+              </div>
+            </div>
+          </div>
 
           {/* Action buttons below file chooser */}
           <div className="flex flex-wrap gap-4 mt-5" style={{ padding: '0.75rem' }}>
