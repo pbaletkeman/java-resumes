@@ -4,7 +4,7 @@ This guide explains all screenshots used in the java-resumes project documentati
 
 ---
 
-## � Related Documentation
+## Related Documentation
 
 This is the main reference guide. For specific tasks, see:
 
@@ -18,7 +18,7 @@ This is the main reference guide. For specific tasks, see:
 | **[architecture/DIAGRAMS.md](architecture/DIAGRAMS.md)** | Reference for 4 architecture diagrams | 15 min |
 | **[setup/README.md](setup/README.md)**                   | Capture guide for 3 setup screenshots | 20 min |
 
-### Start Here If You Want To...
+### Start Here If You Want To
 
 - 📷 **Capture all screenshots**: Follow [CAPTURE_WORKFLOW.md](CAPTURE_WORKFLOW.md) (85 min)
 - 🎨 **Choose screenshot tools**: See [TOOLS_AND_RESOURCES.md](TOOLS_AND_RESOURCES.md)
@@ -29,7 +29,7 @@ This is the main reference guide. For specific tasks, see:
 
 ---
 
-```
+```shell
 docs/screenshots/
 ├── SCREENSHOTS_GUIDE.md          # This file - comprehensive guide
 ├── frontend/                     # Frontend UI screenshots
@@ -355,7 +355,7 @@ docs/screenshots/
 
 ### Naming Convention
 
-```
+```shell
 {category}-{component}-{description}.png
 
 Examples:
@@ -459,6 +459,7 @@ Every screenshot in documentation should have:
    ```
 
 4. **Link to full-size images**:
+
    ```markdown
    [![Thumbnail](path/thumbnail.png)](path/full-size.png)
    ```

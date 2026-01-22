@@ -20,13 +20,13 @@ Interactive OpenAPI documentation interface for the REST API.
 
 ### URL
 
-```
+```plaintext
 http://localhost:8080/swagger-ui/index.html
 ```
 
 ### Components to Include
 
-```
+```plaintext
 ┌─────────────────────────────────────────────────────────┐
 │  Swagger UI - Java Resumes API                          │
 ├─────────────────────────────────────────────────────────┤
@@ -34,7 +34,7 @@ http://localhost:8080/swagger-ui/index.html
 │  java-resumes API                                       │
 │  AI-powered resume and cover letter optimization API    │
 │                                                         │
-│  [Authorize ▼]  [Servers: http://localhost:8080 ▼]    │
+│  [Authorize ▼]  [Servers: http://localhost:8080 ▼]      │
 │                                                         │
 │  ═════════════════════════════════════════════════════  │
 │  POST /api/v1/upload                                    │
@@ -94,7 +94,8 @@ http://localhost:8080/swagger-ui/index.html
    - Ensure all text is readable
 
 6. **Save File**
-   ```
+
+   ```plaintext
    docs/screenshots/backend/swagger-ui.png
    ```
 
@@ -120,7 +121,7 @@ Detailed view of specific API endpoints with request/response examples.
 
 #### POST /upload
 
-```
+```plaintext
 POST /api/v1/upload HTTP/1.1
 Host: localhost:8080
 Content-Type: multipart/form-data
@@ -141,7 +142,7 @@ Response 200:
 
 #### GET /files
 
-```
+```plaintext
 GET /api/v1/files HTTP/1.1
 Host: localhost:8080
 
@@ -168,7 +169,7 @@ Response 200:
 
 #### DELETE /files/{filename}
 
-```
+```plaintext
 DELETE /api/v1/files/resume_optimized.pdf HTTP/1.1
 Host: localhost:8080
 
@@ -221,7 +222,8 @@ Response 200:
    - Ensure all details visible
 
 6. **Save File**
-   ```
+
+   ```plaintext
    docs/screenshots/backend/api-endpoints.png
    ```
 
@@ -248,7 +250,7 @@ Common error scenarios and how the API handles them.
 
 #### 400 Bad Request
 
-```
+```plaintext
 POST /api/v1/upload HTTP/1.1
 
 // Missing required field: resume
@@ -265,7 +267,7 @@ Response 400:
 
 #### 404 Not Found
 
-```
+```plaintext
 GET /api/v1/files/nonexistent-file.pdf HTTP/1.1
 
 Response 404:
@@ -280,7 +282,7 @@ Response 404:
 
 #### 500 Internal Server Error
 
-```
+```plaintext
 POST /api/v1/upload HTTP/1.1
 
 // Server-side error during processing
@@ -331,7 +333,8 @@ Response 500:
    - Clearly label each error type
 
 6. **Save File**
-   ```
+
+   ```plaintext
    docs/screenshots/backend/error-responses.png
    ```
 
@@ -361,7 +364,7 @@ Response 500:
 
 #### Job Description Example
 
-```
+```plaintext
 We are seeking an experienced Senior Java Developer to join our team.
 
 Requirements:
@@ -387,7 +390,7 @@ Benefits: Health insurance, 401k, Remote flexibility, Professional development
 
 #### Resume Example
 
-```
+```plaintext
 JOHN DOE
 Senior Software Developer
 john.doe@email.com | (555) 123-4567 | LinkedIn: linkedin.com/in/johndoe

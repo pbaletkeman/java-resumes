@@ -6,9 +6,9 @@ A comprehensive screenshot documentation system with **8 markdown files** (3,000
 
 ### 📂 Directory Structure
 
-```
+```plaintext
 docs/screenshots/
-├── SCREENSHOTS_GUIDE.md              # Main reference (850+ lines)
+├── SCREENSHOTS_GUIDE.md               # Main reference (850+ lines)
 ├── README.md                          # Directory index (150+ lines)
 ├── CAPTURE_WORKFLOW.md                # Complete workflow guide (400+ lines)
 ├── TOOLS_AND_RESOURCES.md             # Tools comparison (350+ lines)
@@ -315,7 +315,7 @@ docs/screenshots/
 4. ✅ Test screenshots in README
 5. ✅ Commit to git
 
-**Total Time: ~115 minutes (~2 hours)**
+#### Total Time: ~115 minutes (~2 hours)
 
 ---
 

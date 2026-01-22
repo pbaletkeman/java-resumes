@@ -21,7 +21,7 @@ Comprehensive guide to tools for capturing, editing, and optimizing screenshots.
 
 ### 1. ShareX (RECOMMENDED)
 
-**Best for: Comprehensive screenshot workflow**
+#### Best for: Comprehensive screenshot workflow
 
 **Features:**
 
@@ -71,7 +71,7 @@ choco install sharex
 
 ### 2. Greenshot
 
-**Best for: Free lightweight alternative**
+#### Best for: Free lightweight alternative
 
 **Features:**
 
@@ -116,7 +116,7 @@ choco install greenshot
 
 ### 3. Snagit
 
-**Best for: Professional screenshot workflow**
+#### Best for: Professional screenshot workflow
 
 **Features:**
 
@@ -128,7 +128,7 @@ choco install greenshot
 - ✅ Templates
 
 **Installation:**
-Download from: https://www.techsmith.com/screen-capture.html
+Download from: <https://www.techsmith.com/screen-capture.html>
 
 **Cost:** $49.99 USD
 
@@ -136,9 +136,9 @@ Download from: https://www.techsmith.com/screen-capture.html
 
 ### 4. Windows 10/11 Screenshot Tools
 
-**Built-in options (free)**
+#### Built-in options (free)
 
-**Print Screen (Basic)**
+##### Print Screen (Basic)
 
 ```bash
 # Full screen capture
@@ -148,7 +148,7 @@ Print Screen
 Ctrl + V
 ```
 
-**Snipping Tool**
+##### Snipping Tool
 
 ```bash
 # Modern version: Win + Shift + S
@@ -156,7 +156,7 @@ Ctrl + V
 # Can capture to clipboard or file
 ```
 
-**Screenshots App**
+##### Screenshots App
 
 ```bash
 # Windows + Print Screen
@@ -171,7 +171,7 @@ Ctrl + V
 
 ### 1. Paint (Windows Built-in)
 
-**Best for: Quick edits, annotations**
+#### Best for: Quick edits, annotations
 
 **Features:**
 
@@ -194,7 +194,7 @@ Ctrl + O → Select image
 # Save: Ctrl + S
 ```
 
-**Best Practices:**
+##### Best Practices
 
 1. Use for simple edits only
 2. Add annotations/highlights
@@ -207,7 +207,7 @@ Ctrl + O → Select image
 
 ### 2. GIMP (GNU Image Manipulation Program)
 
-**Best for: Professional image editing**
+#### Best for: Professional image editing
 
 **Features:**
 
@@ -233,7 +233,7 @@ choco install gimp
 
 ### 3. Photoshop
 
-**Best for: Professional graphic design**
+#### Best for: Professional graphic design
 
 **Features:**
 
@@ -243,7 +243,7 @@ choco install gimp
 - ✅ Cloud integration
 - ✅ Batch processing
 
-**Installation:** https://www.adobe.com/
+**Installation:** <https://www.adobe.com/>
 
 **Cost:** $22.49/month (Creative Cloud subscription)
 
@@ -251,14 +251,14 @@ choco install gimp
 
 ### 4. Online Tools
 
-**Best for: Quick edits without installation**
+#### Best for: Quick edits without installation
 
-| Tool          | Features               | URL                                          |
-| ------------- | ---------------------- | -------------------------------------------- |
-| Canva         | Easy design, templates | https://www.canva.com/                       |
-| Pixlr         | Photo editor           | https://pixlr.com/                           |
-| PhotoPea      | Photoshop-like         | https://www.photopea.com/                    |
-| Photoshop Web | Full Photoshop         | https://www.adobe.com/products/photoshop/web |
+| Tool          | Features               | URL                                            |
+| ------------- | ---------------------- | ---------------------------------------------- |
+| Canva         | Easy design, templates | <https://www.canva.com/>                       |
+| Pixlr         | Photo editor           | <https://pixlr.com/>                           |
+| PhotoPea      | Photoshop-like         | <https://www.photopea.com/>                    |
+| Photoshop Web | Full Photoshop         | <https://www.adobe.com/products/photoshop/web> |
 
 ---
 
@@ -266,7 +266,7 @@ choco install gimp
 
 ### 1. TinyPNG / TinyJPG (RECOMMENDED)
 
-**Best for: Bulk compression**
+#### Best for: Bulk compression
 
 **Features:**
 
@@ -309,7 +309,7 @@ foreach ($file in $files) {
 
 ### 2. ImageMagick (CLI)
 
-**Best for: Batch automation**
+#### Best for: Batch automation
 
 **Features:**
 
@@ -350,7 +350,7 @@ FOR /F %f IN ('DIR /B docs\screenshots\*.png') DO (
 
 ### 3. PNGQuant
 
-**Best for: PNG optimization**
+#### Best for: PNG optimization
 
 **Features:**
 
@@ -389,7 +389,7 @@ FOR %%f IN (docs\screenshots\*.png) DO (
 
 ### 1. draw.io (RECOMMENDED)
 
-**Best for: Professional diagrams**
+#### Best for: Professional diagrams
 
 **Features:**
 
@@ -424,7 +424,7 @@ choco install drawio
 
 ### 2. Mermaid
 
-**Best for: Text-based diagrams**
+#### Best for: Text-based diagrams
 
 **Features:**
 
@@ -456,7 +456,7 @@ graph TD
 
 ### 3. PlantUML
 
-**Best for: Technical diagrams**
+#### Best for: Technical diagrams
 
 **Features:**
 
@@ -482,7 +482,7 @@ java -version
 
 ### 4. Lucidchart
 
-**Best for: Professional diagrams**
+Best for: Professional diagrams
 
 **Features:**
 
@@ -492,7 +492,7 @@ java -version
 - ✅ Real-time updates
 - ✅ Integration support
 
-**Usage:** https://www.lucidchart.com/
+**Usage:** <ttps://www.lucidchart.com/>
 
 **Cost:** Free (limited), Paid from $5/month
 
@@ -631,7 +631,7 @@ Before capturing screenshots:
 - [draw.io Tutorial](https://www.youtube.com/results?search_query=draw.io+tutorial)
 - [Image Compression Guide](https://web.dev/image-optimization/)
 
-### Best Practices
+### Best Practices Guides
 
 - [Google Screenshot Guidelines](https://developers.google.com/style/screenshots)
 - [Microsoft Screenshot Standards](https://docs.microsoft.com/en-us/style-guide/a-z/s/screenshots)
@@ -674,7 +674,7 @@ Before capturing screenshots:
    - Verify naming convention
    - Update markdown links
 
-**Total Time: ~20 minutes**
+Total Time: ~20 minutes
 
 ---
 

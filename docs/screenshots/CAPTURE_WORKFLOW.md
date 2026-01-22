@@ -87,7 +87,7 @@ npm run dev
 
 - [ ] Vite development server running
 - [ ] Port 5173 accessible
-- [ ] Application loads at http://localhost:5173
+- [ ] Application loads at <http://localhost:5173>
 - [ ] UI renders without errors
 
 ### Screenshot 1: Main Upload Tab
@@ -96,7 +96,7 @@ npm run dev
 
 **Steps:**
 
-1. Open browser: http://localhost:5173
+1. Open browser: <http://localhost:5173>
 2. Verify Main tab is active
 3. Resize window to 800x600px
 4. Ensure full form visible:
@@ -240,7 +240,7 @@ npm run dev
 
 ## 🔧 Phase 2: Backend API Screenshots (3 images)
 
-### Prerequisites
+### Prerequisites - Phase 2
 
 ```bash
 # Ensure backend is running
@@ -260,7 +260,7 @@ npm run dev
 
 **Steps:**
 
-1. Open browser: http://localhost:8080/swagger-ui/index.html
+1. Open browser: <http://localhost:8080/swagger-ui/index.html>
 2. Swagger interface loads
 3. Resize window to 1200x800px
 4. Capture interface showing:
@@ -356,7 +356,7 @@ npm run dev
 
 **Diagram Should Show:**
 
-```
+```plaintext
 ┌─────────────────┐
 │  React Frontend │
 └────────┬────────┘
@@ -400,7 +400,7 @@ npm run dev
 
 **Diagram Should Show:**
 
-```
+```plainttext
 User Input
    ↓
 Resume Upload
@@ -442,7 +442,7 @@ Download Ready
 
 **Diagram Should Show:**
 
-```
+```shell
 docker-compose
 ├─ Frontend Container
 │  ├─ Nginx (port 80)
@@ -481,7 +481,7 @@ docker-compose
 
 **Diagram Should Show:**
 
-```
+```shell
 Frontend
 ├─ App.tsx
 ├─ MainContentTab.tsx
@@ -524,7 +524,7 @@ Complete instructions for:
 
 For each screenshot, verify:
 
-**Technical Requirements**
+#### Technical Requirements
 
 - [ ] Format: PNG
 - [ ] File size: < 500KB (< 300KB preferred)
@@ -534,7 +534,7 @@ For each screenshot, verify:
 - [ ] Color mode: RGB
 - [ ] No corruption or artifacts
 
-**Content Requirements**
+#### Content Requirements
 
 - [ ] Relevant content clearly visible
 - [ ] No personal/sensitive information
@@ -543,7 +543,7 @@ For each screenshot, verify:
 - [ ] Proper naming convention used
 - [ ] Saved to correct directory
 
-**Visual Quality**
+#### Visual Quality
 
 - [ ] Sharp and clear (no blur)
 - [ ] Properly centered
@@ -597,19 +597,19 @@ Verify all references in:
 
 Screenshots should be updated:
 
-**Quarterly Review**
+### Quarterly Review
 
 - [ ] Visual appearance (UI changes, theme updates)
 - [ ] Feature additions
 - [ ] Documentation accuracy
 
-**On Major Release**
+### On Major Release
 
 - [ ] Version update in screenshots
 - [ ] New features showcase
 - [ ] API changes
 
-**When Requested**
+### When Requested
 
 - [ ] Bug fixes visibility
 - [ ] Workflow improvements

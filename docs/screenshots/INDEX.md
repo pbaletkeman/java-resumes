@@ -23,7 +23,7 @@ Create comprehensive screenshot documentation system with:
 
 ## 📁 Complete File Structure
 
-```
+```plaintext
 docs/screenshots/
 ├── 📄 COMPLETE_SYSTEM_SUMMARY.md      ← Start here for overview
 ├── 📄 SCREENSHOTS_GUIDE.md             ← Main reference (850+ lines)
@@ -80,7 +80,7 @@ docs/screenshots/
 
 ### Frontend UI (6 images)
 
-```
+```plaintext
 📸 Main Upload Tab                    800x600px    ⏳ Ready to capture
 📸 File History Panel                 350x600px    ⏳ Ready to capture
 📸 Additional Tools Tab               800x600px    ⏳ Ready to capture
@@ -91,7 +91,7 @@ docs/screenshots/
 
 ### Backend API (3 images)
 
-```
+```plaintext
 📸 Swagger UI                        1200x800px    ⏳ Ready to capture
 📸 API Endpoints Examples            1000x600px    ⏳ Ready to capture
 📸 Error Response Examples           1000x600px    ⏳ Ready to capture
@@ -99,7 +99,7 @@ docs/screenshots/
 
 ### Architecture (4 images)
 
-```
+```plaintext
 📊 System Architecture Diagram                      ⏳ Ready to create
 📊 Data Flow Diagram                                ⏳ Ready to create
 📊 Deployment Architecture                         ⏳ Ready to create
@@ -108,7 +108,7 @@ docs/screenshots/
 
 ### Setup & Deployment (3 images)
 
-```
+```plaintext
 📸 Docker Compose Up Output          1000x400px    ⏳ Ready to capture
 📸 Local Dev Environment             1200x600px    ⏳ Ready to capture
 📸 Build Success Output              1000x500px    ⏳ Ready to capture
@@ -146,7 +146,7 @@ Choose which category to start with:
 
 ## 📋 What's Included in Each Guide
 
-### ✨ All Guides Include:
+### ✨ All Guides Include
 
 1. **Detailed Specifications**
    - Exact dimensions and format
@@ -215,7 +215,7 @@ See [TOOLS_AND_RESOURCES.md](TOOLS_AND_RESOURCES.md) for:
 | **Verification**          | 15 min      | All images verified and optimized     |
 | **TOTAL**                 | **115 min** | **16 complete, verified screenshots** |
 
-**Estimated Total: ~2 hours**
+### Estimated Total: ~2 hours
 
 ---
 
@@ -431,7 +431,7 @@ Choose your path:
 
 ## ✨ System Status
 
-```
+```plaintext
 ┌─────────────────────────────────────────────┐
 │  Screenshot Documentation System Status     │
 ├─────────────────────────────────────────────┤

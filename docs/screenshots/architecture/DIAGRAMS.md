@@ -6,9 +6,9 @@ This directory contains architecture diagrams and visual representations of the 
 
 ### System Architecture
 
-```
+```plaintext
 ┌─────────────────────────────────────────────────────────────┐
-│                    Java Resumes System                       │
+│                    Java Resumes System                      │
 └─────────────────────────────────────────────────────────────┘
 
 ┌──────────────────────┐        ┌──────────────────────┐
@@ -62,7 +62,7 @@ This directory contains architecture diagrams and visual representations of the 
 
 **Frontend Components**:
 
-```
+```shell
 App (Root)
 ├── AppHeader
 │   └── ThemeToggle
@@ -89,7 +89,7 @@ App (Root)
 
 **Backend Components**:
 
-```
+```shell
 RestServiceApplication (Spring Boot)
 ├── ResumeController (REST Endpoints)
 │   ├── /upload (POST)
@@ -114,7 +114,7 @@ RestServiceApplication (Spring Boot)
 
 ### Data Flow Diagram
 
-```
+```plaintext
 User Interaction:
 1. User enters job description (text or upload)
 2. User enters resume (text or upload)
@@ -179,7 +179,7 @@ User Download:
 
 ### Deployment Architecture
 
-```
+```plaintext
 ┌──────────────────────────────────────────────────────────┐
 │              Docker Compose Environment                  │
 └──────────────────────────────────────────────────────────┘
@@ -274,7 +274,7 @@ networks:
 
 ## 📈 Request/Response Flow
 
-```
+```plaintext
 ┌─────────────────────────────────────────────────────────┐
 │           Resume Optimization Request Flow              │
 └─────────────────────────────────────────────────────────┘
@@ -382,7 +382,7 @@ Production Considerations:
 
 ### Horizontal Scaling
 
-```
+```plaintext
 Load Balancer
      │
      ├─► Backend Instance 1
@@ -397,7 +397,7 @@ Shared:
 
 ### Message Queue Pattern
 
-```
+```plaintext
 Frontend ──► REST API ──► Message Queue
                           │
                           ├─► Worker 1

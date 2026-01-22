@@ -139,7 +139,7 @@
 - [ ] Test display
 - [ ] Commit to git
 
-**Total Time: ~145 minutes (~2.5 hours)**
+#### Total Time: ~145 minutes (~2.5 hours)
 
 ---
 
@@ -224,7 +224,7 @@ Complete guide for showing:
 
 All guides reference each other:
 
-```
+```plaintext
 00-START-HERE.md
 ├── → README.md (Quick overview)
 ├── → SCREENSHOTS_GUIDE.md (Main reference)
@@ -389,7 +389,7 @@ Each Category Guide
 
 ## ✨ System Status
 
-```
+```plaintext
 SCREENSHOT DOCUMENTATION SYSTEM
 Status: ✅ COMPLETE & READY
 

@@ -38,7 +38,7 @@ Complete architecture documentation for the java-resumes project, covering both 
 
 ### High-Level Structure
 
-```
+```plaintext
 ┌─────────────────────────────────────────┐
 │         HTTP Client (React Frontend)    │
 └─────────────────┬───────────────────────┘
@@ -193,8 +193,8 @@ class FileInfo {
   String id;               // File identifier
   String filename;         // Original filename
   String uploadedAt;       // Upload timestamp
-  Long size;              // File size in bytes
-  String type;            // File type (resume, cover_letter, pdf, etc.)
+  Long size;               // File size in bytes
+  String type;             // File type (resume, cover_letter, pdf, etc.)
 }
 ```
 
@@ -366,7 +366,7 @@ const useApi = (endpoint: string, method = "GET") => {
 ```typescript
 const useTheme = () => {
   const [theme, setTheme] = useState(
-    () => localStorage.getItem("theme") || "light"
+    () => localStorage.getItem("theme") || "light",
   );
 
   useEffect(() => {
@@ -576,21 +576,21 @@ Local Machine
 
 ### Production Environment
 
-```
-┌──────────────────────────────────────┐
+```plaintext
+┌───────────────────────────────────────┐
 │  Load Balancer / Reverse Proxy        │
 │  (Nginx/HAProxy)                      │
-└─────────────────┬────────────────────┘
+└─────────────────┬─────────────────────┘
                   │
         ┌─────────┴─────────┐
         │                   │
-┌───────▼─────────┐  ┌──────▼────────┐
+┌───────▼─────────┐  ┌──────▼─────────┐
 │  Backend        │  │  Frontend      │
 │  Instance 1     │  │  (Static)      │
 │  (Spring Boot)  │  │                │
 └─────────────────┘  └────────────────┘
-        │
-   ┌────▴────┬──────────────┐
+         │
+   ┌─────▴────┬──────────────┐
    │          │              │
    ▼          ▼              ▼
 Filesystem  LLM API    Database (optional)
@@ -628,7 +628,7 @@ EXPOSE 80
 
 ### Backend
 
-- **JDK**: Java 17 LTS (Corretto)
+- **JDK**: Java 15 LTS (Corretto)
 - **Framework**: Spring Boot 3.5.1
 - **Build**: Gradle 8.7
 - **Testing**: JUnit 5, Mockito
@@ -809,6 +809,6 @@ EXPOSE 80
 
 ---
 
-**Last Updated**: 2024
+**Last Updated**: 2026
 **Project**: java-resumes
-**Repository**: https://github.com/pbaletkeman/java-resumes
+**Repository**: <https://github.com/pbaletkeman/java-resumes>
