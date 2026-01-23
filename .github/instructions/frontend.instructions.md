@@ -78,8 +78,8 @@ frontend/
 
 ### Prerequisites
 
-- Node.js 18+ (LTS recommended)
-- npm 9+ or yarn
+- Node.js 22+ (LTS recommended)
+- npm 11+ or yarn
 - Docker (for containerization)
 
 ### Setup
@@ -169,7 +169,7 @@ VITE_APP_NAME=Resume Optimizer
 ```typescript
 const { data, loading, error, fetch } = useApi<ResultType>(
   "/api/endpoint",
-  "POST"
+  "POST",
 );
 
 // Loading states trigger <LoadingSpinner />

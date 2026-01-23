@@ -6,14 +6,13 @@ Detailed guide for capturing and maintaining frontend UI screenshots for the jav
 
 ### Quick Reference
 
-| Screenshot         | File                    | Size       | Frequency              | Status    |
-| ------------------ | ----------------------- | ---------- | ---------------------- | --------- |
-| Main Upload Tab    | `main-tab.png`          | 800x600px  | Per UI changes         | 📌 Needed |
-| File History Panel | `file-history.png`      | 350x600px  | Per feature changes    | 📌 Needed |
-| Tools Tab          | `tools-tab.png`         | 800x600px  | Per feature changes    | 📌 Needed |
-| Light Theme        | `light-theme.png`       | 1200x800px | Per theme changes      | 📌 Needed |
-| Dark Theme         | `dark-theme.png`        | 1200x800px | Per theme changes      | 📌 Needed |
-| Mobile Responsive  | `responsive-mobile.png` | 375x812px  | Per responsive changes | 📌 Needed |
+| Screenshot         | File               | Size       | Frequency           | Status    |
+| ------------------ | ------------------ | ---------- | ------------------- | --------- |
+| Main Upload Tab    | `main-tab.png`     | 800x600px  | Per UI changes      | 📌 Needed |
+| File History Panel | `file-history.png` | 350x600px  | Per feature changes | 📌 Needed |
+| Tools Tab          | `tools-tab.png`    | 800x600px  | Per feature changes | 📌 Needed |
+| Light Theme        | `light-theme.png`  | 1200x800px | Per theme changes   | 📌 Needed |
+| Dark Theme         | `dark-theme.png`   | 1200x800px | Per theme changes   | 📌 Needed |
 
 ---
 

@@ -33,8 +33,6 @@ The panel shows:
 - A **table** listing all available models
 - **Four buttons** for managing models:
   - **Add Model** - Create a new model
-  - **Export Models** - Download as JSON file
-  - **Import Models** - Upload a JSON file
   - **Reset to Defaults** - Go back to original models
 
 ---
@@ -74,53 +72,6 @@ Value: "gpt-4-turbo"
 4. The model will no longer appear in DocumentUploadForm
 
 **Note:** You must keep at least one model in the list.
-
----
-
-## 📤 How to Export Models (Share Configuration)
-
-### Why Export?
-
-- Share your model configuration with team members
-- Back up your current model list
-- Move configuration to another computer
-
-### Steps:
-
-1. Click **Export Models** button
-2. A JSON file automatically downloads to your computer
-3. ✅ File is named something like `models.json`
-4. Share this file with your team
-
-### What You Get:
-
-```json
-[
-  { "label": "Gemma 3.4B (Default)", "value": "gemma-3-4b-it" },
-  { "label": "GPT-4 Turbo", "value": "gpt-4-turbo" },
-  { "label": "My Custom Model", "value": "my-model" }
-]
-```
-
----
-
-## 📥 How to Import Models (Load Shared Configuration)
-
-### Why Import?
-
-- Use model configurations shared by team members
-- Restore a previously exported backup
-- Apply standardized model list
-
-### Steps:
-
-1. Get the JSON file from someone or from backup
-2. Click **Import Models** button
-3. Select the JSON file from your computer
-4. ✅ Models load immediately
-5. Any previous models are replaced with the imported list
-
-**Note:** Make sure the file is valid JSON before importing.
 
 ---
 
@@ -181,7 +132,7 @@ If you want to create a models JSON file manually:
 ]
 ```
 
-### Rules:
+### Rules
 
 - Must be valid JSON format
 - Each model needs both "label" and "value"

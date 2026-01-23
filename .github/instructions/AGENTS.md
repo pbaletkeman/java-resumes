@@ -493,7 +493,7 @@ When generating documentation, follow these principles:
 When generating backend code:
 
 1. **Follow Google Java Style Guide** as enforced by Checkstyle
-2. **Java Version**: Use Java 25 LTS features and syntax
+2. **Java Version**: Use Java 21 LTS features and syntax
 3. **Spring Boot**: Use latest Spring Boot 3.5.1 features
 4. **Testing**: Write JUnit 5 tests for all public methods
 5. **Documentation**: Add Javadoc for public APIs

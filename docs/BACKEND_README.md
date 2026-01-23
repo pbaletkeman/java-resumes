@@ -1,8 +1,8 @@
 # Resume Optimizer Backend
 
-[![Java](https://img.shields.io/badge/Java-25%20LTS-orange.svg)](https://openjdk.java.net/)
+[![Java](https://img.shields.io/badge/Java-21%20LTS-orange.svg)](https://openjdk.java.net/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.1-brightgreen.svg)](https://spring.io/projects/spring-boot)
-[![Gradle](https://img.shields.io/badge/Gradle-8.7-02303A.svg)](https://gradle.org/)
+[![Gradle](https://img.shields.io/badge/Gradle-8.10-02303A.svg)](https://gradle.org/)
 [![Checkstyle](https://img.shields.io/badge/Checkstyle-10.14.2-blue.svg)](https://checkstyle.org/)
 
 A robust Java Spring Boot backend service for AI-powered resume and cover letter optimization. Provides RESTful APIs for document processing, file management, and LLM integration with comprehensive testing and code quality enforcement.
@@ -59,8 +59,8 @@ Get the backend running in just 5 minutes! Follow these quick steps to start dev
 
 ### Prerequisites
 
-- Java 25 LTS JDK installed
-- Gradle 8.7+ (or use included wrapper)
+- Java 21 LTS JDK installed
+- Gradle 8.10+ (or use included wrapper)
 - LLM service running (Ollama recommended)
 
 ### Steps
@@ -122,7 +122,7 @@ That's it! Your backend is now running. Start uploading resumes and generating o
 | ------------------- | ---------------------- | ------- | --------------------------------- |
 | **Language**        | Java                   | 21 LTS  | Backend programming language      |
 | **Framework**       | Spring Boot            | 3.5.1   | Application framework             |
-| **Build Tool**      | Gradle                 | 8.7     | Build automation and dependencies |
+| **Build Tool**      | Gradle                 | 8.10    | Build automation and dependencies |
 | **Dependency Mgmt** | Spring Dependency Mgmt | 1.1.7   | Consistent dependency versions    |
 
 ### Spring Boot Starters
@@ -157,7 +157,7 @@ That's it! Your backend is now running. Start uploading resumes and generating o
 
 | Tool                     | Version | Purpose                    |
 | ------------------------ | ------- | -------------------------- |
-| **Gradle Wrapper**       | 8.7     | Consistent Gradle version  |
+| **Gradle Wrapper**       | 8.10    | Consistent Gradle version  |
 | **Spring Boot DevTools** | 3.5.1   | Hot reload and live reload |
 | **Checkstyle**           | 10.14.2 | Code style validation      |
 
@@ -315,11 +315,11 @@ If you prefer to run the backend without Docker, follow these native setup instr
 
 ### Prerequisites
 
-- **Java 25 LTS JDK** installed
+- **Java 21 LTS JDK** installed
   ```bash
-  java -version  # Verify you see Java 25
+  java -version  # Verify you see Java 21
   ```
-- **Gradle 8.7+** (or use included wrapper)
+- **Gradle 8.10+** (or use included wrapper)
   ```bash
   ./gradlew --version  # Verify Gradle is installed
   ```

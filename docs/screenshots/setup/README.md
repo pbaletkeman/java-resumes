@@ -4,11 +4,53 @@ Visual documentation for installation, setup, and deployment processes.
 
 ## 📸 Setup Screenshots
 
-| Screenshot        | File                    | Size       | Purpose           | Status    |
-| ----------------- | ----------------------- | ---------- | ----------------- | --------- |
-| Docker Compose Up | `docker-compose-up.png` | 1000x400px | Container startup | 📌 Needed |
-| Local Dev Setup   | `local-dev-setup.png`   | 1200x600px | Local development | 📌 Needed |
-| Build Success     | `build-success.png`     | 1000x500px | Successful build  | 📌 Needed |
+| Screenshot      | File                  | Themes         | Status   |
+| --------------- | --------------------- | -------------- | -------- |
+| Local Dev Setup | `local-dev-setup.png` | Docker startup | ✅ Ready |
+| Build Success   | `build-success.png`   | Build output   | ✅ Ready |
+| Backend Docker  | `backend-docker.png`  | Container logs | ✅ Ready |
+| Frontend Docker | `frontend-docker.png` | Container logs | ✅ Ready |
+
+---
+
+## UI Screenshots with Theme Variants
+
+All UI screenshots are provided in both **dark** and **light** themes for user preference.
+
+### Main Tab (Resume Editor)
+
+|                      Dark Theme                      |                     Light Theme                     |
+| :--------------------------------------------------: | :-------------------------------------------------: |
+|  ![Main Tab - Dark](../frontend/main-tab-dark.png)   | ![Main Tab - Light](../frontend/main-tab-light.png) |
+| **Dark Mode** - Optimized for low-light environments |      **Light Mode** - Clear, bright interface       |
+
+### File History Tab
+
+|                        Dark Theme                         |                         Light Theme                         |
+| :-------------------------------------------------------: | :---------------------------------------------------------: |
+| ![File History - Dark](../frontend/file-history-dark.png) | ![File History - Light](../frontend/file-history-light.png) |
+|              View previous document versions              |                   Browse saved documents                    |
+
+### Settings Tab
+
+|                      Dark Theme                       |                       Light Theme                       |
+| :---------------------------------------------------: | :-----------------------------------------------------: |
+| ![Settings - Dark](../frontend/settings-tab-dark.png) | ![Settings - Light](../frontend/settings-tab-light.png) |
+|           Configure application preferences           |                    Theme and options                    |
+
+### Tools Tab
+
+|                   Dark Theme                    |                    Light Theme                    |
+| :---------------------------------------------: | :-----------------------------------------------: |
+| ![Tools - Dark](../frontend/tools-tab-dark.png) | ![Tools - Light](../frontend/tools-tab-light.png) |
+|         Utility functions and features          |                 Development tools                 |
+
+### Add Model Dialog
+
+|                     Dark Theme                      |                      Light Theme                      |
+| :-------------------------------------------------: | :---------------------------------------------------: |
+| ![Add Model - Dark](../frontend/add-model-dark.png) | ![Add Model - Light](../frontend/add-model-light.png) |
+|           Add new LLM model configuration           |               Configure model settings                |
 
 ---
 
@@ -16,7 +58,13 @@ Visual documentation for installation, setup, and deployment processes.
 
 ### What to Show
 
-Terminal output showing successful Docker Compose startup with all services running.
+Terminal output showing successful Docker Compose startup with both the backend and Vite dev server running.
+
+**Note**: The frontend now runs the Vite development server (not a static build) for hot module reload and visible startup logs.
+
+**Screenshot:** Complete Docker startup with both services running:
+
+![Docker Compose Up - Local Development](./local-dev-setup.png)
 
 ### Output Should Include
 
@@ -48,7 +96,7 @@ backend-1   |
 frontend-1  |
 frontend-1  |  VITE v7.2.4  ready in 234 ms
 frontend-1  |
-frontend-1  |  ➜  Local:   http://localhost:80
+frontend-1  |  ➜  Local:   http://localhost:3000
 frontend-1  |  ➜  press h + enter to show help
 ```
 
@@ -96,11 +144,12 @@ frontend-1  |  ➜  press h + enter to show help
 
 - [ ] Both containers show as "done"
 - [ ] Backend port 8080 confirmed
-- [ ] Frontend running on port 80
+- [ ] Frontend Vite dev server running on port 3000
 - [ ] No error messages visible
 - [ ] "Spring Boot" ASCII art visible
 - [ ] Tomcat startup message visible
-- [ ] Vite startup message visible
+- [ ] Vite startup message visible with "ready in XXX ms"
+- [ ] "Local: http://localhost:3000" visible
 - [ ] Terminal text is readable
 - [ ] File size < 200KB
 
@@ -205,6 +254,10 @@ Complete local development environment with both services running in IDE/termina
 ### What to Show
 
 Terminal output showing successful Gradle build completion.
+
+**Screenshot:** Successful build completion with all tests and checks passing:
+
+![Build Success](./build-success.png)
 
 ### Build Output Should Include
 

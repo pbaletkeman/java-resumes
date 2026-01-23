@@ -1,6 +1,6 @@
-# 🚀 Java Resumes — AI‑Powered Resume Generation with Java 25, React, and LLMs
+# 🚀 Java Resumes — AI‑Powered Resume Generation with Java 21, React, and LLMs
 
-**Java Resumes** is a full‑stack application that turns structured professional data into polished, AI‑enhanced resumes. It combines a modern Java 25 backend, a ReactJS frontend, and your choice of LLM provider (Ollama or OpenAI) to generate clean, customizable resume content with minimal effort.
+**Java Resumes** is a full‑stack application that turns structured professional data into polished, AI‑enhanced resumes. It combines a modern Java 21 backend, a ReactJS frontend, and your choice of LLM provider (Ollama or OpenAI) to generate clean, customizable resume content with minimal effort.
 
 This project is designed for developers, job seekers, and teams who want a repeatable, automated way to produce high‑quality resumes without wrestling with templates or formatting.
 
@@ -35,7 +35,7 @@ The frontend makes it easy to:
 
 It’s clean, fast, and built for iteration.
 
-### ☕ 4. Built on Java 25 with a clean modular architecture
+### ☕ 4. Built on Java 21 with a clean modular architecture
 
 The backend uses modern Java features and a straightforward API design.
 It’s easy to extend, integrate, or adapt for:
@@ -65,7 +65,7 @@ It’s a practical example of how LLMs can enhance everyday workflows without re
 
 | Layer     | Technology           | Purpose                                           |
 | --------- | -------------------- | ------------------------------------------------- |
-| Backend   | **Java 25**          | API, data processing, LLM orchestration           |
+| Backend   | **Java 21**          | API, data processing, LLM orchestration           |
 | Frontend  | **ReactJS**          | User interface for editing and generating resumes |
 | AI        | **Ollama or OpenAI** | Natural‑language generation                       |
 | Build/Run | Gradle / Node        | Standard tooling for Java + React                 |
@@ -88,7 +88,7 @@ It’s a practical example of how LLMs can enhance everyday workflows without re
 - Developers who want a practical example of LLM integration
 - Job seekers who want consistent, high‑quality resumes
 - Teams building HR or talent‑management tools
-- Anyone exploring Java 25 + React + AI workflows
+- Anyone exploring Java 21 + React + AI workflows
 
 ---
 

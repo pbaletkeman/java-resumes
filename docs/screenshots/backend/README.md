@@ -113,7 +113,7 @@ http://localhost:8080/swagger-ui/index.html
 
 ## 2. API Endpoints Reference
 
-### What to Show
+### What to Show API
 
 Detailed view of specific API endpoints with request/response examples.
 
@@ -180,7 +180,7 @@ Response 200:
 }
 ```
 
-### Capture Instructions
+### Capture Instructions API
 
 1. **Use API Testing Tool**
    - Postman (recommended)
@@ -227,7 +227,7 @@ Response 200:
    docs/screenshots/backend/api-endpoints.png
    ```
 
-### Verification Checklist
+### Verification Checklist APIs
 
 - [ ] Request URL visible and correct
 - [ ] HTTP method shown (GET, POST, DELETE)
@@ -242,7 +242,7 @@ Response 200:
 
 ## 3. Error Responses
 
-### What to Show
+### What to Show Errors
 
 Common error scenarios and how the API handles them.
 
@@ -297,7 +297,7 @@ Response 500:
 }
 ```
 
-### Capture Instructions
+### Capture Instructions Details
 
 1. **Prepare Error Scenarios**
    - Missing required fields
@@ -338,7 +338,7 @@ Response 500:
    docs/screenshots/backend/error-responses.png
    ```
 
-### Verification Checklist
+### Verification Checklist Error
 
 - [ ] Error status codes visible (400, 404, 500)
 - [ ] Error messages are helpful and readable

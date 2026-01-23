@@ -25,7 +25,7 @@ Complete guide to building, testing, and deploying the java-resumes application 
 
 **Frontend:**
 
-- Node.js 20+ (https://nodejs.org/)
+- Node.js 22+ (https://nodejs.org/)
 - npm 11+ (included with Node.js)
 
 **Backend:**
@@ -86,7 +86,7 @@ Output: `frontend/dist/` directory with production-ready files
 #### Step 1: Prerequisites Check
 
 ```bash
-node --version    # Should be v20.0.0 or higher
+node --version    # Should be v22.0.0 or higher
 npm --version     # Should be 11.0.0 or higher
 ```
 
@@ -227,7 +227,7 @@ export default defineConfig({
 **Docker:**
 
 ```dockerfile
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 WORKDIR /app
 COPY frontend ./
 RUN npm install && npm run build
@@ -644,7 +644,7 @@ kubectl rollout status deployment/backend
 **Steps:**
 
 1. Checkout code
-2. Setup Node.js 20
+2. Setup Node.js 22
 3. Install dependencies
 4. Run linting
 5. Run type checking

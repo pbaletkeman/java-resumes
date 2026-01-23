@@ -1,9 +1,24 @@
 # Multi-stage build for Java Spring Boot Backend
 
 # Stage 1: Build the application
-FROM gradle:8.7-jdk25 AS builder
+# Using Eclipse Temurin JDK 21 for build (fully Gradle compatible)
+# Java 21 bytecode runs fine on Java 25 runtime
+FROM eclipse-temurin:21-jdk-alpine AS builder
 
 WORKDIR /app
+
+# Install Gradle 8.10 manually
+RUN apk add --no-cache curl unzip && \
+    curl -L https://services.gradle.org/distributions/gradle-8.10-bin.zip -o gradle.zip && \
+    unzip -q gradle.zip && \
+    rm gradle.zip && \
+    mv gradle-8.10 /opt/gradle && \
+    ln -s /opt/gradle/bin/gradle /usr/local/bin/gradle && \
+    rm -rf /tmp/* && \
+    apk del curl unzip
+
+# Set Gradle home for reference
+ENV GRADLE_HOME=/opt/gradle
 
 # Copy gradle files
 COPY build.gradle settings.gradle gradle.properties ./
@@ -19,7 +34,8 @@ COPY config.json ./
 RUN gradle build -x test --no-daemon
 
 # Stage 2: Runtime
-FROM eclipse-temurin:25-jre-alpine
+# Using Eclipse Temurin JDK 21 for runtime
+FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 

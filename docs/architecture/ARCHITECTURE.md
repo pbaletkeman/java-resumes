@@ -531,7 +531,7 @@ graph TB
 **Backend Dockerfile**:
 
 ```dockerfile
-FROM openjdk:25-slim
+FROM eclipse-temurin:21-jre-slim
 COPY build/libs/app.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
 EXPOSE 8080
@@ -540,7 +540,7 @@ EXPOSE 8080
 **Frontend Dockerfile**:
 
 ```dockerfile
-FROM node:20-slim AS build
+FROM node:22-slim AS build
 WORKDIR /app
 COPY . .
 RUN npm install && npm run build
@@ -557,9 +557,9 @@ EXPOSE 80
 
 ### Backend
 
-- **JDK**: Java 25 LTS (Corretto)
+- **JDK**: Java 21 LTS (Eclipse Temurin)
 - **Framework**: Spring Boot 3.5.1
-- **Build**: Gradle 8.7
+- **Build**: Gradle 8.10
 - **Testing**: JUnit 5, Mockito
 - **Quality**: Checkstyle 10.14.2
 - **Serialization**: Gson, Jackson

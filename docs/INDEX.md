@@ -111,14 +111,25 @@ Documentation related to bug fixes, issues, and resolutions:
 
 ---
 
+## Visual Documentation
+
+Screenshots and visual guides for the application:
+
+- **[UI Screenshots - Theme Showcase](screenshots/UI_SCREENSHOTS.md)** - Dark and light theme UI variants for all application tabs
+- **[Setup Screenshots Guide](screenshots/setup/README.md)** - Docker setup, build process, and deployment screenshots
+- **[Architecture Diagrams](screenshots/architecture/)** - System architecture, UML diagrams, and data flow visualizations
+- **[API Documentation Screenshots](screenshots/api/)** - Swagger UI, API endpoints, and error response examples
+
+---
+
 ## Related Documentation
 
 Additional resources and directories:
 
 - **[Repository Root](../README.md)** - Main project README and overview
-- **[Screenshots Directory](screenshots/)** - Captured screenshots for visual documentation
-- **[Backend README](./BACKEND_README.md)** - Backend setup and API documentation (if available)
-- **[Frontend README](../frontend/README.md)** - Frontend setup and component documentation (if available)
+- **[Screenshots Directory](screenshots/)** - All captured screenshots for visual documentation
+- **[Backend README](./BACKEND_README.md)** - Backend setup and API documentation
+- **[Frontend README](../frontend/README.md)** - Frontend setup and component documentation
 - **[Backend Custom Instructions](../.github/instructions/backend.instructions.md)** - Copilot backend guidance
 - **[Frontend Custom Instructions](../.github/instructions/frontend.instructions.md)** - Copilot frontend guidance
 

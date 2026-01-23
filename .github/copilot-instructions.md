@@ -6,7 +6,7 @@ Repository-wide custom instructions for GitHub Copilot agents working on the jav
 
 **java-resumes** is a full-stack AI-powered resume and cover letter optimization application.
 
-- **Backend**: Spring Boot 3.5.1, Java 25 LTS, Gradle 8.7
+- **Backend**: Spring Boot 3.5.1, Java 21 LTS, Gradle 8.10
 - **Frontend**: React 19, TypeScript 5.9.3, Vite 7.2.4
 - **LLM Integration**: Ollama/LM Studio with OpenAI-compatible API
 - **Code Quality**: Checkstyle 10.14.2 (100% compliance), 80%+ test coverage
@@ -596,7 +596,7 @@ class ComponentTest {
 
 ### Local Development Setup
 
-**1. Install Java 25 LTS**
+**1. Install Java 21 LTS**
 
 ```bash
 # Verify installation
@@ -662,8 +662,8 @@ logging.level.ca.letkeman=DEBUG
 ### Core Dependencies
 
 - **Spring Boot**: 3.5.1+
-- **Java**: 25 (LTS)
-- **Gradle**: Latest
+- **Java**: 21 (LTS)
+- **Gradle**: 8.10+
 - **Gson**: 2.13.1
 - **jsoup**: 1.15.4
 - **CommonMark**: 0.24.0
@@ -705,7 +705,7 @@ See `build.gradle` for complete dependency list.
 java -version
 
 # Set JAVA_HOME if needed
-export JAVA_HOME=/path/to/java/25
+export JAVA_HOME=/path/to/java/21
 ```
 
 ### Runtime Issues
@@ -986,9 +986,9 @@ java-resumes/
 
 ### Backend
 
-- **Language**: Java 25 LTS (Eclipse Temurin)
+- **Language**: Java 21 LTS (Eclipse Temurin)
 - **Framework**: Spring Boot 3.5.1
-- **Build Tool**: Gradle 8.7
+- **Build Tool**: Gradle 8.10
 - **Testing**: JUnit 5, Mockito (80%+ coverage required)
 - **Code Quality**: Checkstyle 10.14.2 (100% compliance)
 - **JSON**: Gson
