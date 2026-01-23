@@ -132,7 +132,7 @@ To add a new prompt:
 6. Create comprehensive unit tests
 7. Update frontend (if needed)
 
-**Full guide:** See [docs/ADD_NEW_PROMPT.md](../../docs/ADD_NEW_PROMPT.md)
+**Full guide:** See [docs/PROMPTS_CONFIGURATION.md](../../docs/PROMPTS_CONFIGURATION.md)
 
 ## File Structure
 
@@ -147,9 +147,8 @@ prompts/
 ## Related Documentation
 
 - [PROMPTS_CONFIGURATION.md](../../docs/PROMPTS_CONFIGURATION.md) - Configuration and deployment
-- [ADD_NEW_PROMPT.md](../../docs/ADD_NEW_PROMPT.md) - Step-by-step guide for adding new prompts
 - [Architecture.md](../../docs/architecture/ARCHITECTURE.md) - System architecture
-- [API Documentation](../../docs/api.md) - REST API endpoints
+- [BACKEND_README.md](../../docs/BACKEND_README.md) - Backend API documentation and endpoints
 
 ---
 

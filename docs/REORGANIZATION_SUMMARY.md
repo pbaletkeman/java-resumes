@@ -74,7 +74,7 @@ Successfully completed a comprehensive documentation reorganization and custom i
 
 **Content**:
 
-- Project overview and tech stack (Java 25, Spring Boot 3.5.1, Gradle 8.7)
+- Project overview and tech stack (Java 21, Spring Boot 3.5.1, Gradle 8.7)
 - Complete directory structure with 14+ main files and test files
 - Build instructions: `./gradlew clean build`, test commands, Checkstyle validation
 - Configuration file references (4 application profiles, Checkstyle XML)

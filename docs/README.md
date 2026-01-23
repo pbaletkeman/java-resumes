@@ -105,7 +105,7 @@ See [Architecture.md](./Architecture.md) for detailed architecture diagrams incl
 | Component               | Technology        | Version  |
 | ----------------------- | ----------------- | -------- |
 | **Framework**           | Spring Boot       | 3.5+     |
-| **Language**            | Java              | 17 (LTS) |
+| **Language**            | Java              | 21 (LTS) |
 | **Build Tool**          | Gradle            | Latest   |
 | **API Documentation**   | SpringDoc OpenAPI | 2.8.7    |
 | **JSON Processing**     | Gson              | 2.13.1   |
@@ -188,7 +188,7 @@ java-resumes/
 
 ### Prerequisites
 
-- **Java 17 LTS** (or compatible JDK)
+- **Java 21 LTS** (or compatible JDK)
 - **Gradle** build tool
 - **LLM Service** running locally:
   - Ollama: https://ollama.ai

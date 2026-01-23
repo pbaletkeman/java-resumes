@@ -8,7 +8,7 @@ Fast reference for common build, test, and deployment tasks.
 # Check versions
 node --version    # Should be v20+
 npm --version     # Should be 11+
-java -version     # Should be Java 25
+java -version     # Should be Java 21
 gradle --version  # Should be 9.3+
 ```
 

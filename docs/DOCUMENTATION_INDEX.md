@@ -18,7 +18,7 @@ Complete guide to all documentation files for this project.
    - Development workflow
    - Common patterns
 
-3. **[docs/Architecture.md](docs/Architecture.md)** - System design
+3. **[docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)** - System design
    - 9 Mermaid diagrams
    - Component interactions
    - Data flow visualization
@@ -47,7 +47,7 @@ Complete guide to all documentation files for this project.
 | File                                                          | Purpose             | Audience             | Read Time |
 | ------------------------------------------------------------- | ------------------- | -------------------- | --------- |
 | **[README.md](docs/README.md)**                               | Comprehensive guide | Everyone             | 45 min    |
-| **[Architecture.md](docs/Architecture.md)**                   | System design       | Architects/Dev Leads | 30 min    |
+| **[Architecture.md](docs/architecture/ARCHITECTURE.md)**                   | System design       | Architects/Dev Leads | 30 min    |
 | **[DOCUMENTATION_SUMMARY.md](docs/DOCUMENTATION_SUMMARY.md)** | Index & statistics  | Everyone             | 10 min    |
 
 ### Related Documentation
@@ -78,7 +78,7 @@ Complete guide to all documentation files for this project.
    - Understand project structure
    - Review common patterns
 
-4. Study [docs/Architecture.md](docs/Architecture.md) (20 min)
+4. Study [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) (20 min)
    - Visualize system components
    - Understand data flow
 
@@ -104,7 +104,7 @@ Complete guide to all documentation files for this project.
 
 ### I'm a System Architect
 
-1. Read [docs/Architecture.md](docs/Architecture.md) (30 min)
+1. Read [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) (30 min)
    - Review all 9 diagrams
    - Understand component relationships
    - Study data models
@@ -127,7 +127,7 @@ Complete guide to all documentation files for this project.
 1. Read [README.md](README.md) (5 min)
 2. Review screenshots in [README.md - Screenshots](README.md#%EF%B8%8F-screenshots) (2 min)
 3. Check [docs/README.md - Features](docs/README.md#features) (5 min)
-4. Skim [docs/Architecture.md - 1000ft Process View](docs/Architecture.md#1000ft-process-view) (5 min)
+4. Skim [docs/architecture/ARCHITECTURE.md - 1000ft Process View](docs/architecture/ARCHITECTURE.md#1000ft-process-view) (5 min)
 
 **Total Time**: ~17 minutes
 
@@ -138,7 +138,7 @@ Complete guide to all documentation files for this project.
 1. Read relevant section in [copilot-instructions.md](copilot-instructions.md)
 2. Find class in [copilot-instructions.md - Project Structure](copilot-instructions.md#project-structure)
 3. Review component in [docs/README.md - Core Components](docs/README.md#core-components)
-4. Check related diagrams in [docs/Architecture.md](docs/Architecture.md)
+4. Check related diagrams in [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)
 5. Look at unit tests for patterns
 6. Reference test patterns in [copilot-instructions.md - Testing Standards](copilot-instructions.md#testing-standards)
 
@@ -149,7 +149,7 @@ Complete guide to all documentation files for this project.
 1. Review [copilot-instructions.md - Development Workflow](copilot-instructions.md#development-workflow)
 2. Read [copilot-instructions.md - Common Patterns](copilot-instructions.md#common-patterns)
 3. Study relevant test in [docs/README.md - Testing](docs/README.md#testing)
-4. Check [docs/Architecture.md](docs/Architecture.md) for design guidance
+4. Check [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) for design guidance
 5. Reference existing implementation in source code
 
 ---
@@ -171,7 +171,7 @@ Complete guide to all documentation files for this project.
 
 - The project about? → [README.md - Problem Statement](README.md#problem-statement)
 - The tech stack? → [README.md - Technology Stack](README.md#-technology-stack)
-- The architecture? → [docs/Architecture.md](docs/Architecture.md)
+- The architecture? → [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)
 - The component X? → [docs/README.md - Core Components](docs/README.md#core-components)
 - The class Y? → [copilot-instructions.md - Key Components](copilot-instructions.md#key-components)
 
@@ -208,22 +208,22 @@ Test Files Referenced: 3
 
 - copilot-instructions.md (developer guide)
 - docs/README.md (detailed documentation)
-- docs/Architecture.md (architecture diagrams)
+- docs/architecture/ARCHITECTURE.md (architecture diagrams)
 
 **copilot-instructions.md** contains links to:
 
 - docs/README.md (API reference)
-- docs/Architecture.md (design patterns)
+- docs/architecture/ARCHITECTURE.md (design patterns)
 - Test files (testing examples)
 
 **docs/README.md** contains links to:
 
-- docs/Architecture.md (architecture diagrams)
+- docs/architecture/ARCHITECTURE.md (architecture diagrams)
 - copilot-instructions.md (development guide)
 - ../README.md (quick start)
 - Related markdown files
 
-**docs/Architecture.md** contains links to:
+**docs/architecture/ARCHITECTURE.md** contains links to:
 
 - docs/README.md (detailed documentation)
 - Technology documentation
@@ -252,7 +252,7 @@ All files have:
 1. README.md (5 min)
 2. Quick Start section (15 min)
 3. copilot-instructions.md (30 min)
-4. docs/Architecture.md (20 min)
+4. docs/architecture/ARCHITECTURE.md (20 min)
 5. Run the application (10 min)
 
 **Total**: ~80 minutes
@@ -260,7 +260,7 @@ All files have:
 ### Intermediate Path (Ready to Develop)
 
 1. copilot-instructions.md - Project Structure (10 min)
-2. docs/Architecture.md (20 min)
+2. docs/architecture/ARCHITECTURE.md (20 min)
 3. docs/README.md - Core Components (15 min)
 4. Review unit tests (15 min)
 5. Review source code (20 min)
@@ -269,7 +269,7 @@ All files have:
 
 ### Advanced Path (System Design)
 
-1. docs/Architecture.md (30 min)
+1. docs/architecture/ARCHITECTURE.md (30 min)
 2. All Mermaid diagrams (15 min)
 3. docs/README.md - Core Components (20 min)
 4. Analyze source code structure (20 min)
@@ -286,7 +286,7 @@ All files have:
 1. **Bookmark Key Files**
    - [README.md](README.md) - Quick reference
    - [copilot-instructions.md](copilot-instructions.md) - Development guide
-   - [docs/Architecture.md](docs/Architecture.md) - System design
+   - [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) - System design
 
 2. **Use Table of Contents**
    - Every document starts with a TOC
@@ -316,7 +316,7 @@ All files have:
 **For Development Questions**:
 
 - [copilot-instructions.md](copilot-instructions.md)
-- [docs/Architecture.md](docs/Architecture.md)
+- [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)
 
 **For Feature Details**:
 

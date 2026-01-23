@@ -271,7 +271,7 @@ Explanation of what to see...
 | File                     | Category           | Purpose                   |
 | ------------------------ | ------------------ | ------------------------- |
 | `DOCKER_DEV_SETUP.md`    | Setup, UI          | Development environment   |
-| `docs/Architecture.md`   | Architecture, API  | System design reference   |
+| `docs/architecture/ARCHITECTURE.md`   | Architecture, API  | System design reference   |
 | `docs/BACKEND_README.md` | API, architecture  | Backend API documentation |
 | `README.md` (root)       | Setup, UI overview | Project introduction      |
 
@@ -298,7 +298,7 @@ Screenshots are referenced in:
 - **docs/README.md** - Comprehensive documentation
 - **docs/BACKEND_README.md** - Backend setup guide
 - **frontend/README.md** - Frontend development guide
-- **docs/Architecture.md** - System architecture details
+- **docs/architecture/ARCHITECTURE.md** - System architecture details
 
 ## 💾 Storage & Optimization
 
@@ -322,7 +322,7 @@ Screenshots should be reviewed and updated:
 
 - [SCREENSHOTS_GUIDE.md](SCREENSHOTS_GUIDE.md) - Complete guide
 - [../../README.md](../../README.md) - Project README with screenshot references
-- [../../docs/Architecture.md](../../docs/Architecture.md) - Architecture documentation
+- [../../docs/architecture/ARCHITECTURE.md](../../docs/architecture/ARCHITECTURE.md) - Architecture documentation
 
 ## 🎨 Tools & Resources
 

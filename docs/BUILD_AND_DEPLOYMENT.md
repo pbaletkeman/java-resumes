@@ -30,7 +30,7 @@ Complete guide to building, testing, and deploying the java-resumes application 
 
 **Backend:**
 
-- Java 25 LTS (https://corretto.aws/downloads/latest/amazon-corretto-25-x64-linux-jdk.tar.gz)
+- Java 21 LTS (https://adoptium.net/)
 - Gradle 9.3+ (included with project via wrapper)
 
 ### Quick Build (All-in-One)
@@ -251,15 +251,15 @@ docker push myapp-frontend:latest
 
 ### Overview
 
-The backend is a Spring Boot 3.5.1 application using Java 25 LTS, packaged as a fat JAR for easy deployment.
+The backend is a Spring Boot 3.5.1 application using Java 21 LTS, packaged as a fat JAR for easy deployment.
 
 **Key Statistics:**
 
 - Framework: Spring Boot 3.5.1
-- Language: Java 25 LTS
+- Language: Java 21 LTS
 - Build Tool: Gradle 9.3
 - JAR Size: ~80-120MB
-- Runtime: Java 25 LTS
+- Runtime: Java 21 LTS
 
 ### Quick Start (Backend Only)
 
@@ -274,7 +274,7 @@ Output: `build/libs/java-resumes-*.jar`
 #### Step 1: Prerequisites Check
 
 ```bash
-java -version       # Should be Java 25
+java -version       # Should be Java 21
 gradle --version    # Should be 9.3+
 ```
 
@@ -661,7 +661,7 @@ kubectl rollout status deployment/backend
 **Steps:**
 
 1. Checkout code
-2. Setup Java 25
+2. Setup Java 21
 3. Run tests
 4. Run code quality checks
 5. Build fat JAR
@@ -808,6 +808,6 @@ UPLOAD_PATH=./uploads
 
 ## Support & Resources
 
-- **Documentation**: [docs/Architecture.md](../Architecture.md)
+- **Documentation**: [docs/architecture/ARCHITECTURE.md](../Architecture.md)
 - **GitHub Issues**: https://github.com/pbaletkeman/java-resumes/issues
 - **GitHub Discussions**: https://github.com/pbaletkeman/java-resumes/discussions

@@ -96,7 +96,7 @@ Successfully created comprehensive documentation for the Java Resumes project.
 
 ---
 
-#### 4. [docs/Architecture.md](../docs/Architecture.md)
+#### 4. [docs/architecture/ARCHITECTURE.md](../docs/architecture/ARCHITECTURE.md)
 
 **Purpose**: System architecture with visual Mermaid diagrams
 
@@ -176,7 +176,7 @@ Successfully created comprehensive documentation for the Java Resumes project.
 | README.md               | ~150       | 2                     | 5                |
 | copilot-instructions.md | ~1,200     | 0                     | 15+              |
 | docs/README.md          | ~2,500     | 0                     | 20+              |
-| docs/Architecture.md    | ~1,800     | 9 Mermaid             | 0                |
+| docs/architecture/ARCHITECTURE.md    | ~1,800     | 9 Mermaid             | 0                |
 | **TOTAL**               | **~5,650** | **11 visualizations** | **40+ examples** |
 
 ---
@@ -189,24 +189,24 @@ Successfully created comprehensive documentation for the Java Resumes project.
 
 - copilot-instructions.md (developer guide)
 - docs/README.md (detailed documentation)
-- docs/Architecture.md (architecture diagrams)
+- docs/architecture/ARCHITECTURE.md (architecture diagrams)
 
 **copilot-instructions.md links to**:
 
 - docs/README.md (for detailed API reference)
-- docs/Architecture.md (for design patterns)
+- docs/architecture/ARCHITECTURE.md (for design patterns)
 - build.gradle (for dependencies)
 - Unit test files (for testing examples)
 
 **docs/README.md links to**:
 
-- docs/Architecture.md (architecture diagrams)
+- docs/architecture/ARCHITECTURE.md (architecture diagrams)
 - copilot-instructions.md (development guide)
 - ROOT README.md (quick start)
 - ../MIGRATION_SUMMARY.md (migration history)
 - ../CHECKSTYLE_COMPLIANCE_REPORT.md (code quality)
 
-**docs/Architecture.md links to**:
+**docs/architecture/ARCHITECTURE.md links to**:
 
 - docs/README.md (detailed documentation)
 - Technology versions and configuration
@@ -237,12 +237,12 @@ All markdown files contain:
 
 1. Start with [README.md](../README.md) - Quick overview
 2. Read [copilot-instructions.md](../copilot-instructions.md) - Setup and standards
-3. Review [docs/Architecture.md](../docs/Architecture.md) - System design
+3. Review [docs/architecture/ARCHITECTURE.md](../docs/architecture/ARCHITECTURE.md) - System design
 4. Reference [docs/README.md](../docs/README.md) - Detailed API and components
 
 **For Architects/Designers**:
 
-- [docs/Architecture.md](../docs/Architecture.md) - Complete design overview
+- [docs/architecture/ARCHITECTURE.md](../docs/architecture/ARCHITECTURE.md) - Complete design overview
 - Mermaid diagrams for visualization
 - Component interaction flows
 - Technology stack documentation
@@ -257,7 +257,7 @@ All markdown files contain:
 
 - [copilot-instructions.md](../copilot-instructions.md) - Development workflow
 - [docs/README.md](../docs/README.md#core-components) - Component descriptions
-- [docs/Architecture.md](../docs/Architecture.md) - System design
+- [docs/architecture/ARCHITECTURE.md](../docs/architecture/ARCHITECTURE.md) - System design
 
 ---
 
@@ -356,7 +356,7 @@ All documentation created with:
 1. **Review Documentation**
    - Read [README.md](../README.md) for quick overview
    - Review [copilot-instructions.md](../copilot-instructions.md) for development standards
-   - Study [docs/Architecture.md](../docs/Architecture.md) for system design
+   - Study [docs/architecture/ARCHITECTURE.md](../docs/architecture/ARCHITECTURE.md) for system design
    - Reference [docs/README.md](../docs/README.md) for detailed features
 
 2. **Set Up Local Environment**
@@ -376,7 +376,7 @@ All documentation created with:
 5. **Start Development**
    - Use [copilot-instructions.md](../copilot-instructions.md#development-workflow) for workflow
    - Reference [copilot-instructions.md](../copilot-instructions.md#common-patterns) for code patterns
-   - Follow [docs/Architecture.md](../docs/Architecture.md) for system design guidance
+   - Follow [docs/architecture/ARCHITECTURE.md](../docs/architecture/ARCHITECTURE.md) for system design guidance
 
 ---
 
@@ -385,6 +385,6 @@ All documentation created with:
 For questions about:
 
 - **Features & Usage** → See [docs/README.md](../docs/README.md)
-- **Architecture & Design** → See [docs/Architecture.md](../docs/Architecture.md)
+- **Architecture & Design** → See [docs/architecture/ARCHITECTURE.md](../docs/architecture/ARCHITECTURE.md)
 - **Development Standards** → See [copilot-instructions.md](../copilot-instructions.md)
 - **Quick Overview** → See [README.md](../README.md)

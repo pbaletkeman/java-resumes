@@ -485,7 +485,7 @@ Open your browser and test the following:
 
 1. Open project root
 2. Select "gradle" as build tool
-3. Set JDK to Java 25
+3. Set JDK to Java 21
 4. Enable annotations processing (Settings > Build > Compiler > Annotation Processors)
 
 **VS Code**:
@@ -604,8 +604,8 @@ Ctrl+C
 java -version
 
 # If wrong version, set JAVA_HOME
-export JAVA_HOME=/path/to/jdk-25  # Unix/Mac
-set JAVA_HOME=C:\path\to\jdk-25   # Windows
+export JAVA_HOME=/path/to/jdk-21  # Unix/Mac
+set JAVA_HOME=C:\path\to\jdk-21   # Windows
 ```
 
 **LLM Connection Error**:
@@ -1229,7 +1229,7 @@ plugins {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
@@ -1856,7 +1856,7 @@ implementation 'org.springframework.boot:spring-boot-starter-actuator'
 java -version
 
 # Set JAVA_HOME
-export JAVA_HOME=/path/to/jdk-17
+export JAVA_HOME=/path/to/jdk-21
 ```
 
 **Issue**: Gradle build fails

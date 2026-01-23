@@ -867,7 +867,7 @@ For broader guidance on the java-resumes project, see:
 
 - [copilot-instructions.md](../../copilot-instructions.md) - Repository-wide guidelines
 - [AGENTS.md](../../AGENTS.md) - AI agent development guidelines
-- [docs/Architecture.md](../../docs/Architecture.md) - System architecture
+- [docs/architecture/ARCHITECTURE.md](../../docs/architecture/ARCHITECTURE.md) - System architecture
 - [.github/instructions/backend.instructions.md](backend.instructions.md) - Backend development
 - [.github/instructions/frontend.instructions.md](frontend.instructions.md) - Frontend development
 

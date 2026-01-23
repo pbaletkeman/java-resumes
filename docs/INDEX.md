@@ -165,7 +165,7 @@ java-resumes/
 
 ### Backend
 
-- **Language**: Java 17 LTS (Corretto)
+- **Language**: Java 21 LTS (Eclipse Temurin)
 - **Framework**: Spring Boot 3.5.1
 - **Build Tool**: Gradle 8.7
 - **Testing**: JUnit 5, Mockito

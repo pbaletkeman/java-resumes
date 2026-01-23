@@ -125,7 +125,7 @@ Generated Documents (MD + PDF)
 ┌─────────────────────────────────────────────────────────────────────┐
 │                       BACKEND (Port 8080)                           │
 │  ┌───────────────────────────────────────────────────────────┐      │
-│  │  Spring Boot 3.5.1 + Java 25 + Gradle                     │      │
+│  │  Spring Boot 3.5.1 + Java 21 + Gradle                     │      │
 │  │  ┌─────────────────────────────────────────────────┐      │      │
 │  │  │  Controller Layer (REST Endpoints)              │      │      │
 │  │  │  - ResumeController                             │      │      │
@@ -184,7 +184,7 @@ graph TB
     end
 
     subgraph "Backend Container - Port 8080"
-        SpringBoot[Spring Boot 3.5.1 + Java 25]
+        SpringBoot[Spring Boot 3.5.1 + Java 21]
         Controller[REST Controllers]
         Service[Service Layer]
         Storage[File Storage Service]
@@ -268,7 +268,7 @@ graph LR
 
 | Component           | Technology        | Version | Purpose                       |
 | ------------------- | ----------------- | ------- | ----------------------------- |
-| **Language**        | Java              | 25 LTS  | Backend programming language  |
+| **Language**        | Java              | 21 LTS  | Backend programming language  |
 | **Framework**       | Spring Boot       | 3.5.1   | Application framework         |
 | **Build Tool**      | Gradle            | 8.7     | Build automation              |
 | **API Docs**        | SpringDoc OpenAPI | 2.8.7   | Swagger/OpenAPI documentation |
@@ -490,7 +490,7 @@ java-resumes/
 
 #### Prerequisites
 
-- Java 25 LTS JDK installed
+- Java 21 LTS JDK installed
 - Gradle 8.7+ (or use included wrapper)
 - IDE (IntelliJ IDEA, Eclipse, VS Code)
 
@@ -982,7 +982,7 @@ The java-resumes project includes comprehensive visual documentation and screens
 
 <center>
 
-![Main Content Tab - Upload Interface - Shows job description input, resume upload, optimization type selection, and process button](docs/screenshots/frontend/main-tab.png)
+![Main Content Tab - Upload Interface - Shows job description input, resume upload, optimization type selection, and process button](docs/screenshots/frontend/main-tab-dark.png)
 
 _Upload job descriptions and resumes via text paste or file upload. Select optimization type (Resume, Cover Letter, or both). Adjust LLM parameters (temperature, model). Click Process to start optimization._
 
@@ -1002,7 +1002,7 @@ _Upload job descriptions and resumes via text paste or file upload. Select optim
 
 <center>
 
-![File History Panel - Shows list of uploaded and generated files with timestamps, sizes, and action buttons](docs/screenshots/frontend/file-history.png)
+![File History Panel - Shows list of uploaded and generated files with timestamps, sizes, and action buttons](docs/screenshots/frontend/file-history-dark.png)
 
 _Always-visible panel showing all uploaded and generated files with download and delete options._
 
@@ -1021,7 +1021,7 @@ _Always-visible panel showing all uploaded and generated files with download and
 
 <center>
 
-![Additional Tools Tab - Shows markdown input area, convert button, and PDF preview of output](docs/screenshots/frontend/tools-tab.png)
+![Additional Tools Tab - Shows markdown input area, convert button, and PDF preview of output](docs/screenshots/frontend/tools-tab-dark.png)
 
 _Convert markdown documents to professionally formatted PDFs with custom styling._
 
@@ -1041,7 +1041,7 @@ _Convert markdown documents to professionally formatted PDFs with custom styling
 
 <center>
 
-![Light Theme Interface - Shows full application with light background, dark text, and high contrast](docs/screenshots/frontend/light-theme.png)
+![Light Theme Interface - Shows full application with light background, dark text, and high contrast](docs/screenshots/frontend/main-tab-light.png)
 
 _Clean and professional light theme for comfortable daytime use with excellent readability._
 
@@ -1051,7 +1051,7 @@ _Clean and professional light theme for comfortable daytime use with excellent r
 
 <center>
 
-![Dark Theme Interface - Shows full application with dark background, light text, and accent colors](docs/screenshots/frontend/dark-theme.png)
+![Dark Theme Interface - Shows full application with dark background, light text, and accent colors](docs/screenshots/frontend/main-tab-dark.png)
 
 _Modern dark theme for reduced eye strain in low-light environments with vibrant accent colors._
 
@@ -1061,7 +1061,7 @@ _Modern dark theme for reduced eye strain in low-light environments with vibrant
 
 <center>
 
-![Mobile Responsive Design - Shows interface on iPhone-sized screen with optimized layout](docs/screenshots/frontend/responsive-mobile.png)
+![Mobile Responsive Design - Shows interface on iPhone-sized screen with optimized layout](docs/screenshots/frontend/main-tab-light.png)
 
 _Fully responsive design works seamlessly on mobile devices, tablets, and desktops._
 
@@ -1111,13 +1111,13 @@ _All available REST API endpoints with parameters and response formats._
 
 <center>
 
-![System Architecture - Shows frontend, backend, LLM service, and file storage components with connections](docs/screenshots/architecture/system-architecture.png)
+![System Architecture - Shows frontend, backend, LLM service, and file storage components with connections](docs/screenshots/architecture/document-processing-flow.png)
 
 _High-level view of all system components and how they interact._
 
 </center>
 
-See [**Architecture Diagrams**](docs/screenshots/architecture/DIAGRAMS.md) for detailed ASCII diagrams including:
+See [**Architecture Diagrams**](docs/screenshots/architecture/DIAGRAMS.md) for detailed diagrams including:
 
 - Component architecture
 - Data flow diagrams
@@ -1737,7 +1737,7 @@ All documentation files are located in [docs/](docs/):
 | ------------------------------------------------ | ------------------------------------------------- |
 | [docs/BACKEND_README.md](docs/BACKEND_README.md) | Backend setup, build commands, and API reference  |
 | [docs/README.md](docs/README.md)                 | Frontend setup, components, and development guide |
-| [docs/Architecture.md](docs/Architecture.md)     | System architecture and design patterns           |
+| [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) | System architecture and design patterns           |
 
 ### Backend-Specific Guidance
 
@@ -1763,7 +1763,7 @@ All documentation files are located in [docs/](docs/):
 
 ## 🎯 Project Status
 
-- ✅ **Backend**: Complete with Spring Boot 3.5.1 and Java 25
+- ✅ **Backend**: Complete with Spring Boot 3.5.1 and Java 21
 - ✅ **Frontend**: Complete with React 19, TypeScript, and PrimeReact
 - ✅ **Docker**: Multi-container setup with Docker Compose
 - ✅ **Testing**: 80%+ coverage on both frontend and backend
@@ -1791,7 +1791,7 @@ Comprehensive documentation for development, deployment, and operations:
 
 - **[Quick Build Reference](QUICK_BUILD_REFERENCE.md)** - Fast commands for common tasks
 - **[Build and Deployment Guide](docs/BUILD_AND_DEPLOYMENT.md)** - Complete workflow guide
-- **[Architecture Documentation](docs/Architecture.md)** - System design and component diagrams
+- **[Architecture Documentation](docs/architecture/ARCHITECTURE.md)** - System design and component diagrams
 - **[Frontend Guide](frontend/README.md)** - React development setup and configuration
 - **[Backend Guide](docs/BACKEND_README.md)** - Spring Boot development setup and configuration
 

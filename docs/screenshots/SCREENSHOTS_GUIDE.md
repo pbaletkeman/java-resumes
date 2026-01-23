@@ -406,7 +406,7 @@ Every screenshot in documentation should have:
 ```markdown
 ![Alt text describing the image](docs/screenshots/{category}/{filename}.png)
 
-![Main Upload Interface showing job description and resume inputs](docs/screenshots/frontend/main-tab.png)
+![Main Upload Interface showing job description and resume inputs](docs/screenshots/frontend/main-tab-dark.png)
 ```
 
 ### Best Practices

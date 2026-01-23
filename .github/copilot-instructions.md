@@ -460,7 +460,7 @@ for (int attempt = 0; attempt < MAX_RETRIES; attempt++) {
 
 6. **Update Documentation**
    - Update docs/README.md if user-facing
-   - Update docs/Architecture.md if design changes
+   - Update docs/architecture/ARCHITECTURE.md if design changes
    - Add code comments for complex logic
 
 ### Modifying Existing Code
@@ -750,7 +750,7 @@ server.port=8081
 | Document         | Purpose                | Location                                                             |
 | ---------------- | ---------------------- | -------------------------------------------------------------------- |
 | Detailed README  | Setup, features, API   | [docs/README.md](docs/README.md)                                     |
-| Architecture     | Design diagrams, flows | [docs/Architecture.md](docs/Architecture.md)                         |
+| Architecture     | Design diagrams, flows | [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) |
 | Quick Start      | Initial setup          | [README.md](README.md)                                               |
 | Checkstyle Rules | Code quality           | [config/checkstyle/checkstyle.xml](config/checkstyle/checkstyle.xml) |
 | Build Config     | Dependencies           | [build.gradle](build.gradle)                                         |
@@ -878,7 +878,7 @@ When working on this project:
 Complete documentation is organized in the [docs/](docs/) directory:
 
 - **[docs/INDEX.md](docs/INDEX.md)** - Complete documentation index and navigation
-- **[docs/Architecture.md](docs/Architecture.md)** - System architecture and design patterns
+- **[docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)** - System architecture and design patterns
 - **[docs/BACKEND_README.md](docs/BACKEND_README.md)** - Backend development guide and setup
 - **[docs/README.md](docs/README.md)** - Frontend development guide and setup
 - **[docs/wip/STATUS.md](docs/wip/STATUS.md)** - Current project status and milestones
@@ -1046,7 +1046,7 @@ java-resumes/
 
 **For questions about:**
 
-- **Architecture**: See [docs/Architecture.md](docs/Architecture.md)
+- **Architecture**: See [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)
 - **Backend Setup**: See [docs/BACKEND_README.md](docs/BACKEND_README.md)
 - **Frontend Setup**: See [docs/README.md](docs/README.md)
 - **Code Quality**: See [docs/CHECKSTYLE_AND_OLLAMA.md](docs/CHECKSTYLE_AND_OLLAMA.md)

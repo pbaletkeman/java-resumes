@@ -777,7 +777,7 @@ For more information about project standards and guidelines:
 - [.github/instructions/frontend.instructions.md](.github/instructions/frontend.instructions.md) - Frontend-specific guidelines
 - [docs/BACKEND_README.md](docs/BACKEND_README.md) - Backend setup and API documentation
 - [docs/README.md](docs/README.md) - Frontend setup and component documentation
-- [docs/Architecture.md](docs/architecture/ARCHITECTURE.md) - System architecture and design
+- [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) - System architecture and design
 
 ---
 
