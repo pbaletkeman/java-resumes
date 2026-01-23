@@ -26,7 +26,16 @@ public final class BackgroundResume implements Runnable {
   }
 
   public BackgroundResume(Optimize optimize, String root) {
-    String configStr = Utility.readFileAsString("config.json");
+    // Try to load config from app.config.path system property first
+    String configPath = System.getProperty("app.config.path");
+    String configStr;
+
+    if (configPath != null && !configPath.isEmpty()) {
+      configStr = Utility.readFileAsString(configPath, "config.json");
+    } else {
+      configStr = Utility.readFileAsString("config.json");
+    }
+
     Config c = new Gson().fromJson(configStr, Config.class);
     this.optimize = optimize;
     this.endpoint = c.getEndpoint();

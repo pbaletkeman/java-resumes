@@ -1,581 +1,243 @@
-# Java Resumes - Comprehensive Documentation
+# Java Resumes - Documentation
 
-## Table of Contents
+Welcome to Java Resumes - an AI-powered full-stack resume and cover letter optimization application.
 
-1. [Overview](#overview)
-2. [Problem Statement](#problem-statement)
-3. [Solution Architecture](#solution-architecture)
-4. [Features](#features)
-5. [Technology Stack](#technology-stack)
-6. [Project Structure](#project-structure)
-7. [Getting Started](#getting-started)
-8. [API Endpoints](#api-endpoints)
-9. [Core Components](#core-components)
-10. [Testing](#testing)
-11. [Configuration](#configuration)
-12. [Related Documentation](#related-documentation)
+This documentation is organized into focused sections to make it easy to find what you need.
 
----
+## 📚 Documentation Index
 
-## Overview
+### Getting Started
 
-**Java Resumes** is an AI-powered resume and cover letter optimization system that leverages Large Language Models (LLMs) to create tailored job application documents. The application accepts a job description and existing resume, then generates optimized versions in both Markdown and PDF formats using an OpenAI-compatible API service.
+- **[QUICK_START.md](QUICK_START.md)** - Get up and running in minutes with Docker Compose
+- **[CONFIGURATION.md](CONFIGURATION.md)** - Configure external config paths and LLM services
 
-The solution helps job seekers:
+### Core Documentation
 
-- Save time on creating bespoke resumes for each job
-- Ensure all relevant skills are highlighted
-- Identify skill gaps and learning opportunities
-- Generate ATS-friendly documents
-- Create professional cover letters
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - System design, component overview, and data flow
+- **[FEATURES.md](FEATURES.md)** - Complete feature list and capabilities
+- **[TECHNOLOGY_STACK.md](TECHNOLOGY_STACK.md)** - Technologies used and versions
 
----
+### Development & Deployment
 
-## Problem Statement
+- **[DEVELOPMENT_SETUP.md](DEVELOPMENT_SETUP.md)** - Backend and frontend development setup
+- **[PRODUCTION_DEPLOYMENT.md](PRODUCTION_DEPLOYMENT.md)** - Production deployment and environment configuration
+- **[API_REFERENCE.md](API_REFERENCE.md)** - Complete REST API documentation and endpoints
 
-### The Challenge
+### Testing & Quality
 
-Every job posting requires a uniquely tailored resume and cover letter, which can take an hour or more to create manually. During this process, applicants face several critical risks:
+- **[TESTING.md](TESTING.md)** - Testing strategies and running tests
+- **[CODE_QUALITY.md](CODE_QUALITY.md)** - Code quality standards and checks
 
-- **Missed Details**: May overlook important requirements in the job description
-- **Unneeded Content**: Accidentally include irrelevant experience that turns off employers
-- **Skill Omissions**: Forget to include vital skills that employers are seeking
-- **No Guidance**: Lack of insight into certifications or technologies to learn
+### Troubleshooting & Reference
 
-### The Impact
-
-Manual resume customization is time-consuming and error-prone, potentially costing applicants interviews and job opportunities.
+- **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - Common issues and solutions
+- **[ENVIRONMENT_VARIABLES.md](ENVIRONMENT_VARIABLES.md)** - Complete environment variable reference
 
 ---
 
-## Solution Architecture
+## 🌟 Quick Navigation
 
-Java Resumes provides an intelligent, automated solution that:
-
-1. **Accepts Input**: Job description and current resume (PDF format)
-2. **Processes with AI**: Sends content to LLM for optimization
-3. **Generates Output**: Creates tailored resume and/or cover letter
-4. **Exports Multiple Formats**: Provides both Markdown and PDF versions
-5. **Identifies Opportunities**: Suggests certifications and skills to acquire
-
-### Architecture Overview
-
-See [Architecture.md](./Architecture.md) for detailed architecture diagrams including:
-
-- 1000ft process view
-- Sequence diagrams
-- Detailed process flow
-- Class dependency diagrams
+| Need                               | Go To                                                |
+| ---------------------------------- | ---------------------------------------------------- |
+| Start the app immediately          | [QUICK_START.md](QUICK_START.md)                     |
+| Configure external config/prompts  | [CONFIGURATION.md](CONFIGURATION.md)                 |
+| Understand the system architecture | [ARCHITECTURE.md](ARCHITECTURE.md)                   |
+| Setup development environment      | [DEVELOPMENT_SETUP.md](DEVELOPMENT_SETUP.md)         |
+| Deploy to production               | [PRODUCTION_DEPLOYMENT.md](PRODUCTION_DEPLOYMENT.md) |
+| See all API endpoints              | [API_REFERENCE.md](API_REFERENCE.md)                 |
+| Fix a problem                      | [TROUBLESHOOTING.md](TROUBLESHOOTING.md)             |
+| Find environment variable          | [ENVIRONMENT_VARIABLES.md](ENVIRONMENT_VARIABLES.md) |
+| Learn testing approach             | [TESTING.md](TESTING.md)                             |
+| Check code quality standards       | [CODE_QUALITY.md](CODE_QUALITY.md)                   |
 
 ---
 
-## Features
+## 🎯 Project Overview
 
-### Core Functionality
+**Java Resumes** helps job seekers create optimized, tailored resumes and cover letters using AI-powered Large Language Models.
 
-- **Resume Optimization**: AI-tailored resumes matching job descriptions
-- **Cover Letter Generation**: Professional cover letters aligned with job requirements
-- **Dual Format Export**: Both Markdown and PDF outputs
-- **Skills Gap Analysis**: Recommendations for learning/certifications
-- **Markdown to PDF**: Standalone conversion tool for any Markdown file
-- **File Management**: Upload, list, and delete documents via REST API
-- **ATS Optimization**: Documents formatted for Applicant Tracking System success
+### Key Features
 
-### User Interfaces
+- ✅ AI-powered resume optimization for specific job descriptions
+- ✅ Automated cover letter generation
+- ✅ Markdown to PDF/DOCX conversion
+- ✅ File management and download
+- ✅ Light and dark theme support
+- ✅ Full Docker containerization
+- ✅ External configuration support
 
-1. **Swagger UI**: Interactive API documentation
-   - Endpoint: `http://localhost:8080/swagger-ui/index.html`
-   - Full API exploration and testing
+### Technology Stack
 
-2. **Web UI (Spotlight)**: User-friendly React frontend
-   - Endpoint: `http://localhost:8080/spotlight/index.html`
-   - File uploads and optimization workflows
-   - Built with React, TypeScript, and PrimeReact
-
-3. **REST API**: Programmatic access
-   - Comprehensive endpoints for all operations
-   - JSON request/response format
+- **Frontend:** React 19, TypeScript, Vite, Tailwind CSS, PrimeReact
+- **Backend:** Spring Boot 3.5.1, Java 21 LTS, Gradle
+- **LLM Integration:** Ollama, LM Studio, or OpenAI API
+- **Deployment:** Docker, Docker Compose, Nginx
 
 ---
 
-## Technology Stack
+## 🚀 Getting Started
 
-### Backend
-
-| Component               | Technology        | Version  |
-| ----------------------- | ----------------- | -------- |
-| **Framework**           | Spring Boot       | 3.5+     |
-| **Language**            | Java              | 21 (LTS) |
-| **Build Tool**          | Gradle            | Latest   |
-| **API Documentation**   | SpringDoc OpenAPI | 2.8.7    |
-| **JSON Processing**     | Gson              | 2.13.1   |
-| **HTML/PDF Processing** | Flying Saucer     | 9.1.22   |
-| **Markdown Processing** | CommonMark        | 0.24.0   |
-| **Testing**             | JUnit 5           | Latest   |
-| **Code Quality**        | Checkstyle        | 10.14.2  |
-
-### Frontend
-
-| Component             | Technology             |
-| --------------------- | ---------------------- |
-| **UI Framework**      | React                  |
-| **Language**          | TypeScript             |
-| **Component Library** | PrimeReact             |
-| **Build System**      | Standard React tooling |
-
-### External Services
-
-- **LLM Service**: OpenAI-compatible API
-  - Supports Ollama (local)
-  - Supports LM Studio (local)
-  - Supports OpenAI API (cloud)
-- **Recommended Models**:
-  - gemma-3-4b-it-Q4_K_M
-  - Hermes-3-Llama-3.1-8B.Q4_K_M
-
----
-
-## Project Structure
-
-```shell
-java-resumes/
-├── src/
-│   ├── main/java/ca/letkeman/resumes/
-│   │   ├── RestServiceApplication.java          # Spring Boot entry point
-│   │   ├── BackgroundResume.java                # Background processing thread
-│   │   ├── Config.java                          # Configuration management
-│   │   ├── Utility.java                         # Utility functions
-│   │   ├── controller/
-│   │   │   └── ResumeController.java            # REST endpoints
-│   │   ├── service/
-│   │   │   ├── FilesStorageService.java         # File service interface
-│   │   │   └── FilesStorageServiceImpl.java      # File service implementation
-│   │   ├── model/
-│   │   │   ├── Optimize.java                    # Optimization request model
-│   │   │   └── FileInfo.java                    # File metadata
-│   │   ├── message/
-│   │   │   └── ResponseMessage.java             # API response wrapper
-│   │   └── optimizer/
-│   │       ├── ApiService.java                  # LLM API integration
-│   │       ├── HtmlToPdf.java                   # Markdown/HTML to PDF converter
-│   │       ├── ChatBody.java                    # LLM request model
-│   │       ├── Message.java                     # Chat message model
-│   │       └── responses/
-│   │           ├── LLMResponse.java             # LLM response wrapper
-│   │           ├── Choice.java                  # Response choice
-│   │           ├── Message.java                 # Response message
-│   │           ├── Stats.java                   # Generation statistics
-│   │           └── Usage.java                   # Token usage info
-│   └── test/java/ca/letkeman/resumes/
-│       ├── controller/ResumeControllerTest.java
-│       ├── model/OptimizeTest.java
-│       └── optimizer/ApiServiceTest.java
-├── config/
-│   └── checkstyle/checkstyle.xml               # Code quality rules
-├── build.gradle                                 # Build configuration
-├── README.md                                    # Quick start guide
-├── docs/
-│   ├── README.md                                # This file
-│   ├── Architecture.md                          # Architecture diagrams
-│   └── ...
-└── config.json                                  # LLM configuration
-
-```
-
----
-
-## Getting Started
-
-### Prerequisites
-
-- **Java 21 LTS** (or compatible JDK)
-- **Gradle** build tool
-- **LLM Service** running locally:
-  - Ollama: https://ollama.ai
-  - LM Studio: https://lmstudio.ai
-- **Git** for version control
-
-### Installation
-
-1. **Clone the repository**:
-
-   ```bash
-   git clone https://github.com/pbaletkeman/java-resumes.git
-   cd java-resumes
-   ```
-
-2. **Start LLM Service** (choose one):
-
-   **Option A: Ollama**
-
-   ```bash
-   ollama serve
-   # In another terminal:
-   ollama pull gemma-3-4b-it
-   ```
-
-   **Option B: LM Studio**
-   - Download LM Studio
-   - Load model: gemma-3-4b-it or Hermes-3-Llama-3.1-8B
-   - Start local server on default port
-
-3. **Configure LLM endpoint** in `config.json`:
-
-   ```json
-   {
-     "endpoint": "http://localhost:11434",
-     "apikey": "not-needed-for-local",
-     "model": "gemma-3-4b-it"
-   }
-   ```
-
-4. **Build the project**:
-
-   ```bash
-   ./gradlew build
-   ```
-
-5. **Run the application**:
-
-   ```bash
-   ./gradlew bootRun
-   ```
-
-6. **Access the UI**:
-   - Web UI: http://localhost:8080/spotlight/index.html
-   - API Docs: http://localhost:8080/swagger-ui/index.html
-
----
-
-## API Endpoints
-
-### File Management
-
-| Method     | Endpoint            | Description             |
-| ---------- | ------------------- | ----------------------- |
-| **GET**    | `/files`            | List all uploaded files |
-| **GET**    | `/files/{filename}` | Download specific file  |
-| **DELETE** | `/files/{filename}` | Delete specific file    |
-| **POST**   | `/delete-all`       | Delete all files        |
-
-### Resume/Cover Letter Generation
-
-| Method   | Endpoint            | Description                                 |
-| -------- | ------------------- | ------------------------------------------- |
-| **POST** | `/upload`           | Upload files and generate optimized content |
-| **POST** | `/markdownFile2PDF` | Convert Markdown to PDF                     |
-
-### Request/Response Models
-
-**POST /upload** Request:
-
-```json
-{
-  "optimize": {
-    "company": "string",
-    "jobTitle": "string",
-    "model": "gemma-3-4b-it",
-    "temperature": 0.15,
-    "promptType": ["Resume", "CoverLetter"],
-    "resume": "file content",
-    "jobDescription": "file content"
-  },
-  "files": {
-    "resume": "file",
-    "job": "file"
-  }
-}
-```
-
-**Response**:
-
-```json
-{
-  "message": "generating"
-}
-```
-
----
-
-## Core Components
-
-### Controller Layer (`ResumeController`)
-
-**Responsibilities**:
-
-- Handles HTTP requests for file operations
-- Manages file uploads and downloads
-- Coordinates optimization requests
-- Returns REST responses
-
-**Key Methods**:
-
-- `file2PDF()`: Converts Markdown/HTML to PDF
-- `uploadFiles()`: Processes resume and job description
-- `getListFiles()`: Lists available files
-- `downloadFile()`: Downloads file to client
-- `deleteFile()`: Removes file from storage
-
-### Service Layer (`FilesStorageService`)
-
-**Responsibilities**:
-
-- File persistence operations
-- Directory management
-- Resource loading
-
-**Implementations**:
-
-- `FilesStorageServiceImpl`: File system storage
-
-### Model Layer
-
-**`Optimize`**: Encapsulates optimization request parameters
-
-- `company`: Target company name
-- `jobTitle`: Target job position
-- `model`: LLM model identifier
-- `temperature`: Response randomness (0.0-1.0)
-- `promptType`: Array of output types (Resume, CoverLetter)
-- `resume`: Current resume content
-- `jobDescription`: Job posting content
-
-**`FileInfo`**: Metadata for uploaded files
-
-- `filename`: File identifier
-- `url`: Download URL
-- `size`: File size in bytes
-
-### Optimizer Layer (`ApiService`)
-
-**Responsibilities**:
-
-- Communicates with LLM service
-- Processes optimization requests
-- Generates optimized documents
-- Handles PDF conversion
-
-**Key Methods**:
-
-- `produceFiles()`: Main optimization workflow
-- `createChatBody()`: Builds LLM request
-- `sendHttpRequest()`: Communicates with LLM API
-- `processResponse()`: Extracts and formats LLM output
-
-### Supporting Classes
-
-**`BackgroundResume`**: Thread-based async processing
-
-- Runs optimization in background thread
-- Prevents blocking of API responses
-
-**`HtmlToPdf`**: PDF conversion utility
-
-- Converts Markdown/HTML to PDF
-- Uses Flying Saucer rendering engine
-
-**`Utility`**: Common utility functions
-
-- File operations
-- String manipulation
-- Configuration reading
-
----
-
-## Testing
-
-### Test Coverage
-
-The project includes comprehensive unit tests for:
-
-#### ResumeControllerTest
-
-```java
-// File: src/test/java/ca/letkeman/resumes/controller/ResumeControllerTest.java
-- test_successful_markdown_to_pdf_conversion()
-- test_unsuccessful_markdown_to_pdf_conversion()
-- test_handles_null_file_parameter()
-- test_invalidOptimize()
-- test_optimizeResume_with_valid_files()
-- test_getListFiles_with_files()
-```
-
-**Purpose**: Verifies REST endpoint functionality
-
-- Request validation
-- Response formatting
-- File handling
-- Error scenarios
-
-#### OptimizeTest
-
-```java
-// File: src/test/java/ca/letkeman/resumes/model/OptimizeTest.java
-```
-
-**Purpose**: Tests the Optimize request model
-
-- Parameter validation
-- Serialization/deserialization
-
-#### ApiServiceTest
-
-```java
-// File: src/test/java/ca/letkeman/resumes/optimizer/ApiServiceTest.java
-```
-
-**Purpose**: Tests LLM API integration
-
-- HTTP communication
-- Response parsing
-- Error handling
-
-### Running Tests
-
-**Run all tests**:
+### Fastest Way (Docker)
 
 ```bash
-./gradlew test
+# 1. Clone the repository
+git clone https://github.com/pbaletkeman/java-resumes.git
+cd java-resumes
+
+# 2. Configure (optional - see CONFIGURATION.md)
+# Edit config.json for LLM settings
+
+# 3. Start everything
+docker compose up --build
+
+# 4. Access the application
+# Frontend: http://localhost
+# API Docs: http://localhost:8080/swagger-ui/index.html
 ```
 
-**Run specific test class**:
+**For detailed setup:** → [QUICK_START.md](QUICK_START.md)
+
+### Development Setup
+
+For backend or frontend development, see:
+
+- Backend: [DEVELOPMENT_SETUP.md#backend-development](DEVELOPMENT_SETUP.md#-backend-development)
+- Frontend: [DEVELOPMENT_SETUP.md#frontend-development](DEVELOPMENT_SETUP.md#-frontend-development)
+
+---
+
+## ⚙️ External Configuration
+
+The application supports external configuration for production deployments.
+
+### External Config Path
+
+Set the config.json location via system property:
 
 ```bash
-./gradlew test --tests ResumeControllerTest
+java -jar app.jar -Dapp.config.path=/etc/java-resumes
 ```
 
-**Run with coverage**:
+Or as environment variable:
 
 ```bash
-./gradlew test --info
+export CONFIG_PATH=/etc/java-resumes
+java -jar app.jar
 ```
 
-### Test Best Practices
+### External Prompts Directory
 
-1. **Use MockMvc** for controller testing
-2. **Mock external services** (LLM API, file storage)
-3. **Test error conditions** and edge cases
-4. **Verify response formats** and status codes
-5. **Use meaningful assertions** for clarity
-
----
-
-## Configuration
-
-### Application Properties
-
-Create `application.properties` or `application.yml`:
-
-```properties
-# Server Configuration
-server.port=8080
-server.servlet.context-path=/
-
-# File Upload Configuration
-upload.path=./uploads
-spring.servlet.multipart.max-file-size=10MB
-spring.servlet.multipart.max-request-size=10MB
-
-# Logging
-logging.level.ca.letkeman=DEBUG
-logging.level.org.springframework.web=INFO
-```
-
-### LLM Configuration (`config.json`)
-
-```json
-{
-  "endpoint": "http://localhost:11434",
-  "apikey": "your-api-key-if-using-openai",
-  "model": "gemma-3-4b-it"
-}
-```
-
-**Supported Models**:
-
-- `gemma-3-4b-it` (4GB, good for CPU)
-- `Hermes-3-Llama-3.1-8B` (8GB, better quality)
-- Any OpenAI-compatible LLM
-
-### Code Quality Configuration
-
-Checkstyle rules are defined in `config/checkstyle/checkstyle.xml`.
-
-**Run quality checks**:
+Set custom prompt templates:
 
 ```bash
-./gradlew checkstyleMain checkstyleTest
+# In application.yml
+prompts:
+  external-dir: /etc/java-resumes/prompts
+
+# Or via environment variable
+export PROMPTS_DIR=/etc/java-resumes/prompts
+```
+
+**Learn more:** → [CONFIGURATION.md](CONFIGURATION.md)
+
+---
+
+## 📁 Documentation Structure
+
+```
+docs/
+├── README.md                          # This file (navigation hub)
+├── QUICK_START.md                     # Get started in minutes
+├── CONFIGURATION.md                   # External config & LLM setup
+├── ARCHITECTURE.md                    # System design & diagrams
+├── FEATURES.md                        # Complete feature list
+├── TECHNOLOGY_STACK.md                # Technologies & versions
+├── DEVELOPMENT_SETUP.md               # Dev environment setup
+├── PRODUCTION_DEPLOYMENT.md           # Deployment guide
+├── API_REFERENCE.md                   # REST API docs
+├── TESTING.md                         # Testing strategy
+├── CODE_QUALITY.md                    # Quality standards
+├── TROUBLESHOOTING.md                 # Problem solving
+├── ENVIRONMENT_VARIABLES.md           # All environment vars
+└── screenshots/                       # Visual documentation
+    ├── frontend/                      # UI screenshots
+    ├── backend/                       # API & architecture diagrams
+    └── SCREENSHOTS_GUIDE.md           # How to capture screenshots
 ```
 
 ---
 
-## Related Documentation
+## 📖 How to Use This Documentation
 
-| Document                                                                 | Purpose                                             |
-| ------------------------------------------------------------------------ | --------------------------------------------------- |
-| [Architecture.md](./Architecture.md)                                     | System design, diagrams, and component interactions |
-| [../README.md](../README.md)                                             | Quick start and overview                            |
-| [../MIGRATION_SUMMARY.md](../MIGRATION_SUMMARY.md)                       | Migration history and changes                       |
-| [../CHECKSTYLE_COMPLIANCE_REPORT.md](../CHECKSTYLE_COMPLIANCE_REPORT.md) | Code quality metrics                                |
-
----
-
-## Troubleshooting
-
-### Application Won't Start
-
-**Issue**: Port 8080 already in use
-
-```bash
-# Change port in application.properties
-server.port=8081
-```
-
-### LLM API Connection Failed
-
-**Issue**: Cannot connect to LLM service
-
-- Verify LLM service is running
-- Check `config.json` endpoint URL
-- Test connection: `curl http://localhost:11434/api/tags`
-
-### Files Not Saving
-
-**Issue**: File upload directory not found
-
-- Ensure `upload.path` directory exists
-- Check directory permissions
-- Verify `upload.path` in `config.json`
-
-### PDF Conversion Fails
-
-**Issue**: Markdown to PDF conversion errors
-
-- Verify Flying Saucer dependencies installed
-- Check Markdown syntax
-- Ensure temporary directory exists
+1. **New to the project?** Start with [QUICK_START.md](QUICK_START.md)
+2. **Need to configure something?** Check [CONFIGURATION.md](CONFIGURATION.md)
+3. **Understanding the system?** Read [ARCHITECTURE.md](ARCHITECTURE.md)
+4. **Setting up for development?** Follow [DEVELOPMENT_SETUP.md](DEVELOPMENT_SETUP.md)
+5. **Deploying to production?** See [PRODUCTION_DEPLOYMENT.md](PRODUCTION_DEPLOYMENT.md)
+6. **Running into issues?** Check [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
 
 ---
 
-## Contributing
+## 🔗 Important Links
 
-1. Follow checkstyle rules defined in `config/checkstyle/checkstyle.xml`
-2. Write unit tests for new features
-3. Run `./gradlew build` before submitting changes
-4. Update documentation as needed
+- **GitHub Repository:** https://github.com/pbaletkeman/java-resumes
+- **Issues & Support:** https://github.com/pbaletkeman/java-resumes/issues
+- **Discussions:** https://github.com/pbaletkeman/java-resumes/discussions
+
+### Technology Documentation
+
+- [React Documentation](https://react.dev)
+- [Spring Boot Documentation](https://spring.io/projects/spring-boot)
+- [Vite Documentation](https://vitejs.dev)
+- [Docker Documentation](https://docs.docker.com)
+- [Ollama Documentation](https://ollama.ai)
 
 ---
 
-## License
+## 💡 Tips for Success
 
-See repository for license information.
+### For Docker Users
+
+- Use `docker compose logs -f` to troubleshoot
+- Use `-v` flag to preserve volumes between restarts
+- Set `CONFIG_PATH` before startup for external config
+
+### For Development
+
+- Backend changes require rebuild: `./gradlew build`
+- Frontend hot reload works with `npm run dev`
+- Run tests frequently: `./gradlew test` and `npm test`
+
+### For Production
+
+- Always use environment-specific config
+- Set external `CONFIG_PATH` for config management
+- Use external `PROMPTS_DIR` to customize LLM prompts
+- Enable HTTPS/TLS in production
+- Monitor logs regularly
 
 ---
 
-## Support
+## 📝 Contributing to Documentation
 
-For issues and questions:
+When updating documentation:
 
-- Check existing issues on GitHub
-- Review [Architecture.md](./Architecture.md) for design details
-- Consult unit tests for usage examples
+1. Keep files under 750 lines
+2. Link to related documents
+3. Use consistent formatting
+4. Include examples and code snippets
+5. Update this README if adding new sections
+
+---
+
+## 📞 Need Help?
+
+- **Documentation Issues?** Check [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+- **Bug Reports?** Open a GitHub issue
+- **Questions?** Use GitHub Discussions
+- **Configuration Help?** See [CONFIGURATION.md](CONFIGURATION.md)
+
+---
+
+**Last Updated:** January 2026
+**Version:** 2.0 (External Configuration Support)

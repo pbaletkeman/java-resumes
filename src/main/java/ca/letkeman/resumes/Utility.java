@@ -3,6 +3,7 @@ package ca.letkeman.resumes;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,12 +14,55 @@ public final class Utility {
 
   private static Logger logger = LoggerFactory.getLogger(Utility.class);
 
+  /**
+   * Read a file as a string from the file system.
+   * Attempts to load from an external path if configured via system property.
+   *
+   * @param fileName the name of the file to read
+   * @return the file contents as a string, or empty string if not found
+   */
   public static String readFileAsString(String fileName) {
+    // Try external path first (if configured)
+    String externalPath = System.getProperty("app.config.path");
+    if (externalPath != null && !externalPath.isEmpty()) {
+      try {
+        Path externalFile = Paths.get(externalPath, fileName);
+        if (Files.exists(externalFile)) {
+          String data = Files.readString(externalFile, StandardCharsets.ISO_8859_1);
+          logger.info("Loaded file from external path: {}", externalFile);
+          return data;
+        }
+      } catch (IOException e) {
+        logger.debug("Could not load from external path: {}/{}", externalPath, fileName);
+      }
+    }
+
+    // Fall back to current working directory
     String data = "";
     try {
       data = Files.readString(Paths.get(fileName), StandardCharsets.ISO_8859_1);
+      logger.debug("Loaded file from current directory: {}", fileName);
     } catch (IOException e) {
       logger.error("Error reading file: {}", e.toString());
+    }
+    return data;
+  }
+
+  /**
+   * Read a file as a string from a specified directory.
+   *
+   * @param directory the directory path
+   * @param fileName the name of the file to read
+   * @return the file contents as a string, or empty string if not found
+   */
+  public static String readFileAsString(String directory, String fileName) {
+    String data = "";
+    try {
+      Path filePath = Paths.get(directory, fileName);
+      data = Files.readString(filePath, StandardCharsets.ISO_8859_1);
+      logger.debug("Loaded file from directory: {}/{}", directory, fileName);
+    } catch (IOException e) {
+      logger.error("Error reading file from directory {}: {}", directory, e.toString());
     }
     return data;
   }

@@ -14,13 +14,23 @@ spring:
 upload:
   path: files
 
+# LLM Configuration
+# Default endpoint uses local Ollama service
+# For OpenAI or other providers, update endpoint and apikey
 llm:
   #  endpoint: http://localhost:1234/v1/chat/completions # lmstudio
   endpoint: http://127.0.0.1:11434/v1/chat/completions # ollama
   apikey: 1234567890
+
 # Prompts configuration
 # external-dir: Leave empty to use bundled prompts
 # Set to a directory path (e.g., ./prompts or /etc/java-resumes/prompts) to override with external files
 # External prompts will be loaded if they exist; otherwise bundled versions are used
 prompts:
   external-dir: ${PROMPTS_DIR:}
+
+# Configuration file path
+# Can be set via system property: -Dapp.config.path=/path/to/config
+# Or via environment variable: CONFIG_PATH=/path/to/config
+# Default: looks for config.json in current working directory
+# See docs/CONFIGURATION.md for detailed configuration guide
