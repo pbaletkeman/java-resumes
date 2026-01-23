@@ -747,13 +747,13 @@ server.port=8081
 
 ## Documentation References
 
-| Document         | Purpose                | Location                                                             |
-| ---------------- | ---------------------- | -------------------------------------------------------------------- |
-| Detailed README  | Setup, features, API   | [docs/README.md](docs/README.md)                                     |
+| Document         | Purpose                | Location                                                               |
+| ---------------- | ---------------------- | ---------------------------------------------------------------------- |
+| Detailed README  | Setup, features, API   | [docs/README.md](docs/README.md)                                       |
 | Architecture     | Design diagrams, flows | [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) |
-| Quick Start      | Initial setup          | [README.md](README.md)                                               |
-| Checkstyle Rules | Code quality           | [config/checkstyle/checkstyle.xml](config/checkstyle/checkstyle.xml) |
-| Build Config     | Dependencies           | [build.gradle](build.gradle)                                         |
+| Quick Start      | Initial setup          | [README.md](README.md)                                                 |
+| Checkstyle Rules | Code quality           | [config/checkstyle/checkstyle.xml](config/checkstyle/checkstyle.xml)   |
+| Build Config     | Dependencies           | [build.gradle](build.gradle)                                           |
 
 ---
 

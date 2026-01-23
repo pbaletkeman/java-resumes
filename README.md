@@ -1733,10 +1733,10 @@ All documentation files are located in [docs/](docs/):
 
 ### Backend & Frontend Documentation
 
-| Document                                         | Purpose                                           |
-| ------------------------------------------------ | ------------------------------------------------- |
-| [docs/BACKEND_README.md](docs/BACKEND_README.md) | Backend setup, build commands, and API reference  |
-| [docs/README.md](docs/README.md)                 | Frontend setup, components, and development guide |
+| Document                                                               | Purpose                                           |
+| ---------------------------------------------------------------------- | ------------------------------------------------- |
+| [docs/BACKEND_README.md](docs/BACKEND_README.md)                       | Backend setup, build commands, and API reference  |
+| [docs/README.md](docs/README.md)                                       | Frontend setup, components, and development guide |
 | [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) | System architecture and design patterns           |
 
 ### Backend-Specific Guidance
