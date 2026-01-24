@@ -81,39 +81,40 @@ export const ModelSettings: React.FC = () => {
     showSuccess('Reset to default models');
   };
 
-  const exportModels = () => {
-    const dataStr = JSON.stringify(models, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'models.json';
-    link.click();
-    URL.revokeObjectURL(url);
-    showSuccess('Models exported successfully');
-  };
+  // TODO: Implement export/import models functionality
+  // const exportModels = () => {
+  //   const dataStr = JSON.stringify(models, null, 2);
+  //   const dataBlob = new Blob([dataStr], { type: 'application/json' });
+  //   const url = URL.createObjectURL(dataBlob);
+  //   const link = document.createElement('a');
+  //   link.href = url;
+  //   link.download = 'models.json';
+  //   link.click();
+  //   URL.revokeObjectURL(url);
+  //   showSuccess('Models exported successfully');
+  // };
 
-  const importModels = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  // const importModels = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
+  //   if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = (event: ProgressEvent<FileReader>) => {
-      try {
-        const content = event.target?.result as string;
-        const imported = JSON.parse(content);
-        if (Array.isArray(imported)) {
-          setModels(imported);
-          showSuccess('Models imported successfully');
-        } else {
-          showError('Invalid file format');
-        }
-      } catch (err) {
-        showError('Failed to import models');
-      }
-    };
-    reader.readAsText(file);
-  };
+  //   const reader = new FileReader();
+  //   reader.onload = (event: ProgressEvent<FileReader>) => {
+  //     try {
+  //       const content = event.target?.result as string;
+  //       const imported = JSON.parse(content);
+  //       if (Array.isArray(imported)) {
+  //         setModels(imported);
+  //         showSuccess('Models imported successfully');
+  //       } else {
+  //         showError('Invalid file format');
+  //       }
+  //     } catch (err) {
+  //       showError('Failed to import models');
+  //     }
+  //   };
+  //   reader.readAsText(file);
+  // };
 
   const actionTemplate = (rowData: Model) => (
     <Button
