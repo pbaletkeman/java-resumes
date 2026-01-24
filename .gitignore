@@ -110,3 +110,4 @@ Thumbs.db
 
 # log files
 build_warnings.log
+*.log
