@@ -1,0 +1,5 @@
+# Spotless ignore patterns
+build/
+.gradle/
+*.pb
+*.class

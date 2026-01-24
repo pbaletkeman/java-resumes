@@ -182,7 +182,7 @@ public final class ResumeController {
     if (optimize.getResume() != null) {
       optimize.setResume(Utility.convertLineEndings(optimize.getResume()));
     }
-    LOGGER.info("optimize: {}", optimize);
+    LOGGER.debug("optimize: {}", optimize);
     if (optimize.isValid()) {
       // start background task here
       Thread thread = new Thread(new BackgroundResume(optimize,  root));
@@ -230,7 +230,8 @@ public final class ResumeController {
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("Skills suggestion generation started"));
       } catch (Exception e) {
         LOGGER.error("Error processing skills: {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseMessage("Error processing skills"));
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .body(new ResponseMessage("Error processing skills"));
       }
     } else {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("job description is required"));

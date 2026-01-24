@@ -1,5 +1,11 @@
 package ca.letkeman.resumes.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -7,9 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -18,157 +23,181 @@ class ResumeControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @BeforeEach
+    void setUp() throws IOException {
+        // Create the uploads directory if it doesn't exist
+        Path uploadsPath = Paths.get("uploads");
+        if (!Files.exists(uploadsPath)) {
+            Files.createDirectories(uploadsPath);
+        }
+        // Create a dummy resume.pdf file for delete test
+        Path resumePath = uploadsPath.resolve("resume.pdf");
+        Files.write(resumePath, "dummy resume content".getBytes());
+    }
+
     @Test
-    void test_successful_markdown_to_pdf_conversion() throws Exception {
+    void testSuccessfulMarkdownToPdfConversion() throws Exception {
         MockMultipartFile file = new MockMultipartFile(
                 "file", "test.md", "text/markdown", "# Test Markdown".getBytes());
-        mockMvc.perform(multipart("/api/markdownFile2PDF").file(file))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.message").value("file successfully converted"));
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/markdownFile2PDF").file(file))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("file successfully converted"));
     }
 
     @Test
-    void test_successful_markdown_to_docx_conversion() throws Exception {
+    void testSuccessfulMarkdownToDocxConversion() throws Exception {
         MockMultipartFile file = new MockMultipartFile(
                 "file", "test.md", "text/markdown", "# Test Markdown\n\n## Section\n\nContent here".getBytes());
-        mockMvc.perform(multipart("/api/markdownFile2DOCX").file(file))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.message").value("file successfully converted"));
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/markdownFile2DOCX").file(file))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("file successfully converted"));
     }
 
     @Test
-    void test_unsuccessful_markdown_to_docx_conversion() throws Exception {
+    void testUnsuccessfulMarkdownToDocxConversion() throws Exception {
         MockMultipartFile file = new MockMultipartFile(
                 "file", "bad.md", "text/markdown", new byte[0]);
-        mockMvc.perform(multipart("/api/markdownFile2DOCX").file(file))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.message").value("No file/invalid file provided"));
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/markdownFile2DOCX").file(file))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("No file/invalid file provided"));
     }
 
     @Test
-    void test_handles_null_file_parameter_for_docx() throws Exception {
-        mockMvc.perform(multipart("/api/markdownFile2DOCX"))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.message").value("No file/invalid file provided"));
+    void testHandlesNullFileParameterForDocx() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/markdownFile2DOCX"))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("No file/invalid file provided"));
     }
 
     @Test
-    void test_invalidOptimize() throws Exception {
+    void testInvalidOptimize() throws Exception {
         MockMultipartFile resume = new MockMultipartFile(
             "resume", "resume.pdf", "application/pdf", "dummy resume".getBytes());
         MockMultipartFile job = new MockMultipartFile(
             "job", "jd.pdf", "application/pdf", "dummy job".getBytes());
         String optimizeJson = "{\"resume\":\"\",\"jobDescription\":\"\"}";
-        mockMvc.perform(multipart("/api/upload")
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/upload")
                 .file(resume)
                 .file(job)
                 .param("optimize", optimizeJson))
-            .andExpect(status().isExpectationFailed())
-            .andExpect(jsonPath("$.message").value("Required property missing or invalid."));
+            .andExpect(MockMvcResultMatchers.status().isExpectationFailed())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.message")
+                .value("Required property missing or invalid."));
     }
 
     @Test
-    void test_optimizeResume_with_valid_files() throws Exception {
+    void testOptimizeResumeWithValidFiles() throws Exception {
         MockMultipartFile resume = new MockMultipartFile(
                 "resume", "resume.pdf", "application/pdf", "dummy resume".getBytes());
         MockMultipartFile job = new MockMultipartFile(
                 "job", "jd.pdf", "application/pdf", "dummy job".getBytes());
-        String optimizeJson = "{\"company\":\"company\",\"jobTitle\":\"title\",\"model\":\"model\",\"temperature\":0.01,\"promptType\":[\"Resume\"],\"jobDescription\":\"\",\"resume\":\"\"}";
+        String optimizeJson = "{\"company\":\"company\",\"jobTitle\":\"title\",\"model\":\"model\","
+            + "\"temperature\":0.01,\"promptType\":[\"Resume\"],\"jobDescription\":\"\",\"resume\":\"\"}";
 
-
-        mockMvc.perform(multipart("/api/upload")
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/upload")
                 .file(resume)
                 .file(job)
                 .param("optimize", optimizeJson))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.message").value("generating"));
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("generating"));
     }
 
     @Test
-    void test_getListFiles_with_files() throws Exception {
-        mockMvc.perform(get("/api/files"))
-            .andExpect(status().isOk())
-            .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
+    void testGetListFilesWithFiles() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/files"))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.content()
+                .contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
     }
 
     @Test
-    void test_optimizeResume_with_invalid_optimize() throws Exception {
+    void testOptimizeResumeWithInvalidOptimize() throws Exception {
         MockMultipartFile resume = new MockMultipartFile(
                 "resume", "resume.pdf", "application/pdf", "dummy resume".getBytes());
         MockMultipartFile job = new MockMultipartFile(
                 "job", "jd.pdf", "application/pdf", "dummy job".getBytes());
         String invalidOptimize = "{invalid}";
-        mockMvc.perform(multipart("/api/upload")
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/upload")
                 .file(resume)
                 .file(job)
                 .param("optimize", invalidOptimize))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.message").value("invalid optimize parameter"));
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message")
+                    .value("invalid optimize parameter"));
     }
 
     @Test
-    void test_getListFiles_empty() throws Exception {
+    void testGetListFilesEmpty() throws Exception {
         // This test assumes the storage is empty; may need to clear storage before running
-        mockMvc.perform(get("/api/files"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/files"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
     }
 
     @Test
     void testGetFile() throws Exception {
         // Test requesting a non-existent file; should return 404
-        mockMvc.perform(get("/api/files/nonexistent.md"))
-                .andExpect(status().isNotFound());
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/files/nonexistent.md"))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
     @Test
-    void test_deleteFile_success() throws Exception {
+    void testDeleteFileSuccess() throws Exception {
         // This test assumes a file named "resume.pdf" exists in storage
-        mockMvc.perform(delete("/api/files/resume.pdf"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.message").value(org.hamcrest.Matchers.containsString("Delete the file successfully")));
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/files/resume.pdf"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message")
+                    .value(org.hamcrest.Matchers.containsString("Delete the file successfully")));
     }
 
     @Test
-    void test_deleteFile_not_found() throws Exception {
-        mockMvc.perform(delete("/api/files/nonexistent.pdf"))
-                .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.message").value("The file does not exist!"));
+    void testDeleteFileNotFound() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/files/nonexistent.pdf"))
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message")
+                    .value("The file does not exist!"));
     }
 
     @Test
-    void test_processSkills_with_valid_job() throws Exception {
+    void testProcessSkillsWithValidJob() throws Exception {
         MockMultipartFile job = new MockMultipartFile(
                 "job", "jd.txt", "text/plain", "Java Spring Developer position".getBytes());
-        String optimizeJson = "{\"company\":\"TechCorp\",\"jobTitle\":\"Java Developer\",\"model\":\"mistral\",\"temperature\":0.15,\"promptType\":[\"SKILLS\"],\"jobDescription\":\"\",\"resume\":\"\"}";
+        String optimizeJson = "{\"company\":\"TechCorp\",\"jobTitle\":\"Java Developer\","
+                + "\"model\":\"mistral\",\"temperature\":0.15,\"promptType\":[\"SKILLS\"],"
+                + "\"jobDescription\":\"\",\"resume\":\"\"}";
 
-        mockMvc.perform(multipart("/api/process/skills")
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/process/skills")
                 .file(job)
                 .param("optimize", optimizeJson))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.message").value("Skills suggestion generation started"));
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message")
+                    .value("Skills suggestion generation started"));
     }
 
     @Test
-    void test_processSkills_with_invalid_optimize() throws Exception {
+    void testProcessSkillsWithInvalidOptimize() throws Exception {
         MockMultipartFile job = new MockMultipartFile(
                 "job", "jd.txt", "text/plain", "Java Developer position".getBytes());
         String invalidOptimize = "{invalid json}";
 
-        mockMvc.perform(multipart("/api/process/skills")
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/process/skills")
                 .file(job)
                 .param("optimize", invalidOptimize))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.message").value("invalid optimize parameter"));
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message")
+                    .value("invalid optimize parameter"));
     }
 
     @Test
-    void test_processSkills_without_job_description() throws Exception {
-        String optimizeJson = "{\"company\":\"TechCorp\",\"jobTitle\":\"Java Developer\",\"model\":\"mistral\",\"temperature\":0.15,\"promptType\":[\"SKILLS\"],\"jobDescription\":\"\",\"resume\":\"\"}";
+    void testProcessSkillsWithoutJobDescription() throws Exception {
+        String optimizeJson = "{\"company\":\"TechCorp\",\"jobTitle\":\"Java Developer\","
+                + "\"model\":\"mistral\",\"temperature\":0.15,\"promptType\":[\"SKILLS\"],"
+                + "\"jobDescription\":\"\",\"resume\":\"\"}";
 
-        mockMvc.perform(multipart("/api/process/skills")
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/process/skills")
                 .param("optimize", optimizeJson))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.message").value("job description is required"));
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message")
+                    .value("job description is required"));
     }
 }

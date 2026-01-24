@@ -1,12 +1,11 @@
 package ca.letkeman.resumes.model;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class OptimizeTest {
   @Test
-  void test_valid_optimize_returns_true() {
+  void testValidOptimizeReturnsTrue() {
     String[] promptType = {"Resume"};
     double temperature = 0.5;
     String model = "gemma-3-4b-it";
@@ -17,11 +16,11 @@ class OptimizeTest {
 
     Optimize optimize = new Optimize(promptType, temperature, model, resume, jobDescription, jobTitle, company);
 
-    assertTrue(optimize.isValid());
+    Assertions.assertTrue(optimize.isValid());
   }
 
   @Test
-  void test_null_resume_returns_false() {
+  void testNullResumeReturnsFalse() {
     String[] promptType = {"Resume"};
     double temperature = 0.5;
     String model = "gemma-3-4b-it";
@@ -38,11 +37,11 @@ class OptimizeTest {
     optimize.setJobTitle(jobTitle);
     optimize.setCompany(company);
 
-    assertFalse(optimize.isValid());
+    Assertions.assertFalse(optimize.isValid());
   }
 
   @Test
-  void test_null_description_returns_false() {
+  void testNullDescriptionReturnsFalse() {
     String[] promptType = {"Resume"};
     double temperature = 0.5;
     String model = "gemma-3-4b-it";
@@ -59,11 +58,11 @@ class OptimizeTest {
     optimize.setJobTitle(jobTitle);
     optimize.setCompany(company);
 
-    assertFalse(optimize.isValid());
+    Assertions.assertFalse(optimize.isValid());
   }
 
   @Test
-  void test_null_model_returns_false() {
+  void testNullModelReturnsFalse() {
     String[] promptType = {"Resume"};
     double temperature = 0.5;
     String resume = "Professional resume content";
@@ -80,11 +79,11 @@ class OptimizeTest {
     optimize.setJobTitle(jobTitle);
     optimize.setCompany(company);
 
-    assertFalse(optimize.isValid());
+    Assertions.assertFalse(optimize.isValid());
   }
-  /**/
+
   @Test
-  void test_temperature_out_of_bounds_returns_false() {
+  void testTemperatureOutOfBoundsReturnsFalse() {
     String[] promptType = {"Resume"};
     String model = "gemma-3-4b-it";
     String resume = "Professional resume content";
@@ -102,14 +101,14 @@ class OptimizeTest {
     optimize.setCompany(company);
 
     optimize.setTemperature(-1);
-    assertFalse(optimize.isValid());
+    Assertions.assertFalse(optimize.isValid());
 
     optimize.setTemperature(3);
-    assertFalse(optimize.isValid());
+    Assertions.assertFalse(optimize.isValid());
   }
 
   @Test
-  void test_null_jobTitle_returns_false() {
+  void testNullJobTitleReturnsFalse() {
     String[] promptType = {"Resume"};
     double temperature = 0.5;
     String model = "gemma-3-4b-it";
@@ -126,11 +125,11 @@ class OptimizeTest {
     optimize.setJobTitle(jobTitle);
     optimize.setCompany(company);
 
-    assertFalse(optimize.isValid());
+    Assertions.assertFalse(optimize.isValid());
   }
 
   @Test
-  void test_null_company_returns_false() {
+  void testNullCompanyReturnsFalse() {
     String[] promptType = {"Resume"};
     double temperature = 0.5;
     String model = "gemma-3-4b-it";
@@ -147,11 +146,11 @@ class OptimizeTest {
     optimize.setJobTitle(jobTitle);
     optimize.setCompany(company);
 
-    assertFalse(optimize.isValid());
+    Assertions.assertFalse(optimize.isValid());
   }
 
   @Test
-  void test_null_promptType_returns_false() {
+  void testNullPromptTypeReturnsFalse() {
     String[] promptType = null;
     double temperature = 0.5;
     String model = "gemma-3-4b-it";
@@ -168,11 +167,11 @@ class OptimizeTest {
     optimize.setJobTitle(jobTitle);
     optimize.setCompany(company);
 
-    assertFalse(optimize.isValid());
+    Assertions.assertFalse(optimize.isValid());
   }
 
   @Test
-  void test_promptType_empty_returns_false() {
+  void testPromptTypeEmptyReturnsFalse() {
     String[] promptType = {};
     double temperature = 0.5;
     String model = "gemma-3-4b-it";
@@ -189,11 +188,11 @@ class OptimizeTest {
     optimize.setJobTitle(jobTitle);
     optimize.setCompany(company);
 
-    assertFalse(optimize.isValid());
+    Assertions.assertFalse(optimize.isValid());
   }
 
   @Test
-  void test_promptType_out_of_bounds_returns_false() {
+  void testPromptTypeOutOfBoundsReturnsFalse() {
     String[] promptType = {"Resume1223"};
     double temperature = 0.5;
     String model = "gemma-3-4b-it";
@@ -210,11 +209,11 @@ class OptimizeTest {
     optimize.setJobTitle(jobTitle);
     optimize.setCompany(company);
 
-    assertFalse(optimize.isValid());
+    Assertions.assertFalse(optimize.isValid());
   }
 
   @Test
-  void test_valid_skills_prompt_without_resume() {
+  void testValidSkillsPromptWithoutResume() {
     String[] promptType = {"SKILLS"};
     double temperature = 0.5;
     String model = "gemma-3-4b-it";
@@ -231,49 +230,49 @@ class OptimizeTest {
     optimize.setJobTitle(jobTitle);
     optimize.setCompany(company);
 
-    assertTrue(optimize.isValid(), "SKILLS prompt should be valid without resume content");
+    Assertions.assertTrue(optimize.isValid(), "SKILLS prompt should be valid without resume content");
   }
 
   @Test
-  void test_skills_prompt_type_recognition() {
+  void testSkillsPromptTypeRecognition() {
     String[] promptType = {"SKILLS"};
     Optimize optimize = new Optimize();
     optimize.setPromptType(promptType);
 
-    assertTrue(optimize.isSkillsPrompt(), "Should recognize SKILLS prompt type");
-    assertFalse(optimize.hasResumeOrCoverPrompt(), "Should not be Resume or Cover prompt");
+    Assertions.assertTrue(optimize.isSkillsPrompt(), "Should recognize SKILLS prompt type");
+    Assertions.assertFalse(optimize.hasResumeOrCoverPrompt(), "Should not be Resume or Cover prompt");
   }
 
   @Test
-  void test_resume_prompt_type_recognition() {
+  void testResumePromptTypeRecognition() {
     String[] promptType = {"Resume"};
     Optimize optimize = new Optimize();
     optimize.setPromptType(promptType);
 
-    assertFalse(optimize.isSkillsPrompt(), "Should not be SKILLS prompt");
-    assertTrue(optimize.hasResumeOrCoverPrompt(), "Should be Resume or Cover prompt");
+    Assertions.assertFalse(optimize.isSkillsPrompt(), "Should not be SKILLS prompt");
+    Assertions.assertTrue(optimize.hasResumeOrCoverPrompt(), "Should be Resume or Cover prompt");
   }
 
   @Test
-  void test_valid_prompt_type_includes_skills() {
+  void testValidPromptTypeIncludesSkills() {
     String[] promptType = {"SKILLS"};
     Optimize optimize = new Optimize();
     optimize.setPromptType(promptType);
 
-    assertTrue(optimize.isValidPromptType(), "SKILLS should be a valid prompt type");
+    Assertions.assertTrue(optimize.isValidPromptType(), "SKILLS should be a valid prompt type");
   }
 
   @Test
-  void test_invalid_prompt_type() {
+  void testInvalidPromptType() {
     String[] promptType = {"INVALID"};
     Optimize optimize = new Optimize();
     optimize.setPromptType(promptType);
 
-    assertFalse(optimize.isValidPromptType(), "INVALID should not be a valid prompt type");
+    Assertions.assertFalse(optimize.isValidPromptType(), "INVALID should not be a valid prompt type");
   }
 
   @Test
-  void test_skills_prompt_requires_job_description() {
+  void testSkillsPromptRequiresJobDescription() {
     String[] promptType = {"SKILLS"};
     double temperature = 0.5;
     String model = "gemma-3-4b-it";
@@ -288,21 +287,21 @@ class OptimizeTest {
     optimize.setJobTitle(jobTitle);
     optimize.setCompany(company);
 
-    assertFalse(optimize.isValid(), "SKILLS prompt should require job description");
+    Assertions.assertFalse(optimize.isValid(), "SKILLS prompt should require job description");
   }
 
   @Test
-  void test_case_insensitive_prompt_type_matching() {
+  void testCaseInsensitivePromptTypeMatching() {
     // Test lowercase skills
     String[] promptTypeSkillsLower = {"skills"};
     Optimize optimizeLower = new Optimize();
     optimizeLower.setPromptType(promptTypeSkillsLower);
-    assertTrue(optimizeLower.isSkillsPrompt(), "Should recognize 'skills' in lowercase");
+    Assertions.assertTrue(optimizeLower.isSkillsPrompt(), "Should recognize 'skills' in lowercase");
 
     // Test mixed case
     String[] promptTypeSkillsMixed = {"Skills"};
     Optimize optimizeMixed = new Optimize();
     optimizeMixed.setPromptType(promptTypeSkillsMixed);
-    assertTrue(optimizeMixed.isSkillsPrompt(), "Should recognize 'Skills' in mixed case");
+    Assertions.assertTrue(optimizeMixed.isSkillsPrompt(), "Should recognize 'Skills' in mixed case");
   }
 }

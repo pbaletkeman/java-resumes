@@ -1,6 +1,7 @@
 package ca.letkeman.resumes.optimizer.responses;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -8,11 +9,12 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 public final class LLMResponse {
   private String id;
   private String object;
-  private int created;
+  private long created;
   private String model;
   private List<Choice> choices;
   private Usage usage;
-  private String system_fingerprint;
+  @SerializedName("system_fingerprint")
+  private String systemFingerprint;
 
   public String getId() {
     return id;
@@ -30,11 +32,11 @@ public final class LLMResponse {
     this.object = object;
   }
 
-  public int getCreated() {
+  public long getCreated() {
     return created;
   }
 
-  public void setCreated(int created) {
+  public void setCreated(long created) {
     this.created = created;
   }
 
@@ -62,12 +64,12 @@ public final class LLMResponse {
     this.usage = usage;
   }
 
-  public String getSystem_fingerprint() {
-    return system_fingerprint;
+  public String getSystemFingerprint() {
+    return systemFingerprint;
   }
 
-  public void setSystem_fingerprint(String system_fingerprint) {
-    this.system_fingerprint = system_fingerprint;
+  public void setSystemFingerprint(String systemFingerprint) {
+    this.systemFingerprint = systemFingerprint;
   }
 
   @Override
@@ -85,29 +87,29 @@ public final class LLMResponse {
     return new EqualsBuilder().append(getCreated(), that.getCreated())
         .append(getId(), that.getId()).append(getObject(), that.getObject()).append(getModel(), that.getModel())
         .append(getChoices(), that.getChoices()).append(getUsage(), that.getUsage())
-        .append(getSystem_fingerprint(), that.getSystem_fingerprint()).isEquals();
+        .append(getSystemFingerprint(), that.getSystemFingerprint()).isEquals();
   }
 
   @Override
   public int hashCode() {
     return new HashCodeBuilder(17, 37).append(getId()).append(getObject()).append(getCreated()).append(getModel())
-        .append(getChoices()).append(getUsage()).append(getSystem_fingerprint()).toHashCode();
+        .append(getChoices()).append(getUsage()).append(getSystemFingerprint()).toHashCode();
   }
 
-  public LLMResponse(String id, String object, int created, String model, List<Choice> choices, Usage usage,
-      String system_fingerprint) {
+  public LLMResponse(String id, String object, long created, String model, List<Choice> choices, Usage usage,
+      String systemFingerprint) {
     this.id = id;
     this.object = object;
     this.created = created;
     this.model = model;
     this.choices = choices;
     this.usage = usage;
-    this.system_fingerprint = system_fingerprint;
+    this.systemFingerprint = systemFingerprint;
   }
 
   public LLMResponse() {}
 
-  public String getJSON(){
+  public String getJSON() {
     return new Gson().toJson(this);
   }
 }

@@ -194,7 +194,8 @@ public final class ApiService {
    * @param model - model to use for generation
    * @param root - location to upload & save file tp
    */
-  public void produceFiles(String promptType, Optimize optimize, String endpoint, String apikey, String model, String root) {
+  public void produceFiles(String promptType, Optimize optimize, String endpoint,
+      String apikey, String model, String root) {
     LocalDate myDateObj = LocalDate.now();
     String today = myDateObj.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
 
@@ -306,7 +307,7 @@ public final class ApiService {
     } else {
       body = trimString(message.replace("Additional Suggestions", ""));
     }
-    return new Result(body, (suggestion == null ? "" : suggestion));
+    return new Result(body, suggestion == null ? "" : suggestion);
   }
 
   private String calcBody(String company, String content) {

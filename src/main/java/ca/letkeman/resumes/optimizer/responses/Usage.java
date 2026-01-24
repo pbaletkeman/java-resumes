@@ -1,40 +1,45 @@
 package ca.letkeman.resumes.optimizer.responses;
 
+import com.google.gson.annotations.SerializedName;
+
 public final class Usage {
 
-  private int prompt_tokens;
-  private int completion_tokens;
-  private int total_tokens;
+  @SerializedName("prompt_tokens")
+  private int promptTokens;
+  @SerializedName("completion_tokens")
+  private int completionTokens;
+  @SerializedName("total_tokens")
+  private int totalTokens;
 
-  public int getPrompt_tokens() {
-    return prompt_tokens;
+  public int getPromptTokens() {
+    return promptTokens;
   }
 
-  public void setPrompt_tokens(int prompt_tokens) {
-    this.prompt_tokens = prompt_tokens;
+  public void setPromptTokens(int promptTokens) {
+    this.promptTokens = promptTokens;
   }
 
-  public int getCompletion_tokens() {
-    return completion_tokens;
+  public int getCompletionTokens() {
+    return completionTokens;
   }
 
-  public void setCompletion_tokens(int completion_tokens) {
-    this.completion_tokens = completion_tokens;
+  public void setCompletionTokens(int completionTokens) {
+    this.completionTokens = completionTokens;
   }
 
-  public int getTotal_tokens() {
-    return total_tokens;
+  public int getTotalTokens() {
+    return totalTokens;
   }
 
-  public void setTotal_tokens(int total_tokens) {
-    this.total_tokens = total_tokens;
+  public void setTotalTokens(int totalTokens) {
+    this.totalTokens = totalTokens;
   }
 
   public Usage() {}
 
-  public Usage(int prompt_tokens, int completion_tokens, int total_tokens) {
-    this.prompt_tokens = prompt_tokens;
-    this.completion_tokens = completion_tokens;
-    this.total_tokens = total_tokens;
+  public Usage(int promptTokens, int completionTokens, int totalTokens) {
+    this.promptTokens = promptTokens;
+    this.completionTokens = completionTokens;
+    this.totalTokens = totalTokens;
   }
 }

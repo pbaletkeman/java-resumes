@@ -32,13 +32,13 @@ docker compose up --build
 
 ## 📚 Documentation Index
 
-| Topic | Doc | Topic | Doc |
-|-------|-----|-------|-----|
-| **Setup** | [Quick Start](docs/QUICK_START.md) | **API** | [API Reference](docs/API_REFERENCE.md) |
-| **Architecture** | [System Design](docs/ARCHITECTURE.md) | **Testing** | [Test Guide](docs/TESTING.md) |
-| **Configuration** | [Config Guide](docs/CONFIGURATION.md) | **Code Quality** | [Standards](docs/CODE_QUALITY.md) |
-| **Development** | [Dev Setup](docs/DEVELOPMENT_SETUP.md) | **Issues** | [Troubleshooting](docs/TROUBLESHOOTING.md) |
-| **Deployment** | [Deploy Guide](docs/PRODUCTION_DEPLOYMENT.md) | **Env Vars** | [Configuration](docs/ENVIRONMENT_VARIABLES.md) |
+| Topic             | Doc                                           | Topic            | Doc                                             |
+| ----------------- | --------------------------------------------- | ---------------- | ----------------------------------------------- |
+| **Setup**         | [Quick Start](docs/QUICK_START.md)            | **API**          | [API Reference](docs/API_REFERENCE.md)          |
+| **Architecture**  | [System Design](docs/ARCHITECTURE.md)         | **Testing**      | [Test Guide](docs/TESTING.md)                   |
+| **Configuration** | [Config Guide](docs/CONFIGURATION.md)         | **Code Quality** | [Git Hooks](docs/git-hooks/README_GIT_HOOKS.md) |
+| **Development**   | [Dev Setup](docs/DEVELOPMENT_SETUP.md)        | **Issues**       | [Troubleshooting](docs/TROUBLESHOOTING.md)      |
+| **Deployment**    | [Deploy Guide](docs/PRODUCTION_DEPLOYMENT.md) | **Env Vars**     | [Configuration](docs/ENVIRONMENT_VARIABLES.md)  |
 
 ---
 
@@ -47,6 +47,7 @@ docker compose up --build
 Submit a job description + resume → Get back an AI-optimized resume and/or cover letter tailored to that specific job opening.
 
 **Features:**
+
 - AI-powered resume optimization
 - Cover letter generation
 - Markdown to PDF conversion
@@ -60,9 +61,9 @@ Submit a job description + resume → Get back an AI-optimized resume and/or cov
 
 ## 🏗️ Architecture
 
-**Frontend:** React 19 + TypeScript + PrimeReact + Tailwind CSS  
-**Backend:** Spring Boot 3.5.1 + Java 21 + Gradle  
-**LLM:** Ollama / LM Studio / OpenAI (OpenAI-compatible API)  
+**Frontend:** React 19 + TypeScript + PrimeReact + Tailwind CSS
+**Backend:** Spring Boot 3.5.1 + Java 21 + Gradle
+**LLM:** Ollama / LM Studio / OpenAI (OpenAI-compatible API)
 **DevOps:** Docker Compose for orchestration
 
 See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for detailed diagrams and system design.
@@ -71,16 +72,16 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for detailed diagrams and syste
 
 ## 🛠️ Technology Stack
 
-| Component | Technology | Version |
-|-----------|-----------|---------|
-| **Frontend** | React | 19.2.0 |
-| **Language** | TypeScript | 5.9.3 |
-| **UI Lib** | PrimeReact | 10.9.7 |
-| **Styling** | Tailwind CSS | 4.1.18 |
-| **Backend** | Spring Boot | 3.5.1 |
-| **Language** | Java | 21 LTS |
-| **Build** | Gradle | 8.7 |
-| **Containerization** | Docker | 20.10+ |
+| Component            | Technology   | Version |
+| -------------------- | ------------ | ------- |
+| **Frontend**         | React        | 19.2.0  |
+| **Language**         | TypeScript   | 5.9.3   |
+| **UI Lib**           | PrimeReact   | 10.9.7  |
+| **Styling**          | Tailwind CSS | 4.1.18  |
+| **Backend**          | Spring Boot  | 3.5.1   |
+| **Language**         | Java         | 21 LTS  |
+| **Build**            | Gradle       | 8.7     |
+| **Containerization** | Docker       | 20.10+  |
 
 See [docs/TECHNOLOGY_STACK.md](docs/TECHNOLOGY_STACK.md) for complete details.
 
@@ -108,14 +109,14 @@ java-resumes/
 
 ## 📡 API Endpoints
 
-| Method | Endpoint | Purpose |
-|--------|----------|---------|
-| POST | `/api/upload` | Optimize resume/cover letter |
-| GET | `/api/files` | List files |
-| GET | `/api/files/{filename}` | Download file |
-| DELETE | `/api/files/{filename}` | Delete file |
-| POST | `/api/markdownFile2PDF` | Convert Markdown to PDF |
-| GET | `/api/health` | Health check |
+| Method | Endpoint                | Purpose                      |
+| ------ | ----------------------- | ---------------------------- |
+| POST   | `/api/upload`           | Optimize resume/cover letter |
+| GET    | `/api/files`            | List files                   |
+| GET    | `/api/files/{filename}` | Download file                |
+| DELETE | `/api/files/{filename}` | Delete file                  |
+| POST   | `/api/markdownFile2PDF` | Convert Markdown to PDF      |
+| GET    | `/api/health`           | Health check                 |
 
 Full API docs: http://localhost:8080/swagger-ui/html (when running)
 
@@ -126,6 +127,7 @@ See [docs/API_REFERENCE.md](docs/API_REFERENCE.md) for complete API documentatio
 ## 🔧 Development Setup
 
 ### Backend
+
 ```bash
 cd java-resumes
 ./gradlew build                 # Build
@@ -135,6 +137,7 @@ cd java-resumes
 ```
 
 ### Frontend
+
 ```bash
 cd frontend
 npm install                     # Install
@@ -181,6 +184,7 @@ Edit `config.json`:
 ```
 
 **Ollama** (recommended):
+
 ```bash
 ollama serve
 ollama pull gemma-3-4b-it
@@ -215,11 +219,13 @@ See [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for complete troubleshoot
 ## 🚀 Production Deployment
 
 ### Docker Compose (Recommended)
+
 ```bash
 docker compose up --build -d
 ```
 
 ### Kubernetes / Cloud
+
 See [docs/PRODUCTION_DEPLOYMENT.md](docs/PRODUCTION_DEPLOYMENT.md) for deployment options.
 
 ---

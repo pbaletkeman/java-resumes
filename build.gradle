@@ -3,6 +3,8 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.7'
 	id 'java'
 	id 'checkstyle'
+	id 'com.github.spotbugs' version '6.1.1'
+	id 'com.diffplug.spotless' version '6.25.0'
 }
 
 group = 'com.example'
@@ -56,4 +58,145 @@ tasks.withType(Checkstyle).configureEach {
 		xml.required = true
 		html.required = true
 	}
+}
+
+// SpotBugs Configuration
+spotbugs {
+	effort = 'max'
+	reportLevel = 'medium'
+	excludeFilter = file('config/spotbugs/spotbugs-exclude.xml')
+	ignoreFailures = true
+}
+
+spotbugsMain {
+	reports {
+		html.enabled = true
+		xml.enabled = true
+	}
+}
+
+spotbugsTest {
+	enabled = false
+}
+
+// Spotless Configuration for code formatting
+spotless {
+	enforceCheck = false
+
+	format 'misc', {
+		target 'config/**/*.xml', '.github/**/*.md', 'docs/**/*.md'
+		trimTrailingWhitespace()
+		endWithNewline()
+	}
+
+	java {
+		target 'src/main/java/**/*.java', 'src/test/java/**/*.java'
+
+		// Formatting rules (note: google-java-format has Java 21 compatibility issues)
+		// Enforce imports
+		importOrder()
+		removeUnusedImports()
+
+		// Additional formatting
+		trimTrailingWhitespace()
+		endWithNewline()
+	}
+}
+
+// Task to install git hooks
+task installGitHooks {
+	description 'Install git hooks for code quality checks'
+	doLast {
+		def gitHooksDir = file('.git/hooks')
+		gitHooksDir.mkdirs()
+
+		def preCommitHook = file('.git/hooks/pre-commit')
+		preCommitHook.text = '''#!/bin/bash
+set -e
+
+echo "Running pre-commit checks..."
+echo "================================"
+
+# Run Spotless format check
+echo "Checking code formatting with Spotless..."
+./gradlew spotlessCheck --no-daemon || {
+	echo ""
+	echo "Code formatting issues found!"
+	echo "Run: ./gradlew spotlessApply"
+	echo "Then stage the changes and commit again."
+	exit 1
+}
+
+# Run Checkstyle
+echo "Running Checkstyle..."
+./gradlew checkstyleMain --no-daemon || {
+	echo ""
+	echo "Checkstyle violations found!"
+	echo "Please fix the violations and commit again."
+	exit 1
+}
+
+# Run SpotBugs
+echo "Running SpotBugs analysis..."
+./gradlew spotbugsMain --no-daemon || {
+	echo ""
+	echo "SpotBugs found potential issues!"
+	echo "Review: build/reports/spotbugs/main.html"
+	echo "Note: SpotBugs warnings do not block commits (review-only)"
+	echo ""
+}
+
+echo ""
+echo "✓ All pre-commit checks passed!"
+exit 0
+'''
+		preCommitHook.setExecutable(true)
+
+		def prePushHook = file('.git/hooks/pre-push')
+		prePushHook.text = '''#!/bin/bash
+set -e
+
+echo "Running pre-push checks..."
+echo "================================"
+
+# Run all quality checks
+echo "Running full quality suite..."
+./gradlew clean check spotlessCheck spotbugsMain --no-daemon || {
+	echo ""
+	echo "Quality checks failed!"
+	echo "Please fix the issues before pushing."
+	exit 1
+}
+
+# Run tests
+echo "Running tests..."
+./gradlew test --no-daemon || {
+	echo ""
+	echo "Tests failed!"
+	echo "Please fix the failing tests before pushing."
+	exit 1
+}
+
+echo ""
+echo "✓ All pre-push checks passed! Ready to push."
+exit 0
+'''
+		prePushHook.setExecutable(true)
+
+		println "✓ Git hooks installed successfully!"
+		println "  - .git/hooks/pre-commit (runs on commit)"
+		println "  - .git/hooks/pre-push (runs before push)"
+		println ""
+		println "To skip hooks temporarily, use: git commit --no-verify"
+	}
+}
+
+// Run installGitHooks automatically after gradle build
+tasks.build.finalizedBy(tasks.installGitHooks)
+tasks.check.finalizedBy(tasks.installGitHooks)
+
+// Create a convenience task for manual install
+task setupGitHooks {
+	description 'Manually install git hooks (same as installGitHooks)'
+	dependsOn installGitHooks
 }

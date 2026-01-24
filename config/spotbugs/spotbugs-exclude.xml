@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+  <!-- Exclude test classes from SpotBugs analysis -->
+  <Match>
+    <Class name="~.*Test.*" />
+  </Match>
+
+  <!-- Exclude generated code -->
+  <Match>
+    <Class name="~.*\..*Generated" />
+  </Match>
+
+  <!-- Allow catching generic Exception in controllers for error handling -->
+  <Match>
+    <Bug pattern="REC_CATCH_EXCEPTION" />
+    <Class name="~.*\.controller\..*" />
+  </Match>
+
+  <!-- Allow null returns from optional operations -->
+  <Match>
+    <Bug pattern="NP_NULL_RETURN_FROM_GETCLASS" />
+  </Match>
+
+  <!-- Allow empty methods that are placeholders or overrides -->
+  <Match>
+    <Bug pattern="PZLA_PREFER_ZERO_LENGTH_ARRAYS" />
+  </Match>
+
+  <!-- Allow unused method parameters in interface implementations -->
+  <Match>
+    <Bug pattern="UP_UNUSED_PARAMETER" />
+    <Class name="~.*\.(controller|service|api)\..*" />
+  </Match>
+
+  <!-- Allow field injection patterns common in Spring -->
+  <Match>
+    <Bug pattern="NP_UNWRITTEN_FIELD" />
+    <Class name="~.*\..*Service" />
+  </Match>
+
+  <!-- Exclude static initialization patterns -->
+  <Match>
+    <Bug pattern="SI_INSTANCE_BEFORE_FINALS_ASSIGNED" />
+  </Match>
+</FindBugsFilter>

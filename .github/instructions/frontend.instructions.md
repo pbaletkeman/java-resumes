@@ -18,7 +18,7 @@ This is a React 19 frontend application for the Resume Optimizer platform, using
 - Vitest 4.0.17 (unit testing)
 - ESLint & Prettier (code quality)
 
-**Project Size:** 41+ component files, comprehensive test coverage
+**Project Size:** 15+ component files, comprehensive test coverage
 
 ## Directory Structure
 
@@ -29,19 +29,23 @@ frontend/
 │   │   ├── Layout/                  # Layout components
 │   │   │   ├── Navbar.tsx           # Top navigation with theme toggle
 │   │   │   ├── MainLayout.tsx       # Main layout wrapper
-│   │   │   └── Sidebar.tsx          # Left sidebar navigation
+│   │   │   └── FileHistory.tsx      # File list panel
 │   │   ├── Tabs/                    # Tab components
 │   │   │   ├── MainContentTab.tsx   # Resume/cover letter processing
-│   │   │   └── AdditionalToolsTab.tsx # Markdown to PDF conversion
+│   │   │   └── AdditionalToolsTab.tsx # Markdown to PDF/DOCX conversion
 │   │   ├── Forms/                   # Form components
 │   │   │   ├── DocumentUploadForm.tsx
-│   │   │   └── MarkdownToPdfForm.tsx
+│   │   │   ├── MarkdownToPdfForm.tsx
+│   │   │   └── MarkdownToDocxForm.tsx
+│   │   ├── Settings/                # Settings components
+│   │   │   └── ModelSettings.tsx    # Model configuration
 │   │   ├── Common/                  # Reusable components
 │   │   │   ├── ErrorBoundary.tsx    # Error handling
 │   │   │   ├── LoadingSpinner.tsx   # Loading indicator
 │   │   │   ├── ConfirmDialog.tsx    # Confirmation modal
-│   │   │   └── FileHistory.tsx      # File list panel
+│   │   │   └── SubmissionDialog.tsx # Submission status dialog
 │   │   └── index.ts                 # Component exports
+│   ├── pages/                       # Page-level components
 │   ├── hooks/                       # Custom React hooks
 │   │   ├── useTheme.ts              # Theme management (light/dark)
 │   │   ├── useApi.ts                # API call wrapper
@@ -56,21 +60,22 @@ frontend/
 │   │   ├── constants.ts             # App constants
 │   │   ├── validators.ts            # Form validation
 │   │   └── helpers.ts               # Utility functions
+│   ├── __tests__/                   # Test files
+│   ├── assets/                      # Static assets
+│   │   └── react.svg                # React logo
 │   ├── App.tsx                      # Root component
 │   ├── main.tsx                     # Entry point
 │   └── index.css                    # Global styles
-├── public/                          # Static assets
-├── tests/                           # Test files
 ├── Dockerfile                       # Docker build config
 ├── nginx.conf                       # Nginx server config
 ├── vite.config.ts                   # Vite build config
 ├── vitest.config.ts                 # Vitest config
 ├── tsconfig.json                    # TypeScript config
 ├── tailwind.config.js               # Tailwind config
-├── .eslintrc.json                   # ESLint rules
-├── .prettierrc                      # Prettier formatting
+├── eslint.config.js                 # ESLint configuration
 ├── package.json                     # Dependencies
 ├── .env.example                     # Environment template
+├── .gitignore                       # Git ignore rules
 └── README.md                        # Frontend documentation
 ```
 
@@ -121,8 +126,8 @@ npm run test:coverage
 # Lint code
 npm run lint
 
-# Format code with Prettier
-npm run format
+# Format code with ESLint
+npm run lint -- --fix
 
 # Check types
 npm run type-check
@@ -138,14 +143,19 @@ docker build -t resume-frontend:latest .
 docker run -p 3000:80 resume-frontend:latest
 
 # Access at: http://localhost:3000
+
+# For development:
+npm run dev
 ```
 
-## Configuration Files
+eslint.config.js`\*\*: ESLint configuration and rules
 
-- **`vite.config.ts`**: Build tool configuration, includes proxy for development API calls
-- **`vitest.config.ts`**: Unit test framework configuration
-- **`.eslintrc.json`**: Code linting rules
-- **`.prettierrc`**: Code formatting configuration
+- **`tsconfig.json`**: TypeScript compiler options (strict mode enabled)
+- **`tailwind.config.js`**: Tailwind CSS theming
+- **`.env.example`**: Environment variable template (copy to `.env` for development)
+- **`Dockerfile`**: Multi-stage build (Node build → Nginx runtime)
+- **`nginx.conf`**: Web server configuration for production
+- **`.gitignore`**: Git ignore patterns
 - **`tsconfig.json`**: TypeScript compiler options (strict mode enabled)
 - **`tailwind.config.js`**: Tailwind CSS theming
 - **`.env.example`**: Environment variable template (copy to `.env` for development)
@@ -279,10 +289,12 @@ Always run these checks in order:
 - **React 19 & React DOM**: UI framework
 - **TypeScript**: Type safety
 - **PrimeReact**: Enterprise UI components (DataTable, Dialog, Toast, etc.)
-- **Tailwind CSS**: Utility-first styling
-- **Axios**: HTTP client
-- **React Context API**: State management (no external store needed)
-- **Vitest**: Unit testing framework
+- **Tailwind CSS**: Utility-first st (with coverage support)
+- **React Testing Library**: Component testing utilities
+- **jsdom**: DOM implementation for testing
+- **@vitest/coverage-v8**: Code coverage reporting
+- **ESLint**: Code quality
+- **Playwright**: End-to-end tesframework
 - **React Testing Library**: Component testing utilities
 - **ESLint**: Code quality
 - **Prettier**: Code formatting

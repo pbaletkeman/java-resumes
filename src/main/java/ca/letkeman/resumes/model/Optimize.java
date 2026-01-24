@@ -139,8 +139,8 @@ public final class Optimize {
         && getModel() != null && !getModel().isBlank() && !getModel().isEmpty()
         && !getModel().equals("null")
         && (isSkillsPrompt()
-            || (getResume() != null && !getResume().isBlank() && !getResume().isEmpty()
-                && !getResume().equals("null")));
+            || getResume() != null && !getResume().isBlank() && !getResume().isEmpty()
+                && !getResume().equals("null"));
   }
 
   public boolean hasResumeOrCoverPrompt() {

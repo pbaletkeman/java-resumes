@@ -27,6 +27,7 @@ This documentation is organized into focused sections to make it easy to find wh
 
 - **[TESTING.md](TESTING.md)** - Testing strategies and running tests
 - **[CODE_QUALITY.md](CODE_QUALITY.md)** - Code quality standards and checks
+- **[Git Hooks Setup](git-hooks/README_GIT_HOOKS.md)** - Automated code quality enforcement with Spotless, Checkstyle, and SpotBugs
 
 ### Troubleshooting & Reference
 
@@ -48,7 +49,7 @@ This documentation is organized into focused sections to make it easy to find wh
 | Fix a problem                      | [TROUBLESHOOTING.md](TROUBLESHOOTING.md)             |
 | Find environment variable          | [ENVIRONMENT_VARIABLES.md](ENVIRONMENT_VARIABLES.md) |
 | Learn testing approach             | [TESTING.md](TESTING.md)                             |
-| Check code quality standards       | [CODE_QUALITY.md](CODE_QUALITY.md)                   |
+| Setup code quality hooks           | [Git Hooks](git-hooks/README_GIT_HOOKS.md)           |
 
 ---
 

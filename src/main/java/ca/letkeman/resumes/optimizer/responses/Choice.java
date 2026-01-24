@@ -1,5 +1,6 @@
 package ca.letkeman.resumes.optimizer.responses;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.StringJoiner;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -8,15 +9,16 @@ public final class Choice {
 
   private int index;
   private String logprobs;
-  private String finish_reason;
+  @SerializedName("finish_reason")
+  private String finishReason;
   private Message message;
 
   public Choice() {}
 
-  public Choice(int index, String logprobs, String finish_reason, Message message) {
+  public Choice(int index, String logprobs, String finishReason, Message message) {
     this.index = index;
     this.logprobs = logprobs;
-    this.finish_reason = finish_reason;
+    this.finishReason = finishReason;
     this.message = message;
   }
 
@@ -36,12 +38,12 @@ public final class Choice {
     this.logprobs = logprobs;
   }
 
-  public String getFinish_reason() {
-    return finish_reason;
+  public String getFinishReason() {
+    return finishReason;
   }
 
-  public void setFinish_reason(String finish_reason) {
-    this.finish_reason = finish_reason;
+  public void setFinishReason(String finishReason) {
+    this.finishReason = finishReason;
   }
 
   public Message getMessage() {
@@ -65,13 +67,13 @@ public final class Choice {
     Choice choice = (Choice) o;
 
     return new EqualsBuilder().append(getIndex(), choice.getIndex())
-        .append(getLogprobs(), choice.getLogprobs()).append(getFinish_reason(), choice.getFinish_reason())
+        .append(getLogprobs(), choice.getLogprobs()).append(getFinishReason(), choice.getFinishReason())
         .append(getMessage(), choice.getMessage()).isEquals();
   }
 
   @Override
   public int hashCode() {
-    return new HashCodeBuilder(17, 37).append(getIndex()).append(getLogprobs()).append(getFinish_reason())
+    return new HashCodeBuilder(17, 37).append(getIndex()).append(getLogprobs()).append(getFinishReason())
         .append(getMessage()).toHashCode();
   }
 
@@ -80,7 +82,7 @@ public final class Choice {
     return new StringJoiner(", ", Choice.class.getSimpleName() + "[", "]")
         .add("index=" + index)
         .add("logprobs='" + logprobs + "'")
-        .add("finish_reason='" + finish_reason + "'")
+        .add("finishReason='" + finishReason + "'")
         .add("message=" + message)
         .toString();
   }

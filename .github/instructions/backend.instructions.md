@@ -10,14 +10,14 @@ This is a Spring Boot 3.5.1 backend service for AI-powered resume and cover lett
 
 **Technology Stack:**
 
-- Java 17 (Corretto LTS)
+- Java 21 LTS (Eclipse Temurin)
 - Spring Boot 3.5.1
-- Gradle 8.7
+- Gradle 8.10
 - JUnit 5 & Mockito (80%+ test coverage)
 - Checkstyle 10.14.2
 - SLF4J with Logback
 
-**Project Size:** 14 main source files, 13+ test files
+**Project Size:** 16 main source files, 5+ test files
 
 ## Directory Structure
 
@@ -27,11 +27,13 @@ src/main/java/ca/letkeman/resumes/
 ├── BackgroundResume.java                # Async processing thread
 ├── Config.java                          # LLM configuration loading
 ├── Utility.java                         # Shared utilities
+├── WebConfig.java                       # CORS and web configuration
 ├── controller/
 │   └── ResumeController.java            # REST API endpoints
 ├── service/
 │   ├── FilesStorageService.java         # File operations interface
-│   └── FilesStorageServiceImpl.java      # File operations implementation
+│   ├── FilesStorageServiceImpl.java      # File operations implementation
+│   └── PromptService.java               # Prompt building and management
 ├── model/
 │   ├── Optimize.java                    # Optimization request model
 │   └── FileInfo.java                    # File metadata model
@@ -40,12 +42,14 @@ src/main/java/ca/letkeman/resumes/
 └── optimizer/
     ├── ApiService.java                  # LLM API integration
     ├── HtmlToPdf.java                   # Markdown/HTML to PDF converter
+    ├── MarkdownToDocx.java              # Markdown to DOCX converter
     ├── ChatBody.java                    # LLM request model
     ├── Message.java                     # Chat message model
     └── responses/
         ├── LLMResponse.java             # LLM response wrapper
         ├── Choice.java                  # Response choice
         ├── Message.java                 # Response message
+        ├── Stats.java                   # Generation statistics
         └── Usage.java                   # Token usage statistics
 ```
 
@@ -53,8 +57,8 @@ src/main/java/ca/letkeman/resumes/
 
 ### Prerequisites
 
-- Java 17 JDK (Corretto): `C:\Users\Pete\java\corretto17`
-- Gradle 8.7 (included via wrapper)
+- Java 21 LTS JDK (Eclipse Temurin)
+- Gradle 8.10 (included via wrapper)
 - Ollama or LM Studio running on `http://127.0.0.1:11434`
 
 ### Build Project
@@ -94,20 +98,58 @@ src/main/java/ca/letkeman/resumes/
 # Report location: build/reports/jacoco/test/html/index.html
 ```
 
-### Code Quality
+### Code Quality Tools
+
+This project uses automated code quality tools:
+
+### Spotless
+
+Automatic code formatting using Google Java Format:
 
 ```bash
-# Run Checkstyle on main code
-./gradlew checkstyleMain
+# Check formatting (without changes)
+./gradlew spotlessCheck
 
-# Run Checkstyle on test code
-./gradlew checkstyleTest
-
-# Run all checks
-./gradlew check
-
-# Expected result: 0 non-JSON violations (28 JSON-related violations are intentional for API compatibility)
+# Apply formatting (auto-fixes)
+./gradlew spotlessApply
 ```
+
+### Checkstyle
+
+Enforces coding standards from `config/checkstyle/checkstyle.xml`:
+
+```bash
+./gradlew checkstyleMain
+./gradlew checkstyleTest
+```
+
+View report: `build/reports/checkstyle/main.html`
+
+### SpotBugs
+
+Analyzes code for potential bugs:
+
+```bash
+./gradlew spotbugsMain
+```
+
+View report: `build/reports/spotbugs/main.html`
+
+### Git Hooks
+
+Automatically run quality checks on commit and push. Set up with:
+
+```bash
+./gradlew setupGitHooks
+# or
+./setup-hooks.sh          # Mac/Linux
+./setup-hooks.bat         # Windows
+python setup-hooks.py     # Cross-platform
+```
+
+See [SETUP_GIT_HOOKS.md](../../SETUP_GIT_HOOKS.md) for details.
+
+## Code Quality Tools
 
 ### Run Application
 
@@ -209,6 +251,8 @@ Always run these checks in order:
 5. **Check for obvious errors:** Review code for typos, logic errors
 6. **Commit message format:** Use conventional commits: `feat:`, `fix:`, `test:`, `docs:`, `refactor:`, `chore:`
 
+**Note:** Git hooks automatically run quality checks on commit and push (see [SETUP_GIT_HOOKS.md](../../SETUP_GIT_HOOKS.md))
+
 ## Explicit Instructions
 
 - **Always run `./gradlew clean build`** before pushing code to ensure all checks pass
@@ -226,10 +270,14 @@ Always run these checks in order:
 - **Mockito**: Mocking framework for tests
 - **SLF4J/Logback**: Logging
 - **Gson**: JSON serialization
-- **Apache Tika**: Document parsing
+- **jsoup**: HTML parsing and manipulation
 - **Flying Saucer**: HTML to PDF conversion
 - **CommonMark**: Markdown parsing
-- **Checkstyle**: Code quality enforcement
+- **Apache POI**: DOCX generation
+- **SpringDoc OpenAPI**: API documentation
+- **Checkstyle**: Code style enforcement
+- **SpotBugs**: Bug detection analysis
+- **Spotless**: Code formatting enforcement
 
 ## References
 
@@ -237,5 +285,7 @@ Always run these checks in order:
 - [JUnit 5 Guide](https://junit.org/junit5/docs/)
 - [Mockito Documentation](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html)
 - [Checkstyle Configuration](https://checkstyle.org/config.html)
+- [SpotBugs Documentation](https://spotbugs.readthedocs.io/)
+- [Spotless Documentation](https://github.com/diffplug/spotless)
 
 **When in doubt, refer to existing test files for patterns and examples. The test suite demonstrates all major code patterns and best practices used in this project.**
