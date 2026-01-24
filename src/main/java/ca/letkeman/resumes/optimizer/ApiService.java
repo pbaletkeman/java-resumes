@@ -1,13 +1,10 @@
 package ca.letkeman.resumes.optimizer;
 
 import ca.letkeman.resumes.model.Optimize;
-import ca.letkeman.resumes.optimizer.responses.LLMResponse;
 import ca.letkeman.resumes.optimizer.responses.Choice;
+import ca.letkeman.resumes.optimizer.responses.LLMResponse;
 import ca.letkeman.resumes.service.PromptService;
-
 import com.google.gson.Gson;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -24,9 +22,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.net.HttpURLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component

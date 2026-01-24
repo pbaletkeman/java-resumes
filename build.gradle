@@ -49,7 +49,7 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 checkstyle {
-	toolVersion '10.14.2'
+	toolVersion = '10.14.2'
 	configFile = file('config/checkstyle/checkstyle.xml')
 }
 
@@ -62,8 +62,8 @@ tasks.withType(Checkstyle).configureEach {
 
 // SpotBugs Configuration
 spotbugs {
-	effort = 'max'
-	reportLevel = 'medium'
+	effort = 'MAX'
+	reportLevel = 'MEDIUM'
 	excludeFilter = file('config/spotbugs/spotbugs-exclude.xml')
 	ignoreFailures = true
 }
@@ -105,7 +105,7 @@ spotless {
 
 // Task to install git hooks
 task installGitHooks {
-	description 'Install git hooks for code quality checks'
+	description = 'Install git hooks for code quality checks'
 	doLast {
 		def gitHooksDir = file('.git/hooks')
 		gitHooksDir.mkdirs()
@@ -197,6 +197,6 @@ tasks.check.finalizedBy(tasks.installGitHooks)
 
 // Create a convenience task for manual install
 task setupGitHooks {
-	description 'Manually install git hooks (same as installGitHooks)'
+	description = 'Manually install git hooks (same as installGitHooks)'
 	dependsOn installGitHooks
 }

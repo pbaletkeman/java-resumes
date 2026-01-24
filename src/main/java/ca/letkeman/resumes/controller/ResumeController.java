@@ -5,13 +5,11 @@ import ca.letkeman.resumes.Utility;
 import ca.letkeman.resumes.message.ResponseMessage;
 import ca.letkeman.resumes.model.FileInfo;
 import ca.letkeman.resumes.model.Optimize;
-import ca.letkeman.resumes.service.FilesStorageService;
 import ca.letkeman.resumes.optimizer.HtmlToPdf;
 import ca.letkeman.resumes.optimizer.MarkdownToDocx;
-
+import ca.letkeman.resumes.service.FilesStorageService;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,13 +18,11 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;

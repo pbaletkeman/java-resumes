@@ -1,10 +1,9 @@
 package ca.letkeman.resumes.model;
 
+import ca.letkeman.resumes.Utility;
 import java.util.Arrays;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-
-import ca.letkeman.resumes.Utility;
 
 public final class Optimize {
   String[] promptType = {"Resume"};

@@ -1,0 +1,64 @@
+Picked up JAVA_TOOL_OPTIONS: -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8
+
+> Configure project :
+Build file 'C:\Users\Pete\Desktop\java-resumes\build.gradle': line 52
+Properties should be assigned using the 'propName = value' syntax. Setting a property via the Gradle-generated 'propName value' or 'propName(value)' syntax in Groovy DSL has been deprecated. This is scheduled to be removed in Gradle 10. Use assignment ('toolVersion = <value>') instead. Consult the upgrading guide for further information: https://docs.gradle.org/9.2.1/userguide/upgrading_version_8.html#groovy_space_assignment_syntax
+	at build_a0xj96b4ecducigzmzktzvqai$_run_closure6.doCall$original(C:\Users\Pete\Desktop\java-resumes\build.gradle:52)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+	at build_a0xj96b4ecducigzmzktzvqai.run(C:\Users\Pete\Desktop\java-resumes\build.gradle:51)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+Build file 'C:\Users\Pete\Desktop\java-resumes\build.gradle': line 65
+Assigning String value 'max' to property of enum type 'com.github.spotbugs.snom.Effort'. This behavior has been deprecated. This will fail with an error in Gradle 10. Consult the upgrading guide for further information: https://docs.gradle.org/9.2.1/userguide/upgrading_version_8.html#deprecated_string_to_enum_coercion_for_rich_properties
+	at build_a0xj96b4ecducigzmzktzvqai$_run_closure8.doCall$original(C:\Users\Pete\Desktop\java-resumes\build.gradle:65)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+	at build_a0xj96b4ecducigzmzktzvqai$_run_closure8.doCall(C:\Users\Pete\Desktop\java-resumes\build.gradle)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+Build file 'C:\Users\Pete\Desktop\java-resumes\build.gradle': line 66
+Assigning String value 'medium' to property of enum type 'com.github.spotbugs.snom.Confidence'. This behavior has been deprecated. This will fail with an error in Gradle 10. Consult the upgrading guide for further information: https://docs.gradle.org/9.2.1/userguide/upgrading_version_8.html#deprecated_string_to_enum_coercion_for_rich_properties
+	at build_a0xj96b4ecducigzmzktzvqai$_run_closure8.doCall$original(C:\Users\Pete\Desktop\java-resumes\build.gradle:66)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+	at build_a0xj96b4ecducigzmzktzvqai$_run_closure8.doCall(C:\Users\Pete\Desktop\java-resumes\build.gradle)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+Build file 'C:\Users\Pete\Desktop\java-resumes\build.gradle': line 108
+Properties should be assigned using the 'propName = value' syntax. Setting a property via the Gradle-generated 'propName value' or 'propName(value)' syntax in Groovy DSL has been deprecated. This is scheduled to be removed in Gradle 10. Use assignment ('description = <value>') instead. Consult the upgrading guide for further information: https://docs.gradle.org/9.2.1/userguide/upgrading_version_8.html#groovy_space_assignment_syntax
+	at build_a0xj96b4ecducigzmzktzvqai$_run_closure12.doCall$original(C:\Users\Pete\Desktop\java-resumes\build.gradle:108)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+	at build_a0xj96b4ecducigzmzktzvqai$_run_closure12.doCall(C:\Users\Pete\Desktop\java-resumes\build.gradle)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+Build file 'C:\Users\Pete\Desktop\java-resumes\build.gradle': line 200
+Properties should be assigned using the 'propName = value' syntax. Setting a property via the Gradle-generated 'propName value' or 'propName(value)' syntax in Groovy DSL has been deprecated. This is scheduled to be removed in Gradle 10. Use assignment ('description = <value>') instead. Consult the upgrading guide for further information: https://docs.gradle.org/9.2.1/userguide/upgrading_version_8.html#groovy_space_assignment_syntax
+	at build_a0xj96b4ecducigzmzktzvqai$_run_closure13.doCall$original(C:\Users\Pete\Desktop\java-resumes\build.gradle:200)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+	at build_a0xj96b4ecducigzmzktzvqai.run(C:\Users\Pete\Desktop\java-resumes\build.gradle:199)
+	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
+
+> Task :compileJava UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :resolveMainClassName UP-TO-DATE
+> Task :bootJar UP-TO-DATE
+> Task :jar UP-TO-DATE
+> Task :assemble UP-TO-DATE
+> Task :checkstyleMain UP-TO-DATE
+> Task :compileTestJava UP-TO-DATE
+> Task :processTestResources NO-SOURCE
+> Task :testClasses UP-TO-DATE
+> Task :checkstyleTest UP-TO-DATE
+> Task :spotbugsMain UP-TO-DATE
+> Task :spotbugsTest SKIPPED
+> Task :test UP-TO-DATE
+> Task :check UP-TO-DATE
+> Task :build UP-TO-DATE
+
+> Task :installGitHooks
+✓ Git hooks installed successfully!
+  - .git/hooks/pre-commit (runs on commit)
+  - .git/hooks/pre-push (runs before push)
+
+To skip hooks temporarily, use: git commit --no-verify
+
+[Incubating] Problems report is available at: file:///C:/Users/Pete/Desktop/java-resumes/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 1s
+11 actionable tasks: 1 executed, 10 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.1/userguide/configuration_cache_enabling.html

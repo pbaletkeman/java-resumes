@@ -53,4 +53,3 @@ public final class ChatBody {
     this.stream = stream;
   }
 }
-
