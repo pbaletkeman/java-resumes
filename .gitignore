@@ -107,3 +107,6 @@ uploads/
 # OS files
 .DS_Store
 Thumbs.db
+
+# log files
+build_warnings.log
