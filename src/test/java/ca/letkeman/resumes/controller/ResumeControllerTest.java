@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,23 @@ class ResumeControllerTest {
         // Create a dummy resume.pdf file for delete test
         Path resumePath = uploadsPath.resolve("resume.pdf");
         Files.write(resumePath, "dummy resume content".getBytes());
+    }
+
+    @AfterEach
+    void tearDown() throws IOException {
+        // Clean up test files after each test
+        Path uploadsPath = Paths.get("uploads");
+        if (Files.exists(uploadsPath)) {
+            Files.walk(uploadsPath)
+                .sorted(java.util.Comparator.reverseOrder())
+                .forEach(path -> {
+                    try {
+                        Files.delete(path);
+                    } catch (IOException e) {
+                        // Ignore deletion errors
+                    }
+                });
+        }
     }
 
     @Test

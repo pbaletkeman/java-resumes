@@ -101,6 +101,9 @@ frontend/build/
 frontend/.env
 !frontend/.env.example
 
+# User uploads (generated at runtime)
+uploads/
+
 # OS files
 .DS_Store
 Thumbs.db
