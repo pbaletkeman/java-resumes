@@ -124,7 +124,7 @@ class ResumeControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/files"))
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.content()
-                .contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
+                .contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE));
     }
 
     @Test
@@ -148,7 +148,7 @@ class ResumeControllerTest {
         // This test assumes the storage is empty; may need to clear storage before running
         mockMvc.perform(MockMvcRequestBuilders.get("/api/files"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
+                .andExpect(MockMvcResultMatchers.content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_VALUE));
     }
 
     @Test

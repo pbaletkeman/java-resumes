@@ -162,7 +162,6 @@ public final class MarkdownToDocx {
   private void addTextWithFormatting(XWPFParagraph para, String text) {
     // Simple approach: add text with basic formatting detection
     Pattern boldPattern = Pattern.compile("\\*\\*(.*?)\\*\\*");
-    Pattern italicPattern = Pattern.compile("\\*(.*?)\\*");
 
     Matcher matcher = boldPattern.matcher(text);
     int lastEnd = 0;

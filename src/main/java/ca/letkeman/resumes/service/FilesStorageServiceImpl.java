@@ -67,13 +67,16 @@ public final class FilesStorageServiceImpl implements FilesStorageService {
   public Resource load(String filename) {
     try {
       Path file = root.resolve(filename);
+      var uri = file.toUri();
 
-      Resource resource = new UrlResource(file.toUri());
+      if (uri != null) {
+        Resource resource = new UrlResource(uri);
 
-      if (resource.exists() || resource.isReadable()) {
-        return resource;
-      } else {
-        LOGGER.error("Could not read the file!");
+        if (resource.exists() || resource.isReadable()) {
+          return resource;
+        } else {
+          LOGGER.error("Could not read the file!");
+        }
       }
     } catch (Exception e) {
       LOGGER.error("Error:\n{}", e.getMessage());

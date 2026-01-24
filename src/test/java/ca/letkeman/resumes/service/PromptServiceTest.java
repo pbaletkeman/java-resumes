@@ -142,7 +142,7 @@ class PromptServiceTest {
     @DisplayName("Should handle case-sensitive prompt names")
     void testPromptNameCaseSensitivity() {
         String upperCasePrompt = promptService.loadPrompt("RESUME");
-        String lowerCasePrompt = promptService.loadPrompt("resume");
+        // String lowerCasePrompt = promptService.loadPrompt("resume");
 
         Assertions.assertNotNull(upperCasePrompt, "Uppercase RESUME should load successfully");
         // Note: Case sensitivity depends on file system. File systems like Windows are case-insensitive,
