@@ -211,6 +211,8 @@ public final class ApiService {
     promptData = promptData.replace("{job_title}", optimize.getJobTitle() != null ? optimize.getJobTitle() : "");
     promptData = promptData.replace("{today}", today != null ? today : "");
     promptData = promptData.replace("{company}", optimize.getCompany() != null ? optimize.getCompany() : "");
+    promptData = promptData.replace("{interviewer_name}",
+        optimize.getInterviewerName() != null ? optimize.getInterviewerName() : "");
 
     ChatBody chatBody = getChatBody(optimize, promptData);
     chatBody.setModel(model);
