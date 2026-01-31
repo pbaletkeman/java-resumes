@@ -1,6 +1,7 @@
 package ca.letkeman.resumes.service;
 
 import ca.letkeman.resumes.entity.PromptHistory;
+import ca.letkeman.resumes.model.Optimize;
 import ca.letkeman.resumes.repository.PromptHistoryRepository;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -150,12 +151,7 @@ public class PromptService {
    * Save prompt generation to history database.
    *
    * @param promptType type of prompt generated
-   * @param jobDescription job description input
-   * @param company company name
-   * @param jobTitle job title
-   * @param interviewerName interviewer name (optional)
-   * @param temperature LLM temperature setting
-   * @param model LLM model used
+   * @param optimize the Optimize object containing request parameters
    * @param expandedPrompt the full expanded prompt sent to LLM
    * @param generatedContent the LLM response
    * @param filePath path to the generated file
@@ -164,12 +160,7 @@ public class PromptService {
    */
   public PromptHistory savePromptToHistory(
       String promptType,
-      String jobDescription,
-      String company,
-      String jobTitle,
-      String interviewerName,
-      Double temperature,
-      String model,
+      Optimize optimize,
       String expandedPrompt,
       String generatedContent,
       String filePath,
@@ -183,12 +174,12 @@ public class PromptService {
     PromptHistory history = new PromptHistory();
     history.setRequestId(UUID.randomUUID().toString());
     history.setPromptType(promptType);
-    history.setJobDescription(jobDescription);
-    history.setCompany(company);
-    history.setJobTitle(jobTitle);
-    history.setInterviewerName(interviewerName);
-    history.setTemperature(temperature);
-    history.setModel(model);
+    history.setJobDescription(optimize.getJobDescription());
+    history.setCompany(optimize.getCompany());
+    history.setJobTitle(optimize.getJobTitle());
+    history.setInterviewerName(optimize.getInterviewerName());
+    history.setTemperature(optimize.getTemperature());
+    history.setModel(optimize.getModel());
     history.setExpandedPromptJson(expandedPrompt);
     history.setGeneratedContent(generatedContent);
     history.setGeneratedFilePath(filePath);
