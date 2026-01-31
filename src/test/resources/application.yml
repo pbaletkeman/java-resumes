@@ -1,0 +1,25 @@
+# Test configuration - overrides main application.yml for tests
+spring:
+  datasource:
+    url: jdbc:sqlite::memory:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  flyway:
+    enabled: false
+  servlet:
+    multipart:
+      max-file-size: 500KB
+      max-request-size: 500KB
+
+upload:
+  path: ${java.io.tmpdir}/test-uploads
+
+llm:
+  endpoint: http://localhost:11434/v1/chat/completions
+  apikey: test-api-key
+  mock:
+    enabled: true
+
+prompts:
+  external-dir: ""
