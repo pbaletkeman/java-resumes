@@ -176,6 +176,116 @@ class ResumeControllerTest {
     }
 
     @Test
+    void testMarkdownFile2PdfWithNullFile() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/markdownFile2PDF"))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("No file/invalid file provided"));
+    }
+
+    @Test
+    void testMarkdownFile2DocxWithEmptyFile() throws Exception {
+        MockMultipartFile emptyFile = new MockMultipartFile(
+                "file", "empty.md", "text/markdown", new byte[0]);
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/markdownFile2DOCX").file(emptyFile))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("No file/invalid file provided"));
+    }
+
+    @Test
+    void testOptimizeResumeWithBlankOptimize() throws Exception {
+        MockMultipartFile resume = new MockMultipartFile(
+                "resume", "resume.pdf", "application/pdf", "dummy resume content".getBytes());
+        MockMultipartFile job = new MockMultipartFile(
+                "job", "job.pdf", "application/pdf", "job description".getBytes());
+        
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/upload")
+                .file(resume)
+                .file(job)
+                .param("optimize", "   "))
+                .andExpect(MockMvcResultMatchers.status().isExpectationFailed());
+    }
+
+    @Test
+    void testOptimizeResumeWithNullOptimize() throws Exception {
+        MockMultipartFile resume = new MockMultipartFile(
+                "resume", "resume.pdf", "application/pdf", "dummy resume content".getBytes());
+        MockMultipartFile job = new MockMultipartFile(
+                "job", "job.pdf", "application/pdf", "job description".getBytes());
+        
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/upload")
+                .file(resume)
+                .file(job))
+                .andExpect(MockMvcResultMatchers.status().isExpectationFailed());
+    }
+
+    @Test
+    void testProcessCoverLetterEndpoint() throws Exception {
+        MockMultipartFile coverLetter = new MockMultipartFile(
+                "coverLetter", "cover.txt", "text/plain", "cover letter content here".getBytes());
+        MockMultipartFile job = new MockMultipartFile(
+                "job", "job.txt", "text/plain", "job description here".getBytes());
+        String optimizeJson = "{\"company\":\"TechCorp\",\"jobTitle\":\"Engineer\",\"model\":\"gpt-4\","
+            + "\"temperature\":0.7,\"promptType\":[\"cover\"]}";
+
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/process/cover-letter")
+                .file(coverLetter)
+                .file(job)
+                .param("optimize", optimizeJson))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("generating"));
+    }
+
+    @Test
+    void testProcessResumeEndpoint() throws Exception {
+        MockMultipartFile resume = new MockMultipartFile(
+                "resume", "resume.txt", "text/plain", "resume content".getBytes());
+        MockMultipartFile job = new MockMultipartFile(
+                "job", "job.txt", "text/plain", "job description".getBytes());
+        String optimizeJson = "{\"company\":\"TechCorp\",\"jobTitle\":\"Engineer\",\"model\":\"model\","
+            + "\"temperature\":0.7,\"promptType\":[\"resume\"]}";
+
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/process/resume")
+                .file(resume)
+                .file(job)
+                .param("optimize", optimizeJson))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("generating"));
+    }
+
+    @Test
+    void testOptimizeResumeWithOnlyResumeFile() throws Exception {
+        MockMultipartFile resume = new MockMultipartFile(
+                "resume", "resume.pdf", "application/pdf", "resume content".getBytes());
+        String optimizeJson = "{\"company\":\"TechCorp\",\"jobTitle\":\"Engineer\",\"model\":\"model\","
+            + "\"temperature\":0.7,\"promptType\":[\"Resume\"],\"jobDescription\":\"job desc\",\"resume\":\"\"}";
+
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/upload")
+                .file(resume)
+                .param("optimize", optimizeJson))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("generating"));
+    }
+
+    @Test
+    void testOptimizeResumeWithPrePopulatedResumeInOptimize() throws Exception {
+        String optimizeJson = "{\"company\":\"TechCorp\",\"jobTitle\":\"Engineer\",\"model\":\"model\","
+            + "\"temperature\":0.7,\"promptType\":[\"Resume\"],\"jobDescription\":\"job description text\","
+            + "\"resume\":\"resume content text\"}";
+
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/upload")
+                .param("optimize", optimizeJson))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("generating"));
+    }
+
+    @Test
+    void testHealthCheck() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/health"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("UP"));
+    }
+
+    @Test
     void testProcessSkillsWithValidJob() throws Exception {
         MockMultipartFile job = new MockMultipartFile(
                 "job", "jd.txt", "text/plain", "Java Spring Developer position".getBytes());
