@@ -28,7 +28,6 @@ class PromptServiceTest {
         promptService = new PromptService();
     }
 
-    @Test
     @DisplayName("Should load RESUME prompt successfully")
     void testLoadResumePrompt() {
         String prompt = promptService.loadPrompt("RESUME");
@@ -43,7 +42,6 @@ class PromptServiceTest {
             "Prompt should contain {resume_string} placeholder");
     }
 
-    @Test
     @DisplayName("Should load COVER prompt successfully")
     void testLoadCoverPrompt() {
         String prompt = promptService.loadPrompt("COVER");
@@ -56,7 +54,6 @@ class PromptServiceTest {
             "Prompt should contain {job_description} placeholder");
     }
 
-    @Test
     @DisplayName("Should return empty string for invalid prompt name")
     void testLoadInvalidPrompt() {
         String prompt = promptService.loadPrompt("NONEXISTENT");
@@ -64,7 +61,6 @@ class PromptServiceTest {
         Assertions.assertEquals("", prompt, "Should return empty string for invalid prompt");
     }
 
-    @Test
     @DisplayName("Should return empty string for null prompt name")
     void testLoadNullPrompt() {
         String prompt = promptService.loadPrompt(null);
@@ -72,7 +68,6 @@ class PromptServiceTest {
         Assertions.assertEquals("", prompt, "Should return empty string for null prompt");
     }
 
-    @Test
     @DisplayName("Should return empty string for empty prompt name")
     void testLoadEmptyPrompt() {
         String prompt = promptService.loadPrompt("");
@@ -80,7 +75,6 @@ class PromptServiceTest {
         Assertions.assertEquals("", prompt, "Should return empty string for empty prompt");
     }
 
-    @Test
     @DisplayName("Should handle whitespace-only prompt names")
     void testLoadWhitespacePrompt() {
         String prompt = promptService.loadPrompt("   ");
@@ -88,7 +82,6 @@ class PromptServiceTest {
         Assertions.assertEquals("", prompt, "Should return empty string for whitespace-only prompt");
     }
 
-    @Test
     @DisplayName("Should load RESUME prompt with standardized variable names")
     void testResumePromptHasStandardizedVariables() {
         String prompt = promptService.loadPrompt("RESUME");
@@ -106,7 +99,6 @@ class PromptServiceTest {
             "Prompt should contain standardized {job_description}");
     }
 
-    @Test
     @DisplayName("Should load COVER prompt with standardized variable names")
     void testCoverPromptHasStandardizedVariables() {
         String prompt = promptService.loadPrompt("COVER");
@@ -124,7 +116,6 @@ class PromptServiceTest {
             "Prompt should contain standardized {job_description}");
     }
 
-    @Test
     @DisplayName("Should load multiple prompts independently")
     void testLoadMultiplePromptsIndependently() {
         String resumePrompt = promptService.loadPrompt("RESUME");
@@ -144,7 +135,6 @@ class PromptServiceTest {
             "Cover and skills prompts should be different");
     }
 
-    @Test
     @DisplayName("Should handle case-sensitive prompt names")
     void testPromptNameCaseSensitivity() {
         String upperCasePrompt = promptService.loadPrompt("RESUME");
@@ -155,7 +145,6 @@ class PromptServiceTest {
         // while Linux is case-sensitive. Both results are acceptable.
     }
 
-    @Test
     @DisplayName("Should expand prompt with variables")
     void testExpandPromptWithVariables() {
         String template = "Hello {name}, you applied for {position}";
@@ -169,7 +158,6 @@ class PromptServiceTest {
         Assertions.assertEquals("Hello John Doe, you applied for Software Engineer", expanded);
     }
     
-    @Test
     @DisplayName("Should expand prompt with null value")
     void testExpandPromptWithNullValue() {
         String template = "Hello {name}, you applied for {position}";
@@ -183,21 +171,18 @@ class PromptServiceTest {
         Assertions.assertTrue(expanded.contains("you applied for "));
     }
     
-    @Test
     @DisplayName("Should handle empty template")
     void testExpandPromptWithEmptyTemplate() {
         String expanded = promptService.expandPrompt("", Map.of("key", "value"));
         Assertions.assertEquals("", expanded);
     }
     
-    @Test
     @DisplayName("Should handle null template")
     void testExpandPromptWithNullTemplate() {
         String expanded = promptService.expandPrompt(null, Map.of("key", "value"));
         Assertions.assertEquals("", expanded);
     }
     
-    @Test
     @DisplayName("Should handle template with no variables")
     void testExpandPromptWithNoVariables() {
         String template = "This is a plain text template";
@@ -205,7 +190,6 @@ class PromptServiceTest {
         Assertions.assertEquals(template, expanded);
     }
     
-    @Test
     @DisplayName("Should handle template with unmatched placeholders")
     void testExpandPromptWithUnmatchedPlaceholders() {
         String template = "Hello {name}, your {missing} is here";
@@ -217,7 +201,6 @@ class PromptServiceTest {
         Assertions.assertTrue(expanded.contains("{missing}"));
     }
     
-    @Test
     @DisplayName("Should save prompt to history returns null when repository is null")
     void testSavePromptToHistoryWithNullRepository() {
         // Repository should be null by default for non-Spring test
@@ -232,7 +215,6 @@ class PromptServiceTest {
         Assertions.assertNull(result, "Should return null when repository is not available");
     }
     
-    @Test
     @DisplayName("Should get all history returns empty list when repository is null")
     void testGetAllHistoryWithNullRepository() {
         List<PromptHistory> history = promptService.getAllHistory();
@@ -240,7 +222,6 @@ class PromptServiceTest {
         Assertions.assertTrue(history.isEmpty());
     }
     
-    @Test
     @DisplayName("Should get history by type returns empty list when repository is null")
     void testGetHistoryByTypeWithNullRepository() {
         List<PromptHistory> history = promptService.getHistoryByType("RESUME");
@@ -248,7 +229,6 @@ class PromptServiceTest {
         Assertions.assertTrue(history.isEmpty());
     }
     
-    @Test
     @DisplayName("Should get history by id returns empty when repository is null")
     void testGetHistoryByIdWithNullRepository() {
         Optional<PromptHistory> history = promptService.getHistoryById(1L);
@@ -256,10 +236,58 @@ class PromptServiceTest {
         Assertions.assertFalse(history.isPresent());
     }
     
-    @Test
     @DisplayName("Should delete history by id does nothing when repository is null")
     void testDeleteHistoryByIdWithNullRepository() {
         // Should not throw exception
         Assertions.assertDoesNotThrow(() -> promptService.deleteHistoryById(1L));
+    }
+
+    @DisplayName("Should handle expandPrompt with special characters in variables")
+    void testExpandPromptWithSpecialCharacters() {
+        String template = "Company: {company}, Role: {role}";
+        Map<String, String> variables = new HashMap<>();
+        variables.put("company", "Tech & Co.");
+        variables.put("role", "Sr. Developer <Expert>");
+        
+        String expanded = promptService.expandPrompt(template, variables);
+        
+        Assertions.assertTrue(expanded.contains("Tech & Co."));
+        Assertions.assertTrue(expanded.contains("Sr. Developer <Expert>"));
+    }
+
+    @DisplayName("Should handle expandPrompt with empty string values")
+    void testExpandPromptWithEmptyStringValues() {
+        String template = "Name: {name}, Title: {title}";
+        Map<String, String> variables = new HashMap<>();
+        variables.put("name", "");
+        variables.put("title", "Developer");
+        
+        String expanded = promptService.expandPrompt(template, variables);
+        
+        Assertions.assertTrue(expanded.contains("Name: , Title: Developer"));
+    }
+
+
+
+    @DisplayName("Should handle expandPrompt with multiple occurrences of same placeholder")
+    void testExpandPromptWithDuplicatePlaceholders() {
+        String template = "{name} loves {name}'s work at {name}";
+        Map<String, String> variables = Map.of("name", "Alice");
+        
+        String expanded = promptService.expandPrompt(template, variables);
+        
+        Assertions.assertEquals("Alice loves Alice's work at Alice", expanded);
+    }
+
+    @DisplayName("Should handle expandPrompt with nested braces")
+    void testExpandPromptWithNestedBraces() {
+        String template = "Code: {{variable}} and {actual}";
+        Map<String, String> variables = Map.of("actual", "value");
+        
+        String expanded = promptService.expandPrompt(template, variables);
+        
+        Assertions.assertTrue(expanded.contains("value"));
+        // Should not break on nested braces
+        Assertions.assertTrue(expanded.contains("{"));
     }
 }
