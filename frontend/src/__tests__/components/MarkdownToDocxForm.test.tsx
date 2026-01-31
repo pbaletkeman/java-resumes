@@ -2,9 +2,9 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
 // Mock all dependencies before importing component
-vi.mock('../../../context/AppContext');
-vi.mock('../../../services/fileService');
-vi.mock('../../../hooks/useApi', () => ({
+vi.mock('../../context/AppContext');
+vi.mock('../../services/fileService');
+vi.mock('../../hooks/useApi', () => ({
   useApi: () => ({
     execute: vi.fn(),
     loading: false,
@@ -13,9 +13,9 @@ vi.mock('../../../hooks/useApi', () => ({
 }));
 
 // Import after mocks are set up
-import { MarkdownToDocxForm } from '../../../components/Forms/MarkdownToDocxForm';
-import { useAppContext } from '../../../context/AppContext';
-import { fileService } from '../../../services/fileService';
+import { MarkdownToDocxForm } from '../../components/Forms/MarkdownToDocxForm';
+import { useAppContext } from '../../context/AppContext';
+import { fileService } from '../../services/fileService';
 
 const mockContextValue = {
   showSuccess: vi.fn(),

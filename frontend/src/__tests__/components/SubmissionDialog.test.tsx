@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 
 // Import component
-import { SubmissionDialog } from '../../../components/Common/SubmissionDialog';
+import { SubmissionDialog } from '../../components/Common/SubmissionDialog';
 
 describe('SubmissionDialog', () => {
   const mockOnHide = vi.fn();
