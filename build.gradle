@@ -37,6 +37,14 @@ dependencies {
 	// Apache POI for DOCX generation
 	implementation 'org.apache.poi:poi-ooxml:5.0.0'
 
+	// Database dependencies
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.flywaydb:flyway-core'
+	
+	// SQLite dependencies
+	implementation 'org.xerial:sqlite-jdbc:3.45.0.0'
+	implementation 'org.hibernate.orm:hibernate-community-dialects:6.4.0.Final'
+
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 

@@ -10,6 +10,25 @@ spring:
   servlet:
     multipart: max-file-size=500KB
       max-request-size=500KB
+  
+  # Database configuration (SQLite)
+  datasource:
+    url: jdbc:sqlite:./data/prompts.db
+    driver-class-name: org.sqlite.JDBC
+  
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+  
+  flyway:
+    enabled: true
+    locations: classpath:db/migration/sqlite
+    baseline-on-migrate: true
 
 upload:
   path: files
