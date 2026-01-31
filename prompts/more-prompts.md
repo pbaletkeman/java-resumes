@@ -1,0 +1,6 @@
+- give me five possible five general HR questions that HR could ask me
+- given the attached job description, give me five possible interview questions that HR could ask about the job
+- given the attached job description, give me five possible interview questions that I could HR ask about the job
+- given the attached job description, give me five distinctly different `cold call` emails that I can sent to the company
+- given the attached job description, give me five distinctly different `cold call` linkedIn messages that I can sent to the company recuiter/linkedin contact
+- given the attached job description, give me five distinctly different `thank you for interviewing me` emails
