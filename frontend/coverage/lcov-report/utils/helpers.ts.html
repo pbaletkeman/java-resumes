@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/24</span>
+                <span class='fraction'>24/24</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">18.18% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/22</span>
+                <span class='fraction'>22/22</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -103,57 +103,57 @@
 <a name='L38'></a><a href='#L38'>38</a>
 <a name='L39'></a><a href='#L39'>39</a>
 <a name='L40'></a><a href='#L40'>40</a>
-<a name='L41'></a><a href='#L41'>41</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L41'></a><a href='#L41'>41</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const formatFileSize = <span class="fstat-no" title="function not covered" >(b</span>ytes: number): string =&gt; {
-<span class="cstat-no" title="statement not covered" >  if (bytes === 0) <span class="cstat-no" title="statement not covered" >return '0 Bytes';</span></span>
-  const k = <span class="cstat-no" title="statement not covered" >1024;</span>
-  const sizes = <span class="cstat-no" title="statement not covered" >['Bytes', 'KB', 'MB', 'GB'];</span>
-  const i = <span class="cstat-no" title="statement not covered" >Math.floor(Math.log(bytes) / Math.log(k));</span>
-<span class="cstat-no" title="statement not covered" >  return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + ' ' + sizes[i];</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const formatFileSize = (bytes: number): string =&gt; {
+  if (bytes === 0) return '0 Bytes';
+  const k = 1024;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + ' ' + sizes[i];
 };
 &nbsp;
-export const formatDate = <span class="fstat-no" title="function not covered" >(d</span>ateString: string): string =&gt; {
-  const date = <span class="cstat-no" title="statement not covered" >new Date(dateString);</span>
-<span class="cstat-no" title="statement not covered" >  return new Intl.DateTimeFormat('en-US', {</span>
+export const formatDate = (dateString: string): string =&gt; {
+  const date = new Date(dateString);
+  return new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
@@ -162,25 +162,25 @@ export const formatDate = <span class="fstat-no" title="function not covered" >(
   }).format(date);
 };
 &nbsp;
-export const downloadFile = <span class="fstat-no" title="function not covered" >(b</span>lob: Blob, filename: string): void =&gt; {
-  const url = <span class="cstat-no" title="statement not covered" >window.URL.createObjectURL(blob);</span>
-  const link = <span class="cstat-no" title="statement not covered" >document.createElement('a');</span>
-<span class="cstat-no" title="statement not covered" >  link.href = url;</span>
-<span class="cstat-no" title="statement not covered" >  link.download = filename;</span>
-<span class="cstat-no" title="statement not covered" >  document.body.appendChild(link);</span>
-<span class="cstat-no" title="statement not covered" >  link.click();</span>
-<span class="cstat-no" title="statement not covered" >  document.body.removeChild(link);</span>
-<span class="cstat-no" title="statement not covered" >  window.URL.revokeObjectURL(url);</span>
+export const downloadFile = (blob: Blob, filename: string): void =&gt; {
+  const url = window.URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  window.URL.revokeObjectURL(url);
 };
 &nbsp;
-export const debounce = <span class="fstat-no" title="function not covered" >&lt;T extends (...args: unknown[]) =&gt; unknown&gt;(</span>
+export const debounce = &lt;T extends (...args: unknown[]) =&gt; unknown&gt;(
   func: T,
   delay: number
 ): ((...args: Parameters&lt;T&gt;) =&gt; void) =&gt; {
   let timeoutId: ReturnType&lt;typeof setTimeout&gt;;
-<span class="cstat-no" title="statement not covered" >  return <span class="fstat-no" title="function not covered" >(...a</span>rgs: Parameters&lt;T&gt;) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    clearTimeout(timeoutId);</span>
-<span class="cstat-no" title="statement not covered" >    timeoutId = setTimeout(<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >f</span>unc(...args), d</span>elay);</span>
+  return (...args: Parameters&lt;T&gt;) =&gt; {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() =&gt; func(...args), delay);
   };
 };
 &nbsp;</pre></td></tr></table></pre>
@@ -190,7 +190,7 @@ export const debounce = <span class="fstat-no" title="function not covered" >&lt
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-01-31T22:19:19.256Z
+                at 2026-01-31T23:10:25.638Z
             </div>
         <script src="../prettify.js"></script>
         <script>
