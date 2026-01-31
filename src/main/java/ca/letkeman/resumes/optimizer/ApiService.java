@@ -3,6 +3,7 @@ package ca.letkeman.resumes.optimizer;
 import ca.letkeman.resumes.model.Optimize;
 import ca.letkeman.resumes.optimizer.responses.Choice;
 import ca.letkeman.resumes.optimizer.responses.LLMResponse;
+import ca.letkeman.resumes.service.MockLlmService;
 import ca.letkeman.resumes.service.PromptService;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
@@ -25,6 +26,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -34,6 +36,12 @@ public final class ApiService {
 
   @Autowired(required = false)
   private PromptService promptService;
+
+  @Autowired(required = false)
+  private MockLlmService mockLlmService;
+
+  @Value("${llm.mock.enabled:false}")
+  private boolean mockEnabled;
 
   private String jobDescription;
   private String resume;
@@ -68,8 +76,38 @@ public final class ApiService {
     return promptService;
   }
 
+  /**
+   * Lazily load or create MockLlmService if not injected by Spring.
+   *
+   * @return the MockLlmService instance
+   */
+  private MockLlmService getMockLlmService() {
+    if (mockLlmService == null) {
+      mockLlmService = new MockLlmService();
+    }
+    return mockLlmService;
+  }
+
   public ApiService() {
     // default constructor
+  }
+
+  /**
+   * Check if mock mode is enabled.
+   *
+   * @return true if mock mode is enabled
+   */
+  public boolean isMockEnabled() {
+    return mockEnabled;
+  }
+
+  /**
+   * Set mock mode enabled/disabled.
+   *
+   * @param enabled true to enable mock mode
+   */
+  public void setMockEnabled(boolean enabled) {
+    this.mockEnabled = enabled;
   }
 
   /***
@@ -78,6 +116,12 @@ public final class ApiService {
    * @return - the result from the LLM request
    */
   public LLMResponse invokeApi(ChatBody chatBody, String endpoint, String apikey) {
+    // If mock mode is enabled, return mock response instead of making HTTP call
+    if (mockEnabled) {
+      LOGGER.info("Mock mode enabled - returning simulated LLM response");
+      return getMockLlmService().generateMockResponse(chatBody);
+    }
+
     String jsonBody = new Gson().toJson(chatBody);
     try {
       URI uri = new URI(endpoint);

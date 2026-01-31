@@ -483,5 +483,5 @@ docker exec resume-ollama ollama pull tinyllama
 
 ---
 
-**Last Updated:** January 2026  
+**Last Updated:** January 2026
 **Maintained By:** Java-Resumes Development Team

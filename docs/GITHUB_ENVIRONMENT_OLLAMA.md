@@ -71,11 +71,11 @@ jobs:
   setup-ollama:
     runs-on: ubuntu-latest
     environment: ollama-testing  # Add this line
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       # ... rest of workflow
 ```
 
@@ -123,23 +123,23 @@ jobs:
   test:
     runs-on: ubuntu-latest
     environment: ollama-testing
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Install Ollama
         run: curl -fsSL https://ollama.com/install.sh | sh
-      
+
       - name: Start Ollama
         run: ollama serve &
-      
+
       - name: Pull model
         env:
           MODEL: ${{ vars.OLLAMA_MODEL }}
         run: |
           ollama pull $MODEL
           ollama list
-      
+
       - name: Run tests
         run: |
           # Your test commands here
@@ -158,20 +158,20 @@ jobs:
   test:
     runs-on: ubuntu-latest
     environment: ollama-testing
-    
+
     strategy:
       matrix:
         model: [tinyllama, phi3:mini, gemma2:2b]
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Ollama
         run: |
           curl -fsSL https://ollama.com/install.sh | sh
           ollama serve &
           sleep 10
-      
+
       - name: Test with ${{ matrix.model }}
         run: |
           ollama pull ${{ matrix.model }}
@@ -192,10 +192,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: ollama-testing  # Requires approval if configured
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Deploy to environment
         run: |
           echo "Deploying with Ollama configuration"
@@ -212,7 +212,7 @@ jobs:
 Create multiple environments for different purposes:
 
 - `ollama-development` - For PR testing
-- `ollama-staging` - For pre-production testing  
+- `ollama-staging` - For pre-production testing
 - `ollama-production` - For production deployments
 
 ### 2. Model Selection Strategy
@@ -361,29 +361,29 @@ jobs:
     runs-on: ubuntu-latest
     environment: ollama-testing
     timeout-minutes: 30
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Free disk space
         run: |
           df -h
           sudo rm -rf /usr/share/dotnet
           df -h
-      
+
       - name: Cache Ollama
         uses: actions/cache@v3
         with:
           path: ~/.ollama
           key: ollama-${{ runner.os }}-${{ hashFiles('config.json') }}
-      
+
       - name: Install Ollama
         run: |
           curl -fsSL https://ollama.com/install.sh | sh
           ollama serve > /tmp/ollama.log 2>&1 &
           sleep 10
-      
+
       - name: Pull model
         env:
           MODEL: ${{ inputs.model || vars.OLLAMA_MODEL }}
@@ -391,7 +391,7 @@ jobs:
           echo "Pulling model: $MODEL"
           ollama pull $MODEL
           ollama list
-      
+
       - name: Test inference
         env:
           MODEL: ${{ inputs.model || vars.OLLAMA_MODEL }}
@@ -401,17 +401,17 @@ jobs:
             \"model\": \"$MODEL\",
             \"messages\": [{\"role\": \"user\", \"content\": \"test\"}]
           }" | jq '.'
-      
+
       - name: Run application tests
         run: ./gradlew test
-      
+
       - name: Upload logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: ollama-logs
           path: /tmp/ollama.log
-      
+
       - name: Summary
         run: |
           echo "## Test Summary" >> $GITHUB_STEP_SUMMARY
@@ -430,5 +430,5 @@ jobs:
 
 ---
 
-**Last Updated:** January 2026  
+**Last Updated:** January 2026
 **Repository:** pbaletkeman/java-resumes
