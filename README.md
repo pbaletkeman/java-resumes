@@ -39,6 +39,7 @@ docker compose up --build
 | **Configuration** | [Config Guide](docs/CONFIGURATION.md)         | **Code Quality** | [Git Hooks](docs/git-hooks/README_GIT_HOOKS.md) |
 | **Development**   | [Dev Setup](docs/DEVELOPMENT_SETUP.md)        | **Issues**       | [Troubleshooting](docs/TROUBLESHOOTING.md)      |
 | **Deployment**    | [Deploy Guide](docs/PRODUCTION_DEPLOYMENT.md) | **Env Vars**     | [Configuration](docs/ENVIRONMENT_VARIABLES.md)  |
+| **Ollama Setup**  | [Ollama Guide](docs/OLLAMA_SETUP.md)          | **GitHub CI**    | [GitHub Environment](docs/GITHUB_ENVIRONMENT_OLLAMA.md) |
 
 ---
 

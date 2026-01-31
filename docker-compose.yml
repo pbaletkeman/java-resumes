@@ -1,4 +1,30 @@
 services:
+  # Ollama LLM Service (Optional - comment out if using external Ollama)
+  ollama:
+    image: ollama/ollama:latest
+    container_name: resume-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    networks:
+      - resume-network
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    restart: unless-stopped
+    # Uncomment below for GPU support (requires nvidia-docker)
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
   # Backend - Java Spring Boot API
   backend:
     build:
@@ -10,13 +36,16 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=prod
       - UPLOAD_PATH=files
-      - LLM_ENDPOINT=${LLM_ENDPOINT:-http://host.docker.internal:11434/v1/chat/completions}
+      - LLM_ENDPOINT=${LLM_ENDPOINT:-http://ollama:11434/v1/chat/completions}
       - LLM_APIKEY=${LLM_APIKEY:-not-needed-for-local}
     volumes:
       - backend-files:/app/files
       - ./config.json:/app/config.json:ro
     networks:
       - resume-network
+    depends_on:
+      ollama:
+        condition: service_healthy
     healthcheck:
       test:
         [
@@ -61,3 +90,5 @@ networks:
 volumes:
   backend-files:
     name: resume-backend-files
+  ollama-data:
+    name: resume-ollama-data
