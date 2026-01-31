@@ -46,6 +46,8 @@ dependencies {
 	implementation 'org.xerial:sqlite-jdbc:3.45.0.0'
 	implementation 'org.hibernate.orm:hibernate-community-dialects:6.4.0.Final'
 
+	// H2 database for tests (in-memory)
+	testImplementation 'com.h2database:h2'
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 
@@ -128,16 +130,16 @@ tasks.withType(Checkstyle).configureEach {
 
 // SpotBugs Configuration
 spotbugs {
-	effort = 'MAX'
-	reportLevel = 'MEDIUM'
+	effort = com.github.spotbugs.snom.Effort.valueOf('MAX')
+	reportLevel = com.github.spotbugs.snom.Confidence.valueOf('MEDIUM')
 	excludeFilter = file('config/spotbugs/spotbugs-exclude.xml')
 	ignoreFailures = true
 }
 
 spotbugsMain {
 	reports {
-		html.enabled = true
-		xml.enabled = true
+		html.required = true
+		xml.required = true
 	}
 }
 
