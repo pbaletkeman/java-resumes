@@ -1,5 +1,11 @@
 package ca.letkeman.resumes.service;
 
+import ca.letkeman.resumes.entity.PromptHistory;
+import ca.letkeman.resumes.model.Optimize;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -147,5 +153,113 @@ class PromptServiceTest {
         Assertions.assertNotNull(upperCasePrompt, "Uppercase RESUME should load successfully");
         // Note: Case sensitivity depends on file system. File systems like Windows are case-insensitive,
         // while Linux is case-sensitive. Both results are acceptable.
+    }
+
+    @Test
+    @DisplayName("Should expand prompt with variables")
+    void testExpandPromptWithVariables() {
+        String template = "Hello {name}, you applied for {position}";
+        Map<String, String> variables = Map.of(
+            "name", "John Doe",
+            "position", "Software Engineer"
+        );
+        
+        String expanded = promptService.expandPrompt(template, variables);
+        
+        Assertions.assertEquals("Hello John Doe, you applied for Software Engineer", expanded);
+    }
+    
+    @Test
+    @DisplayName("Should expand prompt with null value")
+    void testExpandPromptWithNullValue() {
+        String template = "Hello {name}, you applied for {position}";
+        Map<String, String> variables = new HashMap<>();
+        variables.put("name", "John");
+        variables.put("position", null);
+        
+        String expanded = promptService.expandPrompt(template, variables);
+        
+        Assertions.assertTrue(expanded.contains("John"));
+        Assertions.assertTrue(expanded.contains("you applied for "));
+    }
+    
+    @Test
+    @DisplayName("Should handle empty template")
+    void testExpandPromptWithEmptyTemplate() {
+        String expanded = promptService.expandPrompt("", Map.of("key", "value"));
+        Assertions.assertEquals("", expanded);
+    }
+    
+    @Test
+    @DisplayName("Should handle null template")
+    void testExpandPromptWithNullTemplate() {
+        String expanded = promptService.expandPrompt(null, Map.of("key", "value"));
+        Assertions.assertEquals("", expanded);
+    }
+    
+    @Test
+    @DisplayName("Should handle template with no variables")
+    void testExpandPromptWithNoVariables() {
+        String template = "This is a plain text template";
+        String expanded = promptService.expandPrompt(template, Map.of());
+        Assertions.assertEquals(template, expanded);
+    }
+    
+    @Test
+    @DisplayName("Should handle template with unmatched placeholders")
+    void testExpandPromptWithUnmatchedPlaceholders() {
+        String template = "Hello {name}, your {missing} is here";
+        Map<String, String> variables = Map.of("name", "John");
+        
+        String expanded = promptService.expandPrompt(template, variables);
+        
+        Assertions.assertTrue(expanded.contains("John"));
+        Assertions.assertTrue(expanded.contains("{missing}"));
+    }
+    
+    @Test
+    @DisplayName("Should save prompt to history returns null when repository is null")
+    void testSavePromptToHistoryWithNullRepository() {
+        // Repository should be null by default for non-Spring test
+        Optimize optimize = new Optimize();
+        optimize.setJobDescription("Test");
+        optimize.setModel("test-model");
+        
+        PromptHistory result = promptService.savePromptToHistory(
+            "RESUME", optimize, "prompt", "content", "/tmp/file.md", 1000L
+        );
+        
+        Assertions.assertNull(result, "Should return null when repository is not available");
+    }
+    
+    @Test
+    @DisplayName("Should get all history returns empty list when repository is null")
+    void testGetAllHistoryWithNullRepository() {
+        List<PromptHistory> history = promptService.getAllHistory();
+        Assertions.assertNotNull(history);
+        Assertions.assertTrue(history.isEmpty());
+    }
+    
+    @Test
+    @DisplayName("Should get history by type returns empty list when repository is null")
+    void testGetHistoryByTypeWithNullRepository() {
+        List<PromptHistory> history = promptService.getHistoryByType("RESUME");
+        Assertions.assertNotNull(history);
+        Assertions.assertTrue(history.isEmpty());
+    }
+    
+    @Test
+    @DisplayName("Should get history by id returns empty when repository is null")
+    void testGetHistoryByIdWithNullRepository() {
+        Optional<PromptHistory> history = promptService.getHistoryById(1L);
+        Assertions.assertNotNull(history);
+        Assertions.assertFalse(history.isPresent());
+    }
+    
+    @Test
+    @DisplayName("Should delete history by id does nothing when repository is null")
+    void testDeleteHistoryByIdWithNullRepository() {
+        // Should not throw exception
+        Assertions.assertDoesNotThrow(() -> promptService.deleteHistoryById(1L));
     }
 }
