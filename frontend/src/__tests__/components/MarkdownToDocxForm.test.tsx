@@ -105,4 +105,22 @@ describe('MarkdownToDocxForm', () => {
     expect(convertBtn).toBeInTheDocument();
     expect(downloadBtn).toBeInTheDocument();
   });
+
+  it('should have card component with correct title', () => {
+    renderComponent();
+    const card = screen.getByText('Markdown to DOCX Converter').closest('.p-card');
+    expect(card).toBeInTheDocument();
+  });
+
+  it('should contain markdown file input', () => {
+    renderComponent();
+    const fileInput = document.querySelector('input[type="file"]');
+    expect(fileInput).toBeInTheDocument();
+  });
+
+  it('should display file chooser element', () => {
+    renderComponent();
+    const fileChooser = screen.getByText('Choose Markdown File');
+    expect(fileChooser).toBeInTheDocument();
+  });
 });
