@@ -406,4 +406,107 @@ class PromptServiceTest {
         Assertions.assertNotNull(history);
         Assertions.assertTrue(history.isEmpty());
     }
+
+    @Test
+    @DisplayName("Should handle savePromptToHistory with all fields populated")
+    void testSavePromptToHistoryWithAllFields() {
+        // This would require a mock repository, but tests the null check path
+        Optimize optimize = new Optimize();
+        optimize.setJobDescription("Senior Developer position");
+        optimize.setCompany("TechCorp");
+        optimize.setJobTitle("Senior Software Engineer");
+        optimize.setInterviewerName("Jane Smith");
+        optimize.setTemperature(0.7);
+        optimize.setModel("gpt-4");
+        
+        PromptHistory result = promptService.savePromptToHistory(
+            "INTERVIEW_HR",
+            optimize,
+            "Full expanded prompt text",
+            "Generated interview questions",
+            "/tmp/interview_hr_questions.md",
+            2500L
+        );
+        
+        // Without repository, should return null
+        Assertions.assertNull(result);
+    }
+
+    @Test
+    @DisplayName("Should handle savePromptToHistory with minimal fields")
+    void testSavePromptToHistoryWithMinimalFields() {
+        Optimize optimize = new Optimize();
+        optimize.setModel("test-model");
+        
+        PromptHistory result = promptService.savePromptToHistory(
+            "COVER",
+            optimize,
+            "",
+            "",
+            null,
+            null
+        );
+        
+        Assertions.assertNull(result);
+    }
+
+    @Test
+    @DisplayName("Should handle getHistoryByType with various prompt types")
+    void testGetHistoryByTypeWithDifferentTypes() {
+        List<PromptHistory> resumeHistory = promptService.getHistoryByType("RESUME");
+        List<PromptHistory> coverHistory = promptService.getHistoryByType("COVER");
+        List<PromptHistory> interviewHistory = promptService.getHistoryByType("INTERVIEW_HR");
+        
+        Assertions.assertTrue(resumeHistory.isEmpty());
+        Assertions.assertTrue(coverHistory.isEmpty());
+        Assertions.assertTrue(interviewHistory.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Should handle getHistoryById with various IDs")
+    void testGetHistoryByIdWithVariousIds() {
+        Optional<PromptHistory> history1 = promptService.getHistoryById(1L);
+        Optional<PromptHistory> history100 = promptService.getHistoryById(100L);
+        Optional<PromptHistory> history0 = promptService.getHistoryById(0L);
+        
+        Assertions.assertFalse(history1.isPresent());
+        Assertions.assertFalse(history100.isPresent());
+        Assertions.assertFalse(history0.isPresent());
+    }
+
+    @Test
+    @DisplayName("Should handle deleteHistoryById with various IDs")
+    void testDeleteHistoryByIdWithVariousIds() {
+        Assertions.assertDoesNotThrow(() -> promptService.deleteHistoryById(1L));
+        Assertions.assertDoesNotThrow(() -> promptService.deleteHistoryById(999L));
+        Assertions.assertDoesNotThrow(() -> promptService.deleteHistoryById(0L));
+    }
+
+    @Test
+    @DisplayName("Should handle expandPrompt with very long variable values")
+    void testExpandPromptWithLongValues() {
+        String longText = "A".repeat(10000);
+        String template = "Content: {content}";
+        Map<String, String> variables = Map.of("content", longText);
+        
+        String expanded = promptService.expandPrompt(template, variables);
+        
+        Assertions.assertTrue(expanded.length() > 10000);
+        Assertions.assertTrue(expanded.contains(longText));
+    }
+
+    @Test
+    @DisplayName("Should handle expandPrompt with placeholders at text boundaries")
+    void testExpandPromptWithPlaceholdersAtTextBoundaries() {
+        String template = "{start} middle text {end}";
+        Map<String, String> variables = new HashMap<>();
+        variables.put("start", "BEGIN");
+        variables.put("end", "END");
+        
+        String expanded = promptService.expandPrompt(template, variables);
+        
+        Assertions.assertTrue(expanded.startsWith("BEGIN"));
+        Assertions.assertTrue(expanded.endsWith("END"));
+        Assertions.assertTrue(expanded.contains("middle text"));
+    }
 }
