@@ -327,4 +327,34 @@ class ResumeControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message")
                     .value("job description is required"));
     }
+
+    @Test
+    void testHealthCheckEndpoint() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/health"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value("UP"));
+    }
+
+    @Test
+    void testDeleteNonExistentFile() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/files/nonexistent.txt"))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    @Test
+    void testGetListFilesWhenEmpty() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/files"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void testMarkdownFile2PDFWithSpecialCharacters() throws Exception {
+        MockMultipartFile file = new MockMultipartFile(
+                "file", "test-file.md", "text/markdown",
+                "# Test with special chars: !@#$%^&*()".getBytes());
+
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/markdownFile2PDF")
+                .file(file))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
 }

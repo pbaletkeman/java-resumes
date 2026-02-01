@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 // Mock all dependencies before importing component
 vi.mock('../../context/AppContext');
@@ -28,29 +28,39 @@ describe('MarkdownToDocxForm', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     (useAppContext as any).mockReturnValue(mockContextValue);
-  
+  });
+
+  const renderComponent = () => {
+    return render(<MarkdownToDocxForm />);
+  };
+
   it('should render the Markdown to DOCX converter form', () => {
     renderComponent();
     expect(screen.getByText('Markdown to DOCX Converter')).toBeInTheDocument();
   });
+
   it('should display the markdown cleanup note', () => {
     renderComponent();
     expect(screen.getByText(/LLM responses often include formatting markdown/)).toBeInTheDocument();
   });
+
   it('should display file selection input', () => {
     renderComponent();
     expect(screen.getByText('Select Markdown File')).toBeInTheDocument();
   });
+
   it('should have Convert button that starts disabled', () => {
     renderComponent();
     const convertBtn = screen.getByRole('button', { name: /convert/i });
     expect(convertBtn).toBeDisabled();
   });
+
   it('should have Download button that starts disabled', () => {
     renderComponent();
     const downloadBtn = screen.getByRole('button', { name: /download/i });
     expect(downloadBtn).toBeDisabled();
   });
+
   it('should display success message when conversion completes', async () => {
     const mockDocxBlob = new Blob(['docx content'], { type: 'application/vnd.ms-word' });
     (fileService.convertMarkdownToDocx as any).mockResolvedValue(mockDocxBlob);
@@ -68,6 +78,7 @@ describe('MarkdownToDocxForm', () => {
     expect(convertBtn).toBeInTheDocument();
     expect(downloadBtn).toBeInTheDocument();
   });
+
   it('should enable convert button when file is selected', async () => {
     renderComponent();
     
@@ -79,10 +90,12 @@ describe('MarkdownToDocxForm', () => {
     // After selecting file (simulated by checking the button exists)
     expect(convertBtn).toBeInTheDocument();
   });
+
   it('should display correct heading text', () => {
     renderComponent();
     expect(screen.getByText('Markdown to DOCX Converter')).toBeInTheDocument();
   });
+
   it('should have proper form structure with buttons', () => {
     renderComponent();
     
@@ -92,14 +105,4 @@ describe('MarkdownToDocxForm', () => {
     expect(convertBtn).toBeInTheDocument();
     expect(downloadBtn).toBeInTheDocument();
   });
-});
-const renderComponent = () => {
-    return render(<MarkdownToDocxForm />);
-  };
-
-
-
-
-
-
 });

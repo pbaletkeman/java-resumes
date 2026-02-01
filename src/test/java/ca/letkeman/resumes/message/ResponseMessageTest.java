@@ -42,4 +42,26 @@ class ResponseMessageTest {
     message.setMessage("Third");
     Assertions.assertEquals("Third", message.getMessage());
   }
+
+  @Test
+  void testMessageWithSpecialCharacters() {
+    String specialMessage = "Test!@#$%^&*()_+-=[]{}|;':\",./<>?";
+    ResponseMessage message = new ResponseMessage(specialMessage);
+    Assertions.assertEquals(specialMessage, message.getMessage());
+  }
+
+  @Test
+  void testMessageWithUnicode() {
+    String unicodeMessage = "Test 你好 世界 🌍";
+    ResponseMessage message = new ResponseMessage(unicodeMessage);
+    Assertions.assertEquals(unicodeMessage, message.getMessage());
+  }
+
+  @Test
+  void testLongMessage() {
+    String longMessage = "A".repeat(10000);
+    ResponseMessage message = new ResponseMessage(longMessage);
+    Assertions.assertEquals(longMessage, message.getMessage());
+    Assertions.assertEquals(10000, message.getMessage().length());
+  }
 }

@@ -290,4 +290,71 @@ class PromptServiceTest {
         // Should not break on nested braces
         Assertions.assertTrue(expanded.contains("{"));
     }
+
+    @DisplayName("Should handle expandPrompt with numeric placeholders")
+    void testExpandPromptWithNumericPlaceholders() {
+        String template = "Value1: {123}, Value2: {456}";
+        Map<String, String> variables = new HashMap<>();
+        variables.put("123", "First");
+        variables.put("456", "Second");
+        
+        String expanded = promptService.expandPrompt(template, variables);
+        
+        Assertions.assertTrue(expanded.contains("First"));
+        Assertions.assertTrue(expanded.contains("Second"));
+    }
+
+    @DisplayName("Should handle expandPrompt with underscore in placeholder names")
+    void testExpandPromptWithUnderscorePlaceholders() {
+        String template = "User: {user_name}, Role: {user_role}";
+        Map<String, String> variables = new HashMap<>();
+        variables.put("user_name", "John Doe");
+        variables.put("user_role", "Admin");
+        
+        String expanded = promptService.expandPrompt(template, variables);
+        
+        Assertions.assertTrue(expanded.contains("John Doe"));
+        Assertions.assertTrue(expanded.contains("Admin"));
+    }
+
+    @DisplayName("Should handle expandPrompt with mixed case placeholders")
+    void testExpandPromptWithMixedCasePlaceholders() {
+        String template = "{CompanyName} - {jobTitle} - {LEVEL}";
+        Map<String, String> variables = new HashMap<>();
+        variables.put("CompanyName", "TechCorp");
+        variables.put("jobTitle", "Developer");
+        variables.put("LEVEL", "Senior");
+        
+        String expanded = promptService.expandPrompt(template, variables);
+        
+        Assertions.assertTrue(expanded.contains("TechCorp"));
+        Assertions.assertTrue(expanded.contains("Developer"));
+        Assertions.assertTrue(expanded.contains("Senior"));
+    }
+
+    @DisplayName("Should handle expandPrompt with very long variable values")
+    void testExpandPromptWithLongVariableValues() {
+        String template = "Description: {desc}";
+        Map<String, String> variables = new HashMap<>();
+        String longValue = "A".repeat(10000);
+        variables.put("desc", longValue);
+        
+        String expanded = promptService.expandPrompt(template, variables);
+        
+        Assertions.assertTrue(expanded.contains(longValue));
+        Assertions.assertTrue(expanded.length() > 10000);
+    }
+
+    @DisplayName("Should handle expandPrompt with placeholder at start and end")
+    void testExpandPromptWithPlaceholderAtBoundaries() {
+        String template = "{start} middle text {end}";
+        Map<String, String> variables = new HashMap<>();
+        variables.put("start", "BEGIN");
+        variables.put("end", "FINISH");
+        
+        String expanded = promptService.expandPrompt(template, variables);
+        
+        Assertions.assertTrue(expanded.startsWith("BEGIN"));
+        Assertions.assertTrue(expanded.endsWith("FINISH"));
+    }
 }
