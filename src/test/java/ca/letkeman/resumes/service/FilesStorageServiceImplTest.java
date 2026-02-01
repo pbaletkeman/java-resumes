@@ -225,4 +225,60 @@ class FilesStorageServiceImplTest {
         String content = Files.readString(savedFile);
         assertEquals("New content", content);
     }
+
+    @Test
+    void testSetConfigRoot() {
+        String newRoot = "/tmp/new-upload-dir";
+        filesStorageService.setConfigRoot(newRoot);
+        // Verify method completes without error
+        assertDoesNotThrow(() -> filesStorageService.setConfigRoot(newRoot));
+    }
+
+    @Test
+    void testLoadWithNullFilename() {
+        // Implementation may throw exception for null filename
+        // Or return null - depends on implementation
+        assertDoesNotThrow(() -> {
+            Resource resource = filesStorageService.load(null);
+            // Just verify it doesn't crash
+        });
+    }
+
+    @Test
+    void testLoadWithEmptyFilename() {
+        // Implementation may handle empty filename differently
+        // Just verify it doesn't crash
+        assertDoesNotThrow(() -> {
+            Resource resource = filesStorageService.load("");
+        });
+    }
+
+    @Test
+    void testDeleteWithNullFilename() {
+        // Implementation throws NullPointerException for null filename
+        assertThrows(NullPointerException.class, () -> {
+            filesStorageService.delete(null);
+        });
+    }
+
+    @Test
+    void testSaveFileWithLargeContent() {
+        // Create a larger file (1MB)
+        byte[] largeContent = new byte[1024 * 1024];
+        for (int i = 0; i < largeContent.length; i++) {
+            largeContent[i] = (byte) (i % 256);
+        }
+
+        MultipartFile largeFile = new MockMultipartFile(
+                "file",
+                "large-file.bin",
+                "application/octet-stream",
+                largeContent
+        );
+
+        assertDoesNotThrow(() -> filesStorageService.save(largeFile));
+
+        Path savedFile = testUploadPath.resolve("large-file.bin");
+        assertTrue(Files.exists(savedFile));
+    }
 }

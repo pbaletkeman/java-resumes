@@ -28,6 +28,7 @@ class PromptServiceTest {
         promptService = new PromptService();
     }
 
+    @Test
     @DisplayName("Should load RESUME prompt successfully")
     void testLoadResumePrompt() {
         String prompt = promptService.loadPrompt("RESUME");
@@ -42,6 +43,7 @@ class PromptServiceTest {
             "Prompt should contain {resume_string} placeholder");
     }
 
+    @Test
     @DisplayName("Should load COVER prompt successfully")
     void testLoadCoverPrompt() {
         String prompt = promptService.loadPrompt("COVER");
@@ -54,6 +56,7 @@ class PromptServiceTest {
             "Prompt should contain {job_description} placeholder");
     }
 
+    @Test
     @DisplayName("Should return empty string for invalid prompt name")
     void testLoadInvalidPrompt() {
         String prompt = promptService.loadPrompt("NONEXISTENT");
@@ -61,6 +64,7 @@ class PromptServiceTest {
         Assertions.assertEquals("", prompt, "Should return empty string for invalid prompt");
     }
 
+    @Test
     @DisplayName("Should return empty string for null prompt name")
     void testLoadNullPrompt() {
         String prompt = promptService.loadPrompt(null);
@@ -68,6 +72,7 @@ class PromptServiceTest {
         Assertions.assertEquals("", prompt, "Should return empty string for null prompt");
     }
 
+    @Test
     @DisplayName("Should return empty string for empty prompt name")
     void testLoadEmptyPrompt() {
         String prompt = promptService.loadPrompt("");
@@ -75,6 +80,7 @@ class PromptServiceTest {
         Assertions.assertEquals("", prompt, "Should return empty string for empty prompt");
     }
 
+    @Test
     @DisplayName("Should handle whitespace-only prompt names")
     void testLoadWhitespacePrompt() {
         String prompt = promptService.loadPrompt("   ");
@@ -82,6 +88,7 @@ class PromptServiceTest {
         Assertions.assertEquals("", prompt, "Should return empty string for whitespace-only prompt");
     }
 
+    @Test
     @DisplayName("Should load RESUME prompt with standardized variable names")
     void testResumePromptHasStandardizedVariables() {
         String prompt = promptService.loadPrompt("RESUME");
@@ -99,6 +106,7 @@ class PromptServiceTest {
             "Prompt should contain standardized {job_description}");
     }
 
+    @Test
     @DisplayName("Should load COVER prompt with standardized variable names")
     void testCoverPromptHasStandardizedVariables() {
         String prompt = promptService.loadPrompt("COVER");
@@ -116,6 +124,7 @@ class PromptServiceTest {
             "Prompt should contain standardized {job_description}");
     }
 
+    @Test
     @DisplayName("Should load multiple prompts independently")
     void testLoadMultiplePromptsIndependently() {
         String resumePrompt = promptService.loadPrompt("RESUME");
@@ -135,6 +144,7 @@ class PromptServiceTest {
             "Cover and skills prompts should be different");
     }
 
+    @Test
     @DisplayName("Should handle case-sensitive prompt names")
     void testPromptNameCaseSensitivity() {
         String upperCasePrompt = promptService.loadPrompt("RESUME");
@@ -145,6 +155,7 @@ class PromptServiceTest {
         // while Linux is case-sensitive. Both results are acceptable.
     }
 
+    @Test
     @DisplayName("Should expand prompt with variables")
     void testExpandPromptWithVariables() {
         String template = "Hello {name}, you applied for {position}";
@@ -158,6 +169,7 @@ class PromptServiceTest {
         Assertions.assertEquals("Hello John Doe, you applied for Software Engineer", expanded);
     }
     
+    @Test
     @DisplayName("Should expand prompt with null value")
     void testExpandPromptWithNullValue() {
         String template = "Hello {name}, you applied for {position}";
@@ -171,18 +183,21 @@ class PromptServiceTest {
         Assertions.assertTrue(expanded.contains("you applied for "));
     }
     
+    @Test
     @DisplayName("Should handle empty template")
     void testExpandPromptWithEmptyTemplate() {
         String expanded = promptService.expandPrompt("", Map.of("key", "value"));
         Assertions.assertEquals("", expanded);
     }
     
+    @Test
     @DisplayName("Should handle null template")
     void testExpandPromptWithNullTemplate() {
         String expanded = promptService.expandPrompt(null, Map.of("key", "value"));
         Assertions.assertEquals("", expanded);
     }
     
+    @Test
     @DisplayName("Should handle template with no variables")
     void testExpandPromptWithNoVariables() {
         String template = "This is a plain text template";
@@ -190,6 +205,7 @@ class PromptServiceTest {
         Assertions.assertEquals(template, expanded);
     }
     
+    @Test
     @DisplayName("Should handle template with unmatched placeholders")
     void testExpandPromptWithUnmatchedPlaceholders() {
         String template = "Hello {name}, your {missing} is here";
@@ -201,6 +217,7 @@ class PromptServiceTest {
         Assertions.assertTrue(expanded.contains("{missing}"));
     }
     
+    @Test
     @DisplayName("Should save prompt to history returns null when repository is null")
     void testSavePromptToHistoryWithNullRepository() {
         // Repository should be null by default for non-Spring test
@@ -215,6 +232,7 @@ class PromptServiceTest {
         Assertions.assertNull(result, "Should return null when repository is not available");
     }
     
+    @Test
     @DisplayName("Should get all history returns empty list when repository is null")
     void testGetAllHistoryWithNullRepository() {
         List<PromptHistory> history = promptService.getAllHistory();
@@ -222,6 +240,7 @@ class PromptServiceTest {
         Assertions.assertTrue(history.isEmpty());
     }
     
+    @Test
     @DisplayName("Should get history by type returns empty list when repository is null")
     void testGetHistoryByTypeWithNullRepository() {
         List<PromptHistory> history = promptService.getHistoryByType("RESUME");
@@ -229,6 +248,7 @@ class PromptServiceTest {
         Assertions.assertTrue(history.isEmpty());
     }
     
+    @Test
     @DisplayName("Should get history by id returns empty when repository is null")
     void testGetHistoryByIdWithNullRepository() {
         Optional<PromptHistory> history = promptService.getHistoryById(1L);
@@ -236,12 +256,14 @@ class PromptServiceTest {
         Assertions.assertFalse(history.isPresent());
     }
     
+    @Test
     @DisplayName("Should delete history by id does nothing when repository is null")
     void testDeleteHistoryByIdWithNullRepository() {
         // Should not throw exception
         Assertions.assertDoesNotThrow(() -> promptService.deleteHistoryById(1L));
     }
 
+    @Test
     @DisplayName("Should handle expandPrompt with special characters in variables")
     void testExpandPromptWithSpecialCharacters() {
         String template = "Company: {company}, Role: {role}";
@@ -255,6 +277,7 @@ class PromptServiceTest {
         Assertions.assertTrue(expanded.contains("Sr. Developer <Expert>"));
     }
 
+    @Test
     @DisplayName("Should handle expandPrompt with empty string values")
     void testExpandPromptWithEmptyStringValues() {
         String template = "Name: {name}, Title: {title}";
@@ -269,6 +292,7 @@ class PromptServiceTest {
 
 
 
+    @Test
     @DisplayName("Should handle expandPrompt with multiple occurrences of same placeholder")
     void testExpandPromptWithDuplicatePlaceholders() {
         String template = "{name} loves {name}'s work at {name}";
@@ -279,6 +303,7 @@ class PromptServiceTest {
         Assertions.assertEquals("Alice loves Alice's work at Alice", expanded);
     }
 
+    @Test
     @DisplayName("Should handle expandPrompt with nested braces")
     void testExpandPromptWithNestedBraces() {
         String template = "Code: {{variable}} and {actual}";
@@ -291,6 +316,7 @@ class PromptServiceTest {
         Assertions.assertTrue(expanded.contains("{"));
     }
 
+    @Test
     @DisplayName("Should handle expandPrompt with numeric placeholders")
     void testExpandPromptWithNumericPlaceholders() {
         String template = "Value1: {123}, Value2: {456}";
@@ -304,6 +330,7 @@ class PromptServiceTest {
         Assertions.assertTrue(expanded.contains("Second"));
     }
 
+    @Test
     @DisplayName("Should handle expandPrompt with underscore in placeholder names")
     void testExpandPromptWithUnderscorePlaceholders() {
         String template = "User: {user_name}, Role: {user_role}";
@@ -317,6 +344,7 @@ class PromptServiceTest {
         Assertions.assertTrue(expanded.contains("Admin"));
     }
 
+    @Test
     @DisplayName("Should handle expandPrompt with mixed case placeholders")
     void testExpandPromptWithMixedCasePlaceholders() {
         String template = "{CompanyName} - {jobTitle} - {LEVEL}";
@@ -332,6 +360,7 @@ class PromptServiceTest {
         Assertions.assertTrue(expanded.contains("Senior"));
     }
 
+    @Test
     @DisplayName("Should handle expandPrompt with very long variable values")
     void testExpandPromptWithLongVariableValues() {
         String template = "Description: {desc}";
@@ -345,6 +374,7 @@ class PromptServiceTest {
         Assertions.assertTrue(expanded.length() > 10000);
     }
 
+    @Test
     @DisplayName("Should handle expandPrompt with placeholder at start and end")
     void testExpandPromptWithPlaceholderAtBoundaries() {
         String template = "{start} middle text {end}";
@@ -356,5 +386,24 @@ class PromptServiceTest {
         
         Assertions.assertTrue(expanded.startsWith("BEGIN"));
         Assertions.assertTrue(expanded.endsWith("FINISH"));
+    }
+
+    @Test
+    @DisplayName("Should get history by company returns empty list when repository is null")
+    void testGetHistoryByCompanyWithNullRepository() {
+        List<PromptHistory> history = promptService.getHistoryByCompany("TechCorp");
+        Assertions.assertNotNull(history);
+        Assertions.assertTrue(history.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Should get history by date range returns empty list when repository is null")
+    void testGetHistoryByDateRangeWithNullRepository() {
+        java.time.LocalDateTime start = java.time.LocalDateTime.now().minusDays(7);
+        java.time.LocalDateTime end = java.time.LocalDateTime.now();
+        
+        List<PromptHistory> history = promptService.getHistoryByDateRange(start, end);
+        Assertions.assertNotNull(history);
+        Assertions.assertTrue(history.isEmpty());
     }
 }

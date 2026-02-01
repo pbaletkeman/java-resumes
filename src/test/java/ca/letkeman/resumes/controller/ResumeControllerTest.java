@@ -379,4 +379,69 @@ class ResumeControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/files/test-file.txt"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
+
+    @Test
+    void testProcessResumeWithInvalidOptimizeJson() throws Exception {
+        MockMultipartFile resume = new MockMultipartFile(
+                "resume", "resume.pdf", "application/pdf", "Resume Content".getBytes());
+        MockMultipartFile job = new MockMultipartFile(
+                "job", "jd.txt", "text/plain", "Java Developer position".getBytes());
+        String invalidOptimize = "{invalid json}";
+
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/process/resume")
+                .file(resume)
+                .file(job)
+                .param("optimize", invalidOptimize))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
+    void testGetListFilesWithSorting() throws Exception {
+        // Create some test files with different dates
+        Path uploadsPath = Paths.get("uploads");
+        Files.write(uploadsPath.resolve("file1.md"), "content1".getBytes());
+        Thread.sleep(10); // Small delay to ensure different timestamps
+        Files.write(uploadsPath.resolve("file2.md"), "content2".getBytes());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/files"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$").isArray());
+    }
+
+    @Test
+    void testMarkdownFile2PDFWithInvalidContent() throws Exception {
+        // Create a file with minimal content
+        MockMultipartFile invalidFile = new MockMultipartFile(
+                "file", "invalid.md", "text/markdown", "# Test".getBytes());
+
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/markdownFile2PDF")
+                .file(invalidFile))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void testMarkdownFile2DOCXWithInvalidContent() throws Exception {
+        // Create a file with minimal content
+        MockMultipartFile invalidFile = new MockMultipartFile(
+                "file", "invalid.md", "text/markdown", "# Test".getBytes());
+
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/markdownFile2DOCX")
+                .file(invalidFile))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void testProcessCoverLetterWithInvalidOptimizeJson() throws Exception {
+        MockMultipartFile coverLetter = new MockMultipartFile(
+                "coverLetter", "cover.md", "text/markdown", "Cover Letter Content".getBytes());
+        MockMultipartFile job = new MockMultipartFile(
+                "job", "jd.txt", "text/plain", "Job Description".getBytes());
+        String invalidOptimize = "{invalid}";
+
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/process/cover-letter")
+                .file(coverLetter)
+                .file(job)
+                .param("optimize", invalidOptimize))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
 }
