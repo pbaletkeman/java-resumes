@@ -323,6 +323,282 @@ curl -X POST http://localhost:8080/api/markdownFile2PDF \
 
 ---
 
+### Interview Preparation *(New)*
+
+#### Generate HR Interview Questions
+
+**Endpoint:** `POST /api/generate/interview-hr-questions`
+
+**Description:** Generate 5 general HR interview questions to prepare for behavioral interviews
+
+**Request Headers:**
+
+```
+Content-Type: application/json
+```
+
+**Request Body:**
+
+```json
+{
+  "jobDescription": "Software Engineer position requiring teamwork and communication skills",
+  "company": "TechCorp" // optional
+}
+```
+
+**Request Example (cURL):**
+
+```bash
+curl -X POST http://localhost:8080/api/generate/interview-hr-questions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jobDescription": "Senior Software Engineer - Lead development teams",
+    "company": "TechStartup"
+  }'
+```
+
+**Response (202 Accepted):**
+
+```json
+{
+  "message": "Interview questions generation started. Check /api/files for results."
+}
+```
+
+**Output:** Markdown file with 5 HR interview questions (behavioral, situational, cultural fit)
+
+---
+
+#### Generate Job-Specific Interview Questions
+
+**Endpoint:** `POST /api/generate/interview-job-specific`
+
+**Description:** Generate 5 role-specific technical or functional interview questions based on job description
+
+**Request Headers:**
+
+```
+Content-Type: application/json
+```
+
+**Request Body:**
+
+```json
+{
+  "jobDescription": "DevOps Engineer - AWS, Kubernetes, CI/CD experience required",
+  "jobTitle": "Senior DevOps Engineer" // optional
+}
+```
+
+**Request Example (cURL):**
+
+```bash
+curl -X POST http://localhost:8080/api/generate/interview-job-specific \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jobDescription": "Full Stack Developer - React, Node.js, MongoDB",
+    "jobTitle": "Full Stack Developer"
+  }'
+```
+
+**Response (202 Accepted):**
+
+```json
+{
+  "message": "Interview questions generation started. Check /api/files for results."
+}
+```
+
+**Output:** Markdown file with 5 job-specific technical/functional interview questions
+
+---
+
+#### Generate Reverse Interview Questions
+
+**Endpoint:** `POST /api/generate/interview-reverse`
+
+**Description:** Generate thoughtful questions candidates can ask interviewers to demonstrate engagement
+
+**Request Headers:**
+
+```
+Content-Type: application/json
+```
+
+**Request Body:**
+
+```json
+{
+  "jobDescription": "Product Manager - B2B SaaS platform",
+  "company": "FastGrowth Inc" // optional
+}
+```
+
+**Request Example (cURL):**
+
+```bash
+curl -X POST http://localhost:8080/api/generate/interview-reverse \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jobDescription": "Engineering Manager - Team of 8 developers",
+    "company": "TechCorp"
+  }'
+```
+
+**Response (202 Accepted):**
+
+```json
+{
+  "message": "Interview questions generation started. Check /api/files for results."
+}
+```
+
+**Output:** Markdown file with 5 strategic questions for candidates to ask during interviews
+
+---
+
+### Professional Networking *(New)*
+
+#### Generate Cold Email
+
+**Endpoint:** `POST /api/generate/cold-email`
+
+**Description:** Generate 5 variations of professional cold outreach emails to target companies
+
+**Request Headers:**
+
+```
+Content-Type: application/json
+```
+
+**Request Body:**
+
+```json
+{
+  "jobDescription": "Software Engineer - Python, Machine Learning",
+  "company": "AI Innovations Inc",
+  "jobTitle": "ML Engineer" // optional
+}
+```
+
+**Request Example (cURL):**
+
+```bash
+curl -X POST http://localhost:8080/api/generate/cold-email \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jobDescription": "Senior Data Scientist - NLP and Computer Vision",
+    "company": "DataTech Solutions",
+    "jobTitle": "Senior Data Scientist"
+  }'
+```
+
+**Response (202 Accepted):**
+
+```json
+{
+  "message": "Cold email generation started. Check /api/files for results."
+}
+```
+
+**Output:** Markdown file with 5 distinct professional cold email templates
+
+---
+
+#### Generate LinkedIn Message
+
+**Endpoint:** `POST /api/generate/cold-linkedin-message`
+
+**Description:** Generate 5 variations of LinkedIn connection request messages for professional networking
+
+**Request Headers:**
+
+```
+Content-Type: application/json
+```
+
+**Request Body:**
+
+```json
+{
+  "jobDescription": "Product Designer - UX/UI for mobile apps",
+  "company": "DesignHub",
+  "jobTitle": "Senior Product Designer" // optional
+}
+```
+
+**Request Example (cURL):**
+
+```bash
+curl -X POST http://localhost:8080/api/generate/cold-linkedin-message \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jobDescription": "Frontend Developer - React, TypeScript",
+    "company": "WebDev Inc",
+    "jobTitle": "Frontend Developer"
+  }'
+```
+
+**Response (202 Accepted):**
+
+```json
+{
+  "message": "LinkedIn message generation started. Check /api/files for results."
+}
+```
+
+**Output:** Markdown file with 5 distinct LinkedIn outreach message variations
+
+---
+
+#### Generate Thank You Email
+
+**Endpoint:** `POST /api/generate/thank-you-email`
+
+**Description:** Generate 5 variations of post-interview thank you emails
+
+**Request Headers:**
+
+```
+Content-Type: application/json
+```
+
+**Request Body:**
+
+```json
+{
+  "jobDescription": "Backend Engineer - Go, Docker, Kubernetes",
+  "company": "CloudFirst Technologies",
+  "jobTitle": "Backend Engineer", // optional
+  "interviewerName": "Sarah Johnson" // optional
+}
+```
+
+**Request Example (cURL):**
+
+```bash
+curl -X POST http://localhost:8080/api/generate/thank-you-email \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jobDescription": "Solutions Architect - AWS, Azure",
+    "company": "Cloud Services Corp",
+    "jobTitle": "Solutions Architect",
+    "interviewerName": "Michael Chen"
+  }'
+```
+
+**Response (202 Accepted):**
+
+```json
+{
+  "message": "Thank you email generation started. Check /api/files for results."
+}
+```
+
+**Output:** Markdown file with 5 distinct thank you email variations
+
+---
+
 ### System
 
 #### Health Check

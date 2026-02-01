@@ -109,6 +109,9 @@ graph TD
     Files["/files GET"]
     FilesId["/files/{id}<br/>GET/DELETE"]
     Markdown["/markdownFile2PDF POST"]
+    Skills["/process/skills POST"]
+    Interview["Interview Endpoints:<br/>/generate/interview-hr-questions<br/>/generate/interview-job-specific<br/>/generate/interview-reverse"]
+    Networking["Networking Endpoints:<br/>/generate/cold-email<br/>/generate/cold-linkedin-message<br/>/generate/thank-you-email"]
 
     Service["ResumeService<br/>Business Logic"]
     OptLogic["Optimization Logic"]
@@ -136,6 +139,9 @@ graph TD
     Controller --> Files
     Controller --> FilesId
     Controller --> Markdown
+    Controller --> Skills
+    Controller --> Interview
+    Controller --> Networking
 
     Service --> OptLogic
     Service --> FileProc
@@ -330,8 +336,16 @@ classDiagram
         +getFile(String) ResponseEntity
         +deleteFile(String) ResponseEntity
         +healthCheck() ResponseEntity
+        +processSkills(String) ResponseEntity
+        +generateInterviewHrQuestions(String) ResponseEntity
+        +generateInterviewJobSpecific(String) ResponseEntity
+        +generateInterviewReverse(String) ResponseEntity
+        +generateColdEmail(String) ResponseEntity
+        +generateColdLinkedInMessage(String) ResponseEntity
+        +generateThankYouEmail(String) ResponseEntity
         -validate(Optimize) boolean
         -spawn(BackgroundResume) void
+        -processPromptRequest(String, Optimize, String) ResponseEntity
     }
 
     class BackgroundResume {

@@ -2,10 +2,17 @@ package ca.letkeman.resumes.model;
 
 import ca.letkeman.resumes.Utility;
 import java.util.Arrays;
+import java.util.Set;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public final class Optimize {
+  private static final Set<String> VALID_PROMPT_TYPES = Set.of(
+      "resume", "cover", "skills",
+      "interview-hr-questions", "interview-job-specific", "interview-reverse",
+      "cold-email", "cold-linkedin-message", "thank-you-email"
+  );
+
   String[] promptType = {"Resume"};
   double temperature = 0.15;
   String model = "gemma-3-4b-it";
@@ -13,6 +20,7 @@ public final class Optimize {
   String jobDescription;
   String jobTitle;
   String company;
+  String interviewerName;
 
   public  Optimize(String[] promptType, double temperature, String model, String resume, String jobDescription,
       String jobTitle, String company) {
@@ -23,6 +31,7 @@ public final class Optimize {
     this.jobDescription = Utility.convertLineEndings(jobDescription);
     this.jobTitle = jobTitle;
     this.company = company;
+    this.interviewerName = null;
   }
 
   public Optimize() {
@@ -84,6 +93,14 @@ public final class Optimize {
     this.company = company;
   }
 
+  public String getInterviewerName() {
+    return interviewerName;
+  }
+
+  public void setInterviewerName(String interviewerName) {
+    this.interviewerName = interviewerName;
+  }
+
   @Override
   public String toString() {
     final StringBuilder sb = new StringBuilder("Optimize{");
@@ -94,6 +111,7 @@ public final class Optimize {
     sb.append(", jobDescription='").append(jobDescription).append('\'');
     sb.append(", jobTitle='").append(jobTitle).append('\'');
     sb.append(", company='").append(company).append('\'');
+    sb.append(", interviewerName='").append(interviewerName).append('\'');
     sb.append('}');
     return sb.toString();
   }
@@ -113,13 +131,15 @@ public final class Optimize {
     return new EqualsBuilder().append(getTemperature(), optimize.getTemperature())
         .append(getPromptType(), optimize.getPromptType()).append(getModel(), optimize.getModel())
         .append(getResume(), optimize.getResume()).append(getJobDescription(), optimize.getJobDescription())
-        .append(getJobTitle(), optimize.getJobTitle()).append(getCompany(), optimize.getCompany()).isEquals();
+        .append(getJobTitle(), optimize.getJobTitle()).append(getCompany(), optimize.getCompany())
+        .append(getInterviewerName(), optimize.getInterviewerName()).isEquals();
   }
 
   @Override
   public int hashCode() {
     return new HashCodeBuilder(17, 37).append(getPromptType()).append(getTemperature()).append(getModel())
-        .append(getResume()).append(getJobDescription()).append(getJobTitle()).append(getCompany()).toHashCode();
+        .append(getResume()).append(getJobDescription()).append(getJobTitle()).append(getCompany())
+        .append(getInterviewerName()).toHashCode();
   }
 
   /*
@@ -137,7 +157,7 @@ public final class Optimize {
         && !getJobTitle().isEmpty() && !getJobTitle().equals("null")
         && getModel() != null && !getModel().isBlank() && !getModel().isEmpty()
         && !getModel().equals("null")
-        && (isSkillsPrompt()
+        && (isSkillsPrompt() || isInterviewOrNetworkingPrompt()
             || getResume() != null && !getResume().isBlank() && !getResume().isEmpty()
                 && !getResume().equals("null"));
   }
@@ -154,7 +174,18 @@ public final class Optimize {
         .anyMatch(x -> x.equalsIgnoreCase("skills"));
   }
 
+  public boolean isInterviewOrNetworkingPrompt() {
+    return Arrays.stream(getPromptType())
+        .anyMatch(x -> x.equalsIgnoreCase("interview-hr-questions")
+            || x.equalsIgnoreCase("interview-job-specific")
+            || x.equalsIgnoreCase("interview-reverse")
+            || x.equalsIgnoreCase("cold-email")
+            || x.equalsIgnoreCase("cold-linkedin-message")
+            || x.equalsIgnoreCase("thank-you-email"));
+  }
+
   public boolean isValidPromptType() {
-    return hasResumeOrCoverPrompt() || isSkillsPrompt();
+    return Arrays.stream(getPromptType())
+        .allMatch(x -> VALID_PROMPT_TYPES.contains(x.toLowerCase()));
   }
 }

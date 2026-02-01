@@ -39,23 +39,52 @@ docker compose up --build
 | **Configuration** | [Config Guide](docs/CONFIGURATION.md)         | **Code Quality** | [Git Hooks](docs/git-hooks/README_GIT_HOOKS.md) |
 | **Development**   | [Dev Setup](docs/DEVELOPMENT_SETUP.md)        | **Issues**       | [Troubleshooting](docs/TROUBLESHOOTING.md)      |
 | **Deployment**    | [Deploy Guide](docs/PRODUCTION_DEPLOYMENT.md) | **Env Vars**     | [Configuration](docs/ENVIRONMENT_VARIABLES.md)  |
+| **Docker**        | [Docker Setup](docs/DOCKER_SETUP.md)          | **Mock Mode**    | [Ollama Mock](docs/OLLAMA_MOCK_MODE.md)         |
+| **Ollama Setup**  | [Ollama Guide](docs/OLLAMA_SETUP.md)          | **GitHub CI**    | [GitHub Environment](docs/GITHUB_ENVIRONMENT_OLLAMA.md) |
 
 ---
 
 ## ✨ What It Does
 
-Submit a job description + resume → Get back an AI-optimized resume and/or cover letter tailored to that specific job opening.
+The application provides comprehensive AI-powered career optimization tools:
+
+### Core Features
+
+**📄 Resume & Cover Letter Optimization**
+- Submit a job description + resume → Get back an AI-optimized resume and/or cover letter tailored to that specific job opening
+- ATS (Applicant Tracking System) optimization
+- Keyword matching and relevance scoring
+
+**🎯 Skills Development Planning**
+- Get personalized recommendations for certifications, skills, and hands-on experiences
+- Receive a structured learning path tailored to your target role
+- Understand time investment and priorities for career advancement
+
+**💼 Interview Preparation** *(New)*
+- **HR Interview Questions**: Get 5 general HR questions to prepare for behavioral interviews
+- **Job-Specific Questions**: Receive 5 technical/functional questions based on the job description
+- **Reverse Interview Questions**: Get thoughtful questions to ask your interviewers
+
+**🤝 Professional Networking** *(New)*
+- **Cold Email Templates**: Generate 5 variations of professional cold outreach emails
+- **LinkedIn Messages**: Create 5 distinct LinkedIn connection request messages
+- **Thank You Emails**: Get 5 variations of post-interview thank you emails
+
+### How It Works
 
 **Features:**
 
-- AI-powered resume optimization
-- Cover letter generation
-- Markdown to PDF conversion
-- File management (upload, download, delete)
-- Light/dark theme support
-- Docker containerized
-- REST API with Swagger docs
-- 80%+ test coverage
+- ✅ AI-powered resume optimization
+- ✅ Cover letter generation
+- ✅ Skills & certifications recommendations
+- ✅ Interview preparation (HR, job-specific, reverse questions) *(New)*
+- ✅ Professional networking (cold emails, LinkedIn, thank you notes) *(New)*
+- ✅ Markdown to PDF conversion
+- ✅ File management (upload, download, delete)
+- ✅ Light/dark theme support
+- ✅ Docker containerized
+- ✅ REST API with Swagger docs
+- ✅ 83%+ test coverage
 
 ---
 
@@ -109,13 +138,34 @@ java-resumes/
 
 ## 📡 API Endpoints
 
+### Core Document Processing
 | Method | Endpoint                | Purpose                      |
 | ------ | ----------------------- | ---------------------------- |
 | POST   | `/api/upload`           | Optimize resume/cover letter |
+| POST   | `/api/markdownFile2PDF` | Convert Markdown to PDF      |
+| POST   | `/api/process/skills`   | Get skills recommendations   |
+
+### Interview Preparation *(New)*
+| Method | Endpoint                              | Purpose                       |
+| ------ | ------------------------------------- | ----------------------------- |
+| POST   | `/api/generate/interview-hr-questions`| Generate HR interview questions|
+| POST   | `/api/generate/interview-job-specific`| Generate job-specific questions|
+| POST   | `/api/generate/interview-reverse`     | Questions to ask interviewers |
+
+### Professional Networking *(New)*
+| Method | Endpoint                              | Purpose                       |
+| ------ | ------------------------------------- | ----------------------------- |
+| POST   | `/api/generate/cold-email`            | Generate cold outreach emails |
+| POST   | `/api/generate/cold-linkedin-message` | Generate LinkedIn messages    |
+| POST   | `/api/generate/thank-you-email`       | Generate thank you emails     |
+
+### File Management
+| Method | Endpoint                | Purpose                      |
+| ------ | ----------------------- | ---------------------------- |
 | GET    | `/api/files`            | List files                   |
 | GET    | `/api/files/{filename}` | Download file                |
 | DELETE | `/api/files/{filename}` | Delete file                  |
-| POST   | `/api/markdownFile2PDF` | Convert Markdown to PDF      |
+| GET    | `/api/health`           | Health check                 |
 | GET    | `/api/health`           | Health check                 |
 
 Full API docs: http://localhost:8080/swagger-ui/html (when running)

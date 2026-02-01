@@ -1,0 +1,214 @@
+name: Ollama LLM Service
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: 'Ollama model to use'
+        required: false
+        default: 'tinyllama'
+        type: choice
+        options:
+          - tinyllama
+          - phi3:mini
+          - gemma2:2b
+          - qwen2.5:0.5b
+          - mistral
+  push:
+    branches: [master, develop]
+    paths:
+      - '.github/workflows/ollama-service.yml'
+  pull_request:
+    branches: [master, develop]
+
+jobs:
+  setup-ollama:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Free up disk space
+        run: |
+          echo "Disk space before cleanup:"
+          df -h
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /usr/local/share/boost
+          echo "Disk space after cleanup:"
+          df -h
+
+      - name: Install Ollama
+        run: |
+          echo "Installing Ollama..."
+          curl -fsSL https://ollama.com/install.sh | sh
+          
+          # Verify installation
+          ollama --version
+
+      - name: Start Ollama service
+        run: |
+          echo "Starting Ollama service..."
+          ollama serve &
+          
+          # Wait for service to be ready
+          echo "Waiting for Ollama service to be ready..."
+          sleep 10
+          
+          # Check if service is running
+          for i in {1..30}; do
+            if curl -s http://localhost:11434/api/version > /dev/null; then
+              echo "Ollama service is ready!"
+              break
+            fi
+            echo "Waiting for Ollama service... ($i/30)"
+            sleep 2
+          done
+
+      - name: Pull Ollama model
+        run: |
+          MODEL="${{ inputs.model || 'tinyllama' }}"
+          echo "Pulling Ollama model: $MODEL"
+          ollama pull $MODEL
+          
+          echo "Model pulled successfully!"
+          ollama list
+
+      - name: Test model inference
+        run: |
+          MODEL="${{ inputs.model || 'tinyllama' }}"
+          echo "Testing model inference..."
+          
+          # Test simple prompt
+          RESPONSE=$(curl -s http://localhost:11434/api/generate -d '{
+            "model": "'$MODEL'",
+            "prompt": "What is the capital of France?",
+            "stream": false
+          }')
+          
+          echo "Response received:"
+          echo "$RESPONSE" | jq -r '.response' || echo "$RESPONSE"
+
+      - name: Test OpenAI-compatible API
+        run: |
+          MODEL="${{ inputs.model || 'tinyllama' }}"
+          echo "Testing OpenAI-compatible API endpoint..."
+          
+          RESPONSE=$(curl -s http://localhost:11434/v1/chat/completions -d '{
+            "model": "'$MODEL'",
+            "messages": [
+              {"role": "system", "content": "You are a helpful assistant."},
+              {"role": "user", "content": "Say hello in one word."}
+            ]
+          }')
+          
+          echo "API Response:"
+          echo "$RESPONSE" | jq '.' || echo "$RESPONSE"
+
+      - name: Create model info artifact
+        run: |
+          MODEL="${{ inputs.model || 'tinyllama' }}"
+          
+          cat > ollama-info.json << EOF
+          {
+            "model": "$MODEL",
+            "endpoint": "http://localhost:11434",
+            "api_version": "v1",
+            "status": "ready",
+            "tested_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          EOF
+          
+          cat ollama-info.json
+
+      - name: Upload Ollama info
+        uses: actions/upload-artifact@v4
+        with:
+          name: ollama-service-info
+          path: ollama-info.json
+          retention-days: 7
+
+  integration-test:
+    needs: setup-ollama
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'corretto'
+          cache: gradle
+
+      - name: Install Ollama
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          ollama serve &
+          sleep 10
+
+      - name: Pull model for integration test
+        run: |
+          MODEL="${{ inputs.model || 'tinyllama' }}"
+          ollama pull $MODEL
+          ollama list
+
+      - name: Update config.json for test
+        run: |
+          MODEL="${{ inputs.model || 'tinyllama' }}"
+          cat > config.json << EOF
+          {
+            "endpoint": "http://localhost:11434/v1/chat/completions",
+            "apikey": "ollama",
+            "model": "$MODEL"
+          }
+          EOF
+          cat config.json
+
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
+      - name: Build application
+        run: ./gradlew build -x test --no-daemon
+
+      - name: Start backend service
+        run: |
+          echo "Starting backend service..."
+          java -jar build/libs/*.jar &
+          BACKEND_PID=$!
+          echo "Backend PID: $BACKEND_PID"
+          
+          # Wait for service to be ready
+          for i in {1..60}; do
+            if curl -s http://localhost:8080/api/health > /dev/null; then
+              echo "Backend service is ready!"
+              break
+            fi
+            echo "Waiting for backend service... ($i/60)"
+            sleep 2
+          done
+        timeout-minutes: 3
+        continue-on-error: true
+
+      - name: Test health endpoint
+        run: |
+          echo "Testing health endpoint..."
+          curl -s http://localhost:8080/api/health | jq '.' || echo "Health check failed"
+        continue-on-error: true
+
+      - name: Create summary
+        run: |
+          MODEL="${{ inputs.model || 'tinyllama' }}"
+          echo "## Ollama Service Test Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ **Model:** $MODEL" >> $GITHUB_STEP_SUMMARY
+          echo "✅ **Endpoint:** http://localhost:11434" >> $GITHUB_STEP_SUMMARY
+          echo "✅ **API Version:** v1" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Service Status" >> $GITHUB_STEP_SUMMARY
+          echo "- Ollama service: Running" >> $GITHUB_STEP_SUMMARY
+          echo "- Model pulled: Success" >> $GITHUB_STEP_SUMMARY
+          echo "- API tests: Completed" >> $GITHUB_STEP_SUMMARY

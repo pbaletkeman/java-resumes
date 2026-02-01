@@ -1,0 +1,20 @@
+# Test configuration
+# Enable mock mode for all tests to avoid requiring Ollama service
+
+llm:
+  endpoint: http://localhost:11434/v1/chat/completions
+  apikey: test-api-key
+  mock:
+    enabled: true
+
+spring:
+  datasource:
+    url: jdbc:sqlite::memory:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  flyway:
+    enabled: false
+
+upload:
+  path: ${java.io.tmpdir}/test-uploads

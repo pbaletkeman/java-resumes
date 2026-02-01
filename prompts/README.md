@@ -78,6 +78,126 @@ Prompts are the communication bridge between the application and the AI model. E
 - Professional tone matching industry standards
 - Ready-to-send formatted document
 
+### 3. **SKILLS.md**
+
+**Purpose**: Generate targeted recommendations for skills, certifications, and experiences to strengthen candidacy
+
+**Key Functions**:
+
+- Identify core technical skills from job requirements
+- Recommend industry-recognized certifications
+- Suggest practical hands-on experiences and projects
+- Provide sequential learning path with timelines
+- Consider career progression and specializations
+
+**Input Parameters**:
+
+- Job title
+- Job description
+- Career level (optional)
+
+**Output**:
+
+- Prioritized certification recommendations with costs and timelines
+- Practical experience suggestions and project ideas
+- Recommended learning path (0-6+ months)
+- Estimated time investment and success metrics
+
+### 4. **Interview Preparation Prompts** (new-prompts.md)
+
+**Purpose**: Prepare candidates for comprehensive interview scenarios
+
+#### 4a. **Interview HR Questions**
+**Endpoint**: `/api/generate/interview-hr-questions`
+
+**Key Functions**:
+- Generate 5 general HR interview questions
+- Cover behavioral, situational, and cultural fit topics
+- Prepare candidates for common HR screening
+
+**Input Parameters**:
+- Job description
+
+**Output**:
+- 5 commonly asked HR interview questions
+
+#### 4b. **Job-Specific Interview Questions**
+**Endpoint**: `/api/generate/interview-job-specific`
+
+**Key Functions**:
+- Generate 5 role-specific technical/functional questions
+- Align questions with job requirements
+- Focus on skills and experience validation
+
+**Input Parameters**:
+- Job description
+
+**Output**:
+- 5 targeted interview questions based on job requirements
+
+#### 4c. **Reverse Interview Questions**
+**Endpoint**: `/api/generate/interview-reverse`
+
+**Key Functions**:
+- Generate thoughtful questions candidates can ask interviewers
+- Demonstrate engagement and strategic thinking
+- Assess company culture and role fit
+
+**Input Parameters**:
+- Job description
+
+**Output**:
+- 5 strategic questions for candidates to ask during interviews
+
+### 5. **Networking & Outreach Prompts** (new-prompts.md)
+
+**Purpose**: Generate professional communication for job search networking
+
+#### 5a. **Cold Email**
+**Endpoint**: `/api/generate/cold-email`
+
+**Key Functions**:
+- Generate 5 distinct cold outreach emails
+- Professional introduction to target companies
+- Express interest and highlight relevant qualifications
+
+**Input Parameters**:
+- Job description
+- Target company information
+
+**Output**:
+- 5 variations of professional cold emails
+
+#### 5b. **Cold LinkedIn Message**
+**Endpoint**: `/api/generate/cold-linkedin-message`
+
+**Key Functions**:
+- Generate 5 distinct LinkedIn connection messages
+- Concise, professional outreach appropriate for LinkedIn
+- Build professional network connections
+
+**Input Parameters**:
+- Job description
+- Target company/recruiter information
+
+**Output**:
+- 5 variations of LinkedIn outreach messages
+
+#### 5c. **Thank You Email**
+**Endpoint**: `/api/generate/thank-you-email`
+
+**Key Functions**:
+- Generate 5 distinct post-interview thank you emails
+- Reinforce interest and qualifications
+- Professional follow-up communication
+
+**Input Parameters**:
+- Job description
+- Interview details (optional)
+
+**Output**:
+- 5 variations of thank you emails
+
 ---
 
 ## Prompt Design Philosophy
@@ -129,9 +249,12 @@ Each prompt emphasizes:
    - Optional: specifies customization preferences
 
 2. **Prompt Selection**:
-   - System determines which prompt(s) to use
+   - System determines which prompt(s) to use based on user request
    - RESUME.md for resume optimization
    - COVER.md for cover letter generation
+   - SKILLS.md for skills/certifications recommendations
+   - Interview preparation prompts for interview questions
+   - Networking prompts for outreach communications
 
 3. **Prompt Execution**:
    - Template is loaded and populated with user data
@@ -279,6 +402,63 @@ Processing:
 - Create compelling closing statement
 
 Output: Personalized cover letter specific to opportunity
+```
+
+### Skills Development Example
+
+```plaintext
+Input: Job Title: DevOps Engineer
+Input: Job Description requires AWS, Kubernetes, CI/CD, Python
+
+Processing:
+- Identify certifications (AWS Solutions Architect, CKA)
+- Recommend hands-on projects (deploy K8s cluster, CI/CD pipeline)
+- Create learning path (0-6 months)
+- Estimate time and cost for each certification
+
+Output: Comprehensive skills development plan with certifications and projects
+```
+
+### Interview Preparation Example
+
+```plaintext
+Input: Job Description for Software Engineering Manager
+
+Processing (HR Questions):
+- Generate behavioral questions (leadership, conflict resolution)
+- Create situational questions (team management scenarios)
+- Include cultural fit questions
+
+Output: 5 HR interview questions specific to management role
+
+Processing (Job-Specific Questions):
+- Generate technical questions (architecture decisions, code review)
+- Create scenario-based questions (sprint planning, technical debt)
+- Include leadership questions (team growth, mentoring)
+
+Output: 5 role-specific interview questions
+```
+
+### Networking Outreach Example
+
+```plaintext
+Input: Job Description for Senior Developer at TechStartup
+
+Processing (Cold Email):
+- Research company culture and values
+- Highlight relevant experience
+- Create compelling introduction
+- Include clear call-to-action
+
+Output: 5 variations of professional cold emails
+
+Processing (LinkedIn Message):
+- Craft concise, LinkedIn-appropriate message
+- Reference mutual connections if applicable
+- Express genuine interest
+- Request connection or conversation
+
+Output: 5 variations of LinkedIn outreach messages
 ```
 
 ## Troubleshooting
