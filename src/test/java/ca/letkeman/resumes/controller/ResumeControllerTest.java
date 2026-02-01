@@ -357,4 +357,26 @@ class ResumeControllerTest {
                 .file(file))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
+
+    @Test
+    void testMarkdownFile2DOCXWithValidFile() throws Exception {
+        MockMultipartFile file = new MockMultipartFile(
+                "file", "test.md", "text/markdown",
+                "# Markdown Content\nParagraph text here.".getBytes());
+
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/markdownFile2DOCX")
+                .file(file))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void testGetFileWithValidFilename() throws Exception {
+        // First create a file
+        Path uploadsPath = Paths.get("uploads");
+        Path testFile = uploadsPath.resolve("test-file.txt");
+        Files.write(testFile, "test content".getBytes());
+        
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/files/test-file.txt"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
 }
