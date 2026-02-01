@@ -32,6 +32,10 @@ The java-resumes application is built with a modern full-stack architecture that
 │  │  │  Controller Layer (REST Endpoints)              │      │      │
 │  │  │  - ResumeController                             │      │      │
 │  │  │  - /upload, /files/*, /markdownFile2PDF         │      │      │
+│  │  │  - /process/skills (Skills recommendations)     │      │      │
+│  │  │  - /generate/interview-* (Interview prep)       │      │      │
+│  │  │  - /generate/cold-*, /generate/thank-you-*      │      │      │
+│  │  │  - (Networking & outreach)                      │      │      │
 │  │  └─────────────────────────────────────────────────┘      │      │
 │  │  ┌─────────────────────────────────────────────────┐      │      │
 │  │  │  Service Layer (Business Logic)                 │      │      │
@@ -54,7 +58,9 @@ The java-resumes application is built with a modern full-stack architecture that
 │  │  - Model: gemma-3-4b-it / llama3 / gpt-4                  │      │
 │  │  - Resume Optimization                                    │      │
 │  │  - Cover Letter Generation                                │      │
-│  │  - Skills Gap Analysis                                    │      │
+│  │  - Skills & Certifications Recommendations                │      │
+│  │  - Interview Preparation (HR, Job-Specific, Reverse)      │      │
+│  │  - Networking (Cold Emails, LinkedIn, Thank You)          │      │
 │  └───────────────────────────────────────────────────────────┘      │
 └─────────────────────────────────────────────────────────────────────┘
                                  ↓
@@ -214,7 +220,9 @@ graph LR
 
 - Resume optimization
 - Cover letter generation
-- Skills gap analysis
+- Skills & certifications recommendations
+- Interview preparation questions (HR, job-specific, reverse)
+- Professional networking (cold emails, LinkedIn messages, thank you notes)
 - Content restructuring
 
 **Configuration:**
@@ -371,16 +379,30 @@ Persistent Volumes:
 
 ### Adding New Document Types
 
-1. Create new document model class
-2. Implement document-specific conversion logic
-3. Add endpoint to `ResumeController`
-4. Update frontend UI
+1. Create new prompt template in `prompts/` directory
+2. Add new endpoint to `ResumeController` (e.g., `/api/generate/new-type`)
+3. Use `processPromptRequest()` helper method with prompt type identifier
+4. Update frontend UI if user-facing (or use API directly)
+5. Document in API_REFERENCE.md and update README.md
+
+**Example**: Interview and networking prompts added in this release:
+- Interview preparation endpoints (hr-questions, job-specific, reverse)
+- Networking endpoints (cold-email, linkedin-message, thank-you-email)
 
 ### Custom Prompt Templates
 
-1. Create prompt file in `PROMPTS_DIR`
-2. Load via `PromptService`
-3. Use in `ApiService` for requests
+1. Create prompt file in `prompts/` directory (e.g., `NEW_TYPE.md`)
+2. Follow existing prompt structure (clear instructions, input parameters, output format)
+3. Load via `PromptService.loadPrompt("NEW_TYPE")`
+4. Add controller endpoint using `processPromptRequest()`
+5. Test with sample data to validate outputs
+
+**Current Prompt Templates**:
+- `RESUME.md` - Resume optimization
+- `COVER.md` - Cover letter generation
+- `SKILLS.md` - Skills & certifications recommendations
+- Interview preparation prompts (hr-questions, job-specific, reverse)
+- Networking prompts (cold-email, linkedin-message, thank-you-email)
 
 ## 📈 Performance Considerations
 
