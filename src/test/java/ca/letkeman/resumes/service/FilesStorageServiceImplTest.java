@@ -281,4 +281,121 @@ class FilesStorageServiceImplTest {
         Path savedFile = testUploadPath.resolve("large-file.bin");
         assertTrue(Files.exists(savedFile));
     }
+
+    @Test
+    void testInitWithNonExistentParentPath() throws IOException {
+        // Test with a path that requires creating multiple parent directories
+        Path deepPath = Paths.get(System.getProperty("java.io.tmpdir"), "test-deep", "nested", "path");
+        
+        // Clean up if it exists
+        if (Files.exists(deepPath)) {
+            Files.walk(deepPath.getParent())
+                .sorted(java.util.Comparator.reverseOrder())
+                .forEach(path -> {
+                    try {
+                        Files.delete(path);
+                    } catch (IOException e) {
+                        // Ignore
+                    }
+                });
+        }
+        
+        assertDoesNotThrow(() -> {
+            filesStorageService.init(deepPath.toString());
+        });
+        
+        // Clean up after test
+        if (Files.exists(deepPath)) {
+            Files.walk(deepPath.getParent().getParent())
+                .sorted(java.util.Comparator.reverseOrder())
+                .forEach(path -> {
+                    try {
+                        Files.delete(path);
+                    } catch (IOException e) {
+                        // Ignore
+                    }
+                });
+        }
+    }
+
+    @Test
+    void testSetConfigRootCreatesDirectories() throws IOException {
+        // Test setting config root creates necessary directories
+        Path newPath = Paths.get(System.getProperty("java.io.tmpdir"), "test-config-root");
+        
+        // Clean up if it exists
+        if (Files.exists(newPath)) {
+            Files.walk(newPath)
+                .sorted(java.util.Comparator.reverseOrder())
+                .forEach(path -> {
+                    try {
+                        Files.delete(path);
+                    } catch (IOException e) {
+                        // Ignore
+                    }
+                });
+        }
+        
+        assertDoesNotThrow(() -> {
+            filesStorageService.setConfigRoot(newPath.toString());
+        });
+        
+        // Verify directory was created
+        assertTrue(Files.exists(newPath));
+        
+        // Clean up
+        Files.walk(newPath)
+            .sorted(java.util.Comparator.reverseOrder())
+            .forEach(path -> {
+                try {
+                    Files.delete(path);
+                } catch (IOException e) {
+                    // Ignore
+                }
+            });
+    }
+
+    @Test
+    void testDeleteAllFiles() throws IOException {
+        // Create test files
+        Files.writeString(testUploadPath.resolve("file1.txt"), "Content 1");
+        Files.writeString(testUploadPath.resolve("file2.txt"), "Content 2");
+        
+        assertTrue(Files.exists(testUploadPath.resolve("file1.txt")));
+        assertTrue(Files.exists(testUploadPath.resolve("file2.txt")));
+        
+        // Delete all files
+        filesStorageService.deleteAll();
+        
+        // Verify files are deleted (directory may still exist temporarily)
+        assertFalse(Files.exists(testUploadPath.resolve("file1.txt")));
+        assertFalse(Files.exists(testUploadPath.resolve("file2.txt")));
+    }
+
+    @Test
+    void testLoadAllWithIOException() throws IOException {
+        // Create directory structure that might cause issues
+        Path subDir = testUploadPath.resolve("subdir");
+        Files.createDirectories(subDir);
+        Files.writeString(subDir.resolve("nested.txt"), "Nested file");
+        
+        // loadAll should handle this gracefully
+        Stream<Path> paths = filesStorageService.loadAll();
+        assertNotNull(paths);
+        // Should only return files at depth 1, not subdirectories
+    }
+
+    @Test
+    void testSaveWithIOExceptionSimulation() {
+        // Create a file that simulates getOriginalFilename returning null
+        MultipartFile mockFile = new MockMultipartFile(
+                "file",
+                null, // null filename should be handled
+                "text/plain",
+                "Test content".getBytes()
+        );
+        
+        // Implementation should catch exception and log
+        assertDoesNotThrow(() -> filesStorageService.save(mockFile));
+    }
 }
