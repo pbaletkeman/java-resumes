@@ -16,10 +16,10 @@ class BackgroundResumeTest {
     @Test
     void testSetOptimize() {
         BackgroundResume backgroundResume = new BackgroundResume();
-        
+
         Optimize optimize = new Optimize();
         optimize.setResume("Test resume");
-        
+
         backgroundResume.setOptimize(optimize);
         Assertions.assertEquals(optimize, backgroundResume.getOptimize());
     }
@@ -28,9 +28,10 @@ class BackgroundResumeTest {
     void testGetOptimize() {
         BackgroundResume backgroundResume = new BackgroundResume();
         Assertions.assertNull(backgroundResume.getOptimize());
-        
+
         Optimize optimize = new Optimize();
         backgroundResume.setOptimize(optimize);
-        Assertions.assertSame(optimize, backgroundResume.getOptimize());
+        // Note: getOptimize() returns a defensive copy, so we use assertEquals instead of assertSame
+        Assertions.assertEquals(optimize, backgroundResume.getOptimize());
     }
 }

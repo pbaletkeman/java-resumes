@@ -197,7 +197,7 @@ class ResumeControllerTest {
                 "resume", "resume.pdf", "application/pdf", "dummy resume content".getBytes());
         MockMultipartFile job = new MockMultipartFile(
                 "job", "job.pdf", "application/pdf", "job description".getBytes());
-        
+
         mockMvc.perform(MockMvcRequestBuilders.multipart("/api/upload")
                 .file(resume)
                 .file(job)
@@ -211,7 +211,7 @@ class ResumeControllerTest {
                 "resume", "resume.pdf", "application/pdf", "dummy resume content".getBytes());
         MockMultipartFile job = new MockMultipartFile(
                 "job", "job.pdf", "application/pdf", "job description".getBytes());
-        
+
         mockMvc.perform(MockMvcRequestBuilders.multipart("/api/upload")
                 .file(resume)
                 .file(job))
@@ -375,7 +375,7 @@ class ResumeControllerTest {
         Path uploadsPath = Paths.get("uploads");
         Path testFile = uploadsPath.resolve("test-file.txt");
         Files.write(testFile, "test content".getBytes());
-        
+
         mockMvc.perform(MockMvcRequestBuilders.get("/api/files/test-file.txt"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }

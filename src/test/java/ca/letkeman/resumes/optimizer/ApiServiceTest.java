@@ -143,10 +143,10 @@ class ApiServiceTest {
     void testMockModeEnabled() {
         apiService.setMockEnabled(true);
         Assertions.assertTrue(apiService.isMockEnabled());
-        
+
         ChatBody chatBody = new ChatBody();
         chatBody.setModel("test-model");
-        
+
         // Should return mock response, not null
         LLMResponse response = apiService.invokeApi(chatBody, "http://any-endpoint", "apikey");
         Assertions.assertNotNull(response);
@@ -156,10 +156,10 @@ class ApiServiceTest {
     void testMockModeDisabled() {
         apiService.setMockEnabled(false);
         Assertions.assertFalse(apiService.isMockEnabled());
-        
+
         ChatBody chatBody = new ChatBody();
         chatBody.setModel("test-model");
-        
+
         // Should attempt real HTTP call and return null (invalid endpoint)
         LLMResponse response = apiService.invokeApi(chatBody, "http://invalid-endpoint", "apikey");
         Assertions.assertNull(response);

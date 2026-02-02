@@ -1,11 +1,7 @@
 package ca.letkeman.resumes.entity;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.time.LocalDateTime;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -17,10 +13,10 @@ class PromptHistoryTest {
     void testPromptHistoryDefaultConstructor() {
         PromptHistory history = new PromptHistory();
 
-        assertNotNull(history);
-        assertNull(history.getId());
-        assertNull(history.getRequestId());
-        assertNull(history.getPromptType());
+        Assertions.assertNotNull(history);
+        Assertions.assertNull(history.getId());
+        Assertions.assertNull(history.getRequestId());
+        Assertions.assertNull(history.getPromptType());
     }
 
     @Test
@@ -49,25 +45,25 @@ class PromptHistoryTest {
         history.setCreatedAt(now);
         history.setUpdatedAt(now);
 
-        assertEquals(1L, history.getId());
-        assertEquals("test-request-id", history.getRequestId());
-        assertEquals("Resume", history.getPromptType());
-        assertEquals("Test Company", history.getCompany());
-        assertEquals("Software Engineer", history.getJobTitle());
-        assertEquals("Job description", history.getJobDescription());
-        assertEquals("John Doe", history.getInterviewerName());
-        assertEquals(0.7, history.getTemperature());
-        assertEquals("mistral", history.getModel());
-        assertEquals("{\"key\":\"value\"}", history.getExpandedPromptJson());
-        assertEquals("Generated content", history.getGeneratedContent());
-        assertEquals("file1.pdf", history.getGeneratedFilePath());
-        assertEquals("pdf", history.getOutputFormat());
-        assertEquals("completed", history.getStatus());
-        assertNull(history.getErrorMessage());
-        assertEquals(1500L, history.getLlmResponseTimeMs());
-        assertEquals(150, history.getTokenUsageEstimate());
-        assertEquals(now, history.getCreatedAt());
-        assertEquals(now, history.getUpdatedAt());
+        Assertions.assertEquals(1L, history.getId());
+        Assertions.assertEquals("test-request-id", history.getRequestId());
+        Assertions.assertEquals("Resume", history.getPromptType());
+        Assertions.assertEquals("Test Company", history.getCompany());
+        Assertions.assertEquals("Software Engineer", history.getJobTitle());
+        Assertions.assertEquals("Job description", history.getJobDescription());
+        Assertions.assertEquals("John Doe", history.getInterviewerName());
+        Assertions.assertEquals(0.7, history.getTemperature());
+        Assertions.assertEquals("mistral", history.getModel());
+        Assertions.assertEquals("{\"key\":\"value\"}", history.getExpandedPromptJson());
+        Assertions.assertEquals("Generated content", history.getGeneratedContent());
+        Assertions.assertEquals("file1.pdf", history.getGeneratedFilePath());
+        Assertions.assertEquals("pdf", history.getOutputFormat());
+        Assertions.assertEquals("completed", history.getStatus());
+        Assertions.assertNull(history.getErrorMessage());
+        Assertions.assertEquals(1500L, history.getLlmResponseTimeMs());
+        Assertions.assertEquals(150, history.getTokenUsageEstimate());
+        Assertions.assertEquals(now, history.getCreatedAt());
+        Assertions.assertEquals(now, history.getUpdatedAt());
     }
 
     @Test
@@ -77,8 +73,8 @@ class PromptHistoryTest {
         history.setStatus("failed");
         history.setErrorMessage("Error occurred during processing");
 
-        assertEquals("failed", history.getStatus());
-        assertEquals("Error occurred during processing", history.getErrorMessage());
+        Assertions.assertEquals("failed", history.getStatus());
+        Assertions.assertEquals("Error occurred during processing", history.getErrorMessage());
     }
 
     @Test
@@ -89,10 +85,10 @@ class PromptHistoryTest {
         history.setPromptType("CoverLetter");
         history.setStatus("pending");
 
-        assertEquals("minimal-request", history.getRequestId());
-        assertEquals("CoverLetter", history.getPromptType());
-        assertEquals("pending", history.getStatus());
-        assertNull(history.getCompany());
-        assertNull(history.getJobTitle());
+        Assertions.assertEquals("minimal-request", history.getRequestId());
+        Assertions.assertEquals("CoverLetter", history.getPromptType());
+        Assertions.assertEquals("pending", history.getStatus());
+        Assertions.assertNull(history.getCompany());
+        Assertions.assertNull(history.getJobTitle());
     }
 }

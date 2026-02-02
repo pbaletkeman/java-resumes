@@ -13,7 +13,19 @@ public final class BackgroundResume implements Runnable {
   private Optimize optimize;
 
   public Optimize getOptimize() {
-    return optimize;
+    // Return defensive copy to prevent external mutation
+    if (optimize != null) {
+      return new Optimize(
+          optimize.getPromptType().clone(),
+          optimize.getTemperature(),
+          optimize.getModel(),
+          optimize.getResume(),
+          optimize.getJobDescription(),
+          optimize.getJobTitle(),
+          optimize.getCompany()
+      );
+    }
+    return null;
   }
 
   private String endpoint;
@@ -22,7 +34,20 @@ public final class BackgroundResume implements Runnable {
   private String root;
 
   public void setOptimize(Optimize optimize) {
-    this.optimize = optimize;
+    // Defensive copy to prevent external mutation
+    if (optimize != null) {
+      this.optimize = new Optimize(
+          optimize.getPromptType().clone(),
+          optimize.getTemperature(),
+          optimize.getModel(),
+          optimize.getResume(),
+          optimize.getJobDescription(),
+          optimize.getJobTitle(),
+          optimize.getCompany()
+      );
+    } else {
+      this.optimize = null;
+    }
   }
 
   public BackgroundResume(Optimize optimize, String root) {
@@ -37,7 +62,20 @@ public final class BackgroundResume implements Runnable {
     }
 
     Config c = new Gson().fromJson(configStr, Config.class);
-    this.optimize = optimize;
+    // Defensive copy to prevent external mutation
+    if (optimize != null) {
+      this.optimize = new Optimize(
+          optimize.getPromptType().clone(),
+          optimize.getTemperature(),
+          optimize.getModel(),
+          optimize.getResume(),
+          optimize.getJobDescription(),
+          optimize.getJobTitle(),
+          optimize.getCompany()
+      );
+    } else {
+      this.optimize = null;
+    }
     this.endpoint = c.getEndpoint();
     this.apikey = c.getApikey();
     this.model = c.getModel();

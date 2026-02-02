@@ -1,6 +1,7 @@
 package ca.letkeman.resumes.optimizer;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class ChatBody {
@@ -22,11 +23,11 @@ public final class ChatBody {
   }
 
   public List<Message> getMessages() {
-    return this.messages;
+    return this.messages != null ? new ArrayList<>(this.messages) : null;
   }
 
   public void setMessages(List<Message> messages) {
-    this.messages = messages;
+    this.messages = messages != null ? new ArrayList<>(messages) : null;
   }
 
   public double getTemperature() {

@@ -1,7 +1,6 @@
 package ca.letkeman.resumes.optimizer;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class MessageTest {
@@ -9,8 +8,8 @@ class MessageTest {
   @Test
   void testDefaultConstructor() {
     Message message = new Message();
-    assertNull(message.getRole());
-    assertNull(message.getContent());
+    Assertions.assertNull(message.getRole());
+    Assertions.assertNull(message.getContent());
   }
 
   @Test
@@ -20,15 +19,15 @@ class MessageTest {
 
     Message message = new Message(role, content);
 
-    assertEquals(role, message.getRole());
-    assertEquals(content, message.getContent());
+    Assertions.assertEquals(role, message.getRole());
+    Assertions.assertEquals(content, message.getContent());
   }
 
   @Test
   void testParameterizedConstructorWithNulls() {
     Message message = new Message(null, null);
-    assertNull(message.getRole());
-    assertNull(message.getContent());
+    Assertions.assertNull(message.getRole());
+    Assertions.assertNull(message.getContent());
   }
 
   @Test
@@ -38,21 +37,21 @@ class MessageTest {
 
     message.setRole(role);
 
-    assertEquals(role, message.getRole());
+    Assertions.assertEquals(role, message.getRole());
   }
 
   @Test
   void testSetAndGetRoleWithNull() {
     Message message = new Message("user", "content");
     message.setRole(null);
-    assertNull(message.getRole());
+    Assertions.assertNull(message.getRole());
   }
 
   @Test
   void testSetAndGetRoleWithEmptyString() {
     Message message = new Message();
     message.setRole("");
-    assertEquals("", message.getRole());
+    Assertions.assertEquals("", message.getRole());
   }
 
   @Test
@@ -62,21 +61,21 @@ class MessageTest {
 
     message.setContent(content);
 
-    assertEquals(content, message.getContent());
+    Assertions.assertEquals(content, message.getContent());
   }
 
   @Test
   void testSetAndGetContentWithNull() {
     Message message = new Message("user", "initial content");
     message.setContent(null);
-    assertNull(message.getContent());
+    Assertions.assertNull(message.getContent());
   }
 
   @Test
   void testSetAndGetContentWithEmptyString() {
     Message message = new Message();
     message.setContent("");
-    assertEquals("", message.getContent());
+    Assertions.assertEquals("", message.getContent());
   }
 
   @Test
@@ -85,41 +84,41 @@ class MessageTest {
 
     message.setRole("user");
     message.setContent("First message");
-    assertEquals("user", message.getRole());
-    assertEquals("First message", message.getContent());
+    Assertions.assertEquals("user", message.getRole());
+    Assertions.assertEquals("First message", message.getContent());
 
     message.setRole("assistant");
     message.setContent("Second message");
-    assertEquals("assistant", message.getRole());
-    assertEquals("Second message", message.getContent());
+    Assertions.assertEquals("assistant", message.getRole());
+    Assertions.assertEquals("Second message", message.getContent());
   }
 
   @Test
   void testSystemRole() {
     Message message = new Message("system", "You are a helpful assistant.");
-    assertEquals("system", message.getRole());
-    assertEquals("You are a helpful assistant.", message.getContent());
+    Assertions.assertEquals("system", message.getRole());
+    Assertions.assertEquals("You are a helpful assistant.", message.getContent());
   }
 
   @Test
   void testLongContent() {
     String longContent = "Lorem ipsum ".repeat(100);
     Message message = new Message("user", longContent);
-    assertEquals("user", message.getRole());
-    assertEquals(longContent, message.getContent());
+    Assertions.assertEquals("user", message.getRole());
+    Assertions.assertEquals(longContent, message.getContent());
   }
 
   @Test
   void testSpecialCharactersInContent() {
     String specialContent = "Special chars: !@#$%^&*()_+-={}[]|\\:;\"'<>?,./";
     Message message = new Message("user", specialContent);
-    assertEquals(specialContent, message.getContent());
+    Assertions.assertEquals(specialContent, message.getContent());
   }
 
   @Test
   void testUnicodeInContent() {
     String unicodeContent = "Hello 世界 🌍";
     Message message = new Message("user", unicodeContent);
-    assertEquals(unicodeContent, message.getContent());
+    Assertions.assertEquals(unicodeContent, message.getContent());
   }
 }

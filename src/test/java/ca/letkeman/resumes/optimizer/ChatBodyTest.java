@@ -1,9 +1,8 @@
 package ca.letkeman.resumes.optimizer;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,13 +19,13 @@ class ChatBodyTest {
   void testSetAndGetModel() {
     String model = "gpt-4";
     chatBody.setModel(model);
-    assertEquals(model, chatBody.getModel());
+    Assertions.assertEquals(model, chatBody.getModel());
   }
 
   @Test
   void testSetAndGetModelWithNull() {
     chatBody.setModel(null);
-    assertNull(chatBody.getModel());
+    Assertions.assertNull(chatBody.getModel());
   }
 
   @Test
@@ -36,69 +35,69 @@ class ChatBodyTest {
     messages.add(new Message("assistant", "Hi there!"));
 
     chatBody.setMessages(messages);
-    assertEquals(messages, chatBody.getMessages());
-    assertEquals(2, chatBody.getMessages().size());
+    Assertions.assertEquals(messages, chatBody.getMessages());
+    Assertions.assertEquals(2, chatBody.getMessages().size());
   }
 
   @Test
   void testSetAndGetMessagesWithEmptyList() {
     List<Message> emptyMessages = new ArrayList<>();
     chatBody.setMessages(emptyMessages);
-    assertEquals(emptyMessages, chatBody.getMessages());
-    assertTrue(chatBody.getMessages().isEmpty());
+    Assertions.assertEquals(emptyMessages, chatBody.getMessages());
+    Assertions.assertTrue(chatBody.getMessages().isEmpty());
   }
 
   @Test
   void testSetAndGetMessagesWithNull() {
     chatBody.setMessages(null);
-    assertNull(chatBody.getMessages());
+    Assertions.assertNull(chatBody.getMessages());
   }
 
   @Test
   void testSetAndGetTemperature() {
     double temperature = 0.7;
     chatBody.setTemperature(temperature);
-    assertEquals(temperature, chatBody.getTemperature(), 0.001);
+    Assertions.assertEquals(temperature, chatBody.getTemperature(), 0.001);
   }
 
   @Test
   void testSetAndGetTemperatureWithZero() {
     chatBody.setTemperature(0.0);
-    assertEquals(0.0, chatBody.getTemperature(), 0.001);
+    Assertions.assertEquals(0.0, chatBody.getTemperature(), 0.001);
   }
 
   @Test
   void testSetAndGetTemperatureWithMax() {
     chatBody.setTemperature(2.0);
-    assertEquals(2.0, chatBody.getTemperature(), 0.001);
+    Assertions.assertEquals(2.0, chatBody.getTemperature(), 0.001);
   }
 
   @Test
   void testSetAndGetMaxTokens() {
     int maxTokens = 1000;
     chatBody.setMaxTokens(maxTokens);
-    assertEquals(maxTokens, chatBody.getMaxTokens());
+    Assertions.assertEquals(maxTokens, chatBody.getMaxTokens());
   }
 
   @Test
   void testSetAndGetMaxTokensWithZero() {
     chatBody.setMaxTokens(0);
-    assertEquals(0, chatBody.getMaxTokens());
+    Assertions.assertEquals(0, chatBody.getMaxTokens());
   }
 
   @Test
   void testSetAndGetMaxTokensWithNegative() {
     chatBody.setMaxTokens(-1);
-    assertEquals(-1, chatBody.getMaxTokens());
+    Assertions.assertEquals(-1, chatBody.getMaxTokens());
   }
 
   @Test
   void testSetAndGetStream() {
     chatBody.setStream(true);
-    assertTrue(chatBody.getStream());
+    Assertions.assertTrue(chatBody.getStream());
 
     chatBody.setStream(false);
-    assertFalse(chatBody.getStream());
+    Assertions.assertFalse(chatBody.getStream());
   }
 
   @Test
@@ -116,20 +115,20 @@ class ChatBodyTest {
     chatBody.setMaxTokens(maxTokens);
     chatBody.setStream(stream);
 
-    assertEquals(model, chatBody.getModel());
-    assertEquals(messages, chatBody.getMessages());
-    assertEquals(temperature, chatBody.getTemperature(), 0.001);
-    assertEquals(maxTokens, chatBody.getMaxTokens());
-    assertTrue(chatBody.getStream());
+    Assertions.assertEquals(model, chatBody.getModel());
+    Assertions.assertEquals(messages, chatBody.getMessages());
+    Assertions.assertEquals(temperature, chatBody.getTemperature(), 0.001);
+    Assertions.assertEquals(maxTokens, chatBody.getMaxTokens());
+    Assertions.assertTrue(chatBody.getStream());
   }
 
   @Test
   void testDefaultValues() {
     ChatBody newChatBody = new ChatBody();
-    assertNull(newChatBody.getModel());
-    assertNull(newChatBody.getMessages());
-    assertEquals(0.0, newChatBody.getTemperature(), 0.001);
-    assertEquals(0, newChatBody.getMaxTokens());
-    assertFalse(newChatBody.getStream());
+    Assertions.assertNull(newChatBody.getModel());
+    Assertions.assertNull(newChatBody.getMessages());
+    Assertions.assertEquals(0.0, newChatBody.getTemperature(), 0.001);
+    Assertions.assertEquals(0, newChatBody.getMaxTokens());
+    Assertions.assertFalse(newChatBody.getStream());
   }
 }

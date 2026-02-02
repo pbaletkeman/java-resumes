@@ -1,13 +1,11 @@
 package ca.letkeman.resumes.model;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 class FileInfoTest {
 
@@ -141,7 +139,7 @@ class FileInfoTest {
     fileInfo.setUrl("http://newurl.com");
     fileInfo.setSize("100kb");
     fileInfo.setDate("2024-02-01");
-    
+
     Assertions.assertEquals("newname.pdf", fileInfo.getName());
     Assertions.assertEquals("http://newurl.com", fileInfo.getUrl());
     Assertions.assertEquals("100kb", fileInfo.getSize());
@@ -159,14 +157,14 @@ class FileInfoTest {
   void testFileSizeForExactlyOneMegabyte(@TempDir Path tempDir) throws IOException {
     Path testFile = tempDir.resolve("exact1mb.txt");
     Files.writeString(testFile, "x".repeat(1048577)); // Slightly more than 1MB
-    
+
     FileInfo fileInfo = new FileInfo(
         "exact1mb.txt",
         "http://localhost/files/exact1mb.txt",
         tempDir.toString(),
         "2024-02-01"
     );
-    
+
     Assertions.assertTrue(fileInfo.getSize().contains("mb"));
   }
 }

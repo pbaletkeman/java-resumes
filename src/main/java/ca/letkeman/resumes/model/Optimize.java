@@ -24,7 +24,7 @@ public final class Optimize {
 
   public  Optimize(String[] promptType, double temperature, String model, String resume, String jobDescription,
       String jobTitle, String company) {
-    this.promptType = promptType;
+    this.promptType = promptType != null ? promptType.clone() : new String[]{"Resume"};
     this.temperature = temperature;
     this.model = model;
     this.resume = Utility.convertLineEndings(resume);
@@ -38,11 +38,11 @@ public final class Optimize {
   }
 
   public String[] getPromptType() {
-    return promptType;
+    return promptType != null ? promptType.clone() : new String[]{"Resume"};
   }
 
   public void setPromptType(String[] promptType) {
-    this.promptType = promptType;
+    this.promptType = promptType != null ? promptType.clone() : new String[]{"Resume"};
   }
 
   public double getTemperature() {

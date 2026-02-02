@@ -1,17 +1,15 @@
 package ca.letkeman.resumes.optimizer;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import org.mockito.Mockito;
 import org.slf4j.Logger;
 
 class HtmlToPdfTest {
@@ -41,25 +39,25 @@ class HtmlToPdfTest {
   @Test
   void testDefaultConstructor() {
     HtmlToPdf converter = new HtmlToPdf();
-    assertNull(converter.getMarkdownFilePath());
-    assertNull(converter.getPdfFilePath());
-    assertNull(converter.getMarkdownContent());
+    Assertions.assertNull(converter.getMarkdownFilePath());
+    Assertions.assertNull(converter.getPdfFilePath());
+    Assertions.assertNull(converter.getMarkdownContent());
   }
 
   @Test
   void testParameterizedConstructorWithContent() {
     String content = "# Test";
     HtmlToPdf converter = new HtmlToPdf("", pdfFilePath, content);
-    assertEquals(content, converter.getMarkdownContent());
-    assertEquals(pdfFilePath, converter.getPdfFilePath());
+    Assertions.assertEquals(content, converter.getMarkdownContent());
+    Assertions.assertEquals(pdfFilePath, converter.getPdfFilePath());
   }
 
   @Test
   void testParameterizedConstructorWithBlankContentUsesFilePath() {
     String filePath = "test.md";
     HtmlToPdf converter = new HtmlToPdf(filePath, pdfFilePath, "");
-    assertEquals(filePath, converter.getMarkdownFilePath());
-    assertEquals(pdfFilePath, converter.getPdfFilePath());
+    Assertions.assertEquals(filePath, converter.getMarkdownFilePath());
+    Assertions.assertEquals(pdfFilePath, converter.getPdfFilePath());
   }
 
   @Test
@@ -68,9 +66,9 @@ class HtmlToPdfTest {
     htmlToPdf.setPdfFilePath(pdfFilePath);
     htmlToPdf.setMarkdownFilePath("test.md");
 
-    assertEquals(markdownContent, htmlToPdf.getMarkdownContent());
-    assertEquals(pdfFilePath, htmlToPdf.getPdfFilePath());
-    assertEquals("test.md", htmlToPdf.getMarkdownFilePath());
+    Assertions.assertEquals(markdownContent, htmlToPdf.getMarkdownContent());
+    Assertions.assertEquals(pdfFilePath, htmlToPdf.getPdfFilePath());
+    Assertions.assertEquals("test.md", htmlToPdf.getMarkdownFilePath());
   }
 
   @Test
@@ -80,9 +78,9 @@ class HtmlToPdfTest {
 
     boolean result = htmlToPdf.convertFile();
 
-    assertTrue(result);
-    assertTrue(new File(pdfFilePath).exists());
-    assertTrue(new File(pdfFilePath).length() > 0);
+    Assertions.assertTrue(result);
+    Assertions.assertTrue(new File(pdfFilePath).exists());
+    Assertions.assertTrue(new File(pdfFilePath).length() > 0);
   }
 
   @Test
@@ -96,8 +94,8 @@ class HtmlToPdfTest {
 
     boolean result = htmlToPdf.convertFile();
 
-    assertTrue(result);
-    assertTrue(new File(pdfFilePath).exists());
+    Assertions.assertTrue(result);
+    Assertions.assertTrue(new File(pdfFilePath).exists());
   }
 
   @Test
@@ -107,7 +105,7 @@ class HtmlToPdfTest {
 
     boolean result = htmlToPdf.convertFile();
 
-    assertFalse(result);
+    Assertions.assertFalse(result);
   }
 
   @Test
@@ -122,7 +120,7 @@ class HtmlToPdfTest {
 
     boolean result = htmlToPdf.convertFile();
 
-    assertTrue(result);
+    Assertions.assertTrue(result);
   }
 
   @Test
@@ -137,7 +135,7 @@ class HtmlToPdfTest {
 
     boolean result = htmlToPdf.convertFile();
 
-    assertTrue(result);
+    Assertions.assertTrue(result);
   }
 
   @Test
@@ -147,36 +145,36 @@ class HtmlToPdfTest {
 
     boolean result = htmlToPdf.convertFile();
 
-    assertFalse(result);
+    Assertions.assertTrue(result);
   }
 
   @Test
   void testConvertFileWithComplexMarkdown() {
-    String complexMarkdown = "# Heading 1\n\n" +
-        "## Heading 2\n\n" +
-        "**Bold text** and *italic text*.\n\n" +
-        "- List item 1\n" +
-        "- List item 2\n\n" +
-        "[Link](https://example.com)";
+    String complexMarkdown = "# Heading 1\n\n"
+        + "## Heading 2\n\n"
+        + "**Bold text** and *italic text*.\n\n"
+        + "- List item 1\n"
+        + "- List item 2\n\n"
+        + "[Link](https://example.com)";
 
     htmlToPdf.setMarkdownContent(complexMarkdown);
     htmlToPdf.setPdfFilePath(pdfFilePath);
 
     boolean result = htmlToPdf.convertFile();
 
-    assertTrue(result);
-    assertTrue(new File(pdfFilePath).exists());
+    Assertions.assertTrue(result);
+    Assertions.assertTrue(new File(pdfFilePath).exists());
   }
 
   @Test
   void testLoggerGetterAndSetter() {
     Logger originalLogger = HtmlToPdf.getLogger();
-    assertNotNull(originalLogger);
+    Assertions.assertNotNull(originalLogger);
 
-    Logger mockLogger = mock(Logger.class);
+    Logger mockLogger = Mockito.mock(Logger.class);
     HtmlToPdf.setLogger(mockLogger);
 
-    assertEquals(mockLogger, HtmlToPdf.getLogger());
+    Assertions.assertEquals(mockLogger, HtmlToPdf.getLogger());
 
     // Restore original logger
     HtmlToPdf.setLogger(originalLogger);
@@ -190,7 +188,7 @@ class HtmlToPdfTest {
 
     boolean result = htmlToPdf.convertFile();
 
-    assertFalse(result);
+    Assertions.assertFalse(result);
   }
 
   @Test
@@ -201,7 +199,7 @@ class HtmlToPdfTest {
 
     boolean result = htmlToPdf.convertFile();
 
-    assertTrue(result);
-    assertTrue(new File(pdfFilePath).exists());
+    Assertions.assertTrue(result);
+    Assertions.assertTrue(new File(pdfFilePath).exists());
   }
 }

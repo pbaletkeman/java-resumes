@@ -3,16 +3,15 @@ package ca.letkeman.resumes.optimizer;
 import ca.letkeman.resumes.model.Optimize;
 import ca.letkeman.resumes.optimizer.responses.Choice;
 import ca.letkeman.resumes.optimizer.responses.LLMResponse;
+import ca.letkeman.resumes.optimizer.responses.Message;
 import ca.letkeman.resumes.service.MockLlmService;
 import ca.letkeman.resumes.service.PromptService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +22,7 @@ class ApiServiceExtendedTest {
     private ApiService apiService;
     private PromptService promptServiceMock;
     private MockLlmService mockLlmServiceMock;
-    
+
     @TempDir
     Path tempDir;
 
@@ -32,13 +31,13 @@ class ApiServiceExtendedTest {
         apiService = new ApiService();
         promptServiceMock = Mockito.mock(PromptService.class);
         mockLlmServiceMock = Mockito.mock(MockLlmService.class);
-        
+
         // Inject mocks
         try {
             var promptField = ApiService.class.getDeclaredField("promptService");
             promptField.setAccessible(true);
             promptField.set(apiService, promptServiceMock);
-            
+
             var mockField = ApiService.class.getDeclaredField("mockLlmService");
             mockField.setAccessible(true);
             mockField.set(apiService, mockLlmServiceMock);
@@ -53,25 +52,25 @@ class ApiServiceExtendedTest {
         Optimize optimize = createBasicOptimize();
         Mockito.when(promptServiceMock.loadPrompt("RESUME"))
             .thenReturn("Resume template: {resume_string} {job_description}");
-        
+
         // Create a valid LLM response
         LLMResponse mockResponse = new LLMResponse();
         List<Choice> choices = new ArrayList<>();
         Choice choice = new Choice();
-        ca.letkeman.resumes.optimizer.responses.Message message = new ca.letkeman.resumes.optimizer.responses.Message();
+        Message message = new Message();
         message.setContent("# Resume Content\nThis is a test resume.");
         choice.setMessage(message);
         choices.add(choice);
         mockResponse.setChoices(choices);
-        
+
         // Mock invokeApi to return our response
         apiService.setMockEnabled(true);
         Mockito.when(mockLlmServiceMock.generateMockResponse(Mockito.any()))
             .thenReturn(mockResponse);
-        
+
         // Execute
         apiService.produceFiles("RESUME", optimize, "http://test", "key", "model", tempDir.toString());
-        
+
         // Verify files were created
         File[] files = tempDir.toFile().listFiles();
         Assertions.assertNotNull(files);
@@ -84,17 +83,17 @@ class ApiServiceExtendedTest {
         Optimize optimize = createBasicOptimize();
         Mockito.when(promptServiceMock.loadPrompt("RESUME"))
             .thenReturn("Template");
-        
+
         // Empty choices
         LLMResponse mockResponse = new LLMResponse();
         mockResponse.setChoices(new ArrayList<>());
-        
+
         apiService.setMockEnabled(true);
         Mockito.when(mockLlmServiceMock.generateMockResponse(Mockito.any()))
             .thenReturn(mockResponse);
-        
+
         // Should handle gracefully
-        Assertions.assertDoesNotThrow(() -> 
+        Assertions.assertDoesNotThrow(() ->
             apiService.produceFiles("RESUME", optimize, "http://test", "key", "model", tempDir.toString())
         );
     }
@@ -104,7 +103,7 @@ class ApiServiceExtendedTest {
         Optimize optimize = createBasicOptimize();
         Mockito.when(promptServiceMock.loadPrompt("RESUME"))
             .thenReturn("Template");
-        
+
         // Choice with null message
         LLMResponse mockResponse = new LLMResponse();
         List<Choice> choices = new ArrayList<>();
@@ -112,13 +111,13 @@ class ApiServiceExtendedTest {
         choice.setMessage(null);
         choices.add(choice);
         mockResponse.setChoices(choices);
-        
+
         apiService.setMockEnabled(true);
         Mockito.when(mockLlmServiceMock.generateMockResponse(Mockito.any()))
             .thenReturn(mockResponse);
-        
+
         // Should handle gracefully
-        Assertions.assertDoesNotThrow(() -> 
+        Assertions.assertDoesNotThrow(() ->
             apiService.produceFiles("RESUME", optimize, "http://test", "key", "model", tempDir.toString())
         );
     }
@@ -128,9 +127,9 @@ class ApiServiceExtendedTest {
         Optimize optimize = createBasicOptimize();
         Mockito.when(promptServiceMock.loadPrompt("RESUME"))
             .thenReturn(null);
-        
+
         // Should return early
-        Assertions.assertDoesNotThrow(() -> 
+        Assertions.assertDoesNotThrow(() ->
             apiService.produceFiles("RESUME", optimize, "http://test", "key", "model", tempDir.toString())
         );
     }
@@ -140,9 +139,9 @@ class ApiServiceExtendedTest {
         Optimize optimize = createBasicOptimize();
         Mockito.when(promptServiceMock.loadPrompt("RESUME"))
             .thenReturn("");
-        
+
         // Should return early
-        Assertions.assertDoesNotThrow(() -> 
+        Assertions.assertDoesNotThrow(() ->
             apiService.produceFiles("RESUME", optimize, "http://test", "key", "model", tempDir.toString())
         );
     }
@@ -150,25 +149,27 @@ class ApiServiceExtendedTest {
     @Test
     void testProduceFilesReplacesAllVariables() {
         Optimize optimize = createBasicOptimize();
-        String template = "Resume: {resume_string}, Job: {job_description}, Title: {job_title}, Company: {company}, Today: {today}, Interviewer: {interviewer_name}";
+        String template = "Resume: {resume_string}, Job: {job_description}, Title: {job_title}, "
+            + "Company: {company}, Today: {today}, Interviewer: {interviewer_name}";
         Mockito.when(promptServiceMock.loadPrompt("RESUME"))
             .thenReturn(template);
-        
+
         LLMResponse mockResponse = new LLMResponse();
         List<Choice> choices = new ArrayList<>();
         Choice choice = new Choice();
-        ca.letkeman.resumes.optimizer.responses.Message message = new ca.letkeman.resumes.optimizer.responses.Message();
+        ca.letkeman.resumes.optimizer.responses.Message message;
+        message = new ca.letkeman.resumes.optimizer.responses.Message();
         message.setContent("Content");
         choice.setMessage(message);
         choices.add(choice);
         mockResponse.setChoices(choices);
-        
+
         apiService.setMockEnabled(true);
         Mockito.when(mockLlmServiceMock.generateMockResponse(Mockito.any()))
             .thenReturn(mockResponse);
-        
+
         // Should replace all variables
-        Assertions.assertDoesNotThrow(() -> 
+        Assertions.assertDoesNotThrow(() ->
             apiService.produceFiles("RESUME", optimize, "http://test", "key", "model", tempDir.toString())
         );
     }
@@ -185,25 +186,26 @@ class ApiServiceExtendedTest {
         Mockito.when(optimize.getInterviewerName()).thenReturn(null);
         Mockito.when(optimize.getTemperature()).thenReturn(0.5);
         Mockito.when(optimize.getModel()).thenReturn("model");
-        
+
         Mockito.when(promptServiceMock.loadPrompt("RESUME"))
             .thenReturn("Template");
-        
+
         LLMResponse mockResponse = new LLMResponse();
         List<Choice> choices = new ArrayList<>();
         Choice choice = new Choice();
-        ca.letkeman.resumes.optimizer.responses.Message message = new ca.letkeman.resumes.optimizer.responses.Message();
+        ca.letkeman.resumes.optimizer.responses.Message message;
+        message = new ca.letkeman.resumes.optimizer.responses.Message();
         message.setContent("Content");
         choice.setMessage(message);
         choices.add(choice);
         mockResponse.setChoices(choices);
-        
+
         apiService.setMockEnabled(true);
         Mockito.when(mockLlmServiceMock.generateMockResponse(Mockito.any()))
             .thenReturn(mockResponse);
-        
+
         // Should handle null fields gracefully
-        Assertions.assertDoesNotThrow(() -> 
+        Assertions.assertDoesNotThrow(() ->
             apiService.produceFiles("RESUME", optimize, "http://test", "key", "model", tempDir.toString())
         );
     }
@@ -213,24 +215,25 @@ class ApiServiceExtendedTest {
         Optimize optimize = createBasicOptimize();
         Mockito.when(promptServiceMock.loadPrompt("RESUME"))
             .thenReturn("Template");
-        
+
         // Response with additional suggestions
         LLMResponse mockResponse = new LLMResponse();
         List<Choice> choices = new ArrayList<>();
         Choice choice = new Choice();
-        ca.letkeman.resumes.optimizer.responses.Message message = new ca.letkeman.resumes.optimizer.responses.Message();
+        ca.letkeman.resumes.optimizer.responses.Message message;
+        message = new ca.letkeman.resumes.optimizer.responses.Message();
         message.setContent("# Resume ContentAdditional Suggestions\n- Suggestion 1\n- Suggestion 2");
         choice.setMessage(message);
         choices.add(choice);
         mockResponse.setChoices(choices);
-        
+
         apiService.setMockEnabled(true);
         Mockito.when(mockLlmServiceMock.generateMockResponse(Mockito.any()))
             .thenReturn(mockResponse);
-        
+
         // Should create suggestion file
         apiService.produceFiles("RESUME", optimize, "http://test", "key", "model", tempDir.toString());
-        
+
         File[] files = tempDir.toFile().listFiles();
         Assertions.assertNotNull(files);
         // Should have main file and suggestion file
@@ -249,26 +252,27 @@ class ApiServiceExtendedTest {
         Optimize optimize = createBasicOptimize();
         Mockito.when(promptServiceMock.loadPrompt("RESUME"))
             .thenReturn("Template");
-        
+
         LLMResponse mockResponse = new LLMResponse();
         List<Choice> choices = new ArrayList<>();
         Choice choice = new Choice();
-        ca.letkeman.resumes.optimizer.responses.Message message = new ca.letkeman.resumes.optimizer.responses.Message();
+        ca.letkeman.resumes.optimizer.responses.Message message;
+        message = new ca.letkeman.resumes.optimizer.responses.Message();
         message.setContent("Content");
         choice.setMessage(message);
         choices.add(choice);
         mockResponse.setChoices(choices);
-        
+
         apiService.setMockEnabled(true);
         Mockito.when(mockLlmServiceMock.generateMockResponse(Mockito.any()))
             .thenReturn(mockResponse);
-        
+
         // Use a subdirectory that doesn't exist
         Path newDir = tempDir.resolve("newsubdir");
         Assertions.assertFalse(Files.exists(newDir));
-        
+
         apiService.produceFiles("RESUME", optimize, "http://test", "key", "model", newDir.toString());
-        
+
         // Directory should be created
         Assertions.assertTrue(Files.exists(newDir));
     }
@@ -278,23 +282,24 @@ class ApiServiceExtendedTest {
         Optimize optimize = createBasicOptimize();
         Mockito.when(promptServiceMock.loadPrompt(Mockito.anyString()))
             .thenReturn("Template");
-        
+
         LLMResponse mockResponse = new LLMResponse();
         List<Choice> choices = new ArrayList<>();
         Choice choice = new Choice();
-        ca.letkeman.resumes.optimizer.responses.Message message = new ca.letkeman.resumes.optimizer.responses.Message();
+        ca.letkeman.resumes.optimizer.responses.Message message;
+        message = new ca.letkeman.resumes.optimizer.responses.Message();
         message.setContent("Content");
         choice.setMessage(message);
         choices.add(choice);
         mockResponse.setChoices(choices);
-        
+
         apiService.setMockEnabled(true);
         Mockito.when(mockLlmServiceMock.generateMockResponse(Mockito.any()))
             .thenReturn(mockResponse);
-        
+
         // Should iterate through all prompt types
         apiService.produceFiles(optimize, "http://test", "key", "model", tempDir.toString());
-        
+
         // Verify loadPrompt was called for each type
         Mockito.verify(promptServiceMock, Mockito.times(2)).loadPrompt(Mockito.anyString());
     }
@@ -306,7 +311,7 @@ class ApiServiceExtendedTest {
         apiService.setMockEnabled(false);
         ChatBody chatBody = new ChatBody();
         chatBody.setModel("test");
-        
+
         // With invalid endpoint, should return null
         LLMResponse response = apiService.invokeApi(chatBody, "http://invalid-endpoint", "key");
         Assertions.assertNull(response);
@@ -316,13 +321,13 @@ class ApiServiceExtendedTest {
     void testGettersAndSetters() {
         apiService.setJobDescription("Test Job Description");
         Assertions.assertEquals("Test Job Description", apiService.getJobDescription());
-        
+
         apiService.setResume("Test Resume");
         Assertions.assertEquals("Test Resume", apiService.getResume());
-        
+
         apiService.setMockEnabled(true);
         Assertions.assertTrue(apiService.isMockEnabled());
-        
+
         apiService.setMockEnabled(false);
         Assertions.assertFalse(apiService.isMockEnabled());
     }

@@ -60,6 +60,18 @@ These request definitions enable seamless testing and integration with the resum
 - **Endpoint**: `/api/markdownFile2PDF`
 - **Purpose**: Convert a Markdown document to PDF format
 
+### 6. **Delete All Files** (`DeleteAllFiles.bru`)
+
+- **Method**: POST
+- **Endpoint**: `/api/delete-all`
+- **Purpose**: Remove all uploaded/generated files from the server
+
+### 7. **Health Check** (`HealthCheck.bru`)
+
+- **Method**: GET
+- **Endpoint**: `/api/health`
+- **Purpose**: Check API health/status
+
 ---
 
 ## Getting Started
@@ -147,7 +159,9 @@ bruno/Resume/
 ├── ListFiles.bru                      # List all files request
 ├── DownloadFile.bru                   # Download file request
 ├── DeleteFile.bru                     # Delete file request
-└── Convert Markdown to PDF.bru        # Markdown to PDF conversion request
+├── Convert Markdown to PDF.bru        # Markdown to PDF conversion request
+├── DeleteAllFiles.bru                 # Delete all files request
+└── HealthCheck.bru                    # Health check request
 ```
 
 ---

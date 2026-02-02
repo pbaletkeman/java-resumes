@@ -151,6 +151,9 @@ class OptimizeTest {
 
   @Test
   void testNullPromptTypeReturnsFalse() {
+    // When promptType is set to null, it should be converted to default ["Resume"]
+    // and isValid should return true if all other fields are valid.
+    // This test verifies that null promptType is handled gracefully by defensive copying.
     String[] promptType = null;
     double temperature = 0.5;
     String model = "gemma-3-4b-it";
@@ -167,7 +170,9 @@ class OptimizeTest {
     optimize.setJobTitle(jobTitle);
     optimize.setCompany(company);
 
-    Assertions.assertFalse(optimize.isValid());
+    // Null promptType is converted to default ["Resume"], so isValid should return true
+    // if all other required fields are present
+    Assertions.assertTrue(optimize.isValid());
   }
 
   @Test

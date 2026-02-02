@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -54,7 +53,7 @@ class ResumeControllerAdvancedTest {
     @Test
     void testGenerateInterviewHRQuestionsWithInvalidJson() throws Exception {
         String optimizeJson = "{invalid json}";
-        
+
         mockMvc.perform(MockMvcRequestBuilders.multipart("/api/generate/interview-hr-questions")
                 .param("optimize", optimizeJson))
             .andExpect(MockMvcResultMatchers.status().isBadRequest())
@@ -64,7 +63,7 @@ class ResumeControllerAdvancedTest {
     @Test
     void testGenerateInterviewHRQuestionsWithMissingJobDescription() throws Exception {
         String optimizeJson = "{\"company\":\"TechCorp\"}";
-        
+
         mockMvc.perform(MockMvcRequestBuilders.multipart("/api/generate/interview-hr-questions")
                 .param("optimize", optimizeJson))
             .andExpect(MockMvcResultMatchers.status().isExpectationFailed())
@@ -75,7 +74,7 @@ class ResumeControllerAdvancedTest {
     @Test
     void testGenerateInterviewJobSpecificQuestionsWithInvalidJson() throws Exception {
         String optimizeJson = "not a json";
-        
+
         mockMvc.perform(MockMvcRequestBuilders.multipart("/api/generate/interview-job-specific")
                 .param("optimize", optimizeJson))
             .andExpect(MockMvcResultMatchers.status().isBadRequest())
@@ -86,7 +85,7 @@ class ResumeControllerAdvancedTest {
     @Test
     void testGenerateColdEmailWithInvalidJson() throws Exception {
         String optimizeJson = "{{{";
-        
+
         mockMvc.perform(MockMvcRequestBuilders.multipart("/api/generate/cold-email")
                 .param("optimize", optimizeJson))
             .andExpect(MockMvcResultMatchers.status().isBadRequest())
@@ -96,7 +95,7 @@ class ResumeControllerAdvancedTest {
     @Test
     void testGenerateColdEmailWithMissingRequired() throws Exception {
         String optimizeJson = "{\"company\":\"TestCo\"}";
-        
+
         mockMvc.perform(MockMvcRequestBuilders.multipart("/api/generate/cold-email")
                 .param("optimize", optimizeJson))
             .andExpect(MockMvcResultMatchers.status().isExpectationFailed())
@@ -107,7 +106,7 @@ class ResumeControllerAdvancedTest {
     @Test
     void testGenerateColdLinkedInMessageWithInvalidJson() throws Exception {
         String optimizeJson = "}invalid{";
-        
+
         mockMvc.perform(MockMvcRequestBuilders.multipart("/api/generate/cold-linkedin-message")
                 .param("optimize", optimizeJson))
             .andExpect(MockMvcResultMatchers.status().isBadRequest())
@@ -118,7 +117,7 @@ class ResumeControllerAdvancedTest {
     @Test
     void testGenerateThankYouEmailWithInvalidJson() throws Exception {
         String optimizeJson = "{bad json";
-        
+
         mockMvc.perform(MockMvcRequestBuilders.multipart("/api/generate/thank-you-email")
                 .param("optimize", optimizeJson))
             .andExpect(MockMvcResultMatchers.status().isBadRequest())
@@ -129,7 +128,7 @@ class ResumeControllerAdvancedTest {
     @Test
     void testProcessSkillsEndpointWithValidInput() throws Exception {
         String optimizeJson = "{\"jobDescription\":\"Test Job Description\"}";
-        
+
         mockMvc.perform(MockMvcRequestBuilders.multipart("/api/process/skills")
                 .param("optimize", optimizeJson))
             .andExpect(MockMvcResultMatchers.status().isOk())
@@ -139,7 +138,7 @@ class ResumeControllerAdvancedTest {
     @Test
     void testProcessSkillsWithInvalidJson() throws Exception {
         String optimizeJson = "invalid";
-        
+
         mockMvc.perform(MockMvcRequestBuilders.multipart("/api/process/skills")
                 .param("optimize", optimizeJson))
             .andExpect(MockMvcResultMatchers.status().isBadRequest())
@@ -149,7 +148,7 @@ class ResumeControllerAdvancedTest {
     @Test
     void testProcessSkillsWithoutJobDescription() throws Exception {
         String optimizeJson = "{\"company\":\"TestCo\"}";
-        
+
         mockMvc.perform(MockMvcRequestBuilders.multipart("/api/process/skills")
                 .param("optimize", optimizeJson))
             .andExpect(MockMvcResultMatchers.status().isBadRequest())

@@ -118,72 +118,53 @@ public class MockLlmService {
   private String generateMockResume() {
     String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
     return """
-        # Professional Resume
-
-        ## Summary
-        Experienced professional with expertise in software development and team leadership.
-        Proven track record of delivering high-quality solutions and driving innovation.
-
-        ## Professional Experience
-
-        ### Senior Software Engineer
-        **Mock Company** | %s
-
-        - Led development of enterprise applications using Java and Spring Boot
-        - Mentored junior developers and conducted code reviews
-        - Improved system performance by 40%% through optimization
-        - Implemented CI/CD pipelines reducing deployment time by 60%%
-
-        ## Skills
-
-        - **Programming**: Java, Python, JavaScript, TypeScript
-        - **Frameworks**: Spring Boot, React, Node.js
-        - **Tools**: Git, Docker, Kubernetes, Jenkins
-        - **Databases**: PostgreSQL, MongoDB, Redis
-
-        ## Education
-
-        **Bachelor of Science in Computer Science**
-        Mock University | 2018
-
-        ## Certifications
-
-        - AWS Certified Solutions Architect
-        - Oracle Certified Professional Java SE Developer
-
+        # Professional Resume%n%n\
+        ## Summary%n\
+        Experienced professional with expertise in software development and team leadership.%n\
+        Proven track record of delivering high-quality solutions and driving innovation.%n%n\
+        ## Professional Experience%n%n\
+        ### Senior Software Engineer%n\
+        **Mock Company** | %s%n%n\
+        - Led development of enterprise applications using Java and Spring Boot%n\
+        - Mentored junior developers and conducted code reviews%n\
+        - Improved system performance by 40%%%% through optimization%n\
+        - Implemented CI/CD pipelines reducing deployment time by 60%%%%n%n\
+        ## Skills%n%n\
+        - **Programming**: Java, Python, JavaScript, TypeScript%n\
+        - **Frameworks**: Spring Boot, React, Node.js%n\
+        - **Tools**: Git, Docker, Kubernetes, Jenkins%n\
+        - **Databases**: PostgreSQL, MongoDB, Redis%n%n\
+        ## Education%n%n\
+        **Bachelor of Science in Computer Science**%n\
+        Mock University | 2018%n%n\
+        ## Certifications%n%n\
+        - AWS Certified Solutions Architect%n\
+        - Oracle Certified Professional Java SE Developer%n\
         """.formatted(date);
   }
 
   private String generateMockCoverLetter() {
     String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
     return """
-        %s
-
-        Dear Hiring Manager,
-
-        I am writing to express my strong interest in the position at your organization.
-        With my background in software development and proven track record of success,
-        I am confident I would be a valuable addition to your team.
-
-        Throughout my career, I have demonstrated expertise in developing scalable
-        applications, leading cross-functional teams, and delivering innovative solutions
-        that drive business value. My experience aligns well with the requirements
-        outlined in the job description.
-
-        Key highlights of my qualifications include:
-
-        - 5+ years of experience in full-stack development
-        - Strong proficiency in Java, Spring Boot, and modern web technologies
-        - Proven ability to architect and implement enterprise-grade solutions
-        - Experience with Agile methodologies and DevOps practices
-
-        I am excited about the opportunity to contribute to your organization and would
-        welcome the chance to discuss how my skills and experience align with your needs.
-
-        Thank you for your consideration.
-
-        Sincerely,
-        [Your Name]
+        %s%n%n\
+        Dear Hiring Manager,%n%n\
+        I am writing to express my strong interest in the position at your organization.%n\
+        With my background in software development and proven track record of success,%n\
+        I am confident I would be a valuable addition to your team.%n%n\
+        Throughout my career, I have demonstrated expertise in developing scalable%n\
+        applications, leading cross-functional teams, and delivering innovative solutions%n\
+        that drive business value. My experience aligns well with the requirements%n\
+        outlined in the job description.%n%n\
+        Key highlights of my qualifications include:%n%n\
+        - 5+ years of experience in full-stack development%n\
+        - Strong proficiency in Java, Spring Boot, and modern web technologies%n\
+        - Proven ability to architect and implement enterprise-grade solutions%n\
+        - Experience with Agile methodologies and DevOps practices%n%n\
+        I am excited about the opportunity to contribute to your organization and would%n\
+        welcome the chance to discuss how my skills and experience align with your needs.%n%n\
+        Thank you for your consideration.%n%n\
+        Sincerely,%n\
+        [Your Name]%n\
         """.formatted(date);
   }
 
@@ -355,31 +336,24 @@ public class MockLlmService {
   private String generateMockThankYouEmail() {
     String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
     return """
-        %s
-
-        Dear [Interviewer Name],
-
-        Thank you for taking the time to meet with me yesterday to discuss the
-        [Position] role at [Company Name]. I thoroughly enjoyed our conversation
-        and learning more about the team and the exciting projects you're working on.
-
-        I was particularly intrigued by [specific topic discussed] and believe my
-        experience with [relevant skill/experience] would allow me to contribute
-        effectively to your team's goals.
-
-        Our discussion reinforced my enthusiasm for this opportunity, and I'm
-        excited about the possibility of joining [Company Name] and contributing
-        to [specific initiative or project].
-
-        Please don't hesitate to reach out if you need any additional information.
-        I look forward to hearing from you about the next steps.
-
-        Thank you again for your time and consideration.
-
-        Best regards,
-        [Your Name]
-        [Phone]
-        [Email]
+        %s%n%n\
+        Dear [Interviewer Name],%n%n\
+        Thank you for taking the time to meet with me yesterday to discuss the%n\
+        [Position] role at [Company Name]. I thoroughly enjoyed our conversation%n\
+        and learning more about the team and the exciting projects you're working on.%n%n\
+        I was particularly intrigued by [specific topic discussed] and believe my%n\
+        experience with [relevant skill/experience] would allow me to contribute%n\
+        effectively to your team's goals.%n%n\
+        Our discussion reinforced my enthusiasm for this opportunity, and I'm%n\
+        excited about the possibility of joining [Company Name] and contributing%n\
+        to [specific initiative or project].%n%n\
+        Please don't hesitate to reach out if you need any additional information.%n\
+        I look forward to hearing from you about the next steps.%n%n\
+        Thank you again for your time and consideration.%n%n\
+        Best regards,%n\
+        [Your Name]%n\
+        [Phone]%n\
+        [Email]%n\
         """.formatted(date);
   }
 

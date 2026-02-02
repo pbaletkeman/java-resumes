@@ -1,15 +1,11 @@
 package ca.letkeman.resumes.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import ca.letkeman.resumes.optimizer.ChatBody;
 import ca.letkeman.resumes.optimizer.Message;
 import ca.letkeman.resumes.optimizer.responses.LLMResponse;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,18 +27,18 @@ class MockLlmServiceTest {
 
         LLMResponse response = mockLlmService.generateMockResponse(chatBody);
 
-        assertNotNull(response);
-        assertNotNull(response.getId());
-        assertTrue(response.getId().startsWith("chatcmpl-mock-"));
-        assertEquals("chat.completion", response.getObject());
-        assertNotNull(response.getCreated());
-        assertNotNull(response.getModel());
-        assertNotNull(response.getChoices());
-        assertEquals(1, response.getChoices().size());
+        Assertions.assertNotNull(response);
+        Assertions.assertNotNull(response.getId());
+        Assertions.assertTrue(response.getId().startsWith("chatcmpl-mock-"));
+        Assertions.assertEquals("chat.completion", response.getObject());
+        Assertions.assertNotNull(response.getCreated());
+        Assertions.assertNotNull(response.getModel());
+        Assertions.assertNotNull(response.getChoices());
+        Assertions.assertEquals(1, response.getChoices().size());
 
         String content = response.getChoices().get(0).getMessage().getContent();
-        assertNotNull(content);
-        assertTrue(content.contains("Professional Resume") || content.contains("Summary"));
+        Assertions.assertNotNull(content);
+        Assertions.assertTrue(content.contains("Professional Resume") || content.contains("Summary"));
     }
 
     @Test
@@ -51,9 +47,9 @@ class MockLlmServiceTest {
 
         LLMResponse response = mockLlmService.generateMockResponse(chatBody);
 
-        assertNotNull(response);
+        Assertions.assertNotNull(response);
         String content = response.getChoices().get(0).getMessage().getContent();
-        assertTrue(content.contains("Dear Hiring Manager") || content.contains("Sincerely"));
+        Assertions.assertTrue(content.contains("Dear Hiring Manager") || content.contains("Sincerely"));
     }
 
     @Test
@@ -62,9 +58,9 @@ class MockLlmServiceTest {
 
         LLMResponse response = mockLlmService.generateMockResponse(chatBody);
 
-        assertNotNull(response);
+        Assertions.assertNotNull(response);
         String content = response.getChoices().get(0).getMessage().getContent();
-        assertTrue(content.contains("Interview") || content.contains("Tell me about yourself"));
+        Assertions.assertTrue(content.contains("Interview") || content.contains("Tell me about yourself"));
     }
 
     @Test
@@ -73,9 +69,9 @@ class MockLlmServiceTest {
 
         LLMResponse response = mockLlmService.generateMockResponse(chatBody);
 
-        assertNotNull(response);
+        Assertions.assertNotNull(response);
         String content = response.getChoices().get(0).getMessage().getContent();
-        assertFalse(content.isEmpty());
+        Assertions.assertFalse(content.isEmpty());
     }
 
     @Test
@@ -84,9 +80,9 @@ class MockLlmServiceTest {
 
         LLMResponse response = mockLlmService.generateMockResponse(chatBody);
 
-        assertNotNull(response);
+        Assertions.assertNotNull(response);
         String content = response.getChoices().get(0).getMessage().getContent();
-        assertFalse(content.isEmpty());
+        Assertions.assertFalse(content.isEmpty());
     }
 
     @Test
@@ -95,9 +91,9 @@ class MockLlmServiceTest {
 
         LLMResponse response = mockLlmService.generateMockResponse(chatBody);
 
-        assertNotNull(response);
+        Assertions.assertNotNull(response);
         String content = response.getChoices().get(0).getMessage().getContent();
-        assertTrue(content.contains("Subject") || content.contains("email"));
+        Assertions.assertTrue(content.contains("Subject") || content.contains("email"));
     }
 
     @Test
@@ -106,9 +102,9 @@ class MockLlmServiceTest {
 
         LLMResponse response = mockLlmService.generateMockResponse(chatBody);
 
-        assertNotNull(response);
+        Assertions.assertNotNull(response);
         String content = response.getChoices().get(0).getMessage().getContent();
-        assertTrue(content.contains("LinkedIn") || content.contains("connect"));
+        Assertions.assertTrue(content.contains("LinkedIn") || content.contains("connect"));
     }
 
     @Test
@@ -117,9 +113,9 @@ class MockLlmServiceTest {
 
         LLMResponse response = mockLlmService.generateMockResponse(chatBody);
 
-        assertNotNull(response);
+        Assertions.assertNotNull(response);
         String content = response.getChoices().get(0).getMessage().getContent();
-        assertTrue(content.contains("Thank you") || content.contains("interview"));
+        Assertions.assertTrue(content.contains("Thank you") || content.contains("interview"));
     }
 
     @Test
@@ -128,9 +124,9 @@ class MockLlmServiceTest {
 
         LLMResponse response = mockLlmService.generateMockResponse(chatBody);
 
-        assertNotNull(response);
+        Assertions.assertNotNull(response);
         String content = response.getChoices().get(0).getMessage().getContent();
-        assertTrue(content.contains("Skills") || content.contains("skill"));
+        Assertions.assertTrue(content.contains("Skills") || content.contains("skill"));
     }
 
     @Test
@@ -139,10 +135,10 @@ class MockLlmServiceTest {
 
         LLMResponse response = mockLlmService.generateMockResponse(chatBody);
 
-        assertNotNull(response);
+        Assertions.assertNotNull(response);
         String content = response.getChoices().get(0).getMessage().getContent();
-        assertFalse(content.isEmpty());
-        assertTrue(content.contains("Mock LLM Response") || content.length() > 0);
+        Assertions.assertFalse(content.isEmpty());
+        Assertions.assertTrue(content.contains("Mock LLM Response") || content.length() > 0);
     }
 
     @Test
@@ -152,8 +148,8 @@ class MockLlmServiceTest {
 
         LLMResponse response = mockLlmService.generateMockResponse(chatBody);
 
-        assertNotNull(response);
-        assertEquals("test-model", response.getModel());
+        Assertions.assertNotNull(response);
+        Assertions.assertEquals("test-model", response.getModel());
     }
 
     @Test
@@ -162,10 +158,10 @@ class MockLlmServiceTest {
 
         LLMResponse response = mockLlmService.generateMockResponse(chatBody);
 
-        assertNotNull(response.getUsage());
-        assertTrue(response.getUsage().getPromptTokens() > 0);
-        assertTrue(response.getUsage().getCompletionTokens() > 0);
-        assertEquals(
+        Assertions.assertNotNull(response.getUsage());
+        Assertions.assertTrue(response.getUsage().getPromptTokens() > 0);
+        Assertions.assertTrue(response.getUsage().getCompletionTokens() > 0);
+        Assertions.assertEquals(
                 response.getUsage().getPromptTokens() + response.getUsage().getCompletionTokens(),
                 response.getUsage().getTotalTokens()
         );
@@ -177,12 +173,12 @@ class MockLlmServiceTest {
 
         LLMResponse response = mockLlmService.generateMockResponse(chatBody);
 
-        assertNotNull(response.getId());
-        assertTrue(response.getId().startsWith("chatcmpl-mock-"));
-        assertEquals("chat.completion", response.getObject());
-        assertTrue(response.getCreated() > 0);
-        assertNotNull(response.getSystemFingerprint());
-        assertTrue(response.getSystemFingerprint().startsWith("mock-fp-"));
+        Assertions.assertNotNull(response.getId());
+        Assertions.assertTrue(response.getId().startsWith("chatcmpl-mock-"));
+        Assertions.assertEquals("chat.completion", response.getObject());
+        Assertions.assertTrue(response.getCreated() > 0);
+        Assertions.assertNotNull(response.getSystemFingerprint());
+        Assertions.assertTrue(response.getSystemFingerprint().startsWith("mock-fp-"));
     }
 
     @Test
@@ -191,13 +187,13 @@ class MockLlmServiceTest {
 
         LLMResponse response = mockLlmService.generateMockResponse(chatBody);
 
-        assertNotNull(response.getChoices());
-        assertEquals(1, response.getChoices().size());
-        assertEquals(0, response.getChoices().get(0).getIndex());
-        assertEquals("stop", response.getChoices().get(0).getFinishReason());
-        assertNotNull(response.getChoices().get(0).getMessage());
-        assertEquals("assistant", response.getChoices().get(0).getMessage().getRole());
-        assertNotNull(response.getChoices().get(0).getMessage().getContent());
+        Assertions.assertNotNull(response.getChoices());
+        Assertions.assertEquals(1, response.getChoices().size());
+        Assertions.assertEquals(0, response.getChoices().get(0).getIndex());
+        Assertions.assertEquals("stop", response.getChoices().get(0).getFinishReason());
+        Assertions.assertNotNull(response.getChoices().get(0).getMessage());
+        Assertions.assertEquals("assistant", response.getChoices().get(0).getMessage().getRole());
+        Assertions.assertNotNull(response.getChoices().get(0).getMessage().getContent());
     }
 
     @Test
@@ -207,7 +203,7 @@ class MockLlmServiceTest {
 
         LLMResponse response = mockLlmService.generateMockResponse(chatBody);
 
-        assertEquals("custom-model-name", response.getModel());
+        Assertions.assertEquals("custom-model-name", response.getModel());
     }
 
     @Test
@@ -217,7 +213,7 @@ class MockLlmServiceTest {
 
         LLMResponse response = mockLlmService.generateMockResponse(chatBody);
 
-        assertEquals("mistral-mock", response.getModel());
+        Assertions.assertEquals("mistral-mock", response.getModel());
     }
 
     @Test
@@ -240,9 +236,9 @@ class MockLlmServiceTest {
 
         LLMResponse response = mockLlmService.generateMockResponse(chatBody);
 
-        assertNotNull(response);
-        assertNotNull(response.getChoices());
-        assertEquals(1, response.getChoices().size());
+        Assertions.assertNotNull(response);
+        Assertions.assertNotNull(response.getChoices());
+        Assertions.assertEquals(1, response.getChoices().size());
     }
 
     /**

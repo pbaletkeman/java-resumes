@@ -1,19 +1,12 @@
 package ca.letkeman.resumes.service;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.Resource;
@@ -57,8 +50,8 @@ class FilesStorageServiceImplTest {
 
     @Test
     void testInit() {
-        assertTrue(Files.exists(testUploadPath));
-        assertTrue(Files.isDirectory(testUploadPath));
+        Assertions.assertTrue(Files.exists(testUploadPath));
+        Assertions.assertTrue(Files.isDirectory(testUploadPath));
     }
 
     @Test
@@ -70,17 +63,17 @@ class FilesStorageServiceImplTest {
                 "Test content".getBytes()
         );
 
-        assertDoesNotThrow(() -> filesStorageService.save(file));
+        Assertions.assertDoesNotThrow(() -> filesStorageService.save(file));
 
         Path savedFile = testUploadPath.resolve("test.txt");
-        assertTrue(Files.exists(savedFile));
+        Assertions.assertTrue(Files.exists(savedFile));
     }
 
     @Test
     void testSaveFileWithNullFile() {
         // The implementation logs errors but doesn't throw exceptions
         // This test verifies that it doesn't crash
-        assertDoesNotThrow(() -> {
+        Assertions.assertDoesNotThrow(() -> {
             filesStorageService.save(null);
         });
     }
@@ -95,7 +88,7 @@ class FilesStorageServiceImplTest {
         );
 
         // The implementation allows empty files
-        assertDoesNotThrow(() -> {
+        Assertions.assertDoesNotThrow(() -> {
             filesStorageService.save(emptyFile);
         });
     }
@@ -108,16 +101,16 @@ class FilesStorageServiceImplTest {
 
         Resource resource = filesStorageService.load("load-test.txt");
 
-        assertNotNull(resource);
-        assertTrue(resource.exists());
-        assertTrue(resource.isReadable());
+        Assertions.assertNotNull(resource);
+        Assertions.assertTrue(resource.exists());
+        Assertions.assertTrue(resource.isReadable());
     }
 
     @Test
     void testLoadNonExistentFile() {
         Resource resource = filesStorageService.load("non-existent.txt");
         // Returns null for non-existent files
-        assertNull(resource);
+        Assertions.assertNull(resource);
     }
 
     @Test
@@ -126,18 +119,18 @@ class FilesStorageServiceImplTest {
         Path testFile = testUploadPath.resolve("delete-test.txt");
         Files.writeString(testFile, "Test content");
 
-        assertTrue(Files.exists(testFile));
+        Assertions.assertTrue(Files.exists(testFile));
 
         filesStorageService.delete("delete-test.txt");
 
-        assertFalse(Files.exists(testFile));
+        Assertions.assertFalse(Files.exists(testFile));
     }
 
     @Test
     void testDeleteNonExistentFile() {
         // Returns false for non-existent files (doesn't throw exception)
         boolean result = filesStorageService.delete("non-existent.txt");
-        assertFalse(result);
+        Assertions.assertFalse(result);
     }
 
     @Test
@@ -149,18 +142,18 @@ class FilesStorageServiceImplTest {
 
         Stream<Path> paths = filesStorageService.loadAll();
 
-        assertNotNull(paths);
+        Assertions.assertNotNull(paths);
         long count = paths.count();
-        assertEquals(3, count);
+        Assertions.assertEquals(3, count);
     }
 
     @Test
     void testLoadAllEmptyDirectory() {
         Stream<Path> paths = filesStorageService.loadAll();
 
-        assertNotNull(paths);
+        Assertions.assertNotNull(paths);
         long count = paths.count();
-        assertEquals(0, count);
+        Assertions.assertEquals(0, count);
     }
 
     @Test
@@ -172,7 +165,7 @@ class FilesStorageServiceImplTest {
                 "Test content".getBytes()
         );
 
-        assertDoesNotThrow(() -> filesStorageService.save(file));
+        Assertions.assertDoesNotThrow(() -> filesStorageService.save(file));
     }
 
     @Test
@@ -191,13 +184,13 @@ class FilesStorageServiceImplTest {
                 "Content 2".getBytes()
         );
 
-        assertDoesNotThrow(() -> {
+        Assertions.assertDoesNotThrow(() -> {
             filesStorageService.save(file1);
             filesStorageService.save(file2);
         });
 
-        assertTrue(Files.exists(testUploadPath.resolve("test1.txt")));
-        assertTrue(Files.exists(testUploadPath.resolve("test2.txt")));
+        Assertions.assertTrue(Files.exists(testUploadPath.resolve("test1.txt")));
+        Assertions.assertTrue(Files.exists(testUploadPath.resolve("test2.txt")));
     }
 
     @Test
@@ -223,7 +216,7 @@ class FilesStorageServiceImplTest {
         // Verify new content
         Path savedFile = testUploadPath.resolve("overwrite.txt");
         String content = Files.readString(savedFile);
-        assertEquals("New content", content);
+        Assertions.assertEquals("New content", content);
     }
 
     @Test
@@ -231,14 +224,14 @@ class FilesStorageServiceImplTest {
         String newRoot = "/tmp/new-upload-dir";
         filesStorageService.setConfigRoot(newRoot);
         // Verify method completes without error
-        assertDoesNotThrow(() -> filesStorageService.setConfigRoot(newRoot));
+        Assertions.assertDoesNotThrow(() -> filesStorageService.setConfigRoot(newRoot));
     }
 
     @Test
     void testLoadWithNullFilename() {
         // Implementation may throw exception for null filename
         // Or return null - depends on implementation
-        assertDoesNotThrow(() -> {
+        Assertions.assertDoesNotThrow(() -> {
             Resource resource = filesStorageService.load(null);
             // Just verify it doesn't crash
         });
@@ -248,7 +241,7 @@ class FilesStorageServiceImplTest {
     void testLoadWithEmptyFilename() {
         // Implementation may handle empty filename differently
         // Just verify it doesn't crash
-        assertDoesNotThrow(() -> {
+        Assertions.assertDoesNotThrow(() -> {
             Resource resource = filesStorageService.load("");
         });
     }
@@ -256,7 +249,7 @@ class FilesStorageServiceImplTest {
     @Test
     void testDeleteWithNullFilename() {
         // Implementation throws NullPointerException for null filename
-        assertThrows(NullPointerException.class, () -> {
+        Assertions.assertThrows(NullPointerException.class, () -> {
             filesStorageService.delete(null);
         });
     }
@@ -276,17 +269,17 @@ class FilesStorageServiceImplTest {
                 largeContent
         );
 
-        assertDoesNotThrow(() -> filesStorageService.save(largeFile));
+        Assertions.assertDoesNotThrow(() -> filesStorageService.save(largeFile));
 
         Path savedFile = testUploadPath.resolve("large-file.bin");
-        assertTrue(Files.exists(savedFile));
+        Assertions.assertTrue(Files.exists(savedFile));
     }
 
     @Test
     void testInitWithNonExistentParentPath() throws IOException {
         // Test with a path that requires creating multiple parent directories
         Path deepPath = Paths.get(System.getProperty("java.io.tmpdir"), "test-deep", "nested", "path");
-        
+
         // Clean up if it exists
         if (Files.exists(deepPath)) {
             Files.walk(deepPath.getParent())
@@ -299,11 +292,11 @@ class FilesStorageServiceImplTest {
                     }
                 });
         }
-        
-        assertDoesNotThrow(() -> {
+
+        Assertions.assertDoesNotThrow(() -> {
             filesStorageService.init(deepPath.toString());
         });
-        
+
         // Clean up after test
         if (Files.exists(deepPath)) {
             Files.walk(deepPath.getParent().getParent())
@@ -322,7 +315,7 @@ class FilesStorageServiceImplTest {
     void testSetConfigRootCreatesDirectories() throws IOException {
         // Test setting config root creates necessary directories
         Path newPath = Paths.get(System.getProperty("java.io.tmpdir"), "test-config-root");
-        
+
         // Clean up if it exists
         if (Files.exists(newPath)) {
             Files.walk(newPath)
@@ -335,14 +328,14 @@ class FilesStorageServiceImplTest {
                     }
                 });
         }
-        
-        assertDoesNotThrow(() -> {
+
+        Assertions.assertDoesNotThrow(() -> {
             filesStorageService.setConfigRoot(newPath.toString());
         });
-        
+
         // Verify directory was created
-        assertTrue(Files.exists(newPath));
-        
+        Assertions.assertTrue(Files.exists(newPath));
+
         // Clean up
         Files.walk(newPath)
             .sorted(java.util.Comparator.reverseOrder())
@@ -360,16 +353,16 @@ class FilesStorageServiceImplTest {
         // Create test files
         Files.writeString(testUploadPath.resolve("file1.txt"), "Content 1");
         Files.writeString(testUploadPath.resolve("file2.txt"), "Content 2");
-        
-        assertTrue(Files.exists(testUploadPath.resolve("file1.txt")));
-        assertTrue(Files.exists(testUploadPath.resolve("file2.txt")));
-        
+
+        Assertions.assertTrue(Files.exists(testUploadPath.resolve("file1.txt")));
+        Assertions.assertTrue(Files.exists(testUploadPath.resolve("file2.txt")));
+
         // Delete all files
         filesStorageService.deleteAll();
-        
+
         // Verify files are deleted (directory may still exist temporarily)
-        assertFalse(Files.exists(testUploadPath.resolve("file1.txt")));
-        assertFalse(Files.exists(testUploadPath.resolve("file2.txt")));
+        Assertions.assertFalse(Files.exists(testUploadPath.resolve("file1.txt")));
+        Assertions.assertFalse(Files.exists(testUploadPath.resolve("file2.txt")));
     }
 
     @Test
@@ -378,10 +371,10 @@ class FilesStorageServiceImplTest {
         Path subDir = testUploadPath.resolve("subdir");
         Files.createDirectories(subDir);
         Files.writeString(subDir.resolve("nested.txt"), "Nested file");
-        
+
         // loadAll should handle this gracefully
         Stream<Path> paths = filesStorageService.loadAll();
-        assertNotNull(paths);
+        Assertions.assertNotNull(paths);
         // Should only return files at depth 1, not subdirectories
     }
 
@@ -394,8 +387,8 @@ class FilesStorageServiceImplTest {
                 "text/plain",
                 "Test content".getBytes()
         );
-        
+
         // Implementation should catch exception and log
-        assertDoesNotThrow(() -> filesStorageService.save(mockFile));
+        Assertions.assertDoesNotThrow(() -> filesStorageService.save(mockFile));
     }
 }

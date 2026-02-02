@@ -1,12 +1,9 @@
 package ca.letkeman.resumes;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
+import org.mockito.Mockito;
 import org.springframework.web.servlet.config.annotation.CorsRegistration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
@@ -18,108 +15,130 @@ class WebConfigTest {
   @Test
   void testWebConfigCreation() {
     WebConfig webConfig = new WebConfig();
-    assertNotNull(webConfig, "WebConfig should be created successfully");
+    Assertions.assertNotNull(webConfig, "WebConfig should be created successfully");
   }
 
   @Test
   void testAddCorsMappings() {
     WebConfig webConfig = new WebConfig();
-    CorsRegistry registry = mock(CorsRegistry.class);
-    CorsRegistration registration = mock(CorsRegistration.class);
+    CorsRegistry registry = Mockito.mock(CorsRegistry.class);
+    CorsRegistration registration = Mockito.mock(CorsRegistration.class);
 
-    when(registry.addMapping(anyString())).thenReturn(registration);
-    when(registration.allowedOrigins(anyString(), anyString(), anyString(), 
-        anyString(), anyString(), anyString())).thenReturn(registration);
-    when(registration.allowedMethods(anyString(), anyString(), anyString(), 
-        anyString(), anyString(), anyString())).thenReturn(registration);
-    when(registration.allowedHeaders(anyString())).thenReturn(registration);
-    when(registration.allowCredentials(true)).thenReturn(registration);
-    when(registration.maxAge(3600L)).thenReturn(registration);
+    Mockito.when(registry.addMapping(ArgumentMatchers.anyString())).thenReturn(registration);
+    Mockito.when(registration.allowedOrigins(
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        .thenReturn(registration);
+    Mockito.when(registration.allowedMethods(
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        .thenReturn(registration);
+    Mockito.when(registration.allowedHeaders(ArgumentMatchers.anyString())).thenReturn(registration);
+    Mockito.when(registration.allowCredentials(true)).thenReturn(registration);
+    Mockito.when(registration.maxAge(3600L)).thenReturn(registration);
 
     webConfig.addCorsMappings(registry);
 
-    verify(registry).addMapping("/api/**");
+    Mockito.verify(registry).addMapping("/api/**");
   }
 
   @Test
   void testCorsAllowsMultipleOrigins() {
     WebConfig webConfig = new WebConfig();
-    CorsRegistry registry = mock(CorsRegistry.class);
-    CorsRegistration registration = mock(CorsRegistration.class);
+    CorsRegistry registry = Mockito.mock(CorsRegistry.class);
+    CorsRegistration registration = Mockito.mock(CorsRegistration.class);
 
-    when(registry.addMapping(anyString())).thenReturn(registration);
-    when(registration.allowedOrigins(anyString(), anyString(), anyString(), 
-        anyString(), anyString(), anyString())).thenReturn(registration);
-    when(registration.allowedMethods(anyString(), anyString(), anyString(), 
-        anyString(), anyString(), anyString())).thenReturn(registration);
-    when(registration.allowedHeaders(anyString())).thenReturn(registration);
-    when(registration.allowCredentials(true)).thenReturn(registration);
-    when(registration.maxAge(3600L)).thenReturn(registration);
+    Mockito.when(registry.addMapping(ArgumentMatchers.anyString())).thenReturn(registration);
+    Mockito.when(registration.allowedOrigins(
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        .thenReturn(registration);
+    Mockito.when(registration.allowedMethods(
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        .thenReturn(registration);
+    Mockito.when(registration.allowedHeaders(ArgumentMatchers.anyString())).thenReturn(registration);
+    Mockito.when(registration.allowCredentials(true)).thenReturn(registration);
+    Mockito.when(registration.maxAge(3600L)).thenReturn(registration);
 
     webConfig.addCorsMappings(registry);
 
-    verify(registration).allowedOrigins(anyString(), anyString(), anyString(), 
-        anyString(), anyString(), anyString());
+    Mockito.verify(registration).allowedOrigins(
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString());
   }
 
   @Test
   void testCorsAllowsAllHttpMethods() {
     WebConfig webConfig = new WebConfig();
-    CorsRegistry registry = mock(CorsRegistry.class);
-    CorsRegistration registration = mock(CorsRegistration.class);
+    CorsRegistry registry = Mockito.mock(CorsRegistry.class);
+    CorsRegistration registration = Mockito.mock(CorsRegistration.class);
 
-    when(registry.addMapping(anyString())).thenReturn(registration);
-    when(registration.allowedOrigins(anyString(), anyString(), anyString(), 
-        anyString(), anyString(), anyString())).thenReturn(registration);
-    when(registration.allowedMethods(anyString(), anyString(), anyString(), 
-        anyString(), anyString(), anyString())).thenReturn(registration);
-    when(registration.allowedHeaders(anyString())).thenReturn(registration);
-    when(registration.allowCredentials(true)).thenReturn(registration);
-    when(registration.maxAge(3600L)).thenReturn(registration);
+    Mockito.when(registry.addMapping(ArgumentMatchers.anyString())).thenReturn(registration);
+    Mockito.when(registration.allowedOrigins(
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        .thenReturn(registration);
+    Mockito.when(registration.allowedMethods(
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        .thenReturn(registration);
+    Mockito.when(registration.allowedHeaders(ArgumentMatchers.anyString())).thenReturn(registration);
+    Mockito.when(registration.allowCredentials(true)).thenReturn(registration);
+    Mockito.when(registration.maxAge(3600L)).thenReturn(registration);
 
     webConfig.addCorsMappings(registry);
 
-    verify(registration).allowedMethods(anyString(), anyString(), anyString(), 
-        anyString(), anyString(), anyString());
+    Mockito.verify(registration).allowedMethods(
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString());
   }
 
   @Test
   void testCorsMaxAge() {
     WebConfig webConfig = new WebConfig();
-    CorsRegistry registry = mock(CorsRegistry.class);
-    CorsRegistration registration = mock(CorsRegistration.class);
+    CorsRegistry registry = Mockito.mock(CorsRegistry.class);
+    CorsRegistration registration = Mockito.mock(CorsRegistration.class);
 
-    when(registry.addMapping(anyString())).thenReturn(registration);
-    when(registration.allowedOrigins(anyString(), anyString(), anyString(), 
-        anyString(), anyString(), anyString())).thenReturn(registration);
-    when(registration.allowedMethods(anyString(), anyString(), anyString(), 
-        anyString(), anyString(), anyString())).thenReturn(registration);
-    when(registration.allowedHeaders(anyString())).thenReturn(registration);
-    when(registration.allowCredentials(true)).thenReturn(registration);
-    when(registration.maxAge(3600L)).thenReturn(registration);
+    Mockito.when(registry.addMapping(ArgumentMatchers.anyString())).thenReturn(registration);
+    Mockito.when(registration.allowedOrigins(
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        .thenReturn(registration);
+    Mockito.when(registration.allowedMethods(
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        .thenReturn(registration);
+    Mockito.when(registration.allowedHeaders(ArgumentMatchers.anyString())).thenReturn(registration);
+    Mockito.when(registration.allowCredentials(true)).thenReturn(registration);
+    Mockito.when(registration.maxAge(3600L)).thenReturn(registration);
 
     webConfig.addCorsMappings(registry);
 
-    verify(registration).maxAge(3600L);
+    Mockito.verify(registration).maxAge(3600L);
   }
 
   @Test
   void testCorsAllowsCredentials() {
     WebConfig webConfig = new WebConfig();
-    CorsRegistry registry = mock(CorsRegistry.class);
-    CorsRegistration registration = mock(CorsRegistration.class);
+    CorsRegistry registry = Mockito.mock(CorsRegistry.class);
+    CorsRegistration registration = Mockito.mock(CorsRegistration.class);
 
-    when(registry.addMapping(anyString())).thenReturn(registration);
-    when(registration.allowedOrigins(anyString(), anyString(), anyString(), 
-        anyString(), anyString(), anyString())).thenReturn(registration);
-    when(registration.allowedMethods(anyString(), anyString(), anyString(), 
-        anyString(), anyString(), anyString())).thenReturn(registration);
-    when(registration.allowedHeaders(anyString())).thenReturn(registration);
-    when(registration.allowCredentials(true)).thenReturn(registration);
-    when(registration.maxAge(3600L)).thenReturn(registration);
+    Mockito.when(registry.addMapping(ArgumentMatchers.anyString())).thenReturn(registration);
+    Mockito.when(registration.allowedOrigins(
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        .thenReturn(registration);
+    Mockito.when(registration.allowedMethods(
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString(),
+        ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.anyString()))
+        .thenReturn(registration);
+    Mockito.when(registration.allowedHeaders(ArgumentMatchers.anyString())).thenReturn(registration);
+    Mockito.when(registration.allowCredentials(true)).thenReturn(registration);
+    Mockito.when(registration.maxAge(3600L)).thenReturn(registration);
 
     webConfig.addCorsMappings(registry);
 
-    verify(registration).allowCredentials(true);
+    Mockito.verify(registration).allowCredentials(true);
   }
 }

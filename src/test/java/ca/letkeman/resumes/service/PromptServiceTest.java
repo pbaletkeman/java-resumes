@@ -163,12 +163,12 @@ class PromptServiceTest {
             "name", "John Doe",
             "position", "Software Engineer"
         );
-        
+
         String expanded = promptService.expandPrompt(template, variables);
-        
+
         Assertions.assertEquals("Hello John Doe, you applied for Software Engineer", expanded);
     }
-    
+
     @Test
     @DisplayName("Should expand prompt with null value")
     void testExpandPromptWithNullValue() {
@@ -176,27 +176,27 @@ class PromptServiceTest {
         Map<String, String> variables = new HashMap<>();
         variables.put("name", "John");
         variables.put("position", null);
-        
+
         String expanded = promptService.expandPrompt(template, variables);
-        
+
         Assertions.assertTrue(expanded.contains("John"));
         Assertions.assertTrue(expanded.contains("you applied for "));
     }
-    
+
     @Test
     @DisplayName("Should handle empty template")
     void testExpandPromptWithEmptyTemplate() {
         String expanded = promptService.expandPrompt("", Map.of("key", "value"));
         Assertions.assertEquals("", expanded);
     }
-    
+
     @Test
     @DisplayName("Should handle null template")
     void testExpandPromptWithNullTemplate() {
         String expanded = promptService.expandPrompt(null, Map.of("key", "value"));
         Assertions.assertEquals("", expanded);
     }
-    
+
     @Test
     @DisplayName("Should handle template with no variables")
     void testExpandPromptWithNoVariables() {
@@ -204,19 +204,19 @@ class PromptServiceTest {
         String expanded = promptService.expandPrompt(template, Map.of());
         Assertions.assertEquals(template, expanded);
     }
-    
+
     @Test
     @DisplayName("Should handle template with unmatched placeholders")
     void testExpandPromptWithUnmatchedPlaceholders() {
         String template = "Hello {name}, your {missing} is here";
         Map<String, String> variables = Map.of("name", "John");
-        
+
         String expanded = promptService.expandPrompt(template, variables);
-        
+
         Assertions.assertTrue(expanded.contains("John"));
         Assertions.assertTrue(expanded.contains("{missing}"));
     }
-    
+
     @Test
     @DisplayName("Should save prompt to history returns null when repository is null")
     void testSavePromptToHistoryWithNullRepository() {
@@ -224,14 +224,14 @@ class PromptServiceTest {
         Optimize optimize = new Optimize();
         optimize.setJobDescription("Test");
         optimize.setModel("test-model");
-        
+
         PromptHistory result = promptService.savePromptToHistory(
             "RESUME", optimize, "prompt", "content", "/tmp/file.md", 1000L
         );
-        
+
         Assertions.assertNull(result, "Should return null when repository is not available");
     }
-    
+
     @Test
     @DisplayName("Should get all history returns empty list when repository is null")
     void testGetAllHistoryWithNullRepository() {
@@ -239,7 +239,7 @@ class PromptServiceTest {
         Assertions.assertNotNull(history);
         Assertions.assertTrue(history.isEmpty());
     }
-    
+
     @Test
     @DisplayName("Should get history by type returns empty list when repository is null")
     void testGetHistoryByTypeWithNullRepository() {
@@ -247,7 +247,7 @@ class PromptServiceTest {
         Assertions.assertNotNull(history);
         Assertions.assertTrue(history.isEmpty());
     }
-    
+
     @Test
     @DisplayName("Should get history by id returns empty when repository is null")
     void testGetHistoryByIdWithNullRepository() {
@@ -255,7 +255,7 @@ class PromptServiceTest {
         Assertions.assertNotNull(history);
         Assertions.assertFalse(history.isPresent());
     }
-    
+
     @Test
     @DisplayName("Should delete history by id does nothing when repository is null")
     void testDeleteHistoryByIdWithNullRepository() {
@@ -270,9 +270,9 @@ class PromptServiceTest {
         Map<String, String> variables = new HashMap<>();
         variables.put("company", "Tech & Co.");
         variables.put("role", "Sr. Developer <Expert>");
-        
+
         String expanded = promptService.expandPrompt(template, variables);
-        
+
         Assertions.assertTrue(expanded.contains("Tech & Co."));
         Assertions.assertTrue(expanded.contains("Sr. Developer <Expert>"));
     }
@@ -284,9 +284,9 @@ class PromptServiceTest {
         Map<String, String> variables = new HashMap<>();
         variables.put("name", "");
         variables.put("title", "Developer");
-        
+
         String expanded = promptService.expandPrompt(template, variables);
-        
+
         Assertions.assertTrue(expanded.contains("Name: , Title: Developer"));
     }
 
@@ -297,9 +297,9 @@ class PromptServiceTest {
     void testExpandPromptWithDuplicatePlaceholders() {
         String template = "{name} loves {name}'s work at {name}";
         Map<String, String> variables = Map.of("name", "Alice");
-        
+
         String expanded = promptService.expandPrompt(template, variables);
-        
+
         Assertions.assertEquals("Alice loves Alice's work at Alice", expanded);
     }
 
@@ -308,9 +308,9 @@ class PromptServiceTest {
     void testExpandPromptWithNestedBraces() {
         String template = "Code: {{variable}} and {actual}";
         Map<String, String> variables = Map.of("actual", "value");
-        
+
         String expanded = promptService.expandPrompt(template, variables);
-        
+
         Assertions.assertTrue(expanded.contains("value"));
         // Should not break on nested braces
         Assertions.assertTrue(expanded.contains("{"));
@@ -323,9 +323,9 @@ class PromptServiceTest {
         Map<String, String> variables = new HashMap<>();
         variables.put("123", "First");
         variables.put("456", "Second");
-        
+
         String expanded = promptService.expandPrompt(template, variables);
-        
+
         Assertions.assertTrue(expanded.contains("First"));
         Assertions.assertTrue(expanded.contains("Second"));
     }
@@ -337,9 +337,9 @@ class PromptServiceTest {
         Map<String, String> variables = new HashMap<>();
         variables.put("user_name", "John Doe");
         variables.put("user_role", "Admin");
-        
+
         String expanded = promptService.expandPrompt(template, variables);
-        
+
         Assertions.assertTrue(expanded.contains("John Doe"));
         Assertions.assertTrue(expanded.contains("Admin"));
     }
@@ -352,9 +352,9 @@ class PromptServiceTest {
         variables.put("CompanyName", "TechCorp");
         variables.put("jobTitle", "Developer");
         variables.put("LEVEL", "Senior");
-        
+
         String expanded = promptService.expandPrompt(template, variables);
-        
+
         Assertions.assertTrue(expanded.contains("TechCorp"));
         Assertions.assertTrue(expanded.contains("Developer"));
         Assertions.assertTrue(expanded.contains("Senior"));
@@ -367,9 +367,9 @@ class PromptServiceTest {
         Map<String, String> variables = new HashMap<>();
         String longValue = "A".repeat(10000);
         variables.put("desc", longValue);
-        
+
         String expanded = promptService.expandPrompt(template, variables);
-        
+
         Assertions.assertTrue(expanded.contains(longValue));
         Assertions.assertTrue(expanded.length() > 10000);
     }
@@ -381,9 +381,9 @@ class PromptServiceTest {
         Map<String, String> variables = new HashMap<>();
         variables.put("start", "BEGIN");
         variables.put("end", "FINISH");
-        
+
         String expanded = promptService.expandPrompt(template, variables);
-        
+
         Assertions.assertTrue(expanded.startsWith("BEGIN"));
         Assertions.assertTrue(expanded.endsWith("FINISH"));
     }
@@ -401,7 +401,7 @@ class PromptServiceTest {
     void testGetHistoryByDateRangeWithNullRepository() {
         java.time.LocalDateTime start = java.time.LocalDateTime.now().minusDays(7);
         java.time.LocalDateTime end = java.time.LocalDateTime.now();
-        
+
         List<PromptHistory> history = promptService.getHistoryByDateRange(start, end);
         Assertions.assertNotNull(history);
         Assertions.assertTrue(history.isEmpty());
@@ -418,7 +418,7 @@ class PromptServiceTest {
         optimize.setInterviewerName("Jane Smith");
         optimize.setTemperature(0.7);
         optimize.setModel("gpt-4");
-        
+
         PromptHistory result = promptService.savePromptToHistory(
             "INTERVIEW_HR",
             optimize,
@@ -427,7 +427,7 @@ class PromptServiceTest {
             "/tmp/interview_hr_questions.md",
             2500L
         );
-        
+
         // Without repository, should return null
         Assertions.assertNull(result);
     }
@@ -437,7 +437,7 @@ class PromptServiceTest {
     void testSavePromptToHistoryWithMinimalFields() {
         Optimize optimize = new Optimize();
         optimize.setModel("test-model");
-        
+
         PromptHistory result = promptService.savePromptToHistory(
             "COVER",
             optimize,
@@ -446,7 +446,7 @@ class PromptServiceTest {
             null,
             null
         );
-        
+
         Assertions.assertNull(result);
     }
 
@@ -456,7 +456,7 @@ class PromptServiceTest {
         List<PromptHistory> resumeHistory = promptService.getHistoryByType("RESUME");
         List<PromptHistory> coverHistory = promptService.getHistoryByType("COVER");
         List<PromptHistory> interviewHistory = promptService.getHistoryByType("INTERVIEW_HR");
-        
+
         Assertions.assertTrue(resumeHistory.isEmpty());
         Assertions.assertTrue(coverHistory.isEmpty());
         Assertions.assertTrue(interviewHistory.isEmpty());
@@ -468,7 +468,7 @@ class PromptServiceTest {
         Optional<PromptHistory> history1 = promptService.getHistoryById(1L);
         Optional<PromptHistory> history100 = promptService.getHistoryById(100L);
         Optional<PromptHistory> history0 = promptService.getHistoryById(0L);
-        
+
         Assertions.assertFalse(history1.isPresent());
         Assertions.assertFalse(history100.isPresent());
         Assertions.assertFalse(history0.isPresent());
@@ -488,9 +488,9 @@ class PromptServiceTest {
         String longText = "A".repeat(10000);
         String template = "Content: {content}";
         Map<String, String> variables = Map.of("content", longText);
-        
+
         String expanded = promptService.expandPrompt(template, variables);
-        
+
         Assertions.assertTrue(expanded.length() > 10000);
         Assertions.assertTrue(expanded.contains(longText));
     }
@@ -502,9 +502,9 @@ class PromptServiceTest {
         Map<String, String> variables = new HashMap<>();
         variables.put("start", "BEGIN");
         variables.put("end", "END");
-        
+
         String expanded = promptService.expandPrompt(template, variables);
-        
+
         Assertions.assertTrue(expanded.startsWith("BEGIN"));
         Assertions.assertTrue(expanded.endsWith("END"));
         Assertions.assertTrue(expanded.contains("middle text"));

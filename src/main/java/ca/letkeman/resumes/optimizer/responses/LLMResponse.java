@@ -2,6 +2,7 @@ package ca.letkeman.resumes.optimizer.responses;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -49,19 +50,21 @@ public final class LLMResponse {
   }
 
   public List<Choice> getChoices() {
-    return choices;
+    return choices != null ? new ArrayList<>(choices) : null;
   }
 
   public void setChoices(List<Choice> choices) {
-    this.choices = choices;
+    this.choices = choices != null ? new ArrayList<>(choices) : null;
   }
 
   public Usage getUsage() {
-    return usage;
+    // Return defensive copy to prevent external mutation
+    return usage != null ? new Usage(usage) : null;
   }
 
   public void setUsage(Usage usage) {
-    this.usage = usage;
+    // Store defensive copy to prevent external mutation
+    this.usage = usage != null ? new Usage(usage) : null;
   }
 
   public String getSystemFingerprint() {
@@ -102,8 +105,18 @@ public final class LLMResponse {
     this.object = object;
     this.created = created;
     this.model = model;
-    this.choices = choices;
-    this.usage = usage;
+    // Defensive copy of choices list and its elements
+    if (choices != null) {
+      this.choices = new ArrayList<>();
+      for (Choice choice : choices) {
+        this.choices.add(choice != null ? new Choice(choice.getIndex(), choice.getLogprobs(),
+            choice.getFinishReason(), choice.getMessage()) : null);
+      }
+    } else {
+      this.choices = null;
+    }
+    // Defensive copy of usage
+    this.usage = usage != null ? new Usage(usage) : null;
     this.systemFingerprint = systemFingerprint;
   }
 

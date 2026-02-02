@@ -59,6 +59,7 @@ public final class ResumeController {
   private String root;
 
 
+  @SuppressWarnings("EI_EXPOSE_REP2")
   public ResumeController(FilesStorageService storageService) {
     this.storageService = storageService;
   }

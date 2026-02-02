@@ -9,7 +9,6 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -287,7 +286,7 @@ public final class ApiService {
     }
 
     String suffixString =
-        DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm").format(LocalDateTime.now());
+        DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm").format(LocalDateTime.now());
     String fileName = promptType + "-" + optimize.getCompany() + "-"
         + optimize.getJobTitle() + "-" + suffixString + ".md";
     createResultFile(fileName, result.body(), root);
@@ -392,7 +391,8 @@ public final class ApiService {
   private void createResultFile(String fileName, String s, String root) {
 
     if (s != null && !s.isBlank()) {
-      try (BufferedWriter writer = new BufferedWriter(new FileWriter(root + File.separator + fileName, false))) {
+      try (BufferedWriter writer = Files.newBufferedWriter(
+          Paths.get(root + File.separator + fileName), StandardCharsets.UTF_8)) {
         writer.write(s);
         writer.flush();  // Data is written to OS page cache, not necessarily to the disk immediately
       } catch (Exception e) {

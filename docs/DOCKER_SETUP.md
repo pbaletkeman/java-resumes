@@ -460,15 +460,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Build images
         run: docker compose build
-      
+
       - name: Run tests
         run: |
           docker compose up -d
           docker compose exec backend gradle test
-      
+
       - name: Push to registry
         run: |
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin

@@ -1,10 +1,8 @@
 package ca.letkeman.resumes;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -15,137 +13,137 @@ class UtilityTest {
     Path tempDir;
 
     @Test
-    void testRemoveFileExtension_SingleExtension() {
+    void testRemoveFileExtensionSingleExtension() {
         String result = Utility.removeFileExtension("document.pdf", false);
         Assertions.assertEquals("document", result);
     }
 
     @Test
-    void testRemoveFileExtension_MultipleExtensions() {
+    void testRemoveFileExtensionMultipleExtensions() {
         String result = Utility.removeFileExtension("archive.tar.gz", false);
         Assertions.assertEquals("archive.tar", result);
     }
 
     @Test
-    void testRemoveFileExtension_RemoveAllExtensions() {
+    void testRemoveFileExtensionRemoveAllExtensions() {
         String result = Utility.removeFileExtension("archive.tar.gz", true);
         Assertions.assertEquals("archive", result);
     }
 
     @Test
-    void testRemoveFileExtension_NoExtension() {
+    void testRemoveFileExtensionNoExtension() {
         String result = Utility.removeFileExtension("document", false);
         Assertions.assertEquals("document", result);
     }
 
     @Test
-    void testRemoveFileExtension_NullFilename() {
+    void testRemoveFileExtensionNullFilename() {
         String result = Utility.removeFileExtension(null, false);
         Assertions.assertNull(result);
     }
 
     @Test
-    void testRemoveFileExtension_EmptyFilename() {
+    void testRemoveFileExtensionEmptyFilename() {
         String result = Utility.removeFileExtension("", false);
         Assertions.assertEquals("", result);
     }
 
     @Test
-    void testRemoveFileExtension_OnlyExtension() {
+    void testRemoveFileExtensionOnlyExtension() {
         String result = Utility.removeFileExtension(".hidden", false);
         Assertions.assertEquals(".hidden", result);
     }
 
     @Test
-    void testConvertLineEndings_Unix() {
+    void testConvertLineEndingsUnix() {
         String input = "line1\nline2\nline3";
         String result = Utility.convertLineEndings(input);
         Assertions.assertTrue(result.contains("\\n"));
     }
 
     @Test
-    void testConvertLineEndings_Windows() {
+    void testConvertLineEndingsWindows() {
         String input = "line1\r\nline2\r\nline3";
         String result = Utility.convertLineEndings(input);
         Assertions.assertTrue(result.contains("\\n"));
     }
 
     @Test
-    void testConvertLineEndings_Mac() {
+    void testConvertLineEndingsMac() {
         String input = "line1\rline2\rline3";
         String result = Utility.convertLineEndings(input);
         Assertions.assertTrue(result.contains("\\n"));
     }
 
     @Test
-    void testConvertLineEndings_Mixed() {
+    void testConvertLineEndingsMixed() {
         String input = "line1\nline2\r\nline3\rline4";
         String result = Utility.convertLineEndings(input);
         Assertions.assertTrue(result.contains("\\n"));
     }
 
     @Test
-    void testConvertLineEndings_Null() {
+    void testConvertLineEndingsNull() {
         String result = Utility.convertLineEndings(null);
         Assertions.assertNull(result);
     }
 
     @Test
-    void testConvertLineEndings_Empty() {
+    void testConvertLineEndingsEmpty() {
         String result = Utility.convertLineEndings("");
         Assertions.assertEquals("", result);
     }
 
     @Test
-    void testConvertLineEndings_NoLineEndings() {
+    void testConvertLineEndingsNoLineEndings() {
         String input = "single line with no breaks";
         String result = Utility.convertLineEndings(input);
         Assertions.assertEquals(input, result);
     }
 
     @Test
-    void testReadFileAsString_FromCurrentDirectory() throws IOException {
+    void testReadFileAsStringFromCurrentDirectory() throws IOException {
         // Create a temp file in the temp directory
         Path testFile = tempDir.resolve("test.txt");
         String content = "Test content";
         Files.writeString(testFile, content);
-        
+
         // Read from full path (simulating current directory)
         String result = Utility.readFileAsString(testFile.toString());
         Assertions.assertEquals(content, result);
     }
 
     @Test
-    void testReadFileAsString_NonExistentFile() {
+    void testReadFileAsStringNonExistentFile() {
         String result = Utility.readFileAsString("nonexistent-file.txt");
         Assertions.assertEquals("", result);
     }
 
     @Test
-    void testReadFileAsString_FromDirectory() throws IOException {
+    void testReadFileAsStringFromDirectory() throws IOException {
         Path testFile = tempDir.resolve("test2.txt");
         String content = "Test content 2";
         Files.writeString(testFile, content);
-        
+
         String result = Utility.readFileAsString(tempDir.toString(), "test2.txt");
         Assertions.assertEquals(content, result);
     }
 
     @Test
-    void testReadFileAsString_FromDirectory_NonExistent() {
+    void testReadFileAsStringFromDirectoryNonExistent() {
         String result = Utility.readFileAsString(tempDir.toString(), "nonexistent.txt");
         Assertions.assertEquals("", result);
     }
 
     @Test
-    void testReadFileAsString_WithExternalPath() throws IOException {
+    void testReadFileAsStringWithExternalPath() throws IOException {
         // Set up external path
         Path externalDir = tempDir.resolve("external");
         Files.createDirectories(externalDir);
         Path externalFile = externalDir.resolve("config.json");
         String content = "{\"key\": \"value\"}";
         Files.writeString(externalFile, content);
-        
+
         // Set system property
         String originalProperty = System.getProperty("app.config.path");
         try {
@@ -163,11 +161,11 @@ class UtilityTest {
     }
 
     @Test
-    void testReadFileAsString_ExternalPathNotSet() throws IOException {
+    void testReadFileAsStringExternalPathNotSet() throws IOException {
         Path testFile = tempDir.resolve("test3.txt");
         String content = "Test content 3";
         Files.writeString(testFile, content);
-        
+
         // Ensure external path is not set
         String originalProperty = System.getProperty("app.config.path");
         try {
@@ -182,11 +180,11 @@ class UtilityTest {
     }
 
     @Test
-    void testReadFileAsString_ExternalPathEmpty() throws IOException {
+    void testReadFileAsStringExternalPathEmpty() throws IOException {
         Path testFile = tempDir.resolve("test4.txt");
         String content = "Test content 4";
         Files.writeString(testFile, content);
-        
+
         String originalProperty = System.getProperty("app.config.path");
         try {
             System.setProperty("app.config.path", "");
@@ -202,26 +200,26 @@ class UtilityTest {
     }
 
     @Test
-    void testRemoveFileExtension_PathWithDots() {
+    void testRemoveFileExtensionPathWithDots() {
         String result = Utility.removeFileExtension("path/to/file.name.txt", false);
         Assertions.assertEquals("path/to/file.name", result);
     }
 
     @Test
-    void testRemoveFileExtension_PathWithDotsRemoveAll() {
+    void testRemoveFileExtensionPathWithDotsRemoveAll() {
         String result = Utility.removeFileExtension("path/to/file.name.txt", true);
         Assertions.assertEquals("path/to/file", result);
     }
 
     @Test
-    void testConvertLineEndings_MultipleConsecutiveNewlines() {
+    void testConvertLineEndingsMultipleConsecutiveNewlines() {
         String input = "line1\n\n\nline2";
         String result = Utility.convertLineEndings(input);
         Assertions.assertTrue(result.contains("\\n"));
     }
 
     @Test
-    void testConvertLineEndings_OnlyNewlines() {
+    void testConvertLineEndingsOnlyNewlines() {
         String input = "\n\n\n";
         String result = Utility.convertLineEndings(input);
         // Should convert and trim

@@ -21,7 +21,7 @@ class ApiServiceHttpErrorTest {
     void setUp() throws IOException {
         apiService = new ApiService();
         apiService.setMockEnabled(false); // Disable mock mode to test real HTTP
-        
+
         mockWebServer = new MockWebServer();
         mockWebServer.start();
     }
@@ -192,7 +192,7 @@ class ApiServiceHttpErrorTest {
     void testInvokeApiSuccessfulResponse() {
         // Valid LLM response JSON
         String validResponse = "{\"choices\":[{\"message\":{\"content\":\"Test response\"}}]}";
-        
+
         mockWebServer.enqueue(new MockResponse()
                 .setResponseCode(200)
                 .setBody(validResponse)
