@@ -39,13 +39,14 @@ Generate thoughtful, strategic questions that a candidate should ask during an i
 Provide **10-12 strategically selected questions** organized by category:
 
 ```markdown
-## Reverse Interview Questions for {job_title} at {company}
+## Reverse Interview Questions for {job_title} at {company_name}
 
 **Generated:** {today}
 
 ### Category 1: Role & Responsibilities
 
 **Question 1:** [Question text]
+
 - **Why Ask This**: [What you're really trying to uncover]
 - **Red Flags**: [Warning signs in the response]
 - **Green Flags**: [Positive indicators in the response]
@@ -77,6 +78,7 @@ Provide **10-12 strategically selected questions** organized by category:
 ## Questions by Category Examples
 
 ### Role & Responsibilities:
+
 - "What does a typical day or week look like in this role?"
 - "What are the most immediate challenges someone in this role would face?"
 - "How do you measure success for this position in the first 30/60/90 days?"
@@ -84,6 +86,7 @@ Provide **10-12 strategically selected questions** organized by category:
 - "What are the biggest challenges your team is currently facing?"
 
 ### Team Dynamics & Management:
+
 - "Can you tell me about the team I'd be working with?"
 - "What's your management style, and how do you support your direct reports?"
 - "How does the team handle disagreements or conflicts?"
@@ -91,6 +94,7 @@ Provide **10-12 strategically selected questions** organized by category:
 - "How long has the team been together, and what's the turnover rate?"
 
 ### Growth & Development:
+
 - "What opportunities for professional development does the company provide?"
 - "Can you share examples of how someone in this role has grown within the company?"
 - "What does career progression typically look like for this role?"
@@ -98,6 +102,7 @@ Provide **10-12 strategically selected questions** organized by category:
 - "How does the company support continuous learning?"
 
 ### Company Culture & Values:
+
 - "How would you describe the company culture in three words?"
 - "What do you like most about working here?"
 - "How does the company celebrate successes or handle failures?"
@@ -105,6 +110,7 @@ Provide **10-12 strategically selected questions** organized by category:
 - "Can you give an example of how the company lives its stated values?"
 
 ### Business & Product Direction:
+
 - "What are the company's biggest priorities for the next year?"
 - "How is the company positioned against competitors?"
 - "What are the biggest risks or challenges facing the business?"
@@ -112,6 +118,7 @@ Provide **10-12 strategically selected questions** organized by category:
 - "What's the company's approach to innovation and experimentation?"
 
 ### Work-Life Balance & Logistics:
+
 - "What are the core working hours, and how flexible is the schedule?"
 - "How often does the team work evenings or weekends?"
 - "What's the on-call or after-hours expectation?"
@@ -119,6 +126,7 @@ Provide **10-12 strategically selected questions** organized by category:
 - "What's the vacation policy, and how easy is it to actually take time off?"
 
 ### Decision-Making & Next Steps:
+
 - "What are the next steps in the interview process?"
 - "What's your timeline for making a decision?"
 - "Are there any concerns about my background or experience I could address?"
@@ -127,8 +135,9 @@ Provide **10-12 strategically selected questions** organized by category:
 ## Context Information
 
 **Job Title:** {job_title}
-**Company:** {company}
+**Company Name:** {company_name}
 **Job Description:** {job_description}
+**Candidate Resume:** {resume}
 **Today's Date:** {today}
 
 ## Important Guidelines
@@ -155,3 +164,4 @@ Provide **10-12 strategically selected questions** organized by category:
 - Markdown formatted with proper headers and sections
 - Customized to the specific role and company context
 - Mix of tactical (day-to-day) and strategic (long-term) questions
+```

@@ -37,17 +37,20 @@ Generate 5 common HR interview questions that are frequently asked during initia
 Provide **5 distinct HR questions** in the following structure:
 
 ```markdown
-## General HR Interview Questions for {job_title} at {company}
+## General HR Interview Questions for {job_title} at {company_name}
 
 **Generated:** {today}
 
 ### Question 1: [Category - e.g., "Self-Assessment"]
+
 **Question:** [Full question text]
 
 **Why This Question Matters:**
+
 - [Brief explanation of what the interviewer is evaluating]
 
 **Preparation Tips:**
+
 - [2-3 actionable tips for answering effectively]
 
 ---
@@ -58,26 +61,31 @@ Provide **5 distinct HR questions** in the following structure:
 ## Example Questions by Category
 
 **Self-Assessment:**
+
 - "Tell me about yourself and your professional journey."
 - "What are your greatest strengths and how do they apply to this role?"
 - "Describe a professional weakness you're actively working to improve."
 
 **Behavioral (Past Experience):**
+
 - "Describe a time when you had to work under pressure to meet a tight deadline. How did you handle it?"
 - "Tell me about a situation where you had a conflict with a colleague. How did you resolve it?"
 - "Give an example of a time you failed at something. What did you learn from it?"
 
 **Situational (Hypothetical):**
+
 - "If you were assigned to a project with unclear requirements, how would you approach it?"
 - "How would you handle a situation where you disagreed with your manager's decision?"
 - "What would you do if you noticed a coworker not meeting deadlines?"
 
 **Motivation & Values:**
+
 - "Why are you interested in this role and our company?"
 - "What motivates you to do your best work?"
 - "Where do you see yourself in 5 years?"
 
 **Teamwork & Collaboration:**
+
 - "Describe your ideal work environment and team dynamic."
 - "How do you contribute to a positive team culture?"
 - "Tell me about a time when you had to collaborate with someone very different from you."
@@ -85,7 +93,9 @@ Provide **5 distinct HR questions** in the following structure:
 ## Context Information
 
 **Job Title:** {job_title}
-**Company:** {company}
+**Company Name:** {company_name}
+**Job Description:** {job_description}
+**Candidate Resume:** {resume}
 **Today's Date:** {today}
 
 ## Important Guidelines

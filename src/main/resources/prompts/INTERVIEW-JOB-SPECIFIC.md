@@ -42,16 +42,20 @@ Provide **5 role-specific questions** directly tied to the job description:
 **Generated:** {today}
 
 ### Question 1: [Technical/Domain Area]
+
 **Question:** [Full question text]
 
 **What This Assesses:**
+
 - [Specific skill or competency being evaluated]
 - [Link to job requirement]
 
 **Strong Answer Indicators:**
+
 - [What to look for in a good response]
 
 **Follow-Up Questions:**
+
 - [1-2 probing questions to dig deeper]
 
 ---
@@ -62,31 +66,37 @@ Provide **5 role-specific questions** directly tied to the job description:
 ## Question Types by Role Category
 
 ### Software Engineering Roles:
+
 - "Describe your experience with [specific technology from job description]. How have you used it to solve complex problems?"
 - "Walk me through your approach to debugging a production issue in a distributed system."
 - "How would you design a [specific system] that needs to handle [scale/constraint from job description]?"
 
 ### Product Management Roles:
+
 - "Given our product serves [target market], how would you prioritize features when stakeholders have competing demands?"
 - "Describe a time when you used data to make a product decision. What metrics did you track and why?"
 - "How would you approach competitive analysis for [specific product/market from job description]?"
 
 ### Data Science/Analytics Roles:
+
 - "Explain a machine learning model you've built from scratch. What problem did it solve and how did you validate its performance?"
 - "How would you approach analyzing [specific business problem mentioned in job description]?"
 - "Describe your experience with [specific tool/framework]. What are its limitations?"
 
 ### Marketing Roles:
+
 - "Describe a campaign you've run for [similar product/audience]. What was your strategy and what were the results?"
 - "How would you measure the success of [specific marketing initiative from job description]?"
 - "What channels would you prioritize for reaching [target customer from job description] and why?"
 
 ### Sales Roles:
+
 - "Walk me through how you would approach selling [company's product] to [specific customer segment]."
 - "Describe your experience with [specific sales methodology or tool]. How has it impacted your close rate?"
 - "How do you handle objections related to [common objection for this industry/product]?"
 
 ### Leadership/Management Roles:
+
 - "Describe how you would build a team to accomplish [specific goal from job description]."
 - "How have you handled underperformance in a team member while maintaining team morale?"
 - "Given [specific challenge from job description], what would your first 90 days look like?"
@@ -94,8 +104,9 @@ Provide **5 role-specific questions** directly tied to the job description:
 ## Context Information
 
 **Job Title:** {job_title}
-**Company:** {company}
+**Company Name:** {company_name}
 **Job Description:** {job_description}
+**Candidate Resume:** {resume}
 **Today's Date:** {today}
 
 ## Important Guidelines

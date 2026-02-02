@@ -38,8 +38,9 @@ Generate **5 distinctly different cold outreach email variations** that a job se
 Provide **5 complete email variations**, each with:
 
 ```markdown
-## Cold Outreach Email Variations for {job_title} at {company}
+## Cold Outreach Email Variations for {job_title} at {company_name}
 
+**Candidate Resume:** {resume}
 **Generated:** {today}
 
 ---
@@ -53,9 +54,11 @@ Provide **5 complete email variations**, each with:
 [Full email text]
 
 **Why This Works:**
+
 - [Explanation of strategy]
 
 **Best For:**
+
 - [When to use this variation]
 
 ---
@@ -66,30 +69,35 @@ Provide **5 complete email variations**, each with:
 ## Email Variation Examples
 
 ### Variation 1: Direct Value Proposition
+
 - **Strategy**: Lead with your unique skills and how they solve a specific problem
 - **Length**: Medium (120-150 words)
 - **Tone**: Professional and confident
 - **CTA**: Request for 15-minute call
 
 ### Variation 2: Shared Connection/Referral
+
 - **Strategy**: Mention a mutual connection or referral (if applicable)
 - **Length**: Short (75-100 words)
 - **Tone**: Warm and conversational
 - **CTA**: Suggest coffee or virtual meeting
 
 ### Variation 3: Industry Insight/News Hook
+
 - **Strategy**: Reference recent company news, funding, product launch, or market trend
 - **Length**: Medium (120-150 words)
 - **Tone**: Informed and enthusiastic
 - **CTA**: Offer to discuss industry perspectives
 
 ### Variation 4: Problem-Solving Approach
+
 - **Strategy**: Identify a challenge the company likely faces and position yourself as a solution
 - **Length**: Longer (150-200 words)
 - **Tone**: Consultative and thoughtful
 - **CTA**: Request to share ideas in a conversation
 
 ### Variation 5: Brief Introduction with Portfolio/Work Sample
+
 - **Strategy**: Short intro with link to relevant work or portfolio
 - **Length**: Very short (60-80 words)
 - **Tone**: Concise and action-oriented
@@ -98,6 +106,7 @@ Provide **5 complete email variations**, each with:
 ## Email Components
 
 ### Subject Line Best Practices:
+
 - Keep to 30-50 characters
 - Personalize with company or recipient name
 - Create curiosity without being clickbaity
@@ -109,6 +118,7 @@ Provide **5 complete email variations**, each with:
   - "How I helped [Similar Company] with [problem]"
 
 ### Opening Line Best Practices:
+
 - Hook reader in first sentence
 - Establish relevance immediately
 - Avoid generic "I hope this email finds you well"
@@ -119,6 +129,7 @@ Provide **5 complete email variations**, each with:
   - "I have a question about [Company's] approach to [specific challenge]."
 
 ### Body Best Practices:
+
 - Paragraph 1: Hook + why you're reaching out
 - Paragraph 2: Your value proposition (2-3 sentences max)
 - Paragraph 3: Specific ask + make it easy to say yes
@@ -126,6 +137,7 @@ Provide **5 complete email variations**, each with:
 - Bullet points for easy scanning (optional)
 
 ### Closing Best Practices:
+
 - Clear, specific call-to-action
 - Offer flexibility (multiple time options)
 - Thank them for their time
@@ -133,6 +145,7 @@ Provide **5 complete email variations**, each with:
 - Professional signature with LinkedIn profile
 
 ### Examples of Strong CTAs:
+
 - "Would you have 15 minutes next week for a quick call?"
 - "I'd love to hear your perspective—are you available for coffee?"
 - "Could we schedule a brief conversation to explore this further?"
@@ -142,8 +155,9 @@ Provide **5 complete email variations**, each with:
 ## Context Information
 
 **Job Title:** {job_title}
-**Company:** {company}
+**Company Name:** {company_name}
 **Job Description:** {job_description}
+**Candidate Resume:** {resume}
 **Today's Date:** {today}
 
 ## Important Guidelines

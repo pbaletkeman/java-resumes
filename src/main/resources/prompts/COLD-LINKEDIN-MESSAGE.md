@@ -10,7 +10,7 @@ Generate **5 distinctly different LinkedIn cold outreach message variations** op
 
 ### 1. **Understand LinkedIn Platform Constraints** by:
 
-- **Character Limits**: 
+- **Character Limits**:
   - Connection request note: 300 characters max
   - InMail message: 1,900 characters max (but optimal is 500-800)
   - Regular message: No hard limit, but keep under 1,000 characters
@@ -40,8 +40,9 @@ Generate **5 distinctly different LinkedIn cold outreach message variations** op
 Provide **5 distinct LinkedIn message variations**:
 
 ```markdown
-## LinkedIn Cold Outreach Messages for {job_title} at {company}
+## LinkedIn Cold Outreach Messages for {job_title} at {company_name}
 
+**Candidate Resume:** {resume}
 **Generated:** {today}
 
 ---
@@ -56,12 +57,15 @@ Provide **5 distinct LinkedIn message variations**:
 [Full message text]
 
 **Why This Works:**
+
 - [Explanation of strategy]
 
 **Best For:**
+
 - [When and who to send this to]
 
 **Follow-Up Strategy:**
+
 - [What to do if they accept/respond or don't respond]
 
 ---
@@ -72,17 +76,21 @@ Provide **5 distinct LinkedIn message variations**:
 ## Message Variation Examples
 
 ### Variation 1: Connection Request with Note (300 chars max)
+
 **Strategy**: Brief, personalized connection request
 **Best For**: First contact with recruiter or hiring manager
 **Example**:
+
 ```
 Hi [Name], I've been impressed by [Company]'s work in [specific area]. As a [your role] with experience in [relevant skill], I'd love to connect and learn more about opportunities on your team. Thanks for considering!
 ```
 
 ### Variation 2: InMail to Hiring Manager (500-600 chars)
+
 **Strategy**: Direct but respectful ask for informational interview
 **Best For**: When you have InMail credits and want to reach decision-makers
 **Example**:
+
 ```
 Hi [Name],
 
@@ -97,9 +105,11 @@ Thanks for your time,
 ```
 
 ### Variation 3: Message After Connection Accepted (400 chars)
+
 **Strategy**: Thank them for connecting, soft ask
 **Best For**: After they accept your connection request
 **Example**:
+
 ```
 Hi [Name],
 
@@ -114,9 +124,11 @@ Best,
 ```
 
 ### Variation 4: Shared Community/Alumni Connection (350 chars)
+
 **Strategy**: Leverage shared experience
 **Best For**: When you have mutual connections, groups, or alumni network
 **Example**:
+
 ```
 Hi [Name],
 
@@ -131,9 +143,11 @@ Thanks!
 ```
 
 ### Variation 5: Content Engagement Follow-Up (400 chars)
+
 **Strategy**: Comment on their LinkedIn post/article first, then message
 **Best For**: When they've recently posted content you can genuinely engage with
 **Example**:
+
 ```
 Hi [Name],
 
@@ -150,12 +164,14 @@ Best,
 ## LinkedIn Message Components
 
 ### Opening Line Best Practices:
+
 - Use their first name
 - Reference something specific (their post, company news, shared connection)
 - Be warm but professional
 - Avoid generic "I hope you're doing well"
 
 ### Body Best Practices:
+
 - Keep paragraphs to 1-2 sentences
 - Use line breaks for easy scanning
 - Show you've done your research
@@ -163,12 +179,14 @@ Best,
 - Be authentic and genuine
 
 ### Closing Best Practices:
+
 - Clear but soft call-to-action
 - Offer flexibility (don't demand their time)
 - Thank them
 - Keep it friendly and pressure-free
 
 ### Subject Line Best Practices (for InMail):
+
 - Personalize with their name or company
 - Create curiosity
 - Keep under 50 characters
@@ -181,6 +199,7 @@ Best,
 ## LinkedIn-Specific Tips
 
 ### Do's:
+
 - ✅ Personalize every message
 - ✅ Keep it conversational
 - ✅ Show genuine interest in their work
@@ -191,6 +210,7 @@ Best,
 - ✅ Follow up once if no response (after 1-2 weeks)
 
 ### Don'ts:
+
 - ❌ Send generic copy-paste messages
 - ❌ Write long paragraphs (hard to read on mobile)
 - ❌ Be too aggressive or salesy

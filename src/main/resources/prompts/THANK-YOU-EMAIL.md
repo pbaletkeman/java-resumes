@@ -39,8 +39,9 @@ Generate **5 distinctly different thank you email variations** that a candidate 
 Provide **5 complete thank you email variations**, each with:
 
 ```markdown
-## Post-Interview Thank You Email Variations for {job_title} at {company}
+## Post-Interview Thank You Email Variations for {job_title} at {company_name}
 
+**Candidate Resume:** {resume}
 **Interviewer:** {interviewer_name}
 **Generated:** {today}
 
@@ -58,12 +59,15 @@ Provide **5 complete thank you email variations**, each with:
 [Full email text]
 
 **Why This Works:**
+
 - [Explanation of strategy]
 
 **Key Elements:**
+
 - [What makes this effective]
 
 **When to Use:**
+
 - [Specific situations where this variation is ideal]
 
 ---
@@ -74,26 +78,31 @@ Provide **5 complete thank you email variations**, each with:
 ## Email Variation Examples
 
 ### Variation 1: Same-Day Enthusiastic (150 words)
+
 **Strategy**: Send within 2-4 hours of interview, express immediate excitement
 **Best For**: After a positive interview with strong rapport
 **Tone**: Warm, energetic, genuine
 
 ### Variation 2: Thoughtful Next-Day Follow-Up (200 words)
+
 **Strategy**: Send next morning, reference specific discussion points
 **Best For**: After technical or in-depth interview
 **Tone**: Professional, reflective, detail-oriented
 
 ### Variation 3: Brief & Professional (100 words)
+
 **Strategy**: Concise thank you for busy executives
 **Best For**: Final-round interview with senior leadership
 **Tone**: Direct, respectful, confident
 
 ### Variation 4: Value Reinforcement (220 words)
+
 **Strategy**: Reiterate how you solve their specific problems
 **Best For**: When interview revealed specific challenges you can address
 **Tone**: Solution-focused, consultative
 
 ### Variation 5: Panel Interview Thank You (180 words)
+
 **Strategy**: Address multiple interviewers, reference each person's contribution
 **Best For**: After panel or group interview
 **Tone**: Inclusive, thorough, appreciative
@@ -101,6 +110,7 @@ Provide **5 complete thank you email variations**, each with:
 ## Email Components
 
 ### Subject Line Best Practices:
+
 - Keep it clear and professional
 - Reference the interview and position
 - Make it easy to search/file
@@ -112,6 +122,7 @@ Provide **5 complete thank you email variations**, each with:
   - "Thank you - [Job Title] Interview on [Date]"
 
 ### Opening Paragraph (1-2 sentences):
+
 - Thank them for their time
 - Reference the specific interview (date, format)
 - Express enthusiasm
@@ -121,6 +132,7 @@ Provide **5 complete thank you email variations**, each with:
   - "I appreciate the opportunity to interview for [Job Title] yesterday—I thoroughly enjoyed our discussion."
 
 ### Middle Paragraph(s) (2-4 sentences):
+
 - Reference specific topics discussed
 - Reiterate your qualifications and fit
 - Address any concerns or clarify points
@@ -131,6 +143,7 @@ Provide **5 complete thank you email variations**, each with:
   - "Thank you for explaining [specific aspect of role]. It confirmed my interest in the position and the team's approach to [topic]."
 
 ### Closing Paragraph (1-2 sentences):
+
 - Restate interest and enthusiasm
 - Invite next steps
 - Offer to provide additional information
@@ -141,6 +154,7 @@ Provide **5 complete thank you email variations**, each with:
   - "I'm enthusiastic about this opportunity and would be thrilled to join the team. Please don't hesitate to reach out if you have any further questions."
 
 ### Sign-Off Best Practices:
+
 - Professional closing:
   - "Best regards,"
   - "Sincerely,"
@@ -154,17 +168,21 @@ Provide **5 complete thank you email variations**, each with:
 ## Advanced Strategies
 
 ### Address Concerns Raised:
+
 If the interviewer expressed a concern, address it tactfully:
+
 ```
 "Regarding your question about my experience with [technology], I wanted to mention that while my recent work focused on [different technology], I completed a certification in [original technology] last year and have been actively building projects in my spare time."
 ```
 
 ### Provide Additional Value:
+
 ```
 "After our discussion, I came across this article about [relevant topic] and thought you might find it interesting: [link]. It aligns with what we discussed regarding [specific challenge]."
 ```
 
 ### Strengthen Weak Points:
+
 ```
 "I've been reflecting on your question about [topic], and I wanted to share another example that demonstrates my experience in this area: [brief story with result]."
 ```
@@ -172,21 +190,25 @@ If the interviewer expressed a concern, address it tactfully:
 ### Customize for Interview Type:
 
 **Phone Screen:**
+
 - Keep it brief (100-125 words)
 - Confirm interest in moving forward
 - Thank them for the introduction to the company
 
 **Technical Interview:**
+
 - Reference specific problems or challenges discussed
 - Mention any insights you've had since the interview
 - Demonstrate continued thinking about the role
 
 **Panel Interview:**
+
 - Send one email addressing all panelists, or individual emails
 - Reference each person's questions or areas of expertise
 - Show appreciation for the group's time
 
 **Final Round:**
+
 - Express strong interest in joining the team
 - Reiterate your top 2-3 qualifications
 - Signal readiness to discuss offer or next steps
