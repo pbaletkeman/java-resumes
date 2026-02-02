@@ -232,7 +232,8 @@ class FilesStorageServiceImplTest {
         // Implementation may throw exception for null filename
         // Or return null - depends on implementation
         Assertions.assertDoesNotThrow(() -> {
-            Resource resource = filesStorageService.load(null);
+            // Resource resource = filesStorageService.load(null);
+            filesStorageService.load(null);
             // Just verify it doesn't crash
         });
     }
@@ -242,7 +243,8 @@ class FilesStorageServiceImplTest {
         // Implementation may handle empty filename differently
         // Just verify it doesn't crash
         Assertions.assertDoesNotThrow(() -> {
-            Resource resource = filesStorageService.load("");
+            // Resource resource = filesStorageService.load("");
+            filesStorageService.load("");
         });
     }
 
