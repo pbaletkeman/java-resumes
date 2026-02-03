@@ -21,6 +21,18 @@ I've been working on a full-stack application that leverages LLMs to generate po
 
 Repository: https://github.com/pbaletkeman/java-resumes
 
+## Table of Contents
+
+- [Architecture Overview](#architecture-overview)
+- [Key Components & Design Decisions](#key-components--design-decisions)
+- [LLM Integration Details](#llm-integration-details)
+- [Frontend Integration](#frontend-integration)
+- [Error Handling & Resilience](#error-handling--resilience)
+- [Performance Considerations](#performance-considerations)
+- [Testing & Validation](#testing--validation)
+- [Lessons Learned](#lessons-learned)
+- [Get Started](#get-started)
+
 ---
 
 ## Architecture Overview
@@ -519,5 +531,8 @@ Have you built LLM integrations in Java? What patterns did you use? Drop a comme
 - Full-stack Java + React workflows
 
 ---
+
+**Last Updated:** February 2, 2026  
+**Maintained By:** java-resumes development team
 
 _Tags: #Java #LLM #AI #React #SpringBoot #OpenAI #Ollama #FullStack #Architecture_

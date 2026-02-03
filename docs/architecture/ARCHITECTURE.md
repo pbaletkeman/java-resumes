@@ -738,6 +738,7 @@ EXPOSE 80
 
 ---
 
-**Last Updated**: 2026
-**Project**: java-resumes
-**Repository**: <https://github.com/pbaletkeman/java-resumes>
+**Last Updated:** February 2, 2026  
+**Project:** java-resumes  
+**Repository:** <https://github.com/pbaletkeman/java-resumes>  
+**Maintained By:** java-resumes development team

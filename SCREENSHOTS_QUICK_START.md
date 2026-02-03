@@ -2,6 +2,16 @@
 
 **Need screenshots? Here's where they are:**
 
+## Table of Contents
+
+- [Quick Links](#-quick-links-start-here)
+- [What's Available](#-whats-available)
+- [By Role](#-by-role)
+- [Documentation Index](#-documentation-index)
+- [Start Now](#-start-now)
+
+---
+
 ## 🚀 Quick Links (Start Here)
 
 | Need                | Link                                                             | Content                |
@@ -118,5 +128,8 @@ Pick your role and jump in:
 - **[For DevOps Engineers →](docs/screenshots/setup/README.md)**
 
 ---
+
+**Last Updated:** February 2, 2026  
+**Maintained By:** java-resumes development team
 
 **Questions?** Check [VISUAL_DOCUMENTATION_GUIDE.md](VISUAL_DOCUMENTATION_GUIDE.md#questions) for answers!

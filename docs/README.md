@@ -4,6 +4,16 @@ Welcome to Java Resumes - an AI-powered full-stack resume and cover letter optim
 
 This documentation is organized into focused sections to make it easy to find what you need.
 
+## Table of Contents
+
+- [Documentation Index](#-documentation-index)
+- [Quick Navigation](#-quick-navigation)
+- [Documentation Structure](#-documentation-structure)
+- [Contributing to Documentation](#-contributing-to-documentation)
+- [Need Help?](#-need-help)
+
+---
+
 ## 📚 Documentation Index
 
 ### Getting Started
@@ -240,5 +250,6 @@ When updating documentation:
 
 ---
 
-**Last Updated:** January 2026
+**Last Updated:** February 2, 2026  
+**Maintained By:** java-resumes development team  
 **Version:** 2.0 (External Configuration Support)

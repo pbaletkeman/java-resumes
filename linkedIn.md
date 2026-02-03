@@ -67,3 +67,8 @@ Special thanks to **Shaw Talebi** for the [initial tutorial](https://www.youtube
 Would love feedback! What features would _you_ add to an AI-powered resume tool?
 
 #Java #React #AI #LLM #Ollama #OpenAI #SoftwareDevelopment #Java21 #FullStack
+
+---
+
+**Last Updated:** February 2, 2026  
+**Maintained By:** java-resumes development team

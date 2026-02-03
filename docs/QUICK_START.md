@@ -2,6 +2,14 @@
 
 Get Java Resumes up and running in minutes using Docker Compose.
 
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Step-by-Step Setup](#step-by-step-setup)
+- [Getting Help](#getting-help)
+
+---
+
 ## Prerequisites
 
 - **Docker** 20.10+ - [Get Docker](https://docs.docker.com/get-docker/)

@@ -1,8 +1,25 @@
 # Ollama GitHub Environment - Quick Reference
 
+Quick reference for setting up and using Ollama with the java-resumes project.
+
+---
+
+## Table of Contents
+
+- [Quick Setup Commands](#quick-setup-commands)
+- [Configuration Files](#configuration-files)
+- [Model Recommendations](#model-recommendations)
+- [Common Tasks](#common-tasks)
+- [Quick Links](#quick-links)
+- [Resource Usage](#resource-usage)
+- [Checklist](#checklist)
+
+---
+
 ## 🚀 Quick Setup Commands
 
 ### Local Development
+
 ```bash
 # Automated setup (recommended)
 ./scripts/setup-ollama.sh
@@ -16,6 +33,7 @@ ollama pull tinyllama
 ```
 
 ### Docker Compose
+
 ```bash
 # Start with Ollama service
 docker-compose up -d
@@ -29,6 +47,7 @@ docker exec resume-ollama ollama list
 ```
 
 ### GitHub Actions
+
 ```bash
 # Workflow triggers automatically on push to master/develop
 # Or manually trigger from Actions tab with model selection
@@ -43,27 +62,28 @@ docker exec resume-ollama ollama list
 
 ## 📋 Configuration Files
 
-| File | Purpose |
-|------|---------|
+| File                                   | Purpose                    |
+| -------------------------------------- | -------------------------- |
 | `.github/workflows/ollama-service.yml` | CI/CD workflow with Ollama |
-| `docker-compose.yml` | Ollama service definition |
-| `config.json` | LLM endpoint configuration |
-| `scripts/setup-ollama.sh` | Automated setup script |
-| `docs/OLLAMA_SETUP.md` | Complete setup guide |
-| `docs/GITHUB_ENVIRONMENT_OLLAMA.md` | GitHub environment guide |
+| `docker-compose.yml`                   | Ollama service definition  |
+| `config.json`                          | LLM endpoint configuration |
+| `scripts/setup-ollama.sh`              | Automated setup script     |
+| `docs/OLLAMA_SETUP.md`                 | Complete setup guide       |
+| `docs/GITHUB_ENVIRONMENT_OLLAMA.md`    | GitHub environment guide   |
 
 ## 🎯 Model Recommendations
 
-| Use Case | Model | Size | Why |
-|----------|-------|------|-----|
+| Use Case      | Model                         | Size   | Why                     |
+| ------------- | ----------------------------- | ------ | ----------------------- |
 | CI/CD Testing | `tinyllama` or `qwen2.5:0.5b` | ~400MB | Fast, minimal resources |
-| Development | `tinyllama` | ~800MB | Quick iteration |
-| Staging | `phi3:mini` | ~2.3GB | Good quality |
-| Production | `mistral` | ~4.1GB | Best quality |
+| Development   | `tinyllama`                   | ~800MB | Quick iteration         |
+| Staging       | `phi3:mini`                   | ~2.3GB | Good quality            |
+| Production    | `mistral`                     | ~4.1GB | Best quality            |
 
 ## ⚡ Common Tasks
 
 ### Change Model
+
 ```bash
 # Update config.json
 cat > config.json << EOF
@@ -79,6 +99,7 @@ ollama pull phi3:mini
 ```
 
 ### Test Ollama
+
 ```bash
 # Check service
 curl http://localhost:11434/api/version
@@ -98,6 +119,7 @@ curl http://localhost:11434/v1/chat/completions -d '{
 ```
 
 ### Troubleshooting
+
 ```bash
 # Check if running
 ps aux | grep ollama
@@ -116,20 +138,20 @@ ollama list  # See installed models
 
 ## 🔗 Quick Links
 
-- **Full Setup Guide**: [docs/OLLAMA_SETUP.md](../docs/OLLAMA_SETUP.md)
-- **GitHub Environment**: [docs/GITHUB_ENVIRONMENT_OLLAMA.md](../docs/GITHUB_ENVIRONMENT_OLLAMA.md)
-- **Ollama Docs**: https://github.com/ollama/ollama
-- **Model Library**: https://ollama.com/library
+- **Full Setup Guide**: [docs/OLLAMA_SETUP.md](docs/OLLAMA_SETUP.md)
+- **GitHub Environment**: [docs/GITHUB_ENVIRONMENT_OLLAMA.md](docs/GITHUB_ENVIRONMENT_OLLAMA.md)
+- **Ollama Docs**: <https://github.com/ollama/ollama>
+- **Model Library**: <https://ollama.com/library>
 
 ## 📊 Resource Usage
 
-| Model | RAM | Disk | Speed |
-|-------|-----|------|-------|
+| Model        | RAM  | Disk   | Speed      |
+| ------------ | ---- | ------ | ---------- |
 | qwen2.5:0.5b | ~1GB | ~400MB | ⚡⚡⚡⚡⚡ |
-| tinyllama | ~2GB | ~800MB | ⚡⚡⚡⚡ |
-| gemma2:2b | ~3GB | ~1.6GB | ⚡⚡⚡ |
-| phi3:mini | ~4GB | ~2.3GB | ⚡⚡ |
-| mistral | ~8GB | ~4.1GB | ⚡ |
+| tinyllama    | ~2GB | ~800MB | ⚡⚡⚡⚡   |
+| gemma2:2b    | ~3GB | ~1.6GB | ⚡⚡⚡     |
+| phi3:mini    | ~4GB | ~2.3GB | ⚡⚡       |
+| mistral      | ~8GB | ~4.1GB | ⚡         |
 
 ## ✅ Checklist
 
@@ -143,5 +165,6 @@ ollama list  # See installed models
 
 ---
 
-**Last Updated**: January 2026  
-**Status**: Ready for use ✅
+**Last Updated:** February 2, 2026
+**Status:** Ready for use ✅
+**Maintained By:** java-resumes development team

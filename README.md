@@ -14,7 +14,27 @@ AI-powered full-stack application for resume and cover letter optimization using
 
 ---
 
-## 🚀 Quick Start (3 minutes)
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Documentation Index](#documentation-index)
+- [What It Does](#what-it-does)
+- [Architecture](#architecture)
+- [Technology Stack](#technology-stack)
+- [Project Structure](#project-structure)
+- [API Endpoints](#api-endpoints)
+- [Development Setup](#development-setup)
+- [Testing](#testing)
+- [Configuration](#configuration)
+- [Troubleshooting](#troubleshooting)
+- [Production Deployment](#production-deployment)
+- [Contributing](#contributing)
+- [License](#license)
+- [Support & Resources](#support--resources)
+
+---
+
+## 🚀 Quick Start
 
 ```bash
 git clone https://github.com/pbaletkeman/java-resumes.git
@@ -174,7 +194,6 @@ java-resumes/
 | GET    | `/api/files/{filename}` | Download file |
 | DELETE | `/api/files/{filename}` | Delete file   |
 | GET    | `/api/health`           | Health check  |
-| GET    | `/api/health`           | Health check  |
 
 Full API docs: http://localhost:8080/swagger-ui/html (when running)
 
@@ -318,3 +337,9 @@ MIT License - see [LICENSE](LICENSE) file for details.
 ---
 
 ### Made with ❤️ using Java, Spring Boot, React, and AI
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team
+**Repository:** [github.com/pbaletkeman/java-resumes](https://github.com/pbaletkeman/java-resumes)

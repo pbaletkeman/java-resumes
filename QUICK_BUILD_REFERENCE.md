@@ -1,6 +1,24 @@
 # Quick Build Reference
 
-Fast reference for common build, test, and deployment tasks.
+Fast reference for common build, test, and deployment tasks across the java-resumes project.
+
+---
+
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Frontend Commands](#frontend-commands)
+- [Backend Commands](#backend-commands)
+- [Build Scripts](#build-scripts)
+- [Production Deployment](#production-deployment)
+- [Version Management](#version-management)
+- [GitHub Actions](#github-actions)
+- [Docker Commands](#docker-commands)
+- [Troubleshooting](#troubleshooting)
+- [CI/CD Status](#cicd-status)
+- [Documentation](#documentation)
+
+---
 
 ## Prerequisites
 
@@ -205,6 +223,11 @@ gh workflow view frontend-build.yml
 
 ## Documentation
 
-- **Full Guide**: [BUILD_AND_DEPLOYMENT.md](./BUILD_AND_DEPLOYMENT.md)
-- **Architecture**: [Architecture.md](./Architecture.md)
-- **README**: [../README.md](../README.md)
+- **Full Guide**: [docs/BUILD_AND_DEPLOYMENT.md](docs/BUILD_AND_DEPLOYMENT.md)
+- **Architecture**: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- **README**: [README.md](README.md)
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

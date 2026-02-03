@@ -324,7 +324,12 @@ docker-compose exec backend bash
 
 ## Related Files
 
-- [docker-compose.yml](../../docker-compose.yml) - Main configuration
-- [frontend/Dockerfile.dev](../../frontend/Dockerfile.dev) - Dev Dockerfile
-- [frontend/vite.config.ts](../../frontend/vite.config.ts) - Vite configuration
-- [Dockerfile](../../Dockerfile) - Backend container configuration
+- [docker-compose.yml](docker-compose.yml) - Main configuration
+- [frontend/Dockerfile.dev](frontend/Dockerfile.dev) - Dev Dockerfile
+- [frontend/vite.config.ts](frontend/vite.config.ts) - Vite configuration
+- [Dockerfile](Dockerfile) - Backend container configuration
+
+---
+
+**Last Updated:** February 2, 2026  
+**Maintained By:** java-resumes development team
