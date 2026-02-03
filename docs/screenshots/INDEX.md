@@ -474,8 +474,8 @@ This documentation system follows:
 **👉 Next Step: Read [README.md](README.md) or start with [CAPTURE_WORKFLOW.md](CAPTURE_WORKFLOW.md)**
 
 ---
-  
----  
-  
-**Last Updated:** February 2, 2026  
-**Maintained By:** java-resumes development team 
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

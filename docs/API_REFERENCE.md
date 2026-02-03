@@ -886,8 +886,8 @@ Typical response times (with Ollama local LLM):
 
 **Last Updated:** February 2, 2026
 **Maintained By:** java-resumes development team
-  
----  
-  
-**Last Updated:** February 2, 2026  
-**Maintained By:** java-resumes development team 
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

@@ -2012,8 +2012,8 @@ Closes #123
 **For complete documentation, see the [Root README](README.md) and [PRD](PRD-PRIMEREACT-DOCKER-v2.md)**
 
 **Made with ☕ using Java, Spring Boot, and AI**
-  
----  
-  
-**Last Updated:** February 2, 2026  
-**Maintained By:** java-resumes development team 
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

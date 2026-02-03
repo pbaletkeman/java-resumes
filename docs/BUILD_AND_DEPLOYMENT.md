@@ -811,8 +811,8 @@ UPLOAD_PATH=./uploads
 - **Documentation**: [docs/architecture/ARCHITECTURE.md](../Architecture.md)
 - **GitHub Issues**: https://github.com/pbaletkeman/java-resumes/issues
 - **GitHub Discussions**: https://github.com/pbaletkeman/java-resumes/discussions
-  
----  
-  
-**Last Updated:** February 2, 2026  
-**Maintained By:** java-resumes development team 
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

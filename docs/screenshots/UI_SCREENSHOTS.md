@@ -360,8 +360,8 @@ When referencing these screenshots in documentation:
 
 **Last Updated:** January 22, 2026
 **Status:** ✅ Complete with all theme variants
-  
----  
-  
-**Last Updated:** February 2, 2026  
-**Maintained By:** java-resumes development team 
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

@@ -410,8 +410,8 @@ Complete feature list and capabilities of the Java Resumes application.
 
 **Last Updated:** February 2, 2026
 **Maintained By:** java-resumes development team
-  
----  
-  
-**Last Updated:** February 2, 2026  
-**Maintained By:** java-resumes development team 
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

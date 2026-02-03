@@ -359,8 +359,8 @@ Read: [docs/screenshots/README.md](../README.md) (2 min)
 **Estimated Time:** ~2 hours
 
 **Let's capture those screenshots!** 📸
-  
----  
-  
-**Last Updated:** February 2, 2026  
-**Maintained By:** java-resumes development team 
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

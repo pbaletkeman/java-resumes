@@ -36,7 +36,7 @@ flowchart TD
     ✓ ./gradlew clean check spotlessCheck spotbugsMain
     ✓ ./gradlew test (all tests must pass)
     ✓ ./gradlew build (full build must succeed)
-    
+
     ✔️ ALL PASS? → Push allowed
 
     ❌ ANY FAIL? → Push blocked"]
