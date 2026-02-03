@@ -1,5 +1,24 @@
 # Non-Technical Model Management Guide
 
+---
+
+## Table of Contents
+
+1. [What This Feature Does](#-what-this-feature-does)
+2. [Quick Start](#-quick-start)
+3. [How to Add a Model](#-how-to-add-a-model)
+4. [How to Remove a Model](#-how-to-remove-a-model)
+5. [How to Reset to Defaults](#-how-to-reset-to-defaults)
+6. [Understanding the Model Table](#-understanding-the-model-table)
+7. [Where Are Models Stored?](#-where-are-models-stored)
+8. [Advanced: JSON Format](#advanced-json-format)
+9. [Frequently Asked Questions](#-frequently-asked-questions)
+10. [Common Use Cases](#-common-use-cases)
+11. [You're Ready!](#-youre-ready)
+12. [Need Help?](#-need-help)
+
+---
+
 > **📍 Location:** `docs/NONTECHNICAL_MODEL_GUIDE.md`
 > **👥 Audience:** Non-Technical Users, Stakeholders
 > **🔗 Related:** [Quick Start Advanced](QUICK_START_ADVANCED.md) | [Project Status](PROJECT_STATUS.md) | [Index](INDEX.md)
@@ -232,3 +251,8 @@ If something isn't working:
 ---
 
 **Last Updated**: January 17, 2025
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

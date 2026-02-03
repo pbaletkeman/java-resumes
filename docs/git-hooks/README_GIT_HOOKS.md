@@ -1,5 +1,22 @@
 # 🎉 Git Hooks Installation Complete!
 
+## Table of Contents
+
+- [Status: READY TO USE](#status-ready-to-use)
+- [Get Started (30 Seconds)](#get-started-30-seconds)
+- [Documentation](#documentation)
+- [First Time Setup](#first-time-setup)
+  - [Step 1: Install Hooks](#step-1-install-hooks)
+  - [Step 2: Auto-Fix Existing Code (Recommended)](#step-2-auto-fix-existing-code-recommended)
+  - [Step 3: Start Using Normally](#step-3-start-using-normally)
+- [Common Questions](#common-questions)
+- [What Got Installed](#what-got-installed)
+- [Daily Commands](#daily-commands)
+- [Next Steps](#next-steps)
+- [Need Help?](#need-help)
+
+---
+
 ## ✅ Status: READY TO USE
 
 Your java-resumes project now has **automated code quality enforcement** using:

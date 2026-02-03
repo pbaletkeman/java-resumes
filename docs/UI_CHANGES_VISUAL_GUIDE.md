@@ -1,5 +1,21 @@
 # UI Changes Visual Guide
 
+---
+
+## Table of Contents
+
+1. [Before vs After](#before-vs-after)
+2. [New Features Highlighted](#new-features-highlighted)
+3. [User Interaction Flow](#user-interaction-flow)
+4. [Code Examples](#code-examples)
+5. [Backend Integration](#backend-integration)
+6. [Responsive Behavior](#responsive-behavior)
+7. [State Management](#state-management)
+8. [Testing Scenarios](#testing-scenarios)
+9. [Summary of Changes](#summary-of-changes)
+
+---
+
 > **📍 Location:** `docs/UI_CHANGES_VISUAL_GUIDE.md`
 > **👥 Audience:** QA, Designers, Stakeholders
 > **🔗 Related:** [Frontend Enhancements](FRONTEND_ENHANCEMENTS.md) | [Screenshot Capture Summary](SCREENSHOT_CAPTURE_SUMMARY.md) | [Index](INDEX.md)
@@ -336,3 +352,8 @@ expect(screen.getByDisplayValue("Resume Optimization")).toBeInTheDocument();
 ---
 
 **This enhancement makes the UI more flexible and provides users full control over which outputs to generate!**
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

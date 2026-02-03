@@ -877,3 +877,8 @@ For broader guidance on the java-resumes project, see:
 **Next Review:** July 2026 ?
 **Maintained By:** java-resumes development team
 ```
+  
+---  
+  
+**Last Updated:** February 2, 2026  
+**Maintained By:** java-resumes development team 

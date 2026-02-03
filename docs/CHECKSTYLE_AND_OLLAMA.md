@@ -1,5 +1,24 @@
 # Checkstyle Configuration & Ollama Integration Status
 
+## Table of Contents
+
+- [Checkstyle Setup](#checkstyle-setup)
+  - [Configuration Files](#configuration-files)
+  - [How to Run Checkstyle](#how-to-run-checkstyle)
+  - [Current Status](#current-status)
+  - [Key Rules Enforced](#key-rules-enforced)
+- [Ollama Integration](#ollama-integration)
+  - [Current Status: ✅ VERIFIED WORKING](#current-status-✅-verified-working)
+  - [Configuration](#configuration)
+  - [Key Components](#key-components)
+  - [Integration Points](#integration-points)
+  - [How to Use with Ollama](#how-to-use-with-ollama)
+  - [Example Request](#example-request)
+  - [Verification Checklist](#verification-checklist)
+- [Next Steps to Fix Checkstyle](#next-steps-to-fix-checkstyle)
+
+---
+
 ## Checkstyle Setup
 
 Checkstyle has been successfully integrated into this project with the following configuration:
@@ -178,3 +197,8 @@ You can automatically view the detailed checkstyle report at:
 ```
 build/reports/checkstyle/main.html
 ```
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

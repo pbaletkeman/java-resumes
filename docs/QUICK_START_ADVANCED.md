@@ -1,5 +1,17 @@
 # 🚀 Quick Start Reference - Java-Resumes
 
+## Table of Contents
+
+- [One-Minute Overview](#one-minute-overview)
+- [For Non-Technical Users](#-for-non-technical-users)
+- [For Technical Users / Developers](#-for-technical-users--developers)
+- [Docker Deployment](#docker-deployment)
+- [LLM Configuration](#llm-configuration)
+- [Troubleshooting](#troubleshooting)
+- [Quick Commands](#quick-commands)
+
+---
+
 > **📍 Location:** `docs/QUICK_START_ADVANCED.md`
 > **👥 Audience:** Developers
 > **🔗 Related:** [Quick Reference](QUICK_REFERENCE.md) | [Technical Checklist](TECHNICAL_CHECKLIST.md) | [Index](INDEX.md)
@@ -431,3 +443,8 @@ npm run lint:fix          # Frontend
 **Last Updated**: January 17, 2025
 **Version**: 1.0 - Production Release
 **Status**: ✅ READY TO USE
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

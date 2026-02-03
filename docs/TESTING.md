@@ -2,6 +2,17 @@
 
 Comprehensive testing strategy for java-resumes application.
 
+## Table of Contents
+
+- [Testing Overview](#-testing-overview)
+- [Backend Testing](#-backend-testing)
+- [Frontend Testing](#-frontend-testing)
+- [Test Coverage](#-test-coverage)
+- [Running Tests in CI/CD](#-running-tests-in-cicd)
+- [Best Practices](#-best-practices)
+
+---
+
 ## 🎯 Testing Overview
 
 ### Coverage Targets

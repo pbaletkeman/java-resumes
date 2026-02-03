@@ -2,6 +2,19 @@
 
 Complete guide for running the java-resumes application using Docker with multiple configuration options.
 
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Available Docker Compose Configurations](#available-docker-compose-configurations)
+- [Service Architecture](#service-architecture)
+- [Service Details](#service-details)
+- [Health Check Endpoints](#health-check-endpoints)
+- [Database Configuration](#database-configuration)
+- [Building and Running](#building-and-running)
+- [LLM Model Management](#llm-model-management)
+
+---
+
 ## Prerequisites
 
 - Docker 20.10+ installed
@@ -913,3 +926,8 @@ For configuration help, refer to:
 - Specific docker-compose file for environment variables
 - `src/main/resources/application*.yml` for application configuration
 - This guide's Database Configuration and Health Check sections
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

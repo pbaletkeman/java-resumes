@@ -1,5 +1,39 @@
 # 🎉 Git Hooks Implementation - COMPLETE & VERIFIED ✅
 
+## Table of Contents
+
+- [Executive Summary](#executive-summary)
+- [What You Got](#what-you-got)
+  - [Three Quality Tools Integrated](#three-quality-tools-integrated)
+  - [Two Automated Git Hooks](#two-automated-git-hooks)
+  - [Complete Setup & Documentation](#complete-setup--documentation)
+- [Files Created (Complete List)](#files-created-complete-list)
+  - [Git Hook Scripts (2 files)](#git-hook-scripts-2-files)
+  - [Configuration Files (2 files)](#configuration-files-2-files)
+  - [Setup Scripts (4 options)](#setup-scripts-4-options)
+  - [Documentation (5 files)](#documentation-5-files)
+  - [Modified Files (2 files)](#modified-files-2-files)
+- [Installation (Pick One Method)](#installation-pick-one-method)
+  - [Method 1: Gradle (Recommended)](#method-1-gradle-recommended)
+  - [Alternative: Mac/Linux/Git Bash](#alternative-maclinuxgit-bash)
+  - [Alternative: Windows Command Prompt](#alternative-windows-command-prompt)
+  - [Alternative: Python (Universal)](#alternative-python-universal)
+- [Quick Start Workflow](#quick-start-workflow)
+- [What Happens Automatically](#what-happens-automatically)
+  - [Before Each Commit](#before-each-commit)
+  - [Before Each Push](#before-each-push)
+- [Daily Development Commands](#daily-development-commands)
+- [Key Commands Reference](#key-commands-reference)
+- [Documentation Overview](#documentation-overview)
+- [Architecture Overview](#architecture-overview)
+- [Tool Details](#tool-details)
+  - [Spotless (Google Java Format)](#spotless-google-java-format)
+  - [Checkstyle](#checkstyle)
+  - [SpotBugs](#spotbugs)
+- [File Structure](#file-structure)
+
+---
+
 ## Executive Summary
 
 Your java-resumes project now has **production-ready automated code quality enforcement** using three complementary tools integrated into the git workflow.

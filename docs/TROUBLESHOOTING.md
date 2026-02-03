@@ -2,6 +2,18 @@
 
 Common issues and their solutions for java-resumes.
 
+## Table of Contents
+
+- [Build Issues](#-build-issues)
+- [Runtime Issues](#-runtime-issues)
+- [Backend Issues](#-backend-issues)
+- [Frontend Issues](#-frontend-issues)
+- [LLM & API Issues](#-llm--api-issues)
+- [Docker Issues](#-docker-issues)
+- [Testing Issues](#-testing-issues)
+
+---
+
 ## 🔴 Build Issues
 
 ### Gradle Build Fails

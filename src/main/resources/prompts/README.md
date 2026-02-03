@@ -2,6 +2,23 @@
 
 This directory contains LLM prompt templates used by the java-resumes application to generate AI-powered career optimization content.
 
+## Table of Contents
+
+- [Available Prompts](#available-prompts)
+  - [Document Optimization](#document-optimization)
+  - [Interview Preparation](#interview-preparation)
+  - [Networking & Outreach](#networking--outreach)
+  - [Post-Interview Follow-Up](#post-interview-follow-up)
+  - [Career Development](#career-development)
+- [Key Information](#key-information)
+- [Prompt Structure](#prompt-structure)
+- [Adding New Prompts](#adding-new-prompts)
+- [File Structure](#file-structure)
+- [Prompt Categories Summary](#prompt-categories-summary)
+- [Related Documentation](#related-documentation)
+
+---
+
 ## Available Prompts
 
 ### Document Optimization

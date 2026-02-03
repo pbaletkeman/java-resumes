@@ -689,3 +689,8 @@ graph LR
 - [Docker Compose Setup](../../docker-compose.yml)
 
 ---
+  
+---  
+  
+**Last Updated:** February 2, 2026  
+**Maintained By:** java-resumes development team 

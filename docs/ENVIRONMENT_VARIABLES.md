@@ -2,6 +2,18 @@
 
 Complete reference for environment variables and configuration in java-resumes.
 
+## Table of Contents
+
+- [Overview](#-overview)
+- [Backend Environment Variables](#-backend-environment-variables)
+- [Frontend Environment Variables](#-frontend-environment-variables)
+- [config.json](#-configjson)
+- [Docker Environment Configuration](#-docker-environment-configuration)
+- [Production Environment Setup](#-production-environment-setup)
+- [Verification and Debugging](#-verification-and-debugging)
+
+---
+
 ## 📋 Overview
 
 The java-resumes project supports configuration through:
@@ -669,3 +681,8 @@ chmod 755 ./uploads
 - [Development Setup](DEVELOPMENT_SETUP.md) - Initial setup guide
 - [Troubleshooting](TROUBLESHOOTING.md) - Common issues
 - [ARCHITECTURE.md](ARCHITECTURE.md) - Design patterns
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

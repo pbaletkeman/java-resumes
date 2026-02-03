@@ -2,6 +2,17 @@
 
 This guide explains how to configure a GitHub environment with Ollama LLM service for automated testing and development.
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Creating a GitHub Environment](#creating-a-github-environment)
+- [Using the Environment in Workflows](#using-the-environment-in-workflows)
+- [Workflow Configuration Examples](#workflow-configuration-examples)
+- [Troubleshooting](#troubleshooting)
+- [Best Practices](#best-practices)
+
+---
+
 ## Overview
 
 GitHub Environments allow you to configure different deployment targets with specific settings, secrets, and protection rules. This guide sets up an environment specifically for Ollama-based LLM testing.
@@ -26,29 +37,31 @@ GitHub Environments allow you to configure different deployment targets with spe
 
 Add the following environment variables:
 
-| Variable Name | Value | Description |
-|---------------|-------|-------------|
-| `OLLAMA_MODEL` | `tinyllama` | Default model to use |
-| `LLM_ENDPOINT` | `http://localhost:11434/v1/chat/completions` | Ollama API endpoint |
-| `LLM_APIKEY` | `ollama` | API key (not required but field needed) |
+| Variable Name  | Value                                        | Description                             |
+| -------------- | -------------------------------------------- | --------------------------------------- |
+| `OLLAMA_MODEL` | `tinyllama`                                  | Default model to use                    |
+| `LLM_ENDPOINT` | `http://localhost:11434/v1/chat/completions` | Ollama API endpoint                     |
+| `LLM_APIKEY`   | `ollama`                                     | API key (not required but field needed) |
 
 ### Step 4: Add Environment Secrets (Optional)
 
 If using external LLM services as fallback:
 
-| Secret Name | Description |
-|-------------|-------------|
-| `OPENAI_API_KEY` | OpenAI API key (fallback) |
+| Secret Name         | Description               |
+| ------------------- | ------------------------- |
+| `OPENAI_API_KEY`    | OpenAI API key (fallback) |
 | `ANTHROPIC_API_KEY` | Claude API key (fallback) |
 
 ### Step 5: Configure Protection Rules (Optional)
 
 **For production environments:**
+
 - Enable "Required reviewers" (1-2 reviewers)
 - Set "Wait timer" to 0 minutes
 - Enable "Prevent self-review"
 
 **For testing environments:**
+
 - No protection rules needed
 
 ---
@@ -70,7 +83,7 @@ on:
 jobs:
   setup-ollama:
     runs-on: ubuntu-latest
-    environment: ollama-testing  # Add this line
+    environment: ollama-testing # Add this line
 
     steps:
       - name: Checkout code
@@ -86,7 +99,7 @@ Access environment variables in workflow:
 ```yaml
 - name: Pull Ollama model
   env:
-    MODEL: ${{ vars.OLLAMA_MODEL }}  # From environment variables
+    MODEL: ${{ vars.OLLAMA_MODEL }} # From environment variables
   run: |
     echo "Pulling model: $MODEL"
     ollama pull $MODEL
@@ -191,7 +204,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: ollama-testing  # Requires approval if configured
+    environment: ollama-testing # Requires approval if configured
 
     steps:
       - uses: actions/checkout@v4
@@ -218,23 +231,27 @@ Create multiple environments for different purposes:
 ### 2. Model Selection Strategy
 
 **Development:**
+
 ```yaml
-OLLAMA_MODEL=tinyllama  # Fast, small
+OLLAMA_MODEL=tinyllama # Fast, small
 ```
 
 **Staging:**
+
 ```yaml
-OLLAMA_MODEL=phi3:mini  # Balanced
+OLLAMA_MODEL=phi3:mini # Balanced
 ```
 
 **Production:**
+
 ```yaml
-OLLAMA_MODEL=mistral    # High quality
+OLLAMA_MODEL=mistral # High quality
 ```
 
 ### 3. Resource Management
 
 Monitor GitHub Actions usage:
+
 - Free tier: 2,000 minutes/month
 - Team: 3,000 minutes/month
 - Enterprise: 50,000 minutes/month
@@ -316,6 +333,7 @@ Cache Ollama models between runs:
 **Error:** `Environment "ollama-testing" not found`
 
 **Solution:**
+
 1. Check environment name spelling
 2. Verify environment exists in Settings → Environments
 3. Ensure you have proper repository permissions
@@ -325,6 +343,7 @@ Cache Ollama models between runs:
 **Error:** `vars.OLLAMA_MODEL is empty`
 
 **Solution:**
+
 1. Verify variables are set in environment configuration
 2. Check workflow references correct environment
 3. Ensure workflow has `environment: ollama-testing` specified
@@ -334,6 +353,7 @@ Cache Ollama models between runs:
 **Cause:** Environment has required reviewers configured
 
 **Solution:**
+
 1. Approve the deployment in GitHub UI
 2. Or remove protection rules for testing environment
 
@@ -350,9 +370,9 @@ on:
   workflow_dispatch:
     inputs:
       model:
-        description: 'Model to test'
+        description: "Model to test"
         required: false
-        default: 'tinyllama'
+        default: "tinyllama"
   push:
     branches: [master]
 
@@ -432,3 +452,8 @@ jobs:
 
 **Last Updated:** January 2026
 **Repository:** pbaletkeman/java-resumes
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

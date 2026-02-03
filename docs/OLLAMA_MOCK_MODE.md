@@ -1,5 +1,17 @@
 # Ollama Mock Mode Documentation
 
+## Table of Contents
+
+- [Overview](#overview)
+- [How It Works](#how-it-works)
+- [Configuration](#configuration)
+- [Mock Response Types](#mock-response-types)
+- [Example Usage](#example-usage)
+- [Testing with Mock Mode](#testing-with-mock-mode)
+- [Troubleshooting](#troubleshooting)
+
+---
+
 ## Overview
 
 The java-resumes application supports a **mock mode** that simulates LLM responses without making actual network calls to Ollama. This is particularly useful for:
@@ -38,7 +50,7 @@ llm:
   endpoint: http://127.0.0.1:11434/v1/chat/completions
   apikey: 1234567890
   mock:
-    enabled: true  # Set to true to enable mock mode
+    enabled: true # Set to true to enable mock mode
 ```
 
 ### Environment Variable
@@ -70,18 +82,18 @@ java -jar -Dspring.profiles.active=test resume-optimizer.jar
 
 The mock service generates tailored responses based on prompt content:
 
-| Prompt Type | Detection Keywords | Response Type |
-|-------------|-------------------|---------------|
-| Resume | "resume", "optimize" | Mock optimized resume |
-| Cover Letter | "cover letter" | Mock cover letter |
-| Interview HR | "interview", "hr" | 5 HR interview questions |
-| Interview Job-Specific | "interview", "job" | 5 technical questions |
-| Reverse Interview | "interview", "reverse" | 10 candidate questions |
-| Cold Email | "cold", "email" | Professional outreach email |
-| LinkedIn Message | "linkedin" | Connection request messages |
-| Thank You Email | "thank", "you" | Post-interview thank you |
-| Skills | "skill" | Skills assessment |
-| Generic | Other | General mock response |
+| Prompt Type            | Detection Keywords     | Response Type               |
+| ---------------------- | ---------------------- | --------------------------- |
+| Resume                 | "resume", "optimize"   | Mock optimized resume       |
+| Cover Letter           | "cover letter"         | Mock cover letter           |
+| Interview HR           | "interview", "hr"      | 5 HR interview questions    |
+| Interview Job-Specific | "interview", "job"     | 5 technical questions       |
+| Reverse Interview      | "interview", "reverse" | 10 candidate questions      |
+| Cold Email             | "cold", "email"        | Professional outreach email |
+| LinkedIn Message       | "linkedin"             | Connection request messages |
+| Thank You Email        | "thank", "you"         | Post-interview thank you    |
+| Skills                 | "skill"                | Skills assessment           |
+| Generic                | Other                  | General mock response       |
 
 ## Example Usage
 
@@ -133,14 +145,16 @@ Mock responses follow the OpenAI/Ollama API format:
   "object": "chat.completion",
   "created": 1706727600,
   "model": "mistral-mock",
-  "choices": [{
-    "index": 0,
-    "message": {
-      "role": "assistant",
-      "content": "Mock response content..."
-    },
-    "finish_reason": "stop"
-  }],
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Mock response content..."
+      },
+      "finish_reason": "stop"
+    }
+  ],
   "usage": {
     "prompt_tokens": 150,
     "completion_tokens": 400,
@@ -153,21 +167,25 @@ Mock responses follow the OpenAI/Ollama API format:
 ## Benefits
 
 ### 1. No External Dependencies
+
 - Works without Ollama installation
 - No network connectivity required
 - Reduces infrastructure complexity
 
 ### 2. Fast Execution
+
 - Instant responses (no network latency)
 - Speeds up test suites significantly
 - Enables rapid development cycles
 
 ### 3. Predictable Testing
+
 - Consistent responses for same inputs
 - Easier to write deterministic tests
 - Reproducible results across environments
 
 ### 4. Cost Reduction
+
 - No API usage costs
 - No compute resources for LLM inference
 - Lower CI/CD costs
@@ -175,17 +193,20 @@ Mock responses follow the OpenAI/Ollama API format:
 ## Limitations
 
 ### Mock Content Quality
+
 - Mock responses are generic templates
 - Not tailored to specific job descriptions
 - Don't reflect actual LLM capabilities
 - Should not be used for production
 
 ### No Real Intelligence
+
 - Responses are predetermined patterns
 - No actual understanding of context
 - Limited variation in outputs
 
 ### Testing Scope
+
 - Tests with mocks validate integration flow
 - Don't test actual LLM response quality
 - Can't detect LLM-specific issues
@@ -214,7 +235,7 @@ class IntegrationTest { }
 # production application.yml
 llm:
   mock:
-    enabled: false  # Always use real LLM in production
+    enabled: false # Always use real LLM in production
 ```
 
 ### 4. Environment-Specific Configuration
@@ -235,18 +256,21 @@ export LLM_MOCK_ENABLED=false
 ### Mock Mode Not Working
 
 1. **Check Configuration**
+
    ```bash
    # Verify configuration is loaded
    grep -r "llm.mock.enabled" src/main/resources/
    ```
 
 2. **Check Logs**
+
    ```
    # Look for mock mode indicator in logs
    Mock mode enabled - returning simulated LLM response
    ```
 
 3. **Verify Property Injection**
+
    ```java
    @Value("${llm.mock.enabled:false}")
    private boolean mockEnabled;
@@ -321,3 +345,8 @@ class ConditionalMockTest {
 
 **Last Updated**: January 31, 2026
 **Version**: 1.0.0
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

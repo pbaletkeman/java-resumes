@@ -523,3 +523,8 @@ curl -X DELETE http://localhost:8080/api/v1/files/resume_optimized.pdf
 ---
 
 Last Updated: 2026-01-16
+  
+---  
+  
+**Last Updated:** February 2, 2026  
+**Maintained By:** java-resumes development team 

@@ -1,5 +1,22 @@
 # Screenshot Capture Summary
 
+---
+
+## Table of Contents
+
+1. [Summary](#summary)
+2. [Screenshots Captured by Category](#screenshots-captured-by-category)
+3. [Aggregate Statistics](#aggregate-statistics)
+4. [File Locations](#file-locations)
+5. [Failures & Root Causes](#failures--root-causes)
+6. [Technical Details](#technical-details)
+7. [Next Steps](#next-steps)
+8. [Verification Checklist](#verification-checklist)
+9. [Notes & Observations](#notes--observations)
+10. [Related Documentation](#related-documentation)
+
+---
+
 > **📍 Location:** `docs/SCREENSHOT_CAPTURE_SUMMARY.md`
 > **👥 Audience:** All Team Members
 > **🔗 Related:** [UI Changes Visual Guide](UI_CHANGES_VISUAL_GUIDE.md) | [Frontend Enhancements](FRONTEND_ENHANCEMENTS.md) | [Index](INDEX.md)
@@ -250,3 +267,8 @@ To improve reliability:
 **Last Updated**: January 18, 2026
 **Created By**: GitHub Copilot
 **Status**: Ready for documentation publication (14/16 screenshots available)
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

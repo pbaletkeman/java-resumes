@@ -2,6 +2,15 @@
 
 Complete feature list and capabilities of the Java Resumes application.
 
+## Table of Contents
+
+- [Core Features](#-core-features)
+- [User Interface](#-user-interface)
+- [Technical Architecture](#-technical-architecture)
+- [Why Java Resumes?](#-why-java-resumes)
+
+---
+
 ## ✨ Core Features
 
 ### 📄 Resume Optimization
@@ -396,3 +405,13 @@ Complete feature list and capabilities of the Java Resumes application.
 - [Quick Start](QUICK_START.md) - Get started in 5 minutes
 - [API Reference](API_REFERENCE.md) - Complete endpoint documentation
 - [Technology Stack](TECHNOLOGY_STACK.md) - All technologies and versions
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team
+  
+---  
+  
+**Last Updated:** February 2, 2026  
+**Maintained By:** java-resumes development team 

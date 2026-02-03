@@ -2,6 +2,18 @@
 
 The java-resumes application is built with a modern full-stack architecture that separates concerns across frontend, backend, and external services.
 
+## Table of Contents
+
+- [High-Level Architecture](#-high-level-architecture)
+- [Request Flow Architecture](#-request-flow-architecture)
+- [Component Details](#component-details)
+- [Data Models](#data-models)
+- [API Endpoints](#api-endpoints)
+- [Design Patterns](#design-patterns)
+- [Integration Points](#integration-points)
+
+---
+
 ## 📐 High-Level Architecture
 
 ```plaintext
@@ -386,6 +398,7 @@ Persistent Volumes:
 5. Document in API_REFERENCE.md and update README.md
 
 **Example**: Interview and networking prompts added in this release:
+
 - Interview preparation endpoints (hr-questions, job-specific, reverse)
 - Networking endpoints (cold-email, linkedin-message, thank-you-email)
 
@@ -398,6 +411,7 @@ Persistent Volumes:
 5. Test with sample data to validate outputs
 
 **Current Prompt Templates**:
+
 - `RESUME.md` - Resume optimization
 - `COVER.md` - Cover letter generation
 - `SKILLS.md` - Skills & certifications recommendations

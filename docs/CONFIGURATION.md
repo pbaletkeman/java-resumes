@@ -2,6 +2,17 @@
 
 Learn how to configure Java Resumes for different environments and customize external paths.
 
+## Table of Contents
+
+- [Overview](#overview)
+- [LLM Configuration](#llm-configuration-configjson)
+- [Application Settings](#application-settings)
+- [Environment Variables](#environment-variables)
+- [Production Configuration](#production-configuration)
+- [Troubleshooting](#troubleshooting)
+
+---
+
 ## Overview
 
 The application supports flexible configuration through:
@@ -456,3 +467,13 @@ Error: Could not read file: config.json
 ---
 
 See also: [ENVIRONMENT_VARIABLES.md](ENVIRONMENT_VARIABLES.md) for complete reference
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team
+  
+---  
+  
+**Last Updated:** February 2, 2026  
+**Maintained By:** java-resumes development team 

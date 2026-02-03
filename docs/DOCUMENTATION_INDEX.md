@@ -2,6 +2,25 @@
 
 Complete guide to all documentation files for this project.
 
+## Table of Contents
+
+- [Quick Access](#-quick-access)
+  - [Start Here](#-start-here)
+- [Complete File List](#-complete-file-list)
+  - [Root Level](#root-level)
+  - [Detailed Documentation (docs/)](#detailed-documentation-docs)
+  - [Related Documentation](#related-documentation)
+- [Documentation by Use Case](#-documentation-by-use-case)
+  - [I'm a New Developer](#im-a-new-developer)
+  - [I'm a QA/Tester](#im-a-qatester)
+  - [I'm a System Architect](#im-a-system-architect)
+  - [I'm a Project Manager](#im-a-project-manager)
+  - [I Need to Fix a Bug](#i-need-to-fix-a-bug)
+  - [I'm Adding a New Feature](#im-adding-a-new-feature)
+- [Search Tips](#-search-tips)
+
+---
+
 ## 📚 Quick Access
 
 ### 🌟 Start Here
@@ -47,7 +66,7 @@ Complete guide to all documentation files for this project.
 | File                                                          | Purpose             | Audience             | Read Time |
 | ------------------------------------------------------------- | ------------------- | -------------------- | --------- |
 | **[README.md](docs/README.md)**                               | Comprehensive guide | Everyone             | 45 min    |
-| **[Architecture.md](docs/architecture/ARCHITECTURE.md)**                   | System design       | Architects/Dev Leads | 30 min    |
+| **[Architecture.md](docs/architecture/ARCHITECTURE.md)**      | System design       | Architects/Dev Leads | 30 min    |
 | **[DOCUMENTATION_SUMMARY.md](docs/DOCUMENTATION_SUMMARY.md)** | Index & statistics  | Everyone             | 10 min    |
 
 ### Related Documentation

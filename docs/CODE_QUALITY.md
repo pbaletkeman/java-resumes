@@ -2,6 +2,16 @@
 
 Comprehensive guide for maintaining code quality in java-resumes.
 
+## Table of Contents
+
+- [Quality Metrics](#-quality-metrics)
+- [Java Code Quality](#-java-code-quality)
+- [Frontend Code Quality](#-frontend-code-quality)
+- [Testing Requirements](#-testing-requirements)
+- [Best Practices](#-best-practices)
+
+---
+
 ## 📊 Quality Metrics
 
 ### Coverage Targets
@@ -575,3 +585,13 @@ Automated quality checks on every push:
 - [Testing](TESTING.md) - Testing strategies
 - [Development Setup](DEVELOPMENT_SETUP.md) - Environment setup
 - [Architecture](ARCHITECTURE.md) - Design patterns
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team
+  
+---  
+  
+**Last Updated:** February 2, 2026  
+**Maintained By:** java-resumes development team 

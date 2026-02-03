@@ -2,6 +2,17 @@
 
 Complete guide for deploying java-resumes to production environments.
 
+## Table of Contents
+
+- [Deployment Options](#-deployment-options)
+- [Docker Compose Deployment](#-docker-compose-deployment)
+- [Cloud Deployment](#-cloud-deployment)
+- [Security Configuration](#-security-configuration)
+- [Performance Tuning](#-performance-tuning)
+- [Monitoring](#-monitoring)
+
+---
+
 ## 🚀 Deployment Options
 
 ### Quick Comparison
@@ -577,3 +588,13 @@ server {
 - [Architecture](ARCHITECTURE.md) - System design
 - [Configuration](CONFIGURATION.md) - Configuration management
 - [Troubleshooting](TROUBLESHOOTING.md) - Production troubleshooting
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team
+  
+---  
+  
+**Last Updated:** February 2, 2026  
+**Maintained By:** java-resumes development team 

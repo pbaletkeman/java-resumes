@@ -1,5 +1,30 @@
 # Git Hooks Implementation Complete ✅
 
+## Table of Contents
+
+- [Summary](#summary)
+- [What Gets Checked](#what-gets-checked)
+  - [On Every git commit](#on-every-git-commit)
+  - [Before Every git push](#before-every-git-push)
+- [Files Created/Modified](#files-createdmodified)
+  - [New Files](#new-files)
+  - [Modified Files](#modified-files)
+- [Installation (Choose One Method)](#installation-choose-one-method)
+  - [Recommended: Gradle](#recommended-gradle)
+  - [Alternative: Bash (Mac/Linux/Git Bash)](#alternative-bash-maclinuxgit-bash)
+  - [Alternative: Windows Command Prompt](#alternative-windows-command-prompt)
+  - [Alternative: Python (Universal)](#alternative-python-universal)
+- [First Use Workflow](#first-use-workflow)
+  - [Step 1: Install Hooks](#step-1-install-hooks)
+  - [Step 2: Auto-Fix Any Existing Issues (Recommended)](#step-2-auto-fix-any-existing-issues-recommended)
+  - [Step 3: Try It Out](#step-3-try-it-out)
+- [Daily Development](#daily-development)
+- [Viewing Reports](#viewing-reports)
+- [Key Commands](#key-commands)
+- [Understanding Violations](#understanding-violations)
+
+---
+
 ## Summary
 
 Your java-resumes project now has a **fully automated code quality enforcement system** using three complementary tools:

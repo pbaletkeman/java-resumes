@@ -4,6 +4,18 @@ applyTo: "src/main/**/*.java,src/test/**/*.java,build.gradle,**/application*.yml
 
 # Java Backend Development Instructions
 
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Directory Structure](#directory-structure)
+- [Setup & Build](#setup--build)
+- [REST API Endpoints](#rest-api-endpoints)
+- [Development Guidelines](#development-guidelines)
+- [Testing Strategy](#testing-strategy)
+- [Validation Checklist](#validation-checklist)
+
+---
+
 ## Project Overview
 
 This is a Spring Boot 3.5.1 backend service for AI-powered resume and cover letter optimization. The application provides RESTful APIs for document processing, file management, and LLM integration with comprehensive testing and code quality enforcement.
@@ -289,3 +301,8 @@ Always run these checks in order:
 - [Spotless Documentation](https://github.com/diffplug/spotless)
 
 **When in doubt, refer to existing test files for patterns and examples. The test suite demonstrates all major code patterns and best practices used in this project.**
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

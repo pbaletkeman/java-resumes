@@ -1,5 +1,20 @@
 # Quick Reference: New Documentation Files
 
+---
+
+## Table of Contents
+
+1. [Documentation Added](#-documentation-added)
+2. [Variable Naming Standardization](#-variable-naming-standardization)
+3. [New Features](#-new-features)
+4. [Implementation Checklist for New Prompts](#-implementation-checklist-for-new-prompts)
+5. [Test Coverage](#-test-coverage)
+6. [Running the Application](#-running-the-application)
+7. [Getting Help](#-getting-help)
+8. [All Jobs Complete](#-all-jobs-complete)
+
+---
+
 > **📍 Location:** `docs/QUICK_REFERENCE.md`
 > **👥 Audience:** All Developers
 > **🔗 Related:** [Quick Start Advanced](QUICK_START_ADVANCED.md) | [AI Agent Guidelines](AGENTS.md) | [Index](INDEX.md)
@@ -197,3 +212,8 @@ docker-compose up
 ---
 
 **Last Updated:** January 18, 2026
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

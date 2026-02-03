@@ -2,6 +2,40 @@
 
 Complete list of all technologies, frameworks, and tools used in the java-resumes project.
 
+## Table of Contents
+
+- [Backend Technologies](#-backend-technologies)
+  - [Core Framework](#core-framework)
+  - [Server & Web](#server--web)
+  - [JSON & Serialization](#json--serialization)
+  - [Document Processing](#document-processing)
+  - [Testing](#testing)
+  - [Code Quality](#code-quality)
+  - [Additional Libraries](#additional-libraries)
+- [Frontend Technologies](#-frontend-technologies)
+  - [Core Framework](#core-framework-1)
+  - [Build & Development](#build--development)
+  - [UI & Styling](#ui--styling)
+  - [HTTP & API](#http--api)
+  - [Development Tools](#development-tools)
+  - [Testing](#testing-1)
+  - [Type Safety](#type-safety)
+- [DevOps & Infrastructure](#-devops--infrastructure)
+  - [Containerization](#containerization)
+  - [Docker Images](#docker-images)
+- [AI/LLM Integration](#-aillm-integration)
+  - [Supported LLM Services](#supported-llm-services)
+  - [API Integration](#api-integration)
+- [Database (Future)](#-database-future)
+- [Cloud & Deployment (Future)](#-cloud--deployment-future)
+- [Monitoring & Observability (Future)](#-monitoring--observability-future)
+- [Security (Current & Future)](#-security-current--future)
+- [Documentation & Communication](#documentation--communication)
+- [Testing & Quality](#testing--quality)
+- [Development Tools](#development-tools-1)
+
+---
+
 ## 🔧 Backend Technologies
 
 ### Core Framework
@@ -396,3 +430,8 @@ React 19.2.0
 - [Architecture](ARCHITECTURE.md) - How technologies fit together
 - [Development Setup](DEVELOPMENT_SETUP.md) - Installation instructions
 - [Production Deployment](PRODUCTION_DEPLOYMENT.md) - Production stack
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

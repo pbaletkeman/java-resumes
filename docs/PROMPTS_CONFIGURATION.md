@@ -1,5 +1,24 @@
 # Prompt Configuration Guide
 
+---
+
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Default Behavior (Bundled Prompts)](#default-behavior-bundled-prompts)
+3. [Using External Prompts (No Recompilation Required)](#using-external-prompts-no-recompilation-required)
+4. [Updating Prompts Without Recompilation](#updating-prompts-without-recompilation)
+5. [Prompt File Format](#prompt-file-format)
+6. [File Structure](#file-structure)
+7. [Troubleshooting](#troubleshooting)
+8. [Architecture](#architecture)
+9. [Best Practices](#best-practices)
+10. [Quick Start](#quick-start)
+11. [Adding New Prompts](#adding-new-prompts)
+12. [See Also](#see-also)
+
+---
+
 This document explains how to configure and manage prompts in the java-resumes application.
 
 ## Overview
@@ -264,3 +283,8 @@ To add a new prompt (e.g., LINKEDIN for LinkedIn summaries):
 - [API Documentation](../docs/api.md)
 - [Architecture Overview](../docs/architecture/ARCHITECTURE.md)
 - [Deployment Guide](../docs/DEPLOYMENT.md)
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

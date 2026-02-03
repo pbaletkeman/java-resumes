@@ -2,6 +2,18 @@
 
 Complete REST API documentation for java-resumes application.
 
+## Table of Contents
+
+- [Base URL](#-base-url)
+- [Core Endpoints](#-core-endpoints)
+- [Upload & Optimize](#-upload--optimize)
+- [File Management](#-file-management)
+- [Response Formats](#-response-formats)
+- [Error Handling](#-error-handling)
+- [Examples](#-examples)
+
+---
+
 ## 📡 Base URL
 
 ```
@@ -323,7 +335,7 @@ curl -X POST http://localhost:8080/api/markdownFile2PDF \
 
 ---
 
-### Interview Preparation *(New)*
+### Interview Preparation _(New)_
 
 #### Generate HR Interview Questions
 
@@ -457,7 +469,7 @@ curl -X POST http://localhost:8080/api/generate/interview-reverse \
 
 ---
 
-### Professional Networking *(New)*
+### Professional Networking _(New)_
 
 #### Generate Cold Email
 
@@ -726,13 +738,13 @@ graph TD
 
 ### Optimization Parameters
 
-| Parameter        | Type   | Default       | Range   | Description              |
-| ---------------- | ------ | ------------- | ------- | ------------------------ |
-| `temperature`    | number | 0.7           | 0.0-1.0 | Response creativity      |
-| `model`          | string | gemma-3-4b-it | -       | LLM model name           |
-| `jobDescription` | string | required      | -       | Target job posting       |
-| `resume`         | string | required      | -       | Current resume text      |
-| `promptType`     | array  | ["resume_string"]    | -       | Output types to generate |
+| Parameter        | Type   | Default           | Range   | Description              |
+| ---------------- | ------ | ----------------- | ------- | ------------------------ |
+| `temperature`    | number | 0.7               | 0.0-1.0 | Response creativity      |
+| `model`          | string | gemma-3-4b-it     | -       | LLM model name           |
+| `jobDescription` | string | required          | -       | Target job posting       |
+| `resume`         | string | required          | -       | Current resume text      |
+| `promptType`     | array  | ["resume_string"] | -       | Output types to generate |
 
 ### File Size Limits
 
@@ -869,3 +881,13 @@ Typical response times (with Ollama local LLM):
 - [Quick Start](QUICK_START.md) - API usage examples
 - [Architecture](ARCHITECTURE.md) - Backend architecture
 - [Testing](TESTING.md) - API testing guide
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team
+  
+---  
+  
+**Last Updated:** February 2, 2026  
+**Maintained By:** java-resumes development team 

@@ -2,6 +2,18 @@
 
 Complete guide for setting up the development environment for java-resumes.
 
+## Table of Contents
+
+- [Prerequisites](#-prerequisites)
+- [Backend Setup](#-backend-setup)
+- [Frontend Setup](#-frontend-setup)
+- [Docker Setup](#-docker-setup)
+- [IDE Configuration](#-ide-configuration)
+- [Verification](#-verification)
+- [Troubleshooting](#-troubleshooting)
+
+---
+
 ## 📋 Prerequisites
 
 ### System Requirements
@@ -647,3 +659,13 @@ npm install
 - [Architecture](ARCHITECTURE.md) - System design overview
 - [Testing](TESTING.md) - Comprehensive testing guide
 - [Production Deployment](PRODUCTION_DEPLOYMENT.md) - Production setup
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team
+  
+---  
+  
+**Last Updated:** February 2, 2026  
+**Maintained By:** java-resumes development team 
