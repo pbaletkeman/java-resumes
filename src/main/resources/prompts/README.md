@@ -260,7 +260,7 @@ All templates use **standardized variable names**:
 2. **Fall back to bundled resources** (from this directory)
 3. **Variables are replaced** by `ApiService` at runtime using regex substitution
 
-See [docs/PROMPTS_CONFIGURATION.md](../../docs/PROMPTS_CONFIGURATION.md) for configuration details.
+See [docs/PROMPTS_CONFIGURATION.md](../../../../docs/PROMPTS_CONFIGURATION.md) for configuration details.
 
 ### Best Practices
 
@@ -335,7 +335,7 @@ To add a new prompt:
 9. Add new option to frontend prompt selector dropdown
 10. Update this README and any relevant documentation
 
-**Full implementation guide:** See [docs/PROMPTS_CONFIGURATION.md](../../docs/PROMPTS_CONFIGURATION.md)
+**Full implementation guide:** See [docs/PROMPTS_CONFIGURATION.md](../../../../docs/PROMPTS_CONFIGURATION.md)
 
 ## File Structure
 
@@ -365,9 +365,9 @@ prompts/
 
 ## Related Documentation
 
-- [PROMPTS_CONFIGURATION.md](../../docs/PROMPTS_CONFIGURATION.md) - Configuration, deployment, and detailed setup
-- [Architecture.md](../../docs/architecture/ARCHITECTURE.md) - System architecture and integration points
-- [BACKEND_README.md](../../docs/BACKEND_README.md) - Backend API documentation and endpoints
+- [PROMPTS_CONFIGURATION.md](../../../../docs/PROMPTS_CONFIGURATION.md) - Configuration, deployment, and detailed setup
+- [Architecture.md](../../../../docs/architecture/ARCHITECTURE.md) - System architecture and integration points
+- [BACKEND_README.md](../../../../docs/BACKEND_README.md) - Backend API documentation and endpoints
 
 ---
 
