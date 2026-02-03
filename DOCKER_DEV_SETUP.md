@@ -331,5 +331,5 @@ docker-compose exec backend bash
 
 ---
 
-**Last Updated:** February 2, 2026  
+**Last Updated:** February 2, 2026
 **Maintained By:** java-resumes development team

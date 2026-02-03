@@ -129,7 +129,7 @@ Pick your role and jump in:
 
 ---
 
-**Last Updated:** February 2, 2026  
+**Last Updated:** February 2, 2026
 **Maintained By:** java-resumes development team
 
 **Questions?** Check [VISUAL_DOCUMENTATION_GUIDE.md](VISUAL_DOCUMENTATION_GUIDE.md#questions) for answers!

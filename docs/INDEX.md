@@ -2,7 +2,7 @@
 
 Complete documentation and reference guide for the java-resumes project.
 
-**Last Updated:** February 2, 2026  
+**Last Updated:** February 2, 2026
 **Status:** Reorganized with cross-linked navigation
 
 ## Table of Contents
@@ -239,5 +239,5 @@ For questions or updates, refer to specific documentation sections or contact th
 
 ---
 
-**Last Updated:** February 2, 2026  
+**Last Updated:** February 2, 2026
 **Maintained By:** java-resumes development team

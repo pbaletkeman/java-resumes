@@ -70,5 +70,5 @@ Would love feedback! What features would _you_ add to an AI-powered resume tool?
 
 ---
 
-**Last Updated:** February 2, 2026  
+**Last Updated:** February 2, 2026
 **Maintained By:** java-resumes development team

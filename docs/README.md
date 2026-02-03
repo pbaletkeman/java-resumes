@@ -250,6 +250,6 @@ When updating documentation:
 
 ---
 
-**Last Updated:** February 2, 2026  
-**Maintained By:** java-resumes development team  
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team
 **Version:** 2.0 (External Configuration Support)
