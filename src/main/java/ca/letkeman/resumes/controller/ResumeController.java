@@ -18,9 +18,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -394,12 +392,4 @@ public final class ResumeController {
     }
   }
 
-  @GetMapping("/health")
-  public ResponseEntity<Map<String, Object>> healthCheck() {
-    Map<String, Object> health = new HashMap<>();
-    health.put("status", "UP");
-    health.put("timestamp", LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
-    health.put("service", "Resume Optimization API");
-    return ResponseEntity.ok(health);
-  }
 }
