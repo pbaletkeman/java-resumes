@@ -1,0 +1,72 @@
+version: "3.8"
+
+services:
+  # Backend - Java Spring Boot API with SQLite
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: resume-backend-sqlite
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - UPLOAD_PATH=files
+      - SERVER_PORT=8080
+      - SPRING_DATASOURCE_URL=jdbc:sqlite:/app/data/prompts.db
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.community.dialect.SQLiteDialect
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=validate
+      - SPRING_FLYWAY_ENABLED=true
+      - SPRING_FLYWAY_LOCATIONS=classpath:db/migration/sqlite
+    volumes:
+      - backend-files:/app/files
+      - backend-data:/app/data
+      - ./config.json:/app/config.json:ro
+    networks:
+      - resume-network
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--no-verbose",
+          "--tries=1",
+          "--spider",
+          "http://localhost:8080/api/health/database",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
+  # Frontend - React + Vite Dev Server
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: resume-frontend-sqlite
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_BASE_URL=http://backend:8080
+      - NODE_ENV=development
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - resume-network
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+
+networks:
+  resume-network:
+    driver: bridge
+    name: resume-sqlite-network
+
+volumes:
+  backend-files:
+    name: resume-sqlite-backend-files
+  backend-data:
+    name: resume-sqlite-backend-data

@@ -39,9 +39,9 @@ Generate **5 distinctly different thank you email variations** that a candidate 
 Provide **5 complete thank you email variations**, each with:
 
 ```markdown
-## Post-Interview Thank You Email Variations for {job_title} at {company_name}
+## Post-Interview Thank You Email Variations for {job_title} at {company}
 
-**Candidate Resume:** {resume}
+**Candidate Resume:** {resume_string}
 **Interviewer:** {interviewer_name}
 **Generated:** {today}
 

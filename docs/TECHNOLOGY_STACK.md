@@ -162,7 +162,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 | Technology | Version | Purpose           |
 | ---------- | ------- | ----------------- |
-| PostgreSQL | 14+     | Production DB     |
+| PostgreSQL | 17+     | Production DB     |
 | MySQL      | 8.0+    | Alternative DB    |
 | H2         | Latest  | In-memory testing |
 | MongoDB    | 6+      | NoSQL option      |
@@ -237,7 +237,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 | GitHub          | Repository hosting     |
 | IntelliJ IDEA   | Java IDE (recommended) |
 | VS Code         | Code editor            |
-| Postman         | API testing            |
+| Bruno           | API testing            |
 | Chrome DevTools | Browser debugging      |
 | Docker Desktop  | Local containerization |
 

@@ -104,9 +104,9 @@ Provide **5 role-specific questions** directly tied to the job description:
 ## Context Information
 
 **Job Title:** {job_title}
-**Company Name:** {company_name}
+**Company Name:** {company}
 **Job Description:** {job_description}
-**Candidate Resume:** {resume}
+**Candidate Resume:** {resume_string}
 **Today's Date:** {today}
 
 ## Important Guidelines

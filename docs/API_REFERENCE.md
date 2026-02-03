@@ -156,7 +156,7 @@ Content-Type: application/json
 ```json
 {
   "jobDescription": "We are looking for a Senior Java Developer with 5+ years...",
-  "resume": "John Doe\nSenior Software Engineer\n...",
+  "resume_string": "John Doe\nSenior Software Engineer\n...",
   "promptType": ["RESUME_OPTIMIZATION", "COVER_LETTER"],
   "temperature": 0.7,
   "model": "gemma-3-4b-it"
@@ -168,14 +168,14 @@ Content-Type: application/json
 ```json
 {
   "type": "object",
-  "required": ["jobDescription", "resume"],
+  "required": ["jobDescription", "resume_string"],
   "properties": {
     "jobDescription": {
       "type": "string",
       "description": "Job description text",
       "minLength": 50
     },
-    "resume": {
+    "resume_string": {
       "type": "string",
       "description": "Resume or CV text",
       "minLength": 50
@@ -209,7 +209,7 @@ curl -X POST http://localhost:8080/api/upload \
   -H "Content-Type: application/json" \
   -d '{
     "jobDescription": "Senior Java Developer - 5+ years required",
-    "resume": "John Doe, Senior Software Engineer, Java experience",
+    "resume_string": "John Doe, Senior Software Engineer, Java experience",
     "promptType": ["RESUME_OPTIMIZATION"],
     "temperature": 0.7,
     "model": "gemma-3-4b-it"
@@ -342,7 +342,7 @@ Content-Type: application/json
 ```json
 {
   "jobDescription": "Software Engineer position requiring teamwork and communication skills",
-  "company": "TechCorp" // optional
+  "company_name": "TechCorp" // optional
 }
 ```
 
@@ -353,7 +353,7 @@ curl -X POST http://localhost:8080/api/generate/interview-hr-questions \
   -H "Content-Type: application/json" \
   -d '{
     "jobDescription": "Senior Software Engineer - Lead development teams",
-    "company": "TechStartup"
+    "company_name": "TechStartup"
   }'
 ```
 
@@ -430,7 +430,7 @@ Content-Type: application/json
 ```json
 {
   "jobDescription": "Product Manager - B2B SaaS platform",
-  "company": "FastGrowth Inc" // optional
+  "company_name": "FastGrowth Inc" // optional
 }
 ```
 
@@ -441,7 +441,7 @@ curl -X POST http://localhost:8080/api/generate/interview-reverse \
   -H "Content-Type: application/json" \
   -d '{
     "jobDescription": "Engineering Manager - Team of 8 developers",
-    "company": "TechCorp"
+    "company_name": "TechCorp"
   }'
 ```
 
@@ -476,7 +476,7 @@ Content-Type: application/json
 ```json
 {
   "jobDescription": "Software Engineer - Python, Machine Learning",
-  "company": "AI Innovations Inc",
+  "company_name": "AI Innovations Inc",
   "jobTitle": "ML Engineer" // optional
 }
 ```
@@ -488,7 +488,7 @@ curl -X POST http://localhost:8080/api/generate/cold-email \
   -H "Content-Type: application/json" \
   -d '{
     "jobDescription": "Senior Data Scientist - NLP and Computer Vision",
-    "company": "DataTech Solutions",
+    "company_name": "DataTech Solutions",
     "jobTitle": "Senior Data Scientist"
   }'
 ```
@@ -522,7 +522,7 @@ Content-Type: application/json
 ```json
 {
   "jobDescription": "Product Designer - UX/UI for mobile apps",
-  "company": "DesignHub",
+  "company_name": "DesignHub",
   "jobTitle": "Senior Product Designer" // optional
 }
 ```
@@ -534,7 +534,7 @@ curl -X POST http://localhost:8080/api/generate/cold-linkedin-message \
   -H "Content-Type: application/json" \
   -d '{
     "jobDescription": "Frontend Developer - React, TypeScript",
-    "company": "WebDev Inc",
+    "company_name": "WebDev Inc",
     "jobTitle": "Frontend Developer"
   }'
 ```
@@ -568,7 +568,7 @@ Content-Type: application/json
 ```json
 {
   "jobDescription": "Backend Engineer - Go, Docker, Kubernetes",
-  "company": "CloudFirst Technologies",
+  "company_name": "CloudFirst Technologies",
   "jobTitle": "Backend Engineer", // optional
   "interviewerName": "Sarah Johnson" // optional
 }
@@ -581,7 +581,7 @@ curl -X POST http://localhost:8080/api/generate/thank-you-email \
   -H "Content-Type: application/json" \
   -d '{
     "jobDescription": "Solutions Architect - AWS, Azure",
-    "company": "Cloud Services Corp",
+    "company_name": "Cloud Services Corp",
     "jobTitle": "Solutions Architect",
     "interviewerName": "Michael Chen"
   }'
@@ -640,7 +640,7 @@ curl -X POST http://localhost:8080/api/upload \
   -H "Content-Type: application/json" \
   -d '{
     "jobDescription": "Software Engineer - Java, Spring Boot, Microservices",
-    "resume": "John Doe\nSenior Java Developer\n10 years experience",
+    "resume_string": "John Doe\nSenior Java Developer\n10 years experience",
     "promptType": ["RESUME_OPTIMIZATION"],
     "temperature": 0.7
   }'
@@ -653,7 +653,7 @@ curl -X POST http://localhost:8080/api/upload \
   -H "Content-Type: application/json" \
   -d '{
     "jobDescription": "Product Manager at TechCorp",
-    "resume": "Jane Smith\nProduct Manager\n8 years tech experience",
+    "resume_string": "Jane Smith\nProduct Manager\n8 years tech experience",
     "promptType": ["RESUME_OPTIMIZATION", "COVER_LETTER"],
     "temperature": 0.8
   }'
@@ -732,7 +732,7 @@ graph TD
 | `model`          | string | gemma-3-4b-it | -       | LLM model name           |
 | `jobDescription` | string | required      | -       | Target job posting       |
 | `resume`         | string | required      | -       | Current resume text      |
-| `promptType`     | array  | ["RESUME"]    | -       | Output types to generate |
+| `promptType`     | array  | ["resume_string"]    | -       | Output types to generate |
 
 ### File Size Limits
 

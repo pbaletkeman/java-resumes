@@ -362,7 +362,7 @@ kubectl logs -f deployment/java-resumes-backend -n java-resumes
 ```yaml
 # Docker Compose - Add PostgreSQL
 db:
-  image: postgres:15-alpine
+  image: postgres:17-alpine
   environment:
     POSTGRES_PASSWORD: ${DB_PASSWORD}
     POSTGRES_DB: java_resumes

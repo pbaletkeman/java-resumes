@@ -284,7 +284,7 @@ npm run dev
 
 **Steps:**
 
-1. Open Postman or similar tool
+1. Open Bruno or similar tool
 2. Show API endpoints:
    - POST /upload
    - GET /files
@@ -313,7 +313,7 @@ npm run dev
    - Missing required field (400)
    - File not found (404)
    - Server error (500)
-2. Capture error response in Postman:
+2. Capture error response in Bruno:
    - HTTP status code
    - Error message
    - Response body

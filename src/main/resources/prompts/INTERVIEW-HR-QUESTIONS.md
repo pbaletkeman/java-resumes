@@ -37,7 +37,7 @@ Generate 5 common HR interview questions that are frequently asked during initia
 Provide **5 distinct HR questions** in the following structure:
 
 ```markdown
-## General HR Interview Questions for {job_title} at {company_name}
+## General HR Interview Questions for {job_title} at {company}
 
 **Generated:** {today}
 
@@ -93,9 +93,9 @@ Provide **5 distinct HR questions** in the following structure:
 ## Context Information
 
 **Job Title:** {job_title}
-**Company Name:** {company_name}
+**Company Name:** {company}
 **Job Description:** {job_description}
-**Candidate Resume:** {resume}
+**Candidate Resume:** {resume_string}
 **Today's Date:** {today}
 
 ## Important Guidelines

@@ -183,11 +183,11 @@ Response 200:
 ### Capture Instructions API
 
 1. **Use API Testing Tool**
-   - Postman (recommended)
+   - Bruno (recommended)
    - Or Insomnia REST client
    - Or curl in terminal
 
-2. **Example with Postman**
+2. **Example with Bruno**
    - Create new POST request
    - URL: `http://localhost:8080/api/v1/upload`
    - Select Body → form-data
@@ -217,7 +217,7 @@ Response 200:
    - Show response status code
 
 5. **Take Screenshot**
-   - Capture Postman window showing request/response
+   - Capture Bruno window showing request/response
    - Or capture terminal output
    - Ensure all details visible
 
@@ -305,7 +305,7 @@ Response 500:
    - Request with invalid data type
    - Server-side simulated error
 
-2. **Using Postman**
+2. **Using Bruno**
    - Create requests for each error scenario
    - Configure request to trigger error
    - Send and observe response
@@ -357,7 +357,7 @@ Response 500:
 
 1. Backend server running: `./gradlew bootRun`
 2. Swagger UI accessible: `http://localhost:8080/swagger-ui/index.html`
-3. API testing tool installed (Postman recommended)
+3. API testing tool installed (Bruno recommended)
 4. Sample test data prepared
 
 ### Sample Test Data
@@ -487,7 +487,7 @@ CERTIFICATIONS
 
 ### Recommended Tools
 
-1. **Postman** (Easy UI, collection management)
+1. **Bruno** (Easy UI, collection management)
 2. **Insomnia** (Clean interface, good for beginners)
 3. **curl** (Command-line, scripts, automation)
 4. **HTTPie** (User-friendly curl alternative)

@@ -413,7 +413,7 @@ Just save your files and see changes instantly in the browser!
 4. **Test Your Changes**:
    - Use the application UI to test features
    - Open browser DevTools (F12) to check console
-   - Use Thunder Client or Postman to test API directly
+   - Use Thunder Client or Bruno to test API directly
 
 5. **Stop the Server**:
    - Press `Ctrl+C` in the terminal

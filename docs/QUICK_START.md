@@ -75,11 +75,65 @@ ollama pull mistral:latest
 }
 ```
 
-### Step 3: Start the Application
+### Step 3: Choose Your Deployment Configuration
+
+The project includes **4 different docker-compose files** optimized for different use cases:
+
+| Configuration         | Use Case             | Database            | LLM Service | Startup Time |
+| --------------------- | -------------------- | ------------------- | ----------- | ------------ |
+| **frontend-backend**  | CI/CD, quick testing | In-memory           | No          | ~30s         |
+| **sqlite**            | Development          | SQLite (persistent) | No          | ~40s         |
+| **postgresql**        | Production-like      | PostgreSQL 17       | No          | ~60s         |
+| **ollama-postgresql** | Full-stack local     | PostgreSQL 17       | Ollama      | ~90s+        |
+
+#### Quick Start Commands
+
+**Option 1: Lightweight (Frontend + Backend only)**
+
+```bash
+docker compose -f docker-compose.frontend-backend.yml up --build
+```
+
+Best for: CI/CD pipelines, quick testing, environments with minimal resources
+
+**Option 2: Development with SQLite**
+
+```bash
+docker compose -f docker-compose.sqlite.yml up --build
+```
+
+Best for: Local development with persistent storage, simpler setup
+
+**Option 3: Production-like with PostgreSQL**
+
+```bash
+docker compose -f docker-compose.postgresql.yml up --build
+```
+
+Best for: Testing production configuration, scale testing, team development
+
+**Option 4: Full Stack with Ollama + PostgreSQL** _(Recommended)_
+
+```bash
+docker compose -f docker-compose.ollama-postgresql.yml up --build
+
+# In another terminal, pull an LLM model:
+docker exec resume-ollama ollama pull mistral
+```
+
+Best for: Complete local development with all services, realistic production simulation
+
+For detailed information about each configuration, databases, health checks, and troubleshooting, see **[DOCKER_SETUP.md](DOCKER_SETUP.md)**.
+
+### Step 4: Start the Application
+
+If using the default configuration (frontend-backend):
 
 ```bash
 docker compose up --build
 ```
+
+Or choose one of the configurations above.
 
 This will:
 
@@ -91,7 +145,7 @@ This will:
 
 First-time builds take longer; subsequent starts are faster.
 
-### Step 4: Access the Application
+### Step 5: Access the Application
 
 Once all services are running, access:
 
@@ -100,7 +154,7 @@ Once all services are running, access:
 - **API Documentation:** <http://localhost:8080/swagger-ui/index.html>
 - **Health Check:** <http://localhost:8080/api/health>
 
-### Step 5: Test It Out
+### Step 6: Test It Out
 
 1. **Open the web interface** at <http://localhost>
 2. **Enter a job description** or upload a job posting

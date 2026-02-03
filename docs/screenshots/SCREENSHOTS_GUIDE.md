@@ -154,7 +154,7 @@ docs/screenshots/
 
 #### API Endpoints (`api-endpoints.png`)
 
-- **Location**: Swagger UI or Postman
+- **Location**: Swagger UI or Bruno
 - **Size**: 1000x600px (minimum)
 - **Shows**:
   - POST /upload endpoint
@@ -169,7 +169,7 @@ docs/screenshots/
 
 #### Error Responses (`error-responses.png`)
 
-- **Location**: Postman or API testing tool
+- **Location**: Bruno or API testing tool
 - **Size**: 1000x600px (minimum)
 - **Shows**:
   - 400 Bad Request error
@@ -178,7 +178,7 @@ docs/screenshots/
   - Error message formats
   - HTTP status codes
 - **How to capture**:
-  1. Use Postman or curl
+  1. Use Bruno or curl
   2. Trigger various errors
   3. Capture response examples
 

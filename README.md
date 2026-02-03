@@ -32,14 +32,14 @@ docker compose up --build
 
 ## 📚 Documentation Index
 
-| Topic             | Doc                                           | Topic            | Doc                                             |
-| ----------------- | --------------------------------------------- | ---------------- | ----------------------------------------------- |
-| **Setup**         | [Quick Start](docs/QUICK_START.md)            | **API**          | [API Reference](docs/API_REFERENCE.md)          |
-| **Architecture**  | [System Design](docs/ARCHITECTURE.md)         | **Testing**      | [Test Guide](docs/TESTING.md)                   |
-| **Configuration** | [Config Guide](docs/CONFIGURATION.md)         | **Code Quality** | [Git Hooks](docs/git-hooks/README_GIT_HOOKS.md) |
-| **Development**   | [Dev Setup](docs/DEVELOPMENT_SETUP.md)        | **Issues**       | [Troubleshooting](docs/TROUBLESHOOTING.md)      |
-| **Deployment**    | [Deploy Guide](docs/PRODUCTION_DEPLOYMENT.md) | **Env Vars**     | [Configuration](docs/ENVIRONMENT_VARIABLES.md)  |
-| **Docker**        | [Docker Setup](docs/DOCKER_SETUP.md)          | **Mock Mode**    | [Ollama Mock](docs/OLLAMA_MOCK_MODE.md)         |
+| Topic             | Doc                                           | Topic            | Doc                                                     |
+| ----------------- | --------------------------------------------- | ---------------- | ------------------------------------------------------- |
+| **Setup**         | [Quick Start](docs/QUICK_START.md)            | **API**          | [API Reference](docs/API_REFERENCE.md)                  |
+| **Architecture**  | [System Design](docs/ARCHITECTURE.md)         | **Testing**      | [Test Guide](docs/TESTING.md)                           |
+| **Configuration** | [Config Guide](docs/CONFIGURATION.md)         | **Code Quality** | [Git Hooks](docs/git-hooks/README_GIT_HOOKS.md)         |
+| **Development**   | [Dev Setup](docs/DEVELOPMENT_SETUP.md)        | **Issues**       | [Troubleshooting](docs/TROUBLESHOOTING.md)              |
+| **Deployment**    | [Deploy Guide](docs/PRODUCTION_DEPLOYMENT.md) | **Env Vars**     | [Configuration](docs/ENVIRONMENT_VARIABLES.md)          |
+| **Docker**        | [Docker Setup](docs/DOCKER_SETUP.md)          | **Mock Mode**    | [Ollama Mock](docs/OLLAMA_MOCK_MODE.md)                 |
 | **Ollama Setup**  | [Ollama Guide](docs/OLLAMA_SETUP.md)          | **GitHub CI**    | [GitHub Environment](docs/GITHUB_ENVIRONMENT_OLLAMA.md) |
 
 ---
@@ -51,21 +51,25 @@ The application provides comprehensive AI-powered career optimization tools:
 ### Core Features
 
 **📄 Resume & Cover Letter Optimization**
+
 - Submit a job description + resume → Get back an AI-optimized resume and/or cover letter tailored to that specific job opening
 - ATS (Applicant Tracking System) optimization
 - Keyword matching and relevance scoring
 
 **🎯 Skills Development Planning**
+
 - Get personalized recommendations for certifications, skills, and hands-on experiences
 - Receive a structured learning path tailored to your target role
 - Understand time investment and priorities for career advancement
 
-**💼 Interview Preparation** *(New)*
+**💼 Interview Preparation** _(New)_
+
 - **HR Interview Questions**: Get 5 general HR questions to prepare for behavioral interviews
 - **Job-Specific Questions**: Receive 5 technical/functional questions based on the job description
 - **Reverse Interview Questions**: Get thoughtful questions to ask your interviewers
 
-**🤝 Professional Networking** *(New)*
+**🤝 Professional Networking** _(New)_
+
 - **Cold Email Templates**: Generate 5 variations of professional cold outreach emails
 - **LinkedIn Messages**: Create 5 distinct LinkedIn connection request messages
 - **Thank You Emails**: Get 5 variations of post-interview thank you emails
@@ -77,8 +81,8 @@ The application provides comprehensive AI-powered career optimization tools:
 - ✅ AI-powered resume optimization
 - ✅ Cover letter generation
 - ✅ Skills & certifications recommendations
-- ✅ Interview preparation (HR, job-specific, reverse questions) *(New)*
-- ✅ Professional networking (cold emails, LinkedIn, thank you notes) *(New)*
+- ✅ Interview preparation (HR, job-specific, reverse questions) _(New)_
+- ✅ Professional networking (cold emails, LinkedIn, thank you notes) _(New)_
 - ✅ Markdown to PDF conversion
 - ✅ File management (upload, download, delete)
 - ✅ Light/dark theme support
@@ -139,20 +143,23 @@ java-resumes/
 ## 📡 API Endpoints
 
 ### Core Document Processing
+
 | Method | Endpoint                | Purpose                      |
 | ------ | ----------------------- | ---------------------------- |
 | POST   | `/api/upload`           | Optimize resume/cover letter |
 | POST   | `/api/markdownFile2PDF` | Convert Markdown to PDF      |
 | POST   | `/api/process/skills`   | Get skills recommendations   |
 
-### Interview Preparation *(New)*
-| Method | Endpoint                              | Purpose                       |
-| ------ | ------------------------------------- | ----------------------------- |
-| POST   | `/api/generate/interview-hr-questions`| Generate HR interview questions|
-| POST   | `/api/generate/interview-job-specific`| Generate job-specific questions|
-| POST   | `/api/generate/interview-reverse`     | Questions to ask interviewers |
+### Interview Preparation _(New)_
 
-### Professional Networking *(New)*
+| Method | Endpoint                               | Purpose                         |
+| ------ | -------------------------------------- | ------------------------------- |
+| POST   | `/api/generate/interview-hr-questions` | Generate HR interview questions |
+| POST   | `/api/generate/interview-job-specific` | Generate job-specific questions |
+| POST   | `/api/generate/interview-reverse`      | Questions to ask interviewers   |
+
+### Professional Networking _(New)_
+
 | Method | Endpoint                              | Purpose                       |
 | ------ | ------------------------------------- | ----------------------------- |
 | POST   | `/api/generate/cold-email`            | Generate cold outreach emails |
@@ -160,13 +167,14 @@ java-resumes/
 | POST   | `/api/generate/thank-you-email`       | Generate thank you emails     |
 
 ### File Management
-| Method | Endpoint                | Purpose                      |
-| ------ | ----------------------- | ---------------------------- |
-| GET    | `/api/files`            | List files                   |
-| GET    | `/api/files/{filename}` | Download file                |
-| DELETE | `/api/files/{filename}` | Delete file                  |
-| GET    | `/api/health`           | Health check                 |
-| GET    | `/api/health`           | Health check                 |
+
+| Method | Endpoint                | Purpose       |
+| ------ | ----------------------- | ------------- |
+| GET    | `/api/files`            | List files    |
+| GET    | `/api/files/{filename}` | Download file |
+| DELETE | `/api/files/{filename}` | Delete file   |
+| GET    | `/api/health`           | Health check  |
+| GET    | `/api/health`           | Health check  |
 
 Full API docs: http://localhost:8080/swagger-ui/html (when running)
 
@@ -305,7 +313,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 - **Documentation**: [docs/README.md](docs/README.md)
 - **Issues**: [GitHub Issues](https://github.com/pbaletkeman/java-resumes/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/pbaletkeman/java-resumes/discussions)
-- **Repository**: https://github.com/pbaletkeman/java-resumes
+- **Repository**: <https://github.com/pbaletkeman/java-resumes>
 
 ---
 

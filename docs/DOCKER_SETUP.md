@@ -1,233 +1,492 @@
 # Docker Setup Guide
 
-Complete guide for running the java-resumes application using Docker.
+Complete guide for running the java-resumes application using Docker with multiple configuration options.
 
 ## Prerequisites
 
 - Docker 20.10+ installed
 - Docker Compose v2+ (or Docker with Compose plugin)
 - At least 4GB RAM available for containers
-- 10GB free disk space
+- 10GB free disk space (20GB+ recommended for PostgreSQL + Ollama)
 
-## Quick Start
+## Available Docker Compose Configurations
+
+This project provides 4 pre-configured docker-compose files for different deployment scenarios:
+
+| File                                   | Services                                 | Database            | Best For                       |
+| -------------------------------------- | ---------------------------------------- | ------------------- | ------------------------------ |
+| `docker-compose.frontend-backend.yml`  | Frontend, Backend                        | SQLite (in-memory)  | Lightweight testing, CI/CD     |
+| `docker-compose.sqlite.yml`            | Frontend, Backend                        | SQLite (persistent) | Local development, small-scale |
+| `docker-compose.postgresql.yml`        | Frontend, Backend, PostgreSQL 17         | PostgreSQL          | Production-like environment    |
+| `docker-compose.ollama-postgresql.yml` | Frontend, Backend, PostgreSQL 17, Ollama | PostgreSQL          | Full stack with local LLM      |
+
+### Quick Start - Choose Your Setup
+
+#### Option 1: Lightweight Frontend + Backend (No Database)
 
 ```bash
-# Start all services (backend, frontend, Ollama)
-docker compose up -d
+docker compose -f docker-compose.frontend-backend.yml up -d
+```
+
+- **Access**: Frontend at http://localhost:3000
+- **Best for**: Quick testing, minimal resources
+- **Database**: None (in-memory only)
+- **Startup time**: ~30 seconds
+
+#### Option 2: Frontend + Backend with SQLite
+
+```bash
+docker compose -f docker-compose.sqlite.yml up -d
+```
+
+- **Access**: Frontend at http://localhost:3000
+- **Best for**: Local development, persistent data
+- **Database**: SQLite file-based (persistent volume)
+- **Startup time**: ~40 seconds
+
+#### Option 3: Frontend + Backend with PostgreSQL 17
+
+```bash
+docker compose -f docker-compose.postgresql.yml up -d
+```
+
+- **Access**: Frontend at http://localhost:3000
+- **Database**: PostgreSQL 17 running in container
+- **Connection**: localhost:5432 (username: resume_user, password: resume_password)
+- **Best for**: Production-like testing, larger datasets
+- **Startup time**: ~60 seconds
+
+#### Option 4: Full Stack with PostgreSQL + Ollama
+
+```bash
+docker compose -f docker-compose.ollama-postgresql.yml up -d
 
 # Pull an LLM model (required for first run)
 docker exec resume-ollama ollama pull tinyllama
-
-# Check service status
-docker compose ps
-
-# View logs
-docker compose logs -f
-
-# Stop all services
-docker compose down
 ```
 
-Access the application:
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:8080
-- API Documentation: http://localhost:8080/swagger-ui/index.html
-- Ollama API: http://localhost:11434
+- **Access**: Frontend at http://localhost:3000, Ollama at http://localhost:11434
+- **Database**: PostgreSQL 17
+- **LLM**: Ollama with local models
+- **Best for**: Complete testing with local LLM service
+- **Startup time**: ~90 seconds
+- **Note**: First model pull can take 5-15 minutes depending on model size
 
-## Architecture
+### Stopping Services
 
-The application consists of 3 services:
+For any configuration:
 
-### 1. Ollama (LLM Service)
+```bash
+# Stop all services
+docker compose -f <compose-file> down
+
+# Stop and remove volumes (WARNING: deletes data)
+docker compose -f <compose-file> down -v
+```
+
+## Service Architecture
+
+### Standard Setup (3 Services)
+
+```
+┌─────────────────────────┐
+│   Frontend (React)      │
+│   Port: 3000            │
+└────────────┬────────────┘
+             │ HTTP
+┌────────────▼────────────┐
+│  Backend (Spring Boot)  │
+│   Port: 8080            │
+└────────────┬────────────┘
+             │ JDBC
+┌────────────▼────────────┐
+│   Database              │
+│   (SQLite/PostgreSQL)   │
+└─────────────────────────┘
+```
+
+### Full Stack Setup (4 Services)
+
+```
+┌──────────────────────────┐
+│   Frontend (React)       │
+│   Port: 3000             │
+└────────────┬─────────────┘
+             │ HTTP
+┌────────────▼─────────────┐
+│  Backend (Spring Boot)   │
+│   Port: 8080             │
+└────────────┬─────────────┘
+      ┌──────┴──────┐
+      │ JDBC        │ HTTP
+      ▼             ▼
+┌──────────┐  ┌──────────────┐
+│PostgreSQL│  │   Ollama     │
+│Port 5432 │  │  Port 11434  │
+└──────────┘  └──────────────┘
+```
+
+## Service Details
+
+### Frontend Service
+
+- **Image**: Built from `./frontend`
+- **Port**: 3000
+- **Technology**: React 19, TypeScript, Vite
+- **Dockerfile**: `./frontend/Dockerfile.dev` (for development)
+- **Environment**:
+  - `VITE_API_BASE_URL`: Backend API URL (default: http://backend:8080)
+  - `NODE_ENV`: development or production
+
+### Backend Service
+
+- **Image**: Built from `./Dockerfile`
+- **Port**: 8080
+- **Technology**: Java 21, Spring Boot 3.5.1
+- **Dockerfile**: `./Dockerfile`
+- **Environment Variables**:
+  - `SPRING_PROFILES_ACTIVE`: Application profile (prod, postgresql, etc)
+  - `UPLOAD_PATH`: File upload directory
+  - Database-specific variables (see Database Configuration section)
+  - LLM endpoint configuration
+
+### PostgreSQL Service (PostgreSQL configs only)
+
+- **Image**: `postgres:17-alpine`
+- **Port**: 5432
+- **Default Credentials**:
+  - Database: `resume_db`
+  - Username: `resume_user`
+  - Password: `resume_password`
+- **Volume**: Persistent data storage at `resume-*-postgres-data`
+- **Health Check**: pg_isready (30s interval)
+
+### Ollama Service (Full-stack only)
+
 - **Image**: `ollama/ollama:latest`
 - **Port**: 11434
-- **Purpose**: Provides local LLM inference
-- **Volume**: `ollama-data` (persistent model storage)
-- **Optional**: Can be disabled if using external LLM service
+- **Purpose**: Local LLM inference
+- **Volume**: Model storage at `resume-ollama-data`
+- **Health Check**: ollama list command (30s interval)
+- **Optional**: GPU support available (see LLM Model Management)
 
-### 2. Backend (Spring Boot API)
-- **Built from**: `./Dockerfile`
-- **Port**: 8080
-- **Technology**: Java 21, Spring Boot 3.5.1, Gradle 8.10
-- **Volume**: `backend-files` (uploaded files storage)
-- **Dependencies**: Ollama service
+## Health Check Endpoints
 
-### 3. Frontend (React UI)
-- **Built from**: `./frontend/Dockerfile` (production) or `./frontend/Dockerfile.dev` (development)
-- **Port**: 3000 (dev) or 80 (production)
-- **Technology**: React 19, TypeScript, Vite
-- **Dependencies**: Backend service
+The backend includes comprehensive health check endpoints for monitoring system status.
 
-## Configuration
-
-### Environment Variables
-
-Create a `.env` file in the project root:
-
-```env
-# LLM Configuration
-LLM_ENDPOINT=http://ollama:11434/v1/chat/completions
-LLM_APIKEY=not-needed-for-local
-
-# Spring Profile
-SPRING_PROFILES_ACTIVE=prod
-
-# Upload Configuration
-UPLOAD_PATH=files
-
-# Frontend Configuration
-VITE_API_BASE_URL=http://backend:8080
-NODE_ENV=production
-```
-
-### Using External LLM Service
-
-To use OpenAI or another external service instead of Ollama:
-
-1. Update `.env`:
-```env
-LLM_ENDPOINT=https://api.openai.com/v1/chat/completions
-LLM_APIKEY=your-api-key-here
-```
-
-2. Comment out Ollama service in `docker-compose.yml`:
-```yaml
-services:
-  # ollama:
-  #   image: ollama/ollama:latest
-  #   ...
-```
-
-3. Update backend depends_on to remove Ollama:
-```yaml
-  backend:
-    # ...
-    depends_on:
-      # ollama:
-      #   condition: service_healthy
-```
-
-## Building Images
-
-### Backend Image
+### Overall System Health
 
 ```bash
-# Build backend image
-docker build -t java-resumes-backend:latest .
-
-# Build with specific Java version
-docker build --build-arg JAVA_VERSION=21 -t java-resumes-backend:latest .
-
-# Build without cache
-docker build --no-cache -t java-resumes-backend:latest .
+curl http://localhost:8080/api/health
 ```
 
-### Frontend Image
+Returns combined status of all system components with overall_status field.
+
+### Individual Health Checks
+
+Database connectivity:
 
 ```bash
-# Build production frontend
-cd frontend
-docker build -f Dockerfile -t java-resumes-frontend:latest .
-
-# Build development frontend (with hot reload)
-docker build -f Dockerfile.dev -t java-resumes-frontend:dev .
+curl http://localhost:8080/api/health/database
 ```
 
-## Development Workflow
-
-### Development Mode (Hot Reload)
-
-For frontend development with hot module reload:
-
-1. Update `docker-compose.yml` to use dev Dockerfile:
-```yaml
-frontend:
-  build:
-    context: ./frontend
-    dockerfile: Dockerfile.dev  # Change from Dockerfile
-  ports:
-    - "5173:5173"  # Vite dev server port
-```
-
-2. Mount source code as volume:
-```yaml
-  volumes:
-    - ./frontend/src:/app/src
-    - ./frontend/public:/app/public
-```
-
-3. Restart frontend service:
-```bash
-docker compose up -d --build frontend
-```
-
-### Backend Development
-
-For backend development:
+LLM service connectivity:
 
 ```bash
-# Rebuild backend after code changes
-docker compose build backend
-docker compose up -d backend
-
-# View backend logs
-docker compose logs -f backend
-
-# Execute commands in backend container
-docker compose exec backend sh
+curl http://localhost:8080/api/health/llm
 ```
 
-### Database Management
+Disk space availability:
 
-The application uses SQLite for prompt history:
+```bash
+curl http://localhost:8080/api/health/disk
+```
+
+### Example Health Response
+
+```json
+{
+  "status": "UP",
+  "timestamp": "2024-02-02T10:30:00Z",
+  "service": "Resume Optimization API",
+  "database": {
+    "type": "PostgreSQL",
+    "status": "UP",
+    "message": "Database connection successful",
+    "url": "jdbc:postgresql://postgres:5432/resume_db"
+  },
+  "llm": {
+    "status": "UP",
+    "message": "LLM service is reachable",
+    "endpoint": "http://ollama:11434/v1/chat/completions",
+    "response_code": 200
+  },
+  "disk": {
+    "status": "UP",
+    "message": "Disk space is available",
+    "usable_mb": 2048,
+    "total_mb": 10240,
+    "free_mb": 3072,
+    "usage_percent": 70
+  },
+  "overall_status": "UP"
+}
+```
+
+### Health Check Status Meanings
+
+- **UP**: Component is working correctly
+- **DOWN**: Component is not responding or has errors
+- **DEGRADED**: System is functioning but with issues
+- **DISABLED**: Component is not configured
+- **WARNING**: Disk space below 500MB
+- **CRITICAL**: Disk space below 100MB
+
+## Database Configuration
+
+### SQLite Configuration
+
+Used in: `docker-compose.sqlite.yml`
+
+Configuration file: `src/main/resources/application.yml`
+
+- **URL**: `jdbc:sqlite:/app/data/prompts.db`
+- **Migrations**: `classpath:db/migration/sqlite`
+- **Advantages**:
+  - Simple setup, no external database required
+  - Good for development and testing
+  - Persistent data stored in Docker volume
+  - File-based, can be backed up easily
+- **Limitations**:
+  - Not suitable for concurrent heavy access
+  - Limited to local single-server scenarios
+  - No advanced features like replication
+
+SQLite Database Operations:
 
 ```bash
 # Access SQLite database
-docker compose exec backend sh
+docker compose -f docker-compose.sqlite.yml exec backend sh
 cd /app/data
 sqlite3 prompts.db
 
+# Useful SQLite commands (in sqlite3)
+.tables                                    # List tables
+.schema prompt_history                     # View table structure
+SELECT COUNT(*) FROM prompt_history;       # Count rows
+SELECT * FROM prompt_history LIMIT 5;      # View sample data
+.quit                                      # Exit
+
 # Backup database
-docker compose exec backend tar czf /tmp/db-backup.tar.gz /app/data
-docker compose cp backend:/tmp/db-backup.tar.gz ./backup/
+docker compose -f docker-compose.sqlite.yml exec backend \
+  tar czf /tmp/db-backup.tar.gz /app/data
+
+# Copy backup to host
+docker compose -f docker-compose.sqlite.yml cp \
+  backend:/tmp/db-backup.tar.gz ./backup/
+```
+
+### PostgreSQL Configuration
+
+Used in: `docker-compose.postgresql.yml` and `docker-compose.ollama-postgresql.yml`
+
+Configuration file: `src/main/resources/application-postgresql.yml`
+
+**Default Environment Variables**:
+
+```yaml
+SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/resume_db
+SPRING_DATASOURCE_USERNAME: resume_user
+SPRING_DATASOURCE_PASSWORD: resume_password
+SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
+SPRING_JPA_HIBERNATE_DDL_AUTO: validate
+SPRING_FLYWAY_LOCATIONS: classpath:db/migration/postgresql
+```
+
+**Custom Credentials**: Edit the postgres service in docker-compose file:
+
+```yaml
+postgres:
+  environment:
+    POSTGRES_DB: your_db_name
+    POSTGRES_USER: your_username
+    POSTGRES_PASSWORD: your_password
+```
+
+Then update backend environment variables to match.
+
+**PostgreSQL Database Operations**:
+
+```bash
+# Connect to PostgreSQL container
+docker compose -f docker-compose.postgresql.yml exec postgres \
+  psql -U resume_user -d resume_db
+
+# Useful PostgreSQL commands (in psql)
+\dt                                  # List tables
+\d prompt_history                    # View table structure
+SELECT COUNT(*) FROM prompt_history; # Count rows
+SELECT * FROM prompt_history LIMIT 5;# View sample data
+\q                                   # Exit psql
+
+# Backup PostgreSQL database
+docker compose -f docker-compose.postgresql.yml exec postgres \
+  pg_dump -U resume_user resume_db > backup-$(date +%Y%m%d).sql
+
+# Restore from backup
+cat backup-2024-02-02.sql | \
+  docker compose -f docker-compose.postgresql.yml exec -T postgres \
+  psql -U resume_user resume_db
+
+# Export table as CSV
+docker compose -f docker-compose.postgresql.yml exec postgres \
+  psql -U resume_user -d resume_db \
+  -c "COPY prompt_history TO STDOUT WITH CSV HEADER" > export.csv
+
+# Check database size
+docker compose -f docker-compose.postgresql.yml exec postgres \
+  psql -U resume_user -d resume_db \
+  -c "SELECT pg_size_pretty(pg_database_size('resume_db'));"
+```
+
+### Database Initialization
+
+Flyway handles automatic schema migration on startup:
+
+- **SQLite migrations**: `src/main/resources/db/migration/sqlite/`
+- **PostgreSQL migrations**: `src/main/resources/db/migration/postgresql/`
+
+Create a new migration:
+
+```bash
+# Create migration file
+touch src/main/resources/db/migration/postgresql/V2__add_new_column.sql
+
+# Add SQL statements
+cat > src/main/resources/db/migration/postgresql/V2__add_new_column.sql << 'EOF'
+ALTER TABLE prompt_history ADD COLUMN new_column TEXT;
+CREATE INDEX idx_new_column ON prompt_history(new_column);
+EOF
+
+# Restart backend to trigger migration
+docker compose -f docker-compose.postgresql.yml up -d --build backend
+
+# Verify migration
+docker compose -f docker-compose.postgresql.yml logs backend | grep Flyway
+```
+
+## Building and Running
+
+### Build Specific Services
+
+```bash
+# Build all services in a compose file
+docker compose -f docker-compose.postgresql.yml build
+
+# Build specific service only
+docker compose -f docker-compose.postgresql.yml build backend
+
+# Build with no cache (forces full rebuild)
+docker compose -f docker-compose.postgresql.yml build --no-cache
+
+# Build in parallel (faster)
+export DOCKER_BUILDKIT=1
+docker compose -f docker-compose.postgresql.yml build --parallel
+```
+
+### Running Services
+
+```bash
+# Start services in background
+docker compose -f docker-compose.postgresql.yml up -d
+
+# Start with automatic rebuild
+docker compose -f docker-compose.postgresql.yml up -d --build
+
+# Start specific service
+docker compose -f docker-compose.postgresql.yml up -d backend
+
+# Run in foreground (see logs in real-time)
+docker compose -f docker-compose.postgresql.yml up
+
+# Restart all services
+docker compose -f docker-compose.postgresql.yml restart
+
+# Restart specific service
+docker compose -f docker-compose.postgresql.yml restart backend
 ```
 
 ## LLM Model Management
+
+Available for: `docker-compose.ollama-postgresql.yml`
 
 ### Available Models
 
 Small models suitable for resume optimization:
 
-| Model | Size | RAM | Speed | Quality |
-|-------|------|-----|-------|---------|
-| qwen2.5:0.5b | 400MB | ~1GB | ⚡⚡⚡⚡⚡ | ⭐⭐ |
-| tinyllama | 800MB | ~2GB | ⚡⚡⚡⚡ | ⭐⭐⭐ |
-| gemma2:2b | 1.6GB | ~3GB | ⚡⚡⚡ | ⭐⭐⭐⭐ |
-| phi3:mini | 2.3GB | ~4GB | ⚡⚡ | ⭐⭐⭐⭐⭐ |
-| mistral | 4.1GB | ~8GB | ⚡ | ⭐⭐⭐⭐⭐ |
+| Model        | Size  | RAM  | Speed      | Quality    | Notes                   |
+| ------------ | ----- | ---- | ---------- | ---------- | ----------------------- |
+| qwen2.5:0.5b | 400MB | ~1GB | ⚡⚡⚡⚡⚡ | ⭐⭐       | Fastest, lowest memory  |
+| tinyllama    | 800MB | ~2GB | ⚡⚡⚡⚡   | ⭐⭐⭐     | Recommended for testing |
+| gemma2:2b    | 1.6GB | ~3GB | ⚡⚡⚡     | ⭐⭐⭐⭐   | Good balance            |
+| phi3:mini    | 2.3GB | ~4GB | ⚡⚡       | ⭐⭐⭐⭐⭐ | High quality            |
+| mistral      | 4.1GB | ~8GB | ⚡         | ⭐⭐⭐⭐⭐ | Best quality, slowest   |
 
 ### Model Operations
 
+For any compose file with Ollama:
+
 ```bash
-# Pull a specific model
-docker exec resume-ollama ollama pull tinyllama
+# Pull a specific model (downloads model from Ollama registry)
+docker compose -f docker-compose.ollama-postgresql.yml exec ollama \
+  ollama pull tinyllama
 
 # List installed models
-docker exec resume-ollama ollama list
+docker compose -f docker-compose.ollama-postgresql.yml exec ollama \
+  ollama list
 
-# Remove a model
-docker exec resume-ollama ollama rm tinyllama
+# Remove a model (frees disk space)
+docker compose -f docker-compose.ollama-postgresql.yml exec ollama \
+  ollama rm tinyllama
 
-# Test model
-docker exec resume-ollama ollama run tinyllama "Hello, how are you?"
+# Test model interactively
+docker compose -f docker-compose.ollama-postgresql.yml exec ollama \
+  ollama run tinyllama "Hello, how are you?"
+
+# Show detailed model information
+docker compose -f docker-compose.ollama-postgresql.yml exec ollama \
+  ollama show tinyllama
+
+# View model performance details
+docker compose -f docker-compose.ollama-postgresql.yml exec ollama \
+  ollama show --verbose tinyllama
 ```
 
 ### GPU Support
 
-To enable GPU acceleration for Ollama:
+To enable GPU acceleration for Ollama (significantly faster inference):
 
-1. Install NVIDIA Docker runtime
-2. Uncomment GPU configuration in `docker-compose.yml`:
+**System Requirements**:
+
+- NVIDIA GPU with CUDA support
+- NVIDIA Docker runtime installed
+
+**Installation Steps**:
+
+1. **Install NVIDIA Docker runtime** (Linux):
+
+```bash
+# Ubuntu/Debian
+sudo apt-get install -y nvidia-docker2
+sudo systemctl restart docker
+
+# Verify installation
+docker run --rm --gpus all nvidia/cuda:11.0.3-base-ubuntu20.04 nvidia-smi
+```
+
+2. **Uncomment GPU configuration** in docker-compose file:
+
 ```yaml
 ollama:
   deploy:
@@ -239,267 +498,396 @@ ollama:
             capabilities: [gpu]
 ```
 
-3. Restart Ollama service:
+3. **Restart Ollama**:
+
 ```bash
-docker compose up -d ollama
+docker compose -f docker-compose.ollama-postgresql.yml up -d ollama
 ```
 
-## Health Checks
-
-All services include health checks:
+4. **Verify GPU access**:
 
 ```bash
-# Check all service health
-docker compose ps
+docker compose -f docker-compose.ollama-postgresql.yml exec ollama \
+  nvidia-smi
+```
 
-# Check backend health endpoint
-curl http://localhost:8080/api/health
+## Monitoring and Logging
 
-# Check Ollama API
-curl http://localhost:11434/api/tags
+### View Service Status
 
-# Check frontend
-curl http://localhost:3000
+```bash
+# Check all services and their status
+docker compose -f docker-compose.ollama-postgresql.yml ps
+
+# Example output:
+# NAME                            STATUS           PORTS
+# resume-frontend                 Up 2 minutes     0.0.0.0:3000->3000/tcp
+# resume-backend                  Up 2 minutes     0.0.0.0:8080->8080/tcp
+# resume-postgres-ollama          Up 2 minutes     0.0.0.0:5432->5432/tcp
+# resume-ollama                   Up 2 minutes     0.0.0.0:11434->11434/tcp
+```
+
+### View Logs
+
+```bash
+# View all logs for all services
+docker compose -f docker-compose.postgresql.yml logs
+
+# View logs for specific service
+docker compose -f docker-compose.postgresql.yml logs backend
+
+# Follow logs in real-time (like tail -f)
+docker compose -f docker-compose.postgresql.yml logs -f frontend
+
+# Show last 100 lines
+docker compose -f docker-compose.postgresql.yml logs --tail=100 backend
+
+# Show logs from last 30 minutes
+docker compose -f docker-compose.postgresql.yml logs --since=30m backend
+
+# Show logs with timestamps
+docker compose -f docker-compose.postgresql.yml logs -t backend
+```
+
+### Container Health and Resources
+
+```bash
+# Monitor real-time resource usage (CPU, memory, I/O)
+docker stats --no-stream
+
+# Watch continuously
+watch docker stats
+
+# Inspect container details
+docker inspect resume-backend
+
+# View environment variables in container
+docker compose -f docker-compose.postgresql.yml exec backend env
+
+# View mounted volumes
+docker inspect -f '{{json .Mounts}}' resume-backend | python -m json.tool
+
+# Get container IP address
+docker inspect -f '{{.NetworkSettings.IPAddress}}' resume-backend
 ```
 
 ## Troubleshooting
 
 ### Backend Fails to Start
 
-**Issue**: Backend exits with connection error
+**Issue**: Backend container exits immediately or fails health check
 
 **Solution**:
-1. Check Ollama is running:
+
 ```bash
-docker compose ps ollama
+# Check logs for specific errors
+docker compose -f docker-compose.postgresql.yml logs backend
+
+# Verify database is running and healthy
+docker compose -f docker-compose.postgresql.yml ps postgres
+docker compose -f docker-compose.postgresql.yml logs postgres
+
+# Check database health endpoint
+curl http://localhost:8080/api/health/database
+
+# Check application logs
+docker compose -f docker-compose.postgresql.yml exec backend cat /app/logs/application.log
+
+# Restart backend
+docker compose -f docker-compose.postgresql.yml restart backend
 ```
 
-2. Verify Ollama health:
-```bash
-docker exec resume-ollama ollama list
-```
+### Database Connection Errors
 
-3. Check backend logs:
+**Issue**: "Connection refused", "database does not exist", or migration fails
+
+**Solution**:
+
 ```bash
-docker compose logs backend
+# Verify database is ready
+docker compose -f docker-compose.postgresql.yml exec postgres \
+  pg_isready -U resume_user -d resume_db
+
+# Check database logs for errors
+docker compose -f docker-compose.postgresql.yml logs postgres
+
+# Verify database credentials
+docker compose -f docker-compose.postgresql.yml exec postgres \
+  psql -U resume_user -d resume_db -c "SELECT 1;"
+
+# Restart database
+docker compose -f docker-compose.postgresql.yml restart postgres
+
+# Check Flyway migration status
+docker compose -f docker-compose.postgresql.yml logs backend | grep -i flyway
 ```
 
 ### Frontend Cannot Connect to Backend
 
-**Issue**: API calls fail with network error
+**Issue**: API calls fail with network error or CORS error
 
 **Solution**:
-1. Verify backend is running:
+
 ```bash
+# Test backend connectivity from host
 curl http://localhost:8080/api/health
-```
 
-2. Check network configuration:
-```bash
-docker network inspect resume-app-network
-```
+# Test backend connectivity from frontend container
+docker compose -f docker-compose.postgresql.yml exec frontend \
+  curl http://backend:8080/api/health
 
-3. Verify environment variables:
-```bash
-docker compose exec frontend env | grep VITE_API
+# Check frontend environment variables
+docker compose -f docker-compose.postgresql.yml exec frontend \
+  env | grep VITE_API
+
+# Check network connectivity
+docker network inspect resume-postgres-network
+
+# Verify CORS configuration in backend
+curl -H "Origin: http://localhost:3000" http://localhost:8080/api/health -v
 ```
 
 ### Out of Memory
 
-**Issue**: Containers crash or become unresponsive
+**Issue**: Containers crash, performance degrades, or "OutOfMemoryError"
 
 **Solution**:
-1. Increase Docker memory limit (Docker Desktop settings)
-2. Use smaller LLM model (qwen2.5:0.5b or tinyllama)
-3. Adjust Java heap size in `docker-compose.yml`:
+
+1. Increase Docker memory limit:
+   - Docker Desktop: Preferences → Resources → Memory
+   - Docker on Linux: Edit `/etc/docker/daemon.json`
+
+2. Use smaller LLM model:
+
+```bash
+docker compose -f docker-compose.ollama-postgresql.yml exec ollama \
+  ollama pull qwen2.5:0.5b
+```
+
+3. Reduce Java heap size in docker-compose:
+
 ```yaml
 backend:
   environment:
-    - JAVA_OPTS=-Xms256m -Xmx512m
+    - JAVA_OPTS=-Xms128m -Xmx512m
+```
+
+4. Monitor memory usage:
+
+```bash
+docker stats --no-stream | grep backend
 ```
 
 ### Port Conflicts
 
-**Issue**: Port already in use
+**Issue**: "Port already in use" or "address already in use"
 
 **Solution**:
-1. Change port mapping in `docker-compose.yml`:
-```yaml
-services:
-  backend:
-    ports:
-      - "8081:8080"  # Change host port
+
+```bash
+# Find process using port (Linux/Mac)
+lsof -i :8080
+
+# Find process using port (Windows)
+netstat -ano | findstr :8080
+taskkill /PID <PID> /F
+
+# Change port in docker-compose
+# Update host port (first number in port mapping)
+ports:
+  - "8081:8080"  # Use 8081 instead of 8080
+
+# Restart services
+docker compose -f docker-compose.postgresql.yml up -d
 ```
 
-2. Update frontend API URL:
-```yaml
-  frontend:
-    environment:
-      - VITE_API_BASE_URL=http://backend:8080  # Container port stays same
-```
+### Ollama Not Responding
 
-### Database Migration Errors
-
-**Issue**: Flyway migration fails
+**Issue**: LLM health check fails, model pull times out
 
 **Solution**:
-1. Check if database volume has old schema:
+
 ```bash
-docker volume rm resume-backend-files
+# Check Ollama container status
+docker compose -f docker-compose.ollama-postgresql.yml ps ollama
+
+# View Ollama logs
+docker compose -f docker-compose.ollama-postgresql.yml logs ollama
+
+# Restart Ollama
+docker compose -f docker-compose.ollama-postgresql.yml restart ollama
+
+# Check Ollama API endpoint
+curl http://localhost:11434/api/tags
+
+# Pull model with verbose output
+docker compose -f docker-compose.ollama-postgresql.yml exec ollama \
+  ollama pull tinyllama --verbose
 ```
 
-2. Restart backend:
+### Disk Space Issues
+
+**Issue**: Container fails to start, disk full error
+
+**Solution**:
+
 ```bash
-docker compose up -d backend
+# Check disk usage
+docker system df
+
+# Check specific container logs
+docker compose -f docker-compose.postgresql.yml logs backend | tail -20
+
+# Clean up unused Docker resources
+docker system prune -a
+
+# Remove unused volumes
+docker volume prune
+
+# Check available disk space
+df -h
+
+# Remove old images
+docker image prune -a
 ```
 
 ## Production Deployment
 
-### Security Considerations
+### Security Best Practices
 
-1. **Change default API keys**:
-```env
-LLM_APIKEY=secure-random-key-here
+1. **Change default database password**:
+
+```yaml
+postgres:
+  environment:
+    POSTGRES_PASSWORD: $(openssl rand -base64 32)
 ```
 
-2. **Use HTTPS**:
-   - Add reverse proxy (nginx, Caddy)
-   - Configure SSL certificates
-   - Update CORS settings
+2. **Use HTTPS/TLS**:
+   - Add reverse proxy (nginx, Traefik, Caddy)
+   - Configure SSL/TLS certificates
+   - Update CORS settings for production domain
 
 3. **Enable authentication**:
    - Implement Spring Security
-   - Add JWT tokens
-   - Configure OAuth2
+   - Add JWT token validation
+   - Configure OAuth2 if needed
 
-4. **Resource limits**:
+4. **Set resource limits** to prevent resource exhaustion:
+
 ```yaml
-services:
-  backend:
-    deploy:
-      resources:
-        limits:
-          cpus: '2'
-          memory: 2G
+backend:
+  deploy:
+    resources:
+      limits:
+        cpus: "2"
+        memory: 2G
+      reservations:
+        cpus: "1"
+        memory: 1G
+```
+
+5. **Use environment variables** for sensitive data (never commit to git):
+
+```bash
+# Use .env file (add to .gitignore)
+docker compose -f docker-compose.postgresql.yml --env-file .env up -d
 ```
 
 ### Backup Strategy
 
 ```bash
-# Backup volumes
-docker run --rm \
-  -v resume-backend-files:/source \
-  -v $(pwd)/backup:/backup \
-  alpine tar czf /backup/backend-files.tar.gz /source
+# Backup PostgreSQL database (compressed)
+docker compose -f docker-compose.postgresql.yml exec postgres \
+  pg_dump -U resume_user resume_db | gzip > backup-$(date +%Y%m%d-%H%M%S).sql.gz
 
+# Backup all volumes
 docker run --rm \
-  -v resume-ollama-data:/source \
+  -v resume-postgres-backend-files:/source \
   -v $(pwd)/backup:/backup \
-  alpine tar czf /backup/ollama-data.tar.gz /source
+  alpine tar czf /backup/backend-files-$(date +%Y%m%d).tar.gz /source
+
+# Restore database
+gunzip < backup-2024-02-02.sql.gz | \
+  docker compose -f docker-compose.postgresql.yml exec -T postgres \
+  psql -U resume_user resume_db
+
+# Restore volumes
+tar xzf /backup/backend-files-2024-02-02.tar.gz -C /
 ```
 
-### Monitoring
+### Monitoring and Observability
 
-Add monitoring services:
+```bash
+# Monitor real-time resource usage
+watch 'docker stats --no-stream'
 
-```yaml
-services:
-  prometheus:
-    image: prom/prometheus
-    ports:
-      - "9090:9090"
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+# Export logs for analysis
+docker compose -f docker-compose.postgresql.yml logs > app-logs.txt
 
-  grafana:
-    image: grafana/grafana
-    ports:
-      - "3001:3000"
-    depends_on:
-      - prometheus
+# Health check monitoring
+watch 'curl -s http://localhost:8080/api/health | python -m json.tool'
+
+# Database monitoring
+docker compose -f docker-compose.postgresql.yml exec postgres \
+  psql -U resume_user -d resume_db \
+  -c "SELECT datname, pg_size_pretty(pg_database_size(datname)) FROM pg_database;"
 ```
 
 ## Performance Optimization
 
 ### Build Optimization
 
-1. **Multi-stage builds**: Already implemented
-2. **Layer caching**: Order Dockerfile commands from least to most frequently changing
-3. **Parallel builds**:
 ```bash
-docker compose build --parallel
+# Enable BuildKit for faster, more efficient builds
+export DOCKER_BUILDKIT=1
+docker compose -f docker-compose.postgresql.yml build --parallel
+
+# Use layer caching (order Dockerfile commands from least to most frequently changing)
+# Use .dockerignore to exclude unnecessary files
 ```
 
 ### Runtime Optimization
 
-1. **Use specific image tags** (not `latest`)
-2. **Enable BuildKit**:
 ```bash
-export DOCKER_BUILDKIT=1
-docker compose build
+# Use specific image tags (not 'latest') for reproducibility
+# Prevents unnecessary pulls and improves caching
+
+# Prune unused resources
+docker system prune -a          # Remove unused images, containers, networks
+docker volume prune             # Remove unused volumes
+docker image prune -a           # Remove dangling images
+
+# Monitor resource usage and optimize
+docker stats --no-stream
 ```
 
-3. **Prune unused resources**:
-```bash
-docker system prune -a
-```
-
-## CI/CD Integration
-
-### GitHub Actions Example
-
-```yaml
-name: Docker Build
-
-on:
-  push:
-    branches: [main]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Build images
-        run: docker compose build
-
-      - name: Run tests
-        run: |
-          docker compose up -d
-          docker compose exec backend gradle test
-
-      - name: Push to registry
-        run: |
-          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker compose push
-```
-
-## Useful Commands
+## Useful Commands Summary
 
 ```bash
-# View container resource usage
-docker stats
+# Service management
+docker compose -f <file> up -d              # Start services
+docker compose -f <file> down               # Stop services
+docker compose -f <file> restart backend    # Restart service
+docker compose -f <file> ps                 # List services
 
-# Inspect service configuration
-docker compose config
+# Build and images
+docker compose -f <file> build              # Build all images
+docker compose -f <file> build --no-cache   # Force rebuild
+docker compose -f <file> pull               # Update images
 
-# Recreate containers (useful after compose file changes)
-docker compose up -d --force-recreate
+# Logs and debugging
+docker compose -f <file> logs               # View logs
+docker compose -f <file> logs -f            # Follow logs
+docker compose -f <file> exec backend sh    # Shell access
 
-# Scale services (if stateless)
-docker compose up -d --scale backend=3
+# Data management
+docker compose -f <file> exec postgres psql -U resume_user -d resume_db
+docker compose -f <file> cp backend:/app/data ./backup/
 
-# Export logs to file
-docker compose logs > docker-logs.txt
-
-# Clean everything (including volumes)
-docker compose down -v
-docker system prune -a --volumes
-
-# Update images to latest
-docker compose pull
-docker compose up -d
+# Cleanup
+docker compose -f <file> down -v            # Remove volumes
+docker system prune -a --volumes            # Full cleanup
 ```
 
 ## Additional Resources
@@ -507,12 +895,21 @@ docker compose up -d
 - [Docker Documentation](https://docs.docker.com/)
 - [Docker Compose Documentation](https://docs.docker.com/compose/)
 - [Ollama Documentation](https://ollama.ai/docs)
+- [PostgreSQL Documentation](https://www.postgresql.org/docs/)
 - [Spring Boot Docker Guide](https://spring.io/guides/topicals/spring-boot-docker/)
 
-## Support
+## Support and Issues
 
-For issues or questions:
-1. Check logs: `docker compose logs`
-2. Review health checks: `docker compose ps`
-3. See troubleshooting section above
-4. Open an issue on GitHub
+For troubleshooting:
+
+1. Check health endpoints: `curl http://localhost:8080/api/health`
+2. Review logs: `docker compose -f <file> logs -f`
+3. Verify all services are running: `docker compose -f <file> ps`
+4. Check resource usage: `docker stats --no-stream`
+5. Open an issue on GitHub with logs and configuration details
+
+For configuration help, refer to:
+
+- Specific docker-compose file for environment variables
+- `src/main/resources/application*.yml` for application configuration
+- This guide's Database Configuration and Health Check sections

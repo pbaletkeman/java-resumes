@@ -275,7 +275,7 @@ Please provide:
 | `{RESUME_CONTENT}`    | Uploaded resume text       |
 | `{JOB_DESCRIPTION}`   | Job description text       |
 | `{OPTIMIZATION_TYPE}` | Type (resume/cover_letter) |
-| `{COMPANY_NAME}`      | Target company             |
+| `{company}`           | Target company             |
 | `{JOB_TITLE}`         | Target job title           |
 
 ---

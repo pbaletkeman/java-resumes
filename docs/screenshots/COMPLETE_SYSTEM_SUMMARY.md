@@ -182,7 +182,7 @@ docs/screenshots/
 - Sample test data (job descriptions, resumes)
 - API endpoints summary table
 - HTTP response codes reference
-- Tool recommendations (Postman, Insomnia, curl)
+- Tool recommendations (Bruno, Insomnia, curl)
 - Testing commands with examples
 
 **Reference:** Step-by-step for backend screenshots

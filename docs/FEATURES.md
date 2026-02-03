@@ -194,7 +194,7 @@ Complete feature list and capabilities of the Java Resumes application.
 - ✅ Debug logging support
 - ✅ Development database support
 - ✅ Test fixtures and seeders
-- ✅ API testing tools (Postman, cURL)
+- ✅ API testing tools (Bruno, cURL)
 - ✅ Browser DevTools integration
 
 ### 📊 Monitoring & Observability

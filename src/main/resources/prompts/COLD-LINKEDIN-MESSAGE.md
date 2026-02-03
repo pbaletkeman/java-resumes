@@ -40,9 +40,9 @@ Generate **5 distinctly different LinkedIn cold outreach message variations** op
 Provide **5 distinct LinkedIn message variations**:
 
 ```markdown
-## LinkedIn Cold Outreach Messages for {job_title} at {company_name}
+## LinkedIn Cold Outreach Messages for {job_title} at {company}
 
-**Candidate Resume:** {resume}
+**Candidate Resume:** {resume_string}
 **Generated:** {today}
 
 ---

@@ -39,7 +39,7 @@ Generate thoughtful, strategic questions that a candidate should ask during an i
 Provide **10-12 strategically selected questions** organized by category:
 
 ```markdown
-## Reverse Interview Questions for {job_title} at {company_name}
+## Reverse Interview Questions for {job_title} at {company}
 
 **Generated:** {today}
 
@@ -135,9 +135,9 @@ Provide **10-12 strategically selected questions** organized by category:
 ## Context Information
 
 **Job Title:** {job_title}
-**Company Name:** {company_name}
+**Company Name:** {company}
 **Job Description:** {job_description}
-**Candidate Resume:** {resume}
+**Candidate Resume:** {resume_string}
 **Today's Date:** {today}
 
 ## Important Guidelines

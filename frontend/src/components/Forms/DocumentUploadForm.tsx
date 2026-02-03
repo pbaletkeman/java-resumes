@@ -26,11 +26,12 @@ const DEFAULT_MODELS = [
 export const DocumentUploadForm: React.FC = () => {
   const [inputMode, setInputMode] = useState(INPUT_MODES.PASTE);
   const [jobDescription, setJobDescription] = useState('');
-  const [resume, setResume] = useState('');
+  const [resume_string, setResumeString] = useState('');
   const [jobFile, setJobFile] = useState<File | null>(null);
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [jobTitle, setJobTitle] = useState('');
-  const [company, setCompany] = useState('');
+  const [company_name, setCompanyName] = useState('');
+  const [interviewerName, setInterviewerName] = useState('');
   const [model, setModel] = useState('gemma-3-4b-it');
   const [promptTypes, setPromptTypes] = useState<string[]>(['resume']);
   const [modelOptions, setModelOptions] = useState(DEFAULT_MODELS);
@@ -65,7 +66,7 @@ export const DocumentUploadForm: React.FC = () => {
   }, []);
 
   const handleResumeChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setResume(e.target.value);
+    setResumeString(e.target.value);
   }, []);
 
   const handleJobTitleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,7 +74,11 @@ export const DocumentUploadForm: React.FC = () => {
   }, []);
 
   const handleCompanyChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setCompany(e.target.value);
+    setCompanyName(e.target.value);
+  }, []);
+
+  const handleInterviewerNameChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setInterviewerName(e.target.value);
   }, []);
 
   const promptTypeOptions = [
@@ -94,7 +99,7 @@ export const DocumentUploadForm: React.FC = () => {
       const jobError = validateTextInput(jobDescription, 'Job Description');
       // Resume is only required if not generating Skills only
       const isSkillsOnly = promptTypes.length === 1 && promptTypes.includes('skills');
-      const resumeError = !isSkillsOnly ? validateTextInput(resume, 'Resume') : null;
+      const resumeError = !isSkillsOnly ? validateTextInput(resume_string, 'Resume') : null;
       if (jobError) newErrors.job = jobError;
       if (resumeError) newErrors.resume = resumeError;
     } else {
@@ -114,7 +119,7 @@ export const DocumentUploadForm: React.FC = () => {
     }
 
     if (!jobTitle.trim()) newErrors.jobTitle = 'Job Title is required';
-    if (!company.trim()) newErrors.company = 'Company is required';
+    if (!company_name.trim()) newErrors.company = 'Company is required';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -128,7 +133,7 @@ export const DocumentUploadForm: React.FC = () => {
 
       if (inputMode === INPUT_MODES.PASTE) {
         formData.append('jobDescription', jobDescription);
-        formData.append('resume', resume);
+        formData.append('resume', resume_string);
       } else {
         if (jobFile) formData.append('jobDescription', jobFile);
         if (resumeFile) formData.append('resume', resumeFile);
@@ -151,15 +156,16 @@ export const DocumentUploadForm: React.FC = () => {
         promptType: ['resume'],
         temperature: 0.15,
         model: model,
-        resume: inputMode === INPUT_MODES.PASTE ? resume : resumeFile?.name || '',
+        resume: inputMode === INPUT_MODES.PASTE ? resume_string : resumeFile?.name || '',
         jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
         jobTitle: jobTitle,
-        company: company,
+        company: company_name,
+        interviewerName: interviewerName,
       };
 
       const data = {
         jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
-        resume: inputMode === INPUT_MODES.PASTE ? resume : resumeFile?.name || '',
+        resume: inputMode === INPUT_MODES.PASTE ? resume_string : resumeFile?.name || '',
         optimize: JSON.stringify(optimize),
       };
 
@@ -180,15 +186,16 @@ export const DocumentUploadForm: React.FC = () => {
         promptType: ['cover'],
         temperature: 0.15,
         model: model,
-        resume: inputMode === INPUT_MODES.PASTE ? resume : resumeFile?.name || '',
+        resume: inputMode === INPUT_MODES.PASTE ? resume_string : resumeFile?.name || '',
         jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
         jobTitle: jobTitle,
-        company: company,
+        company: company_name,
+        interviewerName: interviewerName,
       };
 
       const data = {
         jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
-        resume: inputMode === INPUT_MODES.PASTE ? resume : resumeFile?.name || '',
+        resume: inputMode === INPUT_MODES.PASTE ? resume_string : resumeFile?.name || '',
         optimize: JSON.stringify(optimize),
       };
 
@@ -208,15 +215,16 @@ export const DocumentUploadForm: React.FC = () => {
         promptType: ['skills'],
         temperature: 0.15,
         model: model,
-        resume: inputMode === INPUT_MODES.PASTE ? resume : resumeFile?.name || '',
+        resume: inputMode === INPUT_MODES.PASTE ? resume_string : resumeFile?.name || '',
         jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
         jobTitle: jobTitle,
-        company: company,
+        company: company_name,
+        interviewerName: interviewerName,
       };
 
       const data = {
         jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
-        resume: inputMode === INPUT_MODES.PASTE ? resume : resumeFile?.name || '',
+        resume: inputMode === INPUT_MODES.PASTE ? resume_string : resumeFile?.name || '',
         optimize: JSON.stringify(optimize),
       };
 
@@ -230,18 +238,19 @@ export const DocumentUploadForm: React.FC = () => {
 
   const clearForm = () => {
     setJobDescription('');
-    setResume('');
+    setResumeString('');
     setJobFile(null);
     setResumeFile(null);
     setJobTitle('');
-    setCompany('');
+    setCompanyName('');
+    setInterviewerName('');
     setModel('gemma-3-4b-it');
     setPromptTypes(['resume']);
     setErrors({});
   };
 
   const loading = uploadApi.loading || resumeApi.loading || coverLetterApi.loading;
-  const hasFormData = jobDescription || resume || jobFile || resumeFile;
+  const hasFormData = jobDescription || resume_string || jobFile || resumeFile;
 
   return (
     <Card className="h-full">
@@ -303,7 +312,7 @@ export const DocumentUploadForm: React.FC = () => {
                 </label>
                 <InputText
                   id="company"
-                  value={company}
+                  value={company_name}
                   onChange={handleCompanyChange}
                   placeholder="e.g., Tech Corporation"
                   className={`w-full ${errors.company ? 'p-invalid' : ''}`}
@@ -314,6 +323,19 @@ export const DocumentUploadForm: React.FC = () => {
                     {errors.company}
                   </small>
                 )}
+              </div>
+
+              <div className="field">
+                <label htmlFor="interviewerName" className="block mb-2">
+                  Interviewer Name (Optional)
+                </label>
+                <InputText
+                  id="interviewerName"
+                  value={interviewerName}
+                  onChange={handleInterviewerNameChange}
+                  placeholder="e.g., John Smith"
+                  className="w-full"
+                />
               </div>
 
               <div className="field">
@@ -409,7 +431,7 @@ export const DocumentUploadForm: React.FC = () => {
                   </label>
                   <InputTextarea
                     id="resume"
-                    value={resume}
+                    value={resume_string}
                     onChange={handleResumeChange}
                     rows={20}
                     className={`w-full ${errors.resume ? 'p-invalid' : ''}`}
@@ -510,7 +532,7 @@ export const DocumentUploadForm: React.FC = () => {
                       <span className="font-semibold">Resume:</span>
                       <div className="text-gray-600 dark:text-gray-400 truncate">
                         {inputMode === INPUT_MODES.PASTE
-                          ? resume.substring(0, 40) + '...'
+                          ? resume_string.substring(0, 40) + '...'
                           : resumeFile?.name}
                       </div>
                     </div>

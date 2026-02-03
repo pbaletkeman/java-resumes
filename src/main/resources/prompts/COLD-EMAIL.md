@@ -38,9 +38,9 @@ Generate **5 distinctly different cold outreach email variations** that a job se
 Provide **5 complete email variations**, each with:
 
 ```markdown
-## Cold Outreach Email Variations for {job_title} at {company_name}
+## Cold Outreach Email Variations for {job_title} at {company}
 
-**Candidate Resume:** {resume}
+**Candidate Resume:** {resume_string}
 **Generated:** {today}
 
 ---
@@ -155,9 +155,9 @@ Provide **5 complete email variations**, each with:
 ## Context Information
 
 **Job Title:** {job_title}
-**Company Name:** {company_name}
+**Company Name:** {company}
 **Job Description:** {job_description}
-**Candidate Resume:** {resume}
+**Candidate Resume:** {resume_string}
 **Today's Date:** {today}
 
 ## Important Guidelines

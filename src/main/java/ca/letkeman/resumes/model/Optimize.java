@@ -16,21 +16,21 @@ public final class Optimize {
   String[] promptType = {"Resume"};
   double temperature = 0.15;
   String model = "gemma-3-4b-it";
-  String resume;
+  String resume_string;
   String jobDescription;
   String jobTitle;
-  String company;
+  String company_name;
   String interviewerName;
 
-  public  Optimize(String[] promptType, double temperature, String model, String resume, String jobDescription,
-      String jobTitle, String company) {
+  public  Optimize(String[] promptType, double temperature, String model, String resume_string, String jobDescription,
+      String jobTitle, String company_name) {
     this.promptType = promptType != null ? promptType.clone() : new String[]{"Resume"};
     this.temperature = temperature;
     this.model = model;
-    this.resume = Utility.convertLineEndings(resume);
+    this.resume_string = Utility.convertLineEndings(resume_string);
     this.jobDescription = Utility.convertLineEndings(jobDescription);
     this.jobTitle = jobTitle;
-    this.company = company;
+    this.company_name = company_name;
     this.interviewerName = null;
   }
 
@@ -62,11 +62,11 @@ public final class Optimize {
   }
 
   public String getResume() {
-    return resume;
+    return resume_string;
   }
 
-  public void setResume(String resume) {
-    this.resume = Utility.convertLineEndings(resume);
+  public void setResume(String resume_string) {
+    this.resume_string = Utility.convertLineEndings(resume_string);
   }
 
   public String getJobDescription() {
@@ -86,11 +86,11 @@ public final class Optimize {
   }
 
   public String getCompany() {
-    return company;
+    return company_name;
   }
 
-  public void setCompany(String company) {
-    this.company = company;
+  public void setCompany(String company_name) {
+    this.company_name = company_name;
   }
 
   public String getInterviewerName() {
@@ -107,10 +107,10 @@ public final class Optimize {
     sb.append("promptType=").append(Arrays.toString(promptType));
     sb.append(", temperature=").append(temperature);
     sb.append(", model='").append(model).append('\'');
-    sb.append(", resume='").append(resume).append('\'');
+    sb.append(", resume_string='").append(resume_string).append('\'');
     sb.append(", jobDescription='").append(jobDescription).append('\'');
     sb.append(", jobTitle='").append(jobTitle).append('\'');
-    sb.append(", company='").append(company).append('\'');
+    sb.append(", company_name='").append(company_name).append('\'');
     sb.append(", interviewerName='").append(interviewerName).append('\'');
     sb.append('}');
     return sb.toString();
