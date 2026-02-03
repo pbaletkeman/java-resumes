@@ -33,16 +33,16 @@ The application uses a **hybrid prompt loading system** that:
 
 By default, the application uses prompts bundled in the JAR:
 
-- `src/main/resources/prompts/RESUME.md` - Resume optimization prompt
-- `src/main/resources/prompts/COVER.md` - Cover letter generation prompt
-- `src/main/resources/prompts/SKILLS.md` - Skills, certifications, and experience suggestions
-- `src/main/resources/prompts/COLD-EMAIL.md` - Cold outreach email prompt
-- `src/main/resources/prompts/COLD-LINKEDIN-MESSAGE.md` - LinkedIn outreach prompt
-- `src/main/resources/prompts/INTERVIEW-HR-QUESTIONS.md` - General HR interview questions
-- `src/main/resources/prompts/INTERVIEW-JOB-SPECIFIC.md` - Job-specific interview questions
-- `src/main/resources/prompts/INTERVIEW-REVERSE.md` - Reverse interview questions
-- `src/main/resources/prompts/THANK-YOU-EMAIL.md` - Post-interview thank you email
-- `src/main/resources/prompts/README.md` - Prompts documentation
+- `prompts/RESUME.md` - Resume optimization prompt
+- `prompts/COVER.md` - Cover letter generation prompt
+- `prompts/SKILLS.md` - Skills, certifications, and experience suggestions
+- `prompts/COLD-EMAIL.md` - Cold outreach email prompt
+- `prompts/COLD-LINKEDIN-MESSAGE.md` - LinkedIn outreach prompt
+- `prompts/INTERVIEW-HR-QUESTIONS.md` - General HR interview questions
+- `INTERVIEW-JOB-SPECIFIC.md` - Job-specific interview questions
+- `prompts/INTERVIEW-REVERSE.md` - Reverse interview questions
+- `prompts/THANK-YOU-EMAIL.md` - Post-interview thank you email
+- `prompts/README.md` - Prompts documentation
 
 **These prompts are NOT recompiled into the JAR.** They are read at runtime as resources, so you can:
 
@@ -173,16 +173,16 @@ These placeholders are replaced at runtime with actual values:
 
 ```
 prompts/
-├── RESUME.md          # Resume optimization prompt
-├── COVER.md           # Cover letter generation prompt
-├── SKILLS.md          # Skills, certifications, and experiences
-├── COLD-EMAIL.md      # Cold outreach email prompt
-├── COLD-LINKEDIN-MESSAGE.md # LinkedIn outreach prompt
-├── INTERVIEW-HR-QUESTIONS.md # General HR interview questions
-├── INTERVIEW-JOB-SPECIFIC.md # Job-specific interview questions
-├── INTERVIEW-REVERSE.md # Reverse interview questions
-├── THANK-YOU-EMAIL.md # Post-interview thank you email
-└── README.md          # Prompts documentation
+├── RESUME.md                   # Resume optimization prompt
+├── COVER.md                    # Cover letter generation prompt
+├── SKILLS.md                   # Skills, certifications, and experiences
+├── COLD-EMAIL.md               # Cold outreach email prompt
+├── COLD-LINKEDIN-MESSAGE.md    # LinkedIn outreach prompt
+├── INTERVIEW-HR-QUESTIONS.md   # General HR interview questions
+├── INTERVIEW-JOB-SPECIFIC.md   # Job-specific interview questions
+├── INTERVIEW-REVERSE.md        # Reverse interview questions
+├── THANK-YOU-EMAIL.md          # Post-interview thank you email
+└── README.md                   # Prompts documentation
 ```
 
 All prompt files should be in the same directory (either bundled or external).
@@ -217,16 +217,15 @@ All prompt files should be in the same directory (either bundled or external).
 
 The `PromptService` class handles prompt loading:
 
-```
-PromptService.loadPrompt(promptName)
-    ↓
-Check external directory (if configured)
-    ↓
-If found → Return external version
-    ↓
-If not found → Check bundled resources
-    ↓
-Return bundled version or empty string
+```mermaid
+flowchart TD
+  A["PromptService.loadPrompt(promptName)"] --> B{External directory configured?}
+  B -- Yes --> C[Check external directory]
+  C -- Found --> D[Return external version]
+  C -- Not found --> E[Check bundled resources]
+  B -- No --> E
+  E -- Found --> F[Return bundled version]
+  E -- Not found --> G[Return empty string]
 ```
 
 This architecture ensures:
@@ -252,6 +251,16 @@ This architecture ensures:
 nano src/main/resources/prompts/RESUME.md
 nano src/main/resources/prompts/COVER.md
 nano src/main/resources/prompts/SKILLS.md
+nano src/main/resources/prompts/RESUME.md
+nano src/main/resources/prompts/COVER.md
+nano src/main/resources/prompts/SKILLS.md
+nano src/main/resources/prompts/COLD-EMAIL.md
+nano src/main/resources/prompts/COLD-LINKEDIN-MESSAGE.md
+nano src/main/resources/prompts/INTERVIEW-HR-QUESTIONS.md
+nano src/main/resources/INTERVIEW-JOB-SPECIFIC.md
+nano src/main/resources/prompts/INTERVIEW-REVERSE.md
+nano src/main/resources/prompts/THANK-YOU-EMAIL.md
+nano src/main/resources/prompts/README.md
 
 # Build JAR
 gradlew clean build
