@@ -1,6 +1,7 @@
 package ca.letkeman.resumes.model;
 
 import ca.letkeman.resumes.Utility;
+import com.google.gson.annotations.SerializedName;
 import java.util.Arrays;
 import java.util.Set;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -16,9 +17,11 @@ public final class Optimize {
   String[] promptType = {"Resume"};
   double temperature = 0.15;
   String model = "gemma-3-4b-it";
+  @SerializedName("resume")
   String resume_string;
   String jobDescription;
   String jobTitle;
+  @SerializedName("company")
   String company_name;
   String interviewerName;
 
