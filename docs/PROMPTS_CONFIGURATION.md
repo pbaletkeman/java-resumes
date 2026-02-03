@@ -36,6 +36,13 @@ By default, the application uses prompts bundled in the JAR:
 - `src/main/resources/prompts/RESUME.md` - Resume optimization prompt
 - `src/main/resources/prompts/COVER.md` - Cover letter generation prompt
 - `src/main/resources/prompts/SKILLS.md` - Skills, certifications, and experience suggestions
+- `src/main/resources/prompts/COLD-EMAIL.md` - Cold outreach email prompt
+- `src/main/resources/prompts/COLD-LINKEDIN-MESSAGE.md` - LinkedIn outreach prompt
+- `src/main/resources/prompts/INTERVIEW-HR-QUESTIONS.md` - General HR interview questions
+- `src/main/resources/prompts/INTERVIEW-JOB-SPECIFIC.md` - Job-specific interview questions
+- `src/main/resources/prompts/INTERVIEW-REVERSE.md` - Reverse interview questions
+- `src/main/resources/prompts/THANK-YOU-EMAIL.md` - Post-interview thank you email
+- `src/main/resources/prompts/README.md` - Prompts documentation
 
 **These prompts are NOT recompiled into the JAR.** They are read at runtime as resources, so you can:
 
@@ -168,7 +175,14 @@ These placeholders are replaced at runtime with actual values:
 prompts/
 ├── RESUME.md          # Resume optimization prompt
 ├── COVER.md           # Cover letter generation prompt
-└── SKILLS.md          # Skills, certifications, and experiences
+├── SKILLS.md          # Skills, certifications, and experiences
+├── COLD-EMAIL.md      # Cold outreach email prompt
+├── COLD-LINKEDIN-MESSAGE.md # LinkedIn outreach prompt
+├── INTERVIEW-HR-QUESTIONS.md # General HR interview questions
+├── INTERVIEW-JOB-SPECIFIC.md # Job-specific interview questions
+├── INTERVIEW-REVERSE.md # Reverse interview questions
+├── THANK-YOU-EMAIL.md # Post-interview thank you email
+└── README.md          # Prompts documentation
 ```
 
 All prompt files should be in the same directory (either bundled or external).
