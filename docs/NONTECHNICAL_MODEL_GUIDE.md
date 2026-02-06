@@ -3,41 +3,41 @@
 ---
 
 - [Non-Technical Model Management Guide](#non-technical-model-management-guide)
-  - [What This Feature Does](#what-this-feature-does)
-  - [Quick Start](#quick-start)
+  - [📚 What This Feature Does](#what-this-feature-does)
+  - [🚀 Quick Start](#quick-start)
     - [Step 1: Open Settings](#step-1-open-settings)
     - [Step 2: You'll See the Model Settings Panel](#step-2-youll-see-the-model-settings-panel)
-  - [How to Add a Model](#how-to-add-a-model)
+  - [➕ How to Add a Model](#how-to-add-a-model)
     - [What You Need to Know:](#what-you-need-to-know)
     - [Steps:](#steps)
-  - [How to Remove a Model](#how-to-remove-a-model)
+  - [❌ How to Remove a Model](#how-to-remove-a-model)
     - [Steps:](#steps-1)
-  - [How to Reset to Defaults](#how-to-reset-to-defaults)
+  - [🔄 How to Reset to Defaults](#how-to-reset-to-defaults)
     - [Why Reset?](#why-reset)
     - [Steps:](#steps-2)
-  - [Understanding the Model Table](#understanding-the-model-table)
-  - [Where Are Models Stored?](#where-are-models-stored)
-  - [Advanced: JSON Format](#advanced-json-format)
+  - [📄 Understanding the Model Table](#understanding-the-model-table)
+  - [📂 Where Are Models Stored?](#where-are-models-stored)
+  - [🌟 Advanced: JSON Format](#advanced-json-format)
     - [Rules](#rules)
-  - [Frequently Asked Questions](#frequently-asked-questions)
+  - [❓ Frequently Asked Questions](#frequently-asked-questions)
     - [Q: I deleted a model - can I undo it?](#q-i-deleted-a-model---can-i-undo-it)
     - [Q: Can I use the same model twice with different labels?](#q-can-i-use-the-same-model-twice-with-different-labels)
     - [Q: What happens if I import a file?](#q-what-happens-if-i-import-a-file)
     - [Q: Can I have no models?](#q-can-i-have-no-models)
     - [Q: Do models sync across devices?](#q-do-models-sync-across-devices)
     - [Q: Can the technical person update these for us?](#q-can-the-technical-person-update-these-for-us)
-  - [Common Use Cases](#common-use-cases)
+  - [📯 Common Use Cases](#common-use-cases)
     - [Scenario 1: Team Uses Same Models](#scenario-1-team-uses-same-models)
     - [Scenario 2: Add Specific Model](#scenario-2-add-specific-model)
     - [Scenario 3: Backup Before Testing](#scenario-3-backup-before-testing)
-  - [You're Ready!](#youre-ready)
-  - [Need Help?](#need-help)
+  - [🎉 You're Ready!](#youre-ready)
+  - [💬 Need Help?](#need-help)
 
 ---
 
-> ** Location:** `docs/NONTECHNICAL_MODEL_GUIDE.md`
-> ** Audience:** Non-Technical Users, Stakeholders
-> ** Related:** [Quick Start Advanced](QUICK_START_ADVANCED.md) | [Project Status](PROJECT_STATUS.md) | [Index](INDEX.md)
+> **Location:** `docs/NONTECHNICAL_MODEL_GUIDE.md`
+> **Audience:** Non-Technical Users, Stakeholders
+> **Related:** [Quick Start Advanced](QUICK_START_ADVANCED.md) | [Project Status](PROJECT_STATUS.md) | [Index](INDEX.md)
 
 ---
 

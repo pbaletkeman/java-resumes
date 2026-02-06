@@ -4,9 +4,9 @@ Complete guide for running the java-resumes application using Docker with multip
 
 ## Table of Contents
 
-- [Prerequisites](#prerequisites)
-- [Available Docker Compose Configurations](#available-docker-compose-configurations)
-- [Service Architecture](#service-architecture)
+- [📋 Prerequisites](#prerequisites)
+- [🐳 Available Docker Compose Configurations](#available-docker-compose-configurations)
+- [🏗️ Service Architecture](#service-architecture)
 - [Service Details](#service-details)
 - [Health Check Endpoints](#health-check-endpoints)
 - [Database Configuration](#database-configuration)

@@ -6,13 +6,13 @@ Complete architecture documentation for the java-resumes project, covering both 
 
 ## Table of Contents
 
-1. [Overview](#overview)
-2. [Backend Architecture](#backend-architecture)
-3. [Frontend Architecture](#frontend-architecture)
-4. [Integration & Data Flow](#integration--data-flow)
-5. [Deployment Architecture](#deployment-architecture)
-6. [Technology Stack](#technology-stack)
-7. [Design Patterns](#design-patterns)
+1. 👀 [Overview](#overview)
+2. 🔧 [Backend Architecture](#backend-architecture)
+3. ⚛️ [Frontend Architecture](#frontend-architecture)
+4. 🔄 [Integration & Data Flow](#integration--data-flow)
+5. 🚀 [Deployment Architecture](#deployment-architecture)
+6. 📚 [Technology Stack](#technology-stack)
+7. 🎨 [Design Patterns](#design-patterns)
 
 ---
 

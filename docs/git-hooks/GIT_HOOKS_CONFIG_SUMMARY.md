@@ -4,14 +4,14 @@ This document summarizes the git hooks setup for the java-resumes project using 
 
 ## Table of Contents
 
-- [What Was Implemented](#what-was-implemented)
+- [✅ What Was Implemented](#what-was-implemented)
   - [Build Configuration Updates (buildgradle)](#build-configuration-updates-buildgradle)
   - [Git Hooks Setup](#git-hooks-setup)
   - [Configuration Files](#configuration-files)
   - [Setup Scripts (Multiple Platforms)](#setup-scripts-multiple-platforms)
   - [Documentation](#documentation)
   - [Backend Instructions Updated](#backend-instructions-updated)
-- [How to Use](#how-to-use)
+- [🚀 How to Use](#how-to-use)
   - [First-Time Setup](#first-time-setup)
   - [Daily Development](#daily-development)
 

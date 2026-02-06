@@ -4,7 +4,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ## Table of Contents
 
-- [Backend Technologies](#-backend-technologies)
+- [⚙️ Backend Technologies](#-backend-technologies)
   - [Core Framework](#core-framework)
   - [Server & Web](#server--web)
   - [JSON & Serialization](#json--serialization)
@@ -12,7 +12,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
   - [Testing](#testing)
   - [Code Quality](#code-quality)
   - [Additional Libraries](#additional-libraries)
-- [Frontend Technologies](#-frontend-technologies)
+- [🌟 🌟 Frontend Technologies](#-frontend-technologies)
   - [Core Framework](#core-framework-1)
   - [Build & Development](#build--development)
   - [UI & Styling](#ui--styling)
@@ -20,19 +20,19 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
   - [Development Tools](#development-tools)
   - [Testing](#testing-1)
   - [Type Safety](#type-safety)
-- [DevOps & Infrastructure](#-devops--infrastructure)
+- [🚀 🚀 DevOps & Infrastructure](#-devops--infrastructure)
   - [Containerization](#containerization)
   - [Docker Images](#docker-images)
-- [AI/LLM Integration](#-aillm-integration)
+- [🤖 AI/LLM Integration](#-aillm-integration)
   - [Supported LLM Services](#supported-llm-services)
   - [API Integration](#api-integration)
-- [Database (Future)](#-database-future)
-- [Cloud & Deployment (Future)](#-cloud--deployment-future)
-- [Monitoring & Observability (Future)](#-monitoring--observability-future)
-- [Security (Current & Future)](#-security-current--future)
-- [Documentation & Communication](#documentation--communication)
-- [Testing & Quality](#testing--quality)
-- [Development Tools](#development-tools-1)
+- [💿 Database (Future)](#-database-future)
+- [☁️ Cloud & Deployment (Future)](#-cloud--deployment-future)
+- [📊 Monitoring & Observability (Future)](#-monitoring--observability-future)
+- [🔐 Security (Current & Future)](#-security-current--future)
+- [📖 Documentation & Communication](#documentation--communication)
+- [🧪 Testing & Quality](#testing--quality)
+- [🔧 Development Tools](#development-tools-1)
 
 ---
 

@@ -2,11 +2,11 @@
 
 ## Table of Contents
 
-- [What Just Got Set Up](#what-just-got-set-up)
-- [Daily Workflow](#daily-workflow)
-- [Pre-Commit Hook Details](#pre-commit-hook-details)
-- [Pre-Push Hook Details](#pre-push-hook-details)
-- [Remote Quality Assurance](#remote-quality-assurance)
+- [✅ What Just Got Set Up](#what-just-got-set-up)
+- [📊 Daily Workflow](#daily-workflow)
+- [🔍 Pre-Commit Hook Details](#pre-commit-hook-details)
+- [🚀 Pre-Push Hook Details](#pre-push-hook-details)
+- [☁️ Remote Quality Assurance](#remote-quality-assurance)
 
 ---
 

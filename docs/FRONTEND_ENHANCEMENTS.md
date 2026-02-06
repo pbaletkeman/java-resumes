@@ -4,7 +4,7 @@
 
 - [Frontend Enhancements](#frontend-enhancements)
   - [Summary](#summary)
-  - [Changes Made](#changes-made)
+  - [⚙️ Changes Made](#changes-made)
     - [1. DocumentUploadForm.tsx](#1-documentuploadformtsx)
       - [Added State for Prompt Types](#added-state-for-prompt-types)
       - [New Prompt Type Options](#new-prompt-type-options)
@@ -14,29 +14,29 @@
       - [Updated Clear Form](#updated-clear-form)
     - [2. fileService.ts](#2-fileservicets)
       - [New Service Method](#new-service-method)
-  - [User Experience Improvements](#user-experience-improvements)
+  - [🌟 User Experience Improvements](#user-experience-improvements)
     - [Before](#before)
     - [After](#after)
-  - [Technical Details](#technical-details)
+  - [🔯 Technical Details](#technical-details)
     - [Frontend Architecture](#frontend-architecture)
     - [API Integration](#api-integration)
     - [Build Status](#build-status)
-  - [Testing](#testing)
+  - [🔬 Testing](#testing)
     - [Manual Testing Checklist](#manual-testing-checklist)
     - [Automated Testing](#automated-testing)
-  - [Files Modified](#files-modified)
-  - [Future Enhancements](#future-enhancements)
+  - [📂 Files Modified](#files-modified)
+  - [🚀 Future Enhancements](#future-enhancements)
     - [Model Configuration System](#model-configuration-system)
     - [Additional Output Types](#additional-output-types)
     - [Output Type Combinations](#output-type-combinations)
-  - [Rollback Plan](#rollback-plan)
-  - [Notes](#notes)
+  - [➡️ Rollback Plan](#rollback-plan)
+  - [📄 Notes](#notes)
 
 ---
 
-> ** Location:** `docs/FRONTEND_ENHANCEMENTS.md`
-> ** Audience:** Frontend Developers
-> ** Related:** [Screenshot Capture Summary](SCREENSHOT_CAPTURE_SUMMARY.md) | [Index](INDEX.md)
+> **Location:** `docs/FRONTEND_ENHANCEMENTS.md`
+> **Audience:** Frontend Developers
+> **Related:** [Screenshot Capture Summary](SCREENSHOT_CAPTURE_SUMMARY.md) | [Index](INDEX.md)
 
 --- - Skills Prompt and Model Selection
 

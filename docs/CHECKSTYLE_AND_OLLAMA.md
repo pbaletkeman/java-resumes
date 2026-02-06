@@ -2,12 +2,12 @@
 
 ## Table of Contents
 
-- [Checkstyle Setup](#checkstyle-setup)
+- [✅ Checkstyle Setup](#checkstyle-setup)
   - [Configuration Files](#configuration-files)
   - [How to Run Checkstyle](#how-to-run-checkstyle)
   - [Current Status](#current-status)
   - [Key Rules Enforced](#key-rules-enforced)
-- [Ollama Integration](#ollama-integration)
+- [🤖 Ollama Integration](#ollama-integration)
   - [Current Status: VERIFIED WORKING](#current-status--verified-working)
   - [Configuration](#configuration)
   - [Key Components](#key-components)
@@ -15,7 +15,7 @@
   - [How to Use with Ollama](#how-to-use-with-ollama)
   - [Example Request](#example-request)
   - [Verification Checklist](#verification-checklist)
-- [Next Steps to Fix Checkstyle](#next-steps-to-fix-checkstyle)
+- [🔧 Next Steps to Fix Checkstyle](#next-steps-to-fix-checkstyle)
 
 ---
 
