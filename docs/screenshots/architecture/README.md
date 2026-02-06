@@ -2,14 +2,29 @@
 
 System architecture, component diagrams, and data flow visualizations for the java-resumes application.
 
-## Table of Contents
-
-- [Overview](#overview)
-- [System Architecture](#system-architecture)
-- [Data Flow Diagram](#data-flow-diagram)
-- [UML Diagrams](#uml-diagrams)
-- [Component Relationships](#component-relationships)
-- [Deployment Architecture](#deployment-architecture)
+- [Architecture Diagrams \& Visual Documentation](#architecture-diagrams--visual-documentation)
+  - [📆 Overview](#-overview)
+  - [🎨 System Architecture](#-system-architecture)
+    - [Overall Architecture Diagram](#overall-architecture-diagram)
+  - [🔄 Data Flow Diagram](#-data-flow-diagram)
+  - [📋 UML Diagrams](#-uml-diagrams)
+    - [Backend Class Diagram](#backend-class-diagram)
+    - [Frontend Component Diagram](#frontend-component-diagram)
+  - [🔗 Component Relationships](#-component-relationships)
+    - [Backend Component Interaction](#backend-component-interaction)
+    - [Frontend Component Hierarchy](#frontend-component-hierarchy)
+  - [🚀 Deployment Architecture](#-deployment-architecture)
+    - [Docker Container Architecture](#docker-container-architecture)
+    - [Docker Compose Orchestration](#docker-compose-orchestration)
+  - [🌐 API Integration](#-api-integration)
+    - [LLM Service Integration](#llm-service-integration)
+  - [🚰 Technology Stack Visualization](#-technology-stack-visualization)
+    - [Backend Stack](#backend-stack)
+    - [Frontend Stack](#frontend-stack)
+    - [Infrastructure Stack](#infrastructure-stack)
+  - [📋 Data Models](#-data-models)
+    - [Core Data Models](#core-data-models)
+  - [🔗 Related Documentation](#-related-documentation)
 
 ---
 
@@ -134,54 +149,44 @@ The complete flow of resume optimization from upload to download:
 
 ### Backend Component Interaction
 
-```
-┌─────────────────┐
-│  ResumeController │ ← REST API Endpoints
-└────────┬────────┘
-         │
-         ├─→ ┌──────────────────┐
-         │   │ FilesStorageService │ ← File Upload/Download
-         │   └──────────────────┘
-         │
-         ├─→ ┌────────────────┐
-         │   │ BackgroundResume │ ← Async Processing
-         │   └────────┬───────┘
-         │            │
-         │            ├─→ ┌─────────────┐
-         │                │ ApiService  │ ← LLM Integration
-         │                └─────────────┘
-         │
-         └─→ ┌──────────────────┐
-             │ Model Classes    │ ← DTOs & Entities
-             └──────────────────┘
+```mermaid
+graph TD
+    A["ResumeController<br/>REST API Endpoints"] --> B["FilesStorageService<br/>File Upload/Download"]
+    A --> C["BackgroundResume<br/>Async Processing"]
+    A --> D["Model Classes<br/>DTOs & Entities"]
+    C --> E["ApiService<br/>LLM Integration"]
+    E --> F["External LLM API<br/>Ollama/OpenAI"]
+
+    style A fill:#e3f2fd
+    style B fill:#f3e5f5
+    style C fill:#fff3e0
+    style D fill:#fce4ec
+    style E fill:#e0f2f1
+    style F fill:#f1f8e9
 ```
 
 ### Frontend Component Hierarchy
 
-```
-┌──────────┐
-│   App    │ (Main component)
-└────┬─────┘
-     │
-     ├─→ ┌──────────────┐
-     │   │ MainContentTab│ (Resume editor)
-     │   └──────────────┘
-     │
-     ├─→ ┌──────────────┐
-     │   │ FileHistoryTab│ (File management)
-     │   └──────────────┘
-     │
-     ├─→ ┌──────────────┐
-     │   │ SettingsTab   │ (Configuration)
-     │   └──────────────┘
-     │
-     ├─→ ┌──────────────┐
-     │   │ ToolsTab      │ (Utilities)
-     │   └──────────────┘
-     │
-     └─→ ┌──────────────────┐
-         │ Custom Hooks     │ (useApi, useTheme)
-         └──────────────────┘
+```mermaid
+graph TD
+    A["App<br/>Main Component"] --> B["MainContentTab<br/>Resume Editor"]
+    A --> C["FileHistoryTab<br/>File Management"]
+    A --> D["SettingsTab<br/>Configuration"]
+    A --> E["ToolsTab<br/>Utilities"]
+    A --> F["Custom Hooks<br/>useApi, useTheme"]
+
+    B --> G["API Service"]
+    C --> G
+    D --> G
+    E --> G
+
+    style A fill:#e3f2fd
+    style B fill:#f3e5f5
+    style C fill:#fff3e0
+    style D fill:#fce4ec
+    style E fill:#e0f2f1
+    style F fill:#f1f8e9
+    style G fill:#e8eaf6
 ```
 
 ---
@@ -214,29 +219,21 @@ The complete flow of resume optimization from upload to download:
 
 ### Docker Compose Orchestration
 
-```
-┌─────────────────────────────────────────┐
-│        Docker Compose Network            │
-├─────────────────────────────────────────┤
-│                                         │
-│  ┌──────────────────┐                  │
-│  │ Backend Service  │                  │
-│  │ Spring Boot 3.5  │                  │
-│  │ Port: 8080       │                  │
-│  └──────────────────┘                  │
-│           ▲                            │
-│           │ HTTP                       │
-│           │                            │
-│  ┌──────────────────┐                  │
-│  │ Frontend Service │                  │
-│  │ React + Vite     │                  │
-│  │ Port: 3000       │                  │
-│  └──────────────────┘                  │
-│           │                            │
-│           └────→ External APIs         │
-│                 (Ollama, OpenAI)       │
-│                                         │
-└─────────────────────────────────────────┘
+```mermaid
+graph TB
+    subgraph compose["Docker Compose Network"]
+        A["🐳 Backend Service<br/>Spring Boot 3.5<br/>Port: 8080"]
+        B["🐳 Frontend Service<br/>React + Vite<br/>Port: 3000"]
+        C["🔗 External APIs<br/>Ollama/OpenAI"]
+    end
+
+    B -->|HTTP Requests| A
+    A -->|REST Calls| C
+
+    style compose fill:#eceff1
+    style A fill:#bbdefb
+    style B fill:#c8e6c9
+    style C fill:#ffccbc
 ```
 
 ---
@@ -274,37 +271,60 @@ The complete flow of resume optimization from upload to download:
 
 ### Backend Stack
 
-```
-Spring Boot 3.5.1
-├── Spring Web (REST API)
-├── Spring Data (Data access)
-├── Gradle 8.10 (Build)
-├── JUnit 5 (Testing)
-├── Gson (JSON)
-├── jsoup (HTML parsing)
-└── Flying Saucer (PDF generation)
+```mermaid
+graph TD
+    A["Spring Boot 3.5.1"] --> B["Spring Web<br/>REST API"]
+    A --> C["Spring Data<br/>Data Access"]
+    A --> D["Build Tool<br/>Gradle 8.10"]
+    A --> E["Testing<br/>JUnit 5"]
+    A --> F["JSON Processing<br/>Gson"]
+    A --> G["HTML Parsing<br/>jsoup"]
+    A --> H["PDF Generation<br/>Flying Saucer"]
+
+    style A fill:#bbdefb
+    style B fill:#c8e6c9
+    style C fill:#fff9c4
+    style D fill:#f8bbd0
+    style E fill:#ffccbc
+    style F fill:#c5cae9
+    style G fill:#b2dfdb
+    style H fill:#ffe0b2
 ```
 
 ### Frontend Stack
 
-```
-React 19 + TypeScript 5.9
-├── Vite 7.3.1 (Build tool)
-├── PrimeReact 10.9.7 (Components)
-├── Tailwind CSS 4.1.18 (Styling)
-├── Vitest (Testing)
-├── Axios (HTTP client)
-└── React Icons (Icons)
+```mermaid
+graph TD
+    A["React 19 + TypeScript 5.9"] --> B["Build Tool<br/>Vite 7.3.1"]
+    A --> C["UI Components<br/>PrimeReact 10.9.7"]
+    A --> D["Styling<br/>Tailwind CSS 4.1.18"]
+    A --> E["Testing<br/>Vitest"]
+    A --> F["HTTP Client<br/>Axios"]
+    A --> G["Icons<br/>React Icons"]
+
+    style A fill:#c8e6c9
+    style B fill:#bbdefb
+    style C fill:#fff9c4
+    style D fill:#f8bbd0
+    style E fill:#ffccbc
+    style F fill:#c5cae9
+    style G fill:#b2dfdb
 ```
 
 ### Infrastructure Stack
 
-```
-Docker & Docker Compose
-├── Backend: eclipse-temurin:21-jdk
-├── Frontend Dev: node:22-alpine
-├── Frontend Prod: nginx:alpine
-└── Network: Internal DNS resolution
+```mermaid
+graph TD
+    A["Docker & Docker Compose"] --> B["Backend Container<br/>eclipse-temurin:21-jdk"]
+    A --> C["Frontend Dev<br/>node:22-alpine"]
+    A --> D["Frontend Prod<br/>nginx:alpine"]
+    A --> E["Network<br/>Internal DNS Resolution"]
+
+    style A fill:#ffccbc
+    style B fill:#bbdefb
+    style C fill:#c8e6c9
+    style D fill:#fff9c4
+    style E fill:#f8bbd0
 ```
 
 ---

@@ -3,30 +3,30 @@
 Complete documentation and reference guide for the java-resumes project.
 
 - [Documentation Index](#documentation-index)
-  - [📗 Quick Navigation](#quick-navigation)
+  - [🔍 Quick Navigation](#-quick-navigation)
     - [By Role](#by-role)
-  - [🚀 Getting Started](#getting-started)
-  - [📂 Project Overview](#project-overview)
-  - [💻 Development Guides](#development-guides)
-  - [🔕 Technical Reference](#technical-reference)
-  - [🔬 Session \& Testing](#session--testing)
-  - [📋 Issue Tracking \& Fixes](#issue-tracking--fixes)
-  - [🇽️ Visual Documentation](#visual-documentation)
-  - [📝 Related Documentation](#related-documentation)
-  - [📄 Project Structure](#project-structure)
-  - [🛠️ Technology Stack](#technology-stack)
+  - [🚀 Getting Started](#-getting-started)
+  - [📋 Project Overview](#-project-overview)
+  - [📚 Development Guides](#-development-guides)
+  - [📖 Technical Reference](#-technical-reference)
+  - [💬 Session \& Testing](#-session--testing)
+  - [🐛 Issue Tracking \& Fixes](#-issue-tracking--fixes)
+  - [📸 Visual Documentation](#-visual-documentation)
+  - [🔗 Related Documentation](#-related-documentation)
+  - [📂 Project Structure](#-project-structure)
+  - [🛠️ Technology Stack](#️-technology-stack)
     - [Backend](#backend)
     - [Frontend](#frontend)
-  - [📅 Documentation Categories](#documentation-categories)
+  - [📑 Documentation Categories](#-documentation-categories)
     - [Strategic Documents](#strategic-documents)
-    - [Development Guides](#development-guides-1)
-    - [⚙️ Configuration \& Quality](#configuration--quality)
-    - [🛱 Work-in-Progress](#work-in-progress)
-  - [📓 How to Use This Documentation](#how-to-use-this-documentation)
-  - [🖫 Important Files](#important-files)
+    - [Development Guides](#development-guides)
+    - [Configuration \& Quality](#configuration--quality)
+    - [Work-in-Progress](#work-in-progress)
+  - [📖 How to Use This Documentation](#-how-to-use-this-documentation)
+  - [📋 Important Files](#-important-files)
     - [Configuration Files](#configuration-files)
     - [Root Documentation](#root-documentation)
-  - [🖯 Navigation](#navigation)
+  - [🧭 Navigation](#-navigation)
 
 ---
 
@@ -220,7 +220,6 @@ java-resumes/
 2. **Backend Development?** Read [Backend README](./BACKEND_README.md) and check [Backend Custom Instructions](../.github/instructions/backend.instructions.md)
 3. **Frontend Development?** Read [Frontend README](./README.md) and check [Frontend Custom Instructions](../.github/instructions/frontend.instructions.md)
 4. **Checking Status?** See [STATUS](./wip/STATUS.md) and implementation summaries
-5. **Understanding Code Quality?** Review [Checkstyle Configuration](./CHECKSTYLE_AND_OLLAMA.md)
 
 ## 📋 Important Files
 

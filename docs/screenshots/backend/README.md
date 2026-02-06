@@ -2,6 +2,48 @@
 
 Documentation for capturing and maintaining backend API and system screenshots.
 
+- [Backend Screenshots Guide](#backend-screenshots-guide)
+  - [📸 Backend Screenshots Quick Reference](#-backend-screenshots-quick-reference)
+  - [📋 1. Swagger UI Documentation](#-1-swagger-ui-documentation)
+    - [What to Show](#what-to-show)
+    - [URL](#url)
+    - [Components to Include](#components-to-include)
+    - [Capture Instructions](#capture-instructions)
+    - [Verification Checklist](#verification-checklist)
+  - [🌐 2. API Endpoints Reference](#-2-api-endpoints-reference)
+    - [What to Show API](#what-to-show-api)
+    - [Endpoints to Include](#endpoints-to-include)
+      - [POST /upload](#post-upload)
+      - [GET /files](#get-files)
+      - [DELETE /files/{filename}](#delete-filesfilename)
+    - [Capture Instructions API](#capture-instructions-api)
+    - [Verification Checklist APIs](#verification-checklist-apis)
+  - [3. Error Responses](#3-error-responses)
+    - [What to Show Errors](#what-to-show-errors)
+    - [Error Types to Include](#error-types-to-include)
+      - [400 Bad Request](#400-bad-request)
+      - [404 Not Found](#404-not-found)
+      - [500 Internal Server Error](#500-internal-server-error)
+    - [Capture Instructions Details](#capture-instructions-details)
+    - [Verification Checklist Error](#verification-checklist-error)
+  - [🔄 API Testing Workflow](#-api-testing-workflow)
+    - [Prerequisites](#prerequisites)
+    - [Sample Test Data](#sample-test-data)
+      - [Job Description Example](#job-description-example)
+      - [Resume Example](#resume-example)
+  - [🔍 API Documentation Reference](#-api-documentation-reference)
+    - [Endpoints Summary](#endpoints-summary)
+    - [Response Codes](#response-codes)
+  - [📋 Backend Screenshot Guidelines](#-backend-screenshot-guidelines)
+    - [Documentation Should Include](#documentation-should-include)
+    - [Data Sensitivity](#data-sensitivity)
+    - [Screenshot Quality](#screenshot-quality)
+  - [🔧 Tools for Backend Testing](#-tools-for-backend-testing)
+    - [Recommended Tools](#recommended-tools)
+    - [Testing Commands](#testing-commands)
+  - [📚 References](#-references)
+
+
 ## 📸 Backend Screenshots Quick Reference
 
 | Screenshot      | File                  | Size       | Usage             | Status    |

@@ -2,16 +2,39 @@
 
 Comprehensive visual documentation of the java-resumes application interface with both dark and light theme variants.
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Main Tab - Resume Editor](#main-tab---resume-editor)
-- [File History Tab](#file-history-tab)
-- [Settings Tab](#settings-tab)
-- [Tools Tab](#tools-tab)
-- [Add Model Dialog](#add-model-dialog)
-- [Theme Information](#theme-information)
-- [Screenshots Directory](#screenshots-directory)
+- [UI Screenshots - Theme Showcase](#ui-screenshots---theme-showcase)
+  - [📆 Overview](#-overview)
+  - [Main Tab - Resume Editor](#main-tab---resume-editor)
+    - [Dark Theme](#dark-theme)
+    - [Light Theme](#light-theme)
+  - [📤 File History Tab](#-file-history-tab)
+    - [Dark Theme](#dark-theme-1)
+    - [Light Theme](#light-theme-1)
+  - [⚙️ Settings Tab](#️-settings-tab)
+    - [Dark Theme](#dark-theme-2)
+    - [Light Theme](#light-theme-2)
+  - [🛠️ Tools Tab](#️-tools-tab)
+    - [Dark Theme](#dark-theme-3)
+    - [Light Theme](#light-theme-3)
+  - [📂 Add Model Dialog](#-add-model-dialog)
+    - [Dark Theme](#dark-theme-4)
+    - [Light Theme](#light-theme-4)
+  - [🎨 Theme Information](#-theme-information)
+    - [Dark Theme](#dark-theme-5)
+    - [Light Theme](#light-theme-5)
+    - [Switching Themes](#switching-themes)
+  - [📁 Screenshots Directory](#-screenshots-directory)
+  - [📖 Usage Guidelines](#-usage-guidelines)
+    - [Including Screenshots in Documentation](#including-screenshots-in-documentation)
+  - [🎨 Visual Design Standards](#-visual-design-standards)
+    - [Typography](#typography)
+    - [Colors](#colors)
+    - [Spacing](#spacing)
+    - [Components](#components)
+  - [📰 Technical Details](#-technical-details)
+    - [File Formats](#file-formats)
+    - [File Sizes](#file-sizes)
+  - [🔗 Related Documentation](#-related-documentation)
 
 ---
 
@@ -355,11 +378,6 @@ When referencing these screenshots in documentation:
 - [API Documentation](./api/README.md)
 - [Frontend Development Guide](../../frontend/README.md)
 - [Main Project README](../../README.md)
-
----
-
-**Last Updated:** January 22, 2026
-**Status:** ✅ Complete with all theme variants
 
 ---
 

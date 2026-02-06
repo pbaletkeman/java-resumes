@@ -2,20 +2,28 @@
 
 ---
 
-## Table of Contents
-
-1. [✨ Overview](#overview)
-2. [📆 Default Behavior (Bundled Prompts)](#default-behavior-bundled-prompts)
-3. [🔗 Using External Prompts (No Recompilation Required)](#using-external-prompts-no-recompilation-required)
-4. [📋 Updating Prompts Without Recompilation](#updating-prompts-without-recompilation)
-5. [📄 Prompt File Format](#prompt-file-format)
-6. [📂 File Structure](#file-structure)
-7. [🐛 Troubleshooting](#troubleshooting)
-8. [🏗️ Architecture](#architecture)
-9. [✅ Best Practices](#best-practices)
-10. [🚀 Quick Start](#quick-start)
-11. [➕ Adding New Prompts](#adding-new-prompts)
-12. [🗒️ See Also](#see-also)
+- [Prompt Configuration Guide](#prompt-configuration-guide)
+  - [✨ Overview](#-overview)
+  - [📦 Default Behavior (Bundled Prompts)](#-default-behavior-bundled-prompts)
+  - [🔗 Using External Prompts (No Recompilation Required)](#-using-external-prompts-no-recompilation-required)
+    - [Option 1: Environment Variable](#option-1-environment-variable)
+    - [Option 2: application.yml Configuration](#option-2-applicationyml-configuration)
+    - [Option 3: Docker with Volume Mount](#option-3-docker-with-volume-mount)
+  - [⚙️ Updating Prompts Without Recompilation](#️-updating-prompts-without-recompilation)
+    - [For Bundled Prompts:](#for-bundled-prompts)
+    - [For External Prompts:](#for-external-prompts)
+  - [📋 Prompt File Format](#-prompt-file-format)
+  - [📂 File Structure](#-file-structure)
+  - [🐛 Troubleshooting](#-troubleshooting)
+    - [Prompts Not Updating](#prompts-not-updating)
+    - [Can't Find Prompts](#cant-find-prompts)
+  - [🏗️ Architecture](#️-architecture)
+  - [🎯 Best Practices](#-best-practices)
+  - [🚀 Quick Start](#-quick-start)
+    - [Simplest Option (Bundled):](#simplest-option-bundled)
+    - [Advanced Option (External):](#advanced-option-external)
+  - [➕ Adding New Prompts](#-adding-new-prompts)
+  - [📚 See Also](#-see-also)
 
 ---
 

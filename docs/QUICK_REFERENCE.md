@@ -3,23 +3,22 @@
 ---
 
 - [Quick Reference: New Documentation Files](#quick-reference-new-documentation-files)
-  - [🎆 Documentation Added](#documentation-added)
+  - [🎆 Documentation Added](#-documentation-added)
     - [1. **ADD_NEW_PROMPT.md** - Complete Implementation Guide](#1-add_new_promptmd---complete-implementation-guide)
     - [2. **PROMPTS_CONFIGURATION.md** - Updated Configuration Guide](#2-prompts_configurationmd---updated-configuration-guide)
     - [3. **prompts/README.md** - Prompt Directory Guide](#3-promptsreadmemd---prompt-directory-guide)
     - [4. **Updated README.md** - Main Project Documentation](#4-updated-readmemd---main-project-documentation)
-  - [🔄 Variable Naming Standardization](#variable-naming-standardization)
-  - [✨ New Features](#new-features)
+  - [🔄 Variable Naming Standardization](#-variable-naming-standardization)
     - [SKILLS Prompt](#skills-prompt)
     - [Model Configuration](#model-configuration)
-  - [✅ Implementation Checklist for New Prompts](#implementation-checklist-for-new-prompts)
-  - [🔬 Test Coverage](#test-coverage)
-  - [🚀 Running the Application](#running-the-application)
+  - [✅ Implementation Checklist for New Prompts](#-implementation-checklist-for-new-prompts)
+  - [🧪 Test Coverage](#-test-coverage)
+  - [🚀 Running the Application](#-running-the-application)
     - [Backend](#backend)
     - [Frontend](#frontend)
     - [Docker](#docker)
-  - [💬 Getting Help](#getting-help)
-  - [🌟 All Jobs Complete](#all-jobs-complete)
+  - [💬 Getting Help](#-getting-help)
+  - [🌟 All Jobs Complete](#-all-jobs-complete)
 
 ---
 
@@ -110,8 +109,6 @@
 - Documentation
 
 ---
-
-## ✨ New Features
 
 ### SKILLS Prompt
 

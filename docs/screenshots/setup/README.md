@@ -2,6 +2,48 @@
 
 Visual documentation for installation, setup, and deployment processes.
 
+- [Setup \& Deployment Screenshots Guide](#setup--deployment-screenshots-guide)
+  - [📸 Setup Screenshots](#-setup-screenshots)
+  - [UI Screenshots with Theme Variants](#ui-screenshots-with-theme-variants)
+    - [Main Tab (Resume Editor)](#main-tab-resume-editor)
+    - [File History Tab](#file-history-tab)
+    - [Settings Tab](#settings-tab)
+    - [Tools Tab](#tools-tab)
+    - [Add Model Dialog](#add-model-dialog)
+  - [1. Docker Compose Up](#1-docker-compose-up)
+    - [What to Show](#what-to-show)
+    - [Output Should Include](#output-should-include)
+    - [Capture Instructions](#capture-instructions)
+    - [Verification Checklist](#verification-checklist)
+  - [🖥️ 2. Local Development Setup](#️-2-local-development-setup)
+    - [What to Show](#what-to-show-1)
+    - [Setup Should Show](#setup-should-show)
+    - [Capture Instructions](#capture-instructions-1)
+    - [Verification Checklist](#verification-checklist-1)
+  - [3. Build Success](#3-build-success)
+    - [What to Show](#what-to-show-2)
+    - [Build Output Should Include](#build-output-should-include)
+    - [Capture Instructions](#capture-instructions-2)
+    - [Verification Checklist](#verification-checklist-2)
+  - [📋 Setup Verification Steps](#-setup-verification-steps)
+    - [Prerequisites Verification](#prerequisites-verification)
+    - [LLM Service Verification](#llm-service-verification)
+    - [Application Verification](#application-verification)
+  - [🔄 Build \& Test Workflow](#-build--test-workflow)
+    - [Full Development Cycle](#full-development-cycle)
+    - [Docker Workflow](#docker-workflow)
+  - [📸 Additional Setup Screenshots](#-additional-setup-screenshots)
+    - [Gradle Wrapper Installation](#gradle-wrapper-installation)
+    - [Node Package Installation](#node-package-installation)
+    - [Environment Configuration](#environment-configuration)
+  - [✅ Setup Checklist](#-setup-checklist)
+  - [📞 Troubleshooting Setup Issues](#-troubleshooting-setup-issues)
+    - [Backend Won't Build](#backend-wont-build)
+    - [Frontend Won't Start](#frontend-wont-start)
+    - [Docker Issues](#docker-issues)
+    - [LLM Connection Error](#llm-connection-error)
+  - [📚 References](#-references)
+
 ## 📸 Setup Screenshots
 
 | Screenshot      | File                  | Themes         | Status   |
@@ -580,10 +622,6 @@ ollama pull mistral
 - [Docker Documentation](../../Dockerfile)
 - [Docker Compose Setup](../../docker-compose.yml)
 - [Screenshots Guide](../SCREENSHOTS_GUIDE.md)
-
----
-
-Last Updated: 2026-01-16
 
 ---
 

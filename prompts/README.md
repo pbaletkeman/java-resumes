@@ -4,18 +4,50 @@ This directory contains the carefully crafted prompt templates that drive the ar
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Available Prompt Templates](#available-prompt-templates)
-- [Prompt Design Philosophy](#prompt-design-philosophy)
-- [How Prompts Are Used](#how-prompts-are-used)
-- [Prompt Customization](#prompt-customization)
-- [Quality Metrics](#quality-metrics)
-- [Technical Details](#technical-details)
-- [Best Practices for Prompt Engineering](#best-practices-for-prompt-engineering)
-- [Maintenance & Updates](#maintenance--updates)
-- [Examples](#examples)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
+- [LLM Prompt Templates](#llm-prompt-templates)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Available Prompt Templates](#available-prompt-templates)
+    - [1. **RESUME.md**](#1-resumemd)
+    - [2. **COVER.md**](#2-covermd)
+    - [3. **SKILLS.md**](#3-skillsmd)
+    - [4. **Interview Preparation Prompts** (new-prompts.md)](#4-interview-preparation-prompts-new-promptsmd)
+      - [4a. **Interview HR Questions**](#4a-interview-hr-questions)
+      - [4b. **Job-Specific Interview Questions**](#4b-job-specific-interview-questions)
+      - [4c. **Reverse Interview Questions**](#4c-reverse-interview-questions)
+    - [5. **Networking \& Outreach Prompts** (new-prompts.md)](#5-networking--outreach-prompts-new-promptsmd)
+      - [5a. **Cold Email**](#5a-cold-email)
+      - [5b. **Cold LinkedIn Message**](#5b-cold-linkedin-message)
+      - [5c. **Thank You Email**](#5c-thank-you-email)
+  - [Prompt Design Philosophy](#prompt-design-philosophy)
+    - [1. **Clarity \& Specificity**](#1-clarity--specificity)
+    - [2. **Context Integration**](#2-context-integration)
+    - [3. **Quality Assurance**](#3-quality-assurance)
+    - [4. **Optimization Focus**](#4-optimization-focus)
+  - [How Prompts Are Used](#how-prompts-are-used)
+    - [Processing Flow](#processing-flow)
+    - [Example Prompt Execution](#example-prompt-execution)
+  - [Prompt Customization](#prompt-customization)
+    - [Extending Prompts](#extending-prompts)
+    - [Modifying Existing Prompts](#modifying-existing-prompts)
+  - [Quality Metrics](#quality-metrics)
+  - [Technical Details](#technical-details)
+    - [Prompt Format](#prompt-format)
+    - [Integration Points](#integration-points)
+  - [Best Practices for Prompt Engineering](#best-practices-for-prompt-engineering)
+    - [Do](#do)
+    - [Don't](#dont)
+    - [Regular Review](#regular-review)
+    - [Version Control](#version-control)
+    - [Feedback Loop](#feedback-loop)
+  - [Examples](#examples)
+    - [Resume Optimization Example](#resume-optimization-example)
+    - [Cover Letter Generation Example](#cover-letter-generation-example)
+    - [Skills Development Example](#skills-development-example)
+    - [Interview Preparation Example](#interview-preparation-example)
+    - [Networking Outreach Example](#networking-outreach-example)
+  - [Troubleshooting](#troubleshooting)
+  - [Contributing](#contributing)
 
 ---
 
@@ -108,45 +140,57 @@ Prompts are the communication bridge between the application and the AI model. E
 **Purpose**: Prepare candidates for comprehensive interview scenarios
 
 #### 4a. **Interview HR Questions**
+
 **Endpoint**: `/api/generate/interview-hr-questions`
 
 **Key Functions**:
+
 - Generate 5 general HR interview questions
 - Cover behavioral, situational, and cultural fit topics
 - Prepare candidates for common HR screening
 
 **Input Parameters**:
+
 - Job description
 
 **Output**:
+
 - 5 commonly asked HR interview questions
 
 #### 4b. **Job-Specific Interview Questions**
+
 **Endpoint**: `/api/generate/interview-job-specific`
 
 **Key Functions**:
+
 - Generate 5 role-specific technical/functional questions
 - Align questions with job requirements
 - Focus on skills and experience validation
 
 **Input Parameters**:
+
 - Job description
 
 **Output**:
+
 - 5 targeted interview questions based on job requirements
 
 #### 4c. **Reverse Interview Questions**
+
 **Endpoint**: `/api/generate/interview-reverse`
 
 **Key Functions**:
+
 - Generate thoughtful questions candidates can ask interviewers
 - Demonstrate engagement and strategic thinking
 - Assess company culture and role fit
 
 **Input Parameters**:
+
 - Job description
 
 **Output**:
+
 - 5 strategic questions for candidates to ask during interviews
 
 ### 5. **Networking & Outreach Prompts** (new-prompts.md)
@@ -154,48 +198,60 @@ Prompts are the communication bridge between the application and the AI model. E
 **Purpose**: Generate professional communication for job search networking
 
 #### 5a. **Cold Email**
+
 **Endpoint**: `/api/generate/cold-email`
 
 **Key Functions**:
+
 - Generate 5 distinct cold outreach emails
 - Professional introduction to target companies
 - Express interest and highlight relevant qualifications
 
 **Input Parameters**:
+
 - Job description
 - Target company information
 
 **Output**:
+
 - 5 variations of professional cold emails
 
 #### 5b. **Cold LinkedIn Message**
+
 **Endpoint**: `/api/generate/cold-linkedin-message`
 
 **Key Functions**:
+
 - Generate 5 distinct LinkedIn connection messages
 - Concise, professional outreach appropriate for LinkedIn
 - Build professional network connections
 
 **Input Parameters**:
+
 - Job description
 - Target company/recruiter information
 
 **Output**:
+
 - 5 variations of LinkedIn outreach messages
 
 #### 5c. **Thank You Email**
+
 **Endpoint**: `/api/generate/thank-you-email`
 
 **Key Functions**:
+
 - Generate 5 distinct post-interview thank you emails
 - Reinforce interest and qualifications
 - Professional follow-up communication
 
 **Input Parameters**:
+
 - Job description
 - Interview details (optional)
 
 **Output**:
+
 - 5 variations of thank you emails
 
 ---

@@ -4,15 +4,20 @@ Quick reference for setting up and using Ollama with the java-resumes project.
 
 ---
 
-## Table of Contents
-
-- [🚀 Quick Setup Commands](#-quick-setup-commands)
-- [📋 Configuration Files](#-configuration-files)
-- [🎯 Model Recommendations](#-model-recommendations)
-- [⚡ Common Tasks](#-common-tasks)
-- [🔗 Quick Links](#-quick-links)
-- [📊 Resource Usage](#-resource-usage)
-- [✅ Checklist](#-checklist)
+- [Ollama GitHub Environment - Quick Reference](#ollama-github-environment---quick-reference)
+  - [🚀 Quick Setup Commands](#-quick-setup-commands)
+    - [Local Development](#local-development)
+    - [Docker Compose](#docker-compose)
+    - [GitHub Actions](#github-actions)
+  - [📋 Configuration Files](#-configuration-files)
+  - [🎯 Model Recommendations](#-model-recommendations)
+  - [⚡ Common Tasks](#-common-tasks)
+    - [Change Model](#change-model)
+    - [Test Ollama](#test-ollama)
+    - [Troubleshooting](#troubleshooting)
+  - [🔗 Quick Links](#-quick-links)
+  - [📊 Resource Usage](#-resource-usage)
+  - [✅ Checklist](#-checklist)
 
 ---
 

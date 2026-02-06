@@ -4,19 +4,26 @@ Fast reference for common build, test, and deployment tasks across the java-resu
 
 ---
 
-## Table of Contents
-
-- [✅ Prerequisites](#-prerequisites)
-- [🎨 Frontend Commands](#-frontend-commands)
-- [🔧 Backend Commands](#-backend-commands)
-- [📦 Build Scripts](#-build-scripts)
-- [🚀 Production Deployment](#-production-deployment)
-- [📝 Version Management](#-version-management)
-- [⚙️ GitHub Actions](#-github-actions)
-- [🐳 Docker Commands](#-docker-commands)
-- [🔍 Troubleshooting](#-troubleshooting)
-- [📊 CI/CD Status](#-cicd-status)
-- [📚 Documentation](#-documentation)
+- [Quick Build Reference](#quick-build-reference)
+  - [✅ Prerequisites](#-prerequisites)
+  - [🎨 Frontend Commands](#-frontend-commands)
+  - [🔧 Backend Commands](#-backend-commands)
+  - [📦 Build Scripts](#-build-scripts)
+    - [Windows](#windows)
+    - [macOS/Linux](#macoslinux)
+  - [🚀 Production Deployment](#-production-deployment)
+    - [Frontend](#frontend)
+    - [Backend](#backend)
+  - [📝 Version Management](#-version-management)
+    - [Manual Release](#manual-release)
+    - [Using Release Script](#using-release-script)
+  - [⚙️ GitHub Actions](#️-github-actions)
+    - [View Workflows](#view-workflows)
+    - [Trigger Release Workflow](#trigger-release-workflow)
+  - [🐳 Docker Commands](#-docker-commands)
+  - [🔍 Troubleshooting](#-troubleshooting)
+  - [📊 CI/CD Status](#-cicd-status)
+  - [📚 Documentation](#-documentation)
 
 ---
 

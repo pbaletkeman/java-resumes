@@ -440,32 +440,32 @@ npm run dev
 
 ```
 java-resumes/
- src/main/java/              # Backend source code
+ src/main/java/               # Backend source code
     ca/letkeman/resumes/
-        controller/         # REST endpoints
-        service/            # Business logic
-        model/              # Data models
-        optimizer/          # LLM integration
+        controller/           # REST endpoints
+        service/              # Business logic
+        model/                # Data models
+        optimizer/            # LLM integration
         RestServiceApplication.java
 
- src/test/java/              # Backend tests
+ src/test/java/               # Backend tests
     ca/letkeman/resumes/
 
- frontend/                   # Frontend React app
+ frontend/                    # Frontend React app
     src/
-       components/         # React components
-       hooks/              # Custom hooks
-       services/           # API services
-       App.tsx             # Root component
-       main.tsx            # Entry point
-    tests/                  # Frontend tests
-    package.json            # Dependencies
-    vite.config.ts          # Vite config
+       components/            # React components
+       hooks/                 # Custom hooks
+       services/              # API services
+       App.tsx                # Root component
+       main.tsx               # Entry point
+    tests/                    # Frontend tests
+    package.json              # Dependencies
+    vite.config.ts            # Vite config
 
- build.gradle                # Backend build config
+ build.gradle                 # Backend build config
  settings.gradle
- docker-compose.yml          # Docker config
- config.json                 # LLM config
+ docker-compose.yml           # Docker config
+ config.json                  # LLM config
  README.md
 ```
 

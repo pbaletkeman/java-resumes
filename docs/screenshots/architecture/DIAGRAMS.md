@@ -2,18 +2,21 @@
 
 This directory contains architecture diagrams and visual representations of the java-resumes system.
 
-## � Table of Contents
-
-1. [System Architecture](#system-architecture)
-2. [Component Architecture](#component-architecture)
-3. [Data Flow Diagram](#data-flow-diagram)
-4. [Deployment Architecture](#deployment-architecture)
-5. [Docker Compose Structure](#docker-compose-structure)
-6. [Request/Response Flow](#request-response-flow)
-7. [Backend Component Dependencies (UML)](#backend-component-dependencies-uml)
-8. [Frontend Component Dependencies (UML)](#frontend-component-dependencies-uml)
-9. [Authentication & Security](#authentication--security)
-10. [Scalability Patterns](#scalability-patterns)
+- [Architecture Diagrams](#architecture-diagrams)
+  - [�📊 Diagrams Included](#-diagrams-included)
+    - [System Architecture](#system-architecture)
+    - [Component Architecture](#component-architecture)
+    - [Data Flow Diagram](#data-flow-diagram)
+    - [Deployment Architecture](#deployment-architecture)
+    - [Docker Compose Structure](#docker-compose-structure)
+  - [📈 Request/Response Flow](#-requestresponse-flow)
+  - [Backend Component Dependencies (UML)](#backend-component-dependencies-uml)
+  - [Frontend Component Dependencies (UML)](#frontend-component-dependencies-uml)
+  - [🔄 Authentication \& Security](#-authentication--security)
+  - [🚀 Scalability Patterns](#-scalability-patterns)
+    - [Horizontal Scaling](#horizontal-scaling)
+    - [Message Queue Pattern](#message-queue-pattern)
+  - [📚 References](#-references)
 
 ---
 

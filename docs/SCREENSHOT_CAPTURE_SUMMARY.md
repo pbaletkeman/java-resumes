@@ -3,18 +3,18 @@
 ---
 
 - [Screenshot Capture Summary](#screenshot-capture-summary)
-  - [📋 Summary](#summary)
-  - [🎭 Screenshots Captured by Category](#screenshots-captured-by-category)
+  - [📊 Summary](#-summary)
+  - [🎥 Screenshots Captured by Category](#-screenshots-captured-by-category)
     - [Frontend Screenshots (4/6 captured)](#frontend-screenshots-46-captured)
     - [Backend API Screenshots (3/3 captured)](#backend-api-screenshots-33-captured)
     - [Architecture Diagrams (4/4 captured)](#architecture-diagrams-44-captured)
-    - [Setup & Deployment Screenshots (3/3 captured)](#setup--deployment-screenshots-33-captured)
-  - [📊 Aggregate Statistics](#aggregate-statistics)
-  - [📂 File Locations](#file-locations)
-  - [⚠️ Failures & Root Causes](#failures--root-causes)
+    - [Setup \& Deployment Screenshots (3/3 captured)](#setup--deployment-screenshots-33-captured)
+  - [📊 Aggregate Statistics](#-aggregate-statistics)
+  - [📂 File Locations](#-file-locations)
+  - [⚠️ Failures \& Root Causes](#️-failures--root-causes)
     - [Failed Captures](#failed-captures)
     - [Browser Context Issues](#browser-context-issues)
-  - [🔤 Technical Details](#technical-details)
+  - [🔧 Technical Details](#-technical-details)
     - [Script Configuration](#script-configuration)
     - [Execution Time](#execution-time)
     - [Environment](#environment)
@@ -22,9 +22,9 @@
     - [Option 1: Retry Failed Screenshots](#option-1-retry-failed-screenshots)
     - [Option 2: Manual Screenshot Capture](#option-2-manual-screenshot-capture)
     - [Option 3: Script Enhancement](#option-3-script-enhancement)
-  - [✅ Verification Checklist](#verification-checklist)
-  - [📃 Notes & Observations](#notes--observations)
-  - [🔗 Related Documentation](#related-documentation)
+  - [✅ Verification Checklist](#-verification-checklist)
+  - [📝 Notes \& Observations](#-notes--observations)
+  - [🔗 Related Documentation](#-related-documentation)
 
 ---
 

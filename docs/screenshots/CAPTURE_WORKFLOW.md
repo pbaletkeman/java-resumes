@@ -2,6 +2,51 @@
 
 Complete step-by-step instructions for capturing, verifying, and documenting all 16 required screenshots.
 
+- [Screenshot Capture Workflow](#screenshot-capture-workflow)
+  - [📊 Capture Timeline](#-capture-timeline)
+  - [✅ Pre-Capture Checklist](#-pre-capture-checklist)
+    - [System Requirements](#system-requirements)
+    - [Tools Installed](#tools-installed)
+    - [Project Ready](#project-ready)
+    - [Directory Structure](#directory-structure)
+  - [🎬 Phase 1: Frontend Screenshots (6 images)](#-phase-1-frontend-screenshots-6-images)
+    - [Prerequisites](#prerequisites)
+    - [Backend Startup Checklist](#backend-startup-checklist)
+    - [Frontend Startup Checklist](#frontend-startup-checklist)
+    - [Screenshot 1: Main Upload Tab](#screenshot-1-main-upload-tab)
+    - [Screenshot 2: File History Panel](#screenshot-2-file-history-panel)
+    - [Screenshot 3: Additional Tools Tab](#screenshot-3-additional-tools-tab)
+    - [Screenshot 4: Light Theme](#screenshot-4-light-theme)
+    - [Screenshot 5: Dark Theme](#screenshot-5-dark-theme)
+    - [Screenshot 6: Mobile Responsive](#screenshot-6-mobile-responsive)
+  - [🔧 Phase 2: Backend API Screenshots (3 images)](#-phase-2-backend-api-screenshots-3-images)
+    - [Prerequisites - Phase 2](#prerequisites---phase-2)
+    - [Backend Running Checklist](#backend-running-checklist)
+    - [Screenshot 1: Swagger UI](#screenshot-1-swagger-ui)
+    - [Screenshot 2: API Endpoints](#screenshot-2-api-endpoints)
+    - [Screenshot 3: Error Responses](#screenshot-3-error-responses)
+  - [🏗️ Phase 3: Architecture Diagrams (4 images)](#️-phase-3-architecture-diagrams-4-images)
+    - [Tools Required](#tools-required)
+    - [Screenshot 1: System Architecture](#screenshot-1-system-architecture)
+    - [Screenshot 2: Data Flow Diagram](#screenshot-2-data-flow-diagram)
+    - [Screenshot 3: Deployment Architecture](#screenshot-3-deployment-architecture)
+    - [Screenshot 4: Component Diagram](#screenshot-4-component-diagram)
+  - [📦 Phase 4: Setup \& Deployment Screenshots (3 images)](#-phase-4-setup--deployment-screenshots-3-images)
+    - [See: setup/README.md](#see-setupreadmemd)
+  - [✅ Phase 5: Verification \& Finalization](#-phase-5-verification--finalization)
+    - [Screenshot Verification Checklist](#screenshot-verification-checklist)
+      - [Technical Requirements](#technical-requirements)
+      - [Content Requirements](#content-requirements)
+      - [Visual Quality](#visual-quality)
+    - [File Organization Verification](#file-organization-verification)
+    - [Documentation Link Verification](#documentation-link-verification)
+    - [Final Checklist](#final-checklist)
+  - [🔄 Update Schedule](#-update-schedule)
+    - [Quarterly Review](#quarterly-review)
+    - [On Major Release](#on-major-release)
+    - [When Requested](#when-requested)
+  - [📚 References](#-references)
+
 ## 📊 Capture Timeline
 
 | Phase       | Task                      | Est. Time  | Status       |
@@ -356,21 +401,17 @@ npm run dev
 
 **Diagram Should Show:**
 
-```plaintext
-┌─────────────────┐
-│  React Frontend │
-└────────┬────────┘
-         │ HTTP
-         ▼
-┌─────────────────┐      ┌──────────────┐
-│  Spring Boot    │◄────►│   Ollama     │
-│   REST API      │      │   LLM API    │
-└────────┬────────┘      └──────────────┘
-         │
-         ▼
-┌─────────────────┐
-│  File Storage   │
-└─────────────────┘
+```mermaid
+graph TB
+    A["🎨 React Frontend"] -->|HTTP| B["🔙 Spring Boot<br/>REST API"]
+    B -->|REST Calls| C["🔗 Ollama<br/>LLM API"]
+    B -->|File I/O| D["💾 File Storage"]
+    C -->|Optimized Content| B
+
+    style A fill:#c8e6c9
+    style B fill:#bbdefb
+    style C fill:#ffccbc
+    style D fill:#fff9c4
 ```
 
 **Verification:**
@@ -400,20 +441,22 @@ npm run dev
 
 **Diagram Should Show:**
 
-```plainttext
-User Input
-   ↓
-Resume Upload
-   ↓
-Validation
-   ↓
-LLM Processing
-   ↓
-Response Parsing
-   ↓
-PDF Generation
-   ↓
-Download Ready
+```mermaid
+graph TD
+    A["👤 User Input"] --> B["📄 Resume Upload"]
+    B --> C["✅ Validation"]
+    C --> D["🔄 LLM Processing"]
+    D --> E["📊 Response Parsing"]
+    E --> F["📑 PDF Generation"]
+    F --> G["⬇️ Download Ready"]
+
+    style A fill:#e3f2fd
+    style B fill:#f3e5f5
+    style C fill:#fff3e0
+    style D fill:#fce4ec
+    style E fill:#e0f2f1
+    style F fill:#f1f8e9
+    style G fill:#c8e6c9
 ```
 
 **Verification:**
@@ -442,17 +485,23 @@ Download Ready
 
 **Diagram Should Show:**
 
-```shell
-docker-compose
-├─ Frontend Container
-│  ├─ Nginx (port 80)
-│  └─ React App
-├─ Backend Container
-│  ├─ Spring Boot (port 8080)
-│  ├─ Gradle
-│  └─ Java 17
-└─ Volumes
-   └─ ./uploads:/app/uploads
+```mermaid
+graph TB
+    subgraph compose["Docker Compose Network"]
+        A["🐳 Frontend Container<br/>Nginx<br/>React App"]
+        B["🐳 Backend Container<br/>Spring Boot<br/>Java 17<br/>Gradle"]
+        C["💾 Volumes<br/>./uploads:/app/uploads"]
+    end
+
+    A -->|Port 80| D["🌐 External Access"]
+    B -->|Port 8080| D
+    B --> C
+
+    style A fill:#c8e6c9
+    style B fill:#bbdefb
+    style C fill:#fff9c4
+    style D fill:#ffccbc
+    style compose fill:#eceff1
 ```
 
 **Verification:**
@@ -481,19 +530,37 @@ docker-compose
 
 **Diagram Should Show:**
 
-```shell
-Frontend
-├─ App.tsx
-├─ MainContentTab.tsx
-└─ hooks/
-   ├─ useApi.ts
-   └─ useTheme.ts
+```mermaid
+graph TD
+    subgraph frontend["Frontend Layer"]
+        A["App.tsx"]
+        B["MainContentTab.tsx"]
+        C["Custom Hooks<br/>useApi.ts<br/>useTheme.ts"]
+    end
 
-Backend
-├─ ResumeController
-├─ ApiService
-├─ FilesStorageService
-└─ Model Classes
+    subgraph backend["Backend Layer"]
+        D["ResumeController"]
+        E["ApiService"]
+        F["FilesStorageService"]
+        G["Model Classes"]
+    end
+
+    A --> B
+    B --> C
+    C -->|HTTP| D
+    D --> E
+    D --> F
+    D --> G
+
+    style A fill:#c8e6c9
+    style B fill:#c8e6c9
+    style C fill:#a5d6a7
+    style D fill:#bbdefb
+    style E fill:#bbdefb
+    style F fill:#90caf9
+    style G fill:#64b5f6
+    style frontend fill:#e8f5e9
+    style backend fill:#e3f2fd
 ```
 
 **Verification:**
