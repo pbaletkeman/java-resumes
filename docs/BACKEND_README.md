@@ -1,9 +1,6 @@
 ﻿# Resume Optimizer Backend
 
-[![Java](https://img.shields.io/badge/Java-21%20LTS-orange.svg)](https://openjdk.java.net/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.1-brightgreen.svg)](https://spring.io/projects/spring-boot)
-[![Gradle](https://img.shields.io/badge/Gradle-8.10-02303A.svg)](https://gradle.org/)
-[![Checkstyle](https://img.shields.io/badge/Checkstyle-10.14.2-blue.svg)](https://checkstyle.org/)
+[![Java](https://img.shields.io/badge/Java-21%20LTS-orange.svg)](https://openjdk.java.net/) | [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.1-brightgreen.svg)](https://spring.io/projects/spring-boot) | [![Gradle](https://img.shields.io/badge/Gradle-8.10-02303A.svg)](https://gradle.org/) | [![Checkstyle](https://img.shields.io/badge/Checkstyle-10.14.2-blue.svg)](https://checkstyle.org/)
 
 A robust Java Spring Boot backend service for AI-powered resume and cover letter optimization. Provides RESTful APIs for document processing, file management, and LLM integration with comprehensive testing and code quality enforcement.
 

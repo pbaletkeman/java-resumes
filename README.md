@@ -1,12 +1,6 @@
 # Java Resumes - Full-Stack Resume Optimization Application
 
-[![Java](https://img.shields.io/badge/Java-21%20LTS-orange.svg)](https://openjdk.java.net/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.1-brightgreen.svg)](https://spring.io/projects/spring-boot)
-[![React](https://img.shields.io/badge/React-19.2.0-blue.svg)](https://reactjs.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-22%20LTS-339933.svg)](https://nodejs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue.svg)](https://www.typescriptlang.org/)
-[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED.svg)](https://www.docker.com/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Java](https://img.shields.io/badge/Java-21%20LTS-orange.svg)](https://openjdk.java.net/) | [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.1-brightgreen.svg)](https://spring.io/projects/spring-boot) | [![React](https://img.shields.io/badge/React-19.2.0-blue.svg)](https://reactjs.org/) | [![Node.js](https://img.shields.io/badge/Node.js-22%20LTS-339933.svg)](https://nodejs.org/) | [![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue.svg)](https://www.typescriptlang.org/) | [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED.svg)](https://www.docker.com/) | [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 AI-powered full-stack application for resume and cover letter optimization using Large Language Models. Built with Spring Boot 3.5.1, React 19, TypeScript, and Docker for seamless deployment.
 
@@ -14,23 +8,34 @@ AI-powered full-stack application for resume and cover letter optimization using
 
 ---
 
-## Table of Contents
-
-- [Quick Start](#quick-start)
-- [Documentation Index](#documentation-index)
-- [What It Does](#what-it-does)
-- [Architecture](#architecture)
-- [Technology Stack](#technology-stack)
-- [Project Structure](#project-structure)
-- [API Endpoints](#api-endpoints)
-- [Development Setup](#development-setup)
-- [Testing](#testing)
-- [Configuration](#configuration)
-- [Troubleshooting](#troubleshooting)
-- [Production Deployment](#production-deployment)
-- [Contributing](#contributing)
-- [License](#license)
-- [Support & Resources](#support--resources)
+- [Java Resumes - Full-Stack Resume Optimization Application](#java-resumes---full-stack-resume-optimization-application)
+  - [🚀 Quick Start](#-quick-start)
+  - [📚 Documentation Index](#-documentation-index)
+  - [✨ What It Does](#-what-it-does)
+    - [Core Features](#core-features)
+    - [How It Works](#how-it-works)
+  - [🏗️ Architecture](#️-architecture)
+  - [🛠️ Technology Stack](#️-technology-stack)
+  - [📂 Project Structure](#-project-structure)
+  - [📡 API Endpoints](#-api-endpoints)
+    - [Core Document Processing](#core-document-processing)
+    - [Interview Preparation _(New)_](#interview-preparation-new)
+    - [Professional Networking _(New)_](#professional-networking-new)
+    - [File Management](#file-management)
+  - [🔧 Development Setup](#-development-setup)
+    - [Backend](#backend)
+    - [Frontend](#frontend)
+  - [🧪 Testing](#-testing)
+  - [🔐 Configuration](#-configuration)
+    - [LLM Setup](#llm-setup)
+  - [🐛 Troubleshooting](#-troubleshooting)
+  - [🚀 Production Deployment](#-production-deployment)
+    - [Docker Compose (Recommended)](#docker-compose-recommended)
+    - [Kubernetes / Cloud](#kubernetes--cloud)
+  - [🤝 Contributing](#-contributing)
+  - [📄 License](#-license)
+  - [📞 Support \& Resources](#-support--resources)
+    - [Made with ❤️ using Java, Spring Boot, React, and AI](#made-with-️-using-java-spring-boot-react-and-ai)
 
 ---
 

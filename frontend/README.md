@@ -1,10 +1,6 @@
 # Resume Optimizer Frontend
 
-[![React](https://img.shields.io/badge/React-19.2.0-blue.svg)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue.svg)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-7.2.4-646CFF.svg)](https://vitejs.dev/)
-[![PrimeReact](https://img.shields.io/badge/PrimeReact-10.9.7-007BFF.svg)](https://primereact.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.1.18-38B2AC.svg)](https://tailwindcss.com/)
+[![React](https://img.shields.io/badge/React-19.2.0-blue.svg)](https://reactjs.org/) | [![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue.svg)](https://www.typescriptlang.org/) | [![Vite](https://img.shields.io/badge/Vite-7.2.4-646CFF.svg)](https://vitejs.dev/) | [![PrimeReact](https://img.shields.io/badge/PrimeReact-10.9.7-007BFF.svg)](https://primereact.org/) | [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.1.18-38B2AC.svg)](https://tailwindcss.com/)
 
 A modern, responsive React application built with PrimeReact components for AI-powered resume optimization and document processing. Features a tab-based interface, file management, theme switching, and seamless backend integration.
 
