@@ -9,37 +9,37 @@ AI-powered full-stack application for resume and cover letter optimization using
 ---
 
 - [Java Resumes - Full-Stack Resume Optimization Application](#java-resumes---full-stack-resume-optimization-application)
-  - [Quick Start](#quick-start)
-  - [Documentation Index](#documentation-index)
-  - [What It Does](#what-it-does)
+  - [🚀 Quick Start](#-quick-start)
+  - [📚 Documentation Index](#-documentation-index)
+  - [✨ What It Does](#-what-it-does)
     - [Core Features](#core-features)
     - [How It Works](#how-it-works)
-  - [Architecture](#architecture)
-  - [Technology Stack](#technology-stack)
-  - [Project Structure](#project-structure)
-  - [API Endpoints](#api-endpoints)
+  - [🏗️ Architecture](#️-architecture)
+  - [🛠️ Technology Stack](#️-technology-stack)
+  - [📂 Project Structure](#-project-structure)
+  - [📡 API Endpoints](#-api-endpoints)
     - [Core Document Processing](#core-document-processing)
     - [Interview Preparation _(New)_](#interview-preparation-new)
     - [Professional Networking _(New)_](#professional-networking-new)
     - [File Management](#file-management)
-  - [Development Setup](#development-setup)
+  - [🔧 Development Setup](#-development-setup)
     - [Backend](#backend)
     - [Frontend](#frontend)
-  - [Testing](#testing)
-  - [Configuration](#configuration)
+  - [🧪 Testing](#-testing)
+  - [🔐 Configuration](#-configuration)
     - [LLM Setup](#llm-setup)
-  - [Troubleshooting](#troubleshooting)
-  - [Production Deployment](#production-deployment)
+  - [🐛 Troubleshooting](#-troubleshooting)
+  - [🚀 Production Deployment](#-production-deployment)
     - [Docker Compose (Recommended)](#docker-compose-recommended)
     - [Kubernetes / Cloud](#kubernetes--cloud)
-  - [Contributing](#contributing)
-  - [License](#license)
-  - [Support \& Resources](#support--resources)
+  - [🤝 Contributing](#-contributing)
+  - [📄 License](#-license)
+  - [📞 Support \& Resources](#-support--resources)
     - [Made with ❤️ using Java, Spring Boot, React, and AI](#made-with-️-using-java-spring-boot-react-and-ai)
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
 ```bash
 git clone https://github.com/pbaletkeman/java-resumes.git
@@ -55,7 +55,7 @@ docker compose up --build
 
 ---
 
-## Documentation Index
+## 📚 Documentation Index
 
 | Topic             | Doc                                           | Topic            | Doc                                                     |
 | ----------------- | --------------------------------------------- | ---------------- | ------------------------------------------------------- |
@@ -69,7 +69,7 @@ docker compose up --build
 
 ---
 
-## What It Does
+## ✨ What It Does
 
 The application provides comprehensive AI-powered career optimization tools:
 
@@ -117,7 +117,7 @@ The application provides comprehensive AI-powered career optimization tools:
 
 ---
 
-## Architecture
+## 🏗️ Architecture
 
 **Frontend:** React 19 + TypeScript + PrimeReact + Tailwind CSS
 **Backend:** Spring Boot 3.5.1 + Java 21 + Gradle
@@ -128,7 +128,7 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for detailed diagrams and syste
 
 ---
 
-## Technology Stack
+## 🛠️ Technology Stack
 
 | Component            | Technology   | Version |
 | -------------------- | ------------ | ------- |
@@ -145,7 +145,7 @@ See [docs/TECHNOLOGY_STACK.md](docs/TECHNOLOGY_STACK.md) for complete details.
 
 ---
 
-## Project Structure
+## 📂 Project Structure
 
 ```
 java-resumes/
@@ -165,7 +165,7 @@ java-resumes/
 
 ---
 
-## API Endpoints
+## 📡 API Endpoints
 
 ### Core Document Processing
 
@@ -206,7 +206,7 @@ See [docs/API_REFERENCE.md](docs/API_REFERENCE.md) for complete API documentatio
 
 ---
 
-## Development Setup
+## 🔧 Development Setup
 
 ### Backend
 
@@ -232,7 +232,7 @@ See [docs/DEVELOPMENT_SETUP.md](docs/DEVELOPMENT_SETUP.md) for detailed instruct
 
 ---
 
-## Testing
+## 🧪 Testing
 
 ```bash
 # Backend
@@ -251,7 +251,7 @@ See [docs/TESTING.md](docs/TESTING.md) for complete testing guide.
 
 ---
 
-## Configuration
+## 🔐 Configuration
 
 ### LLM Setup
 
@@ -278,7 +278,7 @@ See [docs/CONFIGURATION.md](docs/CONFIGURATION.md) for advanced configuration.
 
 ---
 
-## Troubleshooting
+## 🐛 Troubleshooting
 
 Common issues and solutions:
 
@@ -298,7 +298,7 @@ See [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for complete troubleshoot
 
 ---
 
-## Production Deployment
+## 🚀 Production Deployment
 
 ### Docker Compose (Recommended)
 
@@ -312,7 +312,7 @@ See [docs/PRODUCTION_DEPLOYMENT.md](docs/PRODUCTION_DEPLOYMENT.md) for deploymen
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/your-feature`
@@ -326,13 +326,13 @@ See [docs/CODE_QUALITY.md](docs/CODE_QUALITY.md) for code standards.
 
 ---
 
-## License
+## 📄 License
 
 MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
-## Support & Resources
+## 📞 Support & Resources
 
 - **Documentation**: [docs/README.md](docs/README.md)
 - **Issues**: [GitHub Issues](https://github.com/pbaletkeman/java-resumes/issues)
