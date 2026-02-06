@@ -1,24 +1,24 @@
 # Git Hooks Configuration
 
 - [Git Hooks Configuration](#git-hooks-configuration)
-  - [Configured Hooks](#configured-hooks)
+  - [⚙️ Configured Hooks](#️-configured-hooks)
     - [`pre-commit`](#pre-commit)
     - [`pre-push`](#pre-push)
-  - [Setup](#setup)
+  - [🔧 Setup](#-setup)
     - [Automatic (Recommended)](#automatic-recommended)
     - [Manual Setup](#manual-setup)
-  - [How It Works](#how-it-works)
-  - [Troubleshooting](#troubleshooting)
+  - [🔄 How It Works](#-how-it-works)
+  - [🐛 Troubleshooting](#-troubleshooting)
     - [Hooks Not Running](#hooks-not-running)
     - [Hook Execution Fails](#hook-execution-fails)
     - [Skipping Hooks (Not Recommended)](#skipping-hooks-not-recommended)
-  - [What Gets Auto-Fixed](#what-gets-auto-fixed)
-  - [Manual Execution](#manual-execution)
-  - [Configuration Files](#configuration-files)
+  - [✨ What Gets Auto-Fixed](#-what-gets-auto-fixed)
+  - [⌨️ Manual Execution](#️-manual-execution)
+  - [📋 Configuration Files](#-configuration-files)
 
 This directory contains git hooks that ensure code quality and formatting compliance.
 
-## Configured Hooks
+## ⚙️ Configured Hooks
 
 ### `pre-commit`
 
@@ -42,7 +42,7 @@ Runs automatically before each push. This hook:
 
 **Behavior:** If any check fails, the push is prevented.
 
-## Setup
+## 🔧 Setup
 
 ### Automatic (Recommended)
 
@@ -65,7 +65,7 @@ git config core.hooksPath .githooks
 git config --global core.hooksPath .githooks
 ```
 
-## How It Works
+## 🔄 How It Works
 
 1. **Before each commit:**
    - `spotlessApply` automatically fixes formatting issues
@@ -78,7 +78,7 @@ git config --global core.hooksPath .githooks
    - Build verification runs
    - Push succeeds if all checks pass
 
-## Troubleshooting
+## 🐛 Troubleshooting
 
 ### Hooks Not Running
 
@@ -112,7 +112,7 @@ git commit --no-verify  # Skips pre-commit hook
 git push --no-verify   # Skips pre-push hook
 ```
 
-## What Gets Auto-Fixed
+## ✨ What Gets Auto-Fixed
 
 The `spotlessApply` task automatically fixes:
 
@@ -122,7 +122,7 @@ The `spotlessApply` task automatically fixes:
 - ✓ Blank line violations
 - ✓ Other formatting issues defined in `.editorconfig` and `spotless.gradle`
 
-## Manual Execution
+## ⌨️ Manual Execution
 
 Run these commands manually anytime:
 
@@ -140,7 +140,7 @@ Run these commands manually anytime:
 ./gradlew spotlessApply check spotbugsMain test build
 ```
 
-## Configuration Files
+## 📋 Configuration Files
 
 - `.editorconfig` - EditorConfig formatting rules
 - `spotless.gradle` - Spotless configuration

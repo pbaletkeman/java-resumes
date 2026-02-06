@@ -28,13 +28,13 @@ This directory contains a comprehensive API collection for the Resume Optimizati
 
 ---
 
-## Overview
+## 📋 Overview
 
 These request definitions enable seamless testing and integration with the resume optimization backend API. Each request is pre-configured with proper endpoints, authentication, and example payloads.
 
 ---
 
-## Available Endpoints
+## 🔌 Available Endpoints
 
 ### 1. **Optimize Resume** (`OptimizeResume.bru`)
 
@@ -84,7 +84,7 @@ These request definitions enable seamless testing and integration with the resum
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -99,7 +99,7 @@ These request definitions enable seamless testing and integration with the resum
 4. Click "Send" to execute the request
 5. View the response in the result panel
 
-## Configuration
+## ⚙️ Configuration
 
 All requests are pre-configured with:
 
@@ -111,7 +111,7 @@ To change the base URL for different environments (development, staging, product
 
 ---
 
-## Request Examples
+## 📝 Request Examples
 
 ### Example: Optimize a Resume
 
@@ -130,7 +130,7 @@ To change the base URL for different environments (development, staging, product
 
 ---
 
-## Response Format
+## 📤 Response Format
 
 All successful responses follow this format:
 
@@ -149,7 +149,7 @@ For file operations, responses may include:
 
 ---
 
-## Error Handling
+## ⚠️ Error Handling
 
 Common HTTP status codes:
 
@@ -160,7 +160,7 @@ Common HTTP status codes:
 
 ---
 
-## Directory Structure
+## 📁 Directory Structure
 
 ```shell
 bruno/Resume/
@@ -176,7 +176,7 @@ bruno/Resume/
 
 ---
 
-## Tips & Best Practices
+## 💡 Tips & Best Practices
 
 - **File Naming**: Use descriptive filenames with appropriate extensions (.pdf, .txt, .md)
 - **Batch Operations**: Use ListFiles to verify uploads before further processing
@@ -185,7 +185,7 @@ bruno/Resume/
 
 ---
 
-## Troubleshooting
+## 🔍 Troubleshooting
 
 - **Connection Refused**: Ensure the backend API is running on port 8080
 - **File Not Found**: Verify the filename exactly matches the listing from ListFiles
@@ -193,7 +193,7 @@ bruno/Resume/
 
 ---
 
-## Additional Resources
+## 📚 Additional Resources
 
 - [Bruno Documentation](https://docs.usebruno.com/)
 - [REST API Best Practices](https://restfulapi.net/)

@@ -4,11 +4,13 @@
 
 ## Table of Contents
 
-- [Quick Links](#-quick-links-start-here)
-- [What's Available](#-whats-available)
-- [By Role](#-by-role)
-- [Documentation Index](#-documentation-index)
-- [Start Now](#-start-now)
+- [🚀 Quick Links](#-quick-links-start-here)
+- [🎨 What's Available](#-whats-available)
+- [👥 By Role](#-by-role)
+- [🔍 Quick Search](#-quick-search)
+- [📚 Documentation Files](#-documentation-files)
+- [✨ Key Features](#-key-features)
+- [🎓 Learn More](#-learn-more)
 
 ---
 
@@ -35,7 +37,7 @@
 
 ---
 
-## 📖 By Role
+## � By Role
 
 ### 👨‍💻 Developer?
 

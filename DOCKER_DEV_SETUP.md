@@ -4,23 +4,23 @@ Comprehensive guide for running java-resumes services locally with hot reload an
 
 ## Table of Contents
 
-- [Quick Start](#quick-start)
-- [What You'll See](#what-youll-see)
-- [Access Services](#access-services)
-- [UI Preview](#ui-preview)
-- [Features](#features)
-- [File Structure](#file-structure)
-- [Commands](#commands)
-- [Common Issues](#common-issues)
-- [Development Workflow](#development-workflow)
-- [Switching Between Dev and Production](#switching-between-dev-and-production)
-- [Environment Variables](#environment-variables)
-- [Troubleshooting](#troubleshooting)
-- [Related Files](#related-files)
+- [⚡ Quick Start](#-quick-start)
+- [📊 What You'll See](#-what-youll-see)
+- [🌐 Access Services](#-access-services)
+- [🎨 UI Preview](#-ui-preview)
+- [✨ Features](#-features)
+- [📁 File Structure](#-file-structure)
+- [⌨️ Commands](#-commands)
+- [🐛 Common Issues](#-common-issues)
+- [🔄 Development Workflow](#-development-workflow)
+- [🔀 Switching Between Dev and Production](#-switching-between-dev-and-production)
+- [🔧 Environment Variables](#-environment-variables)
+- [🔍 Troubleshooting](#-troubleshooting)
+- [📚 Related Files](#-related-files)
 
 ---
 
-## Quick Start
+## ⚡ Quick Start
 
 ```bash
 # Build images
@@ -60,7 +60,7 @@ resume-frontend   |   ➜  press h + enter to show help
 
 ---
 
-## UI Preview
+## 🎨 UI Preview
 
 The frontend is available in both **dark** and **light** themes:
 

@@ -6,13 +6,13 @@ Quick reference for setting up and using Ollama with the java-resumes project.
 
 ## Table of Contents
 
-- [Quick Setup Commands](#quick-setup-commands)
-- [Configuration Files](#configuration-files)
-- [Model Recommendations](#model-recommendations)
-- [Common Tasks](#common-tasks)
-- [Quick Links](#quick-links)
-- [Resource Usage](#resource-usage)
-- [Checklist](#checklist)
+- [🚀 Quick Setup Commands](#-quick-setup-commands)
+- [📋 Configuration Files](#-configuration-files)
+- [🎯 Model Recommendations](#-model-recommendations)
+- [⚡ Common Tasks](#-common-tasks)
+- [🔗 Quick Links](#-quick-links)
+- [📊 Resource Usage](#-resource-usage)
+- [✅ Checklist](#-checklist)
 
 ---
 
