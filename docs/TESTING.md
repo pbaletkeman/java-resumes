@@ -39,7 +39,7 @@ Comprehensive testing strategy for java-resumes application.
 
 ---
 
-## Testing Overview
+## 🧪 Testing Overview
 
 ### Coverage Targets
 
@@ -58,7 +58,7 @@ Comprehensive testing strategy for java-resumes application.
 
 ---
 
-## Backend Testing
+## ⚙️ Backend Testing
 
 ### Test Structure
 
@@ -311,7 +311,7 @@ assertThrows(Exception.class, () -> methodThatThrows());
 
 ---
 
-## Frontend Testing
+## 🎨 Frontend Testing
 
 ### Test Structure
 
@@ -524,7 +524,7 @@ it("should handle async operations", async () => {
 
 ---
 
-## Integration Testing
+## 🔄 Integration Testing
 
 ### End-to-End Flow Testing
 
@@ -559,7 +559,7 @@ npm run test:integration
 
 ---
 
-## Coverage Reports
+## 📊 Coverage Reports
 
 ### Backend Coverage
 
@@ -611,7 +611,7 @@ Lines        : X% ( X/Y )
 
 ---
 
-## Common Test Issues
+## 🐛 Common Test Issues
 
 ### Issue: Mock Not Working
 
@@ -655,7 +655,7 @@ await().atMost(5, SECONDS).until(() -> condition);
 
 ---
 
-## CI/CD Integration
+## 🔄 CI/CD Integration
 
 ### GitHub Actions (Future)
 

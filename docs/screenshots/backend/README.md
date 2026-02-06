@@ -12,7 +12,7 @@ Documentation for capturing and maintaining backend API and system screenshots.
 
 ---
 
-## 1. Swagger UI Documentation
+## 📋 1. Swagger UI Documentation
 
 ### What to Show
 
@@ -111,7 +111,7 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
-## 2. API Endpoints Reference
+## 🌐 2. API Endpoints Reference
 
 ### What to Show API
 

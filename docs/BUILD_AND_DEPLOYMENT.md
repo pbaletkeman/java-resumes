@@ -60,7 +60,7 @@ Complete guide to building, testing, and deploying the java-resumes application 
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Prerequisites
 
@@ -103,7 +103,7 @@ cd frontend && npm run build
 
 ---
 
-## Frontend Build Guide
+## 🎨 Frontend Build Guide
 
 ### Overview
 
@@ -293,7 +293,7 @@ docker push myapp-frontend:latest
 
 ---
 
-## Backend Build Guide
+## 🔨 Backend Build Guide
 
 ### Overview
 
@@ -527,7 +527,7 @@ volumes:
 
 ---
 
-## Release & Version Management
+## 📦 Release & Version Management
 
 ### Overview
 
@@ -616,7 +616,7 @@ git push origin frontend/v1.2.4 backend/v2.0.2 v1.2.4-2.0.2
 
 ---
 
-## Deployment Strategies
+## 🚀 Deployment Strategies
 
 ### Blue-Green Deployment
 
@@ -679,7 +679,7 @@ kubectl rollout status deployment/backend
 
 ---
 
-## CI/CD Workflows
+## 🔄 CI/CD Workflows
 
 ### GitHub Actions Workflows
 
@@ -743,7 +743,7 @@ kubectl rollout status deployment/backend
 
 ---
 
-## Troubleshooting
+## 🐛 Troubleshooting
 
 ### Frontend Build Issues
 
@@ -829,7 +829,7 @@ git push origin v1.2.3
 
 ---
 
-## Environment Variables Reference
+## 🌍 Environment Variables Reference
 
 ### Frontend
 
@@ -852,7 +852,7 @@ UPLOAD_PATH=./uploads
 
 ---
 
-## Support & Resources
+## 💬 Support & Resources
 
 - **Documentation**: [docs/architecture/ARCHITECTURE.md](../Architecture.md)
 - **GitHub Issues**: https://github.com/pbaletkeman/java-resumes/issues

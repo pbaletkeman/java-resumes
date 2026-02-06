@@ -40,14 +40,14 @@ Get Java Resumes up and running in minutes using Docker Compose.
 
 ---
 
-## Prerequisites
+## 📋 Prerequisites
 
 - **Docker** 20.10+ - [Get Docker](https://docs.docker.com/get-docker/)
 - **Docker Compose** 2.0+ - (included with Docker Desktop)
 - **LLM Service** running locally or API key for cloud service
 - **Git** for cloning the repository
 
-## Step-by-Step Setup
+## 📝 Step-by-Step Setup
 
 ### Step 1: Clone the Repository
 
@@ -201,7 +201,7 @@ Once all services are running, access:
 5. **Click "Process"** and wait for optimization
 6. **Download the results** from the file history panel
 
-## Common Commands
+## 🔨 Common Commands
 
 ### View Logs
 
@@ -246,7 +246,7 @@ docker compose exec backend sh
 docker compose exec frontend sh
 ```
 
-## Troubleshooting
+## 🐛 Troubleshooting
 
 ### Port Already in Use
 
@@ -313,7 +313,7 @@ volumes:
   - backend-files:/app/files
 ```
 
-## Next Steps
+## ➡️ Next Steps
 
 ### For Production Deployment
 
@@ -342,7 +342,7 @@ See **[CONFIGURATION.md](CONFIGURATION.md)** for:
 - Environment variable setup
 - Advanced configuration options
 
-## Environment Files
+## 🌍 Environment Files
 
 ### `.env` for Backend Environment
 
@@ -365,14 +365,14 @@ Create `frontend/.env` (optional):
 VITE_API_BASE_URL=http://localhost:8080
 ```
 
-## Performance Tips
+## ⚡ Performance Tips
 
 1. **Allocate more memory** to Docker if you have it available
 2. **Use lightweight models** initially (mistral-7b vs mistral-large)
 3. **Monitor container logs** to identify bottlenecks
 4. **For frequent use,** keep models loaded in memory
 
-## Docker Compose Reference
+## 🐳 Docker Compose Reference
 
 ### Complete docker-compose.yml Structure
 
@@ -416,7 +416,7 @@ networks:
     driver: bridge
 ```
 
-## Getting Help
+## 💬 Getting Help
 
 - **Configuration issues?** [CONFIGURATION.md](CONFIGURATION.md)
 - **Specific problem?** [TROUBLESHOOTING.md](TROUBLESHOOTING.md)

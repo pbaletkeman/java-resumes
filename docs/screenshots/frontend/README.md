@@ -16,7 +16,7 @@ Detailed guide for capturing and maintaining frontend UI screenshots for the jav
 
 ---
 
-## 1. Main Upload Tab
+## 👩‍💻 1. Main Upload Tab
 
 ### What to Show
 
@@ -101,7 +101,7 @@ The primary interface for resume optimization.
 
 ---
 
-## 2. File History Panel
+## 📄 2. File History Panel
 
 ### What to Show
 

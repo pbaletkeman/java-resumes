@@ -34,7 +34,7 @@
 
 ---
 
-## Executive Summary
+## 📋 Executive Summary
 
 Your java-resumes project now has **production-ready automated code quality enforcement** using three complementary tools integrated into the git workflow.
 
@@ -45,7 +45,7 @@ Your java-resumes project now has **production-ready automated code quality enfo
 
 ---
 
-## What You Got
+## ✅ What You Got
 
 ### Three Quality Tools Integrated
 
@@ -72,7 +72,7 @@ Your java-resumes project now has **production-ready automated code quality enfo
 
 ---
 
-## Files Created (Complete List)
+## 📂 Files Created (Complete List)
 
 ### 🎯 Git Hook Scripts (2 files)
 
@@ -117,7 +117,7 @@ build.gradle                                → Added Spotless, SpotBugs, setupG
 
 ---
 
-## Installation (Pick One Method)
+## 📥 Installation (Pick One Method)
 
 ### 🎯 Method 1: Gradle (Recommended)
 
@@ -149,7 +149,7 @@ python setup-hooks.py
 
 ---
 
-## Quick Start Workflow
+## 💨 Quick Start Workflow
 
 ### 1️⃣ Install (30 seconds)
 

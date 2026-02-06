@@ -55,7 +55,7 @@ Common issues and their solutions for java-resumes.
 
 ---
 
-## Build Issues
+## 🏗️ Build Issues
 
 ### Gradle Build Fails
 
@@ -122,7 +122,7 @@ ping repository.maven.apache.org
 
 ---
 
-## Runtime Issues
+## ⚙️ Runtime Issues
 
 ### Application Won't Start
 
@@ -213,7 +213,7 @@ export SERVER_PORT=9090
 
 ---
 
-## Frontend Issues
+## 💻 Frontend Issues
 
 ### npm Build Fails
 
@@ -285,7 +285,7 @@ npm run dev  # Or npm run build
 
 ---
 
-## Database Issues
+## 💾 Database Issues
 
 ### File Storage Errors
 
@@ -330,7 +330,7 @@ curl http://localhost:8080/api/files
 
 ---
 
-## Test Issues
+## 🧪 Test Issues
 
 ### Tests Fail to Run
 
@@ -390,7 +390,7 @@ grep -i jacoco build.gradle
 
 ---
 
-## API Issues
+## 🔌 API Issues
 
 ### CORS Errors
 
@@ -441,7 +441,7 @@ spring.servlet.multipart.max-request-size=50MB
 
 ---
 
-## Performance Issues
+## 📈 Performance Issues
 
 ### Slow Build Times
 
@@ -508,7 +508,7 @@ jvisualvm &  # Opens GUI
 
 ---
 
-## Configuration Issues
+## ⚙️ Configuration Issues
 
 ### External config.json Not Found
 
@@ -557,7 +557,7 @@ export PROMPT_DIR=/path/to/prompts
 
 ---
 
-## Git Issues
+## 🔀 Git Issues
 
 ### Uncommitted Changes
 
@@ -593,7 +593,7 @@ git commit -m "Resolve merge conflicts"
 
 ---
 
-## Diagnostic Commands
+## 🔍 Diagnostic Commands
 
 ### System Information
 
@@ -649,7 +649,7 @@ lsof -i -P -n | grep LISTEN
 
 ---
 
-## Getting Help
+## 🆘 Getting Help
 
 ### Debug Mode
 
@@ -702,7 +702,7 @@ When reporting issues, provide:
 
 ---
 
-## Tips & Tricks
+## 💡 Tips & Tricks
 
 ### Faster Builds
 
@@ -749,7 +749,7 @@ rm -f app.log error.log
 
 ---
 
-## Health Checks
+## ✅ Health Checks
 
 ### Quick Verification
 

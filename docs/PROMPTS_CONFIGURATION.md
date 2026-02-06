@@ -21,15 +21,15 @@
 
 This document explains how to configure and manage prompts in the java-resumes application.
 
-## Overview
+## ✨ Overview
 
 The application uses a **hybrid prompt loading system** that:
 
- **Loads bundled prompts** from `src/main/resources/prompts/` by default (no recompilation needed after updates)
- **Allows external overrides** by setting the `PROMPTS_DIR` environment variable
- **Falls back gracefully** if external files don't exist
+**Loads bundled prompts** from `src/main/resources/prompts/` by default (no recompilation needed after updates)
+**Allows external overrides** by setting the `PROMPTS_DIR` environment variable
+**Falls back gracefully** if external files don't exist
 
-## Default Behavior (Bundled Prompts)
+## 📦 Default Behavior (Bundled Prompts)
 
 By default, the application uses prompts bundled in the JAR:
 
@@ -50,7 +50,7 @@ By default, the application uses prompts bundled in the JAR:
 2. Git push the changes
 3. They take effect automatically without recompiling (assuming fresh JAR build)
 
-## Using External Prompts (No Recompilation Required)
+## 🔗 Using External Prompts (No Recompilation Required)
 
 ### Option 1: Environment Variable
 
@@ -105,7 +105,7 @@ docker run -it \
   java-resumes:latest
 ```
 
-## Updating Prompts Without Recompilation
+## ⚙️ Updating Prompts Without Recompilation
 
 ### For Bundled Prompts:
 
@@ -123,7 +123,7 @@ docker run -it \
 3. Update prompt files anytime**no recompilation needed**
 4. Restart the application for changes to take effect
 
-## Prompt File Format
+## 📋 Prompt File Format
 
 Both `RESUME.md` and `COVER.md` use template variables:
 
@@ -169,7 +169,7 @@ These placeholders are replaced at runtime with actual values:
 - `{resume_string}` - The candidate's resume content (Resume and Cover Letter only)
 - `{today}` - Current date (Cover Letter only)
 
-## File Structure
+## 📂 File Structure
 
 ```
 prompts/
@@ -187,7 +187,7 @@ prompts/
 
 All prompt files should be in the same directory (either bundled or external).
 
-## Troubleshooting
+## 🐛 Troubleshooting
 
 ### Prompts Not Updating
 
@@ -213,7 +213,7 @@ All prompt files should be in the same directory (either bundled or external).
 - Ensure bundled resources are included in JAR (`src/main/resources/prompts/*.md`)
 - Verify file names match exactly: `RESUME.md` and `COVER.md`
 
-## Architecture
+## 🏗️ Architecture
 
 The `PromptService` class handles prompt loading:
 
@@ -234,7 +234,7 @@ This architecture ensures:
 - **Production**: Override with external prompts for flexibility
 - **Fallback**: Always works even if external files are missing
 
-## Best Practices
+## 🎯 Best Practices
 
 1. **Keep both versions in sync**: If using external overrides, maintain consistency with bundled versions
 2. **Version control**: Commit prompt updates to Git for tracking
@@ -242,7 +242,7 @@ This architecture ensures:
 4. **Validation**: Test prompt changes before deploying to production
 5. **Documentation**: Keep prompt versions documented in your deployment notes
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Simplest Option (Bundled):
 
@@ -288,7 +288,7 @@ nano /opt/java-resumes/prompts/SKILLS.md
 # Restart application for changes to take effect
 ```
 
-## Adding New Prompts
+## ➕ Adding New Prompts
 
 To add a new prompt (e.g., LINKEDIN for LinkedIn summaries):
 
@@ -301,7 +301,7 @@ To add a new prompt (e.g., LINKEDIN for LinkedIn summaries):
 
 **See [ADD_NEW_PROMPT.md](./ADD_NEW_PROMPT.md)** for detailed step-by-step instructions.
 
-## See Also
+## 📚 See Also
 
 - [API Documentation](../docs/api.md)
 - [Architecture Overview](../docs/architecture/ARCHITECTURE.md)

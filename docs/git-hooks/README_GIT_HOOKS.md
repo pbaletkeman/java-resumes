@@ -29,7 +29,7 @@ Your java-resumes project now has **automated code quality enforcement** using:
 
 ---
 
-## 🚀 Get Started (30 Seconds)
+## ⚡ Get Started (30 Seconds)
 
 ```bash
 ./gradlew setupGitHooks
@@ -52,7 +52,7 @@ That's it! From now on, git will automatically check code quality on every commi
 
 ---
 
-## 💡 First Time Setup
+## � First Time Setup
 
 ### Step 1: Install Hooks
 
@@ -81,7 +81,7 @@ git commit -m "feat: your feature"
 
 ---
 
-## 📖 Common Questions
+## ❔ Common Questions
 
 **Q: What runs on commit?**
 A: Spotless (format check) → Checkstyle (standards check) → SpotBugs (bug analysis)

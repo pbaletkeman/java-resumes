@@ -40,7 +40,7 @@
 
 --- - Skills Prompt and Model Selection
 
-## Summary
+## 📊 Summary
 
 Added two major frontend enhancements to expose backend capabilities and improve user experience:
 
@@ -50,7 +50,7 @@ Added two major frontend enhancements to expose backend capabilities and improve
 
 ---
 
-## Changes Made
+## ⚙️ Changes Made
 
 ### 1. DocumentUploadForm.tsx
 
@@ -114,7 +114,7 @@ Added `processSkills()` method:
 
 ---
 
-## User Experience Improvements
+## ✨ User Experience Improvements
 
 ### Before
 
@@ -144,7 +144,7 @@ Added `processSkills()` method:
 
 ---
 
-## Technical Details
+## 🔧 Technical Details
 
 ### Frontend Architecture
 
@@ -168,7 +168,7 @@ Added `processSkills()` method:
 
 ---
 
-## Testing
+## 🧪 Testing
 
 ### Manual Testing Checklist
 
@@ -190,7 +190,7 @@ Added `processSkills()` method:
 
 ---
 
-## Files Modified
+## 📝 Files Modified
 
 1. **frontend/src/components/Forms/DocumentUploadForm.tsx**
    - Added `promptTypes` state
@@ -211,7 +211,7 @@ Added `processSkills()` method:
 
 ---
 
-## Future Enhancements
+## 🔮 Future Enhancements
 
 ### Model Configuration System
 
@@ -237,7 +237,7 @@ Could support generating multiple output types with a single submission to reduc
 
 ---
 
-## Rollback Plan
+## 🔄 Rollback Plan
 
 If issues arise, revert:
 
@@ -248,7 +248,7 @@ No database or configuration changes, so rollback is simple and non-breaking.
 
 ---
 
-## Notes
+## 📌 Notes
 
 - All changes are backward compatible
 - No new dependencies added

@@ -48,13 +48,13 @@ Complete REST API documentation for java-resumes application.
 
 ---
 
-##  Base URL
+## 🌐 Base URL
 
 ```plaintext
 http://localhost:8080
 ```
 
-##  Core Endpoints
+## 📍 Core Endpoints
 
 ### File Management
 
@@ -677,7 +677,7 @@ curl http://localhost:8080/api/health
 
 ---
 
-##  Request Examples
+## 💡 Request Examples
 
 ### Example 1: Simple Resume Optimization
 
@@ -734,7 +734,7 @@ curl -X POST http://localhost:8080/api/markdownFile2PDF \
 
 ---
 
-##  API Workflow
+## 🔄 API Workflow
 
 ### Typical Resume Optimization Workflow
 
@@ -768,7 +768,7 @@ graph TD
 
 ---
 
-##  Parameters & Configuration
+## ⚙️ Parameters & Configuration
 
 ### Optimization Parameters
 
@@ -790,7 +790,7 @@ graph TD
 
 ---
 
-##  Error Handling
+## ⚠️ Error Handling
 
 ### HTTP Status Codes
 
@@ -826,7 +826,7 @@ graph TD
 
 ---
 
-##  Interactive API Documentation
+## 📖 Interactive API Documentation
 
 ### Swagger/OpenAPI
 
@@ -845,7 +845,7 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
-##  Authentication (Future)
+## 🔐 Authentication (Future)
 
 **Note:** Current version has no authentication. Production deployment should add:
 
@@ -856,7 +856,7 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
-##  Response Times
+## ⏱️ Response Times
 
 Typical response times (with Ollama local LLM):
 
@@ -872,7 +872,7 @@ Typical response times (with Ollama local LLM):
 
 ---
 
-##  Best Practices
+## ✨ Best Practices
 
 ### Rate Limiting
 

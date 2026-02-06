@@ -10,10 +10,10 @@ A robust Java Spring Boot backend service for AI-powered resume and cover letter
   - [Overview](#overview)
     - [Key Capabilities](#key-capabilities)
   - [Quick Start in 5 Steps](#quick-start-in-5-steps)
-    - [Prerequisites](#prerequisites)
+    - [📋 Prerequisites](#prerequisites)
     - [Steps](#steps)
     - [Access the Application](#access-the-application)
-  - [Technology Stack](#technology-stack)
+  - [🛠️ Technology Stack](#technology-stack)
     - [Core Technologies](#core-technologies)
     - [Spring Boot Starters](#spring-boot-starters)
     - [Libraries and Tools](#libraries-and-tools)
@@ -21,11 +21,11 @@ A robust Java Spring Boot backend service for AI-powered resume and cover letter
     - [Development Tools](#development-tools)
   - [Prerequisites](#prerequisites-1)
     - [Verify Installation](#verify-installation)
-  - [Installation](#installation)
+  - [⚙️ Installation](#installation)
     - [1. Clone the Repository](#1-clone-the-repository)
     - [2. Build the Project](#2-build-the-project)
     - [3. Verify Build](#3-verify-build)
-  - [Configuration](#configuration)
+  - [🔧 Configuration](#configuration)
     - [LLM Service Configuration](#llm-service-configuration)
     - [Spring Boot Configuration](#spring-boot-configuration)
   - [Getting Started Without Docker](#getting-started-without-docker)
@@ -139,7 +139,7 @@ A robust Java Spring Boot backend service for AI-powered resume and cover letter
 
 ---
 
-## Overview
+## ✅ Overview
 
 The Resume Optimizer Backend is a production-ready Spring Boot application that processes resumes and cover letters using Large Language Models (LLMs). It provides a comprehensive REST API for document upload, AI-powered optimization, file management, and document conversion.
 
@@ -156,7 +156,7 @@ The Resume Optimizer Backend is a production-ready Spring Boot application that 
 
 ---
 
-## Quick Start in 5 Steps
+## 🏃 Quick Start in 5 Steps
 
 Get the backend running in just 5 minutes! Follow these quick steps to start developing:
 
@@ -412,7 +412,7 @@ llm:
 
 ---
 
-## Getting Started Without Docker
+## 🚀 Getting Started Without Docker
 
 If you prefer to run the backend without Docker, follow these native setup instructions.
 
@@ -747,7 +747,7 @@ netstat -ano | findstr 8080  # Windows
 
 ---
 
-## Running Locally
+## 🏃 Running Locally
 
 ### Using Gradle
 
@@ -818,7 +818,7 @@ This watches for file changes and automatically recompiles.
 
 ---
 
-## Testing
+## 🧪 Testing
 
 ### Running Tests
 
@@ -955,7 +955,7 @@ public class ServiceTest {
 
 ---
 
-## Docker
+## 🐳 Docker
 
 ### Build Docker Image
 
@@ -1035,7 +1035,7 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
 
 ---
 
-## API Endpoints
+## 📡 API Endpoints
 
 ### File Management Endpoints
 
@@ -1535,7 +1535,7 @@ JSON specification for API tools and clients.
 
 ---
 
-## Environment Variables
+## 🌍 Environment Variables
 
 ### Application Configuration
 
@@ -1576,7 +1576,7 @@ environment:
 
 ---
 
-## Configuration Files
+## ⚙️ Configuration Files
 
 ### application.yml
 
@@ -1650,7 +1650,7 @@ Defines code style rules based on Google Java Style Guide.
 
 ---
 
-## Logging
+## 📝 Logging
 
 ### Logging Configuration
 
@@ -1731,7 +1731,7 @@ tail -f logs/application.log
 
 ---
 
-## Project Structure
+## 📂 Project Structure
 
 ```
 java-resumes/
@@ -1861,7 +1861,7 @@ java-resumes/
 
 ---
 
-## Code Quality
+## ✅ Code Quality
 
 ### Checkstyle
 
@@ -1963,7 +1963,7 @@ This runs:
 
 ---
 
-## LLM Integration
+## 🤖 LLM Integration
 
 ### LLM Service Architecture
 
@@ -2064,7 +2064,7 @@ public void testOptimizeResume() {
 
 ---
 
-## Error Handling
+## ⚠️ Error Handling
 
 ### Exception Hierarchy
 
@@ -2125,7 +2125,7 @@ public class GlobalExceptionHandler {
 
 ---
 
-## Security
+## 🔐 Security
 
 ### Security Best Practices
 
@@ -2192,7 +2192,7 @@ public class CorsConfig implements WebMvcConfigurer {
 
 ---
 
-## Performance
+## ⚡ Performance
 
 ### Performance Optimization
 
@@ -2245,7 +2245,7 @@ implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
 ---
 
-## Troubleshooting
+## 🐛 Troubleshooting
 
 ### Common Issues
 
@@ -2353,7 +2353,7 @@ logging:
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
 We welcome contributions! Please follow these guidelines:
 

@@ -30,7 +30,7 @@ Complete documentation and reference guide for the java-resumes project.
 
 ---
 
-## Quick Navigation
+## 🔍 Quick Navigation
 
 ### By Role
 
@@ -60,7 +60,7 @@ Complete documentation and reference guide for the java-resumes project.
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 Start here if you're new to the project:
 
@@ -70,7 +70,7 @@ Start here if you're new to the project:
 
 ---
 
-## Project Overview
+## 📋 Project Overview
 
 Understand the project structure, status, and architecture:
 
@@ -83,7 +83,7 @@ Understand the project structure, status, and architecture:
 
 ---
 
-## Development Guides
+## 📚 Development Guides
 
 Detailed guides for development and feature implementation:
 
@@ -92,7 +92,7 @@ Detailed guides for development and feature implementation:
 
 ---
 
-## Technical Reference
+## 📖 Technical Reference
 
 Technical documentation and reference materials:
 
@@ -101,7 +101,7 @@ Technical documentation and reference materials:
 
 ---
 
-## Session & Testing
+## 💬 Session & Testing
 
 Session logs, testing guides, and quality assurance documentation:
 
@@ -110,7 +110,7 @@ Session logs, testing guides, and quality assurance documentation:
 
 ---
 
-## Issue Tracking & Fixes
+## 🐛 Issue Tracking & Fixes
 
 Documentation related to bug fixes, issues, and resolutions:
 
@@ -120,7 +120,7 @@ Documentation related to bug fixes, issues, and resolutions:
 
 ---
 
-## Visual Documentation
+## 📸 Visual Documentation
 
 Screenshots and visual guides for the application:
 
@@ -131,7 +131,7 @@ Screenshots and visual guides for the application:
 
 ---
 
-## Related Documentation
+## 🔗 Related Documentation
 
 Additional resources and directories:
 
@@ -144,7 +144,7 @@ Additional resources and directories:
 
 ---
 
-## Project Structure
+## 📂 Project Structure
 
 ```
 java-resumes/
@@ -170,7 +170,7 @@ java-resumes/
 
 ```
 
-## Technology Stack
+## 🛠️ Technology Stack
 
 ### Backend
 
@@ -189,7 +189,7 @@ java-resumes/
 - **Styling**: Tailwind CSS 4.1.18
 - **Testing**: Vitest 4.0.17
 
-## Documentation Categories
+## 📑 Documentation Categories
 
 ### Strategic Documents
 
@@ -214,7 +214,7 @@ java-resumes/
 - **Implementation Summaries** - Backend and frontend implementation details
 - **Progress Tracking** - Code quality and setup progress
 
-## How to Use This Documentation
+## 📖 How to Use This Documentation
 
 1. **Getting Started?** Start with [README](../README.md) and [Architecture](./Architecture.md)
 2. **Backend Development?** Read [Backend README](./BACKEND_README.md) and check [Backend Custom Instructions](../.github/instructions/backend.instructions.md)
@@ -222,7 +222,7 @@ java-resumes/
 4. **Checking Status?** See [STATUS](./wip/STATUS.md) and implementation summaries
 5. **Understanding Code Quality?** Review [Checkstyle Configuration](./CHECKSTYLE_AND_OLLAMA.md)
 
-## Important Files
+## 📋 Important Files
 
 ### Configuration Files
 
@@ -235,7 +235,7 @@ java-resumes/
 - `README.md` - Main project readme
 - `copilot-instructions.md` - Repository-wide Copilot guidance
 
-## Navigation
+## 🧭 Navigation
 
 - [Up to Root](../README.md)
 - [Backend Instructions](../.github/instructions/backend.instructions.md)

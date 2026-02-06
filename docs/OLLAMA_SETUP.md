@@ -47,7 +47,7 @@ This guide explains how to set up and use the Ollama LLM service for the Java-Re
 
 ---
 
-## Overview
+## 🔍 Overview
 
 The Java-Resumes project uses Ollama to run Large Language Models (LLMs) locally for resume optimization, cover letter generation, and interview preparation. This provides:
 
@@ -58,7 +58,7 @@ The Java-Resumes project uses Ollama to run Large Language Models (LLMs) locally
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Option 1: Automated Setup Script (Recommended)
 
@@ -135,7 +135,7 @@ EOF
 
 ---
 
-## Local Development Setup
+## 💻 Local Development Setup
 
 ### Prerequisites
 
@@ -299,7 +299,7 @@ model:
 
 ---
 
-## Configuration
+## ⚙️ Configuration
 
 ### config.json
 
@@ -338,7 +338,7 @@ export LLM_APIKEY=ollama
 
 ---
 
-## Troubleshooting
+## 🐛 Troubleshooting
 
 ### Issue: Ollama service not starting
 
@@ -455,7 +455,7 @@ network_mode: "host"
 
 ---
 
-## Performance Tips
+## ⚡ Performance Tips
 
 ### 1. Model Selection
 
@@ -491,7 +491,7 @@ ollama run tinyllama ""
 
 ---
 
-## Additional Resources
+## 📚 Additional Resources
 
 - **Ollama Official Documentation:** https://github.com/ollama/ollama
 - **Model Library:** https://ollama.com/library
@@ -500,7 +500,7 @@ ollama run tinyllama ""
 
 ---
 
-## Quick Command Reference
+## ⚡ Quick Command Reference
 
 ```bash
 # Installation

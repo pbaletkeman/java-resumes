@@ -8,7 +8,7 @@
   - [Current Status](#current-status)
   - [Key Rules Enforced](#key-rules-enforced)
 - [Ollama Integration](#ollama-integration)
-  - [Current Status:  VERIFIED WORKING](#current-status--verified-working)
+  - [Current Status: VERIFIED WORKING](#current-status--verified-working)
   - [Configuration](#configuration)
   - [Key Components](#key-components)
   - [Integration Points](#integration-points)
@@ -19,7 +19,7 @@
 
 ---
 
-## Checkstyle Setup
+## ✅ Checkstyle Setup
 
 Checkstyle has been successfully integrated into this project with the following configuration:
 
@@ -85,9 +85,9 @@ The project currently has **98 checkstyle warnings** that need to be fixed. Thes
    - Proper Javadoc for public classes/methods
    - Proper comment indentation
 
-## Ollama Integration
+## 🤖 Ollama Integration
 
-### Current Status:  VERIFIED WORKING
+### Current Status: VERIFIED WORKING
 
 The project is fully configured to work with Ollama for LLM-powered resume optimization.
 
@@ -173,16 +173,16 @@ POST http://localhost:8080/api/optimizer
 
 ### Verification Checklist
 
--  Ollama endpoint configured in `application.yml`
--  `ApiService` implements HTTP communication with Ollama
--  All request/response models in place
--  Error handling for API failures
--  Logging configured for debugging
--  Controller endpoints ready to accept requests
--  Spring Boot 3.5.1 compatible
--  Java 21+ compatible
+- Ollama endpoint configured in `application.yml`
+- `ApiService` implements HTTP communication with Ollama
+- All request/response models in place
+- Error handling for API failures
+- Logging configured for debugging
+- Controller endpoints ready to accept requests
+- Spring Boot 3.5.1 compatible
+- Java 21+ compatible
 
-## Next Steps to Fix Checkstyle
+## 🔧 Next Steps to Fix Checkstyle
 
 1. **Rename variables with underscores** to camelCase (especially in response DTOs)
 2. **Add missing newlines** at end of files

@@ -50,10 +50,9 @@ Complete reference for environment variables and configuration in java-resumes.
     - [Upload Path Permission Denied](#upload-path-permission-denied)
   - [Support](#support)
 
-
 ---
 
-##  Overview
+## Overview
 
 The java-resumes project supports configuration through:
 
@@ -71,7 +70,7 @@ The java-resumes project supports configuration through:
 
 ---
 
-##  Backend Environment Variables
+## ⚙️ Backend Environment Variables
 
 ### Core Configuration
 
@@ -135,7 +134,7 @@ management.endpoint.health.show-details=always
 
 ---
 
-##  Frontend Environment Variables
+## Frontend Environment Variables
 
 **Location:** `frontend/.env` (create from `.env.example`)
 
@@ -193,7 +192,7 @@ export default defineConfig({
 
 ---
 
-##  config.json
+## config.json
 
 **Purpose:** LLM service connection configuration
 
@@ -217,9 +216,9 @@ export default defineConfig({
 
 | Field    | Type   | Required | Description                                  |
 | -------- | ------ | -------- | -------------------------------------------- |
-| endpoint | string |        | LLM API endpoint URL (OpenAI-compatible)     |
-| apikey   | string |        | API key for authentication (can be blank)    |
-| model    | string |        | Model identifier (e.g., "mistral", "gemini") |
+| endpoint | string |          | LLM API endpoint URL (OpenAI-compatible)     |
+| apikey   | string |          | API key for authentication (can be blank)    |
+| model    | string |          | Model identifier (e.g., "mistral", "gemini") |
 
 ### Examples
 
@@ -265,7 +264,7 @@ export default defineConfig({
 
 ---
 
-##  Prompt Directory
+## Prompt Directory
 
 **Purpose:** External prompt templates for optimization
 
@@ -331,7 +330,7 @@ Please provide:
 
 ---
 
-##  Setting Environment Variables
+## 🔧 Setting Environment Variables
 
 ### Linux/Mac
 
@@ -436,7 +435,7 @@ docker run -e SERVER_PORT=8080 \
 
 ---
 
-##  Startup Configuration
+## 🚀 Startup Configuration
 
 ### Standard Startup
 
@@ -478,7 +477,7 @@ LOG_LEVEL=DEBUG \
 
 ---
 
-##  Verifying Configuration
+## ✅ Verifying Configuration
 
 ### Check Java Environment
 
@@ -536,7 +535,7 @@ curl http://localhost:8080/api/files | jq .
 
 ---
 
-##  Security Best Practices
+## 🔐 Security Best Practices
 
 ### Sensitive Data
 
@@ -588,7 +587,7 @@ String apiKey = System.getenv("LLM_API_KEY");
 
 ---
 
-##  Configuration Reload
+## 🔄 Configuration Reload
 
 ### Without Restart (Development)
 
@@ -617,7 +616,7 @@ Ctrl+C
 
 ---
 
-##  Common Configurations
+## 📝 Common Configurations
 
 ### Local Development
 
@@ -660,7 +659,7 @@ GRADLE_OPTS="-Xmx8g -XX:+UseG1GC -XX:MaxGCPauseMillis=200"
 
 ---
 
-##  Troubleshooting Configuration
+## 🐛 Troubleshooting Configuration
 
 ### config.json Not Found
 
@@ -713,7 +712,7 @@ chmod 755 ./uploads
 
 ---
 
-##  Support
+## Support
 
 **See also:**
 

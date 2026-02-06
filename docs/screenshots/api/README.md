@@ -12,7 +12,7 @@ Visual documentation of REST API endpoints, Swagger UI, error responses, and usa
 
 ---
 
-## Overview
+## 📆 Overview
 
 Complete visual reference for the java-resumes REST API, including endpoint documentation, request/response formats, and error handling.
 
@@ -27,7 +27,7 @@ Complete visual reference for the java-resumes REST API, including endpoint docu
 
 ---
 
-## Swagger UI Documentation
+## 📚 Swagger UI Documentation
 
 ### Swagger Interface
 
@@ -57,7 +57,7 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
-## API Endpoints Reference
+## 🔗 API Endpoints Reference
 
 ### Endpoint Documentation
 
@@ -136,7 +136,7 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
-## Error Responses Guide
+## ⚠️ Error Responses Guide
 
 ### Error Response Examples
 
@@ -225,7 +225,7 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
-## Usage Examples
+## 📚 Usage Examples
 
 ### Complete Request/Response Flow
 

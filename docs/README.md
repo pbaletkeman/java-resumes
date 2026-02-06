@@ -34,7 +34,7 @@ This documentation is organized into focused sections to make it easy to find wh
 
 ---
 
-## Documentation Index
+## 📚 Documentation Index
 
 ### Getting Started
 
@@ -66,7 +66,7 @@ This documentation is organized into focused sections to make it easy to find wh
 
 ---
 
-## Quick Navigation
+## 🔍 Quick Navigation
 
 | Need                               | Go To                                                |
 | ---------------------------------- | ---------------------------------------------------- |
@@ -83,7 +83,7 @@ This documentation is organized into focused sections to make it easy to find wh
 
 ---
 
-## Project Overview
+## 📋 Project Overview
 
 **Java Resumes** helps job seekers create optimized, tailored resumes and cover letters using AI-powered Large Language Models.
 
@@ -106,7 +106,7 @@ This documentation is organized into focused sections to make it easy to find wh
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Fastest Way (Docker)
 
@@ -137,7 +137,7 @@ For backend or frontend development, see:
 
 ---
 
-## External Configuration
+## ⚙️ External Configuration
 
 The application supports external configuration for production deployments.
 
@@ -173,7 +173,7 @@ export PROMPTS_DIR=/etc/java-resumes/prompts
 
 ---
 
-## Documentation Structure
+## 📂 Documentation Structure
 
 ```
 docs/
@@ -198,7 +198,7 @@ docs/
 
 ---
 
-## How to Use This Documentation
+## 📖 How to Use This Documentation
 
 1. **New to the project?** Start with [QUICK_START.md](QUICK_START.md)
 2. **Need to configure something?** Check [CONFIGURATION.md](CONFIGURATION.md)
@@ -209,7 +209,7 @@ docs/
 
 ---
 
-## Important Links
+## 🔗 Important Links
 
 - **GitHub Repository:** https://github.com/pbaletkeman/java-resumes
 - **Issues & Support:** https://github.com/pbaletkeman/java-resumes/issues
@@ -225,7 +225,7 @@ docs/
 
 ---
 
-## Tips for Success
+## 💡 Tips for Success
 
 ### For Docker Users
 
@@ -249,7 +249,7 @@ docs/
 
 ---
 
-## Contributing to Documentation
+## 📝 Contributing to Documentation
 
 When updating documentation:
 
@@ -261,7 +261,7 @@ When updating documentation:
 
 ---
 
-## Need Help?
+## 🆘 Need Help?
 
 - **Documentation Issues?** Check [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
 - **Bug Reports?** Open a GitHub issue

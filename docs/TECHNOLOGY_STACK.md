@@ -36,7 +36,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-##  Backend Technologies
+## ⚙️ Backend Technologies
 
 ### Core Framework
 
@@ -93,7 +93,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-##  Frontend Technologies
+## 🎨 Frontend Technologies
 
 ### Core Framework
 
@@ -151,7 +151,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-##  DevOps & Infrastructure
+## 🐳 DevOps & Infrastructure
 
 ### Containerization
 
@@ -172,7 +172,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-##  AI/LLM Integration
+## 🤖 AI/LLM Integration
 
 ### Supported LLM Services
 
@@ -192,7 +192,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-##  Database (Future)
+## Database (Future)
 
 | Technology | Version | Purpose           |
 | ---------- | ------- | ----------------- |
@@ -203,7 +203,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-##  Cloud & Deployment (Future)
+## Cloud & Deployment (Future)
 
 | Platform     | Purpose                       |
 | ------------ | ----------------------------- |
@@ -215,7 +215,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-##  Monitoring & Observability (Future)
+## Monitoring & Observability (Future)
 
 | Technology | Purpose                     |
 | ---------- | --------------------------- |
@@ -227,7 +227,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-##  Security (Current & Future)
+## 🔐 Security (Current & Future)
 
 | Technology      | Purpose                      |
 | --------------- | ---------------------------- |
@@ -239,7 +239,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-##  Documentation & Communication
+## Documentation & Communication
 
 | Technology      | Purpose              |
 | --------------- | -------------------- |
@@ -250,7 +250,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-##  Testing & Quality
+## Testing & Quality
 
 | Category      | Technologies                   |
 | ------------- | ------------------------------ |
@@ -263,7 +263,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-##  Development Tools
+## Development Tools
 
 | Tool            | Purpose                |
 | --------------- | ---------------------- |
@@ -277,7 +277,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-##  Version Compatibility Matrix
+## Version Compatibility Matrix
 
 ### Java Backend
 
@@ -332,7 +332,7 @@ Docker Compose
 
 ---
 
-##  Dependency Tree Highlights
+## Dependency Tree Highlights
 
 ### Backend Critical Path
 
@@ -371,7 +371,7 @@ React 19.2.0
 
 ---
 
-##  Performance Metrics by Technology
+## Performance Metrics by Technology
 
 ### Backend Performance
 
@@ -393,7 +393,7 @@ React 19.2.0
 
 ---
 
-##  Security Considerations by Technology
+## Security Considerations by Technology
 
 | Technology  | Security Feature          |
 | ----------- | ------------------------- |
@@ -405,15 +405,15 @@ React 19.2.0
 
 ---
 
-##  Upgrade Path
+## Upgrade Path
 
 ### Next Version Recommendations
 
-- **Spring Boot**: 3.5.1  3.6.x (minor upgrade)
-- **Java**: 21 LTS  23 (current non-LTS)
-- **React**: 19.2.0  20.x (major upgrade, breaking)
-- **Node.js**: 22 LTS  24 LTS (minor upgrade)
-- **TypeScript**: 5.9.3  5.10+ (patch upgrade)
+- **Spring Boot**: 3.5.1 3.6.x (minor upgrade)
+- **Java**: 21 LTS 23 (current non-LTS)
+- **React**: 19.2.0 20.x (major upgrade, breaking)
+- **Node.js**: 22 LTS 24 LTS (minor upgrade)
+- **TypeScript**: 5.9.3 5.10+ (patch upgrade)
 
 ### Long-term Technology Evolution
 

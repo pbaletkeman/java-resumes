@@ -155,7 +155,7 @@ frontend-1  |  ➜  press h + enter to show help
 
 ---
 
-## 2. Local Development Setup
+## 🖥️ 2. Local Development Setup
 
 ### What to Show
 

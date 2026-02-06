@@ -47,7 +47,7 @@ setup-hooks.bat
 python setup-hooks.py
 ```
 
-## Daily Workflow
+## 📋 Daily Workflow
 
 ### Before Committing
 
@@ -77,7 +77,7 @@ git commit --no-verify
 git push --no-verify
 ```
 
-## Common Quality Commands
+## 📊 Common Quality Commands
 
 ```bash
 # Format code automatically
@@ -102,7 +102,7 @@ git push --no-verify
 ./gradlew clean check test
 ```
 
-## Viewing Reports
+## 📈 Viewing Reports
 
 - **Checkstyle**: `build/reports/checkstyle/main.html`
 - **SpotBugs**: `build/reports/spotbugs/main.html`

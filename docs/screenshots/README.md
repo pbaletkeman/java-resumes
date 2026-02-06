@@ -14,7 +14,7 @@ Central hub for all visual documentation and screenshots in the java-resumes pro
 
 ---
 
-## Overview
+## 📋 Overview
 
 This directory contains all visual documentation for the java-resumes application, organized by category for easy navigation and reference.
 
@@ -32,7 +32,7 @@ This directory contains all visual documentation for the java-resumes applicatio
 
 ---
 
-## Directory Structure
+## 📖 Directory Structure
 
 ```
 docs/screenshots/
@@ -78,7 +78,7 @@ docs/screenshots/
 
 ---
 
-## Screenshot Categories
+## 🎯 Screenshot Categories
 
 ### 1. User Interface Screenshots
 
@@ -140,7 +140,7 @@ docs/screenshots/
 
 ---
 
-## Theme Variants
+## 🎨 Theme Variants
 
 ### Dark Theme (10 screenshots)
 
@@ -160,7 +160,7 @@ docs/screenshots/
 
 ---
 
-## Quick Links
+## 🔗 Quick Links
 
 ### By Category
 
@@ -180,7 +180,7 @@ docs/screenshots/
 
 ---
 
-## How to Use Screenshots
+## 📸 How to Use Screenshots
 
 ### In Markdown Documentation
 
@@ -218,7 +218,7 @@ docs/screenshots/
 
 ---
 
-## Markdown Guidelines for Screenshots
+## 🚀 Markdown Guidelines for Screenshots
 
 ### File Naming Conventions
 
@@ -264,16 +264,16 @@ Explanation of what to see...
 
 ---
 
-## Documentation Integration
+## 📤 Documentation Integration
 
 **Where Screenshots Are Used:**
 
-| File                     | Category           | Purpose                   |
-| ------------------------ | ------------------ | ------------------------- |
-| `DOCKER_DEV_SETUP.md`    | Setup, UI          | Development environment   |
-| `docs/architecture/ARCHITECTURE.md`   | Architecture, API  | System design reference   |
-| `docs/BACKEND_README.md` | API, architecture  | Backend API documentation |
-| `README.md` (root)       | Setup, UI overview | Project introduction      |
+| File                                | Category           | Purpose                   |
+| ----------------------------------- | ------------------ | ------------------------- |
+| `DOCKER_DEV_SETUP.md`               | Setup, UI          | Development environment   |
+| `docs/architecture/ARCHITECTURE.md` | Architecture, API  | System design reference   |
+| `docs/BACKEND_README.md`            | API, architecture  | Backend API documentation |
+| `README.md` (root)                  | Setup, UI overview | Project introduction      |
 
 ---
 
@@ -284,7 +284,7 @@ Explanation of what to see...
 - [ ] deployment.png - Docker deployment setup
 - [ ] component-diagram.png - Component relationships
 
-### Setup & Deployment
+## ⚡ Setup & Deployment
 
 - [ ] docker-compose-up.png - Docker startup output
 - [ ] local-dev-setup.png - Local development environment
@@ -324,7 +324,7 @@ Screenshots should be reviewed and updated:
 - [../../README.md](../../README.md) - Project README with screenshot references
 - [../../docs/architecture/ARCHITECTURE.md](../../docs/architecture/ARCHITECTURE.md) - Architecture documentation
 
-## 🎨 Tools & Resources
+## 🛠️ Tools & Resources
 
 ### Recommended Tools
 
@@ -340,7 +340,7 @@ Screenshots should be reviewed and updated:
 - [TinyPNG Image Compression](https://tinypng.com/)
 - [ShareX - Free Screenshot Tool](https://getsharex.com/)
 
-## 📝 Notes
+## � Notes
 
 - All screenshots should include meaningful alt text for accessibility
 - Keep screenshots free of sensitive information (API keys, tokens, passwords)

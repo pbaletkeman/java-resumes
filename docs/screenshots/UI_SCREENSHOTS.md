@@ -15,7 +15,7 @@ Comprehensive visual documentation of the java-resumes application interface wit
 
 ---
 
-## Overview
+## 📆 Overview
 
 The java-resumes application provides a modern, responsive user interface with full dark/light theme support. All screenshots demonstrate both themes side-by-side for easy comparison.
 
@@ -60,7 +60,7 @@ The primary interface for uploading and editing resume documents with AI-powered
 
 ---
 
-## File History Tab
+## 📤 File History Tab
 
 Browse and manage previously generated and saved documents.
 
@@ -90,7 +90,7 @@ Browse and manage previously generated and saved documents.
 
 ---
 
-## Settings Tab
+## ⚙️ Settings Tab
 
 Configure application preferences and LLM model settings.
 
@@ -120,7 +120,7 @@ Configure application preferences and LLM model settings.
 
 ---
 
-## Tools Tab
+## 🛠️ Tools Tab
 
 Utility functions and development tools.
 
@@ -150,7 +150,7 @@ Utility functions and development tools.
 
 ---
 
-## Add Model Dialog
+## 📂 Add Model Dialog
 
 Dialog for configuring new LLM model connections (Ollama, OpenAI, etc.).
 
@@ -180,7 +180,7 @@ Dialog for configuring new LLM model connections (Ollama, OpenAI, etc.).
 
 ---
 
-## Theme Information
+## 🎨 Theme Information
 
 ### Dark Theme
 
@@ -211,7 +211,7 @@ Users can switch between themes:
 
 ---
 
-## Screenshots Directory
+## 📁 Screenshots Directory
 
 ```
 docs/screenshots/
@@ -250,7 +250,7 @@ docs/screenshots/
 
 ---
 
-## Usage Guidelines
+## 📖 Usage Guidelines
 
 ### Including Screenshots in Documentation
 
@@ -281,7 +281,7 @@ When referencing these screenshots in documentation:
 
 ---
 
-## Visual Design Standards
+## 🎨 Visual Design Standards
 
 ### Typography
 
@@ -322,7 +322,7 @@ When referencing these screenshots in documentation:
 
 ---
 
-## Technical Details
+## 📰 Technical Details
 
 ### File Formats
 
@@ -348,7 +348,7 @@ When referencing these screenshots in documentation:
 
 ---
 
-## Related Documentation
+## 🔗 Related Documentation
 
 - [Setup & Deployment Screenshots](./setup/README.md)
 - [Architecture Diagrams](./architecture/README.md)

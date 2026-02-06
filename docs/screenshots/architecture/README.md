@@ -13,7 +13,7 @@ System architecture, component diagrams, and data flow visualizations for the ja
 
 ---
 
-## Overview
+## 📆 Overview
 
 Comprehensive visual documentation of system architecture, showing how components interact and data flows through the application.
 
@@ -28,7 +28,7 @@ Comprehensive visual documentation of system architecture, showing how component
 
 ---
 
-## System Architecture
+## 🎨 System Architecture
 
 ### Overall Architecture Diagram
 
@@ -56,7 +56,7 @@ Comprehensive visual documentation of system architecture, showing how component
 
 ---
 
-## Data Flow Diagram
+## 🔄 Data Flow Diagram
 
 The complete flow of resume optimization from upload to download:
 
@@ -86,7 +86,7 @@ The complete flow of resume optimization from upload to download:
 
 ---
 
-## UML Diagrams
+## 📋 UML Diagrams
 
 ### Backend Class Diagram
 
@@ -130,7 +130,7 @@ The complete flow of resume optimization from upload to download:
 
 ---
 
-## Component Relationships
+## 🔗 Component Relationships
 
 ### Backend Component Interaction
 
@@ -186,7 +186,7 @@ The complete flow of resume optimization from upload to download:
 
 ---
 
-## Deployment Architecture
+## 🚀 Deployment Architecture
 
 ### Docker Container Architecture
 
@@ -241,7 +241,7 @@ The complete flow of resume optimization from upload to download:
 
 ---
 
-## API Integration
+## 🌐 API Integration
 
 ### LLM Service Integration
 
@@ -270,7 +270,7 @@ The complete flow of resume optimization from upload to download:
 
 ---
 
-## Technology Stack Visualization
+## 🚰 Technology Stack Visualization
 
 ### Backend Stack
 
@@ -309,7 +309,7 @@ Docker & Docker Compose
 
 ---
 
-## Data Models
+## 📋 Data Models
 
 ### Core Data Models
 
@@ -337,7 +337,7 @@ Docker & Docker Compose
 
 ---
 
-## Related Documentation
+## 🔗 Related Documentation
 
 - **[Backend README](../BACKEND_README.md)** - Backend API and service documentation
 - **[Frontend README](../../frontend/README.md)** - Frontend component and hook documentation

@@ -50,7 +50,7 @@ Complete guide for setting up the development environment for java-resumes.
 
 ---
 
-## Prerequisites
+## 📋 Prerequisites
 
 ### System Requirements
 
@@ -104,7 +104,7 @@ Complete guide for setting up the development environment for java-resumes.
 
 ---
 
-## Backend Setup
+## ⚙️ Backend Setup
 
 ### Step 1: Clone Repository
 
@@ -240,7 +240,7 @@ Create `config.json` in project root:
 
 ---
 
-## Frontend Setup
+## 🎨 Frontend Setup
 
 ### Step 1: Navigate to Frontend Directory
 
@@ -333,7 +333,7 @@ npm run build --watch
 
 ---
 
-## Full Stack Development with Docker
+## 🐳 Full Stack Development with Docker
 
 ### Quick Start (Docker Compose)
 
@@ -376,7 +376,7 @@ docker compose ps
 
 ---
 
-## Development Workflow
+## 🔄 Development Workflow
 
 ### Local Backend + Local Frontend
 
@@ -436,7 +436,7 @@ npm run dev
 
 ---
 
-## Project Structure for Development
+## 📂 Project Structure for Development
 
 ```
 java-resumes/
@@ -471,7 +471,7 @@ java-resumes/
 
 ---
 
-## Testing During Development
+## 🧪 Testing During Development
 
 ### Backend Tests
 
@@ -524,7 +524,7 @@ npm run test:integration
 
 ---
 
-## Environment Variables
+## 🌍 Environment Variables
 
 ### Backend Environment Variables
 
@@ -569,7 +569,7 @@ VITE_CONFIG_PATH=/path/to/config
 
 ---
 
-## IDE Configuration
+## 💻 IDE Configuration
 
 ### IntelliJ IDEA Setup
 
@@ -617,7 +617,7 @@ TestRunner for Java
 
 ---
 
-## Common Development Issues
+## 🐛 Common Development Issues
 
 ### Issue: Java 21 Not Found
 

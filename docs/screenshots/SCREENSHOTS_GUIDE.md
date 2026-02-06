@@ -4,7 +4,7 @@ This guide explains all screenshots used in the java-resumes project documentati
 
 ---
 
-## Related Documentation
+## 🔗 Related Documentation
 
 This is the main reference guide. For specific tasks, see:
 

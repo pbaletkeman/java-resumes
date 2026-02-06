@@ -10,7 +10,7 @@
 
 ---
 
-## What Just Got Set Up
+## ✅ What Just Got Set Up
 
 This guide provides a visual overview of the automated code quality workflow enforced by git hooks in this project.
 
@@ -45,7 +45,7 @@ flowchart TD
     A --> B --> C --> D --> E --> F --> G
 ```
 
-## Pre-Commit Hook Details
+## 🔎 Pre-Commit Hook Details
 
 - **Runs on:** `git commit`
 - **Checks performed:**
@@ -56,7 +56,7 @@ flowchart TD
   - ✔️ PASS: Commit allowed
   - ❌ FAIL: Commit blocked, error shown
 
-## Pre-Push Hook Details
+## 🔍 Pre-Push Hook Details
 
 - **Runs on:** `git push`
 - **Checks performed:**
@@ -67,7 +67,7 @@ flowchart TD
   - ✔️ ALL PASS: Push allowed
   - ❌ ANY FAIL: Push blocked
 
-## Remote Quality Assurance
+## ✅ Remote Quality Assurance
 
 - Code is only on the remote repository after passing all local quality checks and tests.
 - Ensures that only high-quality, tested code reaches the shared repository.

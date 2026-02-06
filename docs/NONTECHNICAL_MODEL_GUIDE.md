@@ -41,7 +41,7 @@
 
 ---
 
-## What This Feature Does
+## 📚 What This Feature Does
 
 The **Settings** tab allows you to **add, remove, and manage AI models** without needing to know how to code. You can:
 
@@ -53,7 +53,7 @@ The **Settings** tab allows you to **add, remove, and manage AI models** without
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Step 1: Open Settings
 
@@ -72,7 +72,7 @@ The panel shows:
 
 ---
 
-## How to Add a Model
+## ➕ How to Add a Model
 
 ### What You Need to Know:
 
@@ -97,7 +97,7 @@ Value: "gpt-4-turbo"
 
 ---
 
-## How to Remove a Model
+## 🗑️ How to Remove a Model
 
 ### Steps:
 
@@ -110,7 +110,7 @@ Value: "gpt-4-turbo"
 
 ---
 
-## How to Reset to Defaults
+## 🔄 How to Reset to Defaults
 
 ### Why Reset?
 
@@ -129,7 +129,7 @@ Value: "gpt-4-turbo"
 
 ---
 
-## Understanding the Model Table
+## 📊 Understanding the Model Table
 
 The table shows all available models with:
 
@@ -141,7 +141,7 @@ The table shows all available models with:
 
 ---
 
-## Where Are Models Stored?
+## 💾 Where Are Models Stored?
 
 - Models are stored in your **browser's local storage**
 - They persist even after you close and reopen the browser
@@ -150,7 +150,7 @@ The table shows all available models with:
 
 ---
 
-## Advanced: JSON Format
+## 📋 Advanced: JSON Format
 
 If you want to create a models JSON file manually:
 
@@ -177,7 +177,7 @@ If you want to create a models JSON file manually:
 
 ---
 
-## Frequently Asked Questions
+## ❓ Frequently Asked Questions
 
 ### Q: I deleted a model - can I undo it?
 
@@ -214,7 +214,7 @@ If you want to create a models JSON file manually:
 
 ---
 
-## Common Use Cases
+## 💡 Common Use Cases
 
 ### Scenario 1: Team Uses Same Models
 
@@ -241,7 +241,7 @@ If you want to create a models JSON file manually:
 
 ---
 
-## You're Ready!
+## ✨ You're Ready!
 
 You now know how to:
 
@@ -255,7 +255,7 @@ You now know how to:
 
 ---
 
-## Need Help?
+## 💬 Need Help?
 
 If something isn't working:
 

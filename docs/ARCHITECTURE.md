@@ -42,7 +42,7 @@ The java-resumes application is built with a modern full-stack architecture that
 
 ---
 
-## High-Level Architecture
+## 🏗️ High-Level Architecture
 
 ```mermaid
 graph TD
@@ -92,7 +92,7 @@ graph TD
     style Storage fill:#fce4ec
 ```
 
-## Request Flow Architecture
+## 🔄 Request Flow Architecture
 
 ```mermaid
 graph TB
@@ -149,7 +149,7 @@ graph TB
     style Files fill:#ffd93d
 ```
 
-## Container Network Architecture
+## 🌐 Container Network Architecture
 
 ```mermaid
 graph LR

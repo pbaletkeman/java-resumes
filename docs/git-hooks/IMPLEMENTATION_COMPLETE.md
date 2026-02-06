@@ -25,7 +25,7 @@
 
 ---
 
-## Summary
+## 📋 Summary
 
 Your java-resumes project now has a **fully automated code quality enforcement system** using three complementary tools:
 
@@ -59,7 +59,7 @@ Pre-Push Hook Runs:
 ❌ ANY FAIL = Push blocked
 ```
 
-## Files Created/Modified
+## 📁 Files Created/Modified
 
 ### New Files
 
@@ -87,7 +87,7 @@ build.gradle             (Added Spotless, SpotBugs plugins + setupGitHooks task)
 .github/instructions/backend.instructions.md (Added Code Quality Tools section)
 ```
 
-## Installation (Choose One Method)
+## ⚙️ Installation (Choose One Method)
 
 ### 🎯 Recommended: Gradle
 
@@ -115,7 +115,7 @@ setup-hooks.bat
 python setup-hooks.py
 ```
 
-## First Use Workflow
+## 🚀 First Use Workflow
 
 ### Step 1: Install Hooks
 
@@ -149,7 +149,7 @@ git commit -m "test: verify git hooks"
 # ⚠ SpotBugs found X issues (review at build/reports/spotbugs/main.html)
 ```
 
-## Daily Development
+## 📋 Daily Development
 
 ```bash
 # Work on feature
@@ -168,7 +168,7 @@ git push origin feature-branch
 # → Pre-push hook runs automatically (full test suite)
 ```
 
-## Viewing Reports
+## 📈 Viewing Reports
 
 After running quality checks, view violations here:
 
@@ -186,7 +186,7 @@ build/reports/tests/test/index.html
 build/reports/coverage/index.html
 ```
 
-## Key Commands
+## ⌨️ Key Commands
 
 ```bash
 # Install hooks

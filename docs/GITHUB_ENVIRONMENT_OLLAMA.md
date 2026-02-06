@@ -40,13 +40,13 @@ This guide explains how to configure a GitHub environment with Ollama LLM servic
 
 ---
 
-## Overview
+## ℹ️ Overview
 
 GitHub Environments allow you to configure different deployment targets with specific settings, secrets, and protection rules. This guide sets up an environment specifically for Ollama-based LLM testing.
 
 ---
 
-## Creating a GitHub Environment
+## 🔧 Creating a GitHub Environment
 
 ### Step 1: Navigate to Repository Settings
 
@@ -93,7 +93,7 @@ If using external LLM services as fallback:
 
 ---
 
-## Using the Environment in Workflows
+## 🔄 Using the Environment in Workflows
 
 ### Option 1: Reference Environment in Workflow
 
@@ -148,7 +148,7 @@ Access secrets for external APIs:
 
 ---
 
-## Workflow Configuration Examples
+## 📝 Workflow Configuration Examples
 
 ### Example 1: Simple Ollama Test
 
@@ -245,7 +245,7 @@ jobs:
 
 ---
 
-## Environment Management Best Practices
+## 📋 Environment Management Best Practices
 
 ### 1. Separate Environments
 
@@ -299,7 +299,7 @@ Cache Ollama models between runs:
 
 ---
 
-## Monitoring and Debugging
+## 🔍 Monitoring and Debugging
 
 ### View Environment Status
 
@@ -330,7 +330,7 @@ Cache Ollama models between runs:
 
 ---
 
-## Security Considerations
+## 🔐 Security Considerations
 
 ### 1. API Keys
 
@@ -353,7 +353,7 @@ Cache Ollama models between runs:
 
 ---
 
-## Troubleshooting
+## 🐛 Troubleshooting
 
 ### Issue: Environment not available
 
@@ -386,7 +386,7 @@ Cache Ollama models between runs:
 
 ---
 
-## Complete Example Workflow
+## ✅ Complete Example Workflow
 
 Here's a complete example combining all concepts:
 
@@ -468,7 +468,7 @@ jobs:
 
 ---
 
-## Additional Resources
+## 📚 Additional Resources
 
 - [GitHub Environments Documentation](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment)
 - [GitHub Actions Variables](https://docs.github.com/en/actions/learn-github-actions/variables)

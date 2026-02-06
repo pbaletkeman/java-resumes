@@ -53,7 +53,7 @@ Learn how to configure Java Resumes for different environments and customize ext
 
 ---
 
-## Overview
+## 🌍 Overview
 
 The application supports flexible configuration through:
 
@@ -62,7 +62,7 @@ The application supports flexible configuration through:
 3. **Environment variables** - Runtime overrides
 4. **External configuration paths** - For production deployments
 
-## LLM Configuration (config.json)
+## 🤖 LLM Configuration (config.json)
 
 ### File Location
 
@@ -138,7 +138,7 @@ The application supports flexible configuration through:
 }
 ```
 
-## External Configuration Path
+## 💿 External Configuration Path
 
 ### Setting External Config Location
 
@@ -190,7 +190,7 @@ java -jar app.jar \
   --prompts.external-dir=/opt/java-resumes/prompts
 ```
 
-## External Prompts Directory
+## 📑 External Prompts Directory
 
 ### Setting Custom Prompts
 
@@ -252,7 +252,7 @@ cp -r src/main/resources/prompts/* /opt/java-resumes/prompts/
 3. **Restart application** to load new prompts
 4. **Set PROMPTS_DIR environment variable**
 
-## Spring Boot Configuration (application.yml)
+## 🎄 Spring Boot Configuration (application.yml)
 
 ### File Location
 
@@ -325,7 +325,7 @@ export SPRING_PROFILES_ACTIVE=prod
 java -jar app.jar
 ```
 
-## Environment Variables
+## 🌍 Environment Variables
 
 ### Complete List
 
@@ -369,7 +369,7 @@ set SPRING_PROFILES_ACTIVE=prod
 java -jar app.jar
 ```
 
-## Docker Configuration
+## 🐳 Docker Configuration
 
 ### docker-compose.yml with External Config
 
@@ -454,7 +454,7 @@ When the same setting is specified in multiple places, priority is:
 4. **config.json** (embedded configuration)
 5. **Default values**
 
-## Troubleshooting Configuration
+## 🐛 Troubleshooting Configuration
 
 ### "Could not load config"
 
@@ -485,7 +485,7 @@ Error: Could not read file: config.json
 
 **Restart the application** - configuration is loaded at startup, not reloaded at runtime.
 
-## Best Practices
+## ✅ Best Practices
 
 ### Development
 

@@ -17,7 +17,7 @@ This document summarizes the git hooks setup for the java-resumes project using 
 
 ---
 
-## What Was Implemented
+## ✅ What Was Implemented
 
 ### 1. Build Configuration Updates (`build.gradle`)
 
@@ -165,7 +165,7 @@ Updated `.github/instructions/backend.instructions.md` with:
 - Git hooks documentation reference
 - Updated dependencies list
 
-## How to Use
+## 💡 How to Use
 
 ### First-Time Setup
 
@@ -210,7 +210,7 @@ build/reports/spotbugs/main.html
 build/reports/tests/test/index.html
 ```
 
-## File Structure
+## 📁 File Structure
 
 ```
 java-resumes/
@@ -232,7 +232,7 @@ java-resumes/
 └── GIT_HOOKS_CONFIG_SUMMARY.md         # This file
 ```
 
-## Key Commands Reference
+## 📋 Key Commands Reference
 
 | Task                      | Command                    |
 | ------------------------- | -------------------------- |
@@ -253,7 +253,7 @@ java-resumes/
 | **Checkstyle** | Enforce coding standards (120 char line, naming, etc) | Validates rules      | ✅ Yes              |
 | **SpotBugs**   | Detect potential bugs and code smells                 | Analyzes code        | ❌ No (review-only) |
 
-## Integration Points
+## 🔌 Integration Points
 
 ### Git Workflow
 
@@ -275,7 +275,7 @@ java-resumes/
 - VS Code: Checkstyle Extension, SpotBugs Extension
 - Eclipse: Checkstyle Plugin, FindBugs Plugin
 
-## Troubleshooting
+## 🔧 Troubleshooting
 
 ### Hooks Not Running on Commit?
 
@@ -320,7 +320,7 @@ Option 2: Use Python script
 python setup-hooks.py
 ```
 
-## Benefits
+## ✨ Benefits
 
 ✅ **Consistent Code Quality**: Enforced across all commits
 ✅ **Fewer Code Reviews**: Obvious issues caught before PR
@@ -329,14 +329,14 @@ python setup-hooks.py
 ✅ **Automated**: Saves manual review time
 ✅ **Cross-Platform**: Works on Windows, Mac, Linux
 
-## Next Steps
+## 🚀 Next Steps
 
 1. Install hooks: `./gradlew setupGitHooks`
 2. Read guide: [SETUP_GIT_HOOKS.md](SETUP_GIT_HOOKS.md)
 3. Try it: Make a change and commit
 4. View report: Check `build/reports/` for details
 
-## References
+## 🔗 References
 
 - **Spotless**: https://github.com/diffplug/spotless
 - **Checkstyle**: https://checkstyle.org/

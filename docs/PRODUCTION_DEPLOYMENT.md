@@ -44,7 +44,7 @@ Complete guide for deploying java-resumes to production environments.
 
 ---
 
-## Deployment Options
+## 🚀 Deployment Options
 
 ### Quick Comparison
 
@@ -58,7 +58,7 @@ Complete guide for deploying java-resumes to production environments.
 
 ---
 
-## Docker Compose Deployment
+## 🐳 Docker Compose Deployment
 
 ### Prerequisite: Configure Application
 
@@ -188,7 +188,7 @@ docker compose -f docker-compose.prod.yml down
 
 ---
 
-## HTTPS/SSL Configuration
+## 🔐 HTTPS/SSL Configuration
 
 ### Using Let's Encrypt
 
@@ -240,7 +240,7 @@ certbot certonly --standalone -d yourdomain.com
 
 ---
 
-## Cloud Deployment
+## ☁️ Cloud Deployment
 
 ### AWS Deployment
 
@@ -307,7 +307,7 @@ certbot certonly --standalone -d yourdomain.com
 
 ---
 
-## Kubernetes Deployment
+## ⚛️ Kubernetes Deployment
 
 ### Manifest Files
 
@@ -397,7 +397,7 @@ kubectl logs -f deployment/java-resumes-backend -n java-resumes
 
 ---
 
-## Security Hardening
+## 🔒 Security Hardening
 
 ### Database Security
 
@@ -435,7 +435,7 @@ kubectl create secret generic llm-apikey --from-literal=key=sk-...
 
 ---
 
-## Monitoring & Logging
+## 📉 Monitoring \& Logging
 
 ### Docker Logs
 
@@ -484,7 +484,7 @@ kubectl get pods --field-selector=status.phase=Failed
 
 ---
 
-## Continuous Deployment
+## 🔄 Continuous Deployment
 
 ### GitHub Actions CI/CD
 
@@ -515,7 +515,7 @@ jobs:
 
 ---
 
-## Deployment Checklist
+## ✅ Deployment Checklist
 
 ### Pre-Deployment
 
@@ -550,7 +550,7 @@ jobs:
 
 ---
 
-## Rollback Plan
+## 🗙️ Rollback Plan
 
 ### Quick Rollback
 
@@ -577,7 +577,7 @@ postgresql_restore < backup.sql
 
 ---
 
-## Scaling Strategies
+## 📈 Scaling Strategies
 
 ### Horizontal Scaling
 

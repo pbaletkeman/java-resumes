@@ -55,7 +55,7 @@
 
 ---
 
-## One-Minute Overview
+## ⏱️ One-Minute Overview
 
 **What is this?**
 
@@ -73,7 +73,7 @@
 
 ---
 
-## For Non-Technical Users
+## 🚶 For Non-Technical Users
 
 ### I just want to upload and optimize documents
 
@@ -108,7 +108,7 @@
 
 ---
 
-## For Technical Users / Developers
+## 💻 For Technical Users / Developers
 
 ### Build and Run Backend
 
@@ -151,7 +151,7 @@ Result (Optimized document)
 
 ---
 
-## Project Structure
+## 📂 Project Structure
 
 ```
 backend/src/main/java/ca/letkeman/resumes/
@@ -173,7 +173,7 @@ prompts/
 
 ---
 
-## Configuration
+## ⚙️ Configuration
 
 ### Backend Configuration
 
@@ -205,7 +205,7 @@ VITE_APP_NAME=Java-Resumes
 
 ---
 
-## Testing
+## 🧪 Testing
 
 ### Backend Tests
 
@@ -232,7 +232,7 @@ npm run type-check              # TypeScript strict
 
 ---
 
-## Deployment
+## 🚀 Deployment
 
 ### Development
 
@@ -258,7 +258,7 @@ npm run preview                 # Frontend preview
 
 ---
 
-## Documentation
+## 📚 Documentation
 
 | Document                        | Purpose                  |
 | ------------------------------- | ------------------------ |
@@ -270,7 +270,7 @@ npm run preview                 # Frontend preview
 
 ---
 
-## Common Questions
+## ❓ Common Questions
 
 ### Q: How do I change the AI model?
 
@@ -306,7 +306,7 @@ npm run preview                 # Frontend preview
 
 ---
 
-## Troubleshooting
+## 🐛 Troubleshooting
 
 ### Backend won't start
 
@@ -352,7 +352,7 @@ Check VITE_API_URL environment
 
 ---
 
-## Performance
+## ⚡ Performance
 
 | Operation               | Time   |
 | ----------------------- | ------ |
@@ -365,7 +365,7 @@ Check VITE_API_URL environment
 
 ---
 
-## Security Notes
+## 🔐 Security Notes
 
 - Input validation on all uploads
 - File type checking
@@ -376,7 +376,7 @@ Check VITE_API_URL environment
 
 ---
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 **Backend:**
 
@@ -403,7 +403,7 @@ Check VITE_API_URL environment
 
 ---
 
-## Need Help?
+## 💬 Need Help?
 
 1. **User Issue?** Check NONTECHNICAL_MODEL_GUIDE.md
 2. **Technical Issue?** Check IMPLEMENTATION_SUMMARY.md
@@ -412,7 +412,7 @@ Check VITE_API_URL environment
 
 ---
 
-## Key Files to Know
+## 📋 Key Files to Know
 
 ```
 README.md                            Main overview
@@ -440,7 +440,7 @@ prompts/
 
 ---
 
-## Quick Commands
+## ⚡ Quick Commands
 
 ```bash
 # Start development
@@ -465,7 +465,7 @@ npm run lint:fix          # Frontend
 
 ---
 
-## You're Ready!
+## ✨ You're Ready!
 
 - Everything is built and working
 - All tests passing

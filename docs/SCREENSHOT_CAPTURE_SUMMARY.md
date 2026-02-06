@@ -38,13 +38,13 @@
 **Status**: **COMPLETED** - 14 out of 16 screenshots captured successfully
 **Script**: `frontend/capture-screenshots.mjs`
 
-## Summary
+## 📊 Summary
 
 Playwright automation script successfully captured 14 screenshots across all four documentation categories. The script was configured to capture 16 total screenshots, with 2 failures due to browser context issues during extended execution.
 
 ---
 
-## Screenshots Captured by Category
+## 🎥 Screenshots Captured by Category
 
 ### Frontend Screenshots (4/6 captured)
 
@@ -98,7 +98,7 @@ Playwright automation script successfully captured 14 screenshots across all fou
 
 ---
 
-## Aggregate Statistics
+## 📊 Aggregate Statistics
 
 ```
 
@@ -119,7 +119,7 @@ Categories Summary:
 
 ---
 
-## File Locations
+## 📂 File Locations
 
 All screenshots have been saved to the following directories:
 
@@ -150,7 +150,7 @@ docs/
 
 ---
 
-## Failures & Root Causes
+## ⚠️ Failures & Root Causes
 
 ### Failed Captures
 
@@ -178,7 +178,7 @@ During extended test runs, Playwright browser instances were terminated due to:
 
 ---
 
-## Technical Details
+## 🔧 Technical Details
 
 ### Script Configuration
 
@@ -206,7 +206,7 @@ During extended test runs, Playwright browser instances were terminated due to:
 
 ---
 
-## Next Steps
+## 🚀 Next Steps
 
 ### Option 1: Retry Failed Screenshots
 
@@ -238,7 +238,7 @@ To improve reliability:
 
 ---
 
-## Verification Checklist
+## ✅ Verification Checklist
 
 - [x] Screenshots directory structure created (`frontend`, `backend`, `architecture`, `setup`)
 - [x] Frontend screenshots captured (4/6) - 67%
@@ -252,7 +252,7 @@ To improve reliability:
 
 ---
 
-## Notes & Observations
+## 📝 Notes & Observations
 
 1. **Backend API Screenshots**: Most successful category (100% capture rate). Swagger UI loaded consistently and reliably.
 
@@ -266,7 +266,7 @@ To improve reliability:
 
 ---
 
-## Related Documentation
+## 🔗 Related Documentation
 
 - Script location: [frontend/capture-screenshots.mjs](../frontend/capture-screenshots.mjs)
 - Output manifest: [docs/screenshots/MANIFEST.md](MANIFEST.md)

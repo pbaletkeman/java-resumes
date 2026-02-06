@@ -60,7 +60,7 @@ Comprehensive guide for maintaining code quality in java-resumes.
 
 ---
 
-## Java Code Quality
+## ☕ Java Code Quality
 
 ### Checkstyle Configuration
 
@@ -199,7 +199,7 @@ counter++;
 
 ---
 
-## TypeScript/React Code Quality
+## 🎨 TypeScript/React Code Quality
 
 ### ESLint Configuration
 
@@ -324,7 +324,7 @@ export default MyComponent;
 
 ---
 
-## Testing Standards
+## 🧪 Testing Standards
 
 ### Coverage Requirements
 
@@ -372,7 +372,7 @@ describe("MainTab", () => {
 
 ---
 
-## Architecture Guidelines
+## 🏗️ Architecture Guidelines
 
 ### Layered Architecture
 
@@ -425,7 +425,7 @@ export const useApi = () => {
 
 ---
 
-## Security Best Practices
+## 🔐 Security Best Practices
 
 ### Input Validation
 
@@ -480,7 +480,7 @@ stmt.setInt(1, userId);
 
 ---
 
-## Documentation Standards
+## 📚 Documentation Standards
 
 ### Code Comments
 
@@ -529,7 +529,7 @@ public ResponseEntity<ResponseMessage> processResume(Optimize optimize)
 
 ---
 
-## Review Checklist
+## ✅ Review Checklist
 
 ### Code Review Standards
 
@@ -561,7 +561,7 @@ public ResponseEntity<ResponseMessage> processResume(Optimize optimize)
 
 ---
 
-## Continuous Quality
+## 📈 Continuous Quality
 
 ### Pre-commit Hook (Future)
 
@@ -594,7 +594,7 @@ Automated quality checks on every push:
 
 ---
 
-## Refactoring Guidelines
+## 🔄 Refactoring Guidelines
 
 ### When to Refactor
 

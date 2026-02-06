@@ -15,14 +15,14 @@ Complete guide for running the java-resumes application using Docker with multip
 
 ---
 
-## Prerequisites
+## 📋 Prerequisites
 
 - Docker 20.10+ installed
 - Docker Compose v2+ (or Docker with Compose plugin)
 - At least 4GB RAM available for containers
 - 10GB free disk space (20GB+ recommended for PostgreSQL + Ollama)
 
-## Available Docker Compose Configurations
+## 🐳 Available Docker Compose Configurations
 
 This project provides 4 pre-configured docker-compose files for different deployment scenarios:
 
@@ -97,7 +97,7 @@ docker compose -f <compose-file> down
 docker compose -f <compose-file> down -v
 ```
 
-## Service Architecture
+## 🏗️ Service Architecture
 
 ### Standard Setup (3 Services)
 
@@ -438,13 +438,13 @@ Available for: `docker-compose.ollama-postgresql.yml`
 
 Small models suitable for resume optimization:
 
-| Model        | Size  | RAM  | Speed      | Quality    | Notes                   |
-| ------------ | ----- | ---- | ---------- | ---------- | ----------------------- |
-| qwen2.5:0.5b | 400MB | ~1GB |  |        | Fastest, lowest memory  |
-| tinyllama    | 800MB | ~2GB |    |      | Recommended for testing |
-| gemma2:2b    | 1.6GB | ~3GB |      |    | Good balance            |
-| phi3:mini    | 2.3GB | ~4GB |        |  | High quality            |
-| mistral      | 4.1GB | ~8GB |          |  | Best quality, slowest   |
+| Model        | Size  | RAM  | Speed | Quality | Notes                   |
+| ------------ | ----- | ---- | ----- | ------- | ----------------------- |
+| qwen2.5:0.5b | 400MB | ~1GB |       |         | Fastest, lowest memory  |
+| tinyllama    | 800MB | ~2GB |       |         | Recommended for testing |
+| gemma2:2b    | 1.6GB | ~3GB |       |         | Good balance            |
+| phi3:mini    | 2.3GB | ~4GB |       |         | High quality            |
+| mistral      | 4.1GB | ~8GB |       |         | Best quality, slowest   |
 
 ### Model Operations
 
@@ -667,7 +667,7 @@ curl -H "Origin: http://localhost:3000" http://localhost:8080/api/health -v
 **Solution**:
 
 1. Increase Docker memory limit:
-   - Docker Desktop: Preferences  Resources  Memory
+   - Docker Desktop: Preferences Resources Memory
    - Docker on Linux: Edit `/etc/docker/daemon.json`
 
 2. Use smaller LLM model:

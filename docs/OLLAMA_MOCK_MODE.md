@@ -38,7 +38,7 @@
 
 ---
 
-## Overview
+## ✨ Overview
 
 The java-resumes application supports a **mock mode** that simulates LLM responses without making actual network calls to Ollama. This is particularly useful for:
 
@@ -47,7 +47,7 @@ The java-resumes application supports a **mock mode** that simulates LLM respons
 - **CI/CD**: Run automated tests in environments where Ollama isn't available
 - **Debugging**: Get predictable, reproducible responses
 
-## How It Works
+## 🔧 How It Works
 
 When mock mode is enabled, the `ApiService` detects this and routes requests to `MockLlmService` instead of making HTTP calls to the configured Ollama endpoint. The mock service analyzes the prompt content and generates appropriate fake responses that match the expected format.
 
@@ -65,7 +65,7 @@ Request  ApiService.invokeApi()
         Response
 ```
 
-## Configuration
+## ⚙️ Configuration
 
 ### Enable Mock Mode
 
@@ -104,7 +104,7 @@ Then run with test profile:
 java -jar -Dspring.profiles.active=test resume-optimizer.jar
 ```
 
-## Mock Response Types
+## 📋 Mock Response Types
 
 The mock service generates tailored responses based on prompt content:
 
@@ -121,7 +121,7 @@ The mock service generates tailored responses based on prompt content:
 | Skills                 | "skill"                | Skills assessment           |
 | Generic                | Other                  | General mock response       |
 
-## Example Usage
+## 💡 Example Usage
 
 ### Java Code
 
@@ -161,7 +161,7 @@ class MyServiceTest {
 }
 ```
 
-## Mock Response Format
+## 📦 Mock Response Format
 
 Mock responses follow the OpenAI/Ollama API format:
 
@@ -190,7 +190,7 @@ Mock responses follow the OpenAI/Ollama API format:
 }
 ```
 
-## Benefits
+## ✨ Benefits
 
 ### 1. No External Dependencies
 
@@ -216,7 +216,7 @@ Mock responses follow the OpenAI/Ollama API format:
 - No compute resources for LLM inference
 - Lower CI/CD costs
 
-## Limitations
+## ⚠️ Limitations
 
 ### Mock Content Quality
 
@@ -237,7 +237,7 @@ Mock responses follow the OpenAI/Ollama API format:
 - Don't test actual LLM response quality
 - Can't detect LLM-specific issues
 
-## Best Practices
+## 🌟 Best Practices
 
 ### 1. Use Mocks for Unit Tests
 
@@ -277,7 +277,7 @@ export LLM_MOCK_ENABLED=false
 export LLM_MOCK_ENABLED=false
 ```
 
-## Troubleshooting
+## 🐛 Troubleshooting
 
 ### Mock Mode Not Working
 
@@ -316,7 +316,7 @@ export LLM_MOCK_ENABLED=false
 - Verify message structure matches expected format
 - Ensure prompt contains keywords for detection
 
-## Advanced Configuration
+## 🚀 Advanced Configuration
 
 ### Custom Mock Responses
 
@@ -359,7 +359,7 @@ class ConditionalMockTest {
 }
 ```
 
-## See Also
+## 📚 See Also
 
 - [Ollama Setup Guide](OLLAMA_SETUP.md)
 - [Testing Documentation](docs/TESTING.md)
