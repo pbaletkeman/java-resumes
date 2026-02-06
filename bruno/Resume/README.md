@@ -2,19 +2,29 @@
 
 This directory contains a comprehensive API collection for the Resume Optimization Service built with [Bruno](https://www.usebruno.com/), a lightweight API client for testing and documentation.
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Available Endpoints](#available-endpoints)
-- [Getting Started](#getting-started)
-- [Configuration](#configuration)
-- [Request Examples](#request-examples)
-- [Response Format](#response-format)
-- [Error Handling](#error-handling)
-- [Directory Structure](#directory-structure)
-- [Tips & Best Practices](#tips--best-practices)
-- [Troubleshooting](#troubleshooting)
-- [Additional Resources](#additional-resources)
+- [Bruno API Collection: Resume Optimization](#bruno-api-collection-resume-optimization)
+  - [Overview](#overview)
+  - [Available Endpoints](#available-endpoints)
+    - [1. **Optimize Resume** (`OptimizeResume.bru`)](#1-optimize-resume-optimizeresumebru)
+    - [2. **List Files** (`ListFiles.bru`)](#2-list-files-listfilesbru)
+    - [3. **Download File** (`DownloadFile.bru`)](#3-download-file-downloadfilebru)
+    - [4. **Delete File** (`DeleteFile.bru`)](#4-delete-file-deletefilebru)
+    - [5. **Convert Markdown to PDF** (`Convert Markdown to PDF.bru`)](#5-convert-markdown-to-pdf-convert-markdown-to-pdfbru)
+    - [6. **Delete All Files** (`DeleteAllFiles.bru`)](#6-delete-all-files-deleteallfilesbru)
+    - [7. **Health Check** (`HealthCheck.bru`)](#7-health-check-healthcheckbru)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Running the Requests](#running-the-requests)
+  - [Configuration](#configuration)
+  - [Request Examples](#request-examples)
+    - [Example: Optimize a Resume](#example-optimize-a-resume)
+    - [Example: List All Files](#example-list-all-files)
+  - [Response Format](#response-format)
+  - [Error Handling](#error-handling)
+  - [Directory Structure](#directory-structure)
+  - [Tips \& Best Practices](#tips--best-practices)
+  - [Troubleshooting](#troubleshooting)
+  - [Additional Resources](#additional-resources)
 
 ---
 

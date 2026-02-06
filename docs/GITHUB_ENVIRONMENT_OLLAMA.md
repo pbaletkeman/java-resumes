@@ -1,15 +1,42 @@
-# GitHub Environment Setup for Ollama
+﻿# GitHub Environment Setup for Ollama
 
 This guide explains how to configure a GitHub environment with Ollama LLM service for automated testing and development.
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Creating a GitHub Environment](#creating-a-github-environment)
-- [Using the Environment in Workflows](#using-the-environment-in-workflows)
-- [Workflow Configuration Examples](#workflow-configuration-examples)
-- [Troubleshooting](#troubleshooting)
-- [Best Practices](#best-practices)
+- [GitHub Environment Setup for Ollama](#github-environment-setup-for-ollama)
+  - [Overview](#overview)
+  - [Creating a GitHub Environment](#creating-a-github-environment)
+    - [Step 1: Navigate to Repository Settings](#step-1-navigate-to-repository-settings)
+    - [Step 2: Create New Environment](#step-2-create-new-environment)
+    - [Step 3: Configure Environment Variables](#step-3-configure-environment-variables)
+    - [Step 4: Add Environment Secrets (Optional)](#step-4-add-environment-secrets-optional)
+    - [Step 5: Configure Protection Rules (Optional)](#step-5-configure-protection-rules-optional)
+  - [Using the Environment in Workflows](#using-the-environment-in-workflows)
+    - [Option 1: Reference Environment in Workflow](#option-1-reference-environment-in-workflow)
+    - [Option 2: Use Environment Variables](#option-2-use-environment-variables)
+    - [Option 3: Use Secrets](#option-3-use-secrets)
+  - [Workflow Configuration Examples](#workflow-configuration-examples)
+    - [Example 1: Simple Ollama Test](#example-1-simple-ollama-test)
+    - [Example 2: Matrix Testing with Multiple Models](#example-2-matrix-testing-with-multiple-models)
+    - [Example 3: Conditional Deployment](#example-3-conditional-deployment)
+  - [Environment Management Best Practices](#environment-management-best-practices)
+    - [1. Separate Environments](#1-separate-environments)
+    - [2. Model Selection Strategy](#2-model-selection-strategy)
+    - [3. Resource Management](#3-resource-management)
+    - [4. Caching Strategy](#4-caching-strategy)
+  - [Monitoring and Debugging](#monitoring-and-debugging)
+    - [View Environment Status](#view-environment-status)
+    - [Debug Workflow Issues](#debug-workflow-issues)
+    - [View Ollama Logs](#view-ollama-logs)
+  - [Security Considerations](#security-considerations)
+    - [1. API Keys](#1-api-keys)
+    - [2. Model Downloads](#2-model-downloads)
+    - [3. Resource Limits](#3-resource-limits)
+  - [Troubleshooting](#troubleshooting)
+    - [Issue: Environment not available](#issue-environment-not-available)
+    - [Issue: Variables not accessible](#issue-variables-not-accessible)
+    - [Issue: Workflow waiting indefinitely](#issue-workflow-waiting-indefinitely)
+  - [Complete Example Workflow](#complete-example-workflow)
+  - [Additional Resources](#additional-resources)
 
 ---
 
@@ -307,16 +334,16 @@ Cache Ollama models between runs:
 
 ### 1. API Keys
 
-- ✅ Store API keys as **Secrets** (not variables)
-- ✅ Use environment protection for production
-- ✅ Rotate keys regularly
-- ❌ Never commit keys to repository
+- Store API keys as **Secrets** (not variables)
+- Use environment protection for production
+- Rotate keys regularly
+- Never commit keys to repository
 
 ### 2. Model Downloads
 
-- ✅ Verify model checksums
-- ✅ Use official Ollama library
-- ❌ Don't download from untrusted sources
+- Verify model checksums
+- Use official Ollama library
+- Don't download from untrusted sources
 
 ### 3. Resource Limits
 
@@ -335,7 +362,7 @@ Cache Ollama models between runs:
 **Solution:**
 
 1. Check environment name spelling
-2. Verify environment exists in Settings → Environments
+2. Verify environment exists in Settings Environments
 3. Ensure you have proper repository permissions
 
 ### Issue: Variables not accessible
@@ -436,7 +463,7 @@ jobs:
         run: |
           echo "## Test Summary" >> $GITHUB_STEP_SUMMARY
           echo "- **Model**: ${{ inputs.model || vars.OLLAMA_MODEL }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Status**: ✅ Success" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status**:  Success" >> $GITHUB_STEP_SUMMARY
 ```
 
 ---
@@ -447,11 +474,6 @@ jobs:
 - [GitHub Actions Variables](https://docs.github.com/en/actions/learn-github-actions/variables)
 - [GitHub Actions Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
 - [Ollama GitHub Actions Guide](docs/OLLAMA_SETUP.md)
-
----
-
-**Last Updated:** January 2026
-**Repository:** pbaletkeman/java-resumes
 
 ---
 

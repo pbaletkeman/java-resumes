@@ -1,12 +1,42 @@
-# Quick Start Guide
+﻿# Quick Start Guide
 
 Get Java Resumes up and running in minutes using Docker Compose.
 
-## Table of Contents
-
-- [Prerequisites](#prerequisites)
-- [Step-by-Step Setup](#step-by-step-setup)
-- [Getting Help](#getting-help)
+- [Quick Start Guide](#quick-start-guide)
+  - [Prerequisites](#prerequisites)
+  - [Step-by-Step Setup](#step-by-step-setup)
+    - [Step 1: Clone the Repository](#step-1-clone-the-repository)
+    - [Step 2: Configure LLM Service](#step-2-configure-llm-service)
+      - [Option A: Ollama (Recommended for Local Development)](#option-a-ollama-recommended-for-local-development)
+      - [Option B: LM Studio](#option-b-lm-studio)
+      - [Option C: OpenAI API](#option-c-openai-api)
+    - [Step 3: Choose Your Deployment Configuration](#step-3-choose-your-deployment-configuration)
+      - [Quick Start Commands](#quick-start-commands)
+    - [Step 4: Start the Application](#step-4-start-the-application)
+    - [Step 5: Access the Application](#step-5-access-the-application)
+    - [Step 6: Test It Out](#step-6-test-it-out)
+  - [Common Commands](#common-commands)
+    - [View Logs](#view-logs)
+    - [Stop the Application](#stop-the-application)
+    - [Rebuild and Restart](#rebuild-and-restart)
+    - [Check Container Status](#check-container-status)
+    - [Execute Commands Inside Container](#execute-commands-inside-container)
+  - [Troubleshooting](#troubleshooting)
+    - [Port Already in Use](#port-already-in-use)
+    - [LLM Connection Failed](#llm-connection-failed)
+    - [Docker Image Won't Build](#docker-image-wont-build)
+    - [Files Not Persisting](#files-not-persisting)
+  - [Next Steps](#next-steps)
+    - [For Production Deployment](#for-production-deployment)
+    - [For Development](#for-development)
+    - [For Configuration](#for-configuration)
+  - [Environment Files](#environment-files)
+    - [`.env` for Backend Environment](#env-for-backend-environment)
+    - [`.env` for Frontend Environment](#env-for-frontend-environment)
+  - [Performance Tips](#performance-tips)
+  - [Docker Compose Reference](#docker-compose-reference)
+    - [Complete docker-compose.yml Structure](#complete-docker-composeyml-structure)
+  - [Getting Help](#getting-help)
 
 ---
 
@@ -388,10 +418,10 @@ networks:
 
 ## Getting Help
 
-- **Configuration issues?** → [CONFIGURATION.md](CONFIGURATION.md)
-- **Specific problem?** → [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
-- **Need more setup info?** → [DEVELOPMENT_SETUP.md](DEVELOPMENT_SETUP.md)
-- **Bug or feature request?** → [GitHub Issues](https://github.com/pbaletkeman/java-resumes/issues)
+- **Configuration issues?** [CONFIGURATION.md](CONFIGURATION.md)
+- **Specific problem?** [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+- **Need more setup info?** [DEVELOPMENT_SETUP.md](DEVELOPMENT_SETUP.md)
+- **Bug or feature request?** [GitHub Issues](https://github.com/pbaletkeman/java-resumes/issues)
 
 ---
 

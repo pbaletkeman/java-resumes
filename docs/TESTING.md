@@ -1,19 +1,45 @@
-# Testing Guide
+﻿# Testing Guide
 
 Comprehensive testing strategy for java-resumes application.
 
-## Table of Contents
-
-- [Testing Overview](#-testing-overview)
-- [Backend Testing](#-backend-testing)
-- [Frontend Testing](#-frontend-testing)
-- [Test Coverage](#-test-coverage)
-- [Running Tests in CI/CD](#-running-tests-in-cicd)
-- [Best Practices](#-best-practices)
+- [Testing Guide](#testing-guide)
+  - [Testing Overview](#testing-overview)
+    - [Coverage Targets](#coverage-targets)
+    - [Test Types](#test-types)
+  - [Backend Testing](#backend-testing)
+    - [Test Structure](#test-structure)
+    - [Running Tests](#running-tests)
+    - [Test Categories](#test-categories)
+      - [1. Controller Tests (`ResumeControllerTest.java`)](#1-controller-tests-resumecontrollertestjava)
+      - [2. Model Tests (`OptimizeTest.java`, `FileInfoTest.java`)](#2-model-tests-optimizetestjava-fileinfotestjava)
+      - [3. Service Tests (`FilesStorageServiceTest.java`)](#3-service-tests-filesstorageservicetestjava)
+      - [4. Integration Tests (`ApiServiceTest.java`)](#4-integration-tests-apiservicetestjava)
+    - [Best Practices](#best-practices)
+  - [Frontend Testing](#frontend-testing)
+    - [Test Structure](#test-structure-1)
+    - [Running Tests](#running-tests-1)
+    - [Test Categories](#test-categories-1)
+      - [1. Component Tests](#1-component-tests)
+      - [2. Hook Tests](#2-hook-tests)
+      - [3. Service Tests](#3-service-tests)
+    - [Best Practices](#best-practices-1)
+  - [Integration Testing](#integration-testing)
+    - [End-to-End Flow Testing](#end-to-end-flow-testing)
+    - [Example Integration Test](#example-integration-test)
+  - [Coverage Reports](#coverage-reports)
+    - [Backend Coverage](#backend-coverage)
+    - [Frontend Coverage](#frontend-coverage)
+    - [Coverage Goals](#coverage-goals)
+  - [Common Test Issues](#common-test-issues)
+    - [Issue: Mock Not Working](#issue-mock-not-working)
+    - [Issue: Test Timeout](#issue-test-timeout)
+    - [Issue: Flaky Tests](#issue-flaky-tests)
+  - [CI/CD Integration](#cicd-integration)
+    - [GitHub Actions (Future)](#github-actions-future)
 
 ---
 
-## 🎯 Testing Overview
+## Testing Overview
 
 ### Coverage Targets
 
@@ -32,21 +58,21 @@ Comprehensive testing strategy for java-resumes application.
 
 ---
 
-## 🧪 Backend Testing
+## Backend Testing
 
 ### Test Structure
 
 ```
 src/test/java/ca/letkeman/resumes/
-├── controller/
-│   └── ResumeControllerTest.java
-├── model/
-│   ├── OptimizeTest.java
-│   └── FileInfoTest.java
-├── service/
-│   └── FilesStorageServiceTest.java
-└── optimizer/
-    └── ApiServiceTest.java
+ controller/
+    ResumeControllerTest.java
+ model/
+    OptimizeTest.java
+    FileInfoTest.java
+ service/
+    FilesStorageServiceTest.java
+ optimizer/
+     ApiServiceTest.java
 ```
 
 ### Running Tests
@@ -112,11 +138,11 @@ class ResumeControllerTest {
 
 **Tests Included:**
 
-- ✅ Valid file upload
-- ✅ Empty file rejection
-- ✅ Missing required parameters
-- ✅ Invalid file types
-- ✅ Response format validation
+- Valid file upload
+- Empty file rejection
+- Missing required parameters
+- Invalid file types
+- Response format validation
 
 #### 2. Model Tests (`OptimizeTest.java`, `FileInfoTest.java`)
 
@@ -147,10 +173,10 @@ class OptimizeTest {
 
 **Tests Included:**
 
-- ✅ Getter/setter functionality
-- ✅ Validation rules
-- ✅ Default values
-- ✅ Serialization/deserialization
+- Getter/setter functionality
+- Validation rules
+- Default values
+- Serialization/deserialization
 
 #### 3. Service Tests (`FilesStorageServiceTest.java`)
 
@@ -197,11 +223,11 @@ class FilesStorageServiceTest {
 
 **Tests Included:**
 
-- ✅ File save operations
-- ✅ File retrieval
-- ✅ File deletion
-- ✅ Error handling
-- ✅ File permissions
+- File save operations
+- File retrieval
+- File deletion
+- Error handling
+- File permissions
 
 #### 4. Integration Tests (`ApiServiceTest.java`)
 
@@ -244,11 +270,11 @@ class ApiServiceTest {
 
 **Tests Included:**
 
-- ✅ LLM API communication
-- ✅ Response parsing
-- ✅ Error handling
-- ✅ Retry logic
-- ✅ Timeout handling
+- LLM API communication
+- Response parsing
+- Error handling
+- Retry logic
+- Timeout handling
 
 ### Best Practices
 
@@ -285,21 +311,21 @@ assertThrows(Exception.class, () -> methodThatThrows());
 
 ---
 
-## 🎨 Frontend Testing
+## Frontend Testing
 
 ### Test Structure
 
 ```
 frontend/tests/
-├── components/
-│   ├── MainContentTab.test.tsx
-│   ├── FileHistory.test.tsx
-│   └── ThemeToggle.test.tsx
-├── hooks/
-│   ├── useApi.test.ts
-│   └── useTheme.test.ts
-└── services/
-    └── fileService.test.ts
+ components/
+    MainContentTab.test.tsx
+    FileHistory.test.tsx
+    ThemeToggle.test.tsx
+ hooks/
+    useApi.test.ts
+    useTheme.test.ts
+ services/
+     fileService.test.ts
 ```
 
 ### Running Tests
@@ -366,11 +392,11 @@ describe("MainContentTab", () => {
 
 **Tests Included:**
 
-- ✅ Component rendering
-- ✅ Props validation
-- ✅ Event handling
-- ✅ State updates
-- ✅ Conditional rendering
+- Component rendering
+- Props validation
+- Event handling
+- State updates
+- Conditional rendering
 
 #### 2. Hook Tests
 
@@ -413,11 +439,11 @@ describe("useTheme", () => {
 
 **Tests Included:**
 
-- ✅ Hook initialization
-- ✅ State updates
-- ✅ Side effects
-- ✅ LocalStorage interaction
-- ✅ Error handling
+- Hook initialization
+- State updates
+- Side effects
+- LocalStorage interaction
+- Error handling
 
 #### 3. Service Tests
 
@@ -455,11 +481,11 @@ describe("fileService", () => {
 
 **Tests Included:**
 
-- ✅ API calls
-- ✅ Response handling
-- ✅ Error scenarios
-- ✅ Request validation
-- ✅ Timeout handling
+- API calls
+- Response handling
+- Error scenarios
+- Request validation
+- Timeout handling
 
 ### Best Practices
 
@@ -498,7 +524,7 @@ it("should handle async operations", async () => {
 
 ---
 
-## 🔗 Integration Testing
+## Integration Testing
 
 ### End-to-End Flow Testing
 
@@ -521,19 +547,19 @@ npm run test:integration
 # Test: Complete resume optimization workflow
 
 1. User opens application (Frontend)
-2. User uploads resume (Frontend → API)
+2. User uploads resume (Frontend  API)
 3. Backend receives upload (Spring Boot)
-4. Backend sends to LLM (Spring Boot → Ollama)
-5. LLM returns optimized resume (Ollama → Spring Boot)
+4. Backend sends to LLM (Spring Boot  Ollama)
+5. LLM returns optimized resume (Ollama  Spring Boot)
 6. Backend saves files (Spring Boot)
-7. Frontend polls for results (Frontend → API)
+7. Frontend polls for results (Frontend  API)
 8. Frontend displays optimized resume (React)
-9. User downloads file (Frontend → API)
+9. User downloads file (Frontend  API)
 ```
 
 ---
 
-## 📊 Coverage Reports
+## Coverage Reports
 
 ### Backend Coverage
 
@@ -585,7 +611,7 @@ Lines        : X% ( X/Y )
 
 ---
 
-## 🐛 Common Test Issues
+## Common Test Issues
 
 ### Issue: Mock Not Working
 
@@ -629,7 +655,7 @@ await().atMost(5, SECONDS).until(() -> condition);
 
 ---
 
-## 🚀 CI/CD Integration
+## CI/CD Integration
 
 ### GitHub Actions (Future)
 

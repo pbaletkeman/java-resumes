@@ -1,20 +1,59 @@
-# Environment Variables & Configuration
+﻿# Environment Variables & Configuration
 
 Complete reference for environment variables and configuration in java-resumes.
 
-## Table of Contents
+- [Environment Variables \& Configuration](#environment-variables--configuration)
+  - [Overview](#overview)
+  - [Backend Environment Variables](#backend-environment-variables)
+    - [Core Configuration](#core-configuration)
+    - [LLM Service Configuration](#llm-service-configuration)
+    - [Spring Boot Properties](#spring-boot-properties)
+  - [Frontend Environment Variables](#frontend-environment-variables)
+    - [Development](#development)
+    - [Production](#production)
+    - [Using in Frontend Code](#using-in-frontend-code)
+  - [config.json](#configjson)
+    - [Format](#format)
+    - [Parameters](#parameters)
+    - [Examples](#examples)
+  - [Prompt Directory](#prompt-directory)
+    - [Structure](#structure)
+    - [File Format](#file-format)
+    - [Variables](#variables)
+  - [Setting Environment Variables](#setting-environment-variables)
+    - [Linux/Mac](#linuxmac)
+    - [Windows](#windows)
+    - [Docker](#docker)
+  - [Startup Configuration](#startup-configuration)
+    - [Standard Startup](#standard-startup)
+    - [Production Startup](#production-startup)
+    - [Development Startup](#development-startup)
+  - [Verifying Configuration](#verifying-configuration)
+    - [Check Java Environment](#check-java-environment)
+    - [Check Spring Configuration](#check-spring-configuration)
+    - [Check File Paths](#check-file-paths)
+    - [Check API Connectivity](#check-api-connectivity)
+  - [Security Best Practices](#security-best-practices)
+    - [Sensitive Data](#sensitive-data)
+    - [File Permissions](#file-permissions)
+    - [Environment Variable Safety](#environment-variable-safety)
+  - [Configuration Reload](#configuration-reload)
+    - [Without Restart (Development)](#without-restart-development)
+    - [After Changes](#after-changes)
+  - [Common Configurations](#common-configurations)
+    - [Local Development](#local-development)
+    - [Staging Environment](#staging-environment)
+    - [Production Environment](#production-environment)
+  - [Troubleshooting Configuration](#troubleshooting-configuration)
+    - [config.json Not Found](#configjson-not-found)
+    - [Prompt Directory Not Found](#prompt-directory-not-found)
+    - [Upload Path Permission Denied](#upload-path-permission-denied)
+  - [Support](#support)
 
-- [Overview](#-overview)
-- [Backend Environment Variables](#-backend-environment-variables)
-- [Frontend Environment Variables](#-frontend-environment-variables)
-- [config.json](#-configjson)
-- [Docker Environment Configuration](#-docker-environment-configuration)
-- [Production Environment Setup](#-production-environment-setup)
-- [Verification and Debugging](#-verification-and-debugging)
 
 ---
 
-## 📋 Overview
+##  Overview
 
 The java-resumes project supports configuration through:
 
@@ -32,7 +71,7 @@ The java-resumes project supports configuration through:
 
 ---
 
-## 🔧 Backend Environment Variables
+##  Backend Environment Variables
 
 ### Core Configuration
 
@@ -96,7 +135,7 @@ management.endpoint.health.show-details=always
 
 ---
 
-## 🔧 Frontend Environment Variables
+##  Frontend Environment Variables
 
 **Location:** `frontend/.env` (create from `.env.example`)
 
@@ -154,7 +193,7 @@ export default defineConfig({
 
 ---
 
-## 📝 config.json
+##  config.json
 
 **Purpose:** LLM service connection configuration
 
@@ -178,9 +217,9 @@ export default defineConfig({
 
 | Field    | Type   | Required | Description                                  |
 | -------- | ------ | -------- | -------------------------------------------- |
-| endpoint | string | ✅       | LLM API endpoint URL (OpenAI-compatible)     |
-| apikey   | string | ✅       | API key for authentication (can be blank)    |
-| model    | string | ✅       | Model identifier (e.g., "mistral", "gemini") |
+| endpoint | string |        | LLM API endpoint URL (OpenAI-compatible)     |
+| apikey   | string |        | API key for authentication (can be blank)    |
+| model    | string |        | Model identifier (e.g., "mistral", "gemini") |
 
 ### Examples
 
@@ -226,7 +265,7 @@ export default defineConfig({
 
 ---
 
-## 🗂️ Prompt Directory
+##  Prompt Directory
 
 **Purpose:** External prompt templates for optimization
 
@@ -239,13 +278,13 @@ export default defineConfig({
 
 ```
 prompts/
-├── resume_optimization.txt
-├── cover_letter_optimization.txt
-├── resume_detailed.txt
-└── industry_specific/
-    ├── tech.txt
-    ├── finance.txt
-    └── healthcare.txt
+ resume_optimization.txt
+ cover_letter_optimization.txt
+ resume_detailed.txt
+ industry_specific/
+     tech.txt
+     finance.txt
+     healthcare.txt
 ```
 
 ### File Format
@@ -292,7 +331,7 @@ Please provide:
 
 ---
 
-## 🌐 Setting Environment Variables
+##  Setting Environment Variables
 
 ### Linux/Mac
 
@@ -397,7 +436,7 @@ docker run -e SERVER_PORT=8080 \
 
 ---
 
-## 🚀 Startup Configuration
+##  Startup Configuration
 
 ### Standard Startup
 
@@ -439,7 +478,7 @@ LOG_LEVEL=DEBUG \
 
 ---
 
-## 🔍 Verifying Configuration
+##  Verifying Configuration
 
 ### Check Java Environment
 
@@ -470,15 +509,15 @@ curl http://localhost:8080/actuator/env/server.port | jq .
 
 ```bash
 # Verify config.json exists
-test -f config.json && echo "✅ config.json found" || echo "❌ not found"
+test -f config.json && echo " config.json found" || echo " not found"
 cat config.json
 
 # Verify upload directory
-test -d ./uploads && echo "✅ uploads exists" || echo "❌ not found"
+test -d ./uploads && echo " uploads exists" || echo " not found"
 ls -la ./uploads/
 
 # Verify prompt directory
-test -d ./prompts && echo "✅ prompts exists" || echo "❌ not found"
+test -d ./prompts && echo " prompts exists" || echo " not found"
 ls -la ./prompts/
 ```
 
@@ -497,7 +536,7 @@ curl http://localhost:8080/api/files | jq .
 
 ---
 
-## 🔐 Security Best Practices
+##  Security Best Practices
 
 ### Sensitive Data
 
@@ -549,7 +588,7 @@ String apiKey = System.getenv("LLM_API_KEY");
 
 ---
 
-## 🔄 Configuration Reload
+##  Configuration Reload
 
 ### Without Restart (Development)
 
@@ -578,7 +617,7 @@ Ctrl+C
 
 ---
 
-## 📊 Common Configurations
+##  Common Configurations
 
 ### Local Development
 
@@ -621,7 +660,7 @@ GRADLE_OPTS="-Xmx8g -XX:+UseG1GC -XX:MaxGCPauseMillis=200"
 
 ---
 
-## 🆘 Troubleshooting Configuration
+##  Troubleshooting Configuration
 
 ### config.json Not Found
 
@@ -674,7 +713,7 @@ chmod 755 ./uploads
 
 ---
 
-## 📞 Support
+##  Support
 
 **See also:**
 

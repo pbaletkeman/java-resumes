@@ -1,4 +1,4 @@
-# Java Resumes - Documentation Index
+﻿# Java Resumes - Documentation Index
 
 Complete guide to all documentation files for this project.
 
@@ -21,9 +21,9 @@ Complete guide to all documentation files for this project.
 
 ---
 
-## 📚 Quick Access
+## Quick Access
 
-### 🌟 Start Here
+### Start Here
 
 1. **[README.md](README.md)** - 5-minute overview
    - Problem and solution
@@ -50,7 +50,7 @@ Complete guide to all documentation files for this project.
 
 ---
 
-## 📋 Complete File List
+## Complete File List
 
 ### Root Level
 
@@ -71,16 +71,15 @@ Complete guide to all documentation files for this project.
 
 ### Related Documentation
 
-| File                                                                   | Purpose              |
-| ---------------------------------------------------------------------- | -------------------- |
-| **[MIGRATION_SUMMARY.md](MIGRATION_SUMMARY.md)**                       | Migration history    |
-| **[CHECKSTYLE_COMPLIANCE_REPORT.md](CHECKSTYLE_COMPLIANCE_REPORT.md)** | Code quality metrics |
-| **[STATUS.md](STATUS.md)**                                             | Project status       |
-| **[JAVA25_SETUP.md](JAVA25_SETUP.md)**                                 | Java 25 setup guide  |
+| File                                             | Purpose             |
+| ------------------------------------------------ | ------------------- |
+| **[MIGRATION_SUMMARY.md](MIGRATION_SUMMARY.md)** | Migration history   |
+| **[STATUS.md](STATUS.md)**                       | Project status      |
+| **[JAVA25_SETUP.md](JAVA25_SETUP.md)**           | Java 25 setup guide |
 
 ---
 
-## 🎯 Documentation by Use Case
+## Documentation by Use Case
 
 ### I'm a New Developer
 
@@ -173,37 +172,37 @@ Complete guide to all documentation files for this project.
 
 ---
 
-## 🔍 Search Tips
+## Search Tips
 
 ### Finding Information
 
 **"How do I..."**
 
-- Set up locally? → [README.md - Quick Start](README.md#-quick-start)
-- Run tests? → [copilot-instructions.md - Testing Standards](copilot-instructions.md#testing-standards)
-- Follow coding standards? → [copilot-instructions.md - Code Quality Standards](copilot-instructions.md#code-quality-standards)
-- Write a REST endpoint? → [copilot-instructions.md - REST Endpoint Pattern](copilot-instructions.md#rest-endpoint-pattern)
-- Use the API? → [docs/README.md - API Endpoints](docs/README.md#api-endpoints)
-- Deploy the app? → [docs/README.md - Configuration](docs/README.md#configuration)
+- Set up locally? [README.md - Quick Start](README.md#-quick-start)
+- Run tests? [copilot-instructions.md - Testing Standards](copilot-instructions.md#testing-standards)
+- Follow coding standards? [copilot-instructions.md - Code Quality Standards](copilot-instructions.md#code-quality-standards)
+- Write a REST endpoint? [copilot-instructions.md - REST Endpoint Pattern](copilot-instructions.md#rest-endpoint-pattern)
+- Use the API? [docs/README.md - API Endpoints](docs/README.md#api-endpoints)
+- Deploy the app? [docs/README.md - Configuration](docs/README.md#configuration)
 
 **"What is..."**
 
-- The project about? → [README.md - Problem Statement](README.md#problem-statement)
-- The tech stack? → [README.md - Technology Stack](README.md#-technology-stack)
-- The architecture? → [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)
-- The component X? → [docs/README.md - Core Components](docs/README.md#core-components)
-- The class Y? → [copilot-instructions.md - Key Components](copilot-instructions.md#key-components)
+- The project about? [README.md - Problem Statement](README.md#problem-statement)
+- The tech stack? [README.md - Technology Stack](README.md#-technology-stack)
+- The architecture? [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)
+- The component X? [docs/README.md - Core Components](docs/README.md#core-components)
+- The class Y? [copilot-instructions.md - Key Components](copilot-instructions.md#key-components)
 
 **"Where is..."**
 
-- The source code? → [copilot-instructions.md - Project Structure](copilot-instructions.md#project-structure)
-- The tests? → src/test/java/ca/letkeman/resumes/
-- The configuration? → [copilot-instructions.md - Configuration & Setup](copilot-instructions.md#configuration--setup)
-- The API docs? → http://localhost:8080/swagger-ui/index.html
+- The source code? [copilot-instructions.md - Project Structure](copilot-instructions.md#project-structure)
+- The tests? src/test/java/ca/letkeman/resumes/
+- The configuration? [copilot-instructions.md - Configuration & Setup](copilot-instructions.md#configuration--setup)
+- The API docs? http://localhost:8080/swagger-ui/index.html
 
 ---
 
-## 📊 Documentation Statistics
+## Documentation Statistics
 
 ```
 Total Lines of Documentation: 5,650+
@@ -219,7 +218,7 @@ Test Files Referenced: 3
 
 ---
 
-## 🔗 Navigation
+## Navigation
 
 ### Main Document Links
 
@@ -249,22 +248,22 @@ Test Files Referenced: 3
 
 ---
 
-## ✅ Documentation Quality Checklist
+## Documentation Quality Checklist
 
 All files have:
 
-- ✅ Table of contents with anchor links
-- ✅ Clear section organization
-- ✅ Cross-references to other docs
-- ✅ Code examples where relevant
-- ✅ Mermaid diagrams for complex topics
-- ✅ Troubleshooting sections
-- ✅ Configuration examples
-- ✅ Command-line examples
+- Table of contents with anchor links
+- Clear section organization
+- Cross-references to other docs
+- Code examples where relevant
+- Mermaid diagrams for complex topics
+- Troubleshooting sections
+- Configuration examples
+- Command-line examples
 
 ---
 
-## 🎓 Learning Path
+## Learning Path
 
 ### Beginner Path (New to Project)
 
@@ -298,7 +297,7 @@ All files have:
 
 ---
 
-## 🚀 Using This Documentation
+## Using This Documentation
 
 ### Best Practices
 
@@ -324,7 +323,7 @@ All files have:
 
 ---
 
-## 📞 Getting Help
+## Getting Help
 
 **For Setup Issues**:
 
@@ -348,7 +347,7 @@ All files have:
 
 ---
 
-## 📝 Contributing to Documentation
+## Contributing to Documentation
 
 To update documentation:
 

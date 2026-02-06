@@ -1,16 +1,62 @@
-# Build & Deployment Workflows
+﻿# Build & Deployment Workflows
 
 Complete guide to building, testing, and deploying the java-resumes application (frontend and backend) to production.
 
-## 📋 Table of Contents
-
-1. [Quick Start](#quick-start)
-2. [Frontend Build Guide](#frontend-build-guide)
-3. [Backend Build Guide](#backend-build-guide)
-4. [Release & Version Management](#release--version-management)
-5. [Deployment Strategies](#deployment-strategies)
-6. [CI/CD Workflows](#cicd-workflows)
-7. [Troubleshooting](#troubleshooting)
+- [Build \& Deployment Workflows](#build--deployment-workflows)
+  - [Quick Start](#quick-start)
+    - [Prerequisites](#prerequisites)
+    - [Quick Build (All-in-One)](#quick-build-all-in-one)
+  - [Frontend Build Guide](#frontend-build-guide)
+    - [Overview](#overview)
+    - [Quick Start (Frontend Only)](#quick-start-frontend-only)
+    - [Detailed Build Process](#detailed-build-process)
+      - [Step 1: Prerequisites Check](#step-1-prerequisites-check)
+      - [Step 2: Install Dependencies](#step-2-install-dependencies)
+      - [Step 3: Run Tests](#step-3-run-tests)
+      - [Step 4: Production Build](#step-4-production-build)
+      - [Step 5: Verify Build](#step-5-verify-build)
+    - [Using Build Scripts](#using-build-scripts)
+    - [Configuration](#configuration)
+    - [Deployment](#deployment)
+  - [Backend Build Guide](#backend-build-guide)
+    - [Overview](#overview-1)
+    - [Quick Start (Backend Only)](#quick-start-backend-only)
+    - [Detailed Build Process](#detailed-build-process-1)
+      - [Step 1: Prerequisites Check](#step-1-prerequisites-check-1)
+      - [Step 2: Clean Previous Builds](#step-2-clean-previous-builds)
+      - [Step 3: Run Tests](#step-3-run-tests-1)
+      - [Step 4: Code Quality Checks](#step-4-code-quality-checks)
+      - [Step 5: Build Fat JAR](#step-5-build-fat-jar)
+      - [Step 6: Verify JAR](#step-6-verify-jar)
+    - [Using Build Scripts](#using-build-scripts-1)
+    - [Configuration](#configuration-1)
+    - [Deployment](#deployment-1)
+  - [Release \& Version Management](#release--version-management)
+    - [Overview](#overview-2)
+    - [Using Release Scripts](#using-release-scripts)
+    - [Manual Release Process](#manual-release-process)
+      - [Step 1: Update Versions](#step-1-update-versions)
+      - [Step 2: Commit Changes](#step-2-commit-changes)
+      - [Step 3: Create Tags](#step-3-create-tags)
+      - [Step 4: Push to GitHub](#step-4-push-to-github)
+      - [Step 5: Create GitHub Release](#step-5-create-github-release)
+  - [Deployment Strategies](#deployment-strategies)
+    - [Blue-Green Deployment](#blue-green-deployment)
+    - [Canary Deployment](#canary-deployment)
+    - [Zero-Downtime Deployment](#zero-downtime-deployment)
+  - [CI/CD Workflows](#cicd-workflows)
+    - [GitHub Actions Workflows](#github-actions-workflows)
+      - [Frontend Build Workflow](#frontend-build-workflow)
+      - [Backend Build Workflow](#backend-build-workflow)
+      - [Release Workflow](#release-workflow)
+  - [Troubleshooting](#troubleshooting)
+    - [Frontend Build Issues](#frontend-build-issues)
+    - [Backend Build Issues](#backend-build-issues)
+    - [General Issues](#general-issues)
+  - [Environment Variables Reference](#environment-variables-reference)
+    - [Frontend](#frontend)
+    - [Backend](#backend)
+  - [Support \& Resources](#support--resources)
 
 ---
 
@@ -150,12 +196,12 @@ Expected output structure:
 
 ```
 dist/
-├── index.html           # Entry point
-├── assets/
-│   ├── index-[hash].js  # Main bundle
-│   ├── react-[hash].js  # React vendor
-│   └── *.css            # Stylesheets
-└── favicon.ico
+ index.html           # Entry point
+ assets/
+    index-[hash].js  # Main bundle
+    react-[hash].js  # React vendor
+    *.css            # Stylesheets
+ favicon.ico
 ```
 
 ### Using Build Scripts
@@ -176,12 +222,12 @@ chmod +x scripts/build-frontend.sh
 
 The script:
 
-1. ✓ Verifies Node.js installation
-2. ✓ Installs dependencies
-3. ✓ Runs test suite
-4. ✓ Builds production bundle
-5. ✓ Verifies output
-6. ✓ Displays build summary
+1.  Verifies Node.js installation
+2.  Installs dependencies
+3.  Runs test suite
+4.  Builds production bundle
+5.  Verifies output
+6.  Displays build summary
 
 ### Configuration
 
@@ -351,13 +397,13 @@ chmod +x scripts/build-backend.sh
 
 The script:
 
-1. ✓ Verifies Java installation
-2. ✓ Cleans previous builds
-3. ✓ Runs all tests
-4. ✓ Checks code quality
-5. ✓ Builds fat JAR
-6. ✓ Verifies JAR creation
-7. ✓ Displays deployment instructions
+1.  Verifies Java installation
+2.  Cleans previous builds
+3.  Runs all tests
+4.  Checks code quality
+5.  Builds fat JAR
+6.  Verifies JAR creation
+7.  Displays deployment instructions
 
 ### Configuration
 

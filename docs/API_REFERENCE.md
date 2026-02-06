@@ -1,26 +1,60 @@
-# API Reference
+﻿# API Reference
 
 Complete REST API documentation for java-resumes application.
 
-## Table of Contents
-
-- [Base URL](#-base-url)
-- [Core Endpoints](#-core-endpoints)
-- [Upload & Optimize](#-upload--optimize)
-- [File Management](#-file-management)
-- [Response Formats](#-response-formats)
-- [Error Handling](#-error-handling)
-- [Examples](#-examples)
+- [API Reference](#api-reference)
+  - [ Base URL](#-base-url)
+  - [ Core Endpoints](#-core-endpoints)
+    - [File Management](#file-management)
+      - [List All Files](#list-all-files)
+      - [Download File](#download-file)
+      - [Delete File](#delete-file)
+    - [Document Processing](#document-processing)
+      - [Upload \& Optimize Resume/Cover Letter](#upload--optimize-resumecover-letter)
+      - [Convert Markdown to PDF](#convert-markdown-to-pdf)
+    - [Interview Preparation](#interview-preparation)
+      - [Generate HR Interview Questions](#generate-hr-interview-questions)
+      - [Generate Job-Specific Interview Questions](#generate-job-specific-interview-questions)
+      - [Generate Reverse Interview Questions](#generate-reverse-interview-questions)
+    - [Professional Networking](#professional-networking)
+      - [Generate Cold Email](#generate-cold-email)
+      - [Generate LinkedIn Message](#generate-linkedin-message)
+      - [Generate Thank You Email](#generate-thank-you-email)
+    - [System](#system)
+      - [Health Check](#health-check)
+  - [ Request Examples](#-request-examples)
+    - [Example 1: Simple Resume Optimization](#example-1-simple-resume-optimization)
+    - [Example 2: Resume + Cover Letter](#example-2-resume--cover-letter)
+    - [Example 3: List Files and Download](#example-3-list-files-and-download)
+    - [Example 4: Markdown to PDF](#example-4-markdown-to-pdf)
+  - [ API Workflow](#-api-workflow)
+    - [Typical Resume Optimization Workflow](#typical-resume-optimization-workflow)
+    - [File Management Workflow](#file-management-workflow)
+  - [ Parameters \& Configuration](#-parameters--configuration)
+    - [Optimization Parameters](#optimization-parameters)
+    - [File Size Limits](#file-size-limits)
+  - [ Error Handling](#-error-handling)
+    - [HTTP Status Codes](#http-status-codes)
+    - [Common Error Messages](#common-error-messages)
+  - [ Interactive API Documentation](#-interactive-api-documentation)
+    - [Swagger/OpenAPI](#swaggeropenapi)
+  - [ Authentication (Future)](#-authentication-future)
+  - [ Response Times](#-response-times)
+  - [ Best Practices](#-best-practices)
+    - [Rate Limiting](#rate-limiting)
+    - [Caching](#caching)
+    - [Error Handling](#error-handling)
+    - [Polling Strategy](#polling-strategy)
 
 ---
 
-## 📡 Base URL
+##  Base URL
 
-```
+```plaintext
 http://localhost:8080
 ```
 
-## 🔗 Core Endpoints
+##  Core Endpoints
 
 ### File Management
 
@@ -335,7 +369,7 @@ curl -X POST http://localhost:8080/api/markdownFile2PDF \
 
 ---
 
-### Interview Preparation _(New)_
+### Interview Preparation
 
 #### Generate HR Interview Questions
 
@@ -469,7 +503,7 @@ curl -X POST http://localhost:8080/api/generate/interview-reverse \
 
 ---
 
-### Professional Networking _(New)_
+### Professional Networking
 
 #### Generate Cold Email
 
@@ -643,7 +677,7 @@ curl http://localhost:8080/api/health
 
 ---
 
-## 📝 Request Examples
+##  Request Examples
 
 ### Example 1: Simple Resume Optimization
 
@@ -700,7 +734,7 @@ curl -X POST http://localhost:8080/api/markdownFile2PDF \
 
 ---
 
-## 🔄 API Workflow
+##  API Workflow
 
 ### Typical Resume Optimization Workflow
 
@@ -716,7 +750,7 @@ graph TD
     G -->|No| I["7. Wait and poll again"]
     I -->|After 2-5s| F
     H --> J["8. User downloads file"]
-    J -->|GET /api/files/{filename}| K["Receive binary file"]
+    J -->|"GET /api/files/{filename}"| K["Receive binary file"]
 ```
 
 ### File Management Workflow
@@ -734,7 +768,7 @@ graph TD
 
 ---
 
-## ⚙️ Parameters & Configuration
+##  Parameters & Configuration
 
 ### Optimization Parameters
 
@@ -756,7 +790,7 @@ graph TD
 
 ---
 
-## ❌ Error Handling
+##  Error Handling
 
 ### HTTP Status Codes
 
@@ -792,7 +826,7 @@ graph TD
 
 ---
 
-## 📚 Interactive API Documentation
+##  Interactive API Documentation
 
 ### Swagger/OpenAPI
 
@@ -811,7 +845,7 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
-## 🔐 Authentication (Future)
+##  Authentication (Future)
 
 **Note:** Current version has no authentication. Production deployment should add:
 
@@ -822,7 +856,7 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
-## 📊 Response Times
+##  Response Times
 
 Typical response times (with Ollama local LLM):
 
@@ -838,7 +872,7 @@ Typical response times (with Ollama local LLM):
 
 ---
 
-## 💡 Best Practices
+##  Best Practices
 
 ### Rate Limiting
 
@@ -881,11 +915,6 @@ Typical response times (with Ollama local LLM):
 - [Quick Start](QUICK_START.md) - API usage examples
 - [Architecture](ARCHITECTURE.md) - Backend architecture
 - [Testing](TESTING.md) - API testing guide
-
----
-
-**Last Updated:** February 2, 2026
-**Maintained By:** java-resumes development team
 
 ---
 

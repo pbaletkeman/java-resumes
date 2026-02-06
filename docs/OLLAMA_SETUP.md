@@ -1,17 +1,49 @@
-# Ollama LLM Service Setup Guide
+﻿# Ollama LLM Service Setup Guide
 
 This guide explains how to set up and use the Ollama LLM service for the Java-Resumes project, both locally and in GitHub Actions CI/CD environments.
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Quick Start](#quick-start)
-- [Model Options](#model-options)
-- [Local Development Setup](#local-development-setup)
-- [Docker Compose Setup](#docker-compose-setup)
-- [GitHub Actions Integration](#github-actions-integration)
-- [Configuration](#configuration)
-- [Troubleshooting](#troubleshooting)
+- [Ollama LLM Service Setup Guide](#ollama-llm-service-setup-guide)
+  - [Overview](#overview)
+  - [Quick Start](#quick-start)
+    - [Option 1: Automated Setup Script (Recommended)](#option-1-automated-setup-script-recommended)
+    - [Option 2: Manual Setup](#option-2-manual-setup)
+    - [Option 3: Docker Compose (All-in-One)](#option-3-docker-compose-all-in-one)
+  - [Model Options](#model-options)
+    - [Switching Models](#switching-models)
+  - [Local Development Setup](#local-development-setup)
+    - [Prerequisites](#prerequisites)
+    - [Installation Steps](#installation-steps)
+      - [macOS](#macos)
+      - [Linux](#linux)
+      - [Windows (WSL2)](#windows-wsl2)
+    - [Verify Installation](#verify-installation)
+  - [Docker Compose Setup](#docker-compose-setup)
+    - [Start Services](#start-services)
+    - [Initialize Ollama in Container](#initialize-ollama-in-container)
+    - [Environment Variables](#environment-variables)
+    - [GPU Support (Optional)](#gpu-support-optional)
+  - [GitHub Actions Integration](#github-actions-integration)
+    - [Workflow Features](#workflow-features)
+    - [Manual Workflow Trigger](#manual-workflow-trigger)
+    - [Workflow Inputs](#workflow-inputs)
+    - [CI/CD Best Practices](#cicd-best-practices)
+  - [Configuration](#configuration)
+    - [config.json](#configjson)
+    - [application.yml (Backend)](#applicationyml-backend)
+  - [Troubleshooting](#troubleshooting)
+    - [Issue: Ollama service not starting](#issue-ollama-service-not-starting)
+    - [Issue: Model not found](#issue-model-not-found)
+    - [Issue: Out of memory during model load](#issue-out-of-memory-during-model-load)
+    - [Issue: Slow inference performance](#issue-slow-inference-performance)
+    - [Issue: Docker container cannot connect to host Ollama](#issue-docker-container-cannot-connect-to-host-ollama)
+    - [Issue: GitHub Actions workflow fails](#issue-github-actions-workflow-fails)
+  - [Performance Tips](#performance-tips)
+    - [1. Model Selection](#1-model-selection)
+    - [2. System Optimization](#2-system-optimization)
+    - [3. Batch Processing](#3-batch-processing)
+    - [4. Model Preloading](#4-model-preloading)
+  - [Additional Resources](#additional-resources)
+  - [Quick Command Reference](#quick-command-reference)
 
 ---
 
@@ -77,13 +109,13 @@ docker exec resume-ollama ollama list
 
 Choose a model based on your system resources and performance requirements:
 
-| Model | Size | Parameters | Speed | Quality | Recommended For |
-|-------|------|-----------|-------|---------|-----------------|
-| **qwen2.5:0.5b** | ~400MB | 0.5B | ⚡⚡⚡⚡⚡ | ⭐⭐ | CI/CD, Very limited resources |
-| **tinyllama** | ~800MB | 1.1B | ⚡⚡⚡⚡ | ⭐⭐⭐ | **Default**, Fast testing |
-| **gemma2:2b** | ~1.6GB | 2B | ⚡⚡⚡ | ⭐⭐⭐⭐ | Balanced, Good quality |
-| **phi3:mini** | ~2.3GB | 3.8B | ⚡⚡ | ⭐⭐⭐⭐⭐ | Best quality for small model |
-| **mistral** | ~4.1GB | 7B | ⚡ | ⭐⭐⭐⭐⭐ | Production, High quality |
+| Model            | Size   | Parameters | Speed | Quality | Recommended For               |
+| ---------------- | ------ | ---------- | ----- | ------- | ----------------------------- |
+| **qwen2.5:0.5b** | ~400MB | 0.5B       |       |         | CI/CD, Very limited resources |
+| **tinyllama**    | ~800MB | 1.1B       |       |         | **Default**, Fast testing     |
+| **gemma2:2b**    | ~1.6GB | 2B         |       |         | Balanced, Good quality        |
+| **phi3:mini**    | ~2.3GB | 3.8B       |       |         | Best quality for small model  |
+| **mistral**      | ~4.1GB | 7B         |       |         | Production, High quality      |
 
 ### Switching Models
 
@@ -231,11 +263,11 @@ The project includes a GitHub Actions workflow (`.github/workflows/ollama-servic
 
 ### Workflow Features
 
-- ✅ Installs Ollama on GitHub-hosted runners
-- ✅ Pulls specified model (default: tinyllama)
-- ✅ Tests model inference
-- ✅ Runs integration tests with backend
-- ✅ Supports model selection via workflow dispatch
+- Installs Ollama on GitHub-hosted runners
+- Pulls specified model (default: tinyllama)
+- Tests model inference
+- Runs integration tests with backend
+- Supports model selection via workflow dispatch
 
 ### Manual Workflow Trigger
 
@@ -282,6 +314,7 @@ Primary configuration file for LLM settings:
 ```
 
 **Fields:**
+
 - `endpoint`: Ollama API endpoint (OpenAI-compatible format)
 - `apikey`: API key (not required for local Ollama, but field must exist)
 - `model`: Model name to use for inference
@@ -297,6 +330,7 @@ llm:
 ```
 
 Can be overridden with environment variables:
+
 ```bash
 export LLM_ENDPOINT=http://localhost:11434/v1/chat/completions
 export LLM_APIKEY=ollama
@@ -311,6 +345,7 @@ export LLM_APIKEY=ollama
 **Symptoms:** `curl: (7) Failed to connect to localhost port 11434`
 
 **Solutions:**
+
 ```bash
 # Check if service is running
 ps aux | grep ollama
@@ -333,6 +368,7 @@ curl http://localhost:11434/api/version
 **Symptoms:** `Error: model "tinyllama" not found`
 
 **Solutions:**
+
 ```bash
 # List installed models
 ollama list
@@ -349,7 +385,9 @@ ollama list
 **Symptoms:** Process crashes or system becomes unresponsive
 
 **Solutions:**
+
 1. Use a smaller model:
+
    ```bash
    ollama pull qwen2.5:0.5b
    ```
@@ -365,6 +403,7 @@ ollama list
 ### Issue: Slow inference performance
 
 **Solutions:**
+
 1. Use a smaller model (tinyllama, qwen2.5:0.5b)
 2. Enable GPU acceleration (if available)
 3. Reduce concurrent requests
@@ -377,12 +416,14 @@ ollama list
 **Solutions:**
 
 **Option 1:** Use Docker's Ollama service (recommended)
+
 ```bash
 # Use ollama service in docker-compose.yml
 docker-compose up -d ollama
 ```
 
 **Option 2:** Use host.docker.internal
+
 ```yaml
 # In docker-compose.yml
 environment:
@@ -390,6 +431,7 @@ environment:
 ```
 
 **Option 3:** Use host network mode (Linux only)
+
 ```yaml
 # In docker-compose.yml
 network_mode: "host"
@@ -398,11 +440,13 @@ network_mode: "host"
 ### Issue: GitHub Actions workflow fails
 
 **Common causes:**
+
 1. **Disk space:** Free up space before model pull
 2. **Timeout:** Increase timeout for large models
 3. **Network:** Retry on transient network errors
 
 **Debug:**
+
 ```bash
 # Check workflow logs in GitHub Actions tab
 # Look for specific error messages
@@ -414,11 +458,13 @@ network_mode: "host"
 ## Performance Tips
 
 ### 1. Model Selection
+
 - **Development/Testing:** Use `tinyllama` (fast, small)
 - **CI/CD:** Use `qwen2.5:0.5b` (fastest, smallest)
 - **Production:** Use `phi3:mini` or `mistral` (best quality)
 
 ### 2. System Optimization
+
 ```bash
 # Linux: Increase file descriptor limits
 ulimit -n 4096
@@ -428,10 +474,13 @@ ollama ps  # Show running models
 ```
 
 ### 3. Batch Processing
+
 Process multiple requests in batches to optimize model loading time.
 
 ### 4. Model Preloading
+
 Keep Ollama service running to avoid cold start delays:
+
 ```bash
 # Keep service running
 ollama serve &
@@ -480,11 +529,6 @@ docker exec resume-ollama ollama pull tinyllama
 ./scripts/setup-ollama.sh
 ./scripts/setup-ollama.sh phi3:mini
 ```
-
----
-
-**Last Updated:** January 2026
-**Maintained By:** Java-Resumes Development Team
 
 ---
 

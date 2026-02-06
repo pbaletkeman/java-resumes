@@ -1,4 +1,4 @@
-# Prompt Configuration Guide
+﻿# Prompt Configuration Guide
 
 ---
 
@@ -25,9 +25,9 @@ This document explains how to configure and manage prompts in the java-resumes a
 
 The application uses a **hybrid prompt loading system** that:
 
-✅ **Loads bundled prompts** from `src/main/resources/prompts/` by default (no recompilation needed after updates)
-✅ **Allows external overrides** by setting the `PROMPTS_DIR` environment variable
-✅ **Falls back gracefully** if external files don't exist
+ **Loads bundled prompts** from `src/main/resources/prompts/` by default (no recompilation needed after updates)
+ **Allows external overrides** by setting the `PROMPTS_DIR` environment variable
+ **Falls back gracefully** if external files don't exist
 
 ## Default Behavior (Bundled Prompts)
 
@@ -120,7 +120,7 @@ docker run -it \
 
 1. Create a `prompts/` directory with `RESUME.md` and `COVER.md`
 2. Set `PROMPTS_DIR` to point to this directory
-3. Update prompt files anytime—**no recompilation needed**
+3. Update prompt files anytime**no recompilation needed**
 4. Restart the application for changes to take effect
 
 ## Prompt File Format
@@ -173,16 +173,16 @@ These placeholders are replaced at runtime with actual values:
 
 ```
 prompts/
-├── RESUME.md                   # Resume optimization prompt
-├── COVER.md                    # Cover letter generation prompt
-├── SKILLS.md                   # Skills, certifications, and experiences
-├── COLD-EMAIL.md               # Cold outreach email prompt
-├── COLD-LINKEDIN-MESSAGE.md    # LinkedIn outreach prompt
-├── INTERVIEW-HR-QUESTIONS.md   # General HR interview questions
-├── INTERVIEW-JOB-SPECIFIC.md   # Job-specific interview questions
-├── INTERVIEW-REVERSE.md        # Reverse interview questions
-├── THANK-YOU-EMAIL.md          # Post-interview thank you email
-└── README.md                   # Prompts documentation
+ RESUME.md                   # Resume optimization prompt
+ COVER.md                    # Cover letter generation prompt
+ SKILLS.md                   # Skills, certifications, and experiences
+ COLD-EMAIL.md               # Cold outreach email prompt
+ COLD-LINKEDIN-MESSAGE.md    # LinkedIn outreach prompt
+ INTERVIEW-HR-QUESTIONS.md   # General HR interview questions
+ INTERVIEW-JOB-SPECIFIC.md   # Job-specific interview questions
+ INTERVIEW-REVERSE.md        # Reverse interview questions
+ THANK-YOU-EMAIL.md          # Post-interview thank you email
+ README.md                   # Prompts documentation
 ```
 
 All prompt files should be in the same directory (either bundled or external).

@@ -1,15 +1,55 @@
-# Configuration Guide
+﻿# Configuration Guide
 
 Learn how to configure Java Resumes for different environments and customize external paths.
 
-## Table of Contents
-
-- [Overview](#overview)
-- [LLM Configuration](#llm-configuration-configjson)
-- [Application Settings](#application-settings)
-- [Environment Variables](#environment-variables)
-- [Production Configuration](#production-configuration)
-- [Troubleshooting](#troubleshooting)
+- [Configuration Guide](#configuration-guide)
+  - [Overview](#overview)
+  - [LLM Configuration (config.json)](#llm-configuration-configjson)
+    - [File Location](#file-location)
+    - [Configuration Structure](#configuration-structure)
+    - [Configuration Parameters](#configuration-parameters)
+    - [LLM Service Examples](#llm-service-examples)
+      - [Ollama (Local)](#ollama-local)
+      - [LM Studio (Local)](#lm-studio-local)
+      - [OpenAI (Cloud)](#openai-cloud)
+      - [Azure OpenAI](#azure-openai)
+  - [External Configuration Path](#external-configuration-path)
+    - [Setting External Config Location](#setting-external-config-location)
+      - [Option 1: System Property](#option-1-system-property)
+      - [Option 2: Environment Variable](#option-2-environment-variable)
+      - [Option 3: Docker Compose](#option-3-docker-compose)
+    - [How External Config Works](#how-external-config-works)
+    - [Production Deployment Example](#production-deployment-example)
+  - [External Prompts Directory](#external-prompts-directory)
+    - [Setting Custom Prompts](#setting-custom-prompts)
+      - [In application.yml](#in-applicationyml)
+      - [Via Environment Variable](#via-environment-variable)
+      - [In docker-compose.yml](#in-docker-composeyml)
+    - [Prompt Files](#prompt-files)
+    - [Prompt Loading Behavior](#prompt-loading-behavior)
+    - [Customizing Prompts](#customizing-prompts)
+  - [Spring Boot Configuration (application.yml)](#spring-boot-configuration-applicationyml)
+    - [File Location](#file-location-1)
+    - [Common Settings](#common-settings)
+    - [Spring Profiles](#spring-profiles)
+  - [Environment Variables](#environment-variables)
+    - [Complete List](#complete-list)
+    - [Setting Environment Variables](#setting-environment-variables)
+      - [Linux/Mac](#linuxmac)
+      - [Windows (PowerShell)](#windows-powershell)
+      - [Windows (Command Prompt)](#windows-command-prompt)
+  - [Docker Configuration](#docker-configuration)
+    - [docker-compose.yml with External Config](#docker-composeyml-with-external-config)
+    - [.env File for Docker Compose](#env-file-for-docker-compose)
+  - [Configuration Priority](#configuration-priority)
+  - [Troubleshooting Configuration](#troubleshooting-configuration)
+    - ["Could not load config"](#could-not-load-config)
+    - ["Cannot connect to LLM"](#cannot-connect-to-llm)
+    - ["Prompts not loading"](#prompts-not-loading)
+    - [Config Changes Not Applied](#config-changes-not-applied)
+  - [Best Practices](#best-practices)
+    - [Development](#development)
+    - [Production](#production)
 
 ---
 
@@ -140,9 +180,9 @@ backend:
 ```bash
 # Directory structure
 /opt/java-resumes/
-├── config.json           # External config file
-├── prompts/              # External prompts directory
-└── files/                # File storage directory
+ config.json           # External config file
+ prompts/              # External prompts directory
+ files/                # File storage directory
 
 # Start with external paths
 java -jar app.jar \
@@ -185,10 +225,10 @@ Required prompt files in external directory:
 
 ```
 /opt/java-resumes/prompts/
-├── RESUME.md           # Resume optimization prompt
-├── COVER.md            # Cover letter generation prompt
-├── SKILLS.md           # Skills analysis prompt
-└── README.md           # Prompt documentation
+ RESUME.md           # Resume optimization prompt
+ COVER.md            # Cover letter generation prompt
+ SKILLS.md           # Skills analysis prompt
+ README.md           # Prompt documentation
 ```
 
 ### Prompt Loading Behavior
@@ -456,22 +496,17 @@ Error: Could not read file: config.json
 
 ### Production
 
-- ✅ Use external `CONFIG_PATH` for config management
-- ✅ Use external `PROMPTS_DIR` for prompt customization
-- ✅ Set `SPRING_PROFILES_ACTIVE=prod`
-- ✅ Use environment variables for sensitive data (API keys)
-- ✅ Mount volumes read-only where possible
-- ✅ Use secrets management for API keys
-- ✅ Keep configuration separate from deployment
+- Use external `CONFIG_PATH` for config management
+- Use external `PROMPTS_DIR` for prompt customization
+- Set `SPRING_PROFILES_ACTIVE=prod`
+- Use environment variables for sensitive data (API keys)
+- Mount volumes read-only where possible
+- Use secrets management for API keys
+- Keep configuration separate from deployment
 
 ---
 
 See also: [ENVIRONMENT_VARIABLES.md](ENVIRONMENT_VARIABLES.md) for complete reference
-
----
-
-**Last Updated:** February 2, 2026
-**Maintained By:** java-resumes development team
 
 ---
 

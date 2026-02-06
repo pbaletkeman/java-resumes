@@ -1,20 +1,56 @@
-# Development Setup
+﻿# Development Setup
 
 Complete guide for setting up the development environment for java-resumes.
 
-## Table of Contents
-
-- [Prerequisites](#-prerequisites)
-- [Backend Setup](#-backend-setup)
-- [Frontend Setup](#-frontend-setup)
-- [Docker Setup](#-docker-setup)
-- [IDE Configuration](#-ide-configuration)
-- [Verification](#-verification)
-- [Troubleshooting](#-troubleshooting)
+- [Development Setup](#development-setup)
+  - [Prerequisites](#prerequisites)
+    - [System Requirements](#system-requirements)
+    - [For Backend Development](#for-backend-development)
+    - [For Frontend Development](#for-frontend-development)
+    - [For Full Stack Development](#for-full-stack-development)
+  - [Backend Setup](#backend-setup)
+    - [Step 1: Clone Repository](#step-1-clone-repository)
+    - [Step 2: Verify Java Installation](#step-2-verify-java-installation)
+    - [Step 3: Configure Gradle](#step-3-configure-gradle)
+    - [Step 4: Configure LLM Service](#step-4-configure-llm-service)
+    - [Step 5: Build Backend](#step-5-build-backend)
+    - [Step 6: Run Backend](#step-6-run-backend)
+    - [Backend Development Commands](#backend-development-commands)
+  - [Frontend Setup](#frontend-setup)
+    - [Step 1: Navigate to Frontend Directory](#step-1-navigate-to-frontend-directory)
+    - [Step 2: Verify Node/npm Installation](#step-2-verify-nodenpm-installation)
+    - [Step 3: Install Dependencies](#step-3-install-dependencies)
+    - [Step 4: Configure Environment](#step-4-configure-environment)
+    - [Step 5: Start Development Server](#step-5-start-development-server)
+    - [Frontend Development Commands](#frontend-development-commands)
+  - [Full Stack Development with Docker](#full-stack-development-with-docker)
+    - [Quick Start (Docker Compose)](#quick-start-docker-compose)
+    - [Individual Container Commands](#individual-container-commands)
+  - [Development Workflow](#development-workflow)
+    - [Local Backend + Local Frontend](#local-backend--local-frontend)
+    - [Debugging Backend](#debugging-backend)
+    - [Debugging Frontend](#debugging-frontend)
+  - [Project Structure for Development](#project-structure-for-development)
+  - [Testing During Development](#testing-during-development)
+    - [Backend Tests](#backend-tests)
+    - [Frontend Tests](#frontend-tests)
+    - [Integration Testing](#integration-testing)
+  - [Environment Variables](#environment-variables)
+    - [Backend Environment Variables](#backend-environment-variables)
+    - [Frontend Environment Variables](#frontend-environment-variables)
+  - [IDE Configuration](#ide-configuration)
+    - [IntelliJ IDEA Setup](#intellij-idea-setup)
+    - [VS Code Setup](#vs-code-setup)
+  - [Common Development Issues](#common-development-issues)
+    - [Issue: Java 21 Not Found](#issue-java-21-not-found)
+    - [Issue: Port Already in Use](#issue-port-already-in-use)
+    - [Issue: LLM Service Connection Failed](#issue-llm-service-connection-failed)
+    - [Issue: npm install Fails](#issue-npm-install-fails)
+  - [Additional Resources](#additional-resources)
 
 ---
 
-## 📋 Prerequisites
+## Prerequisites
 
 ### System Requirements
 
@@ -68,7 +104,7 @@ Complete guide for setting up the development environment for java-resumes.
 
 ---
 
-## 🔧 Backend Setup
+## Backend Setup
 
 ### Step 1: Clone Repository
 
@@ -204,7 +240,7 @@ Create `config.json` in project root:
 
 ---
 
-## 🎨 Frontend Setup
+## Frontend Setup
 
 ### Step 1: Navigate to Frontend Directory
 
@@ -256,8 +292,8 @@ npm run dev
 ```
 VITE v7.2.4  ready in xxx ms
 
-➜  Local:   http://localhost:3000/
-➜  press h + enter to show help
+  Local:   http://localhost:3000/
+  press h + enter to show help
 ```
 
 ### Frontend Development Commands
@@ -297,7 +333,7 @@ npm run build --watch
 
 ---
 
-## 🐳 Full Stack Development with Docker
+## Full Stack Development with Docker
 
 ### Quick Start (Docker Compose)
 
@@ -340,7 +376,7 @@ docker compose ps
 
 ---
 
-## 🔄 Development Workflow
+## Development Workflow
 
 ### Local Backend + Local Frontend
 
@@ -400,42 +436,42 @@ npm run dev
 
 ---
 
-## 📝 Project Structure for Development
+## Project Structure for Development
 
 ```
 java-resumes/
-├── src/main/java/              # Backend source code
-│   └── ca/letkeman/resumes/
-│       ├── controller/         # REST endpoints
-│       ├── service/            # Business logic
-│       ├── model/              # Data models
-│       ├── optimizer/          # LLM integration
-│       └── RestServiceApplication.java
-│
-├── src/test/java/              # Backend tests
-│   └── ca/letkeman/resumes/
-│
-├── frontend/                   # Frontend React app
-│   ├── src/
-│   │   ├── components/         # React components
-│   │   ├── hooks/              # Custom hooks
-│   │   ├── services/           # API services
-│   │   ├── App.tsx             # Root component
-│   │   └── main.tsx            # Entry point
-│   ├── tests/                  # Frontend tests
-│   ├── package.json            # Dependencies
-│   └── vite.config.ts          # Vite config
-│
-├── build.gradle                # Backend build config
-├── settings.gradle
-├── docker-compose.yml          # Docker config
-├── config.json                 # LLM config
-└── README.md
+ src/main/java/              # Backend source code
+    ca/letkeman/resumes/
+        controller/         # REST endpoints
+        service/            # Business logic
+        model/              # Data models
+        optimizer/          # LLM integration
+        RestServiceApplication.java
+
+ src/test/java/              # Backend tests
+    ca/letkeman/resumes/
+
+ frontend/                   # Frontend React app
+    src/
+       components/         # React components
+       hooks/              # Custom hooks
+       services/           # API services
+       App.tsx             # Root component
+       main.tsx            # Entry point
+    tests/                  # Frontend tests
+    package.json            # Dependencies
+    vite.config.ts          # Vite config
+
+ build.gradle                # Backend build config
+ settings.gradle
+ docker-compose.yml          # Docker config
+ config.json                 # LLM config
+ README.md
 ```
 
 ---
 
-## 🧪 Testing During Development
+## Testing During Development
 
 ### Backend Tests
 
@@ -488,7 +524,7 @@ npm run test:integration
 
 ---
 
-## 🔐 Environment Variables
+## Environment Variables
 
 ### Backend Environment Variables
 
@@ -533,24 +569,24 @@ VITE_CONFIG_PATH=/path/to/config
 
 ---
 
-## 🚀 IDE Configuration
+## IDE Configuration
 
 ### IntelliJ IDEA Setup
 
 1. **Open Project:**
-   - File → Open → Select project root
+   - File Open Select project root
 
 2. **Configure JDK:**
-   - Project Structure → Project → Set SDK to JDK 21
+   - Project Structure Project Set SDK to JDK 21
 
 3. **Configure Run Configuration:**
-   - Run → Edit Configurations
+   - Run Edit Configurations
    - Create new Spring Boot application
    - Main class: `ca.letkeman.resumes.RestServiceApplication`
    - VM options: `-Xmx512m -Dapp.config.path=./`
 
 4. **Install Plugins:**
-   - Settings → Plugins → Search → Install:
+   - Settings Plugins Search Install:
      - Checkstyle-IDEA
      - Gradle
      - Spring Boot
@@ -581,7 +617,7 @@ TestRunner for Java
 
 ---
 
-## 🐛 Common Development Issues
+## Common Development Issues
 
 ### Issue: Java 21 Not Found
 
@@ -642,7 +678,7 @@ npm install
 
 ---
 
-## 📚 Additional Resources
+## Additional Resources
 
 - [Spring Boot Documentation](https://spring.io/projects/spring-boot)
 - [React Documentation](https://react.dev/)
@@ -659,11 +695,6 @@ npm install
 - [Architecture](ARCHITECTURE.md) - System design overview
 - [Testing](TESTING.md) - Comprehensive testing guide
 - [Production Deployment](PRODUCTION_DEPLOYMENT.md) - Production setup
-
----
-
-**Last Updated:** February 2, 2026
-**Maintained By:** java-resumes development team
 
 ---
 

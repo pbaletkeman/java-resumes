@@ -1,18 +1,52 @@
-# Code Quality Standards
+﻿# Code Quality Standards
 
 Comprehensive guide for maintaining code quality in java-resumes.
 
-## Table of Contents
-
-- [Quality Metrics](#-quality-metrics)
-- [Java Code Quality](#-java-code-quality)
-- [Frontend Code Quality](#-frontend-code-quality)
-- [Testing Requirements](#-testing-requirements)
-- [Best Practices](#-best-practices)
+- [Code Quality Standards](#code-quality-standards)
+  - [Quality Metrics](#quality-metrics)
+    - [Coverage Targets](#coverage-targets)
+  - [Java Code Quality](#java-code-quality)
+    - [Checkstyle Configuration](#checkstyle-configuration)
+    - [Running Checkstyle](#running-checkstyle)
+    - [Java Style Guide](#java-style-guide)
+      - [Naming Conventions](#naming-conventions)
+      - [Code Structure](#code-structure)
+      - [Formatting Rules](#formatting-rules)
+      - [Comments \& Documentation](#comments--documentation)
+  - [TypeScript/React Code Quality](#typescriptreact-code-quality)
+    - [ESLint Configuration](#eslint-configuration)
+    - [Running ESLint](#running-eslint)
+    - [TypeScript Strict Mode](#typescript-strict-mode)
+    - [React Best Practices](#react-best-practices)
+      - [Component Structure](#component-structure)
+      - [Naming Conventions](#naming-conventions-1)
+      - [Code Organization](#code-organization)
+  - [Testing Standards](#testing-standards)
+    - [Coverage Requirements](#coverage-requirements)
+    - [Test Structure](#test-structure)
+  - [Architecture Guidelines](#architecture-guidelines)
+    - [Layered Architecture](#layered-architecture)
+    - [Dependency Injection](#dependency-injection)
+  - [Security Best Practices](#security-best-practices)
+    - [Input Validation](#input-validation)
+    - [Error Handling](#error-handling)
+    - [SQL Injection Prevention](#sql-injection-prevention)
+  - [Documentation Standards](#documentation-standards)
+    - [Code Comments](#code-comments)
+    - [Javadoc Standards](#javadoc-standards)
+    - [README \& Markdown](#readme--markdown)
+  - [Review Checklist](#review-checklist)
+    - [Code Review Standards](#code-review-standards)
+  - [Continuous Quality](#continuous-quality)
+    - [Pre-commit Hook (Future)](#pre-commit-hook-future)
+    - [GitHub Actions (Future)](#github-actions-future)
+  - [Refactoring Guidelines](#refactoring-guidelines)
+    - [When to Refactor](#when-to-refactor)
+    - [Refactoring Process](#refactoring-process)
 
 ---
 
-## 📊 Quality Metrics
+## Quality Metrics
 
 ### Coverage Targets
 
@@ -26,7 +60,7 @@ Comprehensive guide for maintaining code quality in java-resumes.
 
 ---
 
-## ☕ Java Code Quality
+## Java Code Quality
 
 ### Checkstyle Configuration
 
@@ -140,16 +174,16 @@ public class ResumeController {
 
 **When to Comment:**
 
-- ✅ Complex business logic
-- ✅ Workarounds and hacks
-- ✅ Non-obvious algorithm decisions
-- ✅ Public API contracts
+- Complex business logic
+- Workarounds and hacks
+- Non-obvious algorithm decisions
+- Public API contracts
 
 **When NOT to Comment:**
 
-- ❌ Obvious operations (counter++, getter)
-- ❌ Repeating what code says
-- ❌ Outdated comments
+- Obvious operations (counter++, getter)
+- Repeating what code says
+- Outdated comments
 
 **Example:**
 
@@ -165,7 +199,7 @@ counter++;
 
 ---
 
-## 🎨 TypeScript/React Code Quality
+## TypeScript/React Code Quality
 
 ### ESLint Configuration
 
@@ -290,7 +324,7 @@ export default MyComponent;
 
 ---
 
-## 🧪 Testing Standards
+## Testing Standards
 
 ### Coverage Requirements
 
@@ -338,20 +372,20 @@ describe("MainTab", () => {
 
 ---
 
-## 📐 Architecture Guidelines
+## Architecture Guidelines
 
 ### Layered Architecture
 
 ```
-┌─────────────────────┐
-│  Presentation Layer │  (Controllers, UI Components)
-├─────────────────────┤
-│   Business Logic    │  (Services, Hooks, Utils)
-├─────────────────────┤
-│  Data Access Layer  │  (Repositories, API Calls)
-├─────────────────────┤
-│   External Services │  (LLM, File Storage)
-└─────────────────────┘
+
+  Presentation Layer   (Controllers, UI Components)
+
+   Business Logic      (Services, Hooks, Utils)
+
+  Data Access Layer    (Repositories, API Calls)
+
+   External Services   (LLM, File Storage)
+
 ```
 
 ### Dependency Injection
@@ -391,7 +425,7 @@ export const useApi = () => {
 
 ---
 
-## 🔐 Security Best Practices
+## Security Best Practices
 
 ### Input Validation
 
@@ -446,7 +480,7 @@ stmt.setInt(1, userId);
 
 ---
 
-## 📝 Documentation Standards
+## Documentation Standards
 
 ### Code Comments
 
@@ -495,7 +529,7 @@ public ResponseEntity<ResponseMessage> processResume(Optimize optimize)
 
 ---
 
-## 🔄 Review Checklist
+## Review Checklist
 
 ### Code Review Standards
 
@@ -527,7 +561,7 @@ public ResponseEntity<ResponseMessage> processResume(Optimize optimize)
 
 ---
 
-## 🚀 Continuous Quality
+## Continuous Quality
 
 ### Pre-commit Hook (Future)
 
@@ -545,30 +579,30 @@ npm run test || exit 1
 # Run build
 ./gradlew build || exit 1
 
-echo "✓ All quality checks passed"
+echo " All quality checks passed"
 ```
 
 ### GitHub Actions (Future)
 
 Automated quality checks on every push:
 
-- ✅ Build verification
-- ✅ Test execution
-- ✅ Coverage reporting
-- ✅ Code quality scanning
-- ✅ Security analysis
+- Build verification
+- Test execution
+- Coverage reporting
+- Code quality scanning
+- Security analysis
 
 ---
 
-## 📈 Refactoring Guidelines
+## Refactoring Guidelines
 
 ### When to Refactor
 
-- ✅ Code is duplicated (DRY principle)
-- ✅ Methods are too long (>20 lines)
-- ✅ Complex conditional logic
-- ✅ Low test coverage
-- ✅ High complexity (cyclomatic complexity >10)
+- Code is duplicated (DRY principle)
+- Methods are too long (>20 lines)
+- Complex conditional logic
+- Low test coverage
+- High complexity (cyclomatic complexity >10)
 
 ### Refactoring Process
 
@@ -585,11 +619,6 @@ Automated quality checks on every push:
 - [Testing](TESTING.md) - Testing strategies
 - [Development Setup](DEVELOPMENT_SETUP.md) - Environment setup
 - [Architecture](ARCHITECTURE.md) - Design patterns
-
----
-
-**Last Updated:** February 2, 2026
-**Maintained By:** java-resumes development team
 
 ---
 

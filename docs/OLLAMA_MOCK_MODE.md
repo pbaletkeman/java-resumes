@@ -1,14 +1,40 @@
-# Ollama Mock Mode Documentation
+﻿# Ollama Mock Mode Documentation
 
-## Table of Contents
-
-- [Overview](#overview)
-- [How It Works](#how-it-works)
-- [Configuration](#configuration)
-- [Mock Response Types](#mock-response-types)
-- [Example Usage](#example-usage)
-- [Testing with Mock Mode](#testing-with-mock-mode)
-- [Troubleshooting](#troubleshooting)
+- [Ollama Mock Mode Documentation](#ollama-mock-mode-documentation)
+  - [Overview](#overview)
+  - [How It Works](#how-it-works)
+    - [Architecture](#architecture)
+  - [Configuration](#configuration)
+    - [Enable Mock Mode](#enable-mock-mode)
+    - [Environment Variable](#environment-variable)
+    - [Configuration Profiles](#configuration-profiles)
+  - [Mock Response Types](#mock-response-types)
+  - [Example Usage](#example-usage)
+    - [Java Code](#java-code)
+    - [Testing](#testing)
+  - [Mock Response Format](#mock-response-format)
+  - [Benefits](#benefits)
+    - [1. No External Dependencies](#1-no-external-dependencies)
+    - [2. Fast Execution](#2-fast-execution)
+    - [3. Predictable Testing](#3-predictable-testing)
+    - [4. Cost Reduction](#4-cost-reduction)
+  - [Limitations](#limitations)
+    - [Mock Content Quality](#mock-content-quality)
+    - [No Real Intelligence](#no-real-intelligence)
+    - [Testing Scope](#testing-scope)
+  - [Best Practices](#best-practices)
+    - [1. Use Mocks for Unit Tests](#1-use-mocks-for-unit-tests)
+    - [2. Use Real LLM for Integration Tests](#2-use-real-llm-for-integration-tests)
+    - [3. Default to Disabled in Production](#3-default-to-disabled-in-production)
+    - [4. Environment-Specific Configuration](#4-environment-specific-configuration)
+  - [Troubleshooting](#troubleshooting)
+    - [Mock Mode Not Working](#mock-mode-not-working)
+    - [Still Making Network Calls](#still-making-network-calls)
+    - [Mock Responses Don't Match Expected Format](#mock-responses-dont-match-expected-format)
+  - [Advanced Configuration](#advanced-configuration)
+    - [Custom Mock Responses](#custom-mock-responses)
+    - [Conditional Mocking](#conditional-mocking)
+  - [See Also](#see-also)
 
 ---
 
@@ -28,14 +54,14 @@ When mock mode is enabled, the `ApiService` detects this and routes requests to 
 ### Architecture
 
 ```
-Request → ApiService.invokeApi()
-           ↓
+Request  ApiService.invokeApi()
+
      [Mock enabled?]
-           ↓
-    Yes → MockLlmService.generateMockResponse()
-           ↓
-    No → HTTP call to Ollama
-           ↓
+
+    Yes  MockLlmService.generateMockResponse()
+
+    No  HTTP call to Ollama
+
         Response
 ```
 
@@ -340,11 +366,6 @@ class ConditionalMockTest {
 - [Configuration Guide](docs/CONFIGURATION.md)
 - [API Service Implementation](src/main/java/ca/letkeman/resumes/optimizer/ApiService.java)
 - [Mock LLM Service](src/main/java/ca/letkeman/resumes/service/MockLlmService.java)
-
----
-
-**Last Updated**: January 31, 2026
-**Version**: 1.0.0
 
 ---
 

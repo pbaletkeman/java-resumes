@@ -1,4 +1,4 @@
-# Technology Stack
+﻿# Technology Stack
 
 Complete list of all technologies, frameworks, and tools used in the java-resumes project.
 
@@ -36,7 +36,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-## 🔧 Backend Technologies
+##  Backend Technologies
 
 ### Core Framework
 
@@ -93,7 +93,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-## 🎨 Frontend Technologies
+##  Frontend Technologies
 
 ### Core Framework
 
@@ -151,7 +151,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-## 🐳 DevOps & Infrastructure
+##  DevOps & Infrastructure
 
 ### Containerization
 
@@ -172,7 +172,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-## 🤖 AI/LLM Integration
+##  AI/LLM Integration
 
 ### Supported LLM Services
 
@@ -192,7 +192,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-## 📊 Database (Future)
+##  Database (Future)
 
 | Technology | Version | Purpose           |
 | ---------- | ------- | ----------------- |
@@ -203,7 +203,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-## ☁️ Cloud & Deployment (Future)
+##  Cloud & Deployment (Future)
 
 | Platform     | Purpose                       |
 | ------------ | ----------------------------- |
@@ -215,7 +215,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-## 📈 Monitoring & Observability (Future)
+##  Monitoring & Observability (Future)
 
 | Technology | Purpose                     |
 | ---------- | --------------------------- |
@@ -227,7 +227,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-## 🔐 Security (Current & Future)
+##  Security (Current & Future)
 
 | Technology      | Purpose                      |
 | --------------- | ---------------------------- |
@@ -239,7 +239,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-## 📚 Documentation & Communication
+##  Documentation & Communication
 
 | Technology      | Purpose              |
 | --------------- | -------------------- |
@@ -250,7 +250,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-## 🧪 Testing & Quality
+##  Testing & Quality
 
 | Category      | Technologies                   |
 | ------------- | ------------------------------ |
@@ -263,7 +263,7 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-## 🛠️ Development Tools
+##  Development Tools
 
 | Tool            | Purpose                |
 | --------------- | ---------------------- |
@@ -277,101 +277,101 @@ Complete list of all technologies, frameworks, and tools used in the java-resume
 
 ---
 
-## 📦 Version Compatibility Matrix
+##  Version Compatibility Matrix
 
 ### Java Backend
 
 ```
 java-resumes
-├── Spring Boot 3.5.1
-│   ├── Java 21 LTS (required)
-│   ├── Gradle 8.7
-│   └── JDK 21
-├── Dependencies
-│   ├── Gson 2.13.1 (JSON)
-│   ├── Flying Saucer 9.1.22 (PDF)
-│   ├── CommonMark 0.24.0 (Markdown)
-│   └── jsoup 1.15.4 (HTML parsing)
-└── Testing
-    ├── JUnit 5 (latest)
-    └── Spring Test 3.5.1
+ Spring Boot 3.5.1
+    Java 21 LTS (required)
+    Gradle 8.7
+    JDK 21
+ Dependencies
+    Gson 2.13.1 (JSON)
+    Flying Saucer 9.1.22 (PDF)
+    CommonMark 0.24.0 (Markdown)
+    jsoup 1.15.4 (HTML parsing)
+ Testing
+     JUnit 5 (latest)
+     Spring Test 3.5.1
 ```
 
 ### React Frontend
 
 ```
 java-resumes
-├── React 19.2.0
-│   ├── TypeScript 5.9.3
-│   ├── Node.js 22 LTS
-│   └── npm 10+
-├── Build Tools
-│   ├── Vite 7.2.4
-│   └── esbuild (latest)
-├── UI Components
-│   ├── PrimeReact 10.9.7
-│   ├── PrimeIcons 7.0.0
-│   └── Tailwind CSS 4.1.18
-└── Testing
-    ├── Vitest 4.0.17
-    └── React Testing Lib 16.3.1
+ React 19.2.0
+    TypeScript 5.9.3
+    Node.js 22 LTS
+    npm 10+
+ Build Tools
+    Vite 7.2.4
+    esbuild (latest)
+ UI Components
+    PrimeReact 10.9.7
+    PrimeIcons 7.0.0
+    Tailwind CSS 4.1.18
+ Testing
+     Vitest 4.0.17
+     React Testing Lib 16.3.1
 ```
 
 ### Infrastructure
 
 ```
 Docker Compose
-├── Frontend Container
-│   ├── Build: node:22-alpine
-│   └── Runtime: nginx:alpine
-├── Backend Container
-│   ├── Build: gradle:8.7-jdk21
-│   └── Runtime: eclipse-temurin:21-jre
-└── Network: resume-app-network
+ Frontend Container
+    Build: node:22-alpine
+    Runtime: nginx:alpine
+ Backend Container
+    Build: gradle:8.7-jdk21
+    Runtime: eclipse-temurin:21-jre
+ Network: resume-app-network
 ```
 
 ---
 
-## 🔄 Dependency Tree Highlights
+##  Dependency Tree Highlights
 
 ### Backend Critical Path
 
 ```
 Spring Boot 3.5.1
-├── spring-boot-starter-web
-│   ├── spring-webmvc
-│   └── tomcat-embed-core
-├── spring-boot-starter-json
-│   └── jackson (JSON processing)
-├── spring-boot-starter-logging
-│   ├── logback
-│   └── slf4j
-└── Flying Saucer 9.1.22
-    ├── xhtmlrenderer
-    └── itext (PDF generation)
+ spring-boot-starter-web
+    spring-webmvc
+    tomcat-embed-core
+ spring-boot-starter-json
+    jackson (JSON processing)
+ spring-boot-starter-logging
+    logback
+    slf4j
+ Flying Saucer 9.1.22
+     xhtmlrenderer
+     itext (PDF generation)
 ```
 
 ### Frontend Critical Path
 
 ```
 React 19.2.0
-├── react-dom
-├── react-router-dom
-├── typescript
-├── @types/react
-├── @types/node
-├── primereact
-│   └── primeicons
-├── tailwindcss
-│   └── postcss
-├── axios
-└── vite
-    └── esbuild
+ react-dom
+ react-router-dom
+ typescript
+ @types/react
+ @types/node
+ primereact
+    primeicons
+ tailwindcss
+    postcss
+ axios
+ vite
+     esbuild
 ```
 
 ---
 
-## 📈 Performance Metrics by Technology
+##  Performance Metrics by Technology
 
 ### Backend Performance
 
@@ -393,7 +393,7 @@ React 19.2.0
 
 ---
 
-## 🔐 Security Considerations by Technology
+##  Security Considerations by Technology
 
 | Technology  | Security Feature          |
 | ----------- | ------------------------- |
@@ -405,15 +405,15 @@ React 19.2.0
 
 ---
 
-## 🚀 Upgrade Path
+##  Upgrade Path
 
 ### Next Version Recommendations
 
-- **Spring Boot**: 3.5.1 → 3.6.x (minor upgrade)
-- **Java**: 21 LTS → 23 (current non-LTS)
-- **React**: 19.2.0 → 20.x (major upgrade, breaking)
-- **Node.js**: 22 LTS → 24 LTS (minor upgrade)
-- **TypeScript**: 5.9.3 → 5.10+ (patch upgrade)
+- **Spring Boot**: 3.5.1  3.6.x (minor upgrade)
+- **Java**: 21 LTS  23 (current non-LTS)
+- **React**: 19.2.0  20.x (major upgrade, breaking)
+- **Node.js**: 22 LTS  24 LTS (minor upgrade)
+- **TypeScript**: 5.9.3  5.10+ (patch upgrade)
 
 ### Long-term Technology Evolution
 

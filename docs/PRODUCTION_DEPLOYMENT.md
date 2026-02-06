@@ -1,19 +1,50 @@
-# Production Deployment
+﻿# Production Deployment
 
 Complete guide for deploying java-resumes to production environments.
 
-## Table of Contents
-
-- [Deployment Options](#-deployment-options)
-- [Docker Compose Deployment](#-docker-compose-deployment)
-- [Cloud Deployment](#-cloud-deployment)
-- [Security Configuration](#-security-configuration)
-- [Performance Tuning](#-performance-tuning)
-- [Monitoring](#-monitoring)
+- [Production Deployment](#production-deployment)
+  - [Deployment Options](#deployment-options)
+    - [Quick Comparison](#quick-comparison)
+  - [Docker Compose Deployment](#docker-compose-deployment)
+    - [Prerequisite: Configure Application](#prerequisite-configure-application)
+    - [Step 1: Build Docker Images](#step-1-build-docker-images)
+    - [Step 2: Create docker-compose.yml](#step-2-create-docker-composeyml)
+    - [Step 3: Deploy](#step-3-deploy)
+  - [HTTPS/SSL Configuration](#httpsssl-configuration)
+    - [Using Let's Encrypt](#using-lets-encrypt)
+    - [Obtain SSL Certificate](#obtain-ssl-certificate)
+  - [Cloud Deployment](#cloud-deployment)
+    - [AWS Deployment](#aws-deployment)
+    - [Azure Deployment](#azure-deployment)
+    - [Google Cloud Deployment](#google-cloud-deployment)
+  - [Kubernetes Deployment](#kubernetes-deployment)
+    - [Manifest Files](#manifest-files)
+    - [Deploy to Kubernetes](#deploy-to-kubernetes)
+  - [Security Hardening](#security-hardening)
+    - [Database Security](#database-security)
+    - [Secrets Management](#secrets-management)
+    - [Network Security](#network-security)
+  - [Monitoring \& Logging](#monitoring--logging)
+    - [Docker Logs](#docker-logs)
+    - [Application Monitoring (Future)](#application-monitoring-future)
+    - [Health Checks](#health-checks)
+  - [Continuous Deployment](#continuous-deployment)
+    - [GitHub Actions CI/CD](#github-actions-cicd)
+  - [Deployment Checklist](#deployment-checklist)
+    - [Pre-Deployment](#pre-deployment)
+    - [Deployment](#deployment)
+    - [Post-Deployment](#post-deployment)
+  - [Rollback Plan](#rollback-plan)
+    - [Quick Rollback](#quick-rollback)
+    - [Database Rollback (Future)](#database-rollback-future)
+  - [Scaling Strategies](#scaling-strategies)
+    - [Horizontal Scaling](#horizontal-scaling)
+    - [Load Balancing](#load-balancing)
+    - [Caching Strategy](#caching-strategy)
 
 ---
 
-## 🚀 Deployment Options
+## Deployment Options
 
 ### Quick Comparison
 
@@ -27,7 +58,7 @@ Complete guide for deploying java-resumes to production environments.
 
 ---
 
-## 🐳 Docker Compose Deployment
+## Docker Compose Deployment
 
 ### Prerequisite: Configure Application
 
@@ -157,7 +188,7 @@ docker compose -f docker-compose.prod.yml down
 
 ---
 
-## 🌐 HTTPS/SSL Configuration
+## HTTPS/SSL Configuration
 
 ### Using Let's Encrypt
 
@@ -209,7 +240,7 @@ certbot certonly --standalone -d yourdomain.com
 
 ---
 
-## ☁️ Cloud Deployment
+## Cloud Deployment
 
 ### AWS Deployment
 
@@ -276,7 +307,7 @@ certbot certonly --standalone -d yourdomain.com
 
 ---
 
-## 🔄 Kubernetes Deployment
+## Kubernetes Deployment
 
 ### Manifest Files
 
@@ -366,7 +397,7 @@ kubectl logs -f deployment/java-resumes-backend -n java-resumes
 
 ---
 
-## 🔐 Security Hardening
+## Security Hardening
 
 ### Database Security
 
@@ -396,15 +427,15 @@ kubectl create secret generic llm-apikey --from-literal=key=sk-...
 
 ### Network Security
 
-- ✅ Firewall rules (allow only 80, 443)
-- ✅ Network policies (Kubernetes)
-- ✅ VPC/Subnets (Cloud)
-- ✅ CORS restrictions
-- ✅ Rate limiting
+- Firewall rules (allow only 80, 443)
+- Network policies (Kubernetes)
+- VPC/Subnets (Cloud)
+- CORS restrictions
+- Rate limiting
 
 ---
 
-## 📊 Monitoring & Logging
+## Monitoring & Logging
 
 ### Docker Logs
 
@@ -453,7 +484,7 @@ kubectl get pods --field-selector=status.phase=Failed
 
 ---
 
-## 🔄 Continuous Deployment
+## Continuous Deployment
 
 ### GitHub Actions CI/CD
 
@@ -484,7 +515,7 @@ jobs:
 
 ---
 
-## 📋 Deployment Checklist
+## Deployment Checklist
 
 ### Pre-Deployment
 
@@ -519,7 +550,7 @@ jobs:
 
 ---
 
-## 🔁 Rollback Plan
+## Rollback Plan
 
 ### Quick Rollback
 
@@ -546,7 +577,7 @@ postgresql_restore < backup.sql
 
 ---
 
-## 📚 Scaling Strategies
+## Scaling Strategies
 
 ### Horizontal Scaling
 
@@ -588,11 +619,6 @@ server {
 - [Architecture](ARCHITECTURE.md) - System design
 - [Configuration](CONFIGURATION.md) - Configuration management
 - [Troubleshooting](TROUBLESHOOTING.md) - Production troubleshooting
-
----
-
-**Last Updated:** February 2, 2026
-**Maintained By:** java-resumes development team
 
 ---
 

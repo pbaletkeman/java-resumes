@@ -104,15 +104,7 @@ return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ResponseMessage("gene
 
 ```typescript
 const { execute, loading, error } = useApi();
-const onSubmit = async () => {
-  try {
-    await execute(async () => fileService.upload(formData));
-    // Start polling for results
-    pollForResults();
-  } catch (err) {
-    /* handle */
-  }
-};
+const onSubmit = async () => {/* Lines 108-115 omitted */};
 ```
 
 ### LLM Integration Points
@@ -128,11 +120,7 @@ const onSubmit = async () => {
 **CRITICAL**: Config comes from config.json (not Spring properties). Endpoint format:
 
 ```json
-{
-  "endpoint": "http://localhost:11434/v1/chat/completions",
-  "apikey": "ollama",
-  "model": "mistral"
-}
+{/* Lines 132-135 omitted */}
 ```
 
 ---
@@ -156,24 +144,13 @@ src/main/java/ca/letkeman/resumes/
 ├── message/
 │   └── ResponseMessage.java           # API response wrapper
 └── optimizer/
-    ├── ApiService.java                # LLM API integration
-    ├── HtmlToPdf.java                 # Markdown-to-PDF converter
-    ├── ChatBody.java                  # LLM request model
-    ├── Message.java                   # Chat message model
-    └── responses/
-        ├── LLMResponse.java           # LLM API response wrapper
-        ├── Choice.java                # Response choice
-        ├── Message.java               # Response message
-        ├── Stats.java                 # Generation stats
-        └── Usage.java                 # Token usage info
-
 src/test/java/ca/letkeman/resumes/
 ├── controller/
 │   └── ResumeControllerTest.java      # REST endpoint tests
 ├── model/
 │   └── OptimizeTest.java              # Optimize model tests
 └── optimizer/
-    └── ApiServiceTest.java            # LLM integration tests
+    /* Lines 176-177 omitted */
 
 docs/
 ├── README.md                          # Detailed documentation
@@ -308,11 +285,7 @@ GET    /api/health                - Health check
 ```java
 @SpringBootTest
 @AutoConfigureMockMvc
-class ResumeControllerTest {
-    // Use MockMvc for HTTP testing
-    // Mock file uploads with MockMultipartFile
-    // Verify response status and JSON content
-}
+class ResumeControllerTest {/* Lines 312-315 omitted */}
 ```
 
 **OptimizeTest**: Model validation
@@ -346,16 +319,6 @@ class ResumeControllerTest {
 ```java
 @Test
 void test_successful_operation() throws Exception {
-    // Setup
-    MockMultipartFile file = new MockMultipartFile(...);
-
-    // Execute
-    mockMvc.perform(multipart("/endpoint").file(file))
-
-    // Assert
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.message").exists());
-}
 ```
 
 ### Running Tests
@@ -419,9 +382,7 @@ The project uses **Checkstyle 10.14.2** with rules defined in `config/checkstyle
 ```java
 // Explain WHY, not WHAT
 // Send request with exponential backoff to handle rate limits
-for (int attempt = 0; attempt < MAX_RETRIES; attempt++) {
-    // ...
-}
+for (int attempt = 0; attempt < MAX_RETRIES; attempt++) {/* Lines 423-424 omitted */}
 ```
 
 ---
@@ -431,37 +392,22 @@ for (int attempt = 0; attempt < MAX_RETRIES; attempt++) {
 ### Adding a New Feature
 
 1. **Analyze Requirements**
-   - Read existing tests for similar features
-   - Check controller endpoints for patterns
-   - Review Architecture.md for design
+   /* Lines 434-437 omitted */
 
 2. **Design Solution**
-   - Keep changes minimal and focused
-   - Follow existing patterns
-   - Consider error cases
+   /* Lines 439-442 omitted */
 
 3. **Implement Code**
-   - Write code with clarity
-   - Follow checkstyle rules
-   - Add meaningful variable names
+   /* Lines 444-447 omitted */
 
 4. **Write Tests**
-   - Test happy path
-   - Test error conditions
-   - Mock external dependencies
+   /* Lines 449-452 omitted */
 
 5. **Run Quality Checks**
-
-   ```bash
-   ./gradlew build
-   ./gradlew test
-   ./gradlew checkstyleMain
-   ```
+/* Lines 454-460 omitted */
 
 6. **Update Documentation**
-   - Update docs/README.md if user-facing
-   - Update docs/architecture/ARCHITECTURE.md if design changes
-   - Add code comments for complex logic
+   /* Lines 462-465 omitted */
 
 ### Modifying Existing Code
 
@@ -498,73 +444,19 @@ git push origin feature/description
 
 ```java
 @PostMapping(path = "/endpoint")
-public ResponseEntity<ResponseMessage> methodName(@RequestParam String param) {
-    try {
-        // Validate input
-        if (param == null || param.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ResponseMessage("Error message"));
-        }
-
-        // Process request
-        String result = processData(param);
-
-        // Return success
-        return ResponseEntity.status(HttpStatus.OK)
-            .body(new ResponseMessage("Success message"));
-    } catch (Exception e) {
-        LOGGER.error("Error: {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-            .body(new ResponseMessage("Server error"));
-    }
-}
+public ResponseEntity<ResponseMessage> methodName(@RequestParam String param) {/* Lines 502-520 omitted */}
 ```
 
 ### Service Method Pattern
 
 ```java
-public void save(MultipartFile file) {
-    // Validate
-    if (file == null || file.isEmpty()) {
-        throw new RuntimeException("File is empty");
-    }
-
-    // Process
-    try {
-        Path uploadPath = Paths.get(configRoot);
-        Files.createDirectories(uploadPath);
-        Files.copy(file.getInputStream(),
-                   uploadPath.resolve(file.getOriginalFilename()));
-    } catch (IOException e) {
-        LOGGER.error("File save error: {}", e.getMessage());
-        throw new RuntimeException("Failed to save file");
-    }
-}
+public void save(MultipartFile file) {/* Lines 527-542 omitted */}
 ```
 
 ### Background Thread Pattern
 
 ```java
-public class BackgroundTask implements Runnable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(BackgroundTask.class);
-
-    private final Data data;
-
-    public BackgroundTask(Data data) {
-        this.data = data;
-    }
-
-    @Override
-    public void run() {
-        try {
-            // Execute long-running operation
-            processData();
-            LOGGER.info("Task completed successfully");
-        } catch (Exception e) {
-            LOGGER.error("Task failed: {}", e.getMessage());
-        }
-    }
-}
+public class BackgroundTask implements Runnable {/* Lines 549-567 omitted */}
 ```
 
 ### Testing Pattern
@@ -572,22 +464,7 @@ public class BackgroundTask implements Runnable {
 ```java
 @SpringBootTest
 @AutoConfigureMockMvc
-class ComponentTest {
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Test
-    void test_successful_scenario() throws Exception {
-        // Setup
-        MockMultipartFile file = new MockMultipartFile(
-            "field", "filename.ext", "mime/type", "content".getBytes());
-
-        // Execute & Assert
-        mockMvc.perform(multipart("/endpoint").file(file))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.message").value("expected"));
-    }
-}
+class ComponentTest {/* Lines 576-590 omitted */}
 ```
 
 ---
@@ -625,11 +502,7 @@ ollama serve
 Edit `config.json`:
 
 ```json
-{
-  "endpoint": "http://localhost:11434",
-  "apikey": "not-needed-for-local",
-  "model": "gemma-3-4b-it"
-}
+{/* Lines 629-632 omitted */}
 ```
 
 **5. Build & Run**
@@ -754,6 +627,7 @@ server.port=8081
 | Quick Start      | Initial setup          | [README.md](README.md)                                                 |
 | Checkstyle Rules | Code quality           | [config/checkstyle/checkstyle.xml](config/checkstyle/checkstyle.xml)   |
 | Build Config     | Dependencies           | [build.gradle](build.gradle)                                           |
+```
 
 ---
 
@@ -773,17 +647,11 @@ server.port=8081
 try {
     return processFile(file);
 } catch (IOException e) {
-    LOGGER.error("Failed to process file {}: {}", filename, e.getMessage());
-    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-        .body(new ResponseMessage("File processing failed"));
-}
 
 // ❌ Bad: Generic exception, no logging
 try {
     return processFile(file);
-} catch (Exception e) {
-    return ResponseEntity.ok(new ResponseMessage("Error"));
-}
+} catch (Exception e) {/* Lines 785-786 omitted */}
 ```
 
 ### Validation
@@ -791,9 +659,6 @@ try {
 ```java
 // ✅ Good: Clear validation with specific error
 if (optimize == null || optimize.getResume().isEmpty()) {
-    return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
-        .body(new ResponseMessage("Required property missing or invalid."));
-}
 
 // ❌ Bad: No validation
 processRequest(optimize);
@@ -805,19 +670,10 @@ processRequest(optimize);
 // ✅ Good: Clear test name and assertions
 @Test
 void test_upload_rejects_empty_file() throws Exception {
-    MockMultipartFile empty = new MockMultipartFile(
-        "file", "empty.pdf", "application/pdf", new byte[0]);
-
-    mockMvc.perform(multipart("/upload").file(empty))
-        .andExpect(status().isBadRequest())
-        .andExpect(jsonPath("$.message").value("No file/invalid file provided"));
-}
 
 // ❌ Bad: Unclear test
 @Test
-void test1() throws Exception {
-    // What is this testing?
-}
+void test1() throws Exception {/* Lines 819-820 omitted */}
 ```
 
 ---
@@ -867,284 +723,3 @@ When working on this project:
 7. **Async Processing**: Use BackgroundResume for long operations
 8. **API Design**: Follow REST conventions in endpoints
 9. **Validation**: Check inputs early and return appropriate errors
-10. **Testing**: Write tests for all public methods and edge cases
-
----
-
----
-
-## Documentation Structure
-
-Complete documentation is organized in the [docs/](docs/) directory:
-
-- **[docs/INDEX.md](docs/INDEX.md)** - Complete documentation index and navigation
-- **[docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)** - System architecture and design patterns
-- **[docs/BACKEND_README.md](docs/BACKEND_README.md)** - Backend development guide and setup
-- **[docs/README.md](docs/README.md)** - Frontend development guide and setup
-- **[docs/wip/STATUS.md](docs/wip/STATUS.md)** - Current project status and milestones
-- **[docs/CHECKSTYLE_AND_OLLAMA.md](docs/CHECKSTYLE_AND_OLLAMA.md)** - Code quality and LLM configuration
-
----
-
-## Validation Checklist
-
-### Before Committing Backend Code
-
-- [ ] All tests pass: `./gradlew clean test`
-- [ ] No Checkstyle violations: `./gradlew checkstyleMain checkstyleTest`
-- [ ] Build succeeds: `./gradlew clean build`
-- [ ] Code coverage meets 80%+ target
-- [ ] No unused imports
-- [ ] All public methods have JSDoc comments
-- [ ] No TODO comments without context
-- [ ] Error handling implemented for all user inputs
-
-### Before Committing Frontend Code
-
-- [ ] All tests pass: `npm test`
-- [ ] No TypeScript errors: `npm run type-check`
-- [ ] No lint errors: `npm run lint`
-- [ ] Build succeeds: `npm run build`
-- [ ] Code coverage meets 80%+ target
-- [ ] No console errors or warnings
-- [ ] Responsive design verified in browser
-- [ ] All components have proper TypeScript types
-
----
-
-## Quick Reference
-
-### Build Commands
-
-**Backend:**
-
-```bash
-./gradlew clean build              # Full build
-./gradlew clean test               # Run tests
-./gradlew checkstyleMain           # Check code quality
-./gradlew bootRun                  # Run application (port 8080)
-```
-
-**Frontend:**
-
-```bash
-npm install                        # Install dependencies
-npm run dev                        # Start dev server (port 5173)
-npm test                           # Run tests
-npm run build                      # Build for production
-npm run lint                       # Check code quality
-npm run type-check                 # TypeScript type checking
-```
-
-### Project Structure
-
-```
-java-resumes/
-├── .github/
-│   └── instructions/              # Path-specific Copilot guidance
-│       ├── backend.instructions.md
-│       └── frontend.instructions.md
-├── src/main/java/                 # Backend source code
-├── src/test/java/                 # Backend tests
-├── frontend/                      # Frontend React application
-├── docs/                          # Documentation
-│   ├── INDEX.md                   # Documentation index
-│   ├── Architecture.md            # System architecture
-│   ├── BACKEND_README.md          # Backend guide
-│   ├── README.md                  # Frontend guide
-│   └── wip/                       # Work-in-progress docs
-├── copilot-instructions.md        # This file (repo-wide guidance)
-├── .gitattributes                 # Git encoding configuration
-└── README.md                      # Main project README
-```
-
-### Essential Backend Files
-
-| File                       | Purpose             |
-| -------------------------- | ------------------- |
-| `ResumeController.java`    | REST API endpoints  |
-| `ApiService.java`          | LLM integration     |
-| `FilesStorageService.java` | File operations     |
-| `BackgroundResume.java`    | Async processing    |
-| `build.gradle`             | Build configuration |
-| `application-*.yml`        | App configuration   |
-
-### Essential Frontend Files
-
-| File                 | Purpose                       |
-| -------------------- | ----------------------------- |
-| `App.tsx`            | Main application component    |
-| `MainContentTab.tsx` | Primary UI interface          |
-| `hooks/useApi.ts`    | Centralized API communication |
-| `hooks/useTheme.ts`  | Theme management              |
-| `vite.config.ts`     | Build configuration           |
-| `tsconfig.json`      | TypeScript configuration      |
-
----
-
-## Technology Stack
-
-### Backend
-
-- **Language**: Java 21 LTS (Eclipse Temurin)
-- **Framework**: Spring Boot 3.5.1
-- **Build Tool**: Gradle 8.10
-- **Testing**: JUnit 5, Mockito (80%+ coverage required)
-- **Code Quality**: Checkstyle 10.14.2 (100% compliance)
-- **JSON**: Gson
-- **PDF Generation**: Flying Saucer, CommonMark
-- **Logging**: SLF4J + Logback
-
-### Frontend
-
-- **Framework**: React 19.2.0
-- **Language**: TypeScript 5.9.3
-- **Build Tool**: Vite 7.2.4
-- **UI Components**: PrimeReact 10.9.7
-- **Styling**: Tailwind CSS 4.1.18
-- **Testing**: Vitest 4.0.17, React Testing Library
-- **HTTP Client**: Axios
-- **Icons**: React Icons
-
----
-
-## Key Guidelines
-
-### General
-
-1. **Clarity Over Cleverness**: Write obvious code
-2. **Test Everything**: Target 80%+ coverage
-3. **Type Safety**: Use types to prevent errors
-4. **Minimal Changes**: Only modify what's necessary
-5. **Documentation**: Update markdown when architecture changes
-
-### Backend
-
-1. Use proper REST conventions for endpoints
-2. Validate all inputs early
-3. Return appropriate HTTP status codes
-4. Log operations with SLF4J
-5. Handle exceptions gracefully
-6. Use service layer for business logic
-7. Write tests for all public methods
-8. Maintain 100% Checkstyle compliance
-
-### Frontend
-
-1. Use TypeScript strict mode
-2. Create reusable components
-3. Use custom hooks for logic
-4. Manage state with React Context
-5. Test components and hooks
-6. Follow Tailwind CSS patterns
-7. Use centralized API communication
-8. Handle loading and error states
-
----
-
-## Getting Help
-
-**For questions about:**
-
-- **Architecture**: See [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)
-- **Backend Setup**: See [docs/BACKEND_README.md](docs/BACKEND_README.md)
-- **Frontend Setup**: See [docs/README.md](docs/README.md)
-- **Code Quality**: See [docs/CHECKSTYLE_AND_OLLAMA.md](docs/CHECKSTYLE_AND_OLLAMA.md)
-- **Project Status**: See [docs/wip/STATUS.md](docs/wip/STATUS.md)
-- **Navigation**: See [docs/INDEX.md](docs/INDEX.md)
-
----
-
-## Configuration Files
-
-Important configuration files (see path-specific instructions for details):
-
-**Backend:**
-
-- `.github/instructions/backend.instructions.md` - Java/Spring Boot guidance
-- `build.gradle` - Build configuration
-- `application-dev.yml` / `application-prod.yml` - App configuration
-- `config/checkstyle/checkstyle.xml` - Code quality rules
-- `.editorconfig` - Editor settings
-
-**Frontend:**
-
-- `.github/instructions/frontend.instructions.md` - React/TypeScript guidance
-- `vite.config.ts` - Build configuration
-- `tsconfig.json` - TypeScript configuration
-- `vitest.config.ts` - Test configuration
-- `frontend/.env.example` - Environment variables template
-- `.editorconfig` - Editor settings
-
-**Git Configuration:**
-
-- `.gitattributes` - Encoding and line ending consistency (UTF-8, LF)
-- `.gitignore` - Files to ignore
-
-**Git Configuration:**
-
-- `.gitattributes` - Encoding and line ending consistency (UTF-8, LF)
-- `.gitignore` - Files to ignore
-
----
-
-## Quick Command Reference
-
-### Backend (Java/Spring Boot)
-
-```bash
-./gradlew clean build              # Full build with tests
-./gradlew clean build -x test      # Build without tests (faster)
-./gradlew test                     # Run all tests
-./gradlew test --tests ClassName   # Run specific test
-./gradlew checkstyleMain           # Check code quality
-./gradlew bootRun                  # Run application (port 8080)
-```
-
-### Frontend (React/TypeScript)
-
-```bash
-npm install                        # Install dependencies
-npm run dev                        # Start dev server (port 5173)
-npm test                           # Run tests
-npm run build                      # Build for production
-npm run lint                       # Check code quality
-npm run type-check                 # TypeScript type checking
-```
-
-### Local Setup
-
-```bash
-# 1. Start LLM Service (Ollama)
-ollama serve
-ollama pull mistral:latest
-
-# 2. In another terminal, build backend
-./gradlew clean build
-
-# 3. In another terminal, build frontend
-cd frontend && npm run dev
-
-# 4. Access UI at http://localhost:5173
-```
-
----
-
-## Project Size & Scope
-
-- **Backend**: ~14 main source files + 13+ test files
-- **Frontend**: ~41+ component files + comprehensive test coverage
-- **Configuration**: Checkstyle (100% required), ESLint, TypeScript strict mode
-- **Testing**: 80%+ coverage target for both backend and frontend
-
----
-
-## Last Updated
-
-Documentation reorganization and Copilot instructions consolidation: 2026
-
-For the latest updates and detailed guidance on specific technologies, see the path-specific instructions or documentation files.
-
-**Repository**: https://github.com/pbaletkeman/java-resumes
-**Issues**: GitHub Issues
-**Discussions**: GitHub Discussions

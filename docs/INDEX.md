@@ -1,20 +1,32 @@
-# Documentation Index
+﻿# Documentation Index
 
 Complete documentation and reference guide for the java-resumes project.
 
-**Last Updated:** February 2, 2026
-**Status:** Reorganized with cross-linked navigation
-
-## Table of Contents
-
-1. [Quick Navigation](#quick-navigation)
-2. [Getting Started](#getting-started)
-3. [Project Overview](#project-overview)
-4. [Development Guides](#development-guides)
-5. [Technical Reference](#technical-reference)
-6. [Session & Testing](#session--testing)
-7. [Issue Tracking & Fixes](#issue-tracking--fixes)
-8. [Related Documentation](#related-documentation)
+- [Documentation Index](#documentation-index)
+  - [Quick Navigation](#quick-navigation)
+    - [By Role](#by-role)
+  - [Getting Started](#getting-started)
+  - [Project Overview](#project-overview)
+  - [Development Guides](#development-guides)
+  - [Technical Reference](#technical-reference)
+  - [Session \& Testing](#session--testing)
+  - [Issue Tracking \& Fixes](#issue-tracking--fixes)
+  - [Visual Documentation](#visual-documentation)
+  - [Related Documentation](#related-documentation)
+  - [Project Structure](#project-structure)
+  - [Technology Stack](#technology-stack)
+    - [Backend](#backend)
+    - [Frontend](#frontend)
+  - [Documentation Categories](#documentation-categories)
+    - [Strategic Documents](#strategic-documents)
+    - [Development Guides](#development-guides-1)
+    - [Configuration \& Quality](#configuration--quality)
+    - [Work-in-Progress](#work-in-progress)
+  - [How to Use This Documentation](#how-to-use-this-documentation)
+  - [Important Files](#important-files)
+    - [Configuration Files](#configuration-files)
+    - [Root Documentation](#root-documentation)
+  - [Navigation](#navigation)
 
 ---
 
@@ -22,30 +34,29 @@ Complete documentation and reference guide for the java-resumes project.
 
 ### By Role
 
-**👤 Project Managers**
+**Project Managers**
 
-- Start → [Project Status](PROJECT_STATUS.md)
-- Then → [Job Completion Summary](JOB_COMPLETION_SUMMARY.md)
-- Check → [Outstanding Issues](OUTSTANDING_ISSUES.md)
+- Start [Project Status](PROJECT_STATUS.md)
+- Then [Job Completion Summary](JOB_COMPLETION_SUMMARY.md)
+- Check [Outstanding Issues](OUTSTANDING_ISSUES.md)
 
-**👨‍💻 Developers**
+**Developers**
 
-- Start → [Quick Start Advanced](QUICK_START_ADVANCED.md)
-- Reference → [Quick Reference](QUICK_REFERENCE.md)
-- Study → [AI Agent Guidelines](AGENTS.md)
-- Check → [Technical Checklist](TECHNICAL_CHECKLIST.md)
+- Start [Quick Start Advanced](QUICK_START_ADVANCED.md)
+- Reference [Quick Reference](QUICK_REFERENCE.md)
+- Study [AI Agent Guidelines](AGENTS.md)
+- Check [Technical Checklist](TECHNICAL_CHECKLIST.md)
 
-**🤖 AI Agents (Copilot, Claude)**
+**AI Agents (Copilot, Claude)**
 
-- Study → [Copilot Instructions](copilot-instructions.md)
-- Reference → [AI Agent Guidelines](AGENTS.md)
-- Use → [Quick Reference](QUICK_REFERENCE.md)
+- Study [Copilot Instructions](copilot-instructions.md)
+- Reference [AI Agent Guidelines](AGENTS.md)
+- Use [Quick Reference](QUICK_REFERENCE.md)
 
-**🧪 QA/Testers**
+**QA/Testers**
 
-- Review → [Testing Guide](OUTPUT_TYPE_TESTING_GUIDE.md)
-- Study → [UI Changes Visual Guide](UI_CHANGES_VISUAL_GUIDE.md)
-- Reference → [Screenshot Capture Summary](SCREENSHOT_CAPTURE_SUMMARY.md)
+- Review [Testing Guide](OUTPUT_TYPE_TESTING_GUIDE.md)
+- Reference [Screenshot Capture Summary](SCREENSHOT_CAPTURE_SUMMARY.md)
 
 ---
 
@@ -77,7 +88,6 @@ Understand the project structure, status, and architecture:
 Detailed guides for development and feature implementation:
 
 - **[Frontend Enhancements](FRONTEND_ENHANCEMENTS.md)** - Frontend improvements, new features, and component documentation
-- **[UI Changes Visual Guide](UI_CHANGES_VISUAL_GUIDE.md)** - Visual documentation of all UI changes and modifications
 - **[Copilot Instructions](copilot-instructions.md)** - Repository-wide instructions and guidelines for GitHub Copilot
 
 ---
@@ -106,7 +116,6 @@ Documentation related to bug fixes, issues, and resolutions:
 
 - **[Outstanding Issues](OUTSTANDING_ISSUES.md)** - Current unresolved issues, blockers, and next action items
 - **[Bug Fix: Output Type](BUG_FIX_OUTPUT_TYPE.md)** - Detailed documentation of output type dropdown bug fix
-- **[Output Type Bug Fix Summary](OUTPUT_TYPE_BUG_FIX_SUMMARY.md)** - Comprehensive summary of all output type bug fixes and changes
 - **[Output Type Fix Quick Reference](OUTPUT_TYPE_FIX_QUICK_REFERENCE.md)** - Quick reference guide for output type fixes and implementations
 
 ---
@@ -139,25 +148,25 @@ Additional resources and directories:
 
 ```
 java-resumes/
-├── .github/
-│   └── instructions/
-│       ├── backend.instructions.md    # Backend development guidance
-│       └── frontend.instructions.md   # Frontend development guidance
-├── src/main/java/                     # Backend source code
-├── src/test/java/                     # Backend tests
-├── frontend/                          # Frontend React application
-├── docs/                              # Documentation
-│   ├── INDEX.md                       # This file
-│   ├── Architecture.md                # System architecture
-│   ├── README.md                      # Frontend documentation
-│   ├── BACKEND_README.md              # Backend documentation
-│   ├── wip/                           # Work-in-progress documentation
-│   │   ├── STATUS.md                  # Current status
-│   │   ├── IMPLEMENTATION_SUMMARY.md  # Implementation overview
-│   │   └── ...                        # Other WIP documents
-│   └── ...                            # Other documentation files
-├── copilot-instructions.md            # Repository-wide Copilot guidance
-└── README.md                          # Main project README
+ .github/
+    instructions/
+        backend.instructions.md     # Backend development guidance
+        frontend.instructions.md    # Frontend development guidance
+ src/main/java/                     # Backend source code
+ src/test/java/                     # Backend tests
+ frontend/                          # Frontend React application
+ docs/                              # Documentation
+    INDEX.md                        # This file
+    Architecture.md                 # System architecture
+    README.md                       # Frontend documentation
+    BACKEND_README.md               # Backend documentation
+    wip/                            # Work-in-progress documentation
+       STATUS.md                    # Current status
+       IMPLEMENTATION_SUMMARY.md    # Implementation overview
+       ...                          # Other WIP documents
+    ...                             # Other documentation files
+ copilot-instructions.md            # Repository-wide Copilot guidance
+ README.md                          # Main project README
 
 ```
 
@@ -211,7 +220,7 @@ java-resumes/
 2. **Backend Development?** Read [Backend README](./BACKEND_README.md) and check [Backend Custom Instructions](../.github/instructions/backend.instructions.md)
 3. **Frontend Development?** Read [Frontend README](./README.md) and check [Frontend Custom Instructions](../.github/instructions/frontend.instructions.md)
 4. **Checking Status?** See [STATUS](./wip/STATUS.md) and implementation summaries
-5. **Understanding Code Quality?** Review [Checkstyle Configuration](./CHECKSTYLE_AND_OLLAMA.md) and [Compliance Report](./CHECKSTYLE_COMPLIANCE_REPORT.md)
+5. **Understanding Code Quality?** Review [Checkstyle Configuration](./CHECKSTYLE_AND_OLLAMA.md)
 
 ## Important Files
 

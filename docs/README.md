@@ -1,20 +1,40 @@
-# Java Resumes - Documentation
+﻿# Java Resumes - Documentation
 
 Welcome to Java Resumes - an AI-powered full-stack resume and cover letter optimization application.
 
 This documentation is organized into focused sections to make it easy to find what you need.
 
-## Table of Contents
-
-- [Documentation Index](#-documentation-index)
-- [Quick Navigation](#-quick-navigation)
-- [Documentation Structure](#-documentation-structure)
-- [Contributing to Documentation](#-contributing-to-documentation)
-- [Need Help?](#-need-help)
+- [Java Resumes - Documentation](#java-resumes---documentation)
+  - [Documentation Index](#documentation-index)
+    - [Getting Started](#getting-started)
+    - [Core Documentation](#core-documentation)
+    - [Development \& Deployment](#development--deployment)
+    - [Testing \& Quality](#testing--quality)
+    - [Troubleshooting \& Reference](#troubleshooting--reference)
+  - [Quick Navigation](#quick-navigation)
+  - [Project Overview](#project-overview)
+    - [Key Features](#key-features)
+    - [Technology Stack](#technology-stack)
+  - [Getting Started](#getting-started-1)
+    - [Fastest Way (Docker)](#fastest-way-docker)
+    - [Development Setup](#development-setup)
+  - [External Configuration](#external-configuration)
+    - [External Config Path](#external-config-path)
+    - [External Prompts Directory](#external-prompts-directory)
+  - [Documentation Structure](#documentation-structure)
+  - [How to Use This Documentation](#how-to-use-this-documentation)
+  - [Important Links](#important-links)
+    - [Technology Documentation](#technology-documentation)
+  - [Tips for Success](#tips-for-success)
+    - [For Docker Users](#for-docker-users)
+    - [For Development](#for-development)
+    - [For Production](#for-production)
+  - [Contributing to Documentation](#contributing-to-documentation)
+  - [Need Help?](#need-help)
 
 ---
 
-## 📚 Documentation Index
+## Documentation Index
 
 ### Getting Started
 
@@ -46,7 +66,7 @@ This documentation is organized into focused sections to make it easy to find wh
 
 ---
 
-## 🌟 Quick Navigation
+## Quick Navigation
 
 | Need                               | Go To                                                |
 | ---------------------------------- | ---------------------------------------------------- |
@@ -63,19 +83,19 @@ This documentation is organized into focused sections to make it easy to find wh
 
 ---
 
-## 🎯 Project Overview
+## Project Overview
 
 **Java Resumes** helps job seekers create optimized, tailored resumes and cover letters using AI-powered Large Language Models.
 
 ### Key Features
 
-- ✅ AI-powered resume optimization for specific job descriptions
-- ✅ Automated cover letter generation
-- ✅ Markdown to PDF/DOCX conversion
-- ✅ File management and download
-- ✅ Light and dark theme support
-- ✅ Full Docker containerization
-- ✅ External configuration support
+- AI-powered resume optimization for specific job descriptions
+- Automated cover letter generation
+- Markdown to PDF/DOCX conversion
+- File management and download
+- Light and dark theme support
+- Full Docker containerization
+- External configuration support
 
 ### Technology Stack
 
@@ -86,7 +106,7 @@ This documentation is organized into focused sections to make it easy to find wh
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Fastest Way (Docker)
 
@@ -106,7 +126,7 @@ docker compose up --build
 # API Docs: http://localhost:8080/swagger-ui/index.html
 ```
 
-**For detailed setup:** → [QUICK_START.md](QUICK_START.md)
+**For detailed setup:** [QUICK_START.md](QUICK_START.md)
 
 ### Development Setup
 
@@ -117,7 +137,7 @@ For backend or frontend development, see:
 
 ---
 
-## ⚙️ External Configuration
+## External Configuration
 
 The application supports external configuration for production deployments.
 
@@ -149,36 +169,36 @@ prompts:
 export PROMPTS_DIR=/etc/java-resumes/prompts
 ```
 
-**Learn more:** → [CONFIGURATION.md](CONFIGURATION.md)
+**Learn more:** [CONFIGURATION.md](CONFIGURATION.md)
 
 ---
 
-## 📁 Documentation Structure
+## Documentation Structure
 
 ```
 docs/
-├── README.md                          # This file (navigation hub)
-├── QUICK_START.md                     # Get started in minutes
-├── CONFIGURATION.md                   # External config & LLM setup
-├── ARCHITECTURE.md                    # System design & diagrams
-├── FEATURES.md                        # Complete feature list
-├── TECHNOLOGY_STACK.md                # Technologies & versions
-├── DEVELOPMENT_SETUP.md               # Dev environment setup
-├── PRODUCTION_DEPLOYMENT.md           # Deployment guide
-├── API_REFERENCE.md                   # REST API docs
-├── TESTING.md                         # Testing strategy
-├── CODE_QUALITY.md                    # Quality standards
-├── TROUBLESHOOTING.md                 # Problem solving
-├── ENVIRONMENT_VARIABLES.md           # All environment vars
-└── screenshots/                       # Visual documentation
-    ├── frontend/                      # UI screenshots
-    ├── backend/                       # API & architecture diagrams
-    └── SCREENSHOTS_GUIDE.md           # How to capture screenshots
+ README.md                          # This file (navigation hub)
+ QUICK_START.md                     # Get started in minutes
+ CONFIGURATION.md                   # External config & LLM setup
+ ARCHITECTURE.md                    # System design & diagrams
+ FEATURES.md                        # Complete feature list
+ TECHNOLOGY_STACK.md                # Technologies & versions
+ DEVELOPMENT_SETUP.md               # Dev environment setup
+ PRODUCTION_DEPLOYMENT.md           # Deployment guide
+ API_REFERENCE.md                   # REST API docs
+ TESTING.md                         # Testing strategy
+ CODE_QUALITY.md                    # Quality standards
+ TROUBLESHOOTING.md                 # Problem solving
+ ENVIRONMENT_VARIABLES.md           # All environment vars
+ screenshots/                       # Visual documentation
+     frontend/                      # UI screenshots
+     backend/                       # API & architecture diagrams
+     SCREENSHOTS_GUIDE.md           # How to capture screenshots
 ```
 
 ---
 
-## 📖 How to Use This Documentation
+## How to Use This Documentation
 
 1. **New to the project?** Start with [QUICK_START.md](QUICK_START.md)
 2. **Need to configure something?** Check [CONFIGURATION.md](CONFIGURATION.md)
@@ -189,7 +209,7 @@ docs/
 
 ---
 
-## 🔗 Important Links
+## Important Links
 
 - **GitHub Repository:** https://github.com/pbaletkeman/java-resumes
 - **Issues & Support:** https://github.com/pbaletkeman/java-resumes/issues
@@ -205,7 +225,7 @@ docs/
 
 ---
 
-## 💡 Tips for Success
+## Tips for Success
 
 ### For Docker Users
 
@@ -229,7 +249,7 @@ docs/
 
 ---
 
-## 📝 Contributing to Documentation
+## Contributing to Documentation
 
 When updating documentation:
 
@@ -241,7 +261,7 @@ When updating documentation:
 
 ---
 
-## 📞 Need Help?
+## Need Help?
 
 - **Documentation Issues?** Check [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
 - **Bug Reports?** Open a GitHub issue

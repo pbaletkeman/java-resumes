@@ -1,4 +1,4 @@
-# Resume Optimizer Backend
+﻿# Resume Optimizer Backend
 
 [![Java](https://img.shields.io/badge/Java-21%20LTS-orange.svg)](https://openjdk.java.net/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.1-brightgreen.svg)](https://spring.io/projects/spring-boot)
@@ -9,34 +9,140 @@ A robust Java Spring Boot backend service for AI-powered resume and cover letter
 
 ---
 
-## 📋 Table of Contents
-
-- [Overview](#-overview)
-- [🚀 Quick Start in 5 Steps](#-quick-start-in-5-steps)
-- [Technology Stack](#%EF%B8%8F-technology-stack)
-- [Prerequisites](#-prerequisites)
-- [Installation](#-installation)
-- [Getting Started Without Docker](#-getting-started-without-docker)
-- [Configuration](#-configuration)
-- [Running Locally](#-running-locally)
-- [Testing](#-testing)
-- [Docker](#-docker)
-- [API Endpoints](#-api-endpoints)
-- [Environment Variables](#-environment-variables)
-- [Configuration Files](#-configuration-files)
-- [Logging](#-logging)
-- [Project Structure](#-project-structure)
-- [Code Quality](#-code-quality)
-- [LLM Integration](#-llm-integration)
-- [Error Handling](#-error-handling)
-- [Security](#-security)
-- [Performance](#-performance)
-- [Troubleshooting](#-troubleshooting)
-- [Contributing](#-contributing)
+- [Resume Optimizer Backend](#resume-optimizer-backend)
+  - [Overview](#overview)
+    - [Key Capabilities](#key-capabilities)
+  - [Quick Start in 5 Steps](#quick-start-in-5-steps)
+    - [Prerequisites](#prerequisites)
+    - [Steps](#steps)
+    - [Access the Application](#access-the-application)
+  - [Technology Stack](#technology-stack)
+    - [Core Technologies](#core-technologies)
+    - [Spring Boot Starters](#spring-boot-starters)
+    - [Libraries and Tools](#libraries-and-tools)
+    - [Testing Framework](#testing-framework)
+    - [Development Tools](#development-tools)
+  - [Prerequisites](#prerequisites-1)
+    - [Verify Installation](#verify-installation)
+  - [Installation](#installation)
+    - [1. Clone the Repository](#1-clone-the-repository)
+    - [2. Build the Project](#2-build-the-project)
+    - [3. Verify Build](#3-verify-build)
+  - [Configuration](#configuration)
+    - [LLM Service Configuration](#llm-service-configuration)
+    - [Spring Boot Configuration](#spring-boot-configuration)
+  - [Getting Started Without Docker](#getting-started-without-docker)
+    - [Prerequisites](#prerequisites-2)
+    - [Step 1: Clone the Repository](#step-1-clone-the-repository)
+    - [Step 2: Set Up LLM Service](#step-2-set-up-llm-service)
+      - [Option A: Ollama (Recommended - Free, Local)](#option-a-ollama-recommended---free-local)
+      - [Option B: LM Studio (Free, Local)](#option-b-lm-studio-free-local)
+      - [Option C: OpenAI API (Paid, Cloud)](#option-c-openai-api-paid-cloud)
+    - [Step 3: Configure LLM Endpoint](#step-3-configure-llm-endpoint)
+    - [Step 4: Build the Project](#step-4-build-the-project)
+    - [Step 5: Run the Application](#step-5-run-the-application)
+    - [Step 6: Verify Installation](#step-6-verify-installation)
+    - [Development Setup](#development-setup)
+      - [Configure IDE](#configure-ide)
+      - [Enable Hot Reload](#enable-hot-reload)
+      - [Run Tests During Development](#run-tests-during-development)
+      - [Check Code Quality](#check-code-quality)
+    - [Directory Structure](#directory-structure)
+    - [Environment Variables](#environment-variables)
+    - [Common Development Tasks](#common-development-tasks)
+    - [Troubleshooting Native Setup](#troubleshooting-native-setup)
+  - [Running Locally](#running-locally)
+    - [Using Gradle](#using-gradle)
+    - [Using JAR File](#using-jar-file)
+    - [Hot Reload Development](#hot-reload-development)
+    - [Development Commands](#development-commands)
+  - [Testing](#testing)
+    - [Running Tests](#running-tests)
+    - [Test Coverage](#test-coverage)
+    - [Test Structure](#test-structure)
+    - [Test Categories](#test-categories)
+    - [Writing Tests](#writing-tests)
+  - [Docker](#docker)
+    - [Build Docker Image](#build-docker-image)
+    - [Run Docker Container](#run-docker-container)
+    - [Docker Compose](#docker-compose)
+    - [Dockerfile Overview](#dockerfile-overview)
+    - [Docker Environment Variables](#docker-environment-variables)
+    - [Docker Health Check](#docker-health-check)
+  - [API Endpoints](#api-endpoints)
+    - [File Management Endpoints](#file-management-endpoints)
+      - [List All Files](#list-all-files)
+      - [Download File](#download-file)
+      - [Delete File](#delete-file)
+    - [Document Processing Endpoints](#document-processing-endpoints)
+      - [Upload and Optimize Resume](#upload-and-optimize-resume)
+      - [Process Resume](#process-resume)
+      - [Process Cover Letter](#process-cover-letter)
+      - [Process Skills](#process-skills)
+      - [Convert Markdown to PDF](#convert-markdown-to-pdf)
+      - [Convert Markdown to DOCX](#convert-markdown-to-docx)
+    - [Interview Preparation Endpoints](#interview-preparation-endpoints)
+      - [Generate HR Interview Questions](#generate-hr-interview-questions)
+      - [Generate Job-Specific Interview Questions](#generate-job-specific-interview-questions)
+      - [Generate Reverse Interview Questions](#generate-reverse-interview-questions)
+    - [Networking and Outreach Endpoints](#networking-and-outreach-endpoints)
+      - [Generate Cold Email](#generate-cold-email)
+      - [Generate Cold LinkedIn Message](#generate-cold-linkedin-message)
+      - [Generate Thank You Email](#generate-thank-you-email)
+    - [System Endpoints](#system-endpoints)
+      - [Health Check](#health-check)
+    - [Error Responses](#error-responses)
+    - [API Documentation](#api-documentation)
+  - [Environment Variables](#environment-variables-1)
+    - [Application Configuration](#application-configuration)
+    - [JVM Options](#jvm-options)
+    - [Docker Environment Variables](#docker-environment-variables-1)
+  - [Configuration Files](#configuration-files)
+    - [application.yml](#applicationyml)
+    - [config.json](#configjson)
+    - [build.gradle](#buildgradle)
+    - [checkstyle.xml](#checkstylexml)
+  - [Logging](#logging)
+    - [Logging Configuration](#logging-configuration)
+    - [Logging Best Practices](#logging-best-practices)
+    - [Viewing Logs](#viewing-logs)
+  - [Project Structure](#project-structure)
+    - [Package Organization](#package-organization)
+  - [Code Quality](#code-quality)
+    - [Checkstyle](#checkstyle)
+    - [Code Style Standards](#code-style-standards)
+    - [Static Analysis](#static-analysis)
+  - [LLM Integration](#llm-integration)
+    - [LLM Service Architecture](#llm-service-architecture)
+    - [ApiService Implementation](#apiservice-implementation)
+    - [LLM Request Format](#llm-request-format)
+    - [Error Handling](#error-handling)
+    - [Testing LLM Integration](#testing-llm-integration)
+  - [Error Handling](#error-handling-1)
+    - [Exception Hierarchy](#exception-hierarchy)
+    - [Global Exception Handler](#global-exception-handler)
+    - [Error Response Format](#error-response-format)
+  - [Security](#security)
+    - [Security Best Practices](#security-best-practices)
+    - [CORS Configuration](#cors-configuration)
+  - [Performance](#performance)
+    - [Performance Optimization](#performance-optimization)
+    - [Performance Monitoring](#performance-monitoring)
+  - [Troubleshooting](#troubleshooting)
+    - [Common Issues](#common-issues)
+      - [Build Failures](#build-failures)
+      - [Runtime Issues](#runtime-issues)
+      - [Test Failures](#test-failures)
+    - [Debug Mode](#debug-mode)
+    - [Getting Help](#getting-help)
+  - [Contributing](#contributing)
+    - [Development Workflow](#development-workflow)
+    - [Code Standards](#code-standards)
+    - [Commit Message Format](#commit-message-format)
 
 ---
 
-## 🌟 Overview
+## Overview
 
 The Resume Optimizer Backend is a production-ready Spring Boot application that processes resumes and cover letters using Large Language Models (LLMs). It provides a comprehensive REST API for document upload, AI-powered optimization, file management, and document conversion.
 
@@ -53,7 +159,7 @@ The Resume Optimizer Backend is a production-ready Spring Boot application that 
 
 ---
 
-## � Quick Start in 5 Steps
+## Quick Start in 5 Steps
 
 Get the backend running in just 5 minutes! Follow these quick steps to start developing:
 
@@ -114,7 +220,7 @@ That's it! Your backend is now running. Start uploading resumes and generating o
 
 ---
 
-## �🛠️ Technology Stack
+## Technology Stack
 
 ### Core Technologies
 
@@ -163,7 +269,7 @@ That's it! Your backend is now running. Start uploading resumes and generating o
 
 ---
 
-## 📦 Prerequisites
+## Prerequisites
 
 Before you begin, ensure you have the following installed:
 
@@ -188,7 +294,7 @@ gradle --version
 
 ---
 
-## 💻 Installation
+## Installation
 
 ### 1. Clone the Repository
 
@@ -224,7 +330,7 @@ ls -lh build/libs/
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 ### LLM Service Configuration
 
@@ -309,7 +415,7 @@ llm:
 
 ---
 
-## 🚀 Getting Started Without Docker
+## Getting Started Without Docker
 
 If you prefer to run the backend without Docker, follow these native setup instructions.
 
@@ -468,13 +574,13 @@ java -Xms512m -Xmx1024m \
 
 Open your browser and test the following:
 
-1. **Health Check**: http://localhost:8080/api/health
+1. **Health Check**: <http://localhost:8080/api/health>
    - Should return: `{"status":"UP"}`
 
-2. **Swagger UI**: http://localhost:8080/swagger-ui/index.html
+2. **Swagger UI**: <http://localhost:8080/swagger-ui/index.html>
    - Should show interactive API documentation
 
-3. **API Docs**: http://localhost:8080/api-docs
+3. **API Docs**: <http://localhost:8080/api-docs>
    - Should return JSON OpenAPI specification
 
 ### Development Setup
@@ -535,16 +641,16 @@ After setup, you should have:
 
 ```
 java-resumes/
-├── src/main/          # Source code
-├── src/test/          # Test code
-├── build/             # Compiled output
-├── files/             # File storage (created at runtime)
-├── config/            # Configuration files
-├── build.gradle       # Build configuration
-├── config.json        # LLM configuration
-├── Dockerfile         # Docker config (optional)
-├── docker-compose.yml # Compose config (optional)
-└── README.md          # This file
+ src/main/          # Source code
+ src/test/          # Test code
+ build/             # Compiled output
+ files/             # File storage (created at runtime)
+ config/            # Configuration files
+ build.gradle       # Build configuration
+ config.json        # LLM configuration
+ Dockerfile         # Docker config (optional)
+ docker-compose.yml # Compose config (optional)
+ README.md          # This file
 ```
 
 ### Environment Variables
@@ -644,7 +750,7 @@ netstat -ano | findstr 8080  # Windows
 
 ---
 
-## 🚀 Running Locally
+## Running Locally
 
 ### Using Gradle
 
@@ -662,10 +768,10 @@ netstat -ano | findstr 8080  # Windows
 
 **Access the application:**
 
-- **API Base URL**: http://localhost:8080
-- **Swagger UI**: http://localhost:8080/swagger-ui/index.html
-- **API Docs**: http://localhost:8080/api-docs
-- **Health Check**: http://localhost:8080/api/health
+- **API Base URL**: <http://localhost:8080>
+- **Swagger UI**: <http://localhost:8080/swagger-ui/index.html>
+- **API Docs**: <http://localhost:8080/api-docs>
+- **Health Check**: <http://localhost:8080/api/health>
 
 ### Using JAR File
 
@@ -715,7 +821,7 @@ This watches for file changes and automatically recompiles.
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Running Tests
 
@@ -772,10 +878,10 @@ start build/reports/jacoco/test/html/index.html  # Windows
 
 ```
 src/test/java/ca/letkeman/resumes/
-├── ResumeControllerTest.java   # REST endpoint tests
-├── OptimizeTest.java             # Model validation tests
-├── ApiServiceTest.java           # LLM integration tests
-└── [additional test files]
+ ResumeControllerTest.java   # REST endpoint tests
+ OptimizeTest.java             # Model validation tests
+ ApiServiceTest.java           # LLM integration tests
+ [additional test files]
 ```
 
 ### Test Categories
@@ -852,7 +958,7 @@ public class ServiceTest {
 
 ---
 
-## 🐳 Docker
+## Docker
 
 ### Build Docker Image
 
@@ -932,7 +1038,7 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
 
 ---
 
-## 📡 API Endpoints
+## API Endpoints
 
 ### File Management Endpoints
 
@@ -942,7 +1048,7 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
 GET /files
 ```
 
-**Description**: Retrieves list of all uploaded and generated files
+**Description**: Retrieves list of all uploaded and generated files with metadata
 
 **Response**: `200 OK`
 
@@ -950,12 +1056,24 @@ GET /files
 [
   {
     "name": "resume-optimized.md",
-    "size": 2048,
-    "uploadDate": "2025-01-16T10:30:00Z",
-    "type": "text/markdown"
+    "url": "http://localhost:8080/files/resume-optimized.md",
+    "date": "2025-01-16 10:30"
+  },
+  {
+    "name": "cover-letter.pdf",
+    "url": "http://localhost:8080/files/cover-letter.pdf",
+    "date": "2025-01-16 10:31"
   }
 ]
 ```
+
+**Response Fields**:
+
+| Field | Type   | Description                           |
+| ----- | ------ | ------------------------------------- |
+| name  | String | File name                             |
+| url   | String | Download URL for the file             |
+| date  | String | Last modified date (yyyy-MM-dd HH:mm) |
 
 #### Download File
 
@@ -963,11 +1081,13 @@ GET /files
 GET /files/{filename}
 ```
 
-**Description**: Downloads specific file
+**Description**: Downloads specific file by name
 
 **Parameters**:
 
-- `filename` (path): Name of file to download
+| Parameter  | Type   | Required | Description              |
+| ---------- | ------ | -------- | ------------------------ |
+| `filename` | String | Yes      | Name of file to download |
 
 **Response**: `200 OK` with file binary data
 
@@ -975,6 +1095,12 @@ GET /files/{filename}
 
 - `Content-Type`: File MIME type
 - `Content-Disposition`: `attachment; filename="..."`
+
+**Example**:
+
+```bash
+curl -O http://localhost:8080/api/files/resume-optimized.pdf
+```
 
 #### Delete File
 
@@ -986,66 +1112,148 @@ DELETE /files/{filename}
 
 **Parameters**:
 
-- `filename` (path): Name of file to delete
+| Parameter  | Type   | Required | Description            |
+| ---------- | ------ | -------- | ---------------------- |
+| `filename` | String | Yes      | Name of file to delete |
 
 **Response**: `200 OK`
 
 ```json
 {
-  "message": "File deleted successfully: resume-old.pdf"
+  "message": "Delete the file successfully: resume-optimized.pdf"
 }
+```
+
+**Error Response** (`404 Not Found`):
+
+```json
+{
+  "message": "The file does not exist!"
+}
+```
+
+**Example**:
+
+```bash
+curl -X DELETE http://localhost:8080/api/files/resume-optimized.pdf
 ```
 
 ### Document Processing Endpoints
 
-#### Upload and Optimize Documents
+#### Upload and Optimize Resume
 
 ```http
 POST /upload
 ```
 
-**Description**: Upload job description and resume, generate optimized versions
+**Description**: Upload resume and job description to generate optimized resume and cover letter
 
-**Request Body**: `application/json`
+**Request**: `multipart/form-data`
+
+**Parameters**:
+
+| Parameter  | Type        | Required | Description                                  |
+| ---------- | ----------- | -------- | -------------------------------------------- |
+| `resume`   | File        | No\*     | Resume file to upload                        |
+| `job`      | File        | No\*     | Job description file to upload               |
+| `optimize` | JSON String | No       | Optimization parameters (see Optimize model) |
+
+**Optimize JSON Parameters**:
 
 ```json
 {
-  "jobDescription": "We are seeking a Senior Java Developer...",
   "resume": "John Doe\nSenior Software Engineer with 10+ years...",
-  "jobDescriptionFile": null,
-  "resumeFile": null,
-  "createOptimizedResume": true,
-  "createOptimizedCoverLetter": true
+  "jobDescription": "We are seeking a Senior Java Developer...",
+  "promptType": ["resume-optimization"]
 }
 ```
-
-**Request Parameters**:
-
-| Field                        | Type    | Required | Description               |
-| ---------------------------- | ------- | -------- | ------------------------- |
-| `jobDescription`             | String  | Yes\*    | Job description text      |
-| `resume`                     | String  | Yes\*    | Resume text               |
-| `jobDescriptionFile`         | String  | Yes\*    | Job description filename  |
-| `resumeFile`                 | String  | Yes\*    | Resume filename           |
-| `createOptimizedResume`      | Boolean | No       | Generate optimized resume |
-| `createOptimizedCoverLetter` | Boolean | No       | Generate cover letter     |
-
-\*Either text fields or file fields must be provided
 
 **Response**: `200 OK`
 
 ```json
 {
-  "message": "Documents uploaded and processed successfully. Check /files for results."
+  "message": "generating"
 }
 ```
 
-**Generated Files**:
+**Example cURL**:
 
-- `resume-optimized.md` - Optimized resume (Markdown)
-- `resume-optimized.pdf` - Optimized resume (PDF)
-- `cover-letter.md` - Cover letter (Markdown)
-- `cover-letter.pdf` - Cover letter (PDF)
+```bash
+curl -X POST http://localhost:8080/api/upload \
+  -F "resume=@resume.txt" \
+  -F "job=@job-description.txt"
+```
+
+#### Process Resume
+
+```http
+POST /process/resume
+```
+
+**Description**: Process resume with job description (alias for `/upload`)
+
+**Request**: `multipart/form-data`
+
+**Parameters**: Same as `/upload`
+
+**Response**: `200 OK`
+
+```json
+{
+  "message": "generating"
+}
+```
+
+#### Process Cover Letter
+
+```http
+POST /process/cover-letter
+```
+
+**Description**: Generate optimized cover letter based on resume and job description
+
+**Request**: `multipart/form-data`
+
+**Parameters**:
+
+| Parameter     | Type        | Required | Description                    |
+| ------------- | ----------- | -------- | ------------------------------ |
+| `coverLetter` | File        | No\*     | Cover letter file to upload    |
+| `job`         | File        | No\*     | Job description file to upload |
+| `optimize`    | JSON String | No       | Optimization parameters        |
+
+**Response**: `200 OK`
+
+```json
+{
+  "message": "generating"
+}
+```
+
+#### Process Skills
+
+```http
+POST /process/skills
+```
+
+**Description**: Generate skill recommendations based on job description
+
+**Request**: `multipart/form-data`
+
+**Parameters**:
+
+| Parameter  | Type        | Required | Description                    |
+| ---------- | ----------- | -------- | ------------------------------ |
+| `job`      | File        | Yes      | Job description file to upload |
+| `optimize` | JSON String | No       | Optimization parameters        |
+
+**Response**: `202 Accepted`
+
+```json
+{
+  "message": "Skills suggestion generation started"
+}
+```
 
 #### Convert Markdown to PDF
 
@@ -1059,7 +1267,9 @@ POST /markdownFile2PDF
 
 **Parameters**:
 
-- `file` (file): Markdown file to convert
+| Parameter | Type | Required | Description   |
+| --------- | ---- | -------- | ------------- |
+| `file`    | File | Yes      | Markdown file |
 
 **Response**: `200 OK` with PDF binary data
 
@@ -1067,6 +1277,191 @@ POST /markdownFile2PDF
 
 - `Content-Type`: `application/pdf`
 - `Content-Disposition`: `attachment; filename="document.pdf"`
+
+**Example cURL**:
+
+```bash
+curl -X POST http://localhost:8080/api/markdownFile2PDF \
+  -F "file=@resume.md" \
+  -o resume.pdf
+```
+
+#### Convert Markdown to DOCX
+
+```http
+POST /markdownFile2DOCX
+```
+
+**Description**: Converts markdown file to Microsoft Word format (.docx)
+
+**Request**: `multipart/form-data`
+
+**Parameters**:
+
+| Parameter | Type | Required | Description   |
+| --------- | ---- | -------- | ------------- |
+| `file`    | File | Yes      | Markdown file |
+
+**Response**: `200 OK` with DOCX binary data
+
+**Headers**:
+
+- `Content-Type`: `application/vnd.openxmlformats-officedocument.wordprocessingml.document`
+- `Content-Disposition`: `attachment; filename="document.docx"`
+
+### Interview Preparation Endpoints
+
+#### Generate HR Interview Questions
+
+```http
+POST /generate/interview-hr-questions
+```
+
+**Description**: Generate common HR interview questions and suggested answers based on resume and job description
+
+**Request**: `multipart/form-data`
+
+**Parameters**:
+
+| Parameter  | Type        | Required | Description                    |
+| ---------- | ----------- | -------- | ------------------------------ |
+| `job`      | File        | No\*     | Job description file to upload |
+| `optimize` | JSON String | No       | Optimization parameters        |
+
+**Response**: `202 Accepted`
+
+```json
+{
+  "message": "generating"
+}
+```
+
+#### Generate Job-Specific Interview Questions
+
+```http
+POST /generate/interview-job-specific
+```
+
+**Description**: Generate technical and role-specific interview questions
+
+**Request**: `multipart/form-data`
+
+**Parameters**:
+
+| Parameter  | Type        | Required | Description                    |
+| ---------- | ----------- | -------- | ------------------------------ |
+| `job`      | File        | No\*     | Job description file to upload |
+| `optimize` | JSON String | No       | Optimization parameters        |
+
+**Response**: `202 Accepted`
+
+```json
+{
+  "message": "generating"
+}
+```
+
+#### Generate Reverse Interview Questions
+
+```http
+POST /generate/interview-reverse
+```
+
+**Description**: Generate questions to ask the interviewer about the role and company
+
+**Request**: `multipart/form-data`
+
+**Parameters**:
+
+| Parameter  | Type        | Required | Description                    |
+| ---------- | ----------- | -------- | ------------------------------ |
+| `job`      | File        | No\*     | Job description file to upload |
+| `optimize` | JSON String | No       | Optimization parameters        |
+
+**Response**: `202 Accepted`
+
+```json
+{
+  "message": "generating"
+}
+```
+
+### Networking and Outreach Endpoints
+
+#### Generate Cold Email
+
+```http
+POST /generate/cold-email
+```
+
+**Description**: Generate personalized cold outreach email based on job description
+
+**Request**: `multipart/form-data`
+
+**Parameters**:
+
+| Parameter  | Type        | Required | Description                    |
+| ---------- | ----------- | -------- | ------------------------------ |
+| `job`      | File        | No\*     | Job description file to upload |
+| `optimize` | JSON String | No       | Optimization parameters        |
+
+**Response**: `202 Accepted`
+
+```json
+{
+  "message": "generating"
+}
+```
+
+#### Generate Cold LinkedIn Message
+
+```http
+POST /generate/cold-linkedin-message
+```
+
+**Description**: Generate personalized LinkedIn outreach message
+
+**Request**: `multipart/form-data`
+
+**Parameters**:
+
+| Parameter  | Type        | Required | Description                    |
+| ---------- | ----------- | -------- | ------------------------------ |
+| `job`      | File        | No\*     | Job description file to upload |
+| `optimize` | JSON String | No       | Optimization parameters        |
+
+**Response**: `202 Accepted`
+
+```json
+{
+  "message": "generating"
+}
+```
+
+#### Generate Thank You Email
+
+```http
+POST /generate/thank-you-email
+```
+
+**Description**: Generate personalized thank you email for after interviews
+
+**Request**: `multipart/form-data`
+
+**Parameters**:
+
+| Parameter  | Type        | Required | Description                    |
+| ---------- | ----------- | -------- | ------------------------------ |
+| `job`      | File        | No\*     | Job description file to upload |
+| `optimize` | JSON String | No       | Optimization parameters        |
+
+**Response**: `202 Accepted`
+
+```json
+{
+  "message": "generating"
+}
+```
 
 ### System Endpoints
 
@@ -1091,33 +1486,43 @@ GET /api/health
 
 All endpoints return consistent error responses:
 
-**400 Bad Request**:
+**400 Bad Request** - Invalid or missing parameters:
 
 ```json
 {
-  "error": "VALIDATION_ERROR",
-  "message": "Job description is required",
-  "timestamp": "2025-01-16T10:30:00Z"
+  "message": "No file/invalid file provided"
 }
 ```
 
-**404 Not Found**:
+**400 Bad Request** - Invalid JSON in optimize parameter:
 
 ```json
 {
-  "error": "FILE_NOT_FOUND",
-  "message": "File not found: resume.pdf",
-  "timestamp": "2025-01-16T10:30:00Z"
+  "message": "invalid optimize parameter"
 }
 ```
 
-**500 Internal Server Error**:
+**404 Not Found** - File not found:
 
 ```json
 {
-  "error": "INTERNAL_SERVER_ERROR",
-  "message": "An unexpected error occurred",
-  "timestamp": "2025-01-16T10:30:00Z"
+  "message": "The file does not exist!"
+}
+```
+
+**417 Expectation Failed** - Missing required fields:
+
+```json
+{
+  "message": "Required property missing or invalid."
+}
+```
+
+**500 Internal Server Error** - Server error:
+
+```json
+{
+  "message": "problem with conversion"
 }
 ```
 
@@ -1133,7 +1538,7 @@ JSON specification for API tools and clients.
 
 ---
 
-## 🔐 Environment Variables
+## Environment Variables
 
 ### Application Configuration
 
@@ -1174,7 +1579,7 @@ environment:
 
 ---
 
-## 📋 Configuration Files
+## Configuration Files
 
 ### application.yml
 
@@ -1248,7 +1653,7 @@ Defines code style rules based on Google Java Style Guide.
 
 ---
 
-## 📝 Logging
+## Logging
 
 ### Logging Configuration
 
@@ -1329,99 +1734,99 @@ tail -f logs/application.log
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 java-resumes/
-├── src/
-│   ├── main/
-│   │   ├── java/ca/letkeman/resumes/
-│   │   │   ├── controller/              # REST Controllers
-│   │   │   │   └── ResumeController.java
-│   │   │   │       - REST API endpoints
-│   │   │   │       - Request/response handling
-│   │   │   │       - File operations
-│   │   │   │
-│   │   │   ├── service/                 # Business Logic
-│   │   │   │   ├── FilesStorageService.java (interface)
-│   │   │   │   └── FilesStorageServiceImpl.java
-│   │   │   │       - File storage operations
-│   │   │   │       - File listing, upload, delete
-│   │   │   │
-│   │   │   ├── model/                   # Data Models
-│   │   │   │   ├── Optimize.java
-│   │   │   │   │   - Request payload for optimization
-│   │   │   │   └── FileInfo.java
-│   │   │   │       - File metadata
-│   │   │   │
-│   │   │   ├── optimizer/               # LLM Integration
-│   │   │   │   ├── ApiService.java
-│   │   │   │   │   - LLM API communication
-│   │   │   │   ├── HtmlToPdf.java
-│   │   │   │   │   - PDF conversion
-│   │   │   │   ├── ChatBody.java
-│   │   │   │   │   - LLM request structure
-│   │   │   │   ├── Message.java
-│   │   │   │   │   - Chat message structure
-│   │   │   │   └── responses/
-│   │   │   │       ├── LLMResponse.java
-│   │   │   │       ├── Choice.java
-│   │   │   │       ├── Message.java
-│   │   │   │       ├── Usage.java
-│   │   │   │       └── Stats.java
-│   │   │   │
-│   │   │   ├── message/                 # Response Messages
-│   │   │   │   └── ResponseMessage.java
-│   │   │   │       - API response wrapper
-│   │   │   │
-│   │   │   ├── Config.java              # Configuration
-│   │   │   │   - Reads config.json
-│   │   │   │   - LLM configuration
-│   │   │   │
-│   │   │   ├── Utility.java             # Utility Methods
-│   │   │   │   - Helper functions
-│   │   │   │   - Common operations
-│   │   │   │
-│   │   │   ├── BackgroundResume.java    # Background Tasks
-│   │   │   │   - Async processing
-│   │   │   │
-│   │   │   └── RestServiceApplication.java
-│   │   │       - Spring Boot main class
-│   │   │       - Application entry point
-│   │   │
-│   │   └── resources/
-│   │       ├── application.yml          # Spring configuration
-│   │       └── static/                  # Static resources
-│   │
-│   └── test/                            # Test Files
-│       └── java/ca/letkeman/resumes/
-│           ├── ResumeControllerTest.java
-│           ├── OptimizeTest.java
-│           └── ApiServiceTest.java
-│
-├── config/                              # Configuration
-│   └── checkstyle/
-│       └── checkstyle.xml              # Code style rules
-│
-├── gradle/                              # Gradle Wrapper
-│   └── wrapper/
-│
-├── build/                               # Build Output
-│   ├── classes/                        # Compiled classes
-│   ├── libs/                           # JAR files
-│   └── reports/                        # Test/coverage reports
-│
-├── files/                               # File Storage (runtime)
-│
-├── build.gradle                         # Gradle build script
-├── settings.gradle                      # Gradle settings
-├── gradle.properties                    # Gradle properties
-├── gradlew                              # Gradle wrapper (Unix)
-├── gradlew.bat                          # Gradle wrapper (Windows)
-├── config.json                          # LLM configuration
-├── Dockerfile                           # Docker build config
-├── .gitignore                           # Git ignore rules
-└── BACKEND_README.md                    # This file
+ src/
+    main/
+       java/ca/letkeman/resumes/
+          controller/              # REST Controllers
+             ResumeController.java
+                - REST API endpoints
+                - Request/response handling
+                - File operations
+
+          service/                 # Business Logic
+             FilesStorageService.java (interface)
+             FilesStorageServiceImpl.java
+                - File storage operations
+                - File listing, upload, delete
+
+          model/                   # Data Models
+             Optimize.java
+               - Request payload for optimization
+             FileInfo.java
+                - File metadata
+
+          optimizer/               # LLM Integration
+             ApiService.java
+               - LLM API communication
+             HtmlToPdf.java
+               - PDF conversion
+             ChatBody.java
+               - LLM request structure
+             Message.java
+               - Chat message structure
+             responses/
+                 LLMResponse.java
+                 Choice.java
+                 Message.java
+                 Usage.java
+                 Stats.java
+
+          message/                 # Response Messages
+             ResponseMessage.java
+                - API response wrapper
+
+          Config.java              # Configuration
+            - Reads config.json
+            - LLM configuration
+
+          Utility.java             # Utility Methods
+            - Helper functions
+            - Common operations
+
+          BackgroundResume.java    # Background Tasks
+            - Async processing
+
+          RestServiceApplication.java
+             - Spring Boot main class
+             - Application entry point
+
+       resources/
+           application.yml          # Spring configuration
+           static/                  # Static resources
+
+    test/                            # Test Files
+        java/ca/letkeman/resumes/
+            ResumeControllerTest.java
+            OptimizeTest.java
+            ApiServiceTest.java
+
+ config/                              # Configuration
+    checkstyle/
+        checkstyle.xml              # Code style rules
+
+ gradle/                              # Gradle Wrapper
+    wrapper/
+
+ build/                               # Build Output
+    classes/                        # Compiled classes
+    libs/                           # JAR files
+    reports/                        # Test/coverage reports
+
+ files/                               # File Storage (runtime)
+
+ build.gradle                         # Gradle build script
+ settings.gradle                      # Gradle settings
+ gradle.properties                    # Gradle properties
+ gradlew                              # Gradle wrapper (Unix)
+ gradlew.bat                          # Gradle wrapper (Windows)
+ config.json                          # LLM configuration
+ Dockerfile                           # Docker build config
+ .gitignore                           # Git ignore rules
+ BACKEND_README.md                    # This file
 ```
 
 ### Package Organization
@@ -1459,7 +1864,7 @@ java-resumes/
 
 ---
 
-## 🔍 Code Quality
+## Code Quality
 
 ### Checkstyle
 
@@ -1561,23 +1966,23 @@ This runs:
 
 ---
 
-## 🤖 LLM Integration
+## LLM Integration
 
 ### LLM Service Architecture
 
 ```
 Application
-    ↓
+
 ApiService.java
-    ↓
+
 HTTP POST (JSON)
-    ↓
+
 LLM Service (Ollama/LM Studio/OpenAI)
-    ↓
+
 Response (JSON)
-    ↓
+
 Parse & Process
-    ↓
+
 Generate Documents
 ```
 
@@ -1662,19 +2067,19 @@ public void testOptimizeResume() {
 
 ---
 
-## ⚠️ Error Handling
+## Error Handling
 
 ### Exception Hierarchy
 
 ```
 RuntimeException
-├── StorageException
-│   ├── StorageFileNotFoundException
-│   └── StorageUploadException
-├── ProcessingException
-│   ├── LLMServiceException
-│   └── DocumentConversionException
-└── ValidationException
+ StorageException
+    StorageFileNotFoundException
+    StorageUploadException
+ ProcessingException
+    LLMServiceException
+    DocumentConversionException
+ ValidationException
 ```
 
 ### Global Exception Handler
@@ -1723,7 +2128,7 @@ public class GlobalExceptionHandler {
 
 ---
 
-## 🔒 Security
+## Security
 
 ### Security Best Practices
 
@@ -1790,7 +2195,7 @@ public class CorsConfig implements WebMvcConfigurer {
 
 ---
 
-## ⚡ Performance
+## Performance
 
 ### Performance Optimization
 
@@ -1843,7 +2248,7 @@ implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -1951,7 +2356,7 @@ logging:
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please follow these guidelines:
 
@@ -2011,7 +2416,7 @@ Closes #123
 
 **For complete documentation, see the [Root README](README.md) and [PRD](PRD-PRIMEREACT-DOCKER-v2.md)**
 
-**Made with ☕ using Java, Spring Boot, and AI**
+**Made with using Java, Spring Boot, and AI**
 
 ---
 

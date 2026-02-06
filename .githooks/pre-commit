@@ -16,16 +16,16 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-# Check 1: Spotless Format Check
-echo -e "${YELLOW}[1/3] Checking code formatting with Spotless...${NC}"
-if ./gradlew spotlessCheck --no-daemon --quiet 2>/dev/null; then
-    echo -e "${GREEN}✓ Spotless check passed${NC}"
+# Check 1: Spotless Format - Auto-Apply
+echo -e "${YELLOW}[1/3] Applying code formatting with Spotless...${NC}"
+if ./gradlew spotlessApply --no-daemon --quiet 2>/dev/null; then
+    echo -e "${GREEN}✓ Spotless formatting applied${NC}"
+    # Stage any formatting changes that were made
+    git add -A 2>/dev/null || true
 else
-    echo -e "${RED}✗ Spotless formatting issues found!${NC}"
+    echo -e "${RED}✗ Spotless formatting failed!${NC}"
     echo ""
-    echo "Run: ./gradlew spotlessApply"
-    echo "This will automatically fix formatting issues."
-    echo "Then stage the changes and commit again."
+    echo "Please review the error and try again."
     echo ""
     exit 1
 fi
