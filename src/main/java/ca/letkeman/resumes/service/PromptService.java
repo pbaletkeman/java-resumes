@@ -51,7 +51,7 @@ public class PromptService {
       return "";
     }
 
-    String fileName = promptName + ".md";
+    String fileName = promptName.toUpperCase() + ".md";
 
     // Try external directory first (if configured)
     if (externalPromptsDir != null && !externalPromptsDir.trim().isEmpty()) {

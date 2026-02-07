@@ -1,23 +1,39 @@
 services:
-  # Ollama LLM Service (Optional - comment out if using external Ollama)
+  # ========================================
+  # Ollama LLM Service (Local Language Model)
+  # ========================================
+  # Ollama provides local LLM inference without API costs or external dependencies.
+  # Models are downloaded on first run and cached in the ollama-data volume.
+  #
+  # QUICK START:
+  #   1. docker-compose up -d ollama
+  #   2. docker exec resume-ollama ollama pull tinyllama  (or any model)
+  #   3. Access: http://localhost:11434 (API endpoint)
+  #
+  # AVAILABLE MODELS: tinyllama, mistral, llama2, neural-chat, etc.
+  # For full list: https://ollama.ai/library
+  #
+  # NOTE: Set LLM_ENDPOINT in backend service to use Ollama
+  # Default: LLM_ENDPOINT=http://ollama:11434/v1/chat/completions
   ollama:
     image: ollama/ollama:latest
     container_name: resume-ollama
     ports:
-      - "11434:11434"
+      - "11434:11434" # Ollama API port
     volumes:
-      - ollama-data:/root/.ollama
+      - ollama-data:/root/.ollama # Persists downloaded models
     networks:
       - resume-network
     healthcheck:
+      # Checks if Ollama API is responding
       test:
         ["CMD-SHELL", "curl -f http://localhost:11434/api/version || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 6
-      start_period: 10s
+      start_period: 10s # Extra startup time for container initialization
     restart: unless-stopped
-    # Uncomment below for GPU support (requires nvidia-docker)
+    # Optional: Uncomment below for GPU support (requires nvidia-docker)
     # deploy:
     #   resources:
     #     reservations:
@@ -39,6 +55,7 @@ services:
       - UPLOAD_PATH=files
       - LLM_ENDPOINT=${LLM_ENDPOINT:-http://ollama:11434/v1/chat/completions}
       - LLM_APIKEY=${LLM_APIKEY:-not-needed-for-local}
+      - LLM_MODEL=${LLM_MODEL:-mistral:latest}
     volumes:
       - backend-files:/app/files
       - ./config.json:/app/config.json:ro
@@ -72,7 +89,10 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - VITE_API_BASE_URL=http://backend:8080
+      # Don't override VITE_API_BASE_URL - use default (http://localhost:8080)
+      # Frontend makes requests to http://localhost:8080/api/...
+      # Vite proxy intercepts and routes to http://backend:8080/api/...
+      - VITE_API_PROXY_TARGET=http://backend:8080
       - NODE_ENV=development
     depends_on:
       backend:

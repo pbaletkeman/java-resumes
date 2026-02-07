@@ -41,31 +41,44 @@ AI-powered full-stack application for resume and cover letter optimization using
 
 ## 🚀 Quick Start
 
+### Docker Compose (Recommended - 3 Steps)
+
 ```bash
 git clone https://github.com/pbaletkeman/java-resumes.git
 cd java-resumes
 
-# Edit config.json with your LLM service
-docker compose up --build
+# Step 1: Start all services (Frontend, Backend, Ollama LLM)
+docker compose up -d
 
-# Access at http://localhost
+# Step 2: Pull an LLM model (e.g., tinyllama)
+docker exec resume-ollama ollama pull tinyllama
+
+# Step 3: Access application
+# Frontend: http://localhost:3000
+# Backend: http://localhost:8080
+# Ollama: http://localhost:11434
 ```
 
-**→ [Detailed Setup Guide](docs/QUICK_START.md)**
+**Available Compose Files:**
+
+- `docker-compose.yml` - Main configuration with all services
+- `docker-compose.frontend-backend.yml` - Alternative configuration (same services, different file structure)
+
+**→ [Docker Compose Quick Start](docs/DOCKER_COMPOSE_QUICK_START.md) | [Detailed Setup Guide](docs/QUICK_START.md)**
 
 ---
 
 ## 📚 Documentation Index
 
-| Topic             | Doc                                           | Topic            | Doc                                                     |
-| ----------------- | --------------------------------------------- | ---------------- | ------------------------------------------------------- |
-| **Setup**         | [Quick Start](docs/QUICK_START.md)            | **API**          | [API Reference](docs/API_REFERENCE.md)                  |
-| **Architecture**  | [System Design](docs/ARCHITECTURE.md)         | **Testing**      | [Test Guide](docs/TESTING.md)                           |
-| **Configuration** | [Config Guide](docs/CONFIGURATION.md)         | **Code Quality** | [Git Hooks](docs/git-hooks/README_GIT_HOOKS.md)         |
-| **Development**   | [Dev Setup](docs/DEVELOPMENT_SETUP.md)        | **Issues**       | [Troubleshooting](docs/TROUBLESHOOTING.md)              |
-| **Deployment**    | [Deploy Guide](docs/PRODUCTION_DEPLOYMENT.md) | **Env Vars**     | [Configuration](docs/ENVIRONMENT_VARIABLES.md)          |
-| **Docker**        | [Docker Setup](docs/DOCKER_SETUP.md)          | **Mock Mode**    | [Ollama Mock](docs/OLLAMA_MOCK_MODE.md)                 |
-| **Ollama Setup**  | [Ollama Guide](docs/OLLAMA_SETUP.md)          | **GitHub CI**    | [GitHub Environment](docs/GITHUB_ENVIRONMENT_OLLAMA.md) |
+| Topic             | Doc                                                  | Topic             | Doc                                                     |
+| ----------------- | ---------------------------------------------------- | ----------------- | ------------------------------------------------------- |
+| **Setup**         | [Quick Start](docs/QUICK_START.md)                   | **API**           | [API Reference](docs/API_REFERENCE.md)                  |
+| **Docker**        | [Docker Compose](docs/DOCKER_COMPOSE_QUICK_START.md) | **Docker Detail** | [Docker Setup](docs/DOCKER_SETUP.md)                    |
+| **Architecture**  | [System Design](docs/ARCHITECTURE.md)                | **Testing**       | [Test Guide](docs/TESTING.md)                           |
+| **Configuration** | [Config Guide](docs/CONFIGURATION.md)                | **Code Quality**  | [Git Hooks](docs/git-hooks/README_GIT_HOOKS.md)         |
+| **Development**   | [Dev Setup](docs/DEVELOPMENT_SETUP.md)               | **Issues**        | [Troubleshooting](docs/TROUBLESHOOTING.md)              |
+| **Deployment**    | [Deploy Guide](docs/PRODUCTION_DEPLOYMENT.md)        | **Env Vars**      | [Configuration](docs/ENVIRONMENT_VARIABLES.md)          |
+| **Ollama LLM**    | [Ollama Guide](docs/OLLAMA_SETUP.md)                 | **GitHub CI**     | [GitHub Environment](docs/GITHUB_ENVIRONMENT_OLLAMA.md) |
 
 ---
 

@@ -76,9 +76,16 @@ public final class BackgroundResume implements Runnable {
     } else {
       this.optimize = null;
     }
-    this.endpoint = c.getEndpoint();
-    this.apikey = c.getApikey();
-    this.model = c.getModel();
+
+    // Support environment variable overrides for LLM configuration
+    // This allows flexibility across different deployment scenarios (Docker, local, cloud)
+    String envEndpoint = System.getenv("LLM_ENDPOINT");
+    String envApikey = System.getenv("LLM_APIKEY");
+    String envModel = System.getenv("LLM_MODEL");
+
+    this.endpoint = (envEndpoint != null && !envEndpoint.isEmpty()) ? envEndpoint : c.getEndpoint();
+    this.apikey = (envApikey != null && !envApikey.isEmpty()) ? envApikey : c.getApikey();
+    this.model = (envModel != null && !envModel.isEmpty()) ? envModel : c.getModel();
     this.root = root;
   }
 

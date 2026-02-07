@@ -1,53 +1,256 @@
-### Resume API Collection
+### Resume & Interview API Test Collection
 # VS Code REST Client format
-# Base URL: https://localhost:8080
+# Base URL: http://localhost:8080
+# These requests test all available prompt types with sample resume and job description
+
+### ========================================
+### HEALTH & FILE MANAGEMENT ENDPOINTS
+### ========================================
+
+###
+### get ollama models (optional, for testing connectivity and model availability)
+### ollama pull mistral:latest
+###
 
 ### Health Check
-GET https://localhost:8080/api/health
+GET http://localhost:8080/api/health
 
 ###
 
-### List Files
-GET https://localhost:8080/api/files
-
-###
-
-### Download File
-GET https://localhost:8080/api/files/{filename}
-
-###
-
-### Delete File
-DELETE https://localhost:8080/api/files/{filename}
+### List All Files
+GET http://localhost:8080/api/files
 
 ###
 
 ### Delete All Files
-POST https://localhost:8080/api/delete-all
+POST http://localhost:8080/api/delete-all
 
 ###
 
+### ========================================
+### INTERVIEW PREPARATION ENDPOINTS
+### ========================================
+
+### Interview - HR Questions
+POST http://localhost:8080/api/generate/interview-hr-questions
+Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="optimize"
+
+{"promptType":["interview-hr-questions"],"resume":"# Peter Letkeman\n\n## Certified Python & Java Spring Developer\npete@letkeman.ca | 519-331-1405 | Toronto, ON\n\n## Summary:\nWith over two decades of experience developing software applications and solutions, I'm a Certified Python 3 and Java Spring Developer with a broad skill set.\n\n## Skills:\n- Certified Python 3.x Developer\n- Certified Java 8 Programmer\n- Java Spring Developer\n- Elasticsearch, JavaScript, JSON, MySQL, PostgreSQL, MongoDB\n- Database design and administration\n- Web application development\n- Git/Source Control Systems, Agile/Scrum\n- RESTful API development, Microservices\n\n## Experience:\n\n**Developer | Rakuten Kobo, Toronto, ON (May 2023 - Present)**\n- Developed reporting platform using Java and Python APIs\n- Engineered fraud prevention solutions\n- Mentored junior developers\n\n**Senior Software Developer | SystemSoft Technologies (August 2021 - April 2023)**\n- Performance optimization\n- Design and user experience\n- Team mentoring\n\n## Education:\nSoftware Architecture - University of Alberta (Coursera)","jobDescription":"PointClickCare is seeking an Intermediate Software Engineer with 2+ years Java, SpringBoot experience. Required: Jenkins, Docker/Kubernetes on Cloud (Azure or AWS), RESTful APIs. Nice to have: SQL Server, NoSQL (Azure ADLS, DeltaLake). Self-starter, team player, problem-solver.","company":"PointClickCare","jobTitle":"Data Software Engineer","temperature":0.7,"model":"mistral:latest"}
+------FormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### Interview - Job-Specific Questions
+POST http://localhost:8080/api/generate/interview-job-specific
+Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="optimize"
+
+{"promptType":["interview-job-specific"],"resume":"# Peter Letkeman\n\n## Certified Python & Java Spring Developer\npete@letkeman.ca | 519-331-1405 | Toronto, ON\n\n## Summary:\nWith 20+ years experience, I'm a Certified Python 3 and Java Spring Developer.\n\n## Skills:\n- Python 3, Java 8, Spring Boot\n- SpringBoot Microservices, RESTful APIs\n- SQL, NoSQL, PostgreSQL, MongoDB\n- Docker, Kubernetes, Azure, AWS\n- Git, Agile/Scrum\n\n## Experience:\n**Developer | Rakuten Kobo (May 2023 - Present)**\n- Java and Python APIs\n- Fraud detection systems\n- Junior developer mentoring\n\n**Senior Developer | SystemSoft (Aug 2021 - Apr 2023)**\n- Performance optimization\n- Cross-functional teams","jobDescription":"Int. Software engineer with 2+ years Java, SpringBoot. Experience with Jenkins, Docker/Kubernetes on Cloud (Azure or AWS). RESTful API endpoints required. Relational databases (SQL Server). Non-relational stores (Azure ADLS, DeltaLake, Hudi). Organization, critical-thinking. Self-starter. Team player.","company":"PointClickCare","jobTitle":"Data Software Engineer","temperature":0.7,"model":"mistral:latest"}
+------FormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### Interview - Reverse Questions
+POST http://localhost:8080/api/generate/interview-reverse
+Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="optimize"
+
+{"promptType":["interview-reverse"],"resume":"# Peter Letkeman\n\n## Certified Python & Java Spring Developer\n\n## Summary:\nWith 20+ years experience, I'm a Certified Python 3 and Java Spring Developer.\n\n## Skills:\n- Java, Python, SpringBoot\n- RESTful APIs, Microservices\n- Docker, Kubernetes\n- SQL, NoSQL\n\n## Experience:\n**Developer | Rakuten Kobo (May 2023 - Present)**\n- APIs and fraud detection\n- Junior developer mentoring\n\n**Senior Developer | SystemSoft (Aug 2021 - Apr 2023)**\n- Performance optimization","jobDescription":"Data Software Engineer. 2+ years Java, SpringBoot. Docker/Kubernetes. RESTful APIs. SQL and NoSQL. Team player, self-starter.","company":"PointClickCare","jobTitle":"Data Software Engineer","temperature":0.7,"model":"mistral:latest"}
+------FormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### ========================================
+### PROFESSIONAL NETWORKING ENDPOINTS
+### ========================================
+
+### Networking - Cold Email
+POST http://localhost:8080/api/generate/cold-email
+Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="optimize"
+
+{"promptType":["cold-email"],"resume":"# Peter Letkeman\n\n## Certified Python & Java Spring Developer\npete@letkeman.ca | 519-331-1405\n\n## Summary:\nWith 20+ years experience, I'm a Certified Python 3 and Java Spring Developer.\n\n## Skills:\n- Java, Python, SpringBoot\n- RESTful APIs, Microservices\n- Docker, Kubernetes, Cloud\n- SQL, NoSQL\n- Agile/Scrum","jobDescription":"PointClickCare is a healthcare technology platform. We value innovation, teamwork, continuous learning.","company":"PointClickCare","jobTitle":"Data Software Engineer","temperature":0.7,"model":"mistral:latest"}
+------FormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### Networking - Cold LinkedIn Message
+POST http://localhost:8080/api/generate/cold-linkedin-message
+Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="optimize"
+
+{"promptType":["cold-linkedin-message"],"resume":"# Peter Letkeman\n\n## Certified Python & Java Spring Developer\npete@letkeman.ca\n\n## Summary:\nCertified Python 3 and Java Spring Developer with 20+ years in software development.\n\n## Skills:\n- Java, Python, SpringBoot\n- Full-stack development\n- Cloud (Azure, AWS)\n- Database design & optimization","jobDescription":"PointClickCare - Healthcare technology platform. Seeking talented software engineers.","company":"PointClickCare","jobTitle":"Data Software Engineer","temperature":0.7,"model":"mistral:latest"}
+------FormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### Networking - Thank You Email
+POST http://localhost:8080/api/generate/thank-you-email
+Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="optimize"
+
+{"promptType":["thank-you-email"],"resume":"# Peter Letkeman\n\n## Certified Python & Java Spring Developer\npete@letkeman.ca\n\n## Summary:\nCertified Python 3 and Java Spring Developer with extensive experience and team leadership.\n\n## Experience:\n**Developer | Rakuten Kobo (May 2023 - Present)**\n- RESTful API development\n- System design\n- Team mentoring","jobDescription":"PointClickCare seeking Data Software Engineer with Java/SpringBoot experience.","company":"PointClickCare","jobTitle":"Data Software Engineer","interviewerName":"John Smith","temperature":0.7,"model":"mistral:latest"}
+------FormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### ========================================
+### DOCUMENT OPTIMIZATION ENDPOINTS
+### ========================================
+
+### Optimize - Resume
+POST http://localhost:8080/api/process/resume
+Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="optimize"
+
+{"promptType":["resume"],"resume":"# Peter Letkeman\n\n## Certified Python & Java Spring Developer\npete@letkeman.ca | 519-331-1405\n\nWith 20+ years developing software, I'm a Certified Python 3 and Java Spring Developer.\n\n## Skills:\n- Python 3.x, Java 8, Spring Developer\n- Elasticsearch, JavaScript, JSON\n- MySQL, SQLite, NoSQL, PostgreSQL, MongoDB\n- Database design and administration\n- RESTful API development\n- Microservices\n\n## Experience:\n**Developer | Rakuten Kobo (May 2023 - Present)**\n- Platform using Java and Python APIs\n- Fraud detection system\n- Junior developer mentoring\n\n**Senior Developer | SystemSoft (Aug 2021 - Apr 2023)**\n- Performance optimization\n- Design and UX\n- Security and API integration\n\n## Education:\nSoftware Architecture - University of Alberta","jobDescription":"PointClickCare: Data Software Engineer. Requirements: 2+ years Java/SpringBoot. Docker/Kubernetes, Azure or AWS. RESTful APIs. SQL databases. NoSQL experience preferred.","company":"PointClickCare","jobTitle":"Data Software Engineer","temperature":0.7,"model":"mistral:latest"}
+------FormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### Optimize - Cover Letter
+POST http://localhost:8080/api/process/cover-letter
+Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="optimize"
+
+{"promptType":["cover"],"resume":"# Peter Letkeman\n\nCertified Python 3 and Java Spring Developer with 20+ years experience. Full-stack development, microservices, cloud technologies.\n\n## Skills:\n- Java, Python, SpringBoot\n- Docker, Kubernetes\n- RESTful APIs, Microservices\n- SQL/NoSQL databases","jobDescription":"PointClickCare is seeking Data Software Engineer with 2+ years Java/SpringBoot. Docker/Kubernetes on Cloud (Azure/AWS). RESTful API experience required.","company":"PointClickCare","jobTitle":"Data Software Engineer","temperature":0.7,"model":"mistral:latest"}
+------FormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### Optimize - Skills Development Plan
+POST http://localhost:8080/api/process/skills
+Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="optimize"
+
+{"promptType":["skills"],"resume":"# Peter Letkeman\n\nCertified Python 3 and Java Spring Developer. Current skills: Java, Python, SpringBoot, Docker, REST APIs, SQL/NoSQL.","jobDescription":"PointClickCare: Data Software Engineer. Requires: 2+ years Java/SpringBoot, Docker/Kubernetes, Cloud (Azure/AWS), RESTful APIs, SQL Server, NoSQL (ADLS, DeltaLake). Nice to have: Apache Hudi, Jenkins.","company":"PointClickCare","jobTitle":"Data Software Engineer","temperature":0.7,"model":"mistral:latest"}
+------FormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### ========================================
+### FILE CONVERSION ENDPOINTS
+### ========================================
+
 ### Convert Markdown to PDF
-POST https://localhost:8080/api/markdownFile2PDF
+POST http://localhost:8080/api/markdownFile2PDF
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="file"; filename="resume.md"
-Content-Type: application/octet-stream
+Content-Type: text/markdown
 
-< ./resume.md
+# Peter Letkeman
+
+## Certified Python & Java Spring Developer
+pete@letkeman.ca | 519-331-1405 | Toronto, ON
+
+## Summary
+With over two decades of experience, I'm a Certified Python 3 and Java Spring Developer with expertise in full-stack development.
+
+## Skills
+- Java & Spring Boot
+- Python 3
+- RESTful APIs
+- Microservices
+- Docker & Kubernetes
+
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 ###
 
-### Optimize Resume
-POST https://localhost:8080/api/upload
+### Convert Markdown to DOCX
+POST http://localhost:8080/api/markdownFile2DOCX
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="optimize"
+Content-Disposition: form-data; name="file"; filename="resume.md"
+Content-Type: text/markdown
 
-{"resume": "", "jobDescription": ""}
+# Peter Letkeman
+
+## Certified Python & Java Spring Developer
+pete@letkeman.ca | 519-331-1405 | Toronto, ON
+
+## Summary
+With over two decades of experience, I'm a Certified Python 3 and Java Spring Developer.
+
+## Skills
+- Java & Spring Boot
+- Python 3
+- RESTful APIs
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### ========================================
+### NOTES FOR TESTING
+### ========================================
+###
+### IMPORTANT: Multipart Form-Data Format
+### All /generate/* and /process/* endpoints use multipart/form-data format.
+### The JSON request is sent as a form field named "optimize".
+### This format handles complex JSON with newlines and special characters properly.
+###
+### To test these requests:
+### 1. Ensure the backend is running: docker-compose up -d
+### 2. Pull an LLM model: docker exec resume-ollama ollama pull mistral
+### 3. Use REST Client extension in VS Code (REST Client by Huachao Mao)
+### 4. Click "Send Request" above each request
+###
+### Request Body Format:
+### Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+### [boundary line]
+### Content-Disposition: form-data; name="optimize"
+### [JSON payload]
+### [boundary line]--
+###
+### Endpoint Mapping:
+### - /api/generate/* → Interview preparation and networking prompts
+### - /api/process/* → Document optimization (resume, cover letter, skills)
+###
+### Field Mapping (JSON inside optimize parameter):
+### - "resume" field → Optimize.resume_string (via @SerializedName)
+### - "company" field → Optimize.company_name (via @SerializedName)
+### - "jobDescription" → Optimize.jobDescription (direct mapping)
+### - "jobTitle" → Optimize.jobTitle (direct mapping)
+### - "interviewerName" → Optimize.interviewerName (optional, for thank-you emails)
+### - "temperature" → Optimize.temperature (0-1 numeric value)
+### - "model" → Optimize.model (LLM model identifier)
+###
+### All string fields should be valid JSON strings with proper escaping.
+### Temperature should be between 0 and 1 (0.7 recommended).
+###
+### Prompt Types Available:
+### - interview-hr-questions: Behavioral interview questions
+### - interview-job-specific: Technical/job-specific questions
+### - interview-reverse: Questions to ask interviewers
+### - cold-email: Professional cold email
+### - cold-linkedin-message: LinkedIn connection message
+### - thank-you-email: Post-interview thank you message
+### - resume: Resume optimized for job posting
+### - cover-letter: Cover letter tailored to job posting
+### - skills: Skills development and learning plan
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="resume"; filename="resume.pdf"
 Content-Type: application/pdf
