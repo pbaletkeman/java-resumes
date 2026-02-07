@@ -95,7 +95,10 @@ export const FileHistory: React.FC = () => {
 
   return (
     <>
-      <Card title={`File History (${fileCount} files)`} className="h-full">
+      <Card
+        title={`File History (${Math.min(10, fileCount)} of ${fileCount} files)`}
+        className="h-full"
+      >
         {newFilesAlert && (
           <Message
             severity="success"
@@ -125,7 +128,7 @@ export const FileHistory: React.FC = () => {
         ) : files.length === 0 ? (
           <div className="text-center p-4 text-gray-500">No Files Found</div>
         ) : (
-          <DataView value={files} listTemplate={listTemplate} />
+          <DataView value={files.slice(0, 10)} listTemplate={listTemplate} />
         )}
       </Card>
       <ConfirmDialog
