@@ -65,107 +65,109 @@ export const MarkdownToPdfForm: React.FC = () => {
   };
 
   return (
-    <Card title="Markdown to PDF Converter" className="h-full">
-      <div className="flex flex-column gap-6 p-4">
-        <div className="field">
-          <label className="font-bold block mb-3">Select Markdown File</label>
-          <FileUpload
-            mode="basic"
-            name="markdownFile"
-            accept=".md"
-            maxFileSize={50000000}
-            onSelect={handleFileSelect}
-            onClear={handleClear}
-            chooseLabel="Choose Markdown File"
-            className="w-full"
-          />
-          {error && <Message severity="error" text={error} className="mt-3 w-full" />}
-          {markdownFile && (
-            <Message
-              severity="info"
-              text={`Selected: ${markdownFile.name}`}
-              className="mt-3 w-full"
+    <div style={{ marginTop: '1.5rem' }}>
+      <Card title="Markdown to PDF Converter" className="h-full">
+        <div className="flex flex-column gap-6 p-4">
+          <div className="field">
+            <label className="font-bold block mb-3">Select Markdown File</label>
+            <FileUpload
+              mode="basic"
+              name="markdownFile"
+              accept=".md"
+              maxFileSize={50000000}
+              onSelect={handleFileSelect}
+              onClear={handleClear}
+              chooseLabel="Choose Markdown File"
+              className="w-full"
             />
-          )}
-
-          {/* Information message about extra markdown */}
-          <div
-            className="mt-4 w-full p-4"
-            style={{
-              backgroundColor: 'var(--surface-section)',
-              border: '1px solid var(--surface-border)',
-              borderRadius: '6px',
-            }}
-          >
-            <div style={{ display: 'flex', gap: '0.75rem' }}>
-              <i
-                className="pi pi-info-circle"
-                style={{ color: 'var(--primary-color)', marginTop: '0.25rem', flexShrink: 0 }}
+            {error && <Message severity="error" text={error} className="mt-3 w-full" />}
+            {markdownFile && (
+              <Message
+                severity="info"
+                text={`Selected: ${markdownFile.name}`}
+                className="mt-3 w-full"
               />
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.5rem',
-                  textAlign: 'left',
-                }}
-              >
-                <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--text-color)' }}>
-                  Note: LLM responses often include formatting markdown or extra content.
-                </p>
-                <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--text-color)' }}>
-                  You may need to clean up your markdown file (remove headers like ### Suggestions,
-                  extra markdown formatting, etc.) before converting to ensure professional-looking
-                  output.
-                </p>
-                <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--text-color)' }}>
-                  Review the markdown file before converting.
-                </p>
+            )}
+
+            {/* Information message about extra markdown */}
+            <div
+              className="mt-4 w-full p-4"
+              style={{
+                backgroundColor: 'var(--surface-section)',
+                border: '1px solid var(--surface-border)',
+                borderRadius: '6px',
+              }}
+            >
+              <div style={{ display: 'flex', gap: '0.75rem' }}>
+                <i
+                  className="pi pi-info-circle"
+                  style={{ color: 'var(--primary-color)', marginTop: '0.25rem', flexShrink: 0 }}
+                />
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.5rem',
+                    textAlign: 'left',
+                  }}
+                >
+                  <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--text-color)' }}>
+                    Note: LLM responses often include formatting markdown or extra content.
+                  </p>
+                  <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--text-color)' }}>
+                    You may need to clean up your markdown file (remove headers like ###
+                    Suggestions, extra markdown formatting, etc.) before converting to ensure
+                    professional-looking output.
+                  </p>
+                  <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--text-color)' }}>
+                    Review the markdown file before converting.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Action buttons below file chooser */}
-          <div className="flex flex-wrap gap-4 mt-5" style={{ padding: '0.75rem' }}>
-            <Button
-              label="Convert"
-              icon="pi pi-refresh"
-              onClick={handleConvert}
-              disabled={!markdownFile || convertApi.loading}
-              style={{ padding: '0.75rem 1.5rem', marginRight: '1.5rem' }}
-            />
-            <Button
-              label="Download"
-              icon="pi pi-download"
-              onClick={handleDownload}
-              disabled={!convertedPdf}
-              severity="success"
-              style={{ padding: '0.75rem 1.5rem', marginRight: '1.5rem' }}
-            />
-            {markdownFile && (
+            {/* Action buttons below file chooser */}
+            <div className="flex flex-wrap gap-4 mt-5" style={{ padding: '0.75rem' }}>
               <Button
-                label="Clear"
-                icon="pi pi-times"
-                onClick={handleClear}
-                disabled={convertApi.loading}
-                severity="secondary"
-                outlined
-                style={{ padding: '0.75rem 1.5rem' }}
+                label="Convert"
+                icon="pi pi-refresh"
+                onClick={handleConvert}
+                disabled={!markdownFile || convertApi.loading}
+                style={{ padding: '0.75rem 1.5rem', marginRight: '1.5rem' }}
+              />
+              <Button
+                label="Download"
+                icon="pi pi-download"
+                onClick={handleDownload}
+                disabled={!convertedPdf}
+                severity="success"
+                style={{ padding: '0.75rem 1.5rem', marginRight: '1.5rem' }}
+              />
+              {markdownFile && (
+                <Button
+                  label="Clear"
+                  icon="pi pi-times"
+                  onClick={handleClear}
+                  disabled={convertApi.loading}
+                  severity="secondary"
+                  outlined
+                  style={{ padding: '0.75rem 1.5rem' }}
+                />
+              )}
+            </div>
+
+            {convertedPdf && (
+              <Message
+                severity="success"
+                text="Conversion successful! Click Download to save the PDF."
+                className="mt-4 w-full"
               />
             )}
           </div>
 
-          {convertedPdf && (
-            <Message
-              severity="success"
-              text="Conversion successful! Click Download to save the PDF."
-              className="mt-4 w-full"
-            />
-          )}
+          {convertApi.loading && <LoadingSpinner message="Converting..." />}
         </div>
-
-        {convertApi.loading && <LoadingSpinner message="Converting..." />}
-      </div>
-    </Card>
+      </Card>
+    </div>
   );
 };

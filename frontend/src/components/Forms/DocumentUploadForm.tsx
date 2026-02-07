@@ -82,9 +82,18 @@ export const DocumentUploadForm: React.FC = () => {
   }, []);
 
   const promptTypeOptions = [
+    // Resume and Cover Letter
     { label: 'Resume Optimization', value: 'resume' },
     { label: 'Cover Letter', value: 'cover' },
     { label: 'Skills & Certifications', value: 'skills' },
+    // Interview Preparation
+    { label: 'HR Interview Questions', value: 'interview-hr' },
+    { label: 'Job-Specific Interview Questions', value: 'interview-job' },
+    { label: 'Reverse Interview (Practice Yours)', value: 'interview-reverse' },
+    // Networking & Outreach
+    { label: 'Cold Email', value: 'cold-email' },
+    { label: 'LinkedIn Connection Message', value: 'cold-linkedin' },
+    { label: 'Thank You Email', value: 'thank-you-email' },
   ];
 
   const modes = [
@@ -236,6 +245,180 @@ export const DocumentUploadForm: React.FC = () => {
     }
   };
 
+  const handleProcessInterviewHr = async () => {
+    if (!validateForm()) return;
+
+    try {
+      const optimize = {
+        promptType: ['interview-hr-questions'],
+        temperature: 0.15,
+        model: model,
+        resume: inputMode === INPUT_MODES.PASTE ? resume_string : resumeFile?.name || '',
+        jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
+        jobTitle: jobTitle,
+        company: company_name,
+        interviewerName: interviewerName,
+      };
+
+      const data = {
+        jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
+        resume: inputMode === INPUT_MODES.PASTE ? resume_string : resumeFile?.name || '',
+        optimize: JSON.stringify(optimize),
+      };
+
+      const result = await resumeApi.execute(() => fileService.processInterviewHr(data));
+      showSuccess('Interview questions generated successfully');
+      console.log('Interview HR Questions:', result);
+    } catch (err: unknown) {
+      showError((err as Error)?.message || 'Failed to generate interview questions');
+    }
+  };
+
+  const handleProcessInterviewJobSpecific = async () => {
+    if (!validateForm()) return;
+
+    try {
+      const optimize = {
+        promptType: ['interview-job-specific'],
+        temperature: 0.15,
+        model: model,
+        resume: inputMode === INPUT_MODES.PASTE ? resume_string : resumeFile?.name || '',
+        jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
+        jobTitle: jobTitle,
+        company: company_name,
+        interviewerName: interviewerName,
+      };
+
+      const data = {
+        jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
+        resume: inputMode === INPUT_MODES.PASTE ? resume_string : resumeFile?.name || '',
+        optimize: JSON.stringify(optimize),
+      };
+
+      const result = await resumeApi.execute(() => fileService.processInterviewJobSpecific(data));
+      showSuccess('Job-specific interview questions generated successfully');
+      console.log('Interview Job-Specific Questions:', result);
+    } catch (err: unknown) {
+      showError((err as Error)?.message || 'Failed to generate job-specific questions');
+    }
+  };
+
+  const handleProcessInterviewReverse = async () => {
+    if (!validateForm()) return;
+
+    try {
+      const optimize = {
+        promptType: ['interview-reverse'],
+        temperature: 0.15,
+        model: model,
+        resume: inputMode === INPUT_MODES.PASTE ? resume_string : resumeFile?.name || '',
+        jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
+        jobTitle: jobTitle,
+        company: company_name,
+        interviewerName: interviewerName,
+      };
+
+      const data = {
+        jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
+        resume: inputMode === INPUT_MODES.PASTE ? resume_string : resumeFile?.name || '',
+        optimize: JSON.stringify(optimize),
+      };
+
+      const result = await resumeApi.execute(() => fileService.processInterviewReverse(data));
+      showSuccess('Reverse interview practice questions generated successfully');
+      console.log('Interview Reverse Questions:', result);
+    } catch (err: unknown) {
+      showError((err as Error)?.message || 'Failed to generate reverse interview questions');
+    }
+  };
+
+  const handleGenerateColdEmail = async () => {
+    if (!validateForm()) return;
+
+    try {
+      const optimize = {
+        promptType: ['cold-email'],
+        temperature: 0.15,
+        model: model,
+        resume: inputMode === INPUT_MODES.PASTE ? resume_string : resumeFile?.name || '',
+        jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
+        jobTitle: jobTitle,
+        company: company_name,
+        interviewerName: interviewerName,
+      };
+
+      const data = {
+        jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
+        resume: inputMode === INPUT_MODES.PASTE ? resume_string : resumeFile?.name || '',
+        optimize: JSON.stringify(optimize),
+      };
+
+      const result = await resumeApi.execute(() => fileService.generateColdEmail(data));
+      showSuccess('Cold email generated successfully');
+      console.log('Cold Email:', result);
+    } catch (err: unknown) {
+      showError((err as Error)?.message || 'Failed to generate cold email');
+    }
+  };
+
+  const handleGenerateColdLinkedIn = async () => {
+    if (!validateForm()) return;
+
+    try {
+      const optimize = {
+        promptType: ['cold-linkedin-message'],
+        temperature: 0.15,
+        model: model,
+        resume: inputMode === INPUT_MODES.PASTE ? resume_string : resumeFile?.name || '',
+        jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
+        jobTitle: jobTitle,
+        company: company_name,
+        interviewerName: interviewerName,
+      };
+
+      const data = {
+        jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
+        resume: inputMode === INPUT_MODES.PASTE ? resume_string : resumeFile?.name || '',
+        optimize: JSON.stringify(optimize),
+      };
+
+      const result = await resumeApi.execute(() => fileService.generateColdLinkedInMessage(data));
+      showSuccess('LinkedIn message generated successfully');
+      console.log('Cold LinkedIn Message:', result);
+    } catch (err: unknown) {
+      showError((err as Error)?.message || 'Failed to generate LinkedIn message');
+    }
+  };
+
+  const handleGenerateThankYouEmail = async () => {
+    if (!validateForm()) return;
+
+    try {
+      const optimize = {
+        promptType: ['thank-you-email'],
+        temperature: 0.15,
+        model: model,
+        resume: inputMode === INPUT_MODES.PASTE ? resume_string : resumeFile?.name || '',
+        jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
+        jobTitle: jobTitle,
+        company: company_name,
+        interviewerName: interviewerName,
+      };
+
+      const data = {
+        jobDescription: inputMode === INPUT_MODES.PASTE ? jobDescription : jobFile?.name || '',
+        resume: inputMode === INPUT_MODES.PASTE ? resume_string : resumeFile?.name || '',
+        optimize: JSON.stringify(optimize),
+      };
+
+      const result = await resumeApi.execute(() => fileService.generateThankYouEmail(data));
+      showSuccess('Thank you email generated successfully');
+      console.log('Thank You Email:', result);
+    } catch (err: unknown) {
+      showError((err as Error)?.message || 'Failed to generate thank you email');
+    }
+  };
+
   const clearForm = () => {
     setJobDescription('');
     setResumeString('');
@@ -259,35 +442,69 @@ export const DocumentUploadForm: React.FC = () => {
         <div className="w-full">
           {/* Input Mode Selector */}
           <div
-            className="w-full bg-yellow-50 border-round border-1 border-yellow-300 mb-3"
-            style={{ padding: '20px' }}
+            className="bg-yellow-50 border-1 border-yellow-300"
+            style={{
+              padding: '20px',
+              marginLeft: '1rem',
+              marginRight: '1rem',
+              borderRadius: '6px',
+              maxWidth: 'calc(100% - 2rem)',
+              marginBottom: '2rem',
+              marginTop: '1.5rem',
+            }}
           >
             <div className="w-full flex gap-4 align-items-center justify-content-between">
               <label className="font-bold text-lg" style={{ minWidth: '20%' }}>
                 Input Mode
               </label>
-              <div className="flex align-items-center justify-content-center flex-1">
+              <div
+                className="flex align-items-center justify-content-center flex-1"
+                style={{ gap: '2rem' }}
+              >
                 <SelectButton
                   value={inputMode}
                   onChange={e => setInputMode(e.value)}
                   options={modes}
                   aria-label="Select input mode"
-                  className="gap-3 text-base"
+                  className="text-base"
+                  style={{ gap: '2rem' }}
                 />
               </div>
             </div>
           </div>
 
           {/* 2. Document Upload & Processing Title */}
-          <div className="w-full font-bold text-lg text-cyan-900 mb-3">
+          <div
+            className="font-bold text-lg text-cyan-900"
+            style={{
+              marginLeft: '1rem',
+              marginRight: '1rem',
+              marginTop: '1.5rem',
+              marginBottom: '1rem',
+            }}
+          >
             Document Upload & Processing
           </div>
 
           {/* User Input Parameters Section */}
-          <div className="w-full bg-blue-50 border-round border-1 border-blue-300 p-4 mb-4">
-            <div className="font-bold mb-3">Job Information & Model Selection</div>
-            <div className="grid grid-cols-4 gap-3">
-              <div className="field">
+          <div
+            className="bg-blue-50 border-1 border-blue-300 p-4 mb-6"
+            style={{
+              marginLeft: '1rem',
+              marginRight: '1rem',
+              borderRadius: '6px',
+              maxWidth: 'calc(100% - 2rem)',
+              marginTop: '1.5rem',
+            }}
+          >
+            <div className="font-bold mb-6" style={{ marginLeft: '0.25rem' }}>
+              Job Information & Model Selection
+            </div>
+            <div
+              className="grid grid-cols-3 gap-5"
+              style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}
+            >
+              <div className="field" style={{ marginRight: '15px', marginLeft: '0.5rem' }}>
                 <label htmlFor="jobTitle" className="block mb-2">
                   Job Title *
                 </label>
@@ -306,7 +523,7 @@ export const DocumentUploadForm: React.FC = () => {
                 )}
               </div>
 
-              <div className="field">
+              <div className="field" style={{ marginRight: '15px' }}>
                 <label htmlFor="company" className="block mb-2">
                   Company *
                 </label>
@@ -325,20 +542,7 @@ export const DocumentUploadForm: React.FC = () => {
                 )}
               </div>
 
-              <div className="field">
-                <label htmlFor="interviewerName" className="block mb-2">
-                  Interviewer Name (Optional)
-                </label>
-                <InputText
-                  id="interviewerName"
-                  value={interviewerName}
-                  onChange={handleInterviewerNameChange}
-                  placeholder="e.g., John Smith"
-                  className="w-full"
-                />
-              </div>
-
-              <div className="field">
+              <div className="field" style={{ marginRight: '1.5rem' }}>
                 <label htmlFor="model" className="block mb-2">
                   AI Model
                 </label>
@@ -354,7 +558,7 @@ export const DocumentUploadForm: React.FC = () => {
                 />
               </div>
 
-              <div className="field">
+              <div className="field" style={{ marginRight: '15px', marginTop: '20px' }}>
                 <label htmlFor="promptTypes" className="block mb-2">
                   Output Types
                 </label>
@@ -375,6 +579,19 @@ export const DocumentUploadForm: React.FC = () => {
                   placeholder="Select output types..."
                   className="w-full"
                   multiple
+                />
+              </div>
+
+              <div className="field" style={{ marginRight: '15px', marginTop: '20px' }}>
+                <label htmlFor="interviewerName" className="block mb-2">
+                  Interviewer Name (Optional)
+                </label>
+                <InputText
+                  id="interviewerName"
+                  value={interviewerName}
+                  onChange={handleInterviewerNameChange}
+                  placeholder="e.g., John Smith"
+                  className="w-full"
                 />
               </div>
             </div>
@@ -570,6 +787,72 @@ export const DocumentUploadForm: React.FC = () => {
                       onClick={handleProcessSkills}
                       disabled={loading}
                       severity="warning"
+                      className="flex-1"
+                    />
+                  )}
+                  {promptTypes.includes('interview-hr') && (
+                    <Button
+                      key="btn-interview-hr"
+                      label="Generate HR Questions"
+                      icon="pi pi-question"
+                      onClick={handleProcessInterviewHr}
+                      disabled={loading}
+                      severity="danger"
+                      className="flex-1"
+                    />
+                  )}
+                  {promptTypes.includes('interview-job') && (
+                    <Button
+                      key="btn-interview-job"
+                      label="Job-Specific Questions"
+                      icon="pi pi-question"
+                      onClick={handleProcessInterviewJobSpecific}
+                      disabled={loading}
+                      severity="danger"
+                      className="flex-1"
+                    />
+                  )}
+                  {promptTypes.includes('interview-reverse') && (
+                    <Button
+                      key="btn-interview-reverse"
+                      label="Reverse Interview"
+                      icon="pi pi-comments"
+                      onClick={handleProcessInterviewReverse}
+                      disabled={loading}
+                      severity="danger"
+                      className="flex-1"
+                    />
+                  )}
+                  {promptTypes.includes('cold-email') && (
+                    <Button
+                      key="btn-cold-email"
+                      label="Cold Email"
+                      icon="pi pi-send"
+                      onClick={handleGenerateColdEmail}
+                      disabled={loading}
+                      severity="secondary"
+                      className="flex-1"
+                    />
+                  )}
+                  {promptTypes.includes('cold-linkedin') && (
+                    <Button
+                      key="btn-cold-linkedin"
+                      label="LinkedIn Message"
+                      icon="pi pi-send"
+                      onClick={handleGenerateColdLinkedIn}
+                      disabled={loading}
+                      severity="secondary"
+                      className="flex-1"
+                    />
+                  )}
+                  {promptTypes.includes('thank-you-email') && (
+                    <Button
+                      key="btn-thank-you"
+                      label="Thank You Email"
+                      icon="pi pi-envelope"
+                      onClick={handleGenerateThankYouEmail}
+                      disabled={loading}
+                      severity="secondary"
                       className="flex-1"
                     />
                   )}

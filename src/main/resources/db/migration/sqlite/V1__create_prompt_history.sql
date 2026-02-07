@@ -1,6 +1,6 @@
 -- Create prompt_history table for SQLite
 CREATE TABLE prompt_history (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY,
     request_id TEXT UNIQUE NOT NULL,
     prompt_type TEXT NOT NULL,
     job_description TEXT,

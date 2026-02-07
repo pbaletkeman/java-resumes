@@ -123,7 +123,7 @@ export const FileHistory: React.FC = () => {
             ))}
           </div>
         ) : files.length === 0 ? (
-          <div className="text-center p-4 text-gray-500">No files uploaded yet</div>
+          <div className="text-center p-4 text-gray-500">No Files Found</div>
         ) : (
           <DataView value={files} listTemplate={listTemplate} />
         )}

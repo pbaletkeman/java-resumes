@@ -221,6 +221,252 @@ export const fileService = {
     return response.data;
   },
 
+  async processInterviewHr(data: {
+    jobDescription: string;
+    resume?: string;
+    optimize?: string;
+  }): Promise<ProcessingResult> {
+    const formData = new FormData();
+
+    if (data.resume) {
+      formData.append('resume', new File([data.resume], 'resume.txt', { type: 'text/plain' }));
+    }
+
+    if (data.jobDescription) {
+      formData.append('job', new File([data.jobDescription], 'job.txt', { type: 'text/plain' }));
+    }
+
+    const optimizeData =
+      data.optimize ||
+      JSON.stringify({
+        resume: data.resume ? 'resume.txt' : '',
+        jobDescription: data.jobDescription ? 'job.txt' : '',
+        company: 'Company',
+        jobTitle: 'Job Title',
+        model: 'mistral:latest',
+        temperature: 0.15,
+        promptType: ['interview-hr-questions'],
+      });
+
+    formData.append('optimize', optimizeData);
+
+    const response = await apiClient.post<ProcessingResult>(
+      API_ENDPOINTS.GENERATE_INTERVIEW_HR,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+    return response.data;
+  },
+
+  async processInterviewJobSpecific(data: {
+    jobDescription: string;
+    resume?: string;
+    optimize?: string;
+  }): Promise<ProcessingResult> {
+    const formData = new FormData();
+
+    if (data.resume) {
+      formData.append('resume', new File([data.resume], 'resume.txt', { type: 'text/plain' }));
+    }
+
+    if (data.jobDescription) {
+      formData.append('job', new File([data.jobDescription], 'job.txt', { type: 'text/plain' }));
+    }
+
+    const optimizeData =
+      data.optimize ||
+      JSON.stringify({
+        resume: data.resume ? 'resume.txt' : '',
+        jobDescription: data.jobDescription ? 'job.txt' : '',
+        company: 'Company',
+        jobTitle: 'Job Title',
+        model: 'mistral:latest',
+        temperature: 0.15,
+        promptType: ['interview-job-specific'],
+      });
+
+    formData.append('optimize', optimizeData);
+
+    const response = await apiClient.post<ProcessingResult>(
+      API_ENDPOINTS.GENERATE_INTERVIEW_JOB_SPECIFIC,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+    return response.data;
+  },
+
+  async processInterviewReverse(data: {
+    jobDescription: string;
+    resume?: string;
+    optimize?: string;
+  }): Promise<ProcessingResult> {
+    const formData = new FormData();
+
+    if (data.resume) {
+      formData.append('resume', new File([data.resume], 'resume.txt', { type: 'text/plain' }));
+    }
+
+    if (data.jobDescription) {
+      formData.append('job', new File([data.jobDescription], 'job.txt', { type: 'text/plain' }));
+    }
+
+    const optimizeData =
+      data.optimize ||
+      JSON.stringify({
+        resume: data.resume ? 'resume.txt' : '',
+        jobDescription: data.jobDescription ? 'job.txt' : '',
+        company: 'Company',
+        jobTitle: 'Job Title',
+        model: 'mistral:latest',
+        temperature: 0.15,
+        promptType: ['interview-reverse'],
+      });
+
+    formData.append('optimize', optimizeData);
+
+    const response = await apiClient.post<ProcessingResult>(
+      API_ENDPOINTS.GENERATE_INTERVIEW_REVERSE,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+    return response.data;
+  },
+
+  async generateColdEmail(data: {
+    jobDescription: string;
+    resume?: string;
+    optimize?: string;
+  }): Promise<ProcessingResult> {
+    const formData = new FormData();
+
+    if (data.resume) {
+      formData.append('resume', new File([data.resume], 'resume.txt', { type: 'text/plain' }));
+    }
+
+    if (data.jobDescription) {
+      formData.append('job', new File([data.jobDescription], 'job.txt', { type: 'text/plain' }));
+    }
+
+    const optimizeData =
+      data.optimize ||
+      JSON.stringify({
+        resume: data.resume ? 'resume.txt' : '',
+        jobDescription: data.jobDescription ? 'job.txt' : '',
+        company: 'Company',
+        jobTitle: 'Job Title',
+        model: 'mistral:latest',
+        temperature: 0.15,
+        promptType: ['cold-email'],
+      });
+
+    formData.append('optimize', optimizeData);
+
+    const response = await apiClient.post<ProcessingResult>(
+      API_ENDPOINTS.GENERATE_COLD_EMAIL,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+    return response.data;
+  },
+
+  async generateColdLinkedInMessage(data: {
+    jobDescription: string;
+    resume?: string;
+    optimize?: string;
+  }): Promise<ProcessingResult> {
+    const formData = new FormData();
+
+    if (data.resume) {
+      formData.append('resume', new File([data.resume], 'resume.txt', { type: 'text/plain' }));
+    }
+
+    if (data.jobDescription) {
+      formData.append('job', new File([data.jobDescription], 'job.txt', { type: 'text/plain' }));
+    }
+
+    const optimizeData =
+      data.optimize ||
+      JSON.stringify({
+        resume: data.resume ? 'resume.txt' : '',
+        jobDescription: data.jobDescription ? 'job.txt' : '',
+        company: 'Company',
+        jobTitle: 'Job Title',
+        model: 'mistral:latest',
+        temperature: 0.15,
+        promptType: ['cold-linkedin-message'],
+      });
+
+    formData.append('optimize', optimizeData);
+
+    const response = await apiClient.post<ProcessingResult>(
+      API_ENDPOINTS.GENERATE_COLD_LINKEDIN,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+    return response.data;
+  },
+
+  async generateThankYouEmail(data: {
+    jobDescription: string;
+    resume?: string;
+    optimize?: string;
+  }): Promise<ProcessingResult> {
+    const formData = new FormData();
+
+    if (data.resume) {
+      formData.append('resume', new File([data.resume], 'resume.txt', { type: 'text/plain' }));
+    }
+
+    if (data.jobDescription) {
+      formData.append('job', new File([data.jobDescription], 'job.txt', { type: 'text/plain' }));
+    }
+
+    const optimizeData =
+      data.optimize ||
+      JSON.stringify({
+        resume: data.resume ? 'resume.txt' : '',
+        jobDescription: data.jobDescription ? 'job.txt' : '',
+        company: 'Company',
+        jobTitle: 'Job Title',
+        model: 'mistral:latest',
+        temperature: 0.15,
+        promptType: ['thank-you-email'],
+      });
+
+    formData.append('optimize', optimizeData);
+
+    const response = await apiClient.post<ProcessingResult>(
+      API_ENDPOINTS.GENERATE_THANK_YOU_EMAIL,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+    return response.data;
+  },
+
   async checkHealth(): Promise<{ status: string; timestamp: string }> {
     const response = await apiClient.get(API_ENDPOINTS.HEALTH);
     return response.data;
