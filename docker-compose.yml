@@ -89,7 +89,8 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - VITE_API_BASE_URL=
+      # Frontend uses VITE_API_PROXY_TARGET for API calls (proxy-only setup).
+      # VITE_API_BASE_URL is intentionally not set here to allow default logic in the app.
       - VITE_API_PROXY_TARGET=http://backend:8080
       - NODE_ENV=development
     depends_on:
