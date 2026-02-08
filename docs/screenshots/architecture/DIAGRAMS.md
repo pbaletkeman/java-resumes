@@ -3,7 +3,7 @@
 This directory contains architecture diagrams and visual representations of the java-resumes system.
 
 - [Architecture Diagrams](#architecture-diagrams)
-  - [�📊 Diagrams Included](#-diagrams-included)
+  - [📊 Diagrams Included](#diagrams-included)
     - [System Architecture](#system-architecture)
     - [Component Architecture](#component-architecture)
     - [Data Flow Diagram](#data-flow-diagram)
@@ -20,7 +20,7 @@ This directory contains architecture diagrams and visual representations of the 
 
 ---
 
-## �📊 Diagrams Included
+## 📊 Diagrams Included
 
 ### System Architecture
 
