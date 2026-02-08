@@ -45,6 +45,10 @@ Comprehensive guide for running java-resumes services locally with hot reload an
 ## ⚡ Quick Start
 
 ```bash
+# (Optional) Configure environment variables
+cp .env.example .env
+# Edit .env if you want to change database credentials or other settings
+
 # Build images
 docker-compose build
 
@@ -53,6 +57,8 @@ docker-compose up
 
 # Press Ctrl+C to stop
 ```
+
+**Note:** For PostgreSQL configurations (`docker-compose.postgresql.yml`, `docker-compose.ollama-postgresql.yml`), database credentials can be customized via environment variables in `.env`. See [Environment Variables](#environment-variables) section for details.
 
 ## What You'll See
 
@@ -286,6 +292,25 @@ docker-compose up
 
 ## Environment Variables
 
+All services can be configured using environment variables. For local development, copy `.env.example` to `.env` and customize as needed:
+
+```bash
+cp .env.example .env
+# Edit .env with your preferred editor
+```
+
+### PostgreSQL Database (for PostgreSQL configurations)
+
+**Important:** These credentials are for local development only. **Always change them for production deployments!**
+
+```
+POSTGRES_DB=resume_db
+POSTGRES_USER=resume_user
+POSTGRES_PASSWORD=resume_password
+```
+
+The docker-compose files will use these environment variables if set, or fall back to the defaults shown above.
+
 ### Frontend (Development)
 
 ```
@@ -301,6 +326,14 @@ SPRING_PROFILES_ACTIVE=prod
 UPLOAD_PATH=files
 LLM_ENDPOINT=http://host.docker.internal:11434/v1/chat/completions
 LLM_APIKEY=not-needed-for-local
+```
+
+For PostgreSQL configurations, also set:
+
+```
+SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
+SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
 ```
 
 ## Troubleshooting

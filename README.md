@@ -77,6 +77,8 @@ docker compose up -d
 docker exec resume-ollama ollama pull mistral:latest
 
 # Option 2: PostgreSQL setup (production-like)
+# For PostgreSQL: Copy .env.example to .env and customize database credentials
+cp .env.example .env
 docker compose -f docker-compose.postgresql.yml up -d
 docker exec resume-ollama ollama pull mistral:latest
 
@@ -87,6 +89,8 @@ docker exec resume-ollama-sqlite ollama pull tinyllama
 # Option 4: Frontend + Backend only (no database)
 docker compose -f docker-compose.frontend-backend.yml up -d
 ```
+
+> **Security Note:** PostgreSQL configurations use environment variables for database credentials. Copy `.env.example` to `.env` and change the default credentials, especially for production deployments. See [DOCKER_DEV_SETUP.md](DOCKER_DEV_SETUP.md#environment-variables) for details.
 
 **→ [Docker Compose Quick Start](docs/DOCKER_COMPOSE_QUICK_START.md) | [Detailed Setup Guide](docs/DOCKER_SETUP.md)**
 
