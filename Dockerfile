@@ -8,6 +8,8 @@ FROM eclipse-temurin:21-jdk-alpine AS builder
 # Build argument to invalidate cache when needed
 ARG CACHE_BUSTER=1
 
+# Use CACHE_BUSTER so changing it actually invalidates the build cache
+RUN echo "Cache buster: $CACHE_BUSTER" > /dev/null
 WORKDIR /app
 
 # Install Gradle 8.10 manually
