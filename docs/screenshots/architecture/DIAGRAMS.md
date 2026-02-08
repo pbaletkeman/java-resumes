@@ -3,24 +3,24 @@
 This directory contains architecture diagrams and visual representations of the java-resumes system.
 
 - [Architecture Diagrams](#architecture-diagrams)
-  - [�📊 Diagrams Included](#-diagrams-included)
+  - [📊 Diagrams Included](#diagrams-included)
     - [System Architecture](#system-architecture)
     - [Component Architecture](#component-architecture)
     - [Data Flow Diagram](#data-flow-diagram)
     - [Deployment Architecture](#deployment-architecture)
     - [Docker Compose Structure](#docker-compose-structure)
-  - [📈 Request/Response Flow](#-requestresponse-flow)
+  - [📈 Request/Response Flow](#requestresponse-flow)
   - [Backend Component Dependencies (UML)](#backend-component-dependencies-uml)
   - [Frontend Component Dependencies (UML)](#frontend-component-dependencies-uml)
-  - [🔄 Authentication \& Security](#-authentication--security)
-  - [🚀 Scalability Patterns](#-scalability-patterns)
+  - [🔄 Authentication & Security](#authentication--security)
+  - [🚀 Scalability Patterns](#scalability-patterns)
     - [Horizontal Scaling](#horizontal-scaling)
     - [Message Queue Pattern](#message-queue-pattern)
-  - [📚 References](#-references)
+  - [📚 References](#references)
 
 ---
 
-## �📊 Diagrams Included
+## 📊 Diagrams Included
 
 ### System Architecture
 
