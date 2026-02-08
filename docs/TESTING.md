@@ -1,4 +1,4 @@
-﻿# Testing Guide
+# Testing Guide
 
 Comprehensive testing strategy for java-resumes application.
 
