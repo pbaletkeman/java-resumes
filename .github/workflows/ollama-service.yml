@@ -182,22 +182,28 @@ jobs:
           echo "Backend PID: $BACKEND_PID"
           
           # Wait for service to be ready
+          healthy=false
           for i in {1..60}; do
             if curl -s http://localhost:8080/api/health > /dev/null; then
               echo "Backend service is ready!"
+              healthy=true
               break
             fi
             echo "Waiting for backend service... ($i/60)"
             sleep 2
           done
+          
+          if [ "$healthy" != "true" ]; then
+            echo "ERROR: Backend service did not become healthy within the expected time."
+            exit 1
+          fi
         timeout-minutes: 3
-        continue-on-error: true
 
       - name: Test health endpoint
         run: |
           echo "Testing health endpoint..."
-          curl -s http://localhost:8080/api/health | jq '.' || echo "Health check failed"
-        continue-on-error: true
+          set -e
+          curl -fsS http://localhost:8080/api/health | jq '.'
 
       - name: Create summary
         run: |

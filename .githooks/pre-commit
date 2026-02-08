@@ -20,8 +20,8 @@ NC='\033[0m' # No Color
 echo -e "${YELLOW}[1/3] Applying code formatting with Spotless...${NC}"
 if ./gradlew spotlessApply --no-daemon --quiet 2>/dev/null; then
     echo -e "${GREEN}✓ Spotless formatting applied${NC}"
-    # Stage any formatting changes that were made
-    git add -A 2>/dev/null || true
+    # Spotless may have modified files; ask the developer to review and stage them explicitly
+    echo -e "${YELLOW}Spotless may have changed files. Please review and stage formatting changes before committing.${NC}"
 else
     echo -e "${RED}✗ Spotless formatting failed!${NC}"
     echo ""

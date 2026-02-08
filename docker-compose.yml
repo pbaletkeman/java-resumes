@@ -25,9 +25,8 @@ services:
     networks:
       - resume-network
     healthcheck:
-      # Checks if Ollama API is responding
-      test:
-        ["CMD-SHELL", "curl -f http://localhost:11434/api/version || exit 1"]
+      # Checks if Ollama daemon is responding using built-in CLI
+      test: ["CMD", "ollama", "list"]
       interval: 10s
       timeout: 5s
       retries: 6
@@ -89,7 +88,8 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - VITE_API_BASE_URL=
+      # Frontend uses VITE_API_PROXY_TARGET for API calls (proxy-only setup).
+      # VITE_API_BASE_URL is intentionally not set here to allow default logic in the app.
       - VITE_API_PROXY_TARGET=http://backend:8080
       - NODE_ENV=development
     depends_on:
