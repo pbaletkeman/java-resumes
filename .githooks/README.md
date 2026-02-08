@@ -24,23 +24,23 @@ This directory contains git hooks that ensure code quality and formatting compli
 
 Runs automatically before each commit. This hook:
 
-- **Automatically applies** `spotlessApply` to fix formatting issues
-- Leaves any formatting changes unstaged; you must stage them manually
+- Runs `spotlessCheck` to verify code formatting (does **not** modify files)
+- If formatting issues are found, you must run `./gradlew spotlessApply` manually and re-stage the changes
 - Runs Checkstyle validation
 - Runs SpotBugs analysis (warning only)
 
-**Behavior:** If Spotless or Checkstyle fails, the commit is prevented.
+**Behavior:** If Spotless or Checkstyle fails, the commit is prevented until issues are fixed and changes are re-staged.
 
 ### `pre-push`
 
 Runs automatically before each push. This hook:
 
-- **Automatically applies** `spotlessApply` to fix formatting issues
+- Runs `spotlessCheck` to ensure formatting is correct (does **not** modify files)
 - Runs full quality checks (Checkstyle, SpotBugs)
 - Executes the complete test suite
 - Verifies the build succeeds
 
-**Behavior:** If any check fails, the push is prevented.
+**Behavior:** If any check fails (including formatting checks), the push is prevented.
 
 ## 🔧 Setup
 
