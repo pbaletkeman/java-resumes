@@ -25,7 +25,7 @@ This directory contains git hooks that ensure code quality and formatting compli
 Runs automatically before each commit. This hook:
 
 - **Automatically applies** `spotlessApply` to fix formatting issues
-- Stages any formatting changes made
+- Leaves any formatting changes unstaged; you must stage them manually
 - Runs Checkstyle validation
 - Runs SpotBugs analysis (warning only)
 
