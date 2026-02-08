@@ -182,22 +182,41 @@ jobs:
           echo "Backend PID: $BACKEND_PID"
           
           # Wait for service to be ready
+          SERVICE_READY=false
           for i in {1..60}; do
             if curl -s http://localhost:8080/api/health > /dev/null; then
               echo "Backend service is ready!"
+              SERVICE_READY=true
               break
             fi
             echo "Waiting for backend service... ($i/60)"
             sleep 2
           done
+          
+          # Fail if service didn't become ready
+          if [ "$SERVICE_READY" = false ]; then
+            echo "ERROR: Backend service failed to start within timeout"
+            exit 1
+          fi
         timeout-minutes: 3
-        continue-on-error: true
 
       - name: Test health endpoint
         run: |
           echo "Testing health endpoint..."
-          curl -s http://localhost:8080/api/health | jq '.' || echo "Health check failed"
-        continue-on-error: true
+          HEALTH_RESPONSE=$(curl -s http://localhost:8080/api/health)
+          
+          if [ -z "$HEALTH_RESPONSE" ]; then
+            echo "ERROR: Health endpoint returned empty response"
+            exit 1
+          fi
+          
+          echo "Health check response:"
+          echo "$HEALTH_RESPONSE" | jq '.'
+          
+          if [ $? -ne 0 ]; then
+            echo "ERROR: Health endpoint returned invalid JSON"
+            exit 1
+          fi
 
       - name: Create summary
         run: |
