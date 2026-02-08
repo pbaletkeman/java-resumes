@@ -25,9 +25,8 @@ services:
     networks:
       - resume-network
     healthcheck:
-      # Checks if Ollama API is responding
-      test:
-        ["CMD-SHELL", "curl -f http://localhost:11434/api/version || exit 1"]
+      # Checks if Ollama daemon is responding using built-in CLI
+      test: ["CMD", "ollama", "list"]
       interval: 10s
       timeout: 5s
       retries: 6
