@@ -854,7 +854,7 @@ UPLOAD_PATH=./uploads
 
 ## 💬 Support & Resources
 
-- **Documentation**: [docs/architecture/ARCHITECTURE.md](../Architecture.md)
+- **Documentation**: [docs/architecture/ARCHITECTURE.md](./architecture/ARCHITECTURE.md)
 - **GitHub Issues**: https://github.com/pbaletkeman/java-resumes/issues
 - **GitHub Discussions**: https://github.com/pbaletkeman/java-resumes/discussions
 
