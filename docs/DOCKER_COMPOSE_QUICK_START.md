@@ -2,6 +2,40 @@
 
 Get up and running with the Java-Resumes application using Docker Compose with local Ollama LLM service in 2 minutes.
 
+- [Docker Compose Quick Start with Ollama](#docker-compose-quick-start-with-ollama)
+  - [Prerequisites](#prerequisites)
+  - [Quick Start (3 Steps)](#quick-start-3-steps)
+    - [Step 1: Start All Services](#step-1-start-all-services)
+    - [Step 2: Pull an LLM Model](#step-2-pull-an-llm-model)
+    - [Step 3: Access the Application](#step-3-access-the-application)
+  - [Alternative Compose Configuration](#alternative-compose-configuration)
+  - [Verify Everything is Running](#verify-everything-is-running)
+  - [Available Models](#available-models)
+    - [Lightweight (4-7GB) - Recommended for Development](#lightweight-4-7gb---recommended-for-development)
+    - [Standard (13-34GB) - Better Quality](#standard-13-34gb---better-quality)
+    - [Large (70GB+) - Best Quality (Requires 16GB+ RAM)](#large-70gb---best-quality-requires-16gb-ram)
+  - [Common Tasks](#common-tasks)
+    - [Restart Services](#restart-services)
+    - [Stop Services](#stop-services)
+    - [View Real-Time Logs](#view-real-time-logs)
+    - [Access Shell in Container](#access-shell-in-container)
+    - [Force Rebuild](#force-rebuild)
+  - [Troubleshooting](#troubleshooting)
+    - [Ollama Reports "Unhealthy"](#ollama-reports-unhealthy)
+    - [Port Already in Use](#port-already-in-use)
+    - [Out of Memory](#out-of-memory)
+    - [Models Not Persisting](#models-not-persisting)
+    - [Backend Cannot Connect to Ollama](#backend-cannot-connect-to-ollama)
+  - [Performance Optimization](#performance-optimization)
+    - [GPU Support (NVIDIA)](#gpu-support-nvidia)
+    - [CPU Optimization](#cpu-optimization)
+    - [Memory Management](#memory-management)
+  - [Environment Variables](#environment-variables)
+  - [System Resource Requirements](#system-resource-requirements)
+  - [Next Steps](#next-steps)
+  - [Getting Help](#getting-help)
+
+
 ## Prerequisites
 
 - Docker and Docker Compose installed
