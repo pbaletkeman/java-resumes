@@ -53,7 +53,7 @@ That's it! From now on, git will automatically check code quality on every commi
 
 ---
 
-## � First Time Setup
+## 🚀 First Time Setup
 
 ### Step 1: Install Hooks
 
