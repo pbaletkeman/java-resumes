@@ -5,6 +5,9 @@
 # Java 21 bytecode runs fine on Java 25 runtime
 FROM eclipse-temurin:21-jdk-alpine AS builder
 
+# Build argument to invalidate cache when needed
+ARG CACHE_BUSTER=1
+
 WORKDIR /app
 
 # Install Gradle 8.10 manually
@@ -48,8 +51,8 @@ COPY --from=builder /app/build/libs/*.jar app.jar
 # Copy configuration
 COPY --from=builder /app/config.json ./
 
-# Create files directory
-RUN mkdir -p /app/files && chown -R spring:spring /app
+# Create necessary directories (files for uploads, data for SQLite database)
+RUN mkdir -p /app/files /app/data && chown -R spring:spring /app
 
 # Switch to non-root user
 USER spring:spring

@@ -1,15 +1,53 @@
-# Quick Start Guide
+﻿# Quick Start Guide
 
 Get Java Resumes up and running in minutes using Docker Compose.
 
-## Prerequisites
+- [Quick Start Guide](#quick-start-guide)
+  - [📋 Prerequisites](#-prerequisites)
+  - [📝 Step-by-Step Setup](#-step-by-step-setup)
+    - [Step 1: Clone the Repository](#step-1-clone-the-repository)
+    - [Step 2: Configure LLM Service](#step-2-configure-llm-service)
+      - [Option A: Ollama (Recommended for Local Development)](#option-a-ollama-recommended-for-local-development)
+      - [Option B: LM Studio](#option-b-lm-studio)
+      - [Option C: OpenAI API](#option-c-openai-api)
+    - [Step 3: Choose Your Deployment Configuration](#step-3-choose-your-deployment-configuration)
+      - [Quick Start Commands](#quick-start-commands)
+    - [Step 4: Start the Application](#step-4-start-the-application)
+    - [Step 5: Access the Application](#step-5-access-the-application)
+    - [Step 6: Test It Out](#step-6-test-it-out)
+  - [🔨 Common Commands](#-common-commands)
+    - [View Logs](#view-logs)
+    - [Stop the Application](#stop-the-application)
+    - [Rebuild and Restart](#rebuild-and-restart)
+    - [Check Container Status](#check-container-status)
+    - [Execute Commands Inside Container](#execute-commands-inside-container)
+  - [🐛 Troubleshooting](#-troubleshooting)
+    - [Port Already in Use](#port-already-in-use)
+    - [LLM Connection Failed](#llm-connection-failed)
+    - [Docker Image Won't Build](#docker-image-wont-build)
+    - [Files Not Persisting](#files-not-persisting)
+  - [➡️ Next Steps](#️-next-steps)
+    - [For Production Deployment](#for-production-deployment)
+    - [For Development](#for-development)
+    - [For Configuration](#for-configuration)
+  - [🌍 Environment Files](#-environment-files)
+    - [`.env` for Backend Environment](#env-for-backend-environment)
+    - [`.env` for Frontend Environment](#env-for-frontend-environment)
+  - [⚡ Performance Tips](#-performance-tips)
+  - [🐳 Docker Compose Reference](#-docker-compose-reference)
+    - [Complete docker-compose.yml Structure](#complete-docker-composeyml-structure)
+  - [💬 Getting Help](#-getting-help)
+
+---
+
+## 📋 Prerequisites
 
 - **Docker** 20.10+ - [Get Docker](https://docs.docker.com/get-docker/)
 - **Docker Compose** 2.0+ - (included with Docker Desktop)
 - **LLM Service** running locally or API key for cloud service
 - **Git** for cloning the repository
 
-## Step-by-Step Setup
+## 📝 Step-by-Step Setup
 
 ### Step 1: Clone the Repository
 
@@ -75,11 +113,65 @@ ollama pull mistral:latest
 }
 ```
 
-### Step 3: Start the Application
+### Step 3: Choose Your Deployment Configuration
+
+The project includes **4 different docker-compose files** optimized for different use cases:
+
+| Configuration         | Use Case             | Database            | LLM Service | Startup Time |
+| --------------------- | -------------------- | ------------------- | ----------- | ------------ |
+| **frontend-backend**  | CI/CD, quick testing | In-memory           | No          | ~30s         |
+| **sqlite**            | Development          | SQLite (persistent) | No          | ~40s         |
+| **postgresql**        | Production-like      | PostgreSQL 17       | No          | ~60s         |
+| **ollama-postgresql** | Full-stack local     | PostgreSQL 17       | Ollama      | ~90s+        |
+
+#### Quick Start Commands
+
+**Option 1: Lightweight (Frontend + Backend only)**
+
+```bash
+docker compose -f docker-compose.frontend-backend.yml up --build
+```
+
+Best for: CI/CD pipelines, quick testing, environments with minimal resources
+
+**Option 2: Development with SQLite**
+
+```bash
+docker compose -f docker-compose.sqlite.yml up --build
+```
+
+Best for: Local development with persistent storage, simpler setup
+
+**Option 3: Production-like with PostgreSQL**
+
+```bash
+docker compose -f docker-compose.postgresql.yml up --build
+```
+
+Best for: Testing production configuration, scale testing, team development
+
+**Option 4: Full Stack with Ollama + PostgreSQL** _(Recommended)_
+
+```bash
+docker compose -f docker-compose.ollama-postgresql.yml up --build
+
+# In another terminal, pull an LLM model:
+docker exec resume-ollama ollama pull mistral
+```
+
+Best for: Complete local development with all services, realistic production simulation
+
+For detailed information about each configuration, databases, health checks, and troubleshooting, see **[DOCKER_SETUP.md](DOCKER_SETUP.md)**.
+
+### Step 4: Start the Application
+
+If using the default configuration (frontend-backend):
 
 ```bash
 docker compose up --build
 ```
+
+Or choose one of the configurations above.
 
 This will:
 
@@ -91,7 +183,7 @@ This will:
 
 First-time builds take longer; subsequent starts are faster.
 
-### Step 4: Access the Application
+### Step 5: Access the Application
 
 Once all services are running, access:
 
@@ -100,7 +192,7 @@ Once all services are running, access:
 - **API Documentation:** <http://localhost:8080/swagger-ui/index.html>
 - **Health Check:** <http://localhost:8080/api/health>
 
-### Step 5: Test It Out
+### Step 6: Test It Out
 
 1. **Open the web interface** at <http://localhost>
 2. **Enter a job description** or upload a job posting
@@ -109,7 +201,7 @@ Once all services are running, access:
 5. **Click "Process"** and wait for optimization
 6. **Download the results** from the file history panel
 
-## Common Commands
+## 🔨 Common Commands
 
 ### View Logs
 
@@ -154,7 +246,7 @@ docker compose exec backend sh
 docker compose exec frontend sh
 ```
 
-## Troubleshooting
+## 🐛 Troubleshooting
 
 ### Port Already in Use
 
@@ -221,7 +313,7 @@ volumes:
   - backend-files:/app/files
 ```
 
-## Next Steps
+## ➡️ Next Steps
 
 ### For Production Deployment
 
@@ -250,7 +342,7 @@ See **[CONFIGURATION.md](CONFIGURATION.md)** for:
 - Environment variable setup
 - Advanced configuration options
 
-## Environment Files
+## 🌍 Environment Files
 
 ### `.env` for Backend Environment
 
@@ -273,14 +365,14 @@ Create `frontend/.env` (optional):
 VITE_API_BASE_URL=http://localhost:8080
 ```
 
-## Performance Tips
+## ⚡ Performance Tips
 
 1. **Allocate more memory** to Docker if you have it available
 2. **Use lightweight models** initially (mistral-7b vs mistral-large)
 3. **Monitor container logs** to identify bottlenecks
 4. **For frequent use,** keep models loaded in memory
 
-## Docker Compose Reference
+## 🐳 Docker Compose Reference
 
 ### Complete docker-compose.yml Structure
 
@@ -324,13 +416,18 @@ networks:
     driver: bridge
 ```
 
-## Getting Help
+## 💬 Getting Help
 
-- **Configuration issues?** → [CONFIGURATION.md](CONFIGURATION.md)
-- **Specific problem?** → [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
-- **Need more setup info?** → [DEVELOPMENT_SETUP.md](DEVELOPMENT_SETUP.md)
-- **Bug or feature request?** → [GitHub Issues](https://github.com/pbaletkeman/java-resumes/issues)
+- **Configuration issues?** [CONFIGURATION.md](CONFIGURATION.md)
+- **Specific problem?** [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+- **Need more setup info?** [DEVELOPMENT_SETUP.md](DEVELOPMENT_SETUP.md)
+- **Bug or feature request?** [GitHub Issues](https://github.com/pbaletkeman/java-resumes/issues)
 
 ---
 
 **Ready?** Start with `docker compose up --build` and follow the steps above!
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

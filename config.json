@@ -1,5 +1,5 @@
 {
-  "endpoint": "http://localhost:11434/v1/chat/completions",
+  "endpoint": "http://ollama:11434/v1/chat/completions",
   "apikey": "ollama",
   "model": "mistral:latest"
 }

@@ -802,3 +802,8 @@ For questions or suggestions about these guidelines:
 
 **Last Updated**: January 17, 2025
 **Next Review**: July 2025
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

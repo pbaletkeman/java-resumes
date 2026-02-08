@@ -1,8 +1,61 @@
-# Troubleshooting Guide
+﻿# Troubleshooting Guide
 
 Common issues and their solutions for java-resumes.
 
-## 🔴 Build Issues
+- [Troubleshooting Guide](#troubleshooting-guide)
+  - [🏗️ Build Issues](#️-build-issues)
+    - [Gradle Build Fails](#gradle-build-fails)
+    - [Checkstyle Failures](#checkstyle-failures)
+    - [Dependency Resolution Fails](#dependency-resolution-fails)
+  - [⚙️ Runtime Issues](#️-runtime-issues)
+    - [Application Won't Start](#application-wont-start)
+    - [LLM API Connection Fails](#llm-api-connection-fails)
+    - [File Upload Fails](#file-upload-fails)
+    - [Port Already in Use](#port-already-in-use)
+  - [💻 Frontend Issues](#-frontend-issues)
+    - [npm Build Fails](#npm-build-fails)
+    - [TypeScript Errors](#typescript-errors)
+    - [Port 5173 Already in Use](#port-5173-already-in-use)
+    - [CSS/Tailwind Not Applying](#csstailwind-not-applying)
+  - [💾 Database Issues](#-database-issues)
+    - [File Storage Errors](#file-storage-errors)
+    - [File Retrieval Fails](#file-retrieval-fails)
+  - [🧪 Test Issues](#-test-issues)
+    - [Tests Fail to Run](#tests-fail-to-run)
+    - [Tests Time Out](#tests-time-out)
+    - [Coverage Report Fails](#coverage-report-fails)
+  - [🔌 API Issues](#-api-issues)
+    - [CORS Errors](#cors-errors)
+    - [Request/Response Format Issues](#requestresponse-format-issues)
+    - [Large File Upload Issues](#large-file-upload-issues)
+  - [📈 Performance Issues](#-performance-issues)
+    - [Slow Build Times](#slow-build-times)
+    - [Slow API Responses](#slow-api-responses)
+    - [High Memory Usage](#high-memory-usage)
+  - [⚙️ Configuration Issues](#️-configuration-issues)
+    - [External config.json Not Found](#external-configjson-not-found)
+    - [External Prompt Directory Not Found](#external-prompt-directory-not-found)
+  - [🔀 Git Issues](#-git-issues)
+    - [Uncommitted Changes](#uncommitted-changes)
+    - [Merge Conflicts](#merge-conflicts)
+  - [🔍 Diagnostic Commands](#-diagnostic-commands)
+    - [System Information](#system-information)
+    - [Application Logs](#application-logs)
+    - [Network Diagnostics](#network-diagnostics)
+  - [🆘 Getting Help](#-getting-help)
+    - [Debug Mode](#debug-mode)
+    - [Collect Information](#collect-information)
+  - [💡 Tips \& Tricks](#-tips--tricks)
+    - [Faster Builds](#faster-builds)
+    - [Development Shortcuts](#development-shortcuts)
+    - [Cleanup Commands](#cleanup-commands)
+  - [✅ Health Checks](#-health-checks)
+    - [Quick Verification](#quick-verification)
+    - [Full Health Check](#full-health-check)
+
+---
+
+## 🏗️ Build Issues
 
 ### Gradle Build Fails
 
@@ -40,10 +93,10 @@ export GRADLE_OPTS="-Xmx2g"
 ./gradlew checkstyleMain
 
 # Common issues:
-# - Line too long (max 120 chars) → Break into multiple lines
-# - Import order → Use IDE organize imports (Ctrl+Shift+O)
-# - Naming convention → Follow Java style guide
-# - Javadoc missing → Add public method documentation
+# - Line too long (max 120 chars)  Break into multiple lines
+# - Import order  Use IDE organize imports (Ctrl+Shift+O)
+# - Naming convention  Follow Java style guide
+# - Javadoc missing  Add public method documentation
 
 # Run build without checkstyle (temporary only!)
 ./gradlew build -x checkstyleMain
@@ -69,7 +122,7 @@ ping repository.maven.apache.org
 
 ---
 
-## 🔴 Runtime Issues
+## ⚙️ Runtime Issues
 
 ### Application Won't Start
 
@@ -160,7 +213,7 @@ export SERVER_PORT=9090
 
 ---
 
-## 🔴 Frontend Issues
+## 💻 Frontend Issues
 
 ### npm Build Fails
 
@@ -232,7 +285,7 @@ npm run dev  # Or npm run build
 
 ---
 
-## 🔴 Database Issues
+## 💾 Database Issues
 
 ### File Storage Errors
 
@@ -253,8 +306,8 @@ grep -i "upload.path" application.properties
 
 # Check Java path handling
 # On Windows: use forward slashes or double backslashes
-# upload.path=uploads    ✅
-# upload.path=uploads\\  ❌
+# upload.path=uploads
+# upload.path=uploads\\
 ```
 
 ### File Retrieval Fails
@@ -277,7 +330,7 @@ curl http://localhost:8080/api/files
 
 ---
 
-## 🔴 Test Issues
+## 🧪 Test Issues
 
 ### Tests Fail to Run
 
@@ -337,7 +390,7 @@ grep -i jacoco build.gradle
 
 ---
 
-## 🔴 API Issues
+## 🔌 API Issues
 
 ### CORS Errors
 
@@ -388,7 +441,7 @@ spring.servlet.multipart.max-request-size=50MB
 
 ---
 
-## 🟡 Performance Issues
+## 📈 Performance Issues
 
 ### Slow Build Times
 
@@ -455,7 +508,7 @@ jvisualvm &  # Opens GUI
 
 ---
 
-## 🟡 Configuration Issues
+## ⚙️ Configuration Issues
 
 ### External config.json Not Found
 
@@ -504,7 +557,7 @@ export PROMPT_DIR=/path/to/prompts
 
 ---
 
-## 🟡 Git Issues
+## 🔀 Git Issues
 
 ### Uncommitted Changes
 
@@ -540,7 +593,7 @@ git commit -m "Resolve merge conflicts"
 
 ---
 
-## 📋 Diagnostic Commands
+## 🔍 Diagnostic Commands
 
 ### System Information
 
@@ -596,7 +649,7 @@ lsof -i -P -n | grep LISTEN
 
 ---
 
-## 📞 Getting Help
+## 🆘 Getting Help
 
 ### Debug Mode
 
@@ -608,7 +661,7 @@ export LOG_LEVEL=DEBUG
 ./gradlew bootRun --debug
 
 # Attach debugger
-# Use IDE: Run → Attach to Process
+# Use IDE: Run  Attach to Process
 ```
 
 ### Collect Information
@@ -696,7 +749,7 @@ rm -f app.log error.log
 
 ---
 
-## 📊 Health Checks
+## ✅ Health Checks
 
 ### Quick Verification
 
@@ -734,16 +787,16 @@ echo "npm: $(npm --version)"
 echo ""
 echo "=== Services Check ==="
 echo -n "LLM API: "
-curl -s http://localhost:11434/api/tags > /dev/null && echo "✅" || echo "❌"
+curl -s http://localhost:11434/api/tags > /dev/null && echo "" || echo ""
 echo -n "Backend: "
-curl -s http://localhost:8080/api/health > /dev/null && echo "✅" || echo "❌"
+curl -s http://localhost:8080/api/health > /dev/null && echo "" || echo ""
 echo -n "Frontend: "
-curl -s http://localhost:5173 > /dev/null && echo "✅" || echo "❌"
+curl -s http://localhost:5173 > /dev/null && echo "" || echo ""
 echo ""
 echo "=== File Check ==="
-test -f config.json && echo "✅ config.json" || echo "❌ config.json"
-test -d uploads && echo "✅ uploads/" || echo "❌ uploads/"
-test -d prompts && echo "✅ prompts/" || echo "❌ prompts/"
+test -f config.json && echo " config.json" || echo " config.json"
+test -d uploads && echo " uploads/" || echo " uploads/"
+test -d prompts && echo " prompts/" || echo " prompts/"
 ```
 
 ---

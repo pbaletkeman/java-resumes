@@ -2,6 +2,62 @@
 
 Comprehensive guide to tools for capturing, editing, and optimizing screenshots.
 
+- [Screenshot Tools \& Resources](#screenshot-tools--resources)
+  - [🎯 Quick Tool Recommendations](#-quick-tool-recommendations)
+    - [For Different Tasks](#for-different-tasks)
+  - [📸 Screenshot Capture Tools](#-screenshot-capture-tools)
+    - [1. ShareX (RECOMMENDED)](#1-sharex-recommended)
+      - [Best for: Comprehensive screenshot workflow](#best-for-comprehensive-screenshot-workflow)
+    - [2. Greenshot](#2-greenshot)
+      - [Best for: Free lightweight alternative](#best-for-free-lightweight-alternative)
+    - [3. Snagit](#3-snagit)
+      - [Best for: Professional screenshot workflow](#best-for-professional-screenshot-workflow)
+    - [4. Windows 10/11 Screenshot Tools](#4-windows-1011-screenshot-tools)
+      - [Built-in options (free)](#built-in-options-free)
+        - [Print Screen (Basic)](#print-screen-basic)
+        - [Snipping Tool](#snipping-tool)
+        - [Screenshots App](#screenshots-app)
+  - [🎨 Image Editing Tools](#-image-editing-tools)
+    - [1. Paint (Windows Built-in)](#1-paint-windows-built-in)
+      - [Best for: Quick edits, annotations](#best-for-quick-edits-annotations)
+        - [Best Practices](#best-practices)
+    - [2. GIMP (GNU Image Manipulation Program)](#2-gimp-gnu-image-manipulation-program)
+      - [Best for: Professional image editing](#best-for-professional-image-editing)
+    - [3. Photoshop](#3-photoshop)
+      - [Best for: Professional graphic design](#best-for-professional-graphic-design)
+    - [4. Online Tools](#4-online-tools)
+      - [Best for: Quick edits without installation](#best-for-quick-edits-without-installation)
+  - [🗜️ Image Compression Tools](#️-image-compression-tools)
+    - [1. TinyPNG / TinyJPG (RECOMMENDED)](#1-tinypng--tinyjpg-recommended)
+      - [Best for: Bulk compression](#best-for-bulk-compression)
+    - [2. ImageMagick (CLI)](#2-imagemagick-cli)
+      - [Best for: Batch automation](#best-for-batch-automation)
+    - [3. PNGQuant](#3-pngquant)
+      - [Best for: PNG optimization](#best-for-png-optimization)
+  - [🎨 Diagram \& Architecture Tools](#-diagram--architecture-tools)
+    - [1. draw.io (RECOMMENDED)](#1-drawio-recommended)
+      - [Best for: Professional diagrams](#best-for-professional-diagrams)
+    - [2. Mermaid](#2-mermaid)
+      - [Best for: Text-based diagrams](#best-for-text-based-diagrams)
+    - [3. PlantUML](#3-plantuml)
+      - [Best for: Technical diagrams](#best-for-technical-diagrams)
+    - [4. Lucidchart](#4-lucidchart)
+  - [🔧 Browser Tools](#-browser-tools)
+    - [DevTools Screenshots](#devtools-screenshots)
+  - [📋 Batch Processing Scripts](#-batch-processing-scripts)
+    - [PowerShell: Batch Screenshot Compression](#powershell-batch-screenshot-compression)
+    - [Bash: Batch Screenshot Resize](#bash-batch-screenshot-resize)
+  - [✅ Pre-Capture Checklist](#-pre-capture-checklist)
+    - [Environment Setup](#environment-setup)
+    - [System Preparation](#system-preparation)
+    - [Tool Preparation](#tool-preparation)
+    - [Content Preparation](#content-preparation)
+  - [📚 Additional Resources](#-additional-resources)
+    - [Official Documentation](#official-documentation)
+    - [Tutorials](#tutorials)
+    - [Best Practices Guides](#best-practices-guides)
+  - [🎯 Quick Start](#-quick-start)
+
 ## 🎯 Quick Tool Recommendations
 
 ### For Different Tasks
@@ -678,4 +734,5 @@ Total Time: ~20 minutes
 
 ---
 
-Last Updated: 2026-01-16
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

@@ -1,42 +1,81 @@
-# System Architecture
+# 🏗️ System Architecture
 
 Complete architecture documentation for the java-resumes project, covering both backend and frontend systems.
 
 ---
 
-## Table of Contents
-
-1. [Overview](#overview)
-2. [Backend Architecture](#backend-architecture)
-3. [Frontend Architecture](#frontend-architecture)
-4. [Integration & Data Flow](#integration--data-flow)
-5. [Deployment Architecture](#deployment-architecture)
-6. [Technology Stack](#technology-stack)
-7. [Design Patterns](#design-patterns)
+- [🏗️ System Architecture](#️-system-architecture)
+  - [👋 Overview](#-overview)
+    - [✨ Key Characteristics](#-key-characteristics)
+  - [🔙 Backend Architecture](#-backend-architecture)
+    - [📊 High-Level Structure](#-high-level-structure)
+    - [📦 Core Components](#-core-components)
+      - [🎛️ ResumeController](#️-resumecontroller)
+      - [🧵 BackgroundResume](#-backgroundresume)
+      - [🔌 ApiService](#-apiservice)
+      - [💾 FilesStorageService](#-filesstorageservice)
+      - [📄 HtmlToPdf](#-htmltopdf)
+    - [📋 Data Models](#-data-models)
+    - [🏢 Layers](#-layers)
+    - [⏱️ Asynchronous Processing](#️-asynchronous-processing)
+  - [🎨 Frontend Architecture](#-frontend-architecture)
+    - [📊 High-Level Structure](#-high-level-structure-1)
+    - [🧹 Component Structure](#-component-structure)
+    - [🌤️ Custom Hooks](#️-custom-hooks)
+    - [🗓️ State Management](#️-state-management)
+    - [📊 Data Flow](#-data-flow)
+    - [🦩 Component Types](#-component-types)
+  - [🔗 Integration \& Data Flow](#-integration--data-flow)
+    - [📄 Document Processing Flow](#-document-processing-flow)
+    - [🔄 API Contracts](#-api-contracts)
+  - [🚀 Deployment Architecture](#-deployment-architecture)
+    - [💻 Development Environment](#-development-environment)
+    - [🌐 Production Environment](#-production-environment)
+    - [🚢 Container Deployment](#-container-deployment)
+  - [📚 Technology Stack](#-technology-stack)
+    - [🔙 Backend](#-backend)
+    - [🎨 Frontend](#-frontend)
+    - [🌐 External Services](#-external-services)
+  - [🎯‍♀️ Design Patterns](#️-design-patterns)
+    - [🔙 Backend Patterns](#-backend-patterns)
+    - [🎨 Frontend Patterns](#-frontend-patterns)
+  - [🚀 Scalability Considerations](#-scalability-considerations)
+    - [🔙 Backend Scaling](#-backend-scaling)
+    - [🎨 Frontend Optimization](#-frontend-optimization)
+    - [💾 Database Scaling](#-database-scaling)
+  - [🔐 Security Considerations](#-security-considerations)
+    - [🔙 Backend](#-backend-1)
+    - [🎨 Frontend](#-frontend-1)
+    - [🔏 Data Protection](#-data-protection)
+  - [👀 Monitoring \& Observability](#-monitoring--observability)
+    - [🔙 Backend](#-backend-2)
+    - [🎨 Frontend](#-frontend-2)
+    - [📊 Key Metrics](#-key-metrics)
+  - [📚 References](#-references)
 
 ---
 
-## Overview
+## 👋 Overview
 
 **java-resumes** is a full-stack application for AI-powered resume and cover letter optimization. The system consists of:
 
-- **Backend**: Spring Boot REST API for document processing and LLM integration
-- **Frontend**: React SPA for user interface and document management
-- **LLM Integration**: Integration with Ollama/LM Studio for AI optimization
+- 🔙 **Backend**: Spring Boot REST API for document processing and LLM integration
+- 🎨 **Frontend**: React SPA for user interface and document management
+- 🤖 **LLM Integration**: Integration with Ollama/LM Studio for AI optimization
 
-### Key Characteristics
+### ✨ Key Characteristics
 
-- **Stateless Architecture**: Backend designed for horizontal scaling
-- **Asynchronous Processing**: Long-running operations handled off the main thread
-- **Responsive Frontend**: React-based UI with real-time status updates
-- **File-Based Storage**: Documents stored on filesystem for simplicity
-- **AI-Powered**: Leverages LLM endpoints for intelligent document optimization
+- ⚡ **Stateless Architecture**: Backend designed for horizontal scaling
+- 🔄 **Asynchronous Processing**: Long-running operations handled off the main thread
+- ⚡ **Responsive Frontend**: React-based UI with real-time status updates
+- 💾 **File-Based Storage**: Documents stored on filesystem for simplicity
+- 🤖 **AI-Powered**: Leverages LLM endpoints for intelligent document optimization
 
 ---
 
-## Backend Architecture
+## 🔙 Backend Architecture
 
-### High-Level Structure
+### 📊 High-Level Structure
 
 ```mermaid
 graph TB
@@ -61,9 +100,9 @@ graph TB
     Models --> External
 ```
 
-### Core Components
+### 📦 Core Components
 
-#### ResumeController
+#### 🎛️ ResumeController
 
 **Responsibility**: REST API endpoints
 
@@ -84,7 +123,7 @@ graph TB
 - Asynchronous processing via BackgroundResume threads
 - Proper HTTP status codes and error messages
 
-#### BackgroundResume
+#### 🧵 BackgroundResume
 
 **Responsibility**: Asynchronous document optimization
 
@@ -104,7 +143,7 @@ graph TB
 - Error handling and logging
 - File I/O operations
 
-#### ApiService
+#### 🔌 ApiService
 
 **Responsibility**: Integration with LLM endpoints
 
@@ -128,7 +167,7 @@ POST {LLM_ENDPOINT}/api/chat
 }
 ```
 
-#### FilesStorageService
+#### 💾 FilesStorageService
 
 **Responsibility**: File system operations
 
@@ -146,7 +185,7 @@ POST {LLM_ENDPOINT}/api/chat
 - Error handling for file operations
 - Logging for audit trail
 
-#### HtmlToPdf
+#### 📄 HtmlToPdf
 
 **Responsibility**: Markdown/HTML to PDF conversion
 
@@ -157,7 +196,7 @@ POST {LLM_ENDPOINT}/api/chat
 3. Render to PDF (Flying Saucer)
 4. Return PDF bytes or save to file
 
-### Data Models
+### 📋 Data Models
 
 **Optimize (Request DTO)**:
 
@@ -184,7 +223,7 @@ class FileInfo {
 }
 ```
 
-### Layers
+### 🏢 Layers
 
 ```mermaid
 graph TD
@@ -204,7 +243,7 @@ graph TD
     Business -->|Accesses| DataAccess
 ```
 
-### Asynchronous Processing
+### ⏱️ Asynchronous Processing
 
 ```mermaid
 sequenceDiagram
@@ -235,9 +274,9 @@ sequenceDiagram
 
 ---
 
-## Frontend Architecture
+## 🎨 Frontend Architecture
 
-### High-Level Structure
+### 📊 High-Level Structure
 
 ```mermaid
 graph TB
@@ -268,7 +307,7 @@ graph TB
     Styling --> API
 ```
 
-### Component Structure
+### 🧹 Component Structure
 
 ```mermaid
 graph TD
@@ -295,7 +334,7 @@ graph TD
     App --> Toasts["Toast Notifications"]
 ```
 
-### Custom Hooks
+### 🌤️ Custom Hooks
 
 **useApi Hook**:
 
@@ -345,7 +384,7 @@ const useTheme = () => {
 };
 ```
 
-### State Management
+### 🗓️ State Management
 
 **AppContext**:
 
@@ -365,7 +404,7 @@ const useTheme = () => {
 - Component-specific UI state (form inputs, dropdowns)
 - Temporary data (search filters, sorting)
 
-### Data Flow
+### 📊 Data Flow
 
 ```mermaid
 sequenceDiagram
@@ -392,7 +431,7 @@ sequenceDiagram
     UI->>User: Display Results
 ```
 
-### Component Types
+### 🦩 Component Types
 
 **Container Components**:
 
@@ -415,9 +454,9 @@ sequenceDiagram
 
 ---
 
-## Integration & Data Flow
+## 🔗 Integration & Data Flow
 
-### Document Processing Flow
+### 📄 Document Processing Flow
 
 ```mermaid
 sequenceDiagram
@@ -455,7 +494,7 @@ sequenceDiagram
     FE->>FE: Add to file history
 ```
 
-### API Contracts
+### 🔄 API Contracts
 
 **Optimization Request** (POST /upload):
 
@@ -499,9 +538,9 @@ sequenceDiagram
 
 ---
 
-## Deployment Architecture
+## 🚀 Deployment Architecture
 
-### Development Environment
+### 💻 Development Environment
 
 ```mermaid
 graph TD
@@ -512,7 +551,7 @@ graph TD
     Dev --> LLM["LLM Service<br/>Ollama / LM Studio<br/>Local or Remote"]
 ```
 
-### Production Environment
+### 🌐 Production Environment
 
 ```mermaid
 graph TB
@@ -526,7 +565,7 @@ graph TB
     BackendInstance --> Database["Database<br/>Optional<br/>Metadata Storage"]
 ```
 
-### Container Deployment
+### 🚢 Container Deployment
 
 **Backend Dockerfile**:
 
@@ -553,9 +592,9 @@ EXPOSE 80
 
 ---
 
-## Technology Stack
+## 📚 Technology Stack
 
-### Backend
+### 🔙 Backend
 
 - **JDK**: Java 21 LTS (Eclipse Temurin)
 - **Framework**: Spring Boot 3.5.1
@@ -566,7 +605,7 @@ EXPOSE 80
 - **PDF**: Flying Saucer, CommonMark
 - **Logging**: SLF4J, Logback
 
-### Frontend
+### 🎨 Frontend
 
 - **Framework**: React 19.2.0
 - **Language**: TypeScript 5.9.3
@@ -577,16 +616,16 @@ EXPOSE 80
 - **Testing**: Vitest 4.0.17, React Testing Library
 - **Icons**: React Icons
 
-### External Services
+### 🌐 External Services
 
 - **LLM**: Ollama / LM Studio (OpenAI-compatible API)
 - **Optional**: OpenAI API, Anthropic API, etc.
 
 ---
 
-## Design Patterns
+## 🎯‍♀️ Design Patterns
 
-### Backend Patterns
+### 🔙 Backend Patterns
 
 **MVC Pattern**:
 
@@ -615,7 +654,7 @@ EXPOSE 80
 - Request/Response DTOs decouple API from internal models
 - Type safety with JSON annotations
 
-### Frontend Patterns
+### 🎨 Frontend Patterns
 
 **Component Pattern**:
 
@@ -643,9 +682,9 @@ EXPOSE 80
 
 ---
 
-## Scalability Considerations
+## 🚀 Scalability Considerations
 
-### Backend Scaling
+### 🔙 Backend Scaling
 
 1. **Stateless Design**: Each request is independent
 2. **Horizontal Scaling**: Multiple backend instances behind load balancer
@@ -653,7 +692,7 @@ EXPOSE 80
 4. **File Storage**: Consider cloud storage (S3, Azure Blob) for multi-instance setup
 5. **LLM Caching**: Cache LLM responses to reduce API calls
 
-### Frontend Optimization
+### 🎨 Frontend Optimization
 
 1. **Code Splitting**: Lazy load components/routes
 2. **Bundle Optimization**: Tree-shake unused code
@@ -661,7 +700,7 @@ EXPOSE 80
 4. **CDN**: Serve static assets from CDN
 5. **Image Optimization**: Use modern formats, compress
 
-### Database Scaling
+### 💾 Database Scaling
 
 - Optional: Add database for persistent file metadata
 - Use connection pooling
@@ -670,9 +709,9 @@ EXPOSE 80
 
 ---
 
-## Security Considerations
+## 🔐 Security Considerations
 
-### Backend
+### 🔙 Backend
 
 - Input validation on all endpoints
 - CORS configuration for frontend domain
@@ -681,7 +720,7 @@ EXPOSE 80
 - File upload validation (type, size)
 - Error messages don't expose internal details
 
-### Frontend
+### 🎨 Frontend
 
 - No sensitive data in local storage
 - HTTPS only in production
@@ -689,7 +728,7 @@ EXPOSE 80
 - CSRF protection via SameSite cookies
 - Content Security Policy headers
 
-### Data Protection
+### 🔏 Data Protection
 
 - Encrypted file uploads (HTTPS)
 - Secure LLM communication
@@ -698,9 +737,9 @@ EXPOSE 80
 
 ---
 
-## Monitoring & Observability
+## 👀 Monitoring & Observability
 
-### Backend
+### 🔙 Backend
 
 - Application logs (SLF4J/Logback)
 - Health check endpoint (`/health`)
@@ -708,7 +747,7 @@ EXPOSE 80
 - Error tracking
 - Request/response logging
 
-### Frontend
+### 🎨 Frontend
 
 - Console logs in development
 - Error boundary logging
@@ -716,7 +755,7 @@ EXPOSE 80
 - Performance monitoring (Core Web Vitals)
 - User session tracking (optional)
 
-### Key Metrics
+### 📊 Key Metrics
 
 - API response time
 - LLM processing time
@@ -727,7 +766,7 @@ EXPOSE 80
 
 ---
 
-## References
+## 📚 References
 
 - [Backend Instructions](../../.github/instructions/backend.instructions.md)
 - [Frontend Instructions](../../.github/instructions/frontend.instructions.md)
@@ -738,6 +777,7 @@ EXPOSE 80
 
 ---
 
-**Last Updated**: 2026
-**Project**: java-resumes
-**Repository**: <https://github.com/pbaletkeman/java-resumes>
+**Last Updated:** February 2, 2026
+**Project:** java-resumes
+**Repository:** <https://github.com/pbaletkeman/java-resumes>
+**Maintained By:** java-resumes development team

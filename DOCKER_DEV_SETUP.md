@@ -2,25 +2,47 @@
 
 Comprehensive guide for running java-resumes services locally with hot reload and visible logs.
 
-## Table of Contents
-
-- [Quick Start](#quick-start)
-- [What You'll See](#what-youll-see)
-- [Access Services](#access-services)
-- [UI Preview](#ui-preview)
-- [Features](#features)
-- [File Structure](#file-structure)
-- [Commands](#commands)
-- [Common Issues](#common-issues)
-- [Development Workflow](#development-workflow)
-- [Switching Between Dev and Production](#switching-between-dev-and-production)
-- [Environment Variables](#environment-variables)
-- [Troubleshooting](#troubleshooting)
-- [Related Files](#related-files)
+- [Development Setup - Docker Compose with Vite Dev Server](#development-setup---docker-compose-with-vite-dev-server)
+  - [⚡ Quick Start](#-quick-start)
+  - [What You'll See](#what-youll-see)
+  - [🎨 UI Preview](#-ui-preview)
+    - [Main Tab (Resume Editor)](#main-tab-resume-editor)
+    - [File History Tab](#file-history-tab)
+    - [Settings Tab](#settings-tab)
+    - [Tools Tab](#tools-tab)
+    - [Add Model Dialog](#add-model-dialog)
+  - [What You'll See](#what-youll-see-1)
+  - [Access Services](#access-services)
+  - [Features](#features)
+  - [File Structure](#file-structure)
+  - [Commands](#commands)
+    - [Run with Logs Visible](#run-with-logs-visible)
+    - [Run in Background](#run-in-background)
+    - [View Logs](#view-logs)
+    - [Stop Services](#stop-services)
+    - [Rebuild Images](#rebuild-images)
+  - [Common Issues](#common-issues)
+    - [Can't see Vite startup message](#cant-see-vite-startup-message)
+    - [Hot reload not working](#hot-reload-not-working)
+    - [Port already in use](#port-already-in-use)
+    - [Backend not accessible from frontend](#backend-not-accessible-from-frontend)
+  - [Development Workflow](#development-workflow)
+  - [Switching Between Dev and Production](#switching-between-dev-and-production)
+    - [Use Development Setup (Vite Dev Server)](#use-development-setup-vite-dev-server)
+    - [Switch to Production Setup (Static Nginx)](#switch-to-production-setup-static-nginx)
+  - [Environment Variables](#environment-variables)
+    - [Frontend (Development)](#frontend-development)
+    - [Backend](#backend)
+  - [Troubleshooting](#troubleshooting)
+    - [Services won't start](#services-wont-start)
+    - [Clear everything and restart](#clear-everything-and-restart)
+    - [Need to run commands in container](#need-to-run-commands-in-container)
+  - [Next Steps](#next-steps)
+  - [Related Files](#related-files)
 
 ---
 
-## Quick Start
+## ⚡ Quick Start
 
 ```bash
 # Build images
@@ -60,7 +82,7 @@ resume-frontend   |   ➜  press h + enter to show help
 
 ---
 
-## UI Preview
+## 🎨 UI Preview
 
 The frontend is available in both **dark** and **light** themes:
 
@@ -324,7 +346,12 @@ docker-compose exec backend bash
 
 ## Related Files
 
-- [docker-compose.yml](../../docker-compose.yml) - Main configuration
-- [frontend/Dockerfile.dev](../../frontend/Dockerfile.dev) - Dev Dockerfile
-- [frontend/vite.config.ts](../../frontend/vite.config.ts) - Vite configuration
-- [Dockerfile](../../Dockerfile) - Backend container configuration
+- [docker-compose.yml](docker-compose.yml) - Main configuration
+- [frontend/Dockerfile.dev](frontend/Dockerfile.dev) - Dev Dockerfile
+- [frontend/vite.config.ts](frontend/vite.config.ts) - Vite configuration
+- [Dockerfile](Dockerfile) - Backend container configuration
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

@@ -7,6 +7,7 @@ WORKDIR /app
 
 ENV NODE_ENV=development
 ENV VITE_HOST=0.0.0.0
+ENV VITE_API_BASE_URL=http://localhost:8080
 
 # Copy package files
 COPY package*.json ./

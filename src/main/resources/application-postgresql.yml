@@ -1,0 +1,52 @@
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    enabled: true
+
+# max request size for a multipart/form-data
+# max file size for each request
+spring:
+  servlet:
+    multipart:
+      max-file-size: 500KB
+      max-request-size: 500KB
+
+  # Database configuration (PostgreSQL)
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/resume_db}
+    username: ${SPRING_DATASOURCE_USERNAME:resume_user}
+    password: ${SPRING_DATASOURCE_PASSWORD:resume_password}
+    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
+
+  jpa:
+    database-platform: ${SPRING_JPA_DATABASE_PLATFORM:org.hibernate.dialect.PostgreSQLDialect}
+    hibernate:
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:validate}
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  flyway:
+    enabled: ${SPRING_FLYWAY_ENABLED:true}
+    locations: ${SPRING_FLYWAY_LOCATIONS:classpath:db/migration/postgresql}
+    baseline-on-migrate: true
+
+upload:
+  path: ${UPLOAD_PATH:files}
+
+# LLM Configuration
+# Default endpoint uses local Ollama service
+# For OpenAI or other providers, update endpoint and apikey
+llm:
+  endpoint: ${LLM_ENDPOINT:http://127.0.0.1:11434/v1/chat/completions}
+  apikey: ${LLM_APIKEY:1234567890}
+  # Mock mode: Set to true to use simulated LLM responses without network calls
+  # Useful for testing and development when Ollama service is not available
+  mock:
+    enabled: false
+
+# Prompts configuration
+# external-dir: Leave empty to use bundled prompts
+# Set to a directory path (e.g., ./prompts or /etc/java-resumes/prompts) to override with external files

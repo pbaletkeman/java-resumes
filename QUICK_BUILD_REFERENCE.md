@@ -1,8 +1,33 @@
 # Quick Build Reference
 
-Fast reference for common build, test, and deployment tasks.
+Fast reference for common build, test, and deployment tasks across the java-resumes project.
 
-## Prerequisites
+---
+
+- [Quick Build Reference](#quick-build-reference)
+  - [✅ Prerequisites](#-prerequisites)
+  - [🎨 Frontend Commands](#-frontend-commands)
+  - [🔧 Backend Commands](#-backend-commands)
+  - [📦 Build Scripts](#-build-scripts)
+    - [Windows](#windows)
+    - [macOS/Linux](#macoslinux)
+  - [🚀 Production Deployment](#-production-deployment)
+    - [Frontend](#frontend)
+    - [Backend](#backend)
+  - [📝 Version Management](#-version-management)
+    - [Manual Release](#manual-release)
+    - [Using Release Script](#using-release-script)
+  - [⚙️ GitHub Actions](#️-github-actions)
+    - [View Workflows](#view-workflows)
+    - [Trigger Release Workflow](#trigger-release-workflow)
+  - [🐳 Docker Commands](#-docker-commands)
+  - [🔍 Troubleshooting](#-troubleshooting)
+  - [📊 CI/CD Status](#-cicd-status)
+  - [📚 Documentation](#-documentation)
+
+---
+
+## ✅ Prerequisites
 
 ```bash
 # Check versions
@@ -12,7 +37,7 @@ java -version     # Should be Java 21
 gradle --version  # Should be 9.3+
 ```
 
-## Frontend Commands
+## 🎨 Frontend Commands
 
 ```bash
 # Install dependencies
@@ -37,7 +62,7 @@ npm run lint
 npm run type-check
 ```
 
-## Backend Commands
+## 🔧 Backend Commands
 
 ```bash
 # Run tests
@@ -56,7 +81,7 @@ gradle build --no-daemon
 java -jar build/libs/*.jar
 ```
 
-## Build Scripts
+## 📦 Build Scripts
 
 ### Windows
 
@@ -84,7 +109,7 @@ scripts\release.bat
 ./scripts/release.sh
 ```
 
-## Production Deployment
+## 🚀 Production Deployment
 
 ### Frontend
 
@@ -106,7 +131,7 @@ gradle build -x test -x checkstyleMain -x checkstyleTest
 # Run: java -jar build/libs/java-resumes-*.jar
 ```
 
-## Version Management
+## 📝 Version Management
 
 ### Manual Release
 
@@ -137,7 +162,7 @@ scripts\release.bat
 ./scripts/release.sh
 ```
 
-## GitHub Actions
+## ⚙️ GitHub Actions
 
 ### View Workflows
 
@@ -152,7 +177,7 @@ scripts\release.bat
 3. Click "Run workflow"
 4. Select options and run
 
-## Docker Commands
+## 🐳 Docker Commands
 
 ```bash
 # Build frontend image
@@ -172,7 +197,7 @@ docker-compose logs -f frontend
 docker-compose down
 ```
 
-## Troubleshooting
+## 🔍 Troubleshooting
 
 ```bash
 # Clear npm cache
@@ -188,7 +213,7 @@ npm install
 gradle build
 ```
 
-## CI/CD Status
+## 📊 CI/CD Status
 
 Check GitHub Actions workflow status:
 
@@ -203,8 +228,13 @@ gh workflow view
 gh workflow view frontend-build.yml
 ```
 
-## Documentation
+## 📚 Documentation
 
-- **Full Guide**: [BUILD_AND_DEPLOYMENT.md](./BUILD_AND_DEPLOYMENT.md)
-- **Architecture**: [Architecture.md](./Architecture.md)
-- **README**: [../README.md](../README.md)
+- **Full Guide**: [docs/BUILD_AND_DEPLOYMENT.md](docs/BUILD_AND_DEPLOYMENT.md)
+- **Architecture**: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- **README**: [README.md](README.md)
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

@@ -1,0 +1,4 @@
+-- PostgreSQL migration V2 - Schema is already correct
+-- This is a placeholder for SQLite compatibility
+-- In PostgreSQL, BIGSERIAL was used from the start in V1
+-- No changes needed for PostgreSQL

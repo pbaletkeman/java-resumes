@@ -19,7 +19,8 @@ public final class Choice {
     this.index = index;
     this.logprobs = logprobs;
     this.finishReason = finishReason;
-    this.message = message;
+    // Defensive copy to prevent external mutation
+    this.message = message != null ? new Message(message) : null;
   }
 
   public int getIndex() {
@@ -47,11 +48,13 @@ public final class Choice {
   }
 
   public Message getMessage() {
-    return message;
+    // Return defensive copy to prevent external mutation
+    return message != null ? new Message(message) : null;
   }
 
   public void setMessage(Message message) {
-    this.message = message;
+    // Store defensive copy to prevent external mutation
+    this.message = message != null ? new Message(message) : null;
   }
 
   @Override

@@ -1,0 +1,128 @@
+services:
+  # Ollama LLM Service
+  ollama:
+    image: ollama/ollama:latest
+    container_name: resume-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    networks:
+      - resume-network
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    restart: unless-stopped
+    # Uncomment below for GPU support (requires nvidia-docker)
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+  # PostgreSQL 17 Database
+  postgres:
+    image: postgres:17-alpine
+    container_name: resume-postgres-ollama
+    environment:
+      POSTGRES_DB: resume_db
+      POSTGRES_USER: resume_user
+      POSTGRES_PASSWORD: resume_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - resume-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U resume_user -d resume_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    restart: unless-stopped
+
+  # Backend - Java Spring Boot API with Ollama and PostgreSQL
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: resume-backend-ollama-postgres
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - UPLOAD_PATH=files
+      - SERVER_PORT=8080
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/resume_db
+      - SPRING_DATASOURCE_USERNAME=resume_user
+      - SPRING_DATASOURCE_PASSWORD=resume_password
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_FLYWAY_ENABLED=false
+      - LLM_ENDPOINT=http://ollama:11434/v1/chat/completions
+      - LLM_APIKEY=not-needed-for-local
+    volumes:
+      - backend-files:/app/files
+      - ./config.json:/app/config.json:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      ollama:
+        condition: service_healthy
+    networks:
+      - resume-network
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--no-verbose",
+          "--tries=1",
+          "--spider",
+          "http://localhost:8080/api/health",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
+  # Frontend - React + Vite Dev Server
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: resume-frontend-ollama-postgres
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8080
+      - NODE_ENV=development
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - resume-network
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+
+networks:
+  resume-network:
+    driver: bridge
+    name: resume-ollama-postgres-network
+
+volumes:
+  backend-files:
+    name: resume-ollama-postgres-backend-files
+  postgres-data:
+    name: resume-ollama-postgres-data
+  ollama-data:
+    name: resume-ollama-data

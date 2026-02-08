@@ -2,18 +2,21 @@
 
 This directory contains architecture diagrams and visual representations of the java-resumes system.
 
-## � Table of Contents
-
-1. [System Architecture](#system-architecture)
-2. [Component Architecture](#component-architecture)
-3. [Data Flow Diagram](#data-flow-diagram)
-4. [Deployment Architecture](#deployment-architecture)
-5. [Docker Compose Structure](#docker-compose-structure)
-6. [Request/Response Flow](#request-response-flow)
-7. [Backend Component Dependencies (UML)](#backend-component-dependencies-uml)
-8. [Frontend Component Dependencies (UML)](#frontend-component-dependencies-uml)
-9. [Authentication & Security](#authentication--security)
-10. [Scalability Patterns](#scalability-patterns)
+- [Architecture Diagrams](#architecture-diagrams)
+  - [�📊 Diagrams Included](#-diagrams-included)
+    - [System Architecture](#system-architecture)
+    - [Component Architecture](#component-architecture)
+    - [Data Flow Diagram](#data-flow-diagram)
+    - [Deployment Architecture](#deployment-architecture)
+    - [Docker Compose Structure](#docker-compose-structure)
+  - [📈 Request/Response Flow](#-requestresponse-flow)
+  - [Backend Component Dependencies (UML)](#backend-component-dependencies-uml)
+  - [Frontend Component Dependencies (UML)](#frontend-component-dependencies-uml)
+  - [🔄 Authentication \& Security](#-authentication--security)
+  - [🚀 Scalability Patterns](#-scalability-patterns)
+    - [Horizontal Scaling](#horizontal-scaling)
+    - [Message Queue Pattern](#message-queue-pattern)
+  - [📚 References](#-references)
 
 ---
 
@@ -109,6 +112,9 @@ graph TD
     Files["/files GET"]
     FilesId["/files/{id}<br/>GET/DELETE"]
     Markdown["/markdownFile2PDF POST"]
+    Skills["/process/skills POST"]
+    Interview["Interview Endpoints:<br/>/generate/interview-hr-questions<br/>/generate/interview-job-specific<br/>/generate/interview-reverse"]
+    Networking["Networking Endpoints:<br/>/generate/cold-email<br/>/generate/cold-linkedin-message<br/>/generate/thank-you-email"]
 
     Service["ResumeService<br/>Business Logic"]
     OptLogic["Optimization Logic"]
@@ -136,6 +142,9 @@ graph TD
     Controller --> Files
     Controller --> FilesId
     Controller --> Markdown
+    Controller --> Skills
+    Controller --> Interview
+    Controller --> Networking
 
     Service --> OptLogic
     Service --> FileProc
@@ -330,8 +339,16 @@ classDiagram
         +getFile(String) ResponseEntity
         +deleteFile(String) ResponseEntity
         +healthCheck() ResponseEntity
+        +processSkills(String) ResponseEntity
+        +generateInterviewHrQuestions(String) ResponseEntity
+        +generateInterviewJobSpecific(String) ResponseEntity
+        +generateInterviewReverse(String) ResponseEntity
+        +generateColdEmail(String) ResponseEntity
+        +generateColdLinkedInMessage(String) ResponseEntity
+        +generateThankYouEmail(String) ResponseEntity
         -validate(Optimize) boolean
         -spawn(BackgroundResume) void
+        -processPromptRequest(String, Optimize, String) ResponseEntity
     }
 
     class BackgroundResume {
@@ -675,3 +692,8 @@ graph LR
 - [Docker Compose Setup](../../docker-compose.yml)
 
 ---
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

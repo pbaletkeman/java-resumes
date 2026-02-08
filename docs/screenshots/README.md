@@ -2,19 +2,42 @@
 
 Central hub for all visual documentation and screenshots in the java-resumes project.
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Directory Structure](#directory-structure)
-- [Screenshot Categories](#screenshot-categories)
-- [Theme Variants](#theme-variants)
-- [Quick Links](#quick-links)
-- [How to Use Screenshots](#how-to-use-screenshots)
-- [Markdown Guidelines](#markdown-guidelines-for-screenshots)
+- [Screenshots Directory - Complete Index](#screenshots-directory---complete-index)
+  - [📋 Overview](#-overview)
+  - [📖 Directory Structure](#-directory-structure)
+  - [🎯 Screenshot Categories](#-screenshot-categories)
+    - [1. User Interface Screenshots](#1-user-interface-screenshots)
+    - [2. Setup \& Deployment Screenshots](#2-setup--deployment-screenshots)
+    - [3. Architecture Diagrams](#3-architecture-diagrams)
+    - [4. API Documentation](#4-api-documentation)
+  - [🎨 Theme Variants](#-theme-variants)
+    - [Dark Theme (10 screenshots)](#dark-theme-10-screenshots)
+    - [Light Theme (10 screenshots)](#light-theme-10-screenshots)
+  - [🔗 Quick Links](#-quick-links)
+    - [By Category](#by-category)
+    - [By Purpose](#by-purpose)
+  - [📸 How to Use Screenshots](#-how-to-use-screenshots)
+    - [In Markdown Documentation](#in-markdown-documentation)
+    - [Creating Side-by-Side Comparisons](#creating-side-by-side-comparisons)
+  - [🚀 Markdown Guidelines for Screenshots](#-markdown-guidelines-for-screenshots)
+    - [File Naming Conventions](#file-naming-conventions)
+    - [Image Link Format](#image-link-format)
+    - [Alt Text Guidelines](#alt-text-guidelines)
+    - [Image Placement](#image-placement)
+  - [📤 Documentation Integration](#-documentation-integration)
+  - [⚡ Setup \& Deployment](#-setup--deployment)
+  - [🔗 Usage in Documentation](#-usage-in-documentation)
+  - [💾 Storage \& Optimization](#-storage--optimization)
+  - [🔄 Maintenance](#-maintenance)
+  - [📚 Related Documentation](#-related-documentation)
+  - [🛠️ Tools \& Resources](#️-tools--resources)
+    - [Recommended Tools](#recommended-tools)
+    - [Links](#links)
+  - [Notes](#notes)
 
 ---
 
-## Overview
+## 📋 Overview
 
 This directory contains all visual documentation for the java-resumes application, organized by category for easy navigation and reference.
 
@@ -32,53 +55,53 @@ This directory contains all visual documentation for the java-resumes applicatio
 
 ---
 
-## Directory Structure
+## 📖 Directory Structure
 
 ```
 docs/screenshots/
 │
-├── README.md                          # This file - directory index
+├── README.md                             # This file - directory index
 │
-├── UI_SCREENSHOTS.md                 # UI theme showcase (dark & light)
+├── UI_SCREENSHOTS.md                     # UI theme showcase (dark & light)
 │
-├── ui/                               # User interface screenshots
-│   ├── main-tab-dark.png            # Resume editor - dark theme
-│   ├── main-tab-light.png           # Resume editor - light theme
-│   ├── file-history-dark.png        # File history - dark theme
-│   ├── file-history-light.png       # File history - light theme
-│   ├── settings-tab-dark.png        # Settings - dark theme
-│   ├── settings-tab-light.png       # Settings - light theme
-│   ├── tools-tab-dark.png           # Tools - dark theme
-│   ├── tools-tab-light.png          # Tools - light theme
-│   ├── add-model-dark.png           # Add model dialog - dark theme
-│   └── add-model-light.png          # Add model dialog - light theme
+├── ui/                                   # User interface screenshots
+│   ├── main-tab-dark.png                 # Resume editor - dark theme
+│   ├── main-tab-light.png                # Resume editor - light theme
+│   ├── file-history-dark.png             # File history - dark theme
+│   ├── file-history-light.png            # File history - light theme
+│   ├── settings-tab-dark.png             # Settings - dark theme
+│   ├── settings-tab-light.png            # Settings - light theme
+│   ├── tools-tab-dark.png                # Tools - dark theme
+│   ├── tools-tab-light.png               # Tools - light theme
+│   ├── add-model-dark.png                # Add model dialog - dark theme
+│   └── add-model-light.png               # Add model dialog - light theme
 │
-├── setup/                            # Setup and deployment documentation
-│   ├── README.md                    # Setup guide with screenshots
-│   ├── local-dev-setup.png         # Docker compose up output
-│   ├── build-success.png           # Gradle build completion
-│   ├── backend-docker.png          # Backend container logs
-│   └── frontend-docker.png         # Frontend container logs
+├── setup/                                # Setup and deployment documentation
+│   ├── README.md                         # Setup guide with screenshots
+│   ├── local-dev-setup.png               # Docker compose up output
+│   ├── build-success.png                 # Gradle build completion
+│   ├── backend-docker.png                # Backend container logs
+│   └── frontend-docker.png               # Frontend container logs
 │
-├── architecture/                     # System architecture and diagrams
-│   ├── README.md                    # Architecture guide
+├── architecture/                         # System architecture and diagrams
+│   ├── README.md                         # Architecture guide
 │   ├── system-architecture-backend.png   # Backend architecture
 │   ├── system-architecture-frontend.png  # Frontend architecture
-│   ├── backend-uml.png              # Backend class diagram
-│   ├── frontend-uml.png             # Frontend component diagram
-│   ├── data-flow.png                # Document processing flow
-│   └── document-processing-flow.png # Full process visualization
+│   ├── backend-uml.png                   # Backend class diagram
+│   ├── frontend-uml.png                  # Frontend component diagram
+│   ├── data-flow.png                     # Document processing flow
+│   └── document-processing-flow.png      # Full process visualization
 │
-└── api/                             # API documentation
-    ├── README.md                    # API documentation guide
-    ├── swagger-ui.png               # Swagger UI interface
-    ├── api-endpoints.png            # Endpoint reference chart
-    └── error-responses.png          # Error response examples
+└── api/                                  # API documentation
+    ├── README.md                         # API documentation guide
+    ├── swagger-ui.png                    # Swagger UI interface
+    ├── api-endpoints.png                 # Endpoint reference chart
+    └── error-responses.png               # Error response examples
 ```
 
 ---
 
-## Screenshot Categories
+## 🎯 Screenshot Categories
 
 ### 1. User Interface Screenshots
 
@@ -140,7 +163,7 @@ docs/screenshots/
 
 ---
 
-## Theme Variants
+## 🎨 Theme Variants
 
 ### Dark Theme (10 screenshots)
 
@@ -160,7 +183,7 @@ docs/screenshots/
 
 ---
 
-## Quick Links
+## 🔗 Quick Links
 
 ### By Category
 
@@ -180,7 +203,7 @@ docs/screenshots/
 
 ---
 
-## How to Use Screenshots
+## 📸 How to Use Screenshots
 
 ### In Markdown Documentation
 
@@ -218,7 +241,7 @@ docs/screenshots/
 
 ---
 
-## Markdown Guidelines for Screenshots
+## 🚀 Markdown Guidelines for Screenshots
 
 ### File Naming Conventions
 
@@ -264,16 +287,16 @@ Explanation of what to see...
 
 ---
 
-## Documentation Integration
+## 📤 Documentation Integration
 
 **Where Screenshots Are Used:**
 
-| File                     | Category           | Purpose                   |
-| ------------------------ | ------------------ | ------------------------- |
-| `DOCKER_DEV_SETUP.md`    | Setup, UI          | Development environment   |
-| `docs/architecture/ARCHITECTURE.md`   | Architecture, API  | System design reference   |
-| `docs/BACKEND_README.md` | API, architecture  | Backend API documentation |
-| `README.md` (root)       | Setup, UI overview | Project introduction      |
+| File                                | Category           | Purpose                   |
+| ----------------------------------- | ------------------ | ------------------------- |
+| `DOCKER_DEV_SETUP.md`               | Setup, UI          | Development environment   |
+| `docs/architecture/ARCHITECTURE.md` | Architecture, API  | System design reference   |
+| `docs/BACKEND_README.md`            | API, architecture  | Backend API documentation |
+| `README.md` (root)                  | Setup, UI overview | Project introduction      |
 
 ---
 
@@ -284,7 +307,7 @@ Explanation of what to see...
 - [ ] deployment.png - Docker deployment setup
 - [ ] component-diagram.png - Component relationships
 
-### Setup & Deployment
+## ⚡ Setup & Deployment
 
 - [ ] docker-compose-up.png - Docker startup output
 - [ ] local-dev-setup.png - Local development environment
@@ -324,7 +347,7 @@ Screenshots should be reviewed and updated:
 - [../../README.md](../../README.md) - Project README with screenshot references
 - [../../docs/architecture/ARCHITECTURE.md](../../docs/architecture/ARCHITECTURE.md) - Architecture documentation
 
-## 🎨 Tools & Resources
+## 🛠️ Tools & Resources
 
 ### Recommended Tools
 
@@ -340,7 +363,7 @@ Screenshots should be reviewed and updated:
 - [TinyPNG Image Compression](https://tinypng.com/)
 - [ShareX - Free Screenshot Tool](https://getsharex.com/)
 
-## 📝 Notes
+## Notes
 
 - All screenshots should include meaningful alt text for accessibility
 - Keep screenshots free of sensitive information (API keys, tokens, passwords)
@@ -351,3 +374,8 @@ Screenshots should be reviewed and updated:
 ---
 
 Last updated: 2026-01-16
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

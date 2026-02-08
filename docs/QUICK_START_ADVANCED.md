@@ -1,12 +1,61 @@
-# 🚀 Quick Start Reference - Java-Resumes
+﻿# Quick Start Reference - Java-Resumes
 
-> **📍 Location:** `docs/QUICK_START_ADVANCED.md`
-> **👥 Audience:** Developers
-> **🔗 Related:** [Quick Reference](QUICK_REFERENCE.md) | [Technical Checklist](TECHNICAL_CHECKLIST.md) | [Index](INDEX.md)
+- [Quick Start Reference - Java-Resumes](#quick-start-reference---java-resumes)
+  - [⏱️ One-Minute Overview](#️-one-minute-overview)
+  - [🚶 For Non-Technical Users](#-for-non-technical-users)
+    - [I just want to upload and optimize documents](#i-just-want-to-upload-and-optimize-documents)
+    - [I want to add a new AI model](#i-want-to-add-a-new-ai-model)
+    - [I want to share my model settings with the team](#i-want-to-share-my-model-settings-with-the-team)
+    - [Something went wrong, I want to reset](#something-went-wrong-i-want-to-reset)
+  - [💻 For Technical Users / Developers](#-for-technical-users--developers)
+    - [Build and Run Backend](#build-and-run-backend)
+    - [Build and Run Frontend](#build-and-run-frontend)
+    - [Key Endpoints](#key-endpoints)
+    - [Architecture](#architecture)
+  - [📂 Project Structure](#-project-structure)
+  - [⚙️ Configuration](#️-configuration)
+    - [Backend Configuration](#backend-configuration)
+    - [Environment Variables](#environment-variables)
+    - [Frontend Environment](#frontend-environment)
+  - [🧪 Testing](#-testing)
+    - [Backend Tests](#backend-tests)
+    - [Frontend Tests](#frontend-tests)
+    - [Code Quality](#code-quality)
+  - [🚀 Deployment](#-deployment)
+    - [Development](#development)
+    - [Production](#production)
+  - [📚 Documentation](#-documentation)
+  - [❓ Common Questions](#-common-questions)
+    - [Q: How do I change the AI model?](#q-how-do-i-change-the-ai-model)
+    - [Q: Can I use my own prompts?](#q-can-i-use-my-own-prompts)
+    - [Q: Where are my models stored?](#q-where-are-my-models-stored)
+    - [Q: Can I backup my models?](#q-can-i-backup-my-models)
+    - [Q: What if I break something?](#q-what-if-i-break-something)
+    - [Q: How many models can I add?](#q-how-many-models-can-i-add)
+    - [Q: Can I share models with team?](#q-can-i-share-models-with-team)
+    - [Q: Do I need an account?](#q-do-i-need-an-account)
+  - [🐛 Troubleshooting](#-troubleshooting)
+    - [Backend won't start](#backend-wont-start)
+    - [Frontend won't build](#frontend-wont-build)
+    - [Models not saving](#models-not-saving)
+    - [API not responding](#api-not-responding)
+  - [⚡ Performance](#-performance)
+  - [🔐 Security Notes](#-security-notes)
+  - [🛠️ Tech Stack](#️-tech-stack)
+  - [💬 Need Help?](#-need-help)
+  - [📋 Key Files to Know](#-key-files-to-know)
+  - [⚡ Quick Commands](#-quick-commands)
+  - [✨ You're Ready!](#-youre-ready)
 
 ---
 
-## One-Minute Overview
+> **Location:** `docs/QUICK_START_ADVANCED.md`
+> **Audience:** Developers
+> **Related:** [Quick Reference](QUICK_REFERENCE.md) | [Technical Checklist](TECHNICAL_CHECKLIST.md) | [Index](INDEX.md)
+
+---
+
+## ⏱️ One-Minute Overview
 
 **What is this?**
 
@@ -16,15 +65,15 @@
 
 **What can I do?**
 
-- 📝 Optimize resumes
-- 💌 Generate cover letters
-- 🎓 Extract skills
-- 🎛️ Manage AI models (Settings tab)
-- 📤 Export/import model configurations
+- Optimize resumes
+- Generate cover letters
+- Extract skills
+- Manage AI models (Settings tab)
+- Export/import model configurations
 
 ---
 
-## 🎯 For Non-Technical Users
+## 🚶 For Non-Technical Users
 
 ### I just want to upload and optimize documents
 
@@ -33,7 +82,7 @@
 3. Upload file
 4. Select what you want (Resume/Cover/Skills)
 5. Click **"Process"**
-6. Get results ✅
+6. Get results
 
 ### I want to add a new AI model
 
@@ -41,25 +90,25 @@
 2. Click **"Add Model"**
 3. Enter model name and ID
 4. Click **"Add"**
-5. Now available for all uploads ✅
+5. Now available for all uploads
 
 ### I want to share my model settings with the team
 
 1. Go to **"Settings"** tab
 2. Click **"Export Models"**
 3. Send JSON file to team
-4. Team goes to Settings → Import Models
-5. Everyone has same settings ✅
+4. Team goes to Settings Import Models
+5. Everyone has same settings
 
 ### Something went wrong, I want to reset
 
 1. Go to **"Settings"** tab
 2. Click **"Reset to Defaults"**
-3. Everything back to original ✅
+3. Everything back to original
 
 ---
 
-## 🎓 For Technical Users / Developers
+## 💻 For Technical Users / Developers
 
 ### Build and Run Backend
 
@@ -92,39 +141,39 @@ GET  /health                         # Health check
 
 ```
 Frontend (React + TypeScript)
-    ↓
+
 Backend (Spring Boot + Java 21)
-    ↓
+
 LLM API (Configurable models)
-    ↓
+
 Result (Optimized document)
 ```
 
 ---
 
-## 📁 Project Structure
+## 📂 Project Structure
 
 ```
 backend/src/main/java/ca/letkeman/resumes/
-├── controller/ResumeController.java       ← API endpoints
-├── service/ApiService.java                ← LLM integration
-└── service/PromptService.java             ← Prompt loading
+ controller/ResumeController.java        API endpoints
+ service/ApiService.java                 LLM integration
+ service/PromptService.java              Prompt loading
 
 frontend/src/
-├── components/Forms/DocumentUploadForm.tsx    ← Main upload
-├── components/Settings/ModelSettings.tsx      ← Model management
-├── components/Tabs/SettingsTab.tsx           ← Settings UI
-└── pages/HomePage.tsx                        ← Main page
+ components/Forms/DocumentUploadForm.tsx     Main upload
+ components/Settings/ModelSettings.tsx       Model management
+ components/Tabs/SettingsTab.tsx            Settings UI
+ pages/HomePage.tsx                         Main page
 
 prompts/
-├── RESUME.md                                 ← Resume optimization
-├── COVER.md                                  ← Cover letter
-└── SKILLS.md                                 ← Skills extraction
+ RESUME.md                                  Resume optimization
+ COVER.md                                   Cover letter
+ SKILLS.md                                  Skills extraction
 ```
 
 ---
 
-## 🔧 Configuration
+## ⚙️ Configuration
 
 ### Backend Configuration
 
@@ -156,12 +205,12 @@ VITE_APP_NAME=Java-Resumes
 
 ---
 
-## 📊 Testing
+## 🧪 Testing
 
 ### Backend Tests
 
 ```bash
-./gradlew test                   # All 57 tests ✅
+./gradlew test                   # All 57 tests
 ./gradlew testResumeController   # Specific test class
 ```
 
@@ -225,7 +274,7 @@ npm run preview                 # Frontend preview
 
 ### Q: How do I change the AI model?
 
-**A:** Go to Settings tab → Add Model or select from dropdown
+**A:** Go to Settings tab Add Model or select from dropdown
 
 ### Q: Can I use my own prompts?
 
@@ -237,11 +286,11 @@ npm run preview                 # Frontend preview
 
 ### Q: Can I backup my models?
 
-**A:** Yes, Settings → Export Models → JSON file
+**A:** Yes, Settings Export Models JSON file
 
 ### Q: What if I break something?
 
-**A:** Go to Settings → Reset to Defaults
+**A:** Go to Settings Reset to Defaults
 
 ### Q: How many models can I add?
 
@@ -249,7 +298,7 @@ npm run preview                 # Frontend preview
 
 ### Q: Can I share models with team?
 
-**A:** Yes, Export → send JSON → they Import
+**A:** Yes, Export send JSON they Import
 
 ### Q: Do I need an account?
 
@@ -257,7 +306,7 @@ npm run preview                 # Frontend preview
 
 ---
 
-## 🆘 Troubleshooting
+## 🐛 Troubleshooting
 
 ### Backend won't start
 
@@ -285,10 +334,10 @@ npm run build
 
 ```bash
 # Check localStorage is enabled
-Press F12 → Application → Local Storage
+Press F12  Application  Local Storage
 
 # Try resetting
-Go to Settings → Reset to Defaults
+Go to Settings  Reset to Defaults
 ```
 
 ### API not responding
@@ -303,7 +352,7 @@ Check VITE_API_URL environment
 
 ---
 
-## 📈 Performance
+## ⚡ Performance
 
 | Operation               | Time   |
 | ----------------------- | ------ |
@@ -318,16 +367,16 @@ Check VITE_API_URL environment
 
 ## 🔐 Security Notes
 
-- ✅ Input validation on all uploads
-- ✅ File type checking
-- ✅ No stored passwords or credentials
-- ✅ localStorage only (no external transmission)
-- ✅ CORS configured for security
-- ✅ Error messages don't expose internals
+- Input validation on all uploads
+- File type checking
+- No stored passwords or credentials
+- localStorage only (no external transmission)
+- CORS configured for security
+- Error messages don't expose internals
 
 ---
 
-## 🎨 Tech Stack
+## 🛠️ Tech Stack
 
 **Backend:**
 
@@ -354,39 +403,39 @@ Check VITE_API_URL environment
 
 ---
 
-## 📞 Need Help?
+## 💬 Need Help?
 
-1. **User Issue?** → Check NONTECHNICAL_MODEL_GUIDE.md
-2. **Technical Issue?** → Check IMPLEMENTATION_SUMMARY.md
-3. **Development?** → Check code comments and JSDoc
-4. **Status?** → Check PROJECT_STATUS.md
+1. **User Issue?** Check NONTECHNICAL_MODEL_GUIDE.md
+2. **Technical Issue?** Check IMPLEMENTATION_SUMMARY.md
+3. **Development?** Check code comments and JSDoc
+4. **Status?** Check PROJECT_STATUS.md
 
 ---
 
-## 🎯 Key Files to Know
+## 📋 Key Files to Know
 
 ```
-README.md                           ← Main overview
-PROJECT_STATUS.md                   ← Current status ⭐
-NONTECHNICAL_MODEL_GUIDE.md         ← User guide ⭐
-IMPLEMENTATION_SUMMARY.md           ← Tech details
-TECHNICAL_CHECKLIST.md              ← Dev checklist
+README.md                            Main overview
+PROJECT_STATUS.md                    Current status
+NONTECHNICAL_MODEL_GUIDE.md          User guide
+IMPLEMENTATION_SUMMARY.md            Tech details
+TECHNICAL_CHECKLIST.md               Dev checklist
 
-frontend/src/pages/HomePage.tsx     ← Main UI
+frontend/src/pages/HomePage.tsx      Main UI
 frontend/src/components/
-  /Settings/ModelSettings.tsx       ← Model management ⭐
-  /Forms/DocumentUploadForm.tsx     ← Upload form ⭐
+  /Settings/ModelSettings.tsx        Model management
+  /Forms/DocumentUploadForm.tsx      Upload form
 
 src/main/java/.../controller/
-  ResumeController.java             ← API endpoints ⭐
+  ResumeController.java              API endpoints
 src/main/java/.../service/
-  ApiService.java                   ← LLM integration ⭐
-  PromptService.java                ← Prompt loading ⭐
+  ApiService.java                    LLM integration
+  PromptService.java                 Prompt loading
 
 prompts/
-  RESUME.md                         ← Resume prompt
-  COVER.md                          ← Cover letter
-  SKILLS.md                         ← Skills extraction
+  RESUME.md                          Resume prompt
+  COVER.md                           Cover letter
+  SKILLS.md                          Skills extraction
 ```
 
 ---
@@ -416,18 +465,17 @@ npm run lint:fix          # Frontend
 
 ---
 
-## ✅ You're Ready!
+## ✨ You're Ready!
 
-- ✅ Everything is built and working
-- ✅ All tests passing
-- ✅ Documentation complete
-- ✅ Ready for production
-- ✅ Non-technical users supported
+- Everything is built and working
+- All tests passing
+- Documentation complete
+- Ready for production
+- Non-technical users supported
 
-**Start using it now!** 🚀
+**Start using it now!**
 
 ---
 
-**Last Updated**: January 17, 2025
-**Version**: 1.0 - Production Release
-**Status**: ✅ READY TO USE
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

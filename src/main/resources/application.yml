@@ -11,16 +11,40 @@ spring:
     multipart: max-file-size=500KB
       max-request-size=500KB
 
+  # Database configuration (SQLite)
+  datasource:
+    url: jdbc:sqlite:./data/prompts.db
+    driver-class-name: org.sqlite.JDBC
+
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration/sqlite
+    baseline-on-migrate: true
+
 upload:
   path: files
 
 # LLM Configuration
 # Default endpoint uses local Ollama service
+# For Docker: use service name 'ollama' (not localhost or 127.0.0.1)
 # For OpenAI or other providers, update endpoint and apikey
 llm:
   #  endpoint: http://localhost:1234/v1/chat/completions # lmstudio
-  endpoint: http://127.0.0.1:11434/v1/chat/completions # ollama
+  endpoint: http://ollama:11434/v1/chat/completions # ollama (Docker DNS)
   apikey: 1234567890
+  # Mock mode: Set to true to use simulated LLM responses without network calls
+  # Useful for testing and development when Ollama service is not available
+  mock:
+    enabled: false
 
 # Prompts configuration
 # external-dir: Leave empty to use bundled prompts

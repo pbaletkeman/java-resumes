@@ -1,69 +1,95 @@
-# System Architecture
+﻿# System Architecture
 
 The java-resumes application is built with a modern full-stack architecture that separates concerns across frontend, backend, and external services.
 
-## 📐 High-Level Architecture
+- [System Architecture](#system-architecture)
+  - [🏗️ High-Level Architecture](#️-high-level-architecture)
+  - [🔄 Request Flow Architecture](#-request-flow-architecture)
+  - [🌐 Container Network Architecture](#-container-network-architecture)
+  - [Component Architecture](#component-architecture)
+    - [Frontend Layer](#frontend-layer)
+    - [Backend Layer](#backend-layer)
+    - [LLM Service Layer](#llm-service-layer)
+  - [Data Flow Diagrams](#data-flow-diagrams)
+    - [Resume Optimization Flow](#resume-optimization-flow)
+    - [File Management Flow](#file-management-flow)
+  - [External Configuration Integration](#external-configuration-integration)
+    - [Configuration Path Resolution](#configuration-path-resolution)
+    - [External Prompts Directory](#external-prompts-directory)
+  - [Security Considerations](#security-considerations)
+    - [Input Validation](#input-validation)
+    - [File Handling](#file-handling)
+    - [API Security](#api-security)
+  - [Deployment Architecture](#deployment-architecture)
+    - [Docker Compose Deployment](#docker-compose-deployment)
+    - [Kubernetes Deployment (Future)](#kubernetes-deployment-future)
+  - [Extensibility Points](#extensibility-points)
+    - [Adding New LLM Providers](#adding-new-llm-providers)
+    - [Adding New Document Types](#adding-new-document-types)
+    - [Custom Prompt Templates](#custom-prompt-templates)
+  - [Performance Considerations](#performance-considerations)
+    - [Async Processing](#async-processing)
+    - [Caching](#caching)
+    - [Resource Optimization](#resource-optimization)
+  - [Testing Architecture](#testing-architecture)
+    - [Backend Testing Strategy](#backend-testing-strategy)
+    - [Frontend Testing Strategy](#frontend-testing-strategy)
+  - [Key Design Patterns](#key-design-patterns)
+    - [MVC Pattern](#mvc-pattern)
+    - [Service Layer Pattern](#service-layer-pattern)
+    - [Repository Pattern (Future)](#repository-pattern-future)
+    - [Strategy Pattern (LLM Integration)](#strategy-pattern-llm-integration)
 
-```plaintext
-┌─────────────────────────────────────────────────────────────────────┐
-│                         USER BROWSER                                │
-│                    (Chrome, Firefox, Safari)                        │
-└────────────────────────────────┬────────────────────────────────────┘
-                                 │ HTTP/HTTPS
-                                 ↓
-┌─────────────────────────────────────────────────────────────────────┐
-│                      FRONTEND (Port 80/3000)                        │
-│  ┌───────────────────────────────────────────────────────────┐      │
-│  │  React 19 + TypeScript + PrimeReact + Tailwind CSS        │      │
-│  │  - Main Content Tab (Upload & Process)                    │      │
-│  │  - Additional Tools Tab (Markdown to PDF)                 │      │
-│  │  - File History Panel (List, Download, Delete)            │      │
-│  │  - Theme Toggle (Light/Dark)                              │      │
-│  └───────────────────────────────────────────────────────────┘      │
-│                      Nginx (Reverse Proxy)                          │
-└────────────────────────────────┬────────────────────────────────────┘
-                                 │ REST API (JSON)
-                                 ↓
-┌─────────────────────────────────────────────────────────────────────┐
-│                       BACKEND (Port 8080)                           │
-│  ┌───────────────────────────────────────────────────────────┐      │
-│  │  Spring Boot 3.5.1 + Java 21 + Gradle                     │      │
-│  │  ┌─────────────────────────────────────────────────┐      │      │
-│  │  │  Controller Layer (REST Endpoints)              │      │      │
-│  │  │  - ResumeController                             │      │      │
-│  │  │  - /upload, /files/*, /markdownFile2PDF         │      │      │
-│  │  └─────────────────────────────────────────────────┘      │      │
-│  │  ┌─────────────────────────────────────────────────┐      │      │
-│  │  │  Service Layer (Business Logic)                 │      │      │
-│  │  │  - FilesStorageService                          │      │      │
-│  │  │  - ApiService (LLM Integration)                 │      │      │
-│  │  └─────────────────────────────────────────────────┘      │      │
-│  │  ┌─────────────────────────────────────────────────┐      │      │
-│  │  │  Utilities                                      │      │      │
-│  │  │  - HtmlToPdf (Document Conversion)              │      │      │
-│  │  │  - File Management (Upload/Download/Delete)     │      │      │
-│  │  └─────────────────────────────────────────────────┘      │      │
-│  └───────────────────────────────────────────────────────────┘      │
-└────────────────────────────────┬────────────────────────────────────┘
-                                 │ HTTP REST API
-                                 ↓
-┌─────────────────────────────────────────────────────────────────────┐
-│                    LLM SERVICE (Port 11434/1234)                    │
-│  ┌───────────────────────────────────────────────────────────┐      │
-│  │  Ollama / LM Studio / OpenAI                              │      │
-│  │  - Model: gemma-3-4b-it / llama3 / gpt-4                  │      │
-│  │  - Resume Optimization                                    │      │
-│  │  - Cover Letter Generation                                │      │
-│  │  - Skills Gap Analysis                                    │      │
-│  └───────────────────────────────────────────────────────────┘      │
-└─────────────────────────────────────────────────────────────────────┘
-                                 ↓
-┌─────────────────────────────────────────────────────────────────────┐
-│                      FILE STORAGE (Volume)                          │
-│  - Uploaded Documents (resumes, job descriptions)                   │
-│  - Generated Documents (optimized resumes, cover letters)           │
-│  - Converted PDFs                                                   │
-└─────────────────────────────────────────────────────────────────────┘
+---
+
+## 🏗️ High-Level Architecture
+
+```mermaid
+graph TD
+    subgraph Browser["User Browser"]
+        User["Chrome, Firefox, Safari"]
+    end
+
+    subgraph Frontend["Frontend - Port 80/3000"]
+        React["React 19 + TypeScript<br/>PrimeReact + Tailwind CSS"]
+        Components["Main Content Tab<br/>Additional Tools Tab<br/>File History Panel<br/>Theme Toggle"]
+        Nginx["Nginx Reverse Proxy"]
+        React --> Components
+        Components --> Nginx
+    end
+
+    subgraph Backend["Backend - Port 8080"]
+        SpringBoot["Spring Boot 3.5.1 + Java 21 + Gradle"]
+        Controller["Controller Layer<br/>ResumeController<br/>/upload, /files/*, /markdownFile2PDF<br/>/process/skills<br/>/generate/interview-*<br/>/generate/cold-*, /generate/thank-you-*"]
+        Service["Service Layer<br/>FilesStorageService<br/>ApiService - LLM Integration"]
+        Utilities["Utilities<br/>HtmlToPdf - Document Conversion<br/>File Management"]
+        SpringBoot --> Controller
+        Controller --> Service
+        Service --> Utilities
+    end
+
+    subgraph LLM["LLM Service - Port 11434/1234"]
+        LLMProvider["Ollama / LM Studio / OpenAI"]
+        Models["Models: gemma-3-4b-it, llama3, gpt-4"]
+        Capabilities["Resume Optimization<br/>Cover Letter Generation<br/>Skills & Certifications<br/>Interview Preparation<br/>Professional Networking"]
+        LLMProvider --> Models
+        LLMProvider --> Capabilities
+    end
+
+    subgraph Storage["File Storage"]
+        Files["Uploaded Documents<br/>Generated Documents<br/>Converted PDFs"]
+    end
+
+    User -->|HTTP/HTTPS| Nginx
+    Nginx -->|REST API JSON| Controller
+    Service -->|HTTP REST API| LLMProvider
+    Utilities -->|Read/Write| Files
+
+    style Browser fill:#e1f5ff
+    style Frontend fill:#e3f2fd
+    style Backend fill:#e8f5e9
+    style LLM fill:#fff3e0
+    style Storage fill:#fce4ec
 ```
 
 ## 🔄 Request Flow Architecture
@@ -123,7 +149,7 @@ graph TB
     style Files fill:#ffd93d
 ```
 
-## 🐳 Container Network Architecture
+## 🌐 Container Network Architecture
 
 ```mermaid
 graph LR
@@ -145,7 +171,7 @@ graph LR
     style LLM fill:#ff6b6b
 ```
 
-## 🏗️ Component Architecture
+## Component Architecture
 
 ### Frontend Layer
 
@@ -214,7 +240,9 @@ graph LR
 
 - Resume optimization
 - Cover letter generation
-- Skills gap analysis
+- Skills & certifications recommendations
+- Interview preparation questions (HR, job-specific, reverse)
+- Professional networking (cold emails, LinkedIn messages, thank you notes)
 - Content restructuring
 
 **Configuration:**
@@ -223,7 +251,7 @@ graph LR
 - API key (if required)
 - Model selection (configurable)
 
-## 🔄 Data Flow Diagrams
+## Data Flow Diagrams
 
 ### Resume Optimization Flow
 
@@ -284,33 +312,47 @@ graph TD
     style E2 fill:#c8e6c9
 ```
 
-## 🌐 External Configuration Integration
+## External Configuration Integration
 
 The architecture supports external configuration paths for enhanced flexibility:
 
 ### Configuration Path Resolution
 
-```plaintext
-1. Check System Property: -Dapp.config.path=/external/path
-   ↓
-2. Check Environment Variable: APP_CONFIG_PATH=/external/path
-   ↓
-3. Fall back to Current Directory: ./config.json
-   ↓
-4. Use Default Configuration
+```mermaid
+graph TD
+    A["Check System Property<br/>-Dapp.config.path=/external/path"] -->|Found| D["Use System Property Config"]
+    A -->|Not Found| B["Check Environment Variable<br/>APP_CONFIG_PATH=/external/path"]
+    B -->|Found| E["Use Environment Variable Config"]
+    B -->|Not Found| C["Fall back to Current Directory<br/>./config.json"]
+    C -->|Found| F["Use Local config.json"]
+    C -->|Not Found| G["Use Default Configuration"]
+
+    style A fill:#e3f2fd
+    style B fill:#e3f2fd
+    style C fill:#e3f2fd
+    style D fill:#c8e6c9
+    style E fill:#c8e6c9
+    style F fill:#c8e6c9
+    style G fill:#fff9c4
 ```
 
 ### External Prompts Directory
 
-```plaintext
-1. Check Environment Variable: PROMPTS_DIR=/external/prompts
-   ↓
-2. Fall back to Application Resource: classpath:prompts/
-   ↓
-3. Use Default Prompts
+```mermaid
+graph TD
+    A["Check Environment Variable<br/>PROMPTS_DIR=/external/prompts"] -->|Found| D["Use External Prompts Directory"]
+    A -->|Not Found| B["Fall back to Application Resource<br/>classpath:prompts/"]
+    B -->|Available| E["Use Application Resource Prompts"]
+    B -->|Not Available| F["Use Default Prompts"]
+
+    style A fill:#e3f2fd
+    style B fill:#e3f2fd
+    style D fill:#c8e6c9
+    style E fill:#c8e6c9
+    style F fill:#fff9c4
 ```
 
-## 🔐 Security Considerations
+## Security Considerations
 
 ### Input Validation
 
@@ -330,7 +372,7 @@ The architecture supports external configuration paths for enhanced flexibility:
 - CORS headers properly configured
 - HTTPS recommended for production
 
-## 📊 Deployment Architecture
+## Deployment Architecture
 
 ### Docker Compose Deployment
 
@@ -361,7 +403,7 @@ Persistent Volumes:
   - file-storage
 ```
 
-## 🔧 Extensibility Points
+## Extensibility Points
 
 ### Adding New LLM Providers
 
@@ -371,18 +413,34 @@ Persistent Volumes:
 
 ### Adding New Document Types
 
-1. Create new document model class
-2. Implement document-specific conversion logic
-3. Add endpoint to `ResumeController`
-4. Update frontend UI
+1. Create new prompt template in `prompts/` directory
+2. Add new endpoint to `ResumeController` (e.g., `/api/generate/new-type`)
+3. Use `processPromptRequest()` helper method with prompt type identifier
+4. Update frontend UI if user-facing (or use API directly)
+5. Document in API_REFERENCE.md and update README.md
+
+**Example**: Interview and networking prompts added in this release:
+
+- Interview preparation endpoints (hr-questions, job-specific, reverse)
+- Networking endpoints (cold-email, linkedin-message, thank-you-email)
 
 ### Custom Prompt Templates
 
-1. Create prompt file in `PROMPTS_DIR`
-2. Load via `PromptService`
-3. Use in `ApiService` for requests
+1. Create prompt file in `prompts/` directory (e.g., `NEW_TYPE.md`)
+2. Follow existing prompt structure (clear instructions, input parameters, output format)
+3. Load via `PromptService.loadPrompt("NEW_TYPE")`
+4. Add controller endpoint using `processPromptRequest()`
+5. Test with sample data to validate outputs
 
-## 📈 Performance Considerations
+**Current Prompt Templates**:
+
+- `RESUME.md` - Resume optimization
+- `COVER.md` - Cover letter generation
+- `SKILLS.md` - Skills & certifications recommendations
+- Interview preparation prompts (hr-questions, job-specific, reverse)
+- Networking prompts (cold-email, linkedin-message, thank-you-email)
+
+## Performance Considerations
 
 ### Async Processing
 
@@ -402,7 +460,7 @@ Persistent Volumes:
 - Temporary file cleanup
 - Connection pooling for external services
 
-## 🧪 Testing Architecture
+## Testing Architecture
 
 ### Backend Testing Strategy
 
@@ -416,7 +474,7 @@ Persistent Volumes:
 - Hook tests: Custom React hooks
 - Service tests: API integration mocking
 
-## 📚 Key Design Patterns
+## Key Design Patterns
 
 ### MVC Pattern
 

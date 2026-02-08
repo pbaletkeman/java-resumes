@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.commonmark.node.Node;
@@ -87,7 +88,7 @@ public final class HtmlToPdf {
     String content = "";
     if (getMarkdownContent() == null || getMarkdownContent().isBlank()) {
       try {
-        content = new String(Files.readAllBytes(Paths.get(getMarkdownFilePath())));
+        content = new String(Files.readAllBytes(Paths.get(getMarkdownFilePath())), StandardCharsets.UTF_8);
       } catch (IOException e) {
         logger.error("Error unable to read markdown file:\n{}", e.toString());
         return false;

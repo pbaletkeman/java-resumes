@@ -42,4 +42,12 @@
   <Match>
     <Bug pattern="SI_INSTANCE_BEFORE_FINALS_ASSIGNED" />
   </Match>
+
+  <!-- Exclude Spring dependency injection EI2 warning in ResumeController -->
+  <!-- Spring proxies are expected to be stored in controllers -->
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2" />
+    <Class name="ca.letkeman.resumes.controller.ResumeController" />
+    <Method name="&lt;init&gt;" />
+  </Match>
 </FindBugsFilter>

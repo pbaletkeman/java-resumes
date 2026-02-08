@@ -2,6 +2,38 @@
 
 This project uses automated git hooks to enforce code quality standards using **Spotless**, **Checkstyle**, and **SpotBugs**.
 
+- [Git Hooks Setup Guide](#git-hooks-setup-guide)
+  - [Installation](#installation)
+  - [What Each Hook Does](#what-each-hook-does)
+    - [Pre-Commit Hook](#pre-commit-hook)
+    - [Pre-Push Hook](#pre-push-hook)
+  - [Common Tasks](#common-tasks)
+    - [Format Code Automatically](#format-code-automatically)
+    - [Run Individual Checks](#run-individual-checks)
+    - [Run All Quality Checks](#run-all-quality-checks)
+    - [Skip Hooks (Not Recommended)](#skip-hooks-not-recommended)
+  - [Viewing Reports](#viewing-reports)
+    - [Checkstyle Report](#checkstyle-report)
+    - [SpotBugs Report](#spotbugs-report)
+    - [Test Report](#test-report)
+  - [Understanding Violations](#understanding-violations)
+    - [Checkstyle Violations](#checkstyle-violations)
+    - [SpotBugs Warnings](#spotbugs-warnings)
+    - [Spotless Issues](#spotless-issues)
+  - [Customization](#customization)
+    - [Modify Checkstyle Rules](#modify-checkstyle-rules)
+    - [Modify SpotBugs Rules](#modify-spotbugs-rules)
+    - [Modify Spotless Rules](#modify-spotless-rules)
+  - [Troubleshooting](#troubleshooting)
+    - [Hooks Not Running](#hooks-not-running)
+  - [Best Practices](#best-practices)
+  - [Integration with IDEs](#integration-with-ides)
+    - [IntelliJ IDEA / Android Studio](#intellij-idea--android-studio)
+    - [VS Code](#vs-code)
+  - [References](#references)
+
+---
+
 ## Installation
 
 Git hooks are automatically installed when you build the project:
@@ -171,33 +203,26 @@ Edit: `build.gradle` (search for `spotless { }` block)
 
 Verify they're executable:
 
-```bash
-ls -la .git/hooks/
-```
+````bash
 
 Both `pre-commit` and `pre-push` should have `x` (execute) permission.
-
 Reinstall:
 
 ```bash
 ./gradlew setupGitHooks
-```
 
 ### Different Behavior on Windows vs Mac/Linux
 
-Hooks use bash scripts. On Windows, ensure:
 
 - Git for Windows installed
 - Using Git Bash terminal (not Command Prompt)
-- Or use WSL (Windows Subsystem for Linux)
 
 ### Gradle Build Issues
 
-Clear Gradle cache:
 
 ```bash
 ./gradlew clean
-```
+````
 
 Rebuild with fresh dependencies:
 

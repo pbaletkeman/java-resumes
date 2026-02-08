@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 
 // Mock all dependencies before importing component
-vi.mock('../../../context/AppContext', () => ({
+vi.mock('../../context/AppContext', () => ({
   useAppContext: () => ({
     showSuccess: vi.fn(),
     showError: vi.fn(),
@@ -11,7 +11,7 @@ vi.mock('../../../context/AppContext', () => ({
   }),
 }));
 
-vi.mock('../../../hooks/useApi', () => ({
+vi.mock('../../hooks/useApi', () => ({
   useApi: () => ({
     execute: vi.fn(),
     loading: false,
@@ -19,7 +19,7 @@ vi.mock('../../../hooks/useApi', () => ({
   }),
 }));
 
-vi.mock('../../../services/fileService', () => ({
+vi.mock('../../services/fileService', () => ({
   fileService: {
     convertMarkdownToPdf: vi.fn(),
     convertMarkdownToDocx: vi.fn(),
@@ -27,7 +27,7 @@ vi.mock('../../../services/fileService', () => ({
 }));
 
 // Import after mocks are set up
-import { AdditionalToolsTab } from '../../../components/Tabs/AdditionalToolsTab';
+import { AdditionalToolsTab } from '../../components/Tabs/AdditionalToolsTab';
 
 const renderComponent = () => {
   return render(<AdditionalToolsTab />);

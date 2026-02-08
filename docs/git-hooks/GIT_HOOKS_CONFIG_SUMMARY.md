@@ -2,7 +2,50 @@
 
 This document summarizes the git hooks setup for the java-resumes project using **Spotless**, **Checkstyle**, and **SpotBugs**.
 
-## What Was Implemented
+- [Git Hooks Configuration Summary](#git-hooks-configuration-summary)
+  - [✅ What Was Implemented](#-what-was-implemented)
+    - [1. Build Configuration Updates (`build.gradle`)](#1-build-configuration-updates-buildgradle)
+      - [Spotless Configuration](#spotless-configuration)
+      - [SpotBugs Configuration](#spotbugs-configuration)
+      - [Checkstyle Configuration](#checkstyle-configuration)
+    - [2. Git Hooks Setup](#2-git-hooks-setup)
+      - [`.githooks/pre-commit`](#githookspre-commit)
+      - [`.githooks/pre-push`](#githookspre-push)
+    - [3. Configuration Files](#3-configuration-files)
+      - [`config/spotbugs/spotbugs-exclude.xml`](#configspotbugsspotbugs-excludexml)
+      - [`.spotlessignore`](#spotlessignore)
+    - [4. Setup Scripts (Multiple Platforms)](#4-setup-scripts-multiple-platforms)
+      - [`setup-hooks.sh` (Mac/Linux/Git Bash)](#setup-hookssh-maclinuxgit-bash)
+      - [`setup-hooks.bat` (Windows Command Prompt)](#setup-hooksbat-windows-command-prompt)
+      - [`setup-hooks.py` (Python - Universal)](#setup-hookspy-python---universal)
+      - [`./gradlew setupGitHooks` (Gradle - Recommended)](#gradlew-setupgithooks-gradle---recommended)
+    - [5. Documentation](#5-documentation)
+      - [`SETUP_GIT_HOOKS.md`](#setup_git_hooksmd)
+      - [`QUICK_START_GIT_HOOKS.md`](#quick_start_git_hooksmd)
+    - [6. Backend Instructions Updated](#6-backend-instructions-updated)
+  - [💡 How to Use](#-how-to-use)
+    - [First-Time Setup](#first-time-setup)
+    - [Daily Development](#daily-development)
+    - [View Reports](#view-reports)
+  - [📁 File Structure](#-file-structure)
+  - [📋 Key Commands Reference](#-key-commands-reference)
+  - [Tool Overview](#tool-overview)
+  - [🔌 Integration Points](#-integration-points)
+    - [Git Workflow](#git-workflow)
+    - [Gradle Build](#gradle-build)
+    - [IDE Support](#ide-support)
+  - [🔧 Troubleshooting](#-troubleshooting)
+    - [Hooks Not Running on Commit?](#hooks-not-running-on-commit)
+    - ["Too Many" Formatting Issues?](#too-many-formatting-issues)
+    - [SpotBugs Warnings Don't Block Commit?](#spotbugs-warnings-dont-block-commit)
+    - [Windows Hooks Not Executing?](#windows-hooks-not-executing)
+  - [✨ Benefits](#-benefits)
+  - [🚀 Next Steps](#-next-steps)
+  - [🔗 References](#-references)
+
+---
+
+## ✅ What Was Implemented
 
 ### 1. Build Configuration Updates (`build.gradle`)
 
@@ -150,7 +193,7 @@ Updated `.github/instructions/backend.instructions.md` with:
 - Git hooks documentation reference
 - Updated dependencies list
 
-## How to Use
+## 💡 How to Use
 
 ### First-Time Setup
 
@@ -195,7 +238,7 @@ build/reports/spotbugs/main.html
 build/reports/tests/test/index.html
 ```
 
-## File Structure
+## 📁 File Structure
 
 ```
 java-resumes/
@@ -217,7 +260,7 @@ java-resumes/
 └── GIT_HOOKS_CONFIG_SUMMARY.md         # This file
 ```
 
-## Key Commands Reference
+## 📋 Key Commands Reference
 
 | Task                      | Command                    |
 | ------------------------- | -------------------------- |
@@ -238,7 +281,7 @@ java-resumes/
 | **Checkstyle** | Enforce coding standards (120 char line, naming, etc) | Validates rules      | ✅ Yes              |
 | **SpotBugs**   | Detect potential bugs and code smells                 | Analyzes code        | ❌ No (review-only) |
 
-## Integration Points
+## 🔌 Integration Points
 
 ### Git Workflow
 
@@ -260,7 +303,7 @@ java-resumes/
 - VS Code: Checkstyle Extension, SpotBugs Extension
 - Eclipse: Checkstyle Plugin, FindBugs Plugin
 
-## Troubleshooting
+## 🔧 Troubleshooting
 
 ### Hooks Not Running on Commit?
 
@@ -305,7 +348,7 @@ Option 2: Use Python script
 python setup-hooks.py
 ```
 
-## Benefits
+## ✨ Benefits
 
 ✅ **Consistent Code Quality**: Enforced across all commits
 ✅ **Fewer Code Reviews**: Obvious issues caught before PR
@@ -314,14 +357,14 @@ python setup-hooks.py
 ✅ **Automated**: Saves manual review time
 ✅ **Cross-Platform**: Works on Windows, Mac, Linux
 
-## Next Steps
+## 🚀 Next Steps
 
 1. Install hooks: `./gradlew setupGitHooks`
 2. Read guide: [SETUP_GIT_HOOKS.md](SETUP_GIT_HOOKS.md)
 3. Try it: Make a change and commit
 4. View report: Check `build/reports/` for details
 
-## References
+## 🔗 References
 
 - **Spotless**: https://github.com/diffplug/spotless
 - **Checkstyle**: https://checkstyle.org/
