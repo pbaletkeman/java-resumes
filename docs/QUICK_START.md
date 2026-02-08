@@ -87,7 +87,7 @@ ollama pull mistral:latest
 
 #### Option B: LM Studio
 
-1. **Download LM Studio:** https://lmstudio.ai
+1. **Download LM Studio:** <https://lmstudio.ai>
 2. **Load a model and start the server**
 3. **Note the server endpoint** (usually `http://localhost:1234`)
 4. **Edit `config.json`:**

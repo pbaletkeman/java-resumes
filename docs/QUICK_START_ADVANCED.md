@@ -131,7 +131,7 @@ npm test                             # Run tests
 
 ### Key Endpoints
 
-```
+```plaintext
 POST /upload                         # Process document
 POST /upload/skills                  # Extract skills
 GET  /health                         # Health check
@@ -139,7 +139,7 @@ GET  /health                         # Health check
 
 ### Architecture
 
-```
+```plaintext
 Frontend (React + TypeScript)
 
 Backend (Spring Boot + Java 21)
@@ -153,7 +153,7 @@ Result (Optimized document)
 
 ## 📂 Project Structure
 
-```
+```plaintext
 backend/src/main/java/ca/letkeman/resumes/
  controller/ResumeController.java        API endpoints
  service/ApiService.java                 LLM integration
@@ -189,7 +189,7 @@ spring:
 
 ### Environment Variables
 
-```
+```plaintext
 PROMPTS_DIR=/path/to/prompts    # Optional: external prompt directory
 JAVA_OPTS=-Xmx1G               # JVM memory
 ```
@@ -198,7 +198,7 @@ JAVA_OPTS=-Xmx1G               # JVM memory
 
 File: `frontend/.env` (optional)
 
-```
+```plaintext
 VITE_API_URL=http://localhost:8080
 VITE_APP_NAME=Java-Resumes
 ```
@@ -414,7 +414,7 @@ Check VITE_API_URL environment
 
 ## 📋 Key Files to Know
 
-```
+```plaintext
 README.md                            Main overview
 PROJECT_STATUS.md                    Current status
 NONTECHNICAL_MODEL_GUIDE.md          User guide

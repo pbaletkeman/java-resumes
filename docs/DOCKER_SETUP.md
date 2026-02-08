@@ -86,7 +86,7 @@ This project provides 4 pre-configured docker-compose files for different deploy
 docker compose -f docker-compose.frontend-backend.yml up -d
 ```
 
-- **Access**: Frontend at http://localhost:3000
+- **Access**: Frontend at <http://localhost:3000>
 - **Best for**: Quick testing, minimal resources
 - **Database**: None (in-memory only)
 - **Startup time**: ~30 seconds
@@ -97,7 +97,7 @@ docker compose -f docker-compose.frontend-backend.yml up -d
 docker compose -f docker-compose.sqlite.yml up -d
 ```
 
-- **Access**: Frontend at http://localhost:3000
+- **Access**: Frontend at <http://localhost:3000>
 - **Best for**: Local development, persistent data
 - **Database**: SQLite file-based (persistent volume)
 - **Startup time**: ~40 seconds
@@ -108,7 +108,7 @@ docker compose -f docker-compose.sqlite.yml up -d
 docker compose -f docker-compose.postgresql.yml up -d
 ```
 
-- **Access**: Frontend at http://localhost:3000
+- **Access**: Frontend at <http://localhost:3000>
 - **Database**: PostgreSQL 17 running in container
 - **Connection**: localhost:5432 (username: resume_user, password: resume_password)
 - **Best for**: Production-like testing, larger datasets
@@ -123,7 +123,7 @@ docker compose -f docker-compose.ollama-postgresql.yml up -d
 docker exec resume-ollama ollama pull tinyllama
 ```
 
-- **Access**: Frontend at http://localhost:3000, Ollama at http://localhost:11434
+- **Access**: Frontend at <http://localhost:3000>, Ollama at <http://localhost:11434>
 - **Database**: PostgreSQL 17
 - **LLM**: Ollama with local models
 - **Best for**: Complete testing with local LLM service
@@ -146,7 +146,7 @@ docker compose -f <compose-file> down -v
 
 ### Standard Setup (3 Services)
 
-```
+```plaintext
 
    Frontend (React)
    Port: 3000
@@ -165,7 +165,7 @@ docker compose -f <compose-file> down -v
 
 ### Full Stack Setup (4 Services)
 
-```
+```plaintext
 
    Frontend (React)
    Port: 3000
@@ -193,7 +193,7 @@ Port 5432     Port 11434
 - **Technology**: React 19, TypeScript, Vite
 - **Dockerfile**: `./frontend/Dockerfile.dev` (for development)
 - **Environment**:
-  - `VITE_API_BASE_URL`: Backend API URL (default: http://backend:8080)
+  - `VITE_API_BASE_URL`: Backend API URL (default: <http://backend:8080>)
   - `NODE_ENV`: development or production
 
 ### Backend Service

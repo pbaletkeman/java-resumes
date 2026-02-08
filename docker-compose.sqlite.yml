@@ -67,7 +67,7 @@ services:
 
   # Ollama - LLM Service
   ollama:
-    image: ollama/ollama:latest
+    image: ollama/ollama:0.1.45 # ollama/ollama:latest most recent version, but can be less stable. Use specific version for consistency.
     container_name: resume-ollama-sqlite
     ports:
       - "11434:11434"

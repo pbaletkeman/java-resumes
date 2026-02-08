@@ -157,7 +157,7 @@ graph TB
 
 **API Pattern**:
 
-```
+```plaintext
 POST {LLM_ENDPOINT}/api/chat
 {
   "model": "model_name",
@@ -275,6 +275,8 @@ sequenceDiagram
 ---
 
 ## 🎨 Frontend Architecture
+
+Various frontend architecture diagrams
 
 ### 📊 High-Level Structure
 

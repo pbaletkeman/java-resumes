@@ -243,7 +243,7 @@ public final class HealthController {
     try {
       // Try to reach the LLM endpoint with a simple GET request
       java.net.HttpURLConnection connection =
-          (java.net.HttpURLConnection) new java.net.URL(llmEndpoint.replace("/v1/chat/completions", ""))
+          (java.net.HttpURLConnection) new java.net.URI(llmEndpoint.replace("/v1/chat/completions", "")).toURL()
               .openConnection();
       connection.setConnectTimeout(3000);
       connection.setReadTimeout(3000);

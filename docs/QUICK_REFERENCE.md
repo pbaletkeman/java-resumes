@@ -4,8 +4,8 @@
 
 - [Quick Reference: New Documentation Files](#quick-reference-new-documentation-files)
   - [🎆 Documentation Added](#-documentation-added)
-    - [1. **ADD_NEW_PROMPT.md** - Complete Implementation Guide](#1-add_new_promptmd---complete-implementation-guide)
-    - [2. **PROMPTS_CONFIGURATION.md** - Updated Configuration Guide](#2-prompts_configurationmd---updated-configuration-guide)
+    - [1. **ADD\_NEW\_PROMPT.md** - Complete Implementation Guide](#1-add_new_promptmd---complete-implementation-guide)
+    - [2. **PROMPTS\_CONFIGURATION.md** - Updated Configuration Guide](#2-prompts_configurationmd---updated-configuration-guide)
     - [3. **prompts/README.md** - Prompt Directory Guide](#3-promptsreadmemd---prompt-directory-guide)
     - [4. **Updated README.md** - Main Project Documentation](#4-updated-readmemd---main-project-documentation)
   - [🔄 Variable Naming Standardization](#-variable-naming-standardization)
@@ -96,7 +96,7 @@
 
 **Old New:**
 
-```
+```plaintext
 {jobTitle}        {job_title}
 {jd_string}       {job_description}
 ```
@@ -133,7 +133,7 @@
 
 Use this when adding a new prompt:
 
-```
+```plaintext
 Creating a new prompt? Follow these steps:
 
 1. Create markdown file in src/main/resources/prompts/YOURNAME.md

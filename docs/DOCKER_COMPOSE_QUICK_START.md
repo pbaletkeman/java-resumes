@@ -35,7 +35,6 @@ Get up and running with the Java-Resumes application using Docker Compose with l
   - [Next Steps](#next-steps)
   - [Getting Help](#getting-help)
 
-
 ## Prerequisites
 
 - Docker and Docker Compose installed
@@ -80,9 +79,9 @@ First-time pull typically takes 5-15 minutes depending on model size and interne
 
 Open your browser:
 
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:8080
-- **Ollama API**: http://localhost:11434
+- **Frontend**: <http://localhost:3000>
+- **Backend API**: <http://localhost:8080>
+- **Ollama API**: <http://localhost:11434>
 
 ## Alternative Compose Configuration
 

@@ -11,7 +11,7 @@ Comprehensive guide for running java-resumes services locally with hot reload an
     - [Settings Tab](#settings-tab)
     - [Tools Tab](#tools-tab)
     - [Add Model Dialog](#add-model-dialog)
-  - [What You'll See](#what-youll-see-1)
+  - [What You'll See Backend](#what-youll-see-backend)
   - [Access Services](#access-services)
   - [Features](#features)
   - [File Structure](#file-structure)
@@ -56,7 +56,7 @@ docker-compose up
 
 ## What You'll See
 
-```
+```plaintext
 resume-backend    |
 resume-backend    |   .   ____          _            __ _ _
 resume-backend    |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -118,9 +118,9 @@ The frontend is available in both **dark** and **light** themes:
 
 ---
 
-## What You'll See
+## What You'll See Backend
 
-```
+```plaintext
 resume-backend    |
 resume-backend    |   .   ____          _            __ _ _
 resume-backend    |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -142,12 +142,12 @@ resume-frontend   |   ➜  press h + enter to show help
 
 ## Access Services
 
-| Service        | URL                                         | Purpose                   |
-| -------------- | ------------------------------------------- | ------------------------- |
-| Frontend       | http://localhost:3000                       | React app with hot reload |
-| Backend        | http://localhost:8080                       | Spring Boot API           |
-| API Docs       | http://localhost:8080/swagger-ui/index.html | API documentation         |
-| Backend Health | http://localhost:8080/api/health            | Health check endpoint     |
+| Service        | URL                                           | Purpose                   |
+| -------------- | --------------------------------------------- | ------------------------- |
+| Frontend       | <http://localhost:3000>                       | React app with hot reload |
+| Backend        | <http://localhost:8080>                       | Spring Boot API           |
+| API Docs       | <http://localhost:8080/swagger-ui/index.html> | API documentation         |
+| Backend Health | <http://localhost:8080/api/health>            | Health check endpoint     |
 
 ## Features
 
@@ -159,7 +159,7 @@ resume-frontend   |   ➜  press h + enter to show help
 
 ## File Structure
 
-```
+```plaintext
 frontend/
 ├── Dockerfile        # Production build (static Nginx)
 ├── Dockerfile.dev    # Development build (Vite dev server)
@@ -252,7 +252,7 @@ docker-compose up
    - Requires rebuild: `docker-compose build` and `docker-compose up`
    - Or restart: `docker-compose restart backend`
 
-5. **View Results** - Open http://localhost:3000 in browser
+5. **View Results** - Open <http://localhost:3000> in browser
 
 ## Switching Between Dev and Production
 
@@ -278,6 +278,7 @@ docker-compose up
    ```
 
 2. Rebuild and run:
+
    ```bash
    docker-compose build
    docker-compose up
@@ -288,7 +289,7 @@ docker-compose up
 
 ### Frontend (Development)
 
-```
+```plaintext
 VITE_API_BASE_URL=http://backend:8080
 NODE_ENV=development
 VITE_HOST=0.0.0.0
@@ -296,7 +297,7 @@ VITE_HOST=0.0.0.0
 
 ### Backend
 
-```
+```plaintext
 SPRING_PROFILES_ACTIVE=prod
 UPLOAD_PATH=files
 LLM_ENDPOINT=http://host.docker.internal:11434/v1/chat/completions
@@ -342,7 +343,7 @@ docker-compose exec backend bash
 - Edit frontend at `frontend/src/` - changes reload instantly
 - Edit backend at `src/main/java/` - rebuild with `docker-compose build && docker-compose up`
 - Run `docker-compose logs` to monitor all activity
-- Access http://localhost:3000 to see your app
+- Access <http://localhost:3000> to see your app
 
 ## Related Files
 

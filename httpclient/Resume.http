@@ -22,7 +22,7 @@
 ###
 ### get ollama models (optional, for testing connectivity and model availability)
 ### To use Ollama LLM features, you must first pull a model:
-###   docker exec resume-ollama ollama pull mistral:latest
+###   docker exec resume-ollama     
 ###
 ### Available models (ordered by size and speed):
 ###   - qwen2.5:0.5b   (400MB, fastest, lowest quality)

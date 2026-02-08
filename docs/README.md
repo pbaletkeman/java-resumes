@@ -175,7 +175,7 @@ export PROMPTS_DIR=/etc/java-resumes/prompts
 
 ## 📂 Documentation Structure
 
-```
+```plaintext
 docs/
  README.md                          # This file (navigation hub)
  QUICK_START.md                     # Get started in minutes
@@ -211,9 +211,9 @@ docs/
 
 ## 🔗 Important Links
 
-- **GitHub Repository:** https://github.com/pbaletkeman/java-resumes
-- **Issues & Support:** https://github.com/pbaletkeman/java-resumes/issues
-- **Discussions:** https://github.com/pbaletkeman/java-resumes/discussions
+- **GitHub Repository:** <https://github.com/pbaletkeman/java-resumes>
+- **Issues & Support:** <https://github.com/pbaletkeman/java-resumes/issues>
+- **Discussions:** <https://github.com/pbaletkeman/java-resumes/discussions>
 
 ### Technology Documentation
 

@@ -16,7 +16,7 @@ services:
   # NOTE: Set LLM_ENDPOINT in backend service to use Ollama
   # Default: LLM_ENDPOINT=http://ollama:11434/v1/chat/completions
   ollama:
-    image: ollama/ollama:latest
+    image: ollama/ollama:0.1.45 # ollama/ollama:latest most recent version, but can be less stable. Use specific version for consistency.
     container_name: resume-ollama
     ports:
       - "11434:11434" # Ollama API port
@@ -28,11 +28,12 @@ services:
       # Checks if Ollama API is responding
       test:
         ["CMD-SHELL", "curl -f http://localhost:11434/api/version || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 6
-      start_period: 10s # Extra startup time for container initialization
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 30s # Extra startup time for container initialization and GPU detection
     restart: unless-stopped
+    pull_policy: if_not_present
     # Optional: Uncomment below for GPU support (requires nvidia-docker)
     # deploy:
     #   resources:
@@ -72,12 +73,12 @@ services:
           "--no-verbose",
           "--tries=1",
           "--spider",
-          "http://localhost:8080/api/health",
+          "http://localhost:8080/actuator/health",
         ]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 60s
     restart: unless-stopped
 
   # Frontend - React + Vite Dev Server
