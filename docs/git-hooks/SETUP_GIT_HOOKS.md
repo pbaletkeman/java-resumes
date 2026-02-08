@@ -203,26 +203,32 @@ Edit: `build.gradle` (search for `spotless { }` block)
 
 Verify they're executable:
 
-````bash
+```bash
+ls -la .git/hooks/
+```
 
 Both `pre-commit` and `pre-push` should have `x` (execute) permission.
+
 Reinstall:
 
 ```bash
 ./gradlew setupGitHooks
+```
 
 ### Different Behavior on Windows vs Mac/Linux
 
+**Requirements:**
 
 - Git for Windows installed
 - Using Git Bash terminal (not Command Prompt)
 
 ### Gradle Build Issues
 
+Clean build directory:
 
 ```bash
 ./gradlew clean
-````
+```
 
 Rebuild with fresh dependencies:
 
