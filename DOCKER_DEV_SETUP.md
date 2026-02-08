@@ -331,10 +331,12 @@ LLM_APIKEY=not-needed-for-local
 For PostgreSQL configurations, also set:
 
 ```
-SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/${POSTGRES_DB}
-SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
-SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
+SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/resume_db
+SPRING_DATASOURCE_USERNAME=resume_user
+SPRING_DATASOURCE_PASSWORD=resume_password
 ```
+
+Note: If you change `POSTGRES_DB`, `POSTGRES_USER`, or `POSTGRES_PASSWORD` above, update these Spring datasource values to match.
 
 ## Troubleshooting
 
