@@ -216,9 +216,9 @@ export default defineConfig({
 
 | Field    | Type   | Required | Description                                  |
 | -------- | ------ | -------- | -------------------------------------------- |
-| endpoint | string |          | LLM API endpoint URL (OpenAI-compatible)     |
-| apikey   | string |          | API key for authentication (can be blank)    |
-| model    | string |          | Model identifier (e.g., "mistral", "gemini") |
+| endpoint | string | Required | LLM API endpoint URL (OpenAI-compatible)     |
+| apikey   | string | Optional | API key for authentication (can be blank)    |
+| model    | string | Required | Model identifier (e.g., "mistral", "gemini") |
 
 ### Examples
 
