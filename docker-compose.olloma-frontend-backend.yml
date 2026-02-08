@@ -90,9 +90,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      # Don't override VITE_API_BASE_URL - use default (http://localhost:8080)
-      # Frontend makes requests to http://localhost:8080/api/...
-      # Vite proxy intercepts and routes to http://backend:8080/api/...
+      - VITE_API_BASE_URL=
       - VITE_API_PROXY_TARGET=http://backend:8080
       - NODE_ENV=development
     depends_on:

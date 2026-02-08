@@ -46,6 +46,14 @@ export const FilesTab: React.FC = () => {
 
   useEffect(() => {
     loadFiles();
+
+    const interval = setInterval(() => {
+      loadFiles();
+    }, 30000);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   const getFilePrefix = (filename: string): string => {
@@ -141,7 +149,13 @@ export const FilesTab: React.FC = () => {
 
   const formatDate = (dateString: string): string => {
     try {
-      return new Date(dateString).toLocaleString();
+      const date = new Date(dateString);
+      const year = date.getUTCFullYear();
+      const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+      const day = String(date.getUTCDate()).padStart(2, '0');
+      const hours = String(date.getUTCHours()).padStart(2, '0');
+      const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+      return `${year}-${month}-${day} ${hours}:${minutes} UTC`;
     } catch {
       return dateString;
     }

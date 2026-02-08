@@ -6,8 +6,11 @@ This directory contains API request collections formatted for [VS Code REST Clie
   - [Files](#files)
     - [Resume.http](#resumehttp)
   - [Prerequisites](#prerequisites)
+    - [Option 1: REST Client (VS Code Extension) - Lightweight \& Version Control Friendly](#option-1-rest-client-vs-code-extension---lightweight--version-control-friendly)
+    - [Option 2: Bruno - Lightweight \& Modern Desktop App](#option-2-bruno---lightweight--modern-desktop-app)
   - [Usage](#usage)
-    - [Basic Workflow](#basic-workflow)
+    - [Using REST Client (VS Code Extension)](#using-rest-client-vs-code-extension)
+    - [Using Bruno (Desktop App)](#using-bruno-desktop-app)
     - [Running Requests](#running-requests)
   - [Resume API Endpoints](#resume-api-endpoints)
     - [Health Check](#health-check)
@@ -38,19 +41,41 @@ A complete collection of Resume API endpoints for testing and development.
 
 ## Prerequisites
 
-Install the REST Client extension for VS Code:
+Choose one of two API testing tools:
+
+### Option 1: REST Client (VS Code Extension) - Lightweight & Version Control Friendly
 
 - **Marketplace**: [humao.rest-client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
-- **Command**: `ext install humao.rest-client`
+- **VS Code Command**: `ext install humao.rest-client`
+- **Pros**: Minimal setup, requests stored in `.http` files (version control friendly), fast
+- **Cons**: VS Code only, basic features
+
+### Option 2: Bruno - Lightweight & Modern Desktop App
+
+- **Website**: [bruno.app](https://www.usebruno.com/)
+- **Download**: Available for Windows, macOS, Linux
+- **Pros**: Lightweight, modern interface, git-friendly, excellent multipart/form-data support
+- **Cons**: Separate application (not VS Code extension)
+
+**Recommendation**: Use **REST Client** for quick testing in VS Code, or **Bruno** for a dedicated API testing experience.
 
 ## Usage
 
-### Basic Workflow
+### Using REST Client (VS Code Extension)
 
 1. Open any `.http` file in VS Code
 2. Hover over or click the **Send Request** link above any endpoint
 3. View the response in the **Response** panel on the right side
 4. Use the response output for debugging and testing
+
+### Using Bruno (Desktop App)
+
+1. Install and launch Bruno
+2. Click **Import** → Select the `Resume.http` file
+3. Bruno automatically parses the `.http` file format
+4. Click the **Send** button next to any request
+5. View the response in the right panel
+6. Collections and responses are stored locally in `.bru` format (version control friendly)
 
 ### Running Requests
 
@@ -229,7 +254,10 @@ Extend timeout in settings:
 
 ## Related Tools
 
-- **Postman**: Desktop app for API testing (alternative)
-- **Bruno**: Lightweight API client (alternative)
-- **Thunder Client**: VS Code extension alternative
-- **REST Client**: This tool - lightweight, file-based, version control friendly
+| Tool               | Type              | Best For                               | Version Control    |
+| ------------------ | ----------------- | -------------------------------------- | ------------------ |
+| **REST Client**    | VS Code Extension | Quick testing in IDE, lightweight      | ✅ `.http` files   |
+| **Bruno**          | Desktop App       | Dedicated API testing, modern UI       | ✅ `.bru` files    |
+| **Postman**        | Desktop App       | Enterprise teams, advanced features    | ❌ Cloud-dependent |
+| **Thunder Client** | VS Code Extension | Alternative to REST Client             | ✅ `.toml` files   |
+| **Swagger UI**     | Web Interface     | Interactive API docs at `/swagger-ui/` | N/A                |

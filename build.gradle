@@ -41,15 +41,19 @@ dependencies {
 	// Database dependencies
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.flywaydb:flyway-core'
-	
+	implementation 'org.flywaydb:flyway-database-postgresql'
+
 	// SQLite dependencies
 	implementation 'org.xerial:sqlite-jdbc:3.45.0.0'
 	implementation 'org.hibernate.orm:hibernate-community-dialects:6.4.0.Final'
 
+	// PostgreSQL dependencies
+	implementation 'org.postgresql:postgresql:42.7.3'
+
 	// H2 database for tests (in-memory)
 	testImplementation 'com.h2database:h2'
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
-	
+
 	// MockWebServer for HTTP testing
 	testImplementation 'com.squareup.okhttp3:mockwebserver:4.12.0'
 }
@@ -71,7 +75,7 @@ jacocoTestReport {
 		html.required = true
 		csv.required = false
 	}
-	
+
 	afterEvaluate {
 		classDirectories.setFrom(files(classDirectories.files.collect {
 			fileTree(dir: it, exclude: [
@@ -89,14 +93,14 @@ jacocoTestReport {
 
 jacocoTestCoverageVerification {
 	dependsOn jacocoTestReport
-	
+
 	violationRules {
 		rule {
 			limit {
 				minimum = 0.80
 			}
 		}
-		
+
 		rule {
 			element = 'CLASS'
 			limit {

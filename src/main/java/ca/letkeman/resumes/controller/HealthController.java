@@ -27,9 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5173", "http://localhost:80",
     "http://127.0.0.1:3000", "http://127.0.0.1:5173", "http://127.0.0.1:80"},
     allowCredentials = "true",
-    maxAge = 3600,
-    methods = {org.springframework.web.bind.annotation.RequestMethod.GET,
-        org.springframework.web.bind.annotation.RequestMethod.OPTIONS})
+    maxAge = 3600)
 @RestController
 @RequestMapping("/api/health")
 public final class HealthController {

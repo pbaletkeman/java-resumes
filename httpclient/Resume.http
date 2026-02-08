@@ -1,7 +1,19 @@
 ### Resume & Interview API Test Collection
-# VS Code REST Client format
+# Format: Compatible with both REST Client (VS Code) and Bruno API testing tools
 # Base URL: http://localhost:8080
 # These requests test all available prompt types with sample resume and job description
+#
+# CHOOSE YOUR TESTING TOOL:
+# ========================
+# 1. REST Client (VS Code Extension)
+#    - Install: humao.rest-client
+#    - Open this file in VS Code
+#    - Click "Send Request" above any endpoint
+#
+# 2. Bruno (Desktop App)
+#    - Download: https://www.usebruno.com/
+#    - Import this file
+#    - Click "Send" on any request
 
 ### ========================================
 ### HEALTH & FILE MANAGEMENT ENDPOINTS
@@ -9,7 +21,22 @@
 
 ###
 ### get ollama models (optional, for testing connectivity and model availability)
-### ollama pull mistral:latest
+### To use Ollama LLM features, you must first pull a model:
+###   docker exec resume-ollama ollama pull mistral:latest
+###
+### Available models (ordered by size and speed):
+###   - qwen2.5:0.5b   (400MB, fastest, lowest quality)
+###   - tinyllama       (800MB, recommended for testing)
+###   - gemma2:2b       (1.6GB, good balance)
+###   - phi3:mini       (2.3GB, high quality)
+###   - mistral         (4.1GB, best quality but slower)
+###
+### List available models:
+###   docker exec resume-ollama ollama list
+###
+### Remove a model to free space:
+###   docker exec resume-ollama ollama rm tinyllama
+###
 ###
 
 ### Health Check
@@ -204,6 +231,49 @@ With over two decades of experience, I'm a Certified Python 3 and Java Spring De
 ###
 
 ### ========================================
+### DOCKER SETUP & LLM CONFIGURATION
+### ========================================
+###
+### DOCKER COMPOSE FILES - Choose One:
+###
+### 1. Main Setup (Recommended):
+###    docker compose up -d
+###    Container names: resume-frontend, resume-backend, resume-ollama
+###
+### 2. PostgreSQL Setup (Production-like):
+###    docker compose -f docker-compose.postgresql.yml up -d
+###    Container names: resume-frontend-postgres, resume-backend-postgres, resume-postgres
+###
+### 3. SQLite with Persistent Data:
+###    docker compose -f docker-compose.sqlite.yml up -d
+###    Container names: resume-frontend-sqlite, resume-backend-sqlite, resume-ollama-sqlite
+###
+### 4. Frontend + Backend Only:
+###    docker compose -f docker-compose.frontend-backend.yml up -d
+###    Container names: resume-frontend, resume-backend, resume-ollama
+###
+### OLLAMA LLM MODEL SETUP - REQUIRED STEP:
+###
+### After starting Docker Compose, you MUST pull an LLM model:
+###
+###    docker exec resume-ollama ollama pull mistral:latest
+###
+### Or use a different model based on your needs:
+###    docker exec resume-ollama ollama pull tinyllama        # Fastest (800MB)
+###    docker exec resume-ollama ollama pull gemma2:2b       # Balanced (1.6GB)
+###    docker exec resume-ollama ollama pull phi3:mini       # High quality (2.3GB)
+###    docker exec resume-ollama ollama pull qwen2.5:0.5b    # Ultra-lightweight (400MB)
+###
+### Check installed models:
+###    docker exec resume-ollama ollama list
+###
+### Access Services:
+###    Frontend: http://localhost:3000
+###    Backend:  http://localhost:8080
+###    Ollama:   http://localhost:11434/api/tags (to verify models)
+###    Swagger:  http://localhost:8080/swagger-ui/index.html
+###
+### ========================================
 ### NOTES FOR TESTING
 ### ========================================
 ###
@@ -212,45 +282,164 @@ With over two decades of experience, I'm a Certified Python 3 and Java Spring De
 ### The JSON request is sent as a form field named "optimize".
 ### This format handles complex JSON with newlines and special characters properly.
 ###
-### To test these requests:
-### 1. Ensure the backend is running: docker-compose up -d
-### 2. Pull an LLM model: docker exec resume-ollama ollama pull mistral
-### 3. Use REST Client extension in VS Code (REST Client by Huachao Mao)
-### 4. Click "Send Request" above each request
+### TESTING STEPS:
+### 1. Start Docker Compose:
+###    docker compose up -d
+###
+### 2. Pull an LLM model (REQUIRED - pick one):
+###    docker exec resume-ollama ollama pull mistral:latest       # Recommended
+###    docker exec resume-ollama ollama pull tinyllama            # Faster
+###
+### 3. Verify services are running:
+###    # Check backend is healthy
+###    curl http://localhost:8080/api/health
+###
+###    # Check Ollama models are loaded
+###    curl -s http://localhost:11434/api/tags | grep -o '"name":"[^"]*"'
+###
+### 4. Choose Your API Testing Tool:
+###
+###    OPTION A: REST Client (VS Code Extension - Recommended for VS Code users)
+###      - Install: REST Client by Huachao Mao from VS Code Extensions
+###      - Open this file in VS Code
+###      - Click "Send Request" button above any endpoint
+###      - View response in the response panel
+###
+###    OPTION B: Bruno (Desktop App - Recommended for dedicated API testing)
+###      - Download from: https://www.usebruno.com/
+###      - Launch Bruno
+###      - Click Import → Select Resume.http
+###      - Click Send on any request
+###      - Supports multipart/form-data perfectly
+###
+### 5. View results:
+###    - Response shown in VS Code REST Client panel
+###    - Files saved to: http://localhost:3000/files (Files Tab)
+###    - Or download directly from Files Tab
 ###
 ### Request Body Format:
-### Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
-### [boundary line]
-### Content-Disposition: form-data; name="optimize"
-### [JSON payload]
-### [boundary line]--
+### All endpoints using /api/generate/* and /api/process/* require:
+###   Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+###
+### Structure:
+###   [boundary line]
+###   Content-Disposition: form-data; name="optimize"
+###   [Complete JSON object as shown in examples]
+###   [boundary line]--
+###
+### Example JSON fields in "optimize" parameter:
+###   {
+###     "promptType": ["interview-hr-questions"],
+###     "resume": "# Full resume content as markdown or text",
+###     "jobDescription": "Job posting text",
+###     "company": "Company name",
+###     "jobTitle": "Position title",
+###     "temperature": 0.7,
+###     "model": "mistral:latest",
+###     "interviewerName": "Optional - for thank-you emails only"
+###   }
+###
+### Docker Compose File Usage:
+###
+### Main Setup (Default - Recommended):
+###   Command: docker compose up -d
+###   Services: Frontend (3000), Backend (8080), Ollama (11434)
+###   Database: SQLite (in-memory by default, configurable to persistent)
+###   Use Case: Full development, testing, and local deployment
+###
+### PostgreSQL Production-like Setup:
+###   Command: docker compose -f docker-compose.postgresql.yml up -d
+###   Services: Frontend (3000), Backend (8080), PostgreSQL (5432)
+###   Database: PostgreSQL 17 (persistent volume)
+###   Use Case: Production testing, scalable deployment
+###   Credentials: resume_user / resume_password
+###
+### SQLite with Persistent Storage:
+###   Command: docker compose -f docker-compose.sqlite.yml up -d
+###   Services: Frontend (3000), Backend (8080), Ollama (11434), SQLite (file-based)
+###   Database: SQLite file in Docker volume (persistent)
+###   Use Case: Local development with data persistence
+###
+### Frontend + Backend Only (No Database Service):
+###   Command: docker compose -f docker-compose.frontend-backend.yml up -d
+###   Services: Frontend (3000), Backend (8080), Ollama (11434)
+###   Database: SQLite in-memory only
+###   Use Case: Quick testing, minimal resource usage
 ###
 ### Endpoint Mapping:
 ### - /api/generate/* → Interview preparation and networking prompts
 ### - /api/process/* → Document optimization (resume, cover letter, skills)
 ###
 ### Field Mapping (JSON inside optimize parameter):
-### - "resume" field → Optimize.resume_string (via @SerializedName)
-### - "company" field → Optimize.company_name (via @SerializedName)
-### - "jobDescription" → Optimize.jobDescription (direct mapping)
-### - "jobTitle" → Optimize.jobTitle (direct mapping)
-### - "interviewerName" → Optimize.interviewerName (optional, for thank-you emails)
-### - "temperature" → Optimize.temperature (0-1 numeric value)
-### - "model" → Optimize.model (LLM model identifier)
 ###
-### All string fields should be valid JSON strings with proper escaping.
-### Temperature should be between 0 and 1 (0.7 recommended).
+### Required Fields (for most endpoints):
+###   - "resume" → User's resume/CV content (plain text or markdown)
+###   - "jobDescription" → Job posting details
+###   - "company" → Company name (for customization)
+###   - "jobTitle" → Position title (for customization)
+###   - "temperature" → Creativity level (0.0-1.0, 0.7 recommended)
+###   - "model" → Ollama model name (e.g., "mistral:latest")
 ###
-### Prompt Types Available:
-### - interview-hr-questions: Behavioral interview questions
-### - interview-job-specific: Technical/job-specific questions
-### - interview-reverse: Questions to ask interviewers
-### - cold-email: Professional cold email
-### - cold-linkedin-message: LinkedIn connection message
-### - thank-you-email: Post-interview thank you message
-### - resume: Resume optimized for job posting
-### - cover-letter: Cover letter tailored to job posting
-### - skills: Skills development and learning plan
+### Optional Fields:
+###   - "interviewerName" → Add name to thank-you emails
+###   - "promptType" → Specific prompt to use (see Prompt Types below)
+###
+### Note: Field names in JSON match Spring @SerializedName annotations
+### String fields must be valid JSON strings with proper escaping
+### Temperature should be between 0 and 1 (0.7 provides good balance)
+### Model must be a valid Ollama model (pulled with 'ollama pull' command)
+###
+###
+### Prompt Types Available and Their Purposes:
+###
+### INTERVIEW PREPARATION (Behavioral & Technical):
+###   - interview-hr-questions
+###     Purpose: Generate common HR interview questions
+###     Returns: 5 behavioral/HR questions tailored to role
+###     Use Case: Prepare for initial screening interviews
+###
+###   - interview-job-specific
+###     Purpose: Generate technical/role-specific interview questions
+###     Returns: 5 job-specific technical questions based on JD
+###     Use Case: Prepare for technical interviews
+###
+###   - interview-reverse
+###     Purpose: Questions to ask your interviewers
+###     Returns: 5 thoughtful questions to ask hiring managers
+###     Use Case: Show engagement and understanding during interviews
+###
+### PROFESSIONAL NETWORKING (Email & Message Templates):
+###   - cold-email
+###     Purpose: Generate professional outreach emails
+###     Returns: 5 variations of unique cold emails to target contacts
+###     Use Case: Networking and job search outreach
+###
+###   - cold-linkedin-message
+###     Purpose: Generate LinkedIn connection request messages
+###     Returns: 5 personalized LinkedIn messages
+###     Use Case: Build professional network
+###
+###   - thank-you-email
+###     Purpose: Post-interview thank you emails
+###     Returns: 5 variations of thank-you emails
+###     Use Case: Follow up after interviews (use with interviewerName field)
+###
+### DOCUMENT OPTIMIZATION (Resume, Cover Letter, Skills):
+###   - resume
+###     Purpose: Optimize resume for specific job posting
+###     Returns: Tailored resume highlighting relevant experience
+###     Use Case: ATS-optimized resume for target role
+###
+###   - cover-letter (or "cover")
+###     Purpose: Generate tailored cover letter
+###     Returns: Customized cover letter for job posting
+###     Use Case: Professional job application letters
+###
+###   - skills
+###     Purpose: Skills development and learning plan
+###     Returns: Personalized learning roadmap for target role
+###     Use Case: Identify gaps and plan skill development
+###
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="resume"; filename="resume.pdf"
 Content-Type: application/pdf

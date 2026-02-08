@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   # Ollama LLM Service
   ollama:
@@ -66,9 +64,8 @@ services:
       - SPRING_DATASOURCE_PASSWORD=resume_password
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
       - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=validate
-      - SPRING_FLYWAY_ENABLED=true
-      - SPRING_FLYWAY_LOCATIONS=classpath:db/migration/postgresql
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_FLYWAY_ENABLED=false
       - LLM_ENDPOINT=http://ollama:11434/v1/chat/completions
       - LLM_APIKEY=not-needed-for-local
     volumes:
@@ -106,7 +103,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - VITE_API_BASE_URL=http://backend:8080
+      - VITE_API_BASE_URL=http://localhost:8080
       - NODE_ENV=development
     depends_on:
       backend:

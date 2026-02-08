@@ -50,8 +50,9 @@ cd java-resumes
 # Step 1: Start all services (Frontend, Backend, Ollama LLM)
 docker compose up -d
 
-# Step 2: Pull an LLM model (e.g., tinyllama)
-docker exec resume-ollama ollama pull tinyllama
+# Step 2: Pull an LLM model (required for AI features)
+# Available models: tinyllama, mistral, llama2, phi3:mini, gemma2:2b, qwen2.5:0.5b
+docker exec resume-ollama ollama pull mistral:latest
 
 # Step 3: Access application
 # Frontend: http://localhost:3000
@@ -59,12 +60,35 @@ docker exec resume-ollama ollama pull tinyllama
 # Ollama: http://localhost:11434
 ```
 
-**Available Compose Files:**
+**Docker Compose Configuration Options:**
 
-- `docker-compose.yml` - Main configuration with all services
-- `docker-compose.frontend-backend.yml` - Alternative configuration (same services, different file structure)
+| File                                  | Services                          | Use Case                               | Database      |
+| ------------------------------------- | --------------------------------- | -------------------------------------- | ------------- |
+| `docker-compose.yml`                  | Frontend, Backend, Ollama         | Full stack with LLM (recommended)      | SQLite        |
+| `docker-compose.postgresql.yml`       | Frontend, Backend, PostgreSQL     | Production-like environment            | PostgreSQL 17 |
+| `docker-compose.sqlite.yml`           | Frontend, Backend, Ollama, SQLite | Local development with persistent data | SQLite        |
+| `docker-compose.frontend-backend.yml` | Frontend, Backend, Ollama         | Lightweight testing                    | SQLite        |
 
-**→ [Docker Compose Quick Start](docs/DOCKER_COMPOSE_QUICK_START.md) | [Detailed Setup Guide](docs/QUICK_START.md)**
+**Quick Start with Different Setups:**
+
+```bash
+# Option 1: Full stack with Ollama (default)
+docker compose up -d
+docker exec resume-ollama ollama pull mistral:latest
+
+# Option 2: PostgreSQL setup (production-like)
+docker compose -f docker-compose.postgresql.yml up -d
+docker exec resume-ollama ollama pull mistral:latest
+
+# Option 3: SQLite with persistent data
+docker compose -f docker-compose.sqlite.yml up -d
+docker exec resume-ollama-sqlite ollama pull tinyllama
+
+# Option 4: Frontend + Backend only (no database)
+docker compose -f docker-compose.frontend-backend.yml up -d
+```
+
+**→ [Docker Compose Quick Start](docs/DOCKER_COMPOSE_QUICK_START.md) | [Detailed Setup Guide](docs/DOCKER_SETUP.md)**
 
 ---
 
@@ -247,6 +271,8 @@ See [docs/DEVELOPMENT_SETUP.md](docs/DEVELOPMENT_SETUP.md) for detailed instruct
 
 ## 🧪 Testing
 
+### Unit & Integration Tests
+
 ```bash
 # Backend
 ./gradlew test                          # Run all tests
@@ -259,6 +285,24 @@ npm run test:coverage                   # Generate coverage report
 ```
 
 Target coverage: **80%+** for both frontend and backend.
+
+### API Testing
+
+Test REST endpoints using one of these tools:
+
+**Option 1: REST Client (VS Code Extension)**
+
+- Install: [REST Client by Huachao Mao](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+- Open: `httpclient/Resume.http`
+- Click "Send Request" above any endpoint
+- Perfect for quick testing within VS Code
+
+**Option 2: Bruno (Desktop App)**
+
+- Download: [bruno.app](https://www.usebruno.com/)
+- Import: Select `httpclient/Resume.http`
+- Click "Send" on any request
+- Great for dedicated API testing experience
 
 See [docs/TESTING.md](docs/TESTING.md) for complete testing guide.
 
