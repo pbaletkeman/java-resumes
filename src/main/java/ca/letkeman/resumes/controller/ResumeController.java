@@ -18,9 +18,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -59,6 +57,7 @@ public final class ResumeController {
   private String root;
 
 
+  @SuppressWarnings("EI_EXPOSE_REP2")
   public ResumeController(FilesStorageService storageService) {
     this.storageService = storageService;
   }
@@ -303,12 +302,94 @@ public final class ResumeController {
     }
   }
 
-  @GetMapping("/health")
-  public ResponseEntity<Map<String, Object>> healthCheck() {
-    Map<String, Object> health = new HashMap<>();
-    health.put("status", "UP");
-    health.put("timestamp", LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
-    health.put("service", "Resume Optimization API");
-    return ResponseEntity.ok(health);
+  @PostMapping(path = "/generate/interview-hr-questions")
+  public ResponseEntity<ResponseMessage> generateInterviewHrQuestions(
+      @RequestParam(name = "job", required = false) MultipartFile job,
+      @RequestParam(name = "optimize", required = false) String opt) {
+    return processPromptRequest(job, opt, "interview-hr-questions");
   }
+
+  @PostMapping(path = "/generate/interview-job-specific")
+  public ResponseEntity<ResponseMessage> generateInterviewJobSpecific(
+      @RequestParam(name = "job", required = false) MultipartFile job,
+      @RequestParam(name = "optimize", required = false) String opt) {
+    return processPromptRequest(job, opt, "interview-job-specific");
+  }
+
+  @PostMapping(path = "/generate/interview-reverse")
+  public ResponseEntity<ResponseMessage> generateInterviewReverse(
+      @RequestParam(name = "job", required = false) MultipartFile job,
+      @RequestParam(name = "optimize", required = false) String opt) {
+    return processPromptRequest(job, opt, "interview-reverse");
+  }
+
+  @PostMapping(path = "/generate/cold-email")
+  public ResponseEntity<ResponseMessage> generateColdEmail(
+      @RequestParam(name = "job", required = false) MultipartFile job,
+      @RequestParam(name = "optimize", required = false) String opt) {
+    return processPromptRequest(job, opt, "cold-email");
+  }
+
+  @PostMapping(path = "/generate/cold-linkedin-message")
+  public ResponseEntity<ResponseMessage> generateColdLinkedInMessage(
+      @RequestParam(name = "job", required = false) MultipartFile job,
+      @RequestParam(name = "optimize", required = false) String opt) {
+    return processPromptRequest(job, opt, "cold-linkedin-message");
+  }
+
+  @PostMapping(path = "/generate/thank-you-email")
+  public ResponseEntity<ResponseMessage> generateThankYouEmail(
+      @RequestParam(name = "job", required = false) MultipartFile job,
+      @RequestParam(name = "optimize", required = false) String opt) {
+    return processPromptRequest(job, opt, "thank-you-email");
+  }
+
+  private ResponseEntity<ResponseMessage> processPromptRequest(
+      MultipartFile job, String opt, String promptType) {
+    Optimize optimize = null;
+    if (opt != null && !opt.isBlank()) {
+      try {
+        optimize = new Gson().fromJson(opt, Optimize.class);
+      } catch (JsonSyntaxException e) {
+        LOGGER.error("Invalid optimize JSON: {}", opt);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body(new ResponseMessage("invalid optimize parameter"));
+      }
+    } else {
+      optimize = new Optimize();
+    }
+
+    // Set the prompt type
+    optimize.setPromptType(new String[]{promptType});
+
+    // Handle job description file upload
+    if ((optimize.getJobDescription() == null || optimize.getJobDescription().isBlank()) && job != null) {
+      try {
+        storageService.setConfigRoot(root);
+        storageService.save(job);
+        optimize.setJobDescription(
+            Utility.readFileAsString(root + File.separator + job.getOriginalFilename()));
+      } catch (Exception e) {
+        LOGGER.error("Could not upload the job: {}. Error:\n{}", job.getOriginalFilename(), e.getMessage());
+      }
+    }
+
+    if (optimize.getJobDescription() != null) {
+      optimize.setJobDescription(Utility.convertLineEndings(optimize.getJobDescription()));
+    }
+
+    LOGGER.debug("Prompt type: {}, optimize: {}", promptType, optimize);
+
+    if (optimize.isValid()) {
+      // Start background task
+      Thread thread = new Thread(new BackgroundResume(optimize, root));
+      thread.start();
+      return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ResponseMessage("generating"));
+    } else {
+      LOGGER.warn("Validation failed for prompt type: {}", promptType);
+      return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
+          .body(new ResponseMessage("Required property missing or invalid."));
+    }
+  }
+
 }

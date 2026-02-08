@@ -2,20 +2,43 @@
 
 Comprehensive visual documentation of the java-resumes application interface with both dark and light theme variants.
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Main Tab - Resume Editor](#main-tab---resume-editor)
-- [File History Tab](#file-history-tab)
-- [Settings Tab](#settings-tab)
-- [Tools Tab](#tools-tab)
-- [Add Model Dialog](#add-model-dialog)
-- [Theme Information](#theme-information)
-- [Screenshots Directory](#screenshots-directory)
+- [UI Screenshots - Theme Showcase](#ui-screenshots---theme-showcase)
+  - [📆 Overview](#-overview)
+  - [Main Tab - Resume Editor](#main-tab---resume-editor)
+    - [Dark Theme](#dark-theme)
+    - [Light Theme](#light-theme)
+  - [📤 File History Tab](#-file-history-tab)
+    - [Dark Theme](#dark-theme-1)
+    - [Light Theme](#light-theme-1)
+  - [⚙️ Settings Tab](#️-settings-tab)
+    - [Dark Theme](#dark-theme-2)
+    - [Light Theme](#light-theme-2)
+  - [🛠️ Tools Tab](#️-tools-tab)
+    - [Dark Theme](#dark-theme-3)
+    - [Light Theme](#light-theme-3)
+  - [📂 Add Model Dialog](#-add-model-dialog)
+    - [Dark Theme](#dark-theme-4)
+    - [Light Theme](#light-theme-4)
+  - [🎨 Theme Information](#-theme-information)
+    - [Dark Theme](#dark-theme-5)
+    - [Light Theme](#light-theme-5)
+    - [Switching Themes](#switching-themes)
+  - [📁 Screenshots Directory](#-screenshots-directory)
+  - [📖 Usage Guidelines](#-usage-guidelines)
+    - [Including Screenshots in Documentation](#including-screenshots-in-documentation)
+  - [🎨 Visual Design Standards](#-visual-design-standards)
+    - [Typography](#typography)
+    - [Colors](#colors)
+    - [Spacing](#spacing)
+    - [Components](#components)
+  - [📰 Technical Details](#-technical-details)
+    - [File Formats](#file-formats)
+    - [File Sizes](#file-sizes)
+  - [🔗 Related Documentation](#-related-documentation)
 
 ---
 
-## Overview
+## 📆 Overview
 
 The java-resumes application provides a modern, responsive user interface with full dark/light theme support. All screenshots demonstrate both themes side-by-side for easy comparison.
 
@@ -60,7 +83,7 @@ The primary interface for uploading and editing resume documents with AI-powered
 
 ---
 
-## File History Tab
+## 📤 File History Tab
 
 Browse and manage previously generated and saved documents.
 
@@ -90,7 +113,7 @@ Browse and manage previously generated and saved documents.
 
 ---
 
-## Settings Tab
+## ⚙️ Settings Tab
 
 Configure application preferences and LLM model settings.
 
@@ -120,7 +143,7 @@ Configure application preferences and LLM model settings.
 
 ---
 
-## Tools Tab
+## 🛠️ Tools Tab
 
 Utility functions and development tools.
 
@@ -150,7 +173,7 @@ Utility functions and development tools.
 
 ---
 
-## Add Model Dialog
+## 📂 Add Model Dialog
 
 Dialog for configuring new LLM model connections (Ollama, OpenAI, etc.).
 
@@ -180,7 +203,7 @@ Dialog for configuring new LLM model connections (Ollama, OpenAI, etc.).
 
 ---
 
-## Theme Information
+## 🎨 Theme Information
 
 ### Dark Theme
 
@@ -211,7 +234,7 @@ Users can switch between themes:
 
 ---
 
-## Screenshots Directory
+## 📁 Screenshots Directory
 
 ```
 docs/screenshots/
@@ -250,7 +273,7 @@ docs/screenshots/
 
 ---
 
-## Usage Guidelines
+## 📖 Usage Guidelines
 
 ### Including Screenshots in Documentation
 
@@ -281,7 +304,7 @@ When referencing these screenshots in documentation:
 
 ---
 
-## Visual Design Standards
+## 🎨 Visual Design Standards
 
 ### Typography
 
@@ -322,7 +345,7 @@ When referencing these screenshots in documentation:
 
 ---
 
-## Technical Details
+## 📰 Technical Details
 
 ### File Formats
 
@@ -348,7 +371,7 @@ When referencing these screenshots in documentation:
 
 ---
 
-## Related Documentation
+## 🔗 Related Documentation
 
 - [Setup & Deployment Screenshots](./setup/README.md)
 - [Architecture Diagrams](./architecture/README.md)
@@ -358,5 +381,5 @@ When referencing these screenshots in documentation:
 
 ---
 
-**Last Updated:** January 22, 2026
-**Status:** ✅ Complete with all theme variants
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

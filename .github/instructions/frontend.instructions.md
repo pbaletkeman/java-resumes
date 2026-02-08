@@ -4,6 +4,18 @@ applyTo: "frontend/**/*.ts,frontend/**/*.tsx,frontend/**/*.js,frontend/**/*.jsx,
 
 # Frontend Development Instructions
 
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Directory Structure](#directory-structure)
+- [Setup & Build](#setup--build)
+- [Component Development](#component-development)
+- [Custom Hooks](#custom-hooks)
+- [Styling & Themes](#styling--themes)
+- [Testing & Validation](#testing--validation)
+
+---
+
 ## Project Overview
 
 This is a React 19 frontend application for the Resume Optimizer platform, using PrimeReact components and TypeScript. It provides a tab-based UI for document upload, resume optimization, cover letter generation, and markdown-to-PDF conversion.
@@ -310,3 +322,8 @@ Always run these checks in order:
 - [Testing Library Best Practices](https://testing-library.com/docs/react-testing-library/intro)
 
 **When in doubt, examine existing component files and test files for patterns. The codebase demonstrates all major patterns and best practices used in this project.**
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

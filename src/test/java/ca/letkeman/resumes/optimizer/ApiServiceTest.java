@@ -138,4 +138,102 @@ class ApiServiceTest {
         // Verify that it doesn't throw exception
         Assertions.assertDoesNotThrow(() -> apiService.produceFiles("SKILLS", optimize, "http://invalid-endpoint", "fakekey", "mistral", System.getProperty("java.io.tmpdir")));
     }
+
+    @Test
+    void testMockModeEnabled() {
+        apiService.setMockEnabled(true);
+        Assertions.assertTrue(apiService.isMockEnabled());
+
+        ChatBody chatBody = new ChatBody();
+        chatBody.setModel("test-model");
+
+        // Should return mock response, not null
+        LLMResponse response = apiService.invokeApi(chatBody, "http://any-endpoint", "apikey");
+        Assertions.assertNotNull(response);
+    }
+
+    @Test
+    void testMockModeDisabled() {
+        apiService.setMockEnabled(false);
+        Assertions.assertFalse(apiService.isMockEnabled());
+
+        ChatBody chatBody = new ChatBody();
+        chatBody.setModel("test-model");
+
+        // Should attempt real HTTP call and return null (invalid endpoint)
+        LLMResponse response = apiService.invokeApi(chatBody, "http://invalid-endpoint", "apikey");
+        Assertions.assertNull(response);
+    }
+
+    @Test
+    void testInvokeApiWithEmptyChatBody() {
+        ChatBody chatBody = new ChatBody();
+        // Empty chat body should still be processed
+        LLMResponse response = apiService.invokeApi(chatBody, "http://invalid-endpoint", "apikey");
+        Assertions.assertNull(response);
+    }
+
+    @Test
+    void testInvokeApiWithInvalidURI() {
+        ChatBody chatBody = new ChatBody();
+        chatBody.setModel("test");
+        // Invalid URI format should return null
+        LLMResponse response = apiService.invokeApi(chatBody, "not a valid uri", "apikey");
+        Assertions.assertNull(response);
+    }
+
+    @Test
+    void testProduceFilesWithMultiplePromptTypes() {
+        Optimize optimize = Mockito.mock(Optimize.class);
+        Mockito.when(optimize.getPromptType()).thenReturn(new String[]{"RESUME", "COVERLETTER"});
+        Mockito.when(optimize.getResume()).thenReturn("My resume");
+        Mockito.when(optimize.getJobDescription()).thenReturn("Job desc");
+        Mockito.when(optimize.getCompany()).thenReturn("Company");
+        Mockito.when(optimize.getJobTitle()).thenReturn("Title");
+        Mockito.when(optimize.getTemperature()).thenReturn(0.7);
+        Mockito.when(optimize.getModel()).thenReturn("model");
+
+        Mockito.when(promptServiceMock.loadPrompt("RESUME")).thenReturn("Resume: {resume_string}");
+        Mockito.when(promptServiceMock.loadPrompt("COVERLETTER")).thenReturn("Cover: {resume_string}");
+
+        // Should process multiple prompt types
+        Assertions.assertDoesNotThrow(() -> apiService.produceFiles("RESUME", optimize, "http://invalid", "key", "model", "/tmp"));
+    }
+
+    @Test
+    void testProduceFilesWithInterviewerName() {
+        Optimize optimize = Mockito.mock(Optimize.class);
+        Mockito.when(optimize.getPromptType()).thenReturn(new String[]{"THANK-YOU-EMAIL"});
+        Mockito.when(optimize.getResume()).thenReturn("Resume");
+        Mockito.when(optimize.getJobDescription()).thenReturn("Desc");
+        Mockito.when(optimize.getCompany()).thenReturn("Company");
+        Mockito.when(optimize.getJobTitle()).thenReturn("Title");
+        Mockito.when(optimize.getInterviewerName()).thenReturn("John Doe");
+        Mockito.when(optimize.getTemperature()).thenReturn(0.5);
+        Mockito.when(optimize.getModel()).thenReturn("model");
+
+        Mockito.when(promptServiceMock.loadPrompt("THANK-YOU-EMAIL"))
+            .thenReturn("Dear {interviewer_name}");
+
+        Assertions.assertDoesNotThrow(() -> apiService.produceFiles("THANK-YOU-EMAIL", optimize, "http://invalid", "key", "model", "/tmp"));
+    }
+
+    @Test
+    void testProduceFilesWithNullInterviewerName() {
+        Optimize optimize = Mockito.mock(Optimize.class);
+        Mockito.when(optimize.getPromptType()).thenReturn(new String[]{"THANK-YOU-EMAIL"});
+        Mockito.when(optimize.getResume()).thenReturn("Resume");
+        Mockito.when(optimize.getJobDescription()).thenReturn("Desc");
+        Mockito.when(optimize.getCompany()).thenReturn("Company");
+        Mockito.when(optimize.getJobTitle()).thenReturn("Title");
+        Mockito.when(optimize.getInterviewerName()).thenReturn(null);
+        Mockito.when(optimize.getTemperature()).thenReturn(0.5);
+        Mockito.when(optimize.getModel()).thenReturn("model");
+
+        Mockito.when(promptServiceMock.loadPrompt("THANK-YOU-EMAIL"))
+            .thenReturn("Dear {interviewer_name}");
+
+        // Should handle null interviewer name gracefully
+        Assertions.assertDoesNotThrow(() -> apiService.produceFiles("THANK-YOU-EMAIL", optimize, "http://invalid", "key", "model", "/tmp"));
+    }
 }

@@ -3,12 +3,12 @@ package ca.letkeman.resumes.optimizer;
 import ca.letkeman.resumes.model.Optimize;
 import ca.letkeman.resumes.optimizer.responses.Choice;
 import ca.letkeman.resumes.optimizer.responses.LLMResponse;
+import ca.letkeman.resumes.service.MockLlmService;
 import ca.letkeman.resumes.service.PromptService;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -25,6 +25,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -34,6 +35,12 @@ public final class ApiService {
 
   @Autowired(required = false)
   private PromptService promptService;
+
+  @Autowired(required = false)
+  private MockLlmService mockLlmService;
+
+  @Value("${llm.mock.enabled:false}")
+  private boolean mockEnabled;
 
   private String jobDescription;
   private String resume;
@@ -68,8 +75,38 @@ public final class ApiService {
     return promptService;
   }
 
+  /**
+   * Lazily load or create MockLlmService if not injected by Spring.
+   *
+   * @return the MockLlmService instance
+   */
+  private MockLlmService getMockLlmService() {
+    if (mockLlmService == null) {
+      mockLlmService = new MockLlmService();
+    }
+    return mockLlmService;
+  }
+
   public ApiService() {
     // default constructor
+  }
+
+  /**
+   * Check if mock mode is enabled.
+   *
+   * @return true if mock mode is enabled
+   */
+  public boolean isMockEnabled() {
+    return mockEnabled;
+  }
+
+  /**
+   * Set mock mode enabled/disabled.
+   *
+   * @param enabled true to enable mock mode
+   */
+  public void setMockEnabled(boolean enabled) {
+    this.mockEnabled = enabled;
   }
 
   /***
@@ -78,6 +115,12 @@ public final class ApiService {
    * @return - the result from the LLM request
    */
   public LLMResponse invokeApi(ChatBody chatBody, String endpoint, String apikey) {
+    // If mock mode is enabled, return mock response instead of making HTTP call
+    if (mockEnabled) {
+      LOGGER.info("Mock mode enabled - returning simulated LLM response");
+      return getMockLlmService().generateMockResponse(chatBody);
+    }
+
     String jsonBody = new Gson().toJson(chatBody);
     try {
       URI uri = new URI(endpoint);
@@ -211,6 +254,8 @@ public final class ApiService {
     promptData = promptData.replace("{job_title}", optimize.getJobTitle() != null ? optimize.getJobTitle() : "");
     promptData = promptData.replace("{today}", today != null ? today : "");
     promptData = promptData.replace("{company}", optimize.getCompany() != null ? optimize.getCompany() : "");
+    promptData = promptData.replace("{interviewer_name}",
+        optimize.getInterviewerName() != null ? optimize.getInterviewerName() : "");
 
     ChatBody chatBody = getChatBody(optimize, promptData);
     chatBody.setModel(model);
@@ -241,7 +286,7 @@ public final class ApiService {
     }
 
     String suffixString =
-        DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm").format(LocalDateTime.now());
+        DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm").format(LocalDateTime.now());
     String fileName = promptType + "-" + optimize.getCompany() + "-"
         + optimize.getJobTitle() + "-" + suffixString + ".md";
     createResultFile(fileName, result.body(), root);
@@ -346,7 +391,8 @@ public final class ApiService {
   private void createResultFile(String fileName, String s, String root) {
 
     if (s != null && !s.isBlank()) {
-      try (BufferedWriter writer = new BufferedWriter(new FileWriter(root + File.separator + fileName, false))) {
+      try (BufferedWriter writer = Files.newBufferedWriter(
+          Paths.get(root + File.separator + fileName), StandardCharsets.UTF_8)) {
         writer.write(s);
         writer.flush();  // Data is written to OS page cache, not necessarily to the disk immediately
       } catch (Exception e) {

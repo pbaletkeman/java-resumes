@@ -2,17 +2,37 @@
 
 Visual documentation of REST API endpoints, Swagger UI, error responses, and usage examples.
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Swagger UI Documentation](#swagger-ui-documentation)
-- [API Endpoints Reference](#api-endpoints-reference)
-- [Error Responses Guide](#error-responses-guide)
-- [Usage Examples](#usage-examples)
+- [API Documentation Screenshots](#api-documentation-screenshots)
+  - [📆 Overview](#overview)
+  - [📚 Swagger UI Documentation](#swagger-ui-documentation)
+    - [Swagger Interface](#swagger-interface)
+  - [🔗 API Endpoints Reference](#api-endpoints-reference)
+    - [Endpoint Documentation](#endpoint-documentation)
+    - [Endpoint Details](#endpoint-details)
+  - [⚠️ Error Responses Guide](#error-responses-guide)
+    - [Error Response Examples](#error-response-examples)
+    - [HTTP Status Codes](#http-status-codes)
+    - [Common Error Responses](#common-error-responses)
+    - [Error Handling Best Practices](#error-handling-best-practices)
+  - [📚 Usage Examples](#usage-examples)
+    - [Complete Request/Response Flow](#complete-requestresponse-flow)
+    - [JavaScript/Axios Example](#javascriptaxios-example)
+    - [cURL Download Example](#curl-download-example)
+  - [Configuration Reference](#configuration-reference)
+    - [API Configuration](#api-configuration)
+    - [CORS Configuration](#cors-configuration)
+    - [Request Validation](#request-validation)
+  - [Performance Characteristics](#performance-characteristics)
+    - [Response Times](#response-times)
+    - [Concurrency](#concurrency)
+    - [Resource Limits](#resource-limits)
+  - [Documentation Files](#documentation-files)
+    - [Directory Structure](#directory-structure)
+    - [Related Documentation](#related-documentation)
 
 ---
 
-## Overview
+## 📆 Overview
 
 Complete visual reference for the java-resumes REST API, including endpoint documentation, request/response formats, and error handling.
 
@@ -27,7 +47,7 @@ Complete visual reference for the java-resumes REST API, including endpoint docu
 
 ---
 
-## Swagger UI Documentation
+## 📚 Swagger UI Documentation
 
 ### Swagger Interface
 
@@ -57,7 +77,7 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
-## API Endpoints Reference
+## 🔗 API Endpoints Reference
 
 ### Endpoint Documentation
 
@@ -136,7 +156,7 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
-## Error Responses Guide
+## ⚠️ Error Responses Guide
 
 ### Error Response Examples
 
@@ -225,7 +245,7 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
-## Usage Examples
+## 📚 Usage Examples
 
 ### Complete Request/Response Flow
 
@@ -427,5 +447,10 @@ docs/screenshots/api/
 
 ---
 
-**Last Updated:** January 22, 2026
+**Document Created:** January 22, 2026
 **Status:** ✅ Complete API documentation with screenshots
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

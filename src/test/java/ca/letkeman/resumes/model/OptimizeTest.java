@@ -9,12 +9,12 @@ class OptimizeTest {
     String[] promptType = {"Resume"};
     double temperature = 0.5;
     String model = "gemma-3-4b-it";
-    String resume = "Professional resume content";
+    String resume_string = "Professional resume content";
     String jobDescription = "Job description content";
     String jobTitle = "Software Engineer";
-    String company = "Tech Company";
+    String company_name = "Tech Company";
 
-    Optimize optimize = new Optimize(promptType, temperature, model, resume, jobDescription, jobTitle, company);
+    Optimize optimize = new Optimize(promptType, temperature, model, resume_string, jobDescription, jobTitle, company_name);
 
     Assertions.assertTrue(optimize.isValid());
   }
@@ -26,7 +26,7 @@ class OptimizeTest {
     String model = "gemma-3-4b-it";
     String jobDescription = "Job description content";
     String jobTitle = "Software Engineer";
-    String company = "Tech Company";
+    String company_name = "Tech Company";
 
     Optimize optimize = new Optimize();
     optimize.setPromptType(promptType);
@@ -35,7 +35,7 @@ class OptimizeTest {
     optimize.setResume(null);
     optimize.setJobDescription(jobDescription);
     optimize.setJobTitle(jobTitle);
-    optimize.setCompany(company);
+    optimize.setCompany(company_name);
 
     Assertions.assertFalse(optimize.isValid());
   }
@@ -45,18 +45,18 @@ class OptimizeTest {
     String[] promptType = {"Resume"};
     double temperature = 0.5;
     String model = "gemma-3-4b-it";
-    String resume = "Professional resume content";
+    String resume_string = "Professional resume content";
     String jobTitle = "Software Engineer";
-    String company = "Tech Company";
+    String company_name = "Tech Company";
 
     Optimize optimize = new Optimize();
     optimize.setPromptType(promptType);
     optimize.setTemperature(temperature);
     optimize.setModel(model);
-    optimize.setResume(resume);
+    optimize.setResume(resume_string);
     optimize.setJobDescription(null);
     optimize.setJobTitle(jobTitle);
-    optimize.setCompany(company);
+    optimize.setCompany(company_name);
 
     Assertions.assertFalse(optimize.isValid());
   }
@@ -65,19 +65,19 @@ class OptimizeTest {
   void testNullModelReturnsFalse() {
     String[] promptType = {"Resume"};
     double temperature = 0.5;
-    String resume = "Professional resume content";
+    String resume_string = "Professional resume content";
     String jobTitle = "Software Engineer";
-    String company = "Tech Company";
+    String company_name = "Tech Company";
     String jobDescription = "Job description content";
 
     Optimize optimize = new Optimize();
     optimize.setPromptType(promptType);
     optimize.setTemperature(temperature);
     optimize.setModel(null);
-    optimize.setResume(resume);
+    optimize.setResume(resume_string);
     optimize.setJobDescription(jobDescription);
     optimize.setJobTitle(jobTitle);
-    optimize.setCompany(company);
+    optimize.setCompany(company_name);
 
     Assertions.assertFalse(optimize.isValid());
   }
@@ -86,19 +86,19 @@ class OptimizeTest {
   void testTemperatureOutOfBoundsReturnsFalse() {
     String[] promptType = {"Resume"};
     String model = "gemma-3-4b-it";
-    String resume = "Professional resume content";
+    String resume_string = "Professional resume content";
     String jobDescription = "Job description content";
     String jobTitle = "Software Engineer";
-    String company = "Tech Company";
+    String company_name = "Tech Company";
 
     Optimize optimize = new Optimize();
     optimize.setPromptType(promptType);
 
     optimize.setModel(model);
-    optimize.setResume(resume);
+    optimize.setResume(resume_string);
     optimize.setJobDescription(jobDescription);
     optimize.setJobTitle(jobTitle);
-    optimize.setCompany(company);
+    optimize.setCompany(company_name);
 
     optimize.setTemperature(-1);
     Assertions.assertFalse(optimize.isValid());
@@ -112,18 +112,18 @@ class OptimizeTest {
     String[] promptType = {"Resume"};
     double temperature = 0.5;
     String model = "gemma-3-4b-it";
-    String resume = "Professional resume content";
+    String resume_string = "Professional resume content";
     String jobTitle = null;
-    String company = "Tech Company";
+    String company_name = "Tech Company";
     String jobDescription = "Job description content";
     Optimize optimize = new Optimize();
     optimize.setPromptType(promptType);
     optimize.setTemperature(temperature);
     optimize.setModel(model);
-    optimize.setResume(resume);
+    optimize.setResume(resume_string);
     optimize.setJobDescription(jobDescription);
     optimize.setJobTitle(jobTitle);
-    optimize.setCompany(company);
+    optimize.setCompany(company_name);
 
     Assertions.assertFalse(optimize.isValid());
   }
@@ -133,41 +133,46 @@ class OptimizeTest {
     String[] promptType = {"Resume"};
     double temperature = 0.5;
     String model = "gemma-3-4b-it";
-    String resume = "Professional resume content";
+    String resume_string = "Professional resume content";
     String jobTitle = "Software Engineer";
-    String company = null;
+    String company_name = null;
     String jobDescription = "Job description content";
     Optimize optimize = new Optimize();
     optimize.setPromptType(promptType);
     optimize.setTemperature(temperature);
     optimize.setModel(model);
-    optimize.setResume(resume);
+    optimize.setResume(resume_string);
     optimize.setJobDescription(jobDescription);
     optimize.setJobTitle(jobTitle);
-    optimize.setCompany(company);
+    optimize.setCompany(company_name);
 
     Assertions.assertFalse(optimize.isValid());
   }
 
   @Test
   void testNullPromptTypeReturnsFalse() {
+    // When promptType is set to null, it should be converted to default ["Resume"]
+    // and isValid should return true if all other fields are valid.
+    // This test verifies that null promptType is handled gracefully by defensive copying.
     String[] promptType = null;
     double temperature = 0.5;
     String model = "gemma-3-4b-it";
-    String resume = "Professional resume content";
+    String resume_string = "Professional resume content";
     String jobTitle = "Software Engineer";
-    String company = "Tech Company";
+    String company_name = "Tech Company";
     String jobDescription = "Job description content";
     Optimize optimize = new Optimize();
     optimize.setPromptType(promptType);
     optimize.setTemperature(temperature);
     optimize.setModel(model);
-    optimize.setResume(resume);
+    optimize.setResume(resume_string);
     optimize.setJobDescription(jobDescription);
     optimize.setJobTitle(jobTitle);
-    optimize.setCompany(company);
+    optimize.setCompany(company_name);
 
-    Assertions.assertFalse(optimize.isValid());
+    // Null promptType is converted to default ["Resume"], so isValid should return true
+    // if all other required fields are present
+    Assertions.assertTrue(optimize.isValid());
   }
 
   @Test
@@ -175,18 +180,18 @@ class OptimizeTest {
     String[] promptType = {};
     double temperature = 0.5;
     String model = "gemma-3-4b-it";
-    String resume = "Professional resume content";
+    String resume_string = "Professional resume content";
     String jobTitle = "Software Engineer";
-    String company = "Tech Company";
+    String company_name = "Tech Company";
     String jobDescription = "Job description content";
     Optimize optimize = new Optimize();
     optimize.setPromptType(promptType);
     optimize.setTemperature(temperature);
     optimize.setModel(model);
-    optimize.setResume(resume);
+    optimize.setResume(resume_string);
     optimize.setJobDescription(jobDescription);
     optimize.setJobTitle(jobTitle);
-    optimize.setCompany(company);
+    optimize.setCompany(company_name);
 
     Assertions.assertFalse(optimize.isValid());
   }
@@ -196,18 +201,18 @@ class OptimizeTest {
     String[] promptType = {"Resume1223"};
     double temperature = 0.5;
     String model = "gemma-3-4b-it";
-    String resume = "Professional resume content";
+    String resume_string = "Professional resume content";
     String jobTitle = "Software Engineer";
-    String company = "Tech Company";
+    String company_name = "Tech Company";
     String jobDescription = "Job description content";
     Optimize optimize = new Optimize();
     optimize.setPromptType(promptType);
     optimize.setTemperature(temperature);
     optimize.setModel(model);
-    optimize.setResume(resume);
+    optimize.setResume(resume_string);
     optimize.setJobDescription(jobDescription);
     optimize.setJobTitle(jobTitle);
-    optimize.setCompany(company);
+    optimize.setCompany(company_name);
 
     Assertions.assertFalse(optimize.isValid());
   }
@@ -219,7 +224,7 @@ class OptimizeTest {
     String model = "gemma-3-4b-it";
     String jobDescription = "Java Spring Developer position requiring 5+ years";
     String jobTitle = "Java Spring Developer";
-    String company = "Tech Company";
+    String company_name = "Tech Company";
 
     Optimize optimize = new Optimize();
     optimize.setPromptType(promptType);
@@ -228,7 +233,7 @@ class OptimizeTest {
     optimize.setResume(null);  // SKILLS prompt doesn't require resume
     optimize.setJobDescription(jobDescription);
     optimize.setJobTitle(jobTitle);
-    optimize.setCompany(company);
+    optimize.setCompany(company_name);
 
     Assertions.assertTrue(optimize.isValid(), "SKILLS prompt should be valid without resume content");
   }
@@ -277,7 +282,7 @@ class OptimizeTest {
     double temperature = 0.5;
     String model = "gemma-3-4b-it";
     String jobTitle = "Java Developer";
-    String company = "Tech Company";
+    String company_name = "Tech Company";
 
     Optimize optimize = new Optimize();
     optimize.setPromptType(promptType);
@@ -285,7 +290,7 @@ class OptimizeTest {
     optimize.setModel(model);
     optimize.setJobDescription(null);  // Missing required field
     optimize.setJobTitle(jobTitle);
-    optimize.setCompany(company);
+    optimize.setCompany(company_name);
 
     Assertions.assertFalse(optimize.isValid(), "SKILLS prompt should require job description");
   }

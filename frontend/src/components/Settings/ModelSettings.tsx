@@ -129,7 +129,7 @@ export const ModelSettings: React.FC = () => {
   return (
     <Card className="h-full">
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
-        <div>
+        <div style={{ marginTop: '1.5rem' }}>
           <h2 className="text-2xl font-bold mb-2">AI Model Management</h2>
           <p className="text-gray-600">
             Manage the list of AI models available in the application. Non-technical users can add,

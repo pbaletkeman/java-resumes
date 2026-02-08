@@ -60,4 +60,12 @@ public final class Message {
     this.role = role;
     this.content = content;
   }
+
+  // Copy constructor for defensive copying
+  public Message(Message other) {
+    if (other != null) {
+      this.role = other.role;
+      this.content = other.content;
+    }
+  }
 }

@@ -1,0 +1,453 @@
+### Resume & Interview API Test Collection
+# Format: Compatible with both REST Client (VS Code) and Bruno API testing tools
+# Base URL: http://localhost:8080
+# These requests test all available prompt types with sample resume and job description
+#
+# CHOOSE YOUR TESTING TOOL:
+# ========================
+# 1. REST Client (VS Code Extension)
+#    - Install: humao.rest-client
+#    - Open this file in VS Code
+#    - Click "Send Request" above any endpoint
+#
+# 2. Bruno (Desktop App)
+#    - Download: https://www.usebruno.com/
+#    - Import this file
+#    - Click "Send" on any request
+
+### ========================================
+### HEALTH & FILE MANAGEMENT ENDPOINTS
+### ========================================
+
+###
+### get ollama models (optional, for testing connectivity and model availability)
+### To use Ollama LLM features, you must first pull a model:
+###   docker exec resume-ollama ollama pull mistral:latest
+###
+### Available models (ordered by size and speed):
+###   - qwen2.5:0.5b   (400MB, fastest, lowest quality)
+###   - tinyllama       (800MB, recommended for testing)
+###   - gemma2:2b       (1.6GB, good balance)
+###   - phi3:mini       (2.3GB, high quality)
+###   - mistral         (4.1GB, best quality but slower)
+###
+### List available models:
+###   docker exec resume-ollama ollama list
+###
+### Remove a model to free space:
+###   docker exec resume-ollama ollama rm tinyllama
+###
+###
+
+### Health Check
+GET http://localhost:8080/api/health
+
+###
+
+### List All Files
+GET http://localhost:8080/api/files
+
+###
+
+### Delete All Files
+POST http://localhost:8080/api/delete-all
+
+###
+
+### ========================================
+### INTERVIEW PREPARATION ENDPOINTS
+### ========================================
+
+### Interview - HR Questions
+POST http://localhost:8080/api/generate/interview-hr-questions
+Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="optimize"
+
+{"promptType":["interview-hr-questions"],"resume":"# Peter Letkeman\n\n## Certified Python & Java Spring Developer\npete@letkeman.ca | 519-331-1405 | Toronto, ON\n\n## Summary:\nWith over two decades of experience developing software applications and solutions, I'm a Certified Python 3 and Java Spring Developer with a broad skill set.\n\n## Skills:\n- Certified Python 3.x Developer\n- Certified Java 8 Programmer\n- Java Spring Developer\n- Elasticsearch, JavaScript, JSON, MySQL, PostgreSQL, MongoDB\n- Database design and administration\n- Web application development\n- Git/Source Control Systems, Agile/Scrum\n- RESTful API development, Microservices\n\n## Experience:\n\n**Developer | Rakuten Kobo, Toronto, ON (May 2023 - Present)**\n- Developed reporting platform using Java and Python APIs\n- Engineered fraud prevention solutions\n- Mentored junior developers\n\n**Senior Software Developer | SystemSoft Technologies (August 2021 - April 2023)**\n- Performance optimization\n- Design and user experience\n- Team mentoring\n\n## Education:\nSoftware Architecture - University of Alberta (Coursera)","jobDescription":"PointClickCare is seeking an Intermediate Software Engineer with 2+ years Java, SpringBoot experience. Required: Jenkins, Docker/Kubernetes on Cloud (Azure or AWS), RESTful APIs. Nice to have: SQL Server, NoSQL (Azure ADLS, DeltaLake). Self-starter, team player, problem-solver.","company":"PointClickCare","jobTitle":"Data Software Engineer","temperature":0.7,"model":"mistral:latest"}
+------FormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### Interview - Job-Specific Questions
+POST http://localhost:8080/api/generate/interview-job-specific
+Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="optimize"
+
+{"promptType":["interview-job-specific"],"resume":"# Peter Letkeman\n\n## Certified Python & Java Spring Developer\npete@letkeman.ca | 519-331-1405 | Toronto, ON\n\n## Summary:\nWith 20+ years experience, I'm a Certified Python 3 and Java Spring Developer.\n\n## Skills:\n- Python 3, Java 8, Spring Boot\n- SpringBoot Microservices, RESTful APIs\n- SQL, NoSQL, PostgreSQL, MongoDB\n- Docker, Kubernetes, Azure, AWS\n- Git, Agile/Scrum\n\n## Experience:\n**Developer | Rakuten Kobo (May 2023 - Present)**\n- Java and Python APIs\n- Fraud detection systems\n- Junior developer mentoring\n\n**Senior Developer | SystemSoft (Aug 2021 - Apr 2023)**\n- Performance optimization\n- Cross-functional teams","jobDescription":"Int. Software engineer with 2+ years Java, SpringBoot. Experience with Jenkins, Docker/Kubernetes on Cloud (Azure or AWS). RESTful API endpoints required. Relational databases (SQL Server). Non-relational stores (Azure ADLS, DeltaLake, Hudi). Organization, critical-thinking. Self-starter. Team player.","company":"PointClickCare","jobTitle":"Data Software Engineer","temperature":0.7,"model":"mistral:latest"}
+------FormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### Interview - Reverse Questions
+POST http://localhost:8080/api/generate/interview-reverse
+Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="optimize"
+
+{"promptType":["interview-reverse"],"resume":"# Peter Letkeman\n\n## Certified Python & Java Spring Developer\n\n## Summary:\nWith 20+ years experience, I'm a Certified Python 3 and Java Spring Developer.\n\n## Skills:\n- Java, Python, SpringBoot\n- RESTful APIs, Microservices\n- Docker, Kubernetes\n- SQL, NoSQL\n\n## Experience:\n**Developer | Rakuten Kobo (May 2023 - Present)**\n- APIs and fraud detection\n- Junior developer mentoring\n\n**Senior Developer | SystemSoft (Aug 2021 - Apr 2023)**\n- Performance optimization","jobDescription":"Data Software Engineer. 2+ years Java, SpringBoot. Docker/Kubernetes. RESTful APIs. SQL and NoSQL. Team player, self-starter.","company":"PointClickCare","jobTitle":"Data Software Engineer","temperature":0.7,"model":"mistral:latest"}
+------FormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### ========================================
+### PROFESSIONAL NETWORKING ENDPOINTS
+### ========================================
+
+### Networking - Cold Email
+POST http://localhost:8080/api/generate/cold-email
+Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="optimize"
+
+{"promptType":["cold-email"],"resume":"# Peter Letkeman\n\n## Certified Python & Java Spring Developer\npete@letkeman.ca | 519-331-1405\n\n## Summary:\nWith 20+ years experience, I'm a Certified Python 3 and Java Spring Developer.\n\n## Skills:\n- Java, Python, SpringBoot\n- RESTful APIs, Microservices\n- Docker, Kubernetes, Cloud\n- SQL, NoSQL\n- Agile/Scrum","jobDescription":"PointClickCare is a healthcare technology platform. We value innovation, teamwork, continuous learning.","company":"PointClickCare","jobTitle":"Data Software Engineer","temperature":0.7,"model":"mistral:latest"}
+------FormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### Networking - Cold LinkedIn Message
+POST http://localhost:8080/api/generate/cold-linkedin-message
+Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="optimize"
+
+{"promptType":["cold-linkedin-message"],"resume":"# Peter Letkeman\n\n## Certified Python & Java Spring Developer\npete@letkeman.ca\n\n## Summary:\nCertified Python 3 and Java Spring Developer with 20+ years in software development.\n\n## Skills:\n- Java, Python, SpringBoot\n- Full-stack development\n- Cloud (Azure, AWS)\n- Database design & optimization","jobDescription":"PointClickCare - Healthcare technology platform. Seeking talented software engineers.","company":"PointClickCare","jobTitle":"Data Software Engineer","temperature":0.7,"model":"mistral:latest"}
+------FormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### Networking - Thank You Email
+POST http://localhost:8080/api/generate/thank-you-email
+Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="optimize"
+
+{"promptType":["thank-you-email"],"resume":"# Peter Letkeman\n\n## Certified Python & Java Spring Developer\npete@letkeman.ca\n\n## Summary:\nCertified Python 3 and Java Spring Developer with extensive experience and team leadership.\n\n## Experience:\n**Developer | Rakuten Kobo (May 2023 - Present)**\n- RESTful API development\n- System design\n- Team mentoring","jobDescription":"PointClickCare seeking Data Software Engineer with Java/SpringBoot experience.","company":"PointClickCare","jobTitle":"Data Software Engineer","interviewerName":"John Smith","temperature":0.7,"model":"mistral:latest"}
+------FormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### ========================================
+### DOCUMENT OPTIMIZATION ENDPOINTS
+### ========================================
+
+### Optimize - Resume
+POST http://localhost:8080/api/process/resume
+Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="optimize"
+
+{"promptType":["resume"],"resume":"# Peter Letkeman\n\n## Certified Python & Java Spring Developer\npete@letkeman.ca | 519-331-1405\n\nWith 20+ years developing software, I'm a Certified Python 3 and Java Spring Developer.\n\n## Skills:\n- Python 3.x, Java 8, Spring Developer\n- Elasticsearch, JavaScript, JSON\n- MySQL, SQLite, NoSQL, PostgreSQL, MongoDB\n- Database design and administration\n- RESTful API development\n- Microservices\n\n## Experience:\n**Developer | Rakuten Kobo (May 2023 - Present)**\n- Platform using Java and Python APIs\n- Fraud detection system\n- Junior developer mentoring\n\n**Senior Developer | SystemSoft (Aug 2021 - Apr 2023)**\n- Performance optimization\n- Design and UX\n- Security and API integration\n\n## Education:\nSoftware Architecture - University of Alberta","jobDescription":"PointClickCare: Data Software Engineer. Requirements: 2+ years Java/SpringBoot. Docker/Kubernetes, Azure or AWS. RESTful APIs. SQL databases. NoSQL experience preferred.","company":"PointClickCare","jobTitle":"Data Software Engineer","temperature":0.7,"model":"mistral:latest"}
+------FormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### Optimize - Cover Letter
+POST http://localhost:8080/api/process/cover-letter
+Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="optimize"
+
+{"promptType":["cover"],"resume":"# Peter Letkeman\n\nCertified Python 3 and Java Spring Developer with 20+ years experience. Full-stack development, microservices, cloud technologies.\n\n## Skills:\n- Java, Python, SpringBoot\n- Docker, Kubernetes\n- RESTful APIs, Microservices\n- SQL/NoSQL databases","jobDescription":"PointClickCare is seeking Data Software Engineer with 2+ years Java/SpringBoot. Docker/Kubernetes on Cloud (Azure/AWS). RESTful API experience required.","company":"PointClickCare","jobTitle":"Data Software Engineer","temperature":0.7,"model":"mistral:latest"}
+------FormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### Optimize - Skills Development Plan
+POST http://localhost:8080/api/process/skills
+Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+
+------FormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="optimize"
+
+{"promptType":["skills"],"resume":"# Peter Letkeman\n\nCertified Python 3 and Java Spring Developer. Current skills: Java, Python, SpringBoot, Docker, REST APIs, SQL/NoSQL.","jobDescription":"PointClickCare: Data Software Engineer. Requires: 2+ years Java/SpringBoot, Docker/Kubernetes, Cloud (Azure/AWS), RESTful APIs, SQL Server, NoSQL (ADLS, DeltaLake). Nice to have: Apache Hudi, Jenkins.","company":"PointClickCare","jobTitle":"Data Software Engineer","temperature":0.7,"model":"mistral:latest"}
+------FormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### ========================================
+### FILE CONVERSION ENDPOINTS
+### ========================================
+
+### Convert Markdown to PDF
+POST http://localhost:8080/api/markdownFile2PDF
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="resume.md"
+Content-Type: text/markdown
+
+# Peter Letkeman
+
+## Certified Python & Java Spring Developer
+pete@letkeman.ca | 519-331-1405 | Toronto, ON
+
+## Summary
+With over two decades of experience, I'm a Certified Python 3 and Java Spring Developer with expertise in full-stack development.
+
+## Skills
+- Java & Spring Boot
+- Python 3
+- RESTful APIs
+- Microservices
+- Docker & Kubernetes
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### Convert Markdown to DOCX
+POST http://localhost:8080/api/markdownFile2DOCX
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="resume.md"
+Content-Type: text/markdown
+
+# Peter Letkeman
+
+## Certified Python & Java Spring Developer
+pete@letkeman.ca | 519-331-1405 | Toronto, ON
+
+## Summary
+With over two decades of experience, I'm a Certified Python 3 and Java Spring Developer.
+
+## Skills
+- Java & Spring Boot
+- Python 3
+- RESTful APIs
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+### ========================================
+### DOCKER SETUP & LLM CONFIGURATION
+### ========================================
+###
+### DOCKER COMPOSE FILES - Choose One:
+###
+### 1. Main Setup (Recommended):
+###    docker compose up -d
+###    Container names: resume-frontend, resume-backend, resume-ollama
+###
+### 2. PostgreSQL Setup (Production-like):
+###    docker compose -f docker-compose.postgresql.yml up -d
+###    Container names: resume-frontend-postgres, resume-backend-postgres, resume-postgres
+###
+### 3. SQLite with Persistent Data:
+###    docker compose -f docker-compose.sqlite.yml up -d
+###    Container names: resume-frontend-sqlite, resume-backend-sqlite, resume-ollama-sqlite
+###
+### 4. Frontend + Backend Only:
+###    docker compose -f docker-compose.frontend-backend.yml up -d
+###    Container names: resume-frontend, resume-backend, resume-ollama
+###
+### OLLAMA LLM MODEL SETUP - REQUIRED STEP:
+###
+### After starting Docker Compose, you MUST pull an LLM model:
+###
+###    docker exec resume-ollama ollama pull mistral:latest
+###
+### Or use a different model based on your needs:
+###    docker exec resume-ollama ollama pull tinyllama        # Fastest (800MB)
+###    docker exec resume-ollama ollama pull gemma2:2b       # Balanced (1.6GB)
+###    docker exec resume-ollama ollama pull phi3:mini       # High quality (2.3GB)
+###    docker exec resume-ollama ollama pull qwen2.5:0.5b    # Ultra-lightweight (400MB)
+###
+### Check installed models:
+###    docker exec resume-ollama ollama list
+###
+### Access Services:
+###    Frontend: http://localhost:3000
+###    Backend:  http://localhost:8080
+###    Ollama:   http://localhost:11434/api/tags (to verify models)
+###    Swagger:  http://localhost:8080/swagger-ui/index.html
+###
+### ========================================
+### NOTES FOR TESTING
+### ========================================
+###
+### IMPORTANT: Multipart Form-Data Format
+### All /generate/* and /process/* endpoints use multipart/form-data format.
+### The JSON request is sent as a form field named "optimize".
+### This format handles complex JSON with newlines and special characters properly.
+###
+### TESTING STEPS:
+### 1. Start Docker Compose:
+###    docker compose up -d
+###
+### 2. Pull an LLM model (REQUIRED - pick one):
+###    docker exec resume-ollama ollama pull mistral:latest       # Recommended
+###    docker exec resume-ollama ollama pull tinyllama            # Faster
+###
+### 3. Verify services are running:
+###    # Check backend is healthy
+###    curl http://localhost:8080/api/health
+###
+###    # Check Ollama models are loaded
+###    curl -s http://localhost:11434/api/tags | grep -o '"name":"[^"]*"'
+###
+### 4. Choose Your API Testing Tool:
+###
+###    OPTION A: REST Client (VS Code Extension - Recommended for VS Code users)
+###      - Install: REST Client by Huachao Mao from VS Code Extensions
+###      - Open this file in VS Code
+###      - Click "Send Request" button above any endpoint
+###      - View response in the response panel
+###
+###    OPTION B: Bruno (Desktop App - Recommended for dedicated API testing)
+###      - Download from: https://www.usebruno.com/
+###      - Launch Bruno
+###      - Click Import → Select Resume.http
+###      - Click Send on any request
+###      - Supports multipart/form-data perfectly
+###
+### 5. View results:
+###    - Response shown in VS Code REST Client panel
+###    - Files saved to: http://localhost:3000/files (Files Tab)
+###    - Or download directly from Files Tab
+###
+### Request Body Format:
+### All endpoints using /api/generate/* and /api/process/* require:
+###   Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
+###
+### Structure:
+###   [boundary line]
+###   Content-Disposition: form-data; name="optimize"
+###   [Complete JSON object as shown in examples]
+###   [boundary line]--
+###
+### Example JSON fields in "optimize" parameter:
+###   {
+###     "promptType": ["interview-hr-questions"],
+###     "resume": "# Full resume content as markdown or text",
+###     "jobDescription": "Job posting text",
+###     "company": "Company name",
+###     "jobTitle": "Position title",
+###     "temperature": 0.7,
+###     "model": "mistral:latest",
+###     "interviewerName": "Optional - for thank-you emails only"
+###   }
+###
+### Docker Compose File Usage:
+###
+### Main Setup (Default - Recommended):
+###   Command: docker compose up -d
+###   Services: Frontend (3000), Backend (8080), Ollama (11434)
+###   Database: SQLite (in-memory by default, configurable to persistent)
+###   Use Case: Full development, testing, and local deployment
+###
+### PostgreSQL Production-like Setup:
+###   Command: docker compose -f docker-compose.postgresql.yml up -d
+###   Services: Frontend (3000), Backend (8080), PostgreSQL (5432)
+###   Database: PostgreSQL 17 (persistent volume)
+###   Use Case: Production testing, scalable deployment
+###   Credentials: resume_user / resume_password
+###
+### SQLite with Persistent Storage:
+###   Command: docker compose -f docker-compose.sqlite.yml up -d
+###   Services: Frontend (3000), Backend (8080), Ollama (11434), SQLite (file-based)
+###   Database: SQLite file in Docker volume (persistent)
+###   Use Case: Local development with data persistence
+###
+### Frontend + Backend Only (No Database Service):
+###   Command: docker compose -f docker-compose.frontend-backend.yml up -d
+###   Services: Frontend (3000), Backend (8080), Ollama (11434)
+###   Database: SQLite in-memory only
+###   Use Case: Quick testing, minimal resource usage
+###
+### Endpoint Mapping:
+### - /api/generate/* → Interview preparation and networking prompts
+### - /api/process/* → Document optimization (resume, cover letter, skills)
+###
+### Field Mapping (JSON inside optimize parameter):
+###
+### Required Fields (for most endpoints):
+###   - "resume" → User's resume/CV content (plain text or markdown)
+###   - "jobDescription" → Job posting details
+###   - "company" → Company name (for customization)
+###   - "jobTitle" → Position title (for customization)
+###   - "temperature" → Creativity level (0.0-1.0, 0.7 recommended)
+###   - "model" → Ollama model name (e.g., "mistral:latest")
+###
+### Optional Fields:
+###   - "interviewerName" → Add name to thank-you emails
+###   - "promptType" → Specific prompt to use (see Prompt Types below)
+###
+### Note: Field names in JSON match Spring @SerializedName annotations
+### String fields must be valid JSON strings with proper escaping
+### Temperature should be between 0 and 1 (0.7 provides good balance)
+### Model must be a valid Ollama model (pulled with 'ollama pull' command)
+###
+###
+### Prompt Types Available and Their Purposes:
+###
+### INTERVIEW PREPARATION (Behavioral & Technical):
+###   - interview-hr-questions
+###     Purpose: Generate common HR interview questions
+###     Returns: 5 behavioral/HR questions tailored to role
+###     Use Case: Prepare for initial screening interviews
+###
+###   - interview-job-specific
+###     Purpose: Generate technical/role-specific interview questions
+###     Returns: 5 job-specific technical questions based on JD
+###     Use Case: Prepare for technical interviews
+###
+###   - interview-reverse
+###     Purpose: Questions to ask your interviewers
+###     Returns: 5 thoughtful questions to ask hiring managers
+###     Use Case: Show engagement and understanding during interviews
+###
+### PROFESSIONAL NETWORKING (Email & Message Templates):
+###   - cold-email
+###     Purpose: Generate professional outreach emails
+###     Returns: 5 variations of unique cold emails to target contacts
+###     Use Case: Networking and job search outreach
+###
+###   - cold-linkedin-message
+###     Purpose: Generate LinkedIn connection request messages
+###     Returns: 5 personalized LinkedIn messages
+###     Use Case: Build professional network
+###
+###   - thank-you-email
+###     Purpose: Post-interview thank you emails
+###     Returns: 5 variations of thank-you emails
+###     Use Case: Follow up after interviews (use with interviewerName field)
+###
+### DOCUMENT OPTIMIZATION (Resume, Cover Letter, Skills):
+###   - resume
+###     Purpose: Optimize resume for specific job posting
+###     Returns: Tailored resume highlighting relevant experience
+###     Use Case: ATS-optimized resume for target role
+###
+###   - cover-letter (or "cover")
+###     Purpose: Generate tailored cover letter
+###     Returns: Customized cover letter for job posting
+###     Use Case: Professional job application letters
+###
+###   - skills
+###     Purpose: Skills development and learning plan
+###     Returns: Personalized learning roadmap for target role
+###     Use Case: Identify gaps and plan skill development
+###
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="resume"; filename="resume.pdf"
+Content-Type: application/pdf
+
+< ./resume.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="job"; filename="job.txt"
+Content-Type: text/plain
+
+< ./job.txt
+------WebKitFormBoundary7MA4YWxkTrZu0gW--

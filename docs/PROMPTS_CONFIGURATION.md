@@ -1,22 +1,56 @@
-# Prompt Configuration Guide
+﻿# Prompt Configuration Guide
+
+---
+
+- [Prompt Configuration Guide](#prompt-configuration-guide)
+  - [✨ Overview](#-overview)
+  - [📦 Default Behavior (Bundled Prompts)](#-default-behavior-bundled-prompts)
+  - [🔗 Using External Prompts (No Recompilation Required)](#-using-external-prompts-no-recompilation-required)
+    - [Option 1: Environment Variable](#option-1-environment-variable)
+    - [Option 2: application.yml Configuration](#option-2-applicationyml-configuration)
+    - [Option 3: Docker with Volume Mount](#option-3-docker-with-volume-mount)
+  - [⚙️ Updating Prompts Without Recompilation](#️-updating-prompts-without-recompilation)
+    - [For Bundled Prompts:](#for-bundled-prompts)
+    - [For External Prompts:](#for-external-prompts)
+  - [📋 Prompt File Format](#-prompt-file-format)
+  - [📂 File Structure](#-file-structure)
+  - [🐛 Troubleshooting](#-troubleshooting)
+    - [Prompts Not Updating](#prompts-not-updating)
+    - [Can't Find Prompts](#cant-find-prompts)
+  - [🏗️ Architecture](#️-architecture)
+  - [🎯 Best Practices](#-best-practices)
+  - [🚀 Quick Start](#-quick-start)
+    - [Simplest Option (Bundled):](#simplest-option-bundled)
+    - [Advanced Option (External):](#advanced-option-external)
+  - [➕ Adding New Prompts](#-adding-new-prompts)
+  - [📚 See Also](#-see-also)
+
+---
 
 This document explains how to configure and manage prompts in the java-resumes application.
 
-## Overview
+## ✨ Overview
 
 The application uses a **hybrid prompt loading system** that:
 
-✅ **Loads bundled prompts** from `src/main/resources/prompts/` by default (no recompilation needed after updates)
-✅ **Allows external overrides** by setting the `PROMPTS_DIR` environment variable
-✅ **Falls back gracefully** if external files don't exist
+**Loads bundled prompts** from `src/main/resources/prompts/` by default (no recompilation needed after updates)
+**Allows external overrides** by setting the `PROMPTS_DIR` environment variable
+**Falls back gracefully** if external files don't exist
 
-## Default Behavior (Bundled Prompts)
+## 📦 Default Behavior (Bundled Prompts)
 
 By default, the application uses prompts bundled in the JAR:
 
-- `src/main/resources/prompts/RESUME.md` - Resume optimization prompt
-- `src/main/resources/prompts/COVER.md` - Cover letter generation prompt
-- `src/main/resources/prompts/SKILLS.md` - Skills, certifications, and experience suggestions
+- `prompts/RESUME.md` - Resume optimization prompt
+- `prompts/COVER.md` - Cover letter generation prompt
+- `prompts/SKILLS.md` - Skills, certifications, and experience suggestions
+- `prompts/COLD-EMAIL.md` - Cold outreach email prompt
+- `prompts/COLD-LINKEDIN-MESSAGE.md` - LinkedIn outreach prompt
+- `prompts/INTERVIEW-HR-QUESTIONS.md` - General HR interview questions
+- `INTERVIEW-JOB-SPECIFIC.md` - Job-specific interview questions
+- `prompts/INTERVIEW-REVERSE.md` - Reverse interview questions
+- `prompts/THANK-YOU-EMAIL.md` - Post-interview thank you email
+- `prompts/README.md` - Prompts documentation
 
 **These prompts are NOT recompiled into the JAR.** They are read at runtime as resources, so you can:
 
@@ -24,7 +58,7 @@ By default, the application uses prompts bundled in the JAR:
 2. Git push the changes
 3. They take effect automatically without recompiling (assuming fresh JAR build)
 
-## Using External Prompts (No Recompilation Required)
+## 🔗 Using External Prompts (No Recompilation Required)
 
 ### Option 1: Environment Variable
 
@@ -79,7 +113,7 @@ docker run -it \
   java-resumes:latest
 ```
 
-## Updating Prompts Without Recompilation
+## ⚙️ Updating Prompts Without Recompilation
 
 ### For Bundled Prompts:
 
@@ -94,10 +128,10 @@ docker run -it \
 
 1. Create a `prompts/` directory with `RESUME.md` and `COVER.md`
 2. Set `PROMPTS_DIR` to point to this directory
-3. Update prompt files anytime—**no recompilation needed**
+3. Update prompt files anytime**no recompilation needed**
 4. Restart the application for changes to take effect
 
-## Prompt File Format
+## 📋 Prompt File Format
 
 Both `RESUME.md` and `COVER.md` use template variables:
 
@@ -143,18 +177,25 @@ These placeholders are replaced at runtime with actual values:
 - `{resume_string}` - The candidate's resume content (Resume and Cover Letter only)
 - `{today}` - Current date (Cover Letter only)
 
-## File Structure
+## 📂 File Structure
 
 ```
 prompts/
-├── RESUME.md          # Resume optimization prompt
-├── COVER.md           # Cover letter generation prompt
-└── SKILLS.md          # Skills, certifications, and experiences
+ RESUME.md                   # Resume optimization prompt
+ COVER.md                    # Cover letter generation prompt
+ SKILLS.md                   # Skills, certifications, and experiences
+ COLD-EMAIL.md               # Cold outreach email prompt
+ COLD-LINKEDIN-MESSAGE.md    # LinkedIn outreach prompt
+ INTERVIEW-HR-QUESTIONS.md   # General HR interview questions
+ INTERVIEW-JOB-SPECIFIC.md   # Job-specific interview questions
+ INTERVIEW-REVERSE.md        # Reverse interview questions
+ THANK-YOU-EMAIL.md          # Post-interview thank you email
+ README.md                   # Prompts documentation
 ```
 
 All prompt files should be in the same directory (either bundled or external).
 
-## Troubleshooting
+## 🐛 Troubleshooting
 
 ### Prompts Not Updating
 
@@ -180,20 +221,19 @@ All prompt files should be in the same directory (either bundled or external).
 - Ensure bundled resources are included in JAR (`src/main/resources/prompts/*.md`)
 - Verify file names match exactly: `RESUME.md` and `COVER.md`
 
-## Architecture
+## 🏗️ Architecture
 
 The `PromptService` class handles prompt loading:
 
-```
-PromptService.loadPrompt(promptName)
-    ↓
-Check external directory (if configured)
-    ↓
-If found → Return external version
-    ↓
-If not found → Check bundled resources
-    ↓
-Return bundled version or empty string
+```mermaid
+flowchart TD
+  A["PromptService.loadPrompt(promptName)"] --> B{External directory configured?}
+  B -- Yes --> C[Check external directory]
+  C -- Found --> D[Return external version]
+  C -- Not found --> E[Check bundled resources]
+  B -- No --> E
+  E -- Found --> F[Return bundled version]
+  E -- Not found --> G[Return empty string]
 ```
 
 This architecture ensures:
@@ -202,7 +242,7 @@ This architecture ensures:
 - **Production**: Override with external prompts for flexibility
 - **Fallback**: Always works even if external files are missing
 
-## Best Practices
+## 🎯 Best Practices
 
 1. **Keep both versions in sync**: If using external overrides, maintain consistency with bundled versions
 2. **Version control**: Commit prompt updates to Git for tracking
@@ -210,7 +250,7 @@ This architecture ensures:
 4. **Validation**: Test prompt changes before deploying to production
 5. **Documentation**: Keep prompt versions documented in your deployment notes
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Simplest Option (Bundled):
 
@@ -219,6 +259,16 @@ This architecture ensures:
 nano src/main/resources/prompts/RESUME.md
 nano src/main/resources/prompts/COVER.md
 nano src/main/resources/prompts/SKILLS.md
+nano src/main/resources/prompts/RESUME.md
+nano src/main/resources/prompts/COVER.md
+nano src/main/resources/prompts/SKILLS.md
+nano src/main/resources/prompts/COLD-EMAIL.md
+nano src/main/resources/prompts/COLD-LINKEDIN-MESSAGE.md
+nano src/main/resources/prompts/INTERVIEW-HR-QUESTIONS.md
+nano src/main/resources/INTERVIEW-JOB-SPECIFIC.md
+nano src/main/resources/prompts/INTERVIEW-REVERSE.md
+nano src/main/resources/prompts/THANK-YOU-EMAIL.md
+nano src/main/resources/prompts/README.md
 
 # Build JAR
 gradlew clean build
@@ -246,7 +296,7 @@ nano /opt/java-resumes/prompts/SKILLS.md
 # Restart application for changes to take effect
 ```
 
-## Adding New Prompts
+## ➕ Adding New Prompts
 
 To add a new prompt (e.g., LINKEDIN for LinkedIn summaries):
 
@@ -259,8 +309,13 @@ To add a new prompt (e.g., LINKEDIN for LinkedIn summaries):
 
 **See [ADD_NEW_PROMPT.md](./ADD_NEW_PROMPT.md)** for detailed step-by-step instructions.
 
-## See Also
+## 📚 See Also
 
 - [API Documentation](../docs/api.md)
 - [Architecture Overview](../docs/architecture/ARCHITECTURE.md)
 - [Deployment Guide](../docs/DEPLOYMENT.md)
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

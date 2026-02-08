@@ -1,14 +1,60 @@
-# API Reference
+﻿# API Reference
 
 Complete REST API documentation for java-resumes application.
 
-## 📡 Base URL
+- [API Reference](#api-reference)
+  - [🌐 Base URL](#-base-url)
+  - [📍 Core Endpoints](#-core-endpoints)
+    - [File Management](#file-management)
+      - [List All Files](#list-all-files)
+      - [Download File](#download-file)
+      - [Delete File](#delete-file)
+    - [Document Processing](#document-processing)
+      - [Upload \& Optimize Resume/Cover Letter](#upload--optimize-resumecover-letter)
+      - [Convert Markdown to PDF](#convert-markdown-to-pdf)
+    - [Interview Preparation](#interview-preparation)
+      - [Generate HR Interview Questions](#generate-hr-interview-questions)
+      - [Generate Job-Specific Interview Questions](#generate-job-specific-interview-questions)
+      - [Generate Reverse Interview Questions](#generate-reverse-interview-questions)
+    - [Professional Networking](#professional-networking)
+      - [Generate Cold Email](#generate-cold-email)
+      - [Generate LinkedIn Message](#generate-linkedin-message)
+      - [Generate Thank You Email](#generate-thank-you-email)
+    - [System](#system)
+      - [Health Check](#health-check)
+  - [💡 Request Examples](#-request-examples)
+    - [Example 1: Simple Resume Optimization](#example-1-simple-resume-optimization)
+    - [Example 2: Resume + Cover Letter](#example-2-resume--cover-letter)
+    - [Example 3: List Files and Download](#example-3-list-files-and-download)
+    - [Example 4: Markdown to PDF](#example-4-markdown-to-pdf)
+  - [🔄 API Workflow](#-api-workflow)
+    - [Typical Resume Optimization Workflow](#typical-resume-optimization-workflow)
+    - [File Management Workflow](#file-management-workflow)
+  - [⚙️ Parameters \& Configuration](#️-parameters--configuration)
+    - [Optimization Parameters](#optimization-parameters)
+    - [File Size Limits](#file-size-limits)
+  - [⚠️ Error Handling](#️-error-handling)
+    - [HTTP Status Codes](#http-status-codes)
+    - [Common Error Messages](#common-error-messages)
+  - [📖 Interactive API Documentation](#-interactive-api-documentation)
+    - [Swagger/OpenAPI](#swaggeropenapi)
+  - [🔐 Authentication (Future)](#-authentication-future)
+  - [⏱️ Response Times](#️-response-times)
+  - [✨ Best Practices](#-best-practices)
+    - [Rate Limiting](#rate-limiting)
+    - [Caching](#caching)
+    - [Error Handling](#error-handling)
+    - [Polling Strategy](#polling-strategy)
 
-```
+---
+
+## 🌐 Base URL
+
+```plaintext
 http://localhost:8080
 ```
 
-## 🔗 Core Endpoints
+## 📍 Core Endpoints
 
 ### File Management
 
@@ -156,7 +202,7 @@ Content-Type: application/json
 ```json
 {
   "jobDescription": "We are looking for a Senior Java Developer with 5+ years...",
-  "resume": "John Doe\nSenior Software Engineer\n...",
+  "resume_string": "John Doe\nSenior Software Engineer\n...",
   "promptType": ["RESUME_OPTIMIZATION", "COVER_LETTER"],
   "temperature": 0.7,
   "model": "gemma-3-4b-it"
@@ -168,14 +214,14 @@ Content-Type: application/json
 ```json
 {
   "type": "object",
-  "required": ["jobDescription", "resume"],
+  "required": ["jobDescription", "resume_string"],
   "properties": {
     "jobDescription": {
       "type": "string",
       "description": "Job description text",
       "minLength": 50
     },
-    "resume": {
+    "resume_string": {
       "type": "string",
       "description": "Resume or CV text",
       "minLength": 50
@@ -209,7 +255,7 @@ curl -X POST http://localhost:8080/api/upload \
   -H "Content-Type: application/json" \
   -d '{
     "jobDescription": "Senior Java Developer - 5+ years required",
-    "resume": "John Doe, Senior Software Engineer, Java experience",
+    "resume_string": "John Doe, Senior Software Engineer, Java experience",
     "promptType": ["RESUME_OPTIMIZATION"],
     "temperature": 0.7,
     "model": "gemma-3-4b-it"
@@ -323,6 +369,282 @@ curl -X POST http://localhost:8080/api/markdownFile2PDF \
 
 ---
 
+### Interview Preparation
+
+#### Generate HR Interview Questions
+
+**Endpoint:** `POST /api/generate/interview-hr-questions`
+
+**Description:** Generate 5 general HR interview questions to prepare for behavioral interviews
+
+**Request Headers:**
+
+```
+Content-Type: application/json
+```
+
+**Request Body:**
+
+```json
+{
+  "jobDescription": "Software Engineer position requiring teamwork and communication skills",
+  "company_name": "TechCorp" // optional
+}
+```
+
+**Request Example (cURL):**
+
+```bash
+curl -X POST http://localhost:8080/api/generate/interview-hr-questions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jobDescription": "Senior Software Engineer - Lead development teams",
+    "company_name": "TechStartup"
+  }'
+```
+
+**Response (202 Accepted):**
+
+```json
+{
+  "message": "Interview questions generation started. Check /api/files for results."
+}
+```
+
+**Output:** Markdown file with 5 HR interview questions (behavioral, situational, cultural fit)
+
+---
+
+#### Generate Job-Specific Interview Questions
+
+**Endpoint:** `POST /api/generate/interview-job-specific`
+
+**Description:** Generate 5 role-specific technical or functional interview questions based on job description
+
+**Request Headers:**
+
+```
+Content-Type: application/json
+```
+
+**Request Body:**
+
+```json
+{
+  "jobDescription": "DevOps Engineer - AWS, Kubernetes, CI/CD experience required",
+  "jobTitle": "Senior DevOps Engineer" // optional
+}
+```
+
+**Request Example (cURL):**
+
+```bash
+curl -X POST http://localhost:8080/api/generate/interview-job-specific \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jobDescription": "Full Stack Developer - React, Node.js, MongoDB",
+    "jobTitle": "Full Stack Developer"
+  }'
+```
+
+**Response (202 Accepted):**
+
+```json
+{
+  "message": "Interview questions generation started. Check /api/files for results."
+}
+```
+
+**Output:** Markdown file with 5 job-specific technical/functional interview questions
+
+---
+
+#### Generate Reverse Interview Questions
+
+**Endpoint:** `POST /api/generate/interview-reverse`
+
+**Description:** Generate thoughtful questions candidates can ask interviewers to demonstrate engagement
+
+**Request Headers:**
+
+```
+Content-Type: application/json
+```
+
+**Request Body:**
+
+```json
+{
+  "jobDescription": "Product Manager - B2B SaaS platform",
+  "company_name": "FastGrowth Inc" // optional
+}
+```
+
+**Request Example (cURL):**
+
+```bash
+curl -X POST http://localhost:8080/api/generate/interview-reverse \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jobDescription": "Engineering Manager - Team of 8 developers",
+    "company_name": "TechCorp"
+  }'
+```
+
+**Response (202 Accepted):**
+
+```json
+{
+  "message": "Interview questions generation started. Check /api/files for results."
+}
+```
+
+**Output:** Markdown file with 5 strategic questions for candidates to ask during interviews
+
+---
+
+### Professional Networking
+
+#### Generate Cold Email
+
+**Endpoint:** `POST /api/generate/cold-email`
+
+**Description:** Generate 5 variations of professional cold outreach emails to target companies
+
+**Request Headers:**
+
+```
+Content-Type: application/json
+```
+
+**Request Body:**
+
+```json
+{
+  "jobDescription": "Software Engineer - Python, Machine Learning",
+  "company_name": "AI Innovations Inc",
+  "jobTitle": "ML Engineer" // optional
+}
+```
+
+**Request Example (cURL):**
+
+```bash
+curl -X POST http://localhost:8080/api/generate/cold-email \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jobDescription": "Senior Data Scientist - NLP and Computer Vision",
+    "company_name": "DataTech Solutions",
+    "jobTitle": "Senior Data Scientist"
+  }'
+```
+
+**Response (202 Accepted):**
+
+```json
+{
+  "message": "Cold email generation started. Check /api/files for results."
+}
+```
+
+**Output:** Markdown file with 5 distinct professional cold email templates
+
+---
+
+#### Generate LinkedIn Message
+
+**Endpoint:** `POST /api/generate/cold-linkedin-message`
+
+**Description:** Generate 5 variations of LinkedIn connection request messages for professional networking
+
+**Request Headers:**
+
+```
+Content-Type: application/json
+```
+
+**Request Body:**
+
+```json
+{
+  "jobDescription": "Product Designer - UX/UI for mobile apps",
+  "company_name": "DesignHub",
+  "jobTitle": "Senior Product Designer" // optional
+}
+```
+
+**Request Example (cURL):**
+
+```bash
+curl -X POST http://localhost:8080/api/generate/cold-linkedin-message \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jobDescription": "Frontend Developer - React, TypeScript",
+    "company_name": "WebDev Inc",
+    "jobTitle": "Frontend Developer"
+  }'
+```
+
+**Response (202 Accepted):**
+
+```json
+{
+  "message": "LinkedIn message generation started. Check /api/files for results."
+}
+```
+
+**Output:** Markdown file with 5 distinct LinkedIn outreach message variations
+
+---
+
+#### Generate Thank You Email
+
+**Endpoint:** `POST /api/generate/thank-you-email`
+
+**Description:** Generate 5 variations of post-interview thank you emails
+
+**Request Headers:**
+
+```
+Content-Type: application/json
+```
+
+**Request Body:**
+
+```json
+{
+  "jobDescription": "Backend Engineer - Go, Docker, Kubernetes",
+  "company_name": "CloudFirst Technologies",
+  "jobTitle": "Backend Engineer", // optional
+  "interviewerName": "Sarah Johnson" // optional
+}
+```
+
+**Request Example (cURL):**
+
+```bash
+curl -X POST http://localhost:8080/api/generate/thank-you-email \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jobDescription": "Solutions Architect - AWS, Azure",
+    "company_name": "Cloud Services Corp",
+    "jobTitle": "Solutions Architect",
+    "interviewerName": "Michael Chen"
+  }'
+```
+
+**Response (202 Accepted):**
+
+```json
+{
+  "message": "Thank you email generation started. Check /api/files for results."
+}
+```
+
+**Output:** Markdown file with 5 distinct thank you email variations
+
+---
+
 ### System
 
 #### Health Check
@@ -355,7 +677,7 @@ curl http://localhost:8080/api/health
 
 ---
 
-## 📝 Request Examples
+## 💡 Request Examples
 
 ### Example 1: Simple Resume Optimization
 
@@ -364,7 +686,7 @@ curl -X POST http://localhost:8080/api/upload \
   -H "Content-Type: application/json" \
   -d '{
     "jobDescription": "Software Engineer - Java, Spring Boot, Microservices",
-    "resume": "John Doe\nSenior Java Developer\n10 years experience",
+    "resume_string": "John Doe\nSenior Java Developer\n10 years experience",
     "promptType": ["RESUME_OPTIMIZATION"],
     "temperature": 0.7
   }'
@@ -377,7 +699,7 @@ curl -X POST http://localhost:8080/api/upload \
   -H "Content-Type: application/json" \
   -d '{
     "jobDescription": "Product Manager at TechCorp",
-    "resume": "Jane Smith\nProduct Manager\n8 years tech experience",
+    "resume_string": "Jane Smith\nProduct Manager\n8 years tech experience",
     "promptType": ["RESUME_OPTIMIZATION", "COVER_LETTER"],
     "temperature": 0.8
   }'
@@ -428,7 +750,7 @@ graph TD
     G -->|No| I["7. Wait and poll again"]
     I -->|After 2-5s| F
     H --> J["8. User downloads file"]
-    J -->|GET /api/files/{filename}| K["Receive binary file"]
+    J -->|"GET /api/files/{filename}"| K["Receive binary file"]
 ```
 
 ### File Management Workflow
@@ -450,13 +772,13 @@ graph TD
 
 ### Optimization Parameters
 
-| Parameter        | Type   | Default       | Range   | Description              |
-| ---------------- | ------ | ------------- | ------- | ------------------------ |
-| `temperature`    | number | 0.7           | 0.0-1.0 | Response creativity      |
-| `model`          | string | gemma-3-4b-it | -       | LLM model name           |
-| `jobDescription` | string | required      | -       | Target job posting       |
-| `resume`         | string | required      | -       | Current resume text      |
-| `promptType`     | array  | ["RESUME"]    | -       | Output types to generate |
+| Parameter        | Type   | Default           | Range   | Description              |
+| ---------------- | ------ | ----------------- | ------- | ------------------------ |
+| `temperature`    | number | 0.7               | 0.0-1.0 | Response creativity      |
+| `model`          | string | gemma-3-4b-it     | -       | LLM model name           |
+| `jobDescription` | string | required          | -       | Target job posting       |
+| `resume`         | string | required          | -       | Current resume text      |
+| `promptType`     | array  | ["resume_string"] | -       | Output types to generate |
 
 ### File Size Limits
 
@@ -468,7 +790,7 @@ graph TD
 
 ---
 
-## ❌ Error Handling
+## ⚠️ Error Handling
 
 ### HTTP Status Codes
 
@@ -504,7 +826,7 @@ graph TD
 
 ---
 
-## 📚 Interactive API Documentation
+## 📖 Interactive API Documentation
 
 ### Swagger/OpenAPI
 
@@ -534,7 +856,7 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
-## 📊 Response Times
+## ⏱️ Response Times
 
 Typical response times (with Ollama local LLM):
 
@@ -550,7 +872,7 @@ Typical response times (with Ollama local LLM):
 
 ---
 
-## 💡 Best Practices
+## ✨ Best Practices
 
 ### Rate Limiting
 
@@ -593,3 +915,8 @@ Typical response times (with Ollama local LLM):
 - [Quick Start](QUICK_START.md) - API usage examples
 - [Architecture](ARCHITECTURE.md) - Backend architecture
 - [Testing](TESTING.md) - API testing guide
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

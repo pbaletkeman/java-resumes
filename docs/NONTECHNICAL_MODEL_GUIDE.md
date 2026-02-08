@@ -1,20 +1,55 @@
-# Non-Technical Model Management Guide
-
-> **📍 Location:** `docs/NONTECHNICAL_MODEL_GUIDE.md`
-> **👥 Audience:** Non-Technical Users, Stakeholders
-> **🔗 Related:** [Quick Start Advanced](QUICK_START_ADVANCED.md) | [Project Status](PROJECT_STATUS.md) | [Index](INDEX.md)
+﻿# Non-Technical Model Management Guide
 
 ---
 
-## 🎯 What This Feature Does
+- [Non-Technical Model Management Guide](#non-technical-model-management-guide)
+  - [📚 What This Feature Does](#-what-this-feature-does)
+  - [🚀 Quick Start](#-quick-start)
+    - [Step 1: Open Settings](#step-1-open-settings)
+    - [Step 2: You'll See the Model Settings Panel](#step-2-youll-see-the-model-settings-panel)
+  - [➕ How to Add a Model](#-how-to-add-a-model)
+    - [What You Need to Know:](#what-you-need-to-know)
+    - [Steps:](#steps)
+  - [🗑️ How to Remove a Model](#️-how-to-remove-a-model)
+    - [Steps:](#steps-1)
+  - [🔄 How to Reset to Defaults](#-how-to-reset-to-defaults)
+    - [Why Reset?](#why-reset)
+    - [Steps:](#steps-2)
+  - [📊 Understanding the Model Table](#-understanding-the-model-table)
+  - [💾 Where Are Models Stored?](#-where-are-models-stored)
+  - [📋 Advanced: JSON Format](#-advanced-json-format)
+    - [Rules](#rules)
+  - [❓ Frequently Asked Questions](#-frequently-asked-questions)
+    - [Q: I deleted a model - can I undo it?](#q-i-deleted-a-model---can-i-undo-it)
+    - [Q: Can I use the same model twice with different labels?](#q-can-i-use-the-same-model-twice-with-different-labels)
+    - [Q: What happens if I import a file?](#q-what-happens-if-i-import-a-file)
+    - [Q: Can I have no models?](#q-can-i-have-no-models)
+    - [Q: Do models sync across devices?](#q-do-models-sync-across-devices)
+    - [Q: Can the technical person update these for us?](#q-can-the-technical-person-update-these-for-us)
+  - [💡 Common Use Cases](#-common-use-cases)
+    - [Scenario 1: Team Uses Same Models](#scenario-1-team-uses-same-models)
+    - [Scenario 2: Add Specific Model](#scenario-2-add-specific-model)
+    - [Scenario 3: Backup Before Testing](#scenario-3-backup-before-testing)
+  - [✨ You're Ready!](#-youre-ready)
+  - [💬 Need Help?](#-need-help)
+
+---
+
+> **Location:** `docs/NONTECHNICAL_MODEL_GUIDE.md`
+> **Audience:** Non-Technical Users, Stakeholders
+> **Related:** [Quick Start Advanced](QUICK_START_ADVANCED.md) | [Project Status](PROJECT_STATUS.md) | [Index](INDEX.md)
+
+---
+
+## 📚 What This Feature Does
 
 The **Settings** tab allows you to **add, remove, and manage AI models** without needing to know how to code. You can:
 
-- ✅ Add new AI models to the application
-- ✅ Remove models you don't need
-- ✅ Export your model list as a file to share with others
-- ✅ Import model lists from team members
-- ✅ Reset back to default models if needed
+- Add new AI models to the application
+- Remove models you don't need
+- Export your model list as a file to share with others
+- Import model lists from team members
+- Reset back to default models if needed
 
 ---
 
@@ -23,7 +58,7 @@ The **Settings** tab allows you to **add, remove, and manage AI models** without
 ### Step 1: Open Settings
 
 1. Look for the **Settings** tab at the top of the application (between "Main Content" and "Additional Tools")
-2. The tab has a ⚙️ (gear) icon
+2. The tab has a (gear) icon
 3. Click on it
 
 ### Step 2: You'll See the Model Settings Panel
@@ -37,7 +72,7 @@ The panel shows:
 
 ---
 
-## 📋 How to Add a Model
+## ➕ How to Add a Model
 
 ### What You Need to Know:
 
@@ -51,7 +86,7 @@ The panel shows:
 3. Enter the **Label** (what users will see)
 4. Enter the **Value** (the model ID)
 5. Click **Add**
-6. ✅ New model appears in the table and in the DocumentUploadForm dropdown
+6. New model appears in the table and in the DocumentUploadForm dropdown
 
 **Example:**
 
@@ -68,7 +103,7 @@ Value: "gpt-4-turbo"
 
 1. Find the model in the table
 2. Click the **delete icon** (trash can) on the right side of the row
-3. ✅ Model is removed
+3. Model is removed
 4. The model will no longer appear in DocumentUploadForm
 
 **Note:** You must keep at least one model in the list.
@@ -88,7 +123,7 @@ Value: "gpt-4-turbo"
 1. Click **Reset to Defaults** button
 2. A confirmation appears
 3. Confirm your choice
-4. ✅ All models return to the original list
+4. All models return to the original list
 
 **Note:** This cannot be undone, but you can import a backup if you exported one.
 
@@ -115,7 +150,7 @@ The table shows all available models with:
 
 ---
 
-## ⚡ Advanced: JSON Format
+## 📋 Advanced: JSON Format
 
 If you want to create a models JSON file manually:
 
@@ -179,7 +214,7 @@ If you want to create a models JSON file manually:
 
 ---
 
-## 🎓 Common Use Cases
+## 💡 Common Use Cases
 
 ### Scenario 1: Team Uses Same Models
 
@@ -206,21 +241,21 @@ If you want to create a models JSON file manually:
 
 ---
 
-## ✅ You're Ready!
+## ✨ You're Ready!
 
 You now know how to:
 
-- ✅ Add models
-- ✅ Remove models
-- ✅ Export configurations
-- ✅ Import configurations
-- ✅ Reset to defaults
+- Add models
+- Remove models
+- Export configurations
+- Import configurations
+- Reset to defaults
 
 **No coding required. No technical knowledge needed. Just click buttons!**
 
 ---
 
-## 📞 Need Help?
+## 💬 Need Help?
 
 If something isn't working:
 
@@ -231,4 +266,5 @@ If something isn't working:
 
 ---
 
-**Last Updated**: January 17, 2025
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

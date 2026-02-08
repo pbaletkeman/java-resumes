@@ -2,29 +2,39 @@
 
 This directory contains a comprehensive API collection for the Resume Optimization Service built with [Bruno](https://www.usebruno.com/), a lightweight API client for testing and documentation.
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Available Endpoints](#available-endpoints)
-- [Getting Started](#getting-started)
-- [Configuration](#configuration)
-- [Request Examples](#request-examples)
-- [Response Format](#response-format)
-- [Error Handling](#error-handling)
-- [Directory Structure](#directory-structure)
-- [Tips & Best Practices](#tips--best-practices)
-- [Troubleshooting](#troubleshooting)
-- [Additional Resources](#additional-resources)
+- [Bruno API Collection: Resume Optimization](#bruno-api-collection-resume-optimization)
+  - [📋 Overview](#-overview)
+  - [🔌 Available Endpoints](#-available-endpoints)
+    - [1. **Optimize Resume** (`OptimizeResume.bru`)](#1-optimize-resume-optimizeresumebru)
+    - [2. **List Files** (`ListFiles.bru`)](#2-list-files-listfilesbru)
+    - [3. **Download File** (`DownloadFile.bru`)](#3-download-file-downloadfilebru)
+    - [4. **Delete File** (`DeleteFile.bru`)](#4-delete-file-deletefilebru)
+    - [5. **Convert Markdown to PDF** (`Convert Markdown to PDF.bru`)](#5-convert-markdown-to-pdf-convert-markdown-to-pdfbru)
+    - [6. **Delete All Files** (`DeleteAllFiles.bru`)](#6-delete-all-files-deleteallfilesbru)
+    - [7. **Health Check** (`HealthCheck.bru`)](#7-health-check-healthcheckbru)
+  - [🚀 Getting Started](#-getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Running the Requests](#running-the-requests)
+  - [⚙️ Configuration](#️-configuration)
+  - [📝 Request Examples](#-request-examples)
+    - [Example: Optimize a Resume](#example-optimize-a-resume)
+    - [Example: List All Files](#example-list-all-files)
+  - [📤 Response Format](#-response-format)
+  - [⚠️ Error Handling](#️-error-handling)
+  - [📁 Directory Structure](#-directory-structure)
+  - [💡 Tips \& Best Practices](#-tips--best-practices)
+  - [🔍 Troubleshooting](#-troubleshooting)
+  - [📚 Additional Resources](#-additional-resources)
 
 ---
 
-## Overview
+## 📋 Overview
 
 These request definitions enable seamless testing and integration with the resume optimization backend API. Each request is pre-configured with proper endpoints, authentication, and example payloads.
 
 ---
 
-## Available Endpoints
+## 🔌 Available Endpoints
 
 ### 1. **Optimize Resume** (`OptimizeResume.bru`)
 
@@ -60,9 +70,21 @@ These request definitions enable seamless testing and integration with the resum
 - **Endpoint**: `/api/markdownFile2PDF`
 - **Purpose**: Convert a Markdown document to PDF format
 
+### 6. **Delete All Files** (`DeleteAllFiles.bru`)
+
+- **Method**: POST
+- **Endpoint**: `/api/delete-all`
+- **Purpose**: Remove all uploaded/generated files from the server
+
+### 7. **Health Check** (`HealthCheck.bru`)
+
+- **Method**: GET
+- **Endpoint**: `/api/health`
+- **Purpose**: Check API health/status
+
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -77,7 +99,7 @@ These request definitions enable seamless testing and integration with the resum
 4. Click "Send" to execute the request
 5. View the response in the result panel
 
-## Configuration
+## ⚙️ Configuration
 
 All requests are pre-configured with:
 
@@ -89,7 +111,7 @@ To change the base URL for different environments (development, staging, product
 
 ---
 
-## Request Examples
+## 📝 Request Examples
 
 ### Example: Optimize a Resume
 
@@ -108,7 +130,7 @@ To change the base URL for different environments (development, staging, product
 
 ---
 
-## Response Format
+## 📤 Response Format
 
 All successful responses follow this format:
 
@@ -127,7 +149,7 @@ For file operations, responses may include:
 
 ---
 
-## Error Handling
+## ⚠️ Error Handling
 
 Common HTTP status codes:
 
@@ -138,7 +160,7 @@ Common HTTP status codes:
 
 ---
 
-## Directory Structure
+## 📁 Directory Structure
 
 ```shell
 bruno/Resume/
@@ -147,12 +169,14 @@ bruno/Resume/
 ├── ListFiles.bru                      # List all files request
 ├── DownloadFile.bru                   # Download file request
 ├── DeleteFile.bru                     # Delete file request
-└── Convert Markdown to PDF.bru        # Markdown to PDF conversion request
+├── Convert Markdown to PDF.bru        # Markdown to PDF conversion request
+├── DeleteAllFiles.bru                 # Delete all files request
+└── HealthCheck.bru                    # Health check request
 ```
 
 ---
 
-## Tips & Best Practices
+## 💡 Tips & Best Practices
 
 - **File Naming**: Use descriptive filenames with appropriate extensions (.pdf, .txt, .md)
 - **Batch Operations**: Use ListFiles to verify uploads before further processing
@@ -161,7 +185,7 @@ bruno/Resume/
 
 ---
 
-## Troubleshooting
+## 🔍 Troubleshooting
 
 - **Connection Refused**: Ensure the backend API is running on port 8080
 - **File Not Found**: Verify the filename exactly matches the listing from ListFiles
@@ -169,7 +193,7 @@ bruno/Resume/
 
 ---
 
-## Additional Resources
+## 📚 Additional Resources
 
 - [Bruno Documentation](https://docs.usebruno.com/)
 - [REST API Best Practices](https://restfulapi.net/)

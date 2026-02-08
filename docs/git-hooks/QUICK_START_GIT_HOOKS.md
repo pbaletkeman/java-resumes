@@ -1,5 +1,23 @@
 # Quick Start Guide - Git Hooks & Code Quality
 
+- [Quick Start Guide - Git Hooks \& Code Quality](#quick-start-guide---git-hooks--code-quality)
+  - [One-Time Setup](#one-time-setup)
+    - [Option 1: Gradle (Recommended)](#option-1-gradle-recommended)
+    - [Option 2: Shell Script (Mac/Linux)](#option-2-shell-script-maclinux)
+    - [Option 3: Batch Script (Windows)](#option-3-batch-script-windows)
+    - [Option 4: Python (Cross-Platform)](#option-4-python-cross-platform)
+  - [📋 Daily Workflow](#-daily-workflow)
+    - [Before Committing](#before-committing)
+    - [Before Pushing](#before-pushing)
+    - [To Bypass Hooks (Not Recommended)](#to-bypass-hooks-not-recommended)
+  - [📊 Common Quality Commands](#-common-quality-commands)
+  - [📈 Viewing Reports](#-viewing-reports)
+  - [What Each Tool Does](#what-each-tool-does)
+  - [Troubleshooting](#troubleshooting)
+  - [See Also](#see-also)
+
+---
+
 This is a quick reference for setting up and using the automated code quality checks.
 
 ## One-Time Setup
@@ -28,7 +46,7 @@ setup-hooks.bat
 python setup-hooks.py
 ```
 
-## Daily Workflow
+## 📋 Daily Workflow
 
 ### Before Committing
 
@@ -58,7 +76,7 @@ git commit --no-verify
 git push --no-verify
 ```
 
-## Common Quality Commands
+## 📊 Common Quality Commands
 
 ```bash
 # Format code automatically
@@ -83,7 +101,7 @@ git push --no-verify
 ./gradlew clean check test
 ```
 
-## Viewing Reports
+## 📈 Viewing Reports
 
 - **Checkstyle**: `build/reports/checkstyle/main.html`
 - **SpotBugs**: `build/reports/spotbugs/main.html`

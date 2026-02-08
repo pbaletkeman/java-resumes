@@ -1,6 +1,44 @@
 # Git Hooks Implementation Complete ✅
 
-## Summary
+- [Git Hooks Implementation Complete ✅](#git-hooks-implementation-complete-)
+  - [📋 Summary](#-summary)
+  - [What Gets Checked](#what-gets-checked)
+    - [On Every `git commit`](#on-every-git-commit)
+    - [Before Every `git push`](#before-every-git-push)
+  - [📁 Files Created/Modified](#-files-createdmodified)
+    - [New Files](#new-files)
+    - [Modified Files](#modified-files)
+  - [⚙️ Installation (Choose One Method)](#️-installation-choose-one-method)
+    - [🎯 Recommended: Gradle](#-recommended-gradle)
+    - [Alternative: Bash (Mac/Linux/Git Bash)](#alternative-bash-maclinuxgit-bash)
+    - [Alternative: Windows Command Prompt](#alternative-windows-command-prompt)
+    - [Alternative: Python (Universal)](#alternative-python-universal)
+  - [🚀 First Use Workflow](#-first-use-workflow)
+    - [Step 1: Install Hooks](#step-1-install-hooks)
+    - [Step 2: Auto-Fix Any Existing Issues (Recommended)](#step-2-auto-fix-any-existing-issues-recommended)
+    - [Step 3: Try It Out](#step-3-try-it-out)
+  - [📋 Daily Development](#-daily-development)
+  - [📈 Viewing Reports](#-viewing-reports)
+  - [⌨️ Key Commands](#️-key-commands)
+  - [Understanding Violations](#understanding-violations)
+    - ["Spotless found violations"](#spotless-found-violations)
+    - ["Checkstyle found violations"](#checkstyle-found-violations)
+    - ["SpotBugs found issues"](#spotbugs-found-issues)
+  - [Troubleshooting](#troubleshooting)
+    - [Q: Hooks aren't running?](#q-hooks-arent-running)
+    - [Q: Too many formatting issues to fix?](#q-too-many-formatting-issues-to-fix)
+    - [Q: Windows - "bash: setup-hooks.sh: No such file"?](#q-windows---bash-setup-hookssh-no-such-file)
+    - [Q: Can I skip the hooks?](#q-can-i-skip-the-hooks)
+    - [Q: How do I update exclusion rules?](#q-how-do-i-update-exclusion-rules)
+  - [Configuration Files](#configuration-files)
+  - [Features](#features)
+  - [Next Steps](#next-steps)
+  - [Resources](#resources)
+  - [Support](#support)
+
+---
+
+## 📋 Summary
 
 Your java-resumes project now has a **fully automated code quality enforcement system** using three complementary tools:
 
@@ -34,7 +72,7 @@ Pre-Push Hook Runs:
 ❌ ANY FAIL = Push blocked
 ```
 
-## Files Created/Modified
+## 📁 Files Created/Modified
 
 ### New Files
 
@@ -62,7 +100,7 @@ build.gradle             (Added Spotless, SpotBugs plugins + setupGitHooks task)
 .github/instructions/backend.instructions.md (Added Code Quality Tools section)
 ```
 
-## Installation (Choose One Method)
+## ⚙️ Installation (Choose One Method)
 
 ### 🎯 Recommended: Gradle
 
@@ -90,7 +128,7 @@ setup-hooks.bat
 python setup-hooks.py
 ```
 
-## First Use Workflow
+## 🚀 First Use Workflow
 
 ### Step 1: Install Hooks
 
@@ -124,7 +162,7 @@ git commit -m "test: verify git hooks"
 # ⚠ SpotBugs found X issues (review at build/reports/spotbugs/main.html)
 ```
 
-## Daily Development
+## 📋 Daily Development
 
 ```bash
 # Work on feature
@@ -143,7 +181,7 @@ git push origin feature-branch
 # → Pre-push hook runs automatically (full test suite)
 ```
 
-## Viewing Reports
+## 📈 Viewing Reports
 
 After running quality checks, view violations here:
 
@@ -161,7 +199,7 @@ build/reports/tests/test/index.html
 build/reports/coverage/index.html
 ```
 
-## Key Commands
+## ⌨️ Key Commands
 
 ```bash
 # Install hooks

@@ -2,6 +2,48 @@
 
 Documentation for capturing and maintaining backend API and system screenshots.
 
+- [Backend Screenshots Guide](#backend-screenshots-guide)
+  - [📸 Backend Screenshots Quick Reference](#-backend-screenshots-quick-reference)
+  - [📋 1. Swagger UI Documentation](#-1-swagger-ui-documentation)
+    - [What to Show](#what-to-show)
+    - [URL](#url)
+    - [Components to Include](#components-to-include)
+    - [Capture Instructions](#capture-instructions)
+    - [Verification Checklist](#verification-checklist)
+  - [🌐 2. API Endpoints Reference](#-2-api-endpoints-reference)
+    - [What to Show API](#what-to-show-api)
+    - [Endpoints to Include](#endpoints-to-include)
+      - [POST /upload](#post-upload)
+      - [GET /files](#get-files)
+      - [DELETE /files/{filename}](#delete-filesfilename)
+    - [Capture Instructions API](#capture-instructions-api)
+    - [Verification Checklist APIs](#verification-checklist-apis)
+  - [3. Error Responses](#3-error-responses)
+    - [What to Show Errors](#what-to-show-errors)
+    - [Error Types to Include](#error-types-to-include)
+      - [400 Bad Request](#400-bad-request)
+      - [404 Not Found](#404-not-found)
+      - [500 Internal Server Error](#500-internal-server-error)
+    - [Capture Instructions Details](#capture-instructions-details)
+    - [Verification Checklist Error](#verification-checklist-error)
+  - [🔄 API Testing Workflow](#-api-testing-workflow)
+    - [Prerequisites](#prerequisites)
+    - [Sample Test Data](#sample-test-data)
+      - [Job Description Example](#job-description-example)
+      - [Resume Example](#resume-example)
+  - [🔍 API Documentation Reference](#-api-documentation-reference)
+    - [Endpoints Summary](#endpoints-summary)
+    - [Response Codes](#response-codes)
+  - [📋 Backend Screenshot Guidelines](#-backend-screenshot-guidelines)
+    - [Documentation Should Include](#documentation-should-include)
+    - [Data Sensitivity](#data-sensitivity)
+    - [Screenshot Quality](#screenshot-quality)
+  - [🔧 Tools for Backend Testing](#-tools-for-backend-testing)
+    - [Recommended Tools](#recommended-tools)
+    - [Testing Commands](#testing-commands)
+  - [📚 References](#-references)
+
+
 ## 📸 Backend Screenshots Quick Reference
 
 | Screenshot      | File                  | Size       | Usage             | Status    |
@@ -12,7 +54,7 @@ Documentation for capturing and maintaining backend API and system screenshots.
 
 ---
 
-## 1. Swagger UI Documentation
+## 📋 1. Swagger UI Documentation
 
 ### What to Show
 
@@ -111,7 +153,7 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
-## 2. API Endpoints Reference
+## 🌐 2. API Endpoints Reference
 
 ### What to Show API
 
@@ -183,11 +225,11 @@ Response 200:
 ### Capture Instructions API
 
 1. **Use API Testing Tool**
-   - Postman (recommended)
+   - Bruno (recommended)
    - Or Insomnia REST client
    - Or curl in terminal
 
-2. **Example with Postman**
+2. **Example with Bruno**
    - Create new POST request
    - URL: `http://localhost:8080/api/v1/upload`
    - Select Body → form-data
@@ -217,7 +259,7 @@ Response 200:
    - Show response status code
 
 5. **Take Screenshot**
-   - Capture Postman window showing request/response
+   - Capture Bruno window showing request/response
    - Or capture terminal output
    - Ensure all details visible
 
@@ -305,7 +347,7 @@ Response 500:
    - Request with invalid data type
    - Server-side simulated error
 
-2. **Using Postman**
+2. **Using Bruno**
    - Create requests for each error scenario
    - Configure request to trigger error
    - Send and observe response
@@ -357,7 +399,7 @@ Response 500:
 
 1. Backend server running: `./gradlew bootRun`
 2. Swagger UI accessible: `http://localhost:8080/swagger-ui/index.html`
-3. API testing tool installed (Postman recommended)
+3. API testing tool installed (Bruno recommended)
 4. Sample test data prepared
 
 ### Sample Test Data
@@ -487,7 +529,7 @@ CERTIFICATIONS
 
 ### Recommended Tools
 
-1. **Postman** (Easy UI, collection management)
+1. **Bruno** (Easy UI, collection management)
 2. **Insomnia** (Clean interface, good for beginners)
 3. **curl** (Command-line, scripts, automation)
 4. **HTTPie** (User-friendly curl alternative)
@@ -523,3 +565,8 @@ curl -X DELETE http://localhost:8080/api/v1/files/resume_optimized.pdf
 ---
 
 Last Updated: 2026-01-16
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

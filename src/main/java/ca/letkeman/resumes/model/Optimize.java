@@ -1,39 +1,51 @@
 package ca.letkeman.resumes.model;
 
 import ca.letkeman.resumes.Utility;
+import com.google.gson.annotations.SerializedName;
 import java.util.Arrays;
+import java.util.Set;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public final class Optimize {
+  private static final Set<String> VALID_PROMPT_TYPES = Set.of(
+      "resume", "cover", "skills",
+      "interview-hr-questions", "interview-job-specific", "interview-reverse",
+      "cold-email", "cold-linkedin-message", "thank-you-email"
+  );
+
   String[] promptType = {"Resume"};
   double temperature = 0.15;
   String model = "gemma-3-4b-it";
-  String resume;
+  @SerializedName("resume")
+  String resume_string;
   String jobDescription;
   String jobTitle;
-  String company;
+  @SerializedName("company")
+  String company_name;
+  String interviewerName;
 
-  public  Optimize(String[] promptType, double temperature, String model, String resume, String jobDescription,
-      String jobTitle, String company) {
-    this.promptType = promptType;
+  public  Optimize(String[] promptType, double temperature, String model, String resume_string, String jobDescription,
+      String jobTitle, String company_name) {
+    this.promptType = promptType != null ? promptType.clone() : new String[]{"Resume"};
     this.temperature = temperature;
     this.model = model;
-    this.resume = Utility.convertLineEndings(resume);
+    this.resume_string = Utility.convertLineEndings(resume_string);
     this.jobDescription = Utility.convertLineEndings(jobDescription);
     this.jobTitle = jobTitle;
-    this.company = company;
+    this.company_name = company_name;
+    this.interviewerName = null;
   }
 
   public Optimize() {
   }
 
   public String[] getPromptType() {
-    return promptType;
+    return promptType != null ? promptType.clone() : new String[]{"Resume"};
   }
 
   public void setPromptType(String[] promptType) {
-    this.promptType = promptType;
+    this.promptType = promptType != null ? promptType.clone() : new String[]{"Resume"};
   }
 
   public double getTemperature() {
@@ -53,11 +65,11 @@ public final class Optimize {
   }
 
   public String getResume() {
-    return resume;
+    return resume_string;
   }
 
-  public void setResume(String resume) {
-    this.resume = Utility.convertLineEndings(resume);
+  public void setResume(String resume_string) {
+    this.resume_string = Utility.convertLineEndings(resume_string);
   }
 
   public String getJobDescription() {
@@ -77,11 +89,19 @@ public final class Optimize {
   }
 
   public String getCompany() {
-    return company;
+    return company_name;
   }
 
-  public void setCompany(String company) {
-    this.company = company;
+  public void setCompany(String company_name) {
+    this.company_name = company_name;
+  }
+
+  public String getInterviewerName() {
+    return interviewerName;
+  }
+
+  public void setInterviewerName(String interviewerName) {
+    this.interviewerName = interviewerName;
   }
 
   @Override
@@ -90,10 +110,11 @@ public final class Optimize {
     sb.append("promptType=").append(Arrays.toString(promptType));
     sb.append(", temperature=").append(temperature);
     sb.append(", model='").append(model).append('\'');
-    sb.append(", resume='").append(resume).append('\'');
+    sb.append(", resume_string='").append(resume_string).append('\'');
     sb.append(", jobDescription='").append(jobDescription).append('\'');
     sb.append(", jobTitle='").append(jobTitle).append('\'');
-    sb.append(", company='").append(company).append('\'');
+    sb.append(", company_name='").append(company_name).append('\'');
+    sb.append(", interviewerName='").append(interviewerName).append('\'');
     sb.append('}');
     return sb.toString();
   }
@@ -113,13 +134,15 @@ public final class Optimize {
     return new EqualsBuilder().append(getTemperature(), optimize.getTemperature())
         .append(getPromptType(), optimize.getPromptType()).append(getModel(), optimize.getModel())
         .append(getResume(), optimize.getResume()).append(getJobDescription(), optimize.getJobDescription())
-        .append(getJobTitle(), optimize.getJobTitle()).append(getCompany(), optimize.getCompany()).isEquals();
+        .append(getJobTitle(), optimize.getJobTitle()).append(getCompany(), optimize.getCompany())
+        .append(getInterviewerName(), optimize.getInterviewerName()).isEquals();
   }
 
   @Override
   public int hashCode() {
     return new HashCodeBuilder(17, 37).append(getPromptType()).append(getTemperature()).append(getModel())
-        .append(getResume()).append(getJobDescription()).append(getJobTitle()).append(getCompany()).toHashCode();
+        .append(getResume()).append(getJobDescription()).append(getJobTitle()).append(getCompany())
+        .append(getInterviewerName()).toHashCode();
   }
 
   /*
@@ -137,7 +160,7 @@ public final class Optimize {
         && !getJobTitle().isEmpty() && !getJobTitle().equals("null")
         && getModel() != null && !getModel().isBlank() && !getModel().isEmpty()
         && !getModel().equals("null")
-        && (isSkillsPrompt()
+        && (isSkillsPrompt() || isInterviewOrNetworkingPrompt()
             || getResume() != null && !getResume().isBlank() && !getResume().isEmpty()
                 && !getResume().equals("null"));
   }
@@ -154,7 +177,18 @@ public final class Optimize {
         .anyMatch(x -> x.equalsIgnoreCase("skills"));
   }
 
+  public boolean isInterviewOrNetworkingPrompt() {
+    return Arrays.stream(getPromptType())
+        .anyMatch(x -> x.equalsIgnoreCase("interview-hr-questions")
+            || x.equalsIgnoreCase("interview-job-specific")
+            || x.equalsIgnoreCase("interview-reverse")
+            || x.equalsIgnoreCase("cold-email")
+            || x.equalsIgnoreCase("cold-linkedin-message")
+            || x.equalsIgnoreCase("thank-you-email"));
+  }
+
   public boolean isValidPromptType() {
-    return hasResumeOrCoverPrompt() || isSkillsPrompt();
+    return Arrays.stream(getPromptType())
+        .allMatch(x -> VALID_PROMPT_TYPES.contains(x.toLowerCase()));
   }
 }

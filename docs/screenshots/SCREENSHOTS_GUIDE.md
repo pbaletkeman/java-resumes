@@ -2,9 +2,56 @@
 
 This guide explains all screenshots used in the java-resumes project documentation, how they're organized, and how to update them.
 
+- [Screenshots and Visual Documentation Guide](#screenshots-and-visual-documentation-guide)
+  - [🔗 Related Documentation](#-related-documentation)
+    - [Start Here If You Want To](#start-here-if-you-want-to)
+  - [🎯 Screenshot Categories](#-screenshot-categories)
+    - [Frontend UI Screenshots](#frontend-ui-screenshots)
+      - [Main Upload \& Process Tab (`main-tab.png`)](#main-upload--process-tab-main-tabpng)
+      - [File History Panel (`file-history.png`)](#file-history-panel-file-historypng)
+      - [Additional Tools Tab (`tools-tab.png`)](#additional-tools-tab-tools-tabpng)
+      - [Light Theme (`light-theme.png`)](#light-theme-light-themepng)
+      - [Dark Theme (`dark-theme.png`)](#dark-theme-dark-themepng)
+    - [Backend API Screenshots](#backend-api-screenshots)
+      - [Swagger UI (`swagger-ui.png`)](#swagger-ui-swagger-uipng)
+      - [API Endpoints (`api-endpoints.png`)](#api-endpoints-api-endpointspng)
+      - [Error Responses (`error-responses.png`)](#error-responses-error-responsespng)
+    - [Architecture \& Diagrams](#architecture--diagrams)
+      - [System Architecture (`system-architecture.png`)](#system-architecture-system-architecturepng)
+      - [Data Flow (`data-flow.png`)](#data-flow-data-flowpng)
+      - [Deployment Setup (`deployment.png`)](#deployment-setup-deploymentpng)
+      - [Component Diagram (`component-diagram.png`)](#component-diagram-component-diagrampng)
+    - [Setup \& Installation Screenshots](#setup--installation-screenshots)
+      - [Docker Compose Up (`docker-compose-up.png`)](#docker-compose-up-docker-compose-uppng)
+      - [Local Development Setup (`local-dev-setup.png`)](#local-development-setup-local-dev-setuppng)
+      - [Build Success (`build-success.png`)](#build-success-build-successpng)
+  - [🔧 Tools for Creating Screenshots](#-tools-for-creating-screenshots)
+    - [For UI Screenshots](#for-ui-screenshots)
+    - [For Diagrams \& Architecture](#for-diagrams--architecture)
+    - [For Image Optimization](#for-image-optimization)
+    - [For Screen Recording (optional)](#for-screen-recording-optional)
+  - [📋 Screenshot Requirements](#-screenshot-requirements)
+    - [Image Format \& Size](#image-format--size)
+    - [Naming Convention](#naming-convention)
+    - [Alt Text (for accessibility)](#alt-text-for-accessibility)
+    - [Documentation Standards](#documentation-standards)
+  - [🔄 Updating Screenshots](#-updating-screenshots)
+    - [When to Update Screenshots](#when-to-update-screenshots)
+    - [Update Process](#update-process)
+    - [Version Control](#version-control)
+  - [📸 Using Screenshots in Documentation](#-using-screenshots-in-documentation)
+    - [Markdown Syntax](#markdown-syntax)
+    - [Best Practices](#best-practices)
+  - [✅ Screenshot Verification Checklist](#-screenshot-verification-checklist)
+  - [🎓 Example Screenshots in README](#-example-screenshots-in-readme)
+    - [Current Implementation](#current-implementation)
+    - [Next Steps](#next-steps)
+  - [📞 Questions \& Support](#-questions--support)
+  - [Revision History](#revision-history)
+
 ---
 
-## Related Documentation
+## 🔗 Related Documentation
 
 This is the main reference guide. For specific tasks, see:
 
@@ -154,7 +201,7 @@ docs/screenshots/
 
 #### API Endpoints (`api-endpoints.png`)
 
-- **Location**: Swagger UI or Postman
+- **Location**: Swagger UI or Bruno
 - **Size**: 1000x600px (minimum)
 - **Shows**:
   - POST /upload endpoint
@@ -169,7 +216,7 @@ docs/screenshots/
 
 #### Error Responses (`error-responses.png`)
 
-- **Location**: Postman or API testing tool
+- **Location**: Bruno or API testing tool
 - **Size**: 1000x600px (minimum)
 - **Shows**:
   - 400 Bad Request error
@@ -178,7 +225,7 @@ docs/screenshots/
   - Error message formats
   - HTTP status codes
 - **How to capture**:
-  1. Use Postman or curl
+  1. Use Bruno or curl
   2. Trigger various errors
   3. Capture response examples
 
@@ -517,3 +564,8 @@ For questions about screenshots:
 | 2026-01-16 | Initial guide created with directory structure and standards |
 
 ---
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team

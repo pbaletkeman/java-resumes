@@ -1,12 +1,6 @@
 # Java Resumes - Full-Stack Resume Optimization Application
 
-[![Java](https://img.shields.io/badge/Java-21%20LTS-orange.svg)](https://openjdk.java.net/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.1-brightgreen.svg)](https://spring.io/projects/spring-boot)
-[![React](https://img.shields.io/badge/React-19.2.0-blue.svg)](https://reactjs.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-22%20LTS-339933.svg)](https://nodejs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue.svg)](https://www.typescriptlang.org/)
-[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED.svg)](https://www.docker.com/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Java](https://img.shields.io/badge/Java-21%20LTS-orange.svg)](https://openjdk.java.net/) | [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.1-brightgreen.svg)](https://spring.io/projects/spring-boot) | [![React](https://img.shields.io/badge/React-19.2.0-blue.svg)](https://reactjs.org/) | [![Node.js](https://img.shields.io/badge/Node.js-22%20LTS-339933.svg)](https://nodejs.org/) | [![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue.svg)](https://www.typescriptlang.org/) | [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED.svg)](https://www.docker.com/) | [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 AI-powered full-stack application for resume and cover letter optimization using Large Language Models. Built with Spring Boot 3.5.1, React 19, TypeScript, and Docker for seamless deployment.
 
@@ -14,48 +8,149 @@ AI-powered full-stack application for resume and cover letter optimization using
 
 ---
 
-## 🚀 Quick Start (3 minutes)
+- [Java Resumes - Full-Stack Resume Optimization Application](#java-resumes---full-stack-resume-optimization-application)
+  - [🚀 Quick Start](#-quick-start)
+  - [📚 Documentation Index](#-documentation-index)
+  - [✨ What It Does](#-what-it-does)
+    - [Core Features](#core-features)
+    - [How It Works](#how-it-works)
+  - [🏗️ Architecture](#️-architecture)
+  - [🛠️ Technology Stack](#️-technology-stack)
+  - [📂 Project Structure](#-project-structure)
+  - [📡 API Endpoints](#-api-endpoints)
+    - [Core Document Processing](#core-document-processing)
+    - [Interview Preparation _(New)_](#interview-preparation-new)
+    - [Professional Networking _(New)_](#professional-networking-new)
+    - [File Management](#file-management)
+  - [🔧 Development Setup](#-development-setup)
+    - [Backend](#backend)
+    - [Frontend](#frontend)
+  - [🧪 Testing](#-testing)
+  - [🔐 Configuration](#-configuration)
+    - [LLM Setup](#llm-setup)
+  - [🐛 Troubleshooting](#-troubleshooting)
+  - [🚀 Production Deployment](#-production-deployment)
+    - [Docker Compose (Recommended)](#docker-compose-recommended)
+    - [Kubernetes / Cloud](#kubernetes--cloud)
+  - [🤝 Contributing](#-contributing)
+  - [📄 License](#-license)
+  - [📞 Support \& Resources](#-support--resources)
+    - [Made with ❤️ using Java, Spring Boot, React, and AI](#made-with-️-using-java-spring-boot-react-and-ai)
+
+---
+
+## 🚀 Quick Start
+
+### Docker Compose (Recommended - 3 Steps)
 
 ```bash
 git clone https://github.com/pbaletkeman/java-resumes.git
 cd java-resumes
 
-# Edit config.json with your LLM service
-docker compose up --build
+# Step 1: Start all services (Frontend, Backend, Ollama LLM)
+docker compose up -d
 
-# Access at http://localhost
+# Step 2: Pull an LLM model (required for AI features)
+# Available models: tinyllama, mistral, llama2, phi3:mini, gemma2:2b, qwen2.5:0.5b
+docker exec resume-ollama ollama pull mistral:latest
+
+# Step 3: Access application
+# Frontend: http://localhost:3000
+# Backend: http://localhost:8080
+# Ollama: http://localhost:11434
 ```
 
-**→ [Detailed Setup Guide](docs/QUICK_START.md)**
+**Docker Compose Configuration Options:**
+
+| File                                  | Services                          | Use Case                               | Database      |
+| ------------------------------------- | --------------------------------- | -------------------------------------- | ------------- |
+| `docker-compose.yml`                  | Frontend, Backend, Ollama         | Full stack with LLM (recommended)      | SQLite        |
+| `docker-compose.postgresql.yml`       | Frontend, Backend, PostgreSQL     | Production-like environment            | PostgreSQL 17 |
+| `docker-compose.sqlite.yml`           | Frontend, Backend, Ollama, SQLite | Local development with persistent data | SQLite        |
+| `docker-compose.frontend-backend.yml` | Frontend, Backend, Ollama         | Lightweight testing                    | SQLite        |
+
+**Quick Start with Different Setups:**
+
+```bash
+# Option 1: Full stack with Ollama (default)
+docker compose up -d
+docker exec resume-ollama ollama pull mistral:latest
+
+# Option 2: PostgreSQL setup (production-like)
+docker compose -f docker-compose.postgresql.yml up -d
+docker exec resume-ollama ollama pull mistral:latest
+
+# Option 3: SQLite with persistent data
+docker compose -f docker-compose.sqlite.yml up -d
+docker exec resume-ollama-sqlite ollama pull tinyllama
+
+# Option 4: Frontend + Backend only (no database)
+docker compose -f docker-compose.frontend-backend.yml up -d
+```
+
+**→ [Docker Compose Quick Start](docs/DOCKER_COMPOSE_QUICK_START.md) | [Detailed Setup Guide](docs/DOCKER_SETUP.md)**
 
 ---
 
 ## 📚 Documentation Index
 
-| Topic             | Doc                                           | Topic            | Doc                                             |
-| ----------------- | --------------------------------------------- | ---------------- | ----------------------------------------------- |
-| **Setup**         | [Quick Start](docs/QUICK_START.md)            | **API**          | [API Reference](docs/API_REFERENCE.md)          |
-| **Architecture**  | [System Design](docs/ARCHITECTURE.md)         | **Testing**      | [Test Guide](docs/TESTING.md)                   |
-| **Configuration** | [Config Guide](docs/CONFIGURATION.md)         | **Code Quality** | [Git Hooks](docs/git-hooks/README_GIT_HOOKS.md) |
-| **Development**   | [Dev Setup](docs/DEVELOPMENT_SETUP.md)        | **Issues**       | [Troubleshooting](docs/TROUBLESHOOTING.md)      |
-| **Deployment**    | [Deploy Guide](docs/PRODUCTION_DEPLOYMENT.md) | **Env Vars**     | [Configuration](docs/ENVIRONMENT_VARIABLES.md)  |
+| Topic             | Doc                                                  | Topic             | Doc                                                     |
+| ----------------- | ---------------------------------------------------- | ----------------- | ------------------------------------------------------- |
+| **Setup**         | [Quick Start](docs/QUICK_START.md)                   | **API**           | [API Reference](docs/API_REFERENCE.md)                  |
+| **Docker**        | [Docker Compose](docs/DOCKER_COMPOSE_QUICK_START.md) | **Docker Detail** | [Docker Setup](docs/DOCKER_SETUP.md)                    |
+| **Architecture**  | [System Design](docs/ARCHITECTURE.md)                | **Testing**       | [Test Guide](docs/TESTING.md)                           |
+| **Configuration** | [Config Guide](docs/CONFIGURATION.md)                | **Code Quality**  | [Git Hooks](docs/git-hooks/README_GIT_HOOKS.md)         |
+| **Development**   | [Dev Setup](docs/DEVELOPMENT_SETUP.md)               | **Issues**        | [Troubleshooting](docs/TROUBLESHOOTING.md)              |
+| **Deployment**    | [Deploy Guide](docs/PRODUCTION_DEPLOYMENT.md)        | **Env Vars**      | [Configuration](docs/ENVIRONMENT_VARIABLES.md)          |
+| **Ollama LLM**    | [Ollama Guide](docs/OLLAMA_SETUP.md)                 | **GitHub CI**     | [GitHub Environment](docs/GITHUB_ENVIRONMENT_OLLAMA.md) |
 
 ---
 
 ## ✨ What It Does
 
-Submit a job description + resume → Get back an AI-optimized resume and/or cover letter tailored to that specific job opening.
+The application provides comprehensive AI-powered career optimization tools:
+
+### Core Features
+
+**📄 Resume & Cover Letter Optimization**
+
+- Submit a job description + resume → Get back an AI-optimized resume and/or cover letter tailored to that specific job opening
+- ATS (Applicant Tracking System) optimization
+- Keyword matching and relevance scoring
+
+**🎯 Skills Development Planning**
+
+- Get personalized recommendations for certifications, skills, and hands-on experiences
+- Receive a structured learning path tailored to your target role
+- Understand time investment and priorities for career advancement
+
+**💼 Interview Preparation** _(New)_
+
+- **HR Interview Questions**: Get 5 general HR questions to prepare for behavioral interviews
+- **Job-Specific Questions**: Receive 5 technical/functional questions based on the job description
+- **Reverse Interview Questions**: Get thoughtful questions to ask your interviewers
+
+**🤝 Professional Networking** _(New)_
+
+- **Cold Email Templates**: Generate 5 variations of professional cold outreach emails
+- **LinkedIn Messages**: Create 5 distinct LinkedIn connection request messages
+- **Thank You Emails**: Get 5 variations of post-interview thank you emails
+
+### How It Works
 
 **Features:**
 
-- AI-powered resume optimization
-- Cover letter generation
-- Markdown to PDF conversion
-- File management (upload, download, delete)
-- Light/dark theme support
-- Docker containerized
-- REST API with Swagger docs
-- 80%+ test coverage
+- ✅ AI-powered resume optimization
+- ✅ Cover letter generation
+- ✅ Skills & certifications recommendations
+- ✅ Interview preparation (HR, job-specific, reverse questions) _(New)_
+- ✅ Professional networking (cold emails, LinkedIn, thank you notes) _(New)_
+- ✅ Markdown to PDF conversion
+- ✅ File management (upload, download, delete)
+- ✅ Light/dark theme support
+- ✅ Docker containerized
+- ✅ REST API with Swagger docs
+- ✅ 83%+ test coverage
 
 ---
 
@@ -109,14 +204,38 @@ java-resumes/
 
 ## 📡 API Endpoints
 
+### Core Document Processing
+
 | Method | Endpoint                | Purpose                      |
 | ------ | ----------------------- | ---------------------------- |
 | POST   | `/api/upload`           | Optimize resume/cover letter |
-| GET    | `/api/files`            | List files                   |
-| GET    | `/api/files/{filename}` | Download file                |
-| DELETE | `/api/files/{filename}` | Delete file                  |
 | POST   | `/api/markdownFile2PDF` | Convert Markdown to PDF      |
-| GET    | `/api/health`           | Health check                 |
+| POST   | `/api/process/skills`   | Get skills recommendations   |
+
+### Interview Preparation _(New)_
+
+| Method | Endpoint                               | Purpose                         |
+| ------ | -------------------------------------- | ------------------------------- |
+| POST   | `/api/generate/interview-hr-questions` | Generate HR interview questions |
+| POST   | `/api/generate/interview-job-specific` | Generate job-specific questions |
+| POST   | `/api/generate/interview-reverse`      | Questions to ask interviewers   |
+
+### Professional Networking _(New)_
+
+| Method | Endpoint                              | Purpose                       |
+| ------ | ------------------------------------- | ----------------------------- |
+| POST   | `/api/generate/cold-email`            | Generate cold outreach emails |
+| POST   | `/api/generate/cold-linkedin-message` | Generate LinkedIn messages    |
+| POST   | `/api/generate/thank-you-email`       | Generate thank you emails     |
+
+### File Management
+
+| Method | Endpoint                | Purpose       |
+| ------ | ----------------------- | ------------- |
+| GET    | `/api/files`            | List files    |
+| GET    | `/api/files/{filename}` | Download file |
+| DELETE | `/api/files/{filename}` | Delete file   |
+| GET    | `/api/health`           | Health check  |
 
 Full API docs: http://localhost:8080/swagger-ui/html (when running)
 
@@ -152,6 +271,8 @@ See [docs/DEVELOPMENT_SETUP.md](docs/DEVELOPMENT_SETUP.md) for detailed instruct
 
 ## 🧪 Testing
 
+### Unit & Integration Tests
+
 ```bash
 # Backend
 ./gradlew test                          # Run all tests
@@ -164,6 +285,24 @@ npm run test:coverage                   # Generate coverage report
 ```
 
 Target coverage: **80%+** for both frontend and backend.
+
+### API Testing
+
+Test REST endpoints using one of these tools:
+
+**Option 1: REST Client (VS Code Extension)**
+
+- Install: [REST Client by Huachao Mao](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+- Open: `httpclient/Resume.http`
+- Click "Send Request" above any endpoint
+- Perfect for quick testing within VS Code
+
+**Option 2: Bruno (Desktop App)**
+
+- Download: [bruno.app](https://www.usebruno.com/)
+- Import: Select `httpclient/Resume.http`
+- Click "Send" on any request
+- Great for dedicated API testing experience
 
 See [docs/TESTING.md](docs/TESTING.md) for complete testing guide.
 
@@ -255,8 +394,14 @@ MIT License - see [LICENSE](LICENSE) file for details.
 - **Documentation**: [docs/README.md](docs/README.md)
 - **Issues**: [GitHub Issues](https://github.com/pbaletkeman/java-resumes/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/pbaletkeman/java-resumes/discussions)
-- **Repository**: https://github.com/pbaletkeman/java-resumes
+- **Repository**: <https://github.com/pbaletkeman/java-resumes>
 
 ---
 
 ### Made with ❤️ using Java, Spring Boot, React, and AI
+
+---
+
+**Last Updated:** February 2, 2026
+**Maintained By:** java-resumes development team
+**Repository:** [github.com/pbaletkeman/java-resumes](https://github.com/pbaletkeman/java-resumes)
