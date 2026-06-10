@@ -1,4 +1,4 @@
-@echo off
+xdsdds@echo off
 REM Frontend batch file for npm management and dev server
 REM Usage: frontend.bat [OPTIONS]
 REM   --clean      : Clear node_modules directory

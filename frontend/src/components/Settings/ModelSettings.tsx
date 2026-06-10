@@ -16,11 +16,12 @@ export interface Model {
 const STORAGE_KEY = 'java-resumes-models';
 
 const DEFAULT_MODELS: Model[] = [
-  { id: '1', label: 'Gemma 3.4B (Default)', value: 'gemma-3-4b-it' },
-  { id: '2', label: 'GPT-4 Turbo', value: 'gpt-4-turbo' },
-  { id: '3', label: 'Claude 3 Opus', value: 'claude-3-opus' },
-  { id: '4', label: 'Llama 2 Chat', value: 'llama-2-chat' },
-  { id: '5', label: 'Mistral', value: 'mistral' },
+  { id: '1', label: 'qwen2.5:7b-instruct (Default)', value: 'qwen2.5:7b-instruct' },
+  { id: '2', label: 'Gemma 3.4B', value: 'gemma-3-4b-it' },
+  { id: '3', label: 'GPT-4 Turbo', value: 'gpt-4-turbo' },
+  { id: '4', label: 'Claude 3 Opus', value: 'claude-3-opus' },
+  { id: '5', label: 'Llama 2 Chat', value: 'llama-2-chat' },
+  { id: '6', label: 'Mistral', value: 'mistral' },
 ];
 
 export const ModelSettings: React.FC = () => {

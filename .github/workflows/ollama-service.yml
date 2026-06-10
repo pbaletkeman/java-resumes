@@ -6,13 +6,13 @@ on:
       model:
         description: 'Ollama model to use'
         required: false
-        default: 'tinyllama'
+        default: 'qwen2.5:7b-instruct'
         type: choice
         options:
+          - qwen2.5:7b-instruct
           - tinyllama
           - phi3:mini
           - gemma2:2b
-          - qwen2.5:0.5b
           - mistral
   push:
     branches: [master, develop]
@@ -24,7 +24,7 @@ on:
 jobs:
   setup-ollama:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -43,7 +43,7 @@ jobs:
         run: |
           echo "Installing Ollama..."
           curl -fsSL https://ollama.com/install.sh | sh
-          
+
           # Verify installation
           ollama --version
 
@@ -51,11 +51,11 @@ jobs:
         run: |
           echo "Starting Ollama service..."
           ollama serve &
-          
+
           # Wait for service to be ready
           echo "Waiting for Ollama service to be ready..."
           sleep 10
-          
+
           # Check if service is running
           for i in {1..30}; do
             if curl -s http://localhost:11434/api/version > /dev/null; then
@@ -71,7 +71,7 @@ jobs:
           MODEL="${{ inputs.model || 'tinyllama' }}"
           echo "Pulling Ollama model: $MODEL"
           ollama pull $MODEL
-          
+
           echo "Model pulled successfully!"
           ollama list
 
@@ -79,14 +79,14 @@ jobs:
         run: |
           MODEL="${{ inputs.model || 'tinyllama' }}"
           echo "Testing model inference..."
-          
+
           # Test simple prompt
           RESPONSE=$(curl -s http://localhost:11434/api/generate -d '{
             "model": "'$MODEL'",
             "prompt": "What is the capital of France?",
             "stream": false
           }')
-          
+
           echo "Response received:"
           echo "$RESPONSE" | jq -r '.response' || echo "$RESPONSE"
 
@@ -94,7 +94,7 @@ jobs:
         run: |
           MODEL="${{ inputs.model || 'tinyllama' }}"
           echo "Testing OpenAI-compatible API endpoint..."
-          
+
           RESPONSE=$(curl -s http://localhost:11434/v1/chat/completions -d '{
             "model": "'$MODEL'",
             "messages": [
@@ -102,14 +102,14 @@ jobs:
               {"role": "user", "content": "Say hello in one word."}
             ]
           }')
-          
+
           echo "API Response:"
           echo "$RESPONSE" | jq '.' || echo "$RESPONSE"
 
       - name: Create model info artifact
         run: |
           MODEL="${{ inputs.model || 'tinyllama' }}"
-          
+
           cat > ollama-info.json << EOF
           {
             "model": "$MODEL",
@@ -119,7 +119,7 @@ jobs:
             "tested_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
           }
           EOF
-          
+
           cat ollama-info.json
 
       - name: Upload Ollama info
@@ -132,7 +132,7 @@ jobs:
   integration-test:
     needs: setup-ollama
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -180,7 +180,7 @@ jobs:
           java -jar build/libs/*.jar &
           BACKEND_PID=$!
           echo "Backend PID: $BACKEND_PID"
-          
+
           # Wait for service to be ready
           for i in {1..60}; do
             if curl -s http://localhost:8080/api/health > /dev/null; then

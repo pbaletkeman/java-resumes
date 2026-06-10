@@ -16,7 +16,8 @@ import { SubmissionDialog } from '../Common/SubmissionDialog';
 
 // Default models (fallback if not in storage)
 const DEFAULT_MODELS = [
-  { label: 'Gemma 3.4B (Default)', value: 'gemma-3-4b-it' },
+  { label: 'qwen2.5:7b-instruct (Default)', value: 'qwen2.5:7b-instruct' },
+  { label: 'Gemma 3.4B', value: 'gemma-3-4b-it' },
   { label: 'GPT-4 Turbo', value: 'gpt-4-turbo' },
   { label: 'Claude 3 Opus', value: 'claude-3-opus' },
   { label: 'Llama 2 Chat', value: 'llama-2-chat' },
@@ -32,7 +33,7 @@ export const DocumentUploadForm: React.FC = () => {
   const [jobTitle, setJobTitle] = useState('');
   const [company_name, setCompanyName] = useState('');
   const [interviewerName, setInterviewerName] = useState('');
-  const [model, setModel] = useState('gemma-3-4b-it');
+  const [model, setModel] = useState('qwen2.5:7b-instruct');
   const [promptTypes, setPromptTypes] = useState<string[]>(['resume']);
   const [modelOptions, setModelOptions] = useState(DEFAULT_MODELS);
   const [errors, setErrors] = useState<{
